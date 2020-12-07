@@ -138,7 +138,7 @@ namespace boost {
                     {
                         delete [] m_Storage.m_dynSet;
                     }
-                }
+                } // NOLINT Potential memory leak [clang-analyzer-cplusplus.NewDeleteLeaks,-warnings-as-errors]
 
                 // Assignment
                 is_any_ofF& operator=(const is_any_ofF& Other)
