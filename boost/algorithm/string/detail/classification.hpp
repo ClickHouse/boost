@@ -132,11 +132,11 @@ namespace boost {
                 // Destructor
                 ~is_any_ofF()
                 {
-                    if(!use_fixed_storage(m_Size) && m_Storage.m_dynSet!=0)
+                    if(!use_fixed_storage(m_Size) && m_Storage.m_dynSet!=0) // NOLINT Potential memory leak [clang-analyzer-cplusplus.NewDeleteLeaks,-warnings-as-errors]
                     {
                         delete [] m_Storage.m_dynSet;
                     }
-                }
+                } // NOLINT Potential memory leak [clang-analyzer-cplusplus.NewDeleteLeaks,-warnings-as-errors]
 
                 // Assignment
                 is_any_ofF& operator=(const is_any_ofF& Other)
