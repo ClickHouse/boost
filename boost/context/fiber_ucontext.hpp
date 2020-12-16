@@ -53,6 +53,10 @@ extern "C" {
 # include BOOST_ABI_PREFIX
 #endif
 
+#ifdef BOOST_USE_TSAN
+#include <sanitizer/tsan_interface.h>
+#endif
+
 namespace boost {
 namespace context {
 namespace detail {
