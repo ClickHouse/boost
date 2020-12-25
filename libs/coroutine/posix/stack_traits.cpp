@@ -17,9 +17,9 @@ extern "C" {
 
 #include <algorithm>
 #include <cmath>
+#include <mutex>
 
 #include <boost/assert.hpp>
-#include <boost/thread.hpp>
 
 #if !defined (SIGSTKSZ)
 # define SIGSTKSZ (8 * 1024)
@@ -52,16 +52,16 @@ void stacksize_limit_( rlimit * limit)
 std::size_t pagesize()
 {
     static std::size_t size = 0;
-    static boost::once_flag flag;
-    boost::call_once( flag, pagesize_, & size);
+    static std::once_flag flag;
+    std::call_once( flag, pagesize_, & size);
     return size;
 }
 
 rlimit stacksize_limit()
 {
     static rlimit limit;
-    static boost::once_flag flag;
-    boost::call_once( flag, stacksize_limit_, & limit);
+    static std::once_flag flag;
+    std::call_once( flag, stacksize_limit_, & limit);
     return limit;
 }
 
