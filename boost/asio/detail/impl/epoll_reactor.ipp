@@ -32,6 +32,12 @@
 
 #include <boost/asio/detail/push_options.hpp>
 
+#if defined(__has_feature)
+#if __has_feature(memory_sanitizer)
+#include <sanitizer/msan_interface.h>
+#endif
+#endif
+
 namespace boost {
 namespace asio {
 namespace detail {
@@ -507,6 +513,11 @@ void epoll_reactor::run(long usec, op_queue<operation>& ops)
 
   // Block on the epoll descriptor.
   epoll_event events[128];
+#if defined(__has_feature)
+#if __has_feature(memory_sanitizer)
+  __msan_unpoison(events, 128);
+#endif
+#endif
   int num_events = epoll_wait(epoll_fd_, events, 128, timeout);
 
 #if defined(BOOST_ASIO_ENABLE_HANDLER_TRACKING)
