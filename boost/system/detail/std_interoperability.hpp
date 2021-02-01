@@ -57,8 +57,10 @@ inline std::error_category const & to_std_category( boost::system::error_categor
 {
     typedef std::map< boost::system::error_category const *, std::unique_ptr<std_category> > map_type;
 
+    static std::mutex mutex_;
     static map_type map_;
 
+    std::lock_guard lock( mutex_ );
     map_type::iterator i = map_.find( &cat );
 
     if( i == map_.end() )
