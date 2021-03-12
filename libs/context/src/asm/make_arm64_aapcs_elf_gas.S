@@ -55,7 +55,9 @@
 .text
 .align  2
 .global make_fcontext
+#ifndef __APPLE__
 .type   make_fcontext, %function
+#endif
 make_fcontext:
     # shift address in x0 (allocated stack) to lower 16 byte boundary
     and x0, x0, ~0xF
@@ -80,6 +82,8 @@ finish:
     # exit application
     bl  _exit
 
+#ifndef __APPLE__
 .size   make_fcontext,.-make_fcontext
 # Mark that we don't need executable stack.
 .section .note.GNU-stack,"",%progbits
+#endif
