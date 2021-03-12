@@ -55,7 +55,9 @@
 .text
 .align  2
 .global jump_fcontext
+#ifndef __APPLE__
 .type   jump_fcontext, %function
+#endif
 jump_fcontext:
     # prepare stack for GP + FPU
     sub  sp, sp, #0xb0
@@ -109,6 +111,8 @@ jump_fcontext:
     add  sp, sp, #0xb0
 
     ret x4
+#ifndef __APPLE__
 .size   jump_fcontext,.-jump_fcontext
 # Mark that we don't need executable stack.
 .section .note.GNU-stack,"",%progbits
+#endif
