@@ -55,7 +55,9 @@
 .text
 .align  2
 .global ontop_fcontext
+#ifndef __APPLE__
 .type   ontop_fcontext, %function
+#endif
 ontop_fcontext:
     # prepare stack for GP + FPU
     sub  sp, sp, #0xb0
@@ -108,6 +110,8 @@ ontop_fcontext:
 
     # jump to ontop-function
     ret x2
+#ifndef __APPLE__
 .size   ontop_fcontext,.-ontop_fcontext
 # Mark that we don't need executable stack.
 .section .note.GNU-stack,"",%progbits
+#endif
