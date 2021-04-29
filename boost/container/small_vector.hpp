@@ -431,7 +431,22 @@ class small_vector_base
       : base_type(initial_capacity_t(), this->internal_storage(), capacity, ::boost::forward<AllocFwd>(a))
    {}
 
-   //~small_vector_base(){}
+   //! In case of MSan use-after-destruction detection is enabled
+   //! (-fsanitize-memory-use-after-dtor and poison_in_dtor=1 option is set)
+   //! small_vector will trigger use-of-uninitialized-value for non-pod types.
+   //! Suppress this (just like llvm does [1])
+   //!
+   //!   [1]: https://lists.llvm.org/pipermail/llvm-commits/Week-of-Mon-20150831/297043.html
+   //!
+   //! NOTE: we cannot use __msan_unpoison() here
+   //! since it will be poisoned just after dtor will return.
+#if defined(__has_feature)
+#    if __has_feature(memory_sanitizer)
+   __attribute__((no_sanitize_memory)) ~small_vector_base() {}
+#    endif
+#else
+   //~small_vector_base() {}
+#endif
 
    private:
    //The only member
