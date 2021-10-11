@@ -72,8 +72,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 // NOTE: _X86_AMD implies _X86, so there is no need to check for it here!
 //
 #if defined(BOOST_HW_SIMD_ARM_AVAILABLE) && defined(BOOST_HW_SIMD_PPC_AVAILABLE) ||\
-    defined(BOOST_HW_SIMD_ARM_AVAILABLE) && defined(BOOST_HW_SIMD_X86_AVAILABLE) ||\
-    defined(BOOST_HW_SIMD_PPC_AVAILABLE) && defined(BOOST_HW_SIMD_X86_AVAILABLE)
+    defined(BOOST_HW_SIMD_ARM_AVAILABLE) && defined(BOOST_HW_SIMD_X86_AVAILABLE)
 #   error "Multiple SIMD architectures detected, this cannot happen!"
 #endif
 
