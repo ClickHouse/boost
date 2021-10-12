@@ -59,8 +59,8 @@ template <class T>
 struct has_hidden_guard_digits_10<T, true> : public mpl::bool_<(std::numeric_limits<T>::digits10 != std::numeric_limits<T>::max_digits10)> {};
 
 template <class T>
-struct has_hidden_guard_digits 
-   : public has_hidden_guard_digits_10<T, 
+struct has_hidden_guard_digits
+   : public has_hidden_guard_digits_10<T,
    std::numeric_limits<T>::is_specialized
    && (std::numeric_limits<T>::radix == 10) >
 {};
@@ -68,7 +68,7 @@ struct has_hidden_guard_digits
 template <class T>
 inline const T& normalize_value(const T& val, const mpl::false_&) { return val; }
 template <class T>
-inline T normalize_value(const T& val, const mpl::true_&) 
+inline T normalize_value(const T& val, const mpl::true_&)
 {
    BOOST_STATIC_ASSERT(std::numeric_limits<T>::is_specialized);
    BOOST_STATIC_ASSERT(std::numeric_limits<T>::radix != 2);
@@ -76,7 +76,7 @@ inline T normalize_value(const T& val, const mpl::true_&)
    boost::intmax_t shift = (boost::intmax_t)std::numeric_limits<T>::digits - (boost::intmax_t)ilogb(val) - 1;
    T result = scalbn(val, shift);
    result = round(result);
-   return scalbn(result, -shift); 
+   return scalbn(result, -shift);
 }
 
 template <class T>
@@ -88,7 +88,7 @@ inline T get_smallest_value(mpl::true_ const&)
    // when using the SSE2 registers in DAZ or FTZ mode.
    //
    static const T m = std::numeric_limits<T>::denorm_min();
-#ifdef BOOST_MATH_CHECK_SSE2
+#if defined(BOOST_MATH_CHECK_SSE2) && !defined(__powerpc64__) /* PowerPC has shim for SSE intrinsics, but not this specific intrinsic */
    return (_mm_getcsr() & (_MM_FLUSH_ZERO_ON | 0x40)) ? tools::min_value<T>() : m;;
 #else
    return ((tools::min_value<T>() / 2) == 0) ? tools::min_value<T>() : m;
