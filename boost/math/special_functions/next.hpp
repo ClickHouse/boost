@@ -90,7 +90,7 @@ inline T get_smallest_value(std::true_type const&)
    // when using the SSE2 registers in DAZ or FTZ mode.
    //
    static const T m = std::numeric_limits<T>::denorm_min();
-#ifdef BOOST_MATH_CHECK_SSE2
+#if defined(BOOST_MATH_CHECK_SSE2) && !defined(__powerpc64__) /* PowerPC has shim for SSE intrinsics, but not this specific intrinsic */
    return (_mm_getcsr() & (_MM_FLUSH_ZERO_ON | 0x40)) ? tools::min_value<T>() : m;
 #else
    return ((tools::min_value<T>() / 2) == 0) ? tools::min_value<T>() : m;
