@@ -2,7 +2,7 @@
 // detail/impl/epoll_reactor.ipp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2019 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2021 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -22,6 +22,7 @@
 #include <cstddef>
 #include <sys/epoll.h>
 #include <boost/asio/detail/epoll_reactor.hpp>
+#include <boost/asio/detail/scheduler.hpp>
 #include <boost/asio/detail/throw_error.hpp>
 #include <boost/asio/error.hpp>
 
@@ -30,12 +31,6 @@
 #endif // defined(BOOST_ASIO_HAS_TIMERFD)
 
 #include <boost/asio/detail/push_options.hpp>
-
-#if defined(__has_feature)
-#if __has_feature(memory_sanitizer)
-#include <sanitizer/msan_interface.h>
-#endif
-#endif
 
 namespace boost {
 namespace asio {
@@ -349,6 +344,35 @@ void epoll_reactor::cancel_ops(socket_type,
   scheduler_.post_deferred_completions(ops);
 }
 
+void epoll_reactor::cancel_ops_by_key(socket_type,
+    epoll_reactor::per_descriptor_data& descriptor_data,
+    int op_type, void* cancellation_key)
+{
+  if (!descriptor_data)
+    return;
+
+  mutex::scoped_lock descriptor_lock(descriptor_data->mutex_);
+
+  op_queue<operation> ops;
+  op_queue<reactor_op> other_ops;
+  while (reactor_op* op = descriptor_data->op_queue_[op_type].front())
+  {
+    descriptor_data->op_queue_[op_type].pop();
+    if (op->cancellation_key_ == cancellation_key)
+    {
+      op->ec_ = boost::asio::error::operation_aborted;
+      ops.push(op);
+    }
+    else
+      other_ops.push(op);
+  }
+  descriptor_data->op_queue_[op_type].push(other_ops);
+
+  descriptor_lock.unlock();
+
+  scheduler_.post_deferred_completions(ops);
+}
+
 void epoll_reactor::deregister_descriptor(socket_type descriptor,
     epoll_reactor::per_descriptor_data& descriptor_data, bool closing)
 {
@@ -474,11 +498,6 @@ void epoll_reactor::run(long usec, op_queue<operation>& ops)
 
   // Block on the epoll descriptor.
   epoll_event events[128];
-#if defined(__has_feature)
-#if __has_feature(memory_sanitizer)
-  __msan_unpoison(events, 128);
-#endif
-#endif
   int num_events = epoll_wait(epoll_fd_, events, 128, timeout);
 
 #if defined(BOOST_ASIO_ENABLE_HANDLER_TRACKING)

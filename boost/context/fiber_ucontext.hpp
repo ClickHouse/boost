@@ -32,6 +32,7 @@ extern "C" {
 
 #include <boost/assert.hpp>
 #include <boost/config.hpp>
+#include <boost/predef.h>
 
 #include <boost/context/detail/disable_overload.hpp>
 #if defined(BOOST_NO_CXX14_STD_EXCHANGE)
@@ -80,7 +81,6 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
     std::function< fiber_activation_record*(fiber_activation_record*&) >    ontop{};
     bool                                                        terminated{ false };
     bool                                                        force_unwind{ false };
-    bool                                                        is_started{ false };
 #if defined(BOOST_USE_ASAN)
     void                                                    *   fake_stack{ nullptr };
     void                                                    *   stack_bottom{ nullptr };
@@ -235,19 +235,10 @@ struct BOOST_CONTEXT_DECL fiber_activation_record_initializer {
 
 struct forced_unwind {
     fiber_activation_record  *  from{ nullptr };
-#ifndef BOOST_ASSERT_IS_VOID
-    bool                        caught{ false };
-#endif
 
     forced_unwind( fiber_activation_record * from_) noexcept :
         from{ from_ } {
     }
-
-#ifndef BOOST_ASSERT_IS_VOID
-    ~forced_unwind() {
-        BOOST_ASSERT( caught);
-    }
-#endif
 };
 
 template< typename Ctx, typename StackAlloc, typename Fn >
@@ -286,7 +277,6 @@ public:
         Ctx c{ from };
         try {
             // invoke context-function
-            is_started = true;
 #if defined(BOOST_NO_CXX17_STD_INVOKE)
             c = boost::context::detail::invoke( fn_, std::move( c) );
 #else
@@ -294,9 +284,6 @@ public:
 #endif  
         } catch ( forced_unwind const& ex) {
             c = Ctx{ ex.from };
-#ifndef BOOST_ASSERT_IS_VOID
-            const_cast< forced_unwind & >( ex).caught = true;
-#endif
         }
         // this context has finished its task
 		from = nullptr;
@@ -331,7 +318,12 @@ static fiber_activation_record * create_fiber1( StackAlloc && salloc, Fn && fn) 
                 std::error_code( errno, std::system_category() ),
                 "getcontext() failed");
     }
+#if BOOST_OS_BSD_FREE
+    // because FreeBSD defines stack_t::ss_sp as char *
+    record->uctx.uc_stack.ss_sp = static_cast< char * >( stack_bottom);
+#else
     record->uctx.uc_stack.ss_sp = stack_bottom;
+#endif
     // 64byte gap between control structure and stack top
     record->uctx.uc_stack.ss_size = reinterpret_cast< uintptr_t >( storage) -
             reinterpret_cast< uintptr_t >( stack_bottom) - static_cast< uintptr_t >( 64);
@@ -369,7 +361,12 @@ static fiber_activation_record * create_fiber2( preallocated palloc, StackAlloc 
                 std::error_code( errno, std::system_category() ),
                 "getcontext() failed");
     }
+#if BOOST_OS_BSD_FREE
+    // because FreeBSD defines stack_t::ss_sp as char *
+    record->uctx.uc_stack.ss_sp = static_cast< char * >( stack_bottom);
+#else
     record->uctx.uc_stack.ss_sp = stack_bottom;
+#endif
     // 64byte gap between control structure and stack top
     record->uctx.uc_stack.ss_size = reinterpret_cast< uintptr_t >( storage) -
             reinterpret_cast< uintptr_t >( stack_bottom) - static_cast< uintptr_t >( 64);
@@ -443,7 +440,7 @@ public:
 
     ~fiber() {
         if ( BOOST_UNLIKELY( nullptr != ptr_) && ! ptr_->main_ctx) {
-            if ( BOOST_LIKELY( ! ptr_->terminated && ptr_->is_started) ) {
+            if ( BOOST_LIKELY( ! ptr_->terminated) ) {
                 ptr_->force_unwind = true;
                 ptr_->resume();
                 BOOST_ASSERT( ptr_->terminated);
@@ -514,6 +511,8 @@ public:
         return ptr_ < other.ptr_;
     }
 
+    #if !defined(BOOST_EMBTC)
+
     template< typename charT, class traitsT >
     friend std::basic_ostream< charT, traitsT > &
     operator<<( std::basic_ostream< charT, traitsT > & os, fiber const& other) {
@@ -524,10 +523,32 @@ public:
         }
     }
 
+    #else
+
+    template< typename charT, class traitsT >
+    friend std::basic_ostream< charT, traitsT > &
+    operator<<( std::basic_ostream< charT, traitsT > & os, fiber const& other);
+
+    #endif
+
     void swap( fiber & other) noexcept {
         std::swap( ptr_, other.ptr_);
     }
 };
+
+#if defined(BOOST_EMBTC)
+
+    template< typename charT, class traitsT >
+    inline std::basic_ostream< charT, traitsT > &
+    operator<<( std::basic_ostream< charT, traitsT > & os, fiber const& other) {
+        if ( nullptr != other.ptr_) {
+            return os << other.ptr_;
+        } else {
+            return os << "{not-a-context}";
+        }
+    }
+
+#endif
 
 inline
 void swap( fiber & l, fiber & r) noexcept {

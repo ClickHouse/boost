@@ -13,10 +13,12 @@
 
 #include <boost/algorithm/string/config.hpp>
 #include <algorithm>
+#include <cstring>
 #include <functional>
 #include <locale>
 
 #include <boost/range/begin.hpp>
+#include <boost/range/distance.hpp>
 #include <boost/range/end.hpp>
 
 #include <boost/algorithm/string/predicate_facade.hpp>
@@ -45,7 +47,7 @@ namespace boost {
                     return std::use_facet< std::ctype<CharT> >(m_Locale).is( m_Type, Ch );
                 }
 
-                #if defined(__BORLANDC__) && (__BORLANDC__ >= 0x560) && (__BORLANDC__ <= 0x582) && !defined(_USE_OLD_RW_STL)
+                #if defined(BOOST_BORLANDC) && (BOOST_BORLANDC >= 0x560) && (BOOST_BORLANDC <= 0x582) && !defined(_USE_OLD_RW_STL)
                     template<>
                     bool operator()( char const Ch ) const
                     {
@@ -132,11 +134,11 @@ namespace boost {
                 // Destructor
                 ~is_any_ofF()
                 {
-                    if(!use_fixed_storage(m_Size) && m_Storage.m_dynSet!=0) // NOLINT Potential memory leak [clang-analyzer-cplusplus.NewDeleteLeaks,-warnings-as-errors]
+                    if(!use_fixed_storage(m_Size) && m_Storage.m_dynSet!=0)
                     {
                         delete [] m_Storage.m_dynSet;
                     }
-                } // NOLINT Potential memory leak [clang-analyzer-cplusplus.NewDeleteLeaks,-warnings-as-errors]
+                }
 
                 // Assignment
                 is_any_ofF& operator=(const is_any_ofF& Other)
