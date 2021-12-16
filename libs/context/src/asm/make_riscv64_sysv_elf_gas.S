@@ -75,7 +75,11 @@ make_fcontext:
 
     # save address of finish as return-address for context-function
     # will be entered after context-function returns (RA register)
+<<<<<<< HEAD
     la  a4, finish
+=======
+    lla  a4, finish
+>>>>>>> d0b4a3b3 (Update libs to 1.78.0 and remove extras)
     sd  a4, 0xc0(a0)
 
     ret // return pointer to context-data (a0)
@@ -84,7 +88,11 @@ finish:
     # exit code is zero
     li  a0, 0
     # exit application
+<<<<<<< HEAD
     tail  _exit
+=======
+    tail  _exit@plt
+>>>>>>> d0b4a3b3 (Update libs to 1.78.0 and remove extras)
 
 .size   make_fcontext,.-make_fcontext
 # Mark that we don't need executable stack.
