@@ -294,7 +294,7 @@ namespace boost { namespace program_options {
         return *this;
     }
 
-    const unsigned options_description::m_default_line_length = 80;
+    const unsigned options_description::m_default_line_length = 78;
 
     options_description::options_description(unsigned line_length,
                                              unsigned min_description_length)
