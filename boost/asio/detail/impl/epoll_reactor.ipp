@@ -2,7 +2,7 @@
 // detail/impl/epoll_reactor.ipp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2021 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2022 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -31,12 +31,6 @@
 #endif // defined(BOOST_ASIO_HAS_TIMERFD)
 
 #include <boost/asio/detail/push_options.hpp>
-
-#if defined(__has_feature)
-#if __has_feature(memory_sanitizer)
-#include <sanitizer/msan_interface.h>
-#endif
-#endif
 
 namespace boost {
 namespace asio {
@@ -504,11 +498,6 @@ void epoll_reactor::run(long usec, op_queue<operation>& ops)
 
   // Block on the epoll descriptor.
   epoll_event events[128];
-#if defined(__has_feature)
-#if __has_feature(memory_sanitizer)
-  __msan_unpoison(events, 128);
-#endif
-#endif
   int num_events = epoll_wait(epoll_fd_, events, 128, timeout);
 
 #if defined(BOOST_ASIO_ENABLE_HANDLER_TRACKING)

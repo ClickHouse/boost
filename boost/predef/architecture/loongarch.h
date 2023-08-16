@@ -13,9 +13,11 @@ http://www.boost.org/LICENSE_1_0.txt)
 
 /* tag::reference[]
 = `BOOST_ARCH_LOONGARCH`
+
 [options="header"]
 |===
 | {predef_symbol} | {predef_version}
+
 | `+__loongarch__+` | {predef_detection}
 |===
 */ // end::reference[]

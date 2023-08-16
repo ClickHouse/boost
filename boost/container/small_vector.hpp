@@ -39,6 +39,7 @@
 #if defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 #include <boost/move/detail/fwd_macros.hpp>
 #endif
+#include <boost/move/detail/force_ptr.hpp>
 
 //std
 #if !defined(BOOST_NO_CXX11_HDR_INITIALIZER_LIST)
@@ -324,7 +325,7 @@ class small_vector_allocator
    const_pointer internal_storage() const
    {
       const vector_alloc_holder_t &v_holder = static_cast<const vector_alloc_holder_t &>(*this);
-      const vector_base &v_base = reinterpret_cast<const vector_base &>(v_holder);
+      const vector_base &v_base = *move_detail::force_ptr<const vector_base *>(&v_holder);
       const derived_type &d_base = static_cast<const derived_type &>(v_base);
       return d_base.internal_storage();
    }
@@ -333,7 +334,7 @@ class small_vector_allocator
    pointer internal_storage()
    {
       vector_alloc_holder_t &v_holder = static_cast<vector_alloc_holder_t &>(*this);
-      vector_base &v_base = reinterpret_cast<vector_base &>(v_holder);
+      vector_base &v_base = *move_detail::force_ptr<vector_base *>(&v_holder);
       derived_type &d_base = static_cast<derived_type &>(v_base);
       return d_base.internal_storage();
    }
@@ -431,22 +432,7 @@ class small_vector_base
       : base_type(initial_capacity_t(), this->internal_storage(), capacity, ::boost::forward<AllocFwd>(a))
    {}
 
-   //! In case of MSan use-after-destruction detection is enabled
-   //! (-fsanitize-memory-use-after-dtor and poison_in_dtor=1 option is set)
-   //! small_vector will trigger use-of-uninitialized-value for non-pod types.
-   //! Suppress this (just like llvm does [1])
-   //!
-   //!   [1]: https://lists.llvm.org/pipermail/llvm-commits/Week-of-Mon-20150831/297043.html
-   //!
-   //! NOTE: we cannot use __msan_unpoison() here
-   //! since it will be poisoned just after dtor will return.
-#if defined(__has_feature)
-#    if __has_feature(memory_sanitizer)
-   __attribute__((no_sanitize_memory)) ~small_vector_base() {}
-#    endif
-#else
-   //~small_vector_base() {}
-#endif
+   //~small_vector_base(){}
 
    private:
    //The only member
