@@ -121,8 +121,10 @@ SSE, SSE2, AVX and AVX2. For more informations,
 // NOTE: _X86_AMD implies _X86, so there is no need to check for it here!
 //
 #if defined(BOOST_HW_SIMD_ARM_AVAILABLE) && defined(BOOST_HW_SIMD_PPC_AVAILABLE) ||\
-    defined(BOOST_HW_SIMD_ARM_AVAILABLE) && defined(BOOST_HW_SIMD_X86_AVAILABLE) ||\
-    defined(BOOST_HW_SIMD_PPC_AVAILABLE) && defined(BOOST_HW_SIMD_X86_AVAILABLE)
+    defined(BOOST_HW_SIMD_ARM_AVAILABLE) && defined(BOOST_HW_SIMD_X86_AVAILABLE)
+    /// ClickHouse cmake/cpu_features.cmake sets -D__SSE2__=1 on PPC. Not doing so will disable intrinsics-based paths and reduce
+    /// performance on PPC. With that, below check fails. It was added with boost 1.79 but I think boost is too ambitious here.
+    /// defined(BOOST_HW_SIMD_PPC_AVAILABLE) && defined(BOOST_HW_SIMD_X86_AVAILABLE)
 #   error "Multiple SIMD architectures detected, this cannot happen!"
 #endif
 
