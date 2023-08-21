@@ -13,9 +13,7 @@ include(BoostInstall)
 
 #
 
-set(__boost_incompatible_libraries
-  gil
-)
+set(__boost_incompatible_libraries "")
 
 # Define cache variables if root project
 
@@ -49,7 +47,13 @@ if(CMAKE_SOURCE_DIR STREQUAL Boost_SOURCE_DIR)
 
   option(BUILD_TESTING "Build the tests." OFF)
   include(CTest)
-  add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure -C $<CONFIG>)
+
+  if(NOT TARGET tests)
+    add_custom_target(tests)
+  endif()
+
+  add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --no-tests=error -C $<CONFIG>)
+  add_dependencies(check tests)
 
   # link=static|shared
   option(BUILD_SHARED_LIBS "Build shared libraries")

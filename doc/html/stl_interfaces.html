@@ -55,6 +55,13 @@
     <code class="computeroutput"><span class="identifier">sequence_container_interface</span></code></a></span></dt>
 <dt><span class="section"><a href="boost_stlinterfaces/tutorial___reverse_iterator_.html">Tutorial:
     <code class="computeroutput"><span class="identifier">reverse_iterator</span></code></a></span></dt>
+<dt><span class="section"><a href="boost_stlinterfaces/tutorial__view_adaptors.html">Tutorial:
+    View Adaptors</a></span></dt>
+<dt><span class="section"><a href="boost_stlinterfaces/tutorial___closure__and__adaptor_.html">Tutorial:
+    <code class="computeroutput"><span class="identifier">closure</span></code> and <code class="computeroutput"><span class="identifier">adaptor</span></code></a></span></dt>
+<dt><span class="section"><a href="boost_stlinterfaces/tutorial___bind_back____and_more_complicated_view_adaptors.html">Tutorial:
+    <code class="computeroutput"><span class="identifier">bind_back</span><span class="special">()</span></code>
+    and More Complicated View Adaptors</a></span></dt>
 <dt><span class="section"><a href="boost_stlinterfaces/examples.html">Examples</a></span></dt>
 <dd><dl>
 <dt><span class="section"><a href="boost_stlinterfaces/examples.html#boost_stlinterfaces.examples.random_access_iterator">Random
@@ -99,6 +106,18 @@
       Boost.STLInterfaces provides a pre-C++20-friendly implementation.
     </p>
 <p>
+      Due to inconsistencies in the way different compilers implement their C++20
+      view adaptors' <code class="computeroutput"><span class="keyword">operator</span><span class="special">|</span></code>
+      support, its particularly thorny to try and write a view adaptor portable across
+      multiple versions of C++, or even across multiple compilers building in C++20
+      mode. Boost.STLInterfaces provides a type <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">range_adaptor_closure</span></code>
+      that is compatible with C++23's <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">range_adaptor_closure</span></code>,
+      and which works with earlier versions of C++ as well. Boost.STLInterfaces also
+      has helper templates that make it much easier to write view adaptors with
+      <code class="computeroutput"><span class="keyword">operator</span><span class="special">|</span></code>
+      support.
+    </p>
+<p>
       Most daunting of all is the task of writing a type or template that meets the
       container requirements in the standard. Boost.STLInterfaces provides another
       template called <code class="computeroutput">sequence_container_interface</code>
@@ -112,8 +131,7 @@
 <tr><td align="left" valign="top"><p>
         C++20 versions of <code class="computeroutput">iterator_interface</code> and <code class="computeroutput">sequence_container_interface</code>
         are provided (C++20 provides <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">view_interface</span></code>).
-        These are constrained templates using C++20 concepts. These are in the <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">v2</span></code> namespace, and are considered experimental,
-        because at the time of this writing, no C++20-conforming compiler exists.
+        These are constrained templates using C++20 concepts. These are in the <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">v2</span></code> namespace.
       </p></td></tr>
 </table></div>
 <h4>
@@ -326,7 +344,7 @@
 </div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"><p><small>Last revised: April 06, 2022 at 21:11:07 GMT</small></p></td>
+<td align="left"><p><small>Last revised: August 04, 2022 at 02:55:29 GMT</small></p></td>
 <td align="right"><div class="copyright-footer"></div></td>
 </tr></table>
 <hr>

@@ -585,7 +585,7 @@
 
 <span class="comment">// d now holds the number of milliseconds from start to end.</span>
 
-<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">ms</span><span class="special">.</span><span class="identifier">count</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">"ms\n"</span><span class="special">;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">d</span><span class="special">.</span><span class="identifier">count</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">"ms\n"</span><span class="special">;</span>
 </pre>
 <p>
             We can convert to <a class="link" href="reference.html#chrono.reference.cpp0x.duration_hpp.duration_typedefs" title="duration typedefs"><code class="computeroutput"><span class="identifier">nanoseconds</span></code></a>, or some integral-based
@@ -631,7 +631,7 @@
 <span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><a class="link" href="reference.html#chrono.reference.cpp0x.duration_hpp.duration_typedefs" title="duration typedefs"><code class="computeroutput"><span class="identifier">milliseconds</span></code></a> <span class="identifier">ms</span><span class="special">;</span>
 <span class="identifier">ms</span> <span class="identifier">d</span> <span class="special">=</span> <span class="identifier">round_up</span><span class="special">&lt;</span><span class="identifier">ms</span><span class="special">&gt;(</span><span class="identifier">end</span> <span class="special">-</span> <span class="identifier">start</span><span class="special">);</span>
 <span class="comment">// d now holds the number of milliseconds from start to end, rounded up.</span>
-<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">ms</span><span class="special">.</span><span class="identifier">count</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">"ms\n"</span><span class="special">;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">d</span><span class="special">.</span><span class="identifier">count</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">"ms\n"</span><span class="special">;</span>
 </pre>
 </div>
 <div class="section">
@@ -1181,7 +1181,7 @@
 <span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><a class="link" href="reference.html#chrono.reference.cpp0x.duration_hpp.duration_typedefs" title="duration typedefs"><code class="computeroutput"><span class="identifier">milliseconds</span></code></a> <span class="identifier">ms</span><span class="special">;</span>
 <span class="identifier">ms</span> <span class="identifier">d</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><a class="link" href="reference.html#chrono.reference.other_clocks.thread_clock_hpp.thread_clock" title="Class thread_clock"><code class="computeroutput"><span class="identifier">thread_clock</span></code></a><span class="special">::</span><span class="identifier">now</span><span class="special">()</span> <span class="special">-</span> <span class="identifier">start</span><span class="special">;</span>
 <span class="comment">// d now holds the number of milliseconds from start to end.</span>
-<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">ms</span><span class="special">.</span><span class="identifier">count</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">"ms\n"</span><span class="special">;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">d</span><span class="special">.</span><span class="identifier">count</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">"ms\n"</span><span class="special">;</span>
 </pre>
 <p>
             If you need seconds with a floating-point representation you can do:

@@ -19,20 +19,11 @@
 // (Rescaling was an earlier approach to fix robustness issues.)
 // However, if BOOST_GEOMETRY_ROBUSTNESS_ALTERNATIVE is specified, it flips the default.
 #if !defined(BOOST_GEOMETRY_NO_ROBUSTNESS) && !defined(BOOST_GEOMETRY_USE_RESCALING)
-  ///
-  /// See https://github.com/boostorg/geometry/pull/977/files
-  ///
-  /// Continue to use rescaling for the time being. The PR sounds like Boost guys aim for
-  /// exactly the same results w/ and wo/ rescaling. Unfortunately, when rescaling was disabled
-  /// for the first time (1.79), expected results of polygon dictionary tests in ClickHousebroke.
-  /// There is some hope that later boost versions will fix this. Therefore keeping rescaling
-  /// alive for the time being and not refreshing the expected results.
-  ///
-  /// #if defined(BOOST_GEOMETRY_ROBUSTNESS_ALTERNATIVE)
+  #if defined(BOOST_GEOMETRY_ROBUSTNESS_ALTERNATIVE)
     #define BOOST_GEOMETRY_USE_RESCALING
-  /// #else
-  ///   #define BOOST_GEOMETRY_NO_ROBUSTNESS
-  /// #endif
+  #else
+    #define BOOST_GEOMETRY_NO_ROBUSTNESS
+  #endif
 #endif
 
 #if defined(BOOST_GEOMETRY_USE_RESCALING) && ! defined(BOOST_GEOMETRY_ROBUSTNESS_ALTERNATIVE)

@@ -9,10 +9,9 @@
 //
 
 #include <boost/asio.hpp>
-#include <boost/asio/experimental/deferred.hpp>
 #include <iostream>
 
-using boost::asio::experimental::deferred;
+using boost::asio::deferred;
 
 int main()
 {

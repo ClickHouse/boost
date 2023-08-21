@@ -151,6 +151,8 @@ An
                     Construct an overlapped handle without opening it. <br> <span class="silver"> —</span><br>
                     Construct an overlapped handle on an existing native handle.
                     <br> <span class="silver"> —</span><br> Move-construct an overlapped handle from another.
+                    <br> <span class="silver"> —</span><br> Move-construct an overlapped handle from a handle
+                    of another executor type.
                   </p>
                 </td>
 </tr>
@@ -235,7 +237,21 @@ An
                 </td>
 <td>
                   <p>
-                    Move-assign an overlapped handle from another.
+                    Move-assign an overlapped handle from another. <br> <span class="silver"> —</span><br>
+                    Move-assign an overlapped handle from a handle of another executor
+                    type.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <a class="link" href="release.html" title="windows::basic_overlapped_handle::release"><span class="bold"><strong>release</strong></span></a>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Release ownership of the underlying native handle.
                   </p>
                 </td>
 </tr>

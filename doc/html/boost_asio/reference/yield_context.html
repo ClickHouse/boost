@@ -33,7 +33,7 @@
         A <a class="link" href="../overview/model/completion_tokens.html" title="Completion Tokens">completion
         token</a> object that represents the currently executing coroutine.
       </p>
-<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">basic_yield_context</span><span class="special">&lt;</span> <span class="identifier">unspecified</span> <span class="special">&gt;</span> <span class="identifier">yield_context</span><span class="special">;</span>
+<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">basic_yield_context</span><span class="special">&lt;</span> <span class="identifier">any_io_executor</span> <span class="special">&gt;</span> <span class="identifier">yield_context</span><span class="special">;</span>
 </pre>
 <h5>
 <a name="boost_asio.reference.yield_context.h0"></a>
@@ -60,24 +60,24 @@
 <tr>
 <td>
                 <p>
-                  <a class="link" href="basic_yield_context/callee_type.html" title="basic_yield_context::callee_type"><span class="bold"><strong>callee_type</strong></span></a>
+                  <a class="link" href="basic_yield_context/cancellation_slot_type.html" title="basic_yield_context::cancellation_slot_type"><span class="bold"><strong>cancellation_slot_type</strong></span></a>
                 </p>
               </td>
 <td>
                 <p>
-                  The coroutine callee type, used by the implementation.
+                  The cancellation slot type associated with the yield context.
                 </p>
               </td>
 </tr>
 <tr>
 <td>
                 <p>
-                  <a class="link" href="basic_yield_context/caller_type.html" title="basic_yield_context::caller_type"><span class="bold"><strong>caller_type</strong></span></a>
+                  <a class="link" href="basic_yield_context/executor_type.html" title="basic_yield_context::executor_type"><span class="bold"><strong>executor_type</strong></span></a>
                 </p>
               </td>
 <td>
                 <p>
-                  The coroutine caller type, used by the implementation.
+                  The executor type associated with the yield context.
                 </p>
               </td>
 </tr>
@@ -114,9 +114,55 @@
               </td>
 <td>
                 <p>
-                  Construct a yield context to represent the specified coroutine.
-                  <br> <span class="silver"> —</span><br> Construct a yield context from another yield context
-                  type.
+                  Construct a yield context from another yield context type.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="basic_yield_context/cancelled.html" title="basic_yield_context::cancelled"><span class="bold"><strong>cancelled</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Determine whether the current coroutine has been cancelled.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="basic_yield_context/get_cancellation_slot.html" title="basic_yield_context::get_cancellation_slot"><span class="bold"><strong>get_cancellation_slot</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Get the cancellation slot associated with the coroutine.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="basic_yield_context/get_cancellation_state.html" title="basic_yield_context::get_cancellation_state"><span class="bold"><strong>get_cancellation_state</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Get the cancellation state associated with the coroutine.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="basic_yield_context/get_executor.html" title="basic_yield_context::get_executor"><span class="bold"><strong>get_executor</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Get the executor associated with the yield context.
                 </p>
               </td>
 </tr>
@@ -132,6 +178,32 @@
                 </p>
               </td>
 </tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="basic_yield_context/reset_cancellation_state.html" title="basic_yield_context::reset_cancellation_state"><span class="bold"><strong>reset_cancellation_state</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Reset the cancellation state associated with the coroutine.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="basic_yield_context/throw_if_cancelled.html" title="basic_yield_context::throw_if_cancelled"><span class="bold"><strong>throw_if_cancelled</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Determine whether the coroutine throws if trying to suspend when
+                  it has been cancelled. <br> <span class="silver"> —</span><br> Set whether the coroutine
+                  throws if trying to suspend when it has been cancelled.
+                </p>
+              </td>
+</tr>
 </tbody>
 </table></div>
 <p>
@@ -140,8 +212,8 @@
         A <a class="link" href="basic_yield_context.html" title="basic_yield_context"><code class="computeroutput"><span class="identifier">basic_yield_context</span></code></a> object may be
         passed as a completion token to an asynchronous operation. For example:
       </p>
-<pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Handler</span><span class="special">&gt;</span>
-<span class="keyword">void</span> <span class="identifier">my_coroutine</span><span class="special">(</span><span class="identifier">basic_yield_context</span><span class="special">&lt;</span><span class="identifier">Handler</span><span class="special">&gt;</span> <span class="identifier">yield</span><span class="special">)</span>
+<pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Executor</span><span class="special">&gt;</span>
+<span class="keyword">void</span> <span class="identifier">my_coroutine</span><span class="special">(</span><span class="identifier">basic_yield_context</span><span class="special">&lt;</span><span class="identifier">Executor</span><span class="special">&gt;</span> <span class="identifier">yield</span><span class="special">)</span>
 <span class="special">{</span>
   <span class="special">...</span>
   <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">my_socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">buffer</span><span class="special">,</span> <span class="identifier">yield</span><span class="special">);</span>

@@ -851,11 +851,12 @@ The
           <span class="emphasis"><em>Shared</em></span> <span class="emphasis"><em>objects:</em></span> Unsafe.
         </p>
 <p>
-          Synchronous <code class="computeroutput"><span class="identifier">send</span></code>, <code class="computeroutput"><span class="identifier">receive</span></code>, and <code class="computeroutput"><span class="identifier">connect</span></code>
-          operations are thread safe with respect to each other, if the underlying
-          operating system calls are also thread safe. This means that it is permitted
-          to perform concurrent calls to these synchronous operations on a single
-          socket object. Other synchronous operations, such as <code class="computeroutput"><span class="identifier">open</span></code>
+          Synchronous <code class="computeroutput"><span class="identifier">send</span></code>, <code class="computeroutput"><span class="identifier">receive</span></code>, <code class="computeroutput"><span class="identifier">connect</span></code>,
+          and <code class="computeroutput"><span class="identifier">shutdown</span></code> operations
+          are thread safe with respect to each other, if the underlying operating
+          system calls are also thread safe. This means that it is permitted to perform
+          concurrent calls to these synchronous operations on a single socket object.
+          Other synchronous operations, such as <code class="computeroutput"><span class="identifier">open</span></code>
           or <code class="computeroutput"><span class="identifier">close</span></code>, are not thread
           safe.
         </p>

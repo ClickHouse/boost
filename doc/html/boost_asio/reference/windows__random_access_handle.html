@@ -176,6 +176,8 @@
                   Construct a random-access handle without opening it. <br> <span class="silver"> —</span><br>
                   Construct a random-access handle on an existing native handle.
                   <br> <span class="silver"> —</span><br> Move-construct a random-access handle from another.
+                  <br> <span class="silver"> —</span><br> Move-construct a random-access handle from a handle
+                  of another executor type.
                 </p>
               </td>
 </tr>
@@ -260,7 +262,9 @@
               </td>
 <td>
                 <p>
-                  Move-assign a random-access handle from another.
+                  Move-assign a random-access handle from another. <br> <span class="silver"> —</span><br>
+                  Move-assign a random-access handle from a handle of another executor
+                  type.
                 </p>
               </td>
 </tr>
@@ -273,6 +277,18 @@
 <td>
                 <p>
                   Read some data from the handle at the specified offset.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="windows__basic_random_access_handle/release.html" title="windows::basic_random_access_handle::release"><span class="bold"><strong>release</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Release ownership of the underlying native handle.
                 </p>
               </td>
 </tr>

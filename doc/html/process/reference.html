@@ -27,6 +27,7 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="process.reference"></a>Reference</h2></div></div></div>
 <div class="toc"><dl class="toc">
+<dt><span class="section"><a href="reference.html#header.boost.process_hpp">Header &lt;boost/process.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.args_hpp">Header &lt;boost/process/args.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.async_hpp">Header &lt;boost/process/async.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.async_pipe_hpp">Header &lt;boost/process/async_pipe.hpp&gt;</a></span></dt>
@@ -39,6 +40,7 @@
 <dt><span class="section"><a href="reference.html#header.boost.process.exception_hpp">Header &lt;boost/process/exception.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.exe_hpp">Header &lt;boost/process/exe.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.extend_hpp">Header &lt;boost/process/extend.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="reference.html#header.boost.process.filesystem_hpp">Header &lt;boost/process/filesystem.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.group_hpp">Header &lt;boost/process/group.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.handles_hpp">Header &lt;boost/process/handles.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.io_hpp">Header &lt;boost/process/io.hpp&gt;</a></span></dt>
@@ -52,6 +54,11 @@
 <dt><span class="section"><a href="reference.html#header.boost.process.system_hpp">Header &lt;boost/process/system.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="reference.html#header.boost.process.windows_hpp">Header &lt;boost/process/windows.hpp&gt;</a></span></dt>
 </dl></div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="header.boost.process_hpp"></a>Header &lt;<a href="../../../../../boost/process.hpp" target="_top">boost/process.hpp</a>&gt;</h3></div></div></div>
+<p>Convenience header which includes all public and platform-independent boost.process header files. </p>
+</div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="header.boost.process.args_hpp"></a>Header &lt;<a href="../../../../../boost/process/args.hpp" target="_top">boost/process/args.hpp</a>&gt;</h3></div></div></div>
@@ -188,7 +195,7 @@
     <span class="identifier">wnative_environment</span> <a name="boost.this_process.wenvironment"></a><span class="identifier">wenvironment</span><span class="special">(</span><span class="special">)</span><span class="special">;</span>
 
     <span class="comment">// Get the path environment variable of the current process runs. </span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&gt;</span> <a name="boost.this_process.path"></a><span class="identifier">path</span><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&gt;</span> <a name="boost.this_process.path"></a><span class="identifier">path</span><span class="special">(</span><span class="special">)</span><span class="special">;</span>
   <span class="special">}</span>
 <span class="special">}</span></pre>
 </div>
@@ -269,6 +276,8 @@ Please refer to the <a class="link" href="../boost_process/extend.html" title="E
   <span class="special">}</span>
 <span class="special">}</span></pre>
 </div>
+<div class="section"><div class="titlepage"><div><div><h3 class="title">
+<a name="header.boost.process.filesystem_hpp"></a>Header &lt;<a href="../../../../../boost/process/filesystem.hpp" target="_top">boost/process/filesystem.hpp</a>&gt;</h3></div></div></div></div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="header.boost.process.group_hpp"></a>Header &lt;<a href="../../../../../boost/process/group.hpp" target="_top">boost/process/group.hpp</a>&gt;</h3></div></div></div>
@@ -324,9 +333,9 @@ Please refer to the <a class="link" href="../boost_process/extend.html" title="E
 <p><b>File I/O. </b></p>
 <p>
 The library allows full redirection of streams to files as shown below.</p>
-<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">log</span>    <span class="special">=</span> <span class="string">"my_log_file.txt"</span><span class="special">;</span>
-<span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">input</span>  <span class="special">=</span> <span class="string">"input.txt"</span><span class="special">;</span>
-<span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">output</span> <span class="special">=</span> <span class="string">"output.txt"</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">log</span>    <span class="special">=</span> <span class="string">"my_log_file.txt"</span><span class="special">;</span>
+<span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">input</span>  <span class="special">=</span> <span class="string">"input.txt"</span><span class="special">;</span>
+<span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">output</span> <span class="special">=</span> <span class="string">"output.txt"</span><span class="special">;</span>
 <span class="identifier">system</span><span class="special">(</span><span class="string">"my_prog"</span><span class="special">,</span> <span class="identifier">std_out</span><span class="special">&gt;</span><span class="identifier">output</span><span class="special">,</span> <span class="identifier">std_in</span><span class="special">&lt;</span><span class="identifier">input</span><span class="special">,</span> <span class="identifier">std_err</span><span class="special">&gt;</span><span class="identifier">log</span><span class="special">)</span><span class="special">;</span>
 </pre>
 <p><b>Synchronous Pipe I/O. </b></p>
@@ -456,9 +465,9 @@ Streams can be redirected to null, which means, that written date will be discar
 <p>Defines a function to search for an executable in path. </p>
 <pre class="synopsis"><span class="keyword">namespace</span> <span class="identifier">boost</span> <span class="special">{</span>
   <span class="keyword">namespace</span> <span class="identifier">process</span> <span class="special">{</span>
-    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> 
-    <a class="link" href="../boost/process/search_path.html" title="Function search_path"><span class="identifier">search_path</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&amp;</span><span class="special">,</span> 
-                <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">this_process</span><span class="special">::</span><span class="identifier">path</span><span class="special">(</span><span class="special">)</span><span class="special">)</span><span class="special">;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> 
+    <a class="link" href="../boost/process/search_path.html" title="Function search_path"><span class="identifier">search_path</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&amp;</span><span class="special">,</span> 
+                <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">this_process</span><span class="special">::</span><span class="identifier">path</span><span class="special">(</span><span class="special">)</span><span class="special">)</span><span class="special">;</span>
   <span class="special">}</span>
 <span class="special">}</span></pre>
 </div>

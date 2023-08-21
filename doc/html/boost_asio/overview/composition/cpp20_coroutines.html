@@ -120,13 +120,13 @@
         </h6>
 <p>
           To perform explicit error handling, rather than the default exception-throwing
-          behaviour, use the <a class="link" href="../../reference/experimental__as_tuple.html" title="experimental::as_tuple"><code class="computeroutput"><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">as_tuple</span></code></a> or <a class="link" href="../../reference/redirect_error.html" title="redirect_error"><code class="computeroutput"><span class="identifier">redirect_error</span></code></a> completion token
+          behaviour, use the <a class="link" href="../../reference/as_tuple.html" title="as_tuple"><code class="computeroutput"><span class="identifier">as_tuple</span></code></a> or <a class="link" href="../../reference/redirect_error.html" title="redirect_error"><code class="computeroutput"><span class="identifier">redirect_error</span></code></a> completion token
           adapters.
         </p>
 <p>
-          The <code class="computeroutput"><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">as_tuple</span></code> completion token adapter packages
-          the completion handler arguments into a single tuple, which is then returned
-          as the result of the awaited operation. For example:
+          The <code class="computeroutput"><span class="identifier">as_tuple</span></code> completion
+          token adapter packages the completion handler arguments into a single tuple,
+          which is then returned as the result of the awaited operation. For example:
         </p>
 <pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">awaitable</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="identifier">echo</span><span class="special">(</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">)</span>
 <span class="special">{</span>
@@ -135,7 +135,7 @@
   <span class="special">{</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">&gt;</span> <span class="identifier">result</span> <span class="special">=</span>
       <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">as_tuple</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">));</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">as_tuple</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">));</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">get</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;(</span><span class="identifier">result</span><span class="special">))</span>
     <span class="special">{</span>
       <span class="comment">// success</span>
@@ -153,8 +153,8 @@
   <span class="keyword">char</span> <span class="identifier">data</span><span class="special">[</span><span class="number">1024</span><span class="special">];</span>
   <span class="keyword">for</span> <span class="special">(;;)</span>
   <span class="special">{</span>
-    <span class="keyword">auto</span> <span class="special">[</span><span class="identifier">ec</span><span class="special">,</span> <span class="identifier">n</span><span class="special">]</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">as_tuple</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">));</span>
+    <span class="keyword">auto</span> <span class="special">[</span><span class="identifier">ec</span><span class="special">,</span> <span class="identifier">n</span><span class="special">]</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">as_tuple</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">));</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">ec</span><span class="special">)</span>
     <span class="special">{</span>
       <span class="comment">// success</span>
@@ -298,7 +298,7 @@
         </h6>
 <p>
           <a class="link" href="../../reference/co_spawn.html" title="co_spawn">co_spawn</a>, <a class="link" href="../../reference/detached.html" title="detached">detached</a>,
-          <a class="link" href="../../reference/redirect_error.html" title="redirect_error">redirect_error</a>,
+          <a class="link" href="../../reference/as_tuple.html" title="as_tuple">as_tuple</a>, <a class="link" href="../../reference/redirect_error.html" title="redirect_error">redirect_error</a>,
           <a class="link" href="../../reference/awaitable.html" title="awaitable">awaitable</a>, <a class="link" href="../../reference/use_awaitable_t.html" title="use_awaitable_t">use_awaitable_t</a>,
           <a class="link" href="../../reference/use_awaitable.html" title="use_awaitable">use_awaitable</a>,
           <a class="link" href="../../reference/this_coro__executor.html" title="this_coro::executor">this_coro::executor</a>,

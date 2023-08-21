@@ -33,7 +33,7 @@
           function enables programs to implement asynchronous logic in a synchronous
           manner, as shown in the following example:
         </p>
-<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">spawn</span><span class="special">(</span><span class="identifier">my_strand</span><span class="special">,</span> <span class="identifier">do_echo</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">spawn</span><span class="special">(</span><span class="identifier">my_strand</span><span class="special">,</span> <span class="identifier">do_echo</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">detached</span><span class="special">);</span>
 
 <span class="comment">// ...</span>
 
@@ -59,11 +59,11 @@
 <span class="special">}</span>
 </pre>
 <p>
-          The first argument to <code class="computeroutput"><span class="identifier">spawn</span><span class="special">()</span></code> may be a <a class="link" href="../../reference/io_context__strand.html" title="io_context::strand"><code class="computeroutput"><span class="identifier">strand</span></code></a>, <a class="link" href="../../reference/io_context.html" title="io_context"><code class="computeroutput"><span class="identifier">io_context</span></code></a>, or a <a class="link" href="../../reference/Handler.html" title="Handlers">completion
-          handler</a>. This argument determines the context in which the coroutine
-          is permitted to execute. For example, a server's per-client object may
-          consist of multiple coroutines; they should all run on the same <code class="computeroutput"><span class="identifier">strand</span></code> so that no explicit synchronisation
-          is required.
+          The first argument to <code class="computeroutput"><span class="identifier">spawn</span><span class="special">()</span></code> may be an executor or execution context.
+          This argument determines the context in which the coroutine is permitted
+          to execute. For example, a server's per-client object may consist of multiple
+          coroutines; they should all run on the same <code class="computeroutput"><span class="identifier">strand</span></code>
+          so that no explicit synchronisation is required.
         </p>
 <p>
           The second argument is a function object with signature:
@@ -118,11 +118,11 @@
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">yield</span><span class="special">[</span><span class="identifier">ec</span><span class="special">]);</span>
 </pre>
 <p>
-          <span class="bold"><strong>Note:</strong></span> if <code class="computeroutput"><span class="identifier">spawn</span><span class="special">()</span></code> is used with a custom completion handler
-          of type <code class="computeroutput"><span class="identifier">Handler</span></code>, the function
+          <span class="bold"><strong>Note:</strong></span> if <code class="computeroutput"><span class="identifier">spawn</span><span class="special">()</span></code> is used with a specified executor of
+          type <code class="computeroutput"><span class="identifier">Executor</span></code>, the function
           object signature is actually:
         </p>
-<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">coroutine</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">basic_yield_context</span><span class="special">&lt;</span><span class="identifier">Handler</span><span class="special">&gt;</span> <span class="identifier">yield</span><span class="special">);</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">coroutine</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">basic_yield_context</span><span class="special">&lt;</span><span class="identifier">Executor</span><span class="special">&gt;</span> <span class="identifier">yield</span><span class="special">);</span>
 </pre>
 <h6>
 <a name="boost_asio.overview.composition.spawn.h0"></a>
