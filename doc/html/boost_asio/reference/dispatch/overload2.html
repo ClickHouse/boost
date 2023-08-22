@@ -119,11 +119,7 @@
               and a function call operator that performs:
             </p>
 <pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">a</span> <span class="special">=</span> <span class="identifier">get_associated_allocator</span><span class="special">(</span><span class="identifier">handler_</span><span class="special">);</span>
-<span class="identifier">execution</span><span class="special">::</span><span class="identifier">execute</span><span class="special">(</span>
-    <span class="identifier">prefer</span><span class="special">(</span><span class="identifier">executor_</span><span class="special">,</span>
-      <span class="identifier">execution</span><span class="special">::</span><span class="identifier">blocking</span><span class="special">.</span><span class="identifier">possibly</span><span class="special">,</span>
-      <span class="identifier">execution</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">(</span><span class="identifier">a</span><span class="special">)),</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">handler_</span><span class="special">));</span>
+<span class="identifier">prefer</span><span class="special">(</span><span class="identifier">executor_</span><span class="special">,</span> <span class="identifier">execution</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">(</span><span class="identifier">a</span><span class="special">)).</span><span class="identifier">execute</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">handler_</span><span class="special">));</span>
 </pre>
 </li>
 <li class="listitem">
@@ -144,11 +140,7 @@
 <p class="simpara">
               If <code class="computeroutput"><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span><span class="identifier">Ex</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is true, performs
             </p>
-<pre class="programlisting"><span class="identifier">execution</span><span class="special">::</span><span class="identifier">execute</span><span class="special">(</span>
-    <span class="identifier">prefer</span><span class="special">(</span><span class="identifier">ex</span><span class="special">,</span>
-      <span class="identifier">execution</span><span class="special">::</span><span class="identifier">blocking</span><span class="special">.</span><span class="identifier">possibly</span><span class="special">,</span>
-      <span class="identifier">execution</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">(</span><span class="identifier">alloc</span><span class="special">)),</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">f</span><span class="special">));</span>
+<pre class="programlisting"><span class="identifier">prefer</span><span class="special">(</span><span class="identifier">ex</span><span class="special">,</span> <span class="identifier">execution</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">(</span><span class="identifier">alloc</span><span class="special">)).</span><span class="identifier">execute</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">f</span><span class="special">));</span>
 </pre>
 </li>
 <li class="listitem">

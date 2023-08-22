@@ -150,8 +150,8 @@
             </td>
 <td>
               <p>
-                Uses COM to show debug info. May require linking with <span class="bold"><strong>ole32</strong></span>
-                and <span class="bold"><strong>dbgeng</strong></span>.
+                Uses <code class="computeroutput"><span class="identifier">dbgeng</span><span class="special">.</span><span class="identifier">h</span></code> to show debug info. May require
+                linking with <span class="bold"><strong>ole32</strong></span> and <span class="bold"><strong>dbgeng</strong></span>.
               </p>
             </td>
 <td>
@@ -216,10 +216,9 @@
             </td>
 <td>
               <p>
-                Uses COM to show debug info and caches COM instances in TLS for better
-                performance. Useful only for cases when traces are gathered very
-                often. <a href="#ftn.stacktrace.configuration_and_build.f2" class="footnote" name="stacktrace.configuration_and_build.f2"><sup class="footnote">[c]</sup></a> May require linking with <span class="bold"><strong>ole32</strong></span>
-                and <span class="bold"><strong>dbgeng</strong></span>.
+                Uses <code class="computeroutput"><span class="identifier">dbgeng</span><span class="special">.</span><span class="identifier">h</span></code> to show debug info and caches
+                internals in TLS for better performance. Useful only for cases when
+                traces are gathered very often. May require linking with <span class="bold"><strong>ole32</strong></span> and <span class="bold"><strong>dbgeng</strong></span>.
               </p>
             </td>
 <td>
@@ -252,8 +251,8 @@
 <td>
               <p>
                 Requires linking with <span class="bold"><strong>libdl</strong></span> on POSIX
-                and <span class="bold"><strong>libbacktrace</strong></span> libraries. <span class="bold"><strong>libbacktrace</strong></span> is probably already installed
-                in your system<a href="#ftn.stacktrace.configuration_and_build.f3" class="footnote" name="stacktrace.configuration_and_build.f3"><sup class="footnote">[d]</sup></a>, or built into your compiler.
+                and <span class="bold"><strong>libbacktrace</strong></span> libraries<a href="#ftn.stacktrace.configuration_and_build.f2" class="footnote" name="stacktrace.configuration_and_build.f2"><sup class="footnote">[c]</sup></a>. <span class="bold"><strong>libbacktrace</strong></span> is probably
+                already installed in your system<a href="#ftn.stacktrace.configuration_and_build.f3" class="footnote" name="stacktrace.configuration_and_build.f3"><sup class="footnote">[d]</sup></a>, or built into your compiler.
               </p>
               <p>
                 Otherwise (if you are a <span class="bold"><strong>MinGW</strong></span>/<span class="bold"><strong>MinGW-w64</strong></span> user for example) it can be downloaded
@@ -360,10 +359,14 @@
                   or marking functions as exported produce a better stacktraces.
                 </p></div>
 <div id="ftn.stacktrace.configuration_and_build.f2" class="footnote"><p><a href="#stacktrace.configuration_and_build.f2" class="para"><sup class="para">[c] </sup></a>
-                  This may affect other components of your program that use COM,
-                  because this mode calls the <code class="computeroutput"><span class="identifier">CoInitializeEx</span><span class="special">(</span><span class="number">0</span><span class="special">,</span> <span class="identifier">COINIT_MULTITHREADED</span><span class="special">)</span></code> on first use and does not call
-                  <code class="computeroutput"><span class="special">::</span><span class="identifier">CoUninitialize</span><span class="special">();</span></code> until the current thread is
-                  destroyed.
+                  Some <span class="bold"><strong>libbacktrace</strong></span> packages SEGFAULT
+                  if there's a concurrent work with the same <code class="computeroutput"><span class="identifier">backtrace_state</span></code>
+                  instance. To avoid that issue the Boost.Stacktrace library uses
+                  <code class="computeroutput"><span class="keyword">thread_local</span></code> states,
+                  unfortuantely this may consume a lot of memory if you often create
+                  and destroy execution threads in your application. Define <span class="bold"><strong>BOOST_STACKTRACE_BACKTRACE_FORCE_STATIC</strong></span>
+                  to force single instance, but make sure that <a href="https://github.com/boostorg/stacktrace/blob/develop/test/thread_safety_checking.cpp" target="_top">thread_safety_checking.cpp</a>
+                  works well in your setup.
                 </p></div>
 <div id="ftn.stacktrace.configuration_and_build.f3" class="footnote"><p><a href="#stacktrace.configuration_and_build.f3" class="para"><sup class="para">[d] </sup></a>
                   If you are using Clang with libstdc++ you could get into troubles

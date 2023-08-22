@@ -48,7 +48,7 @@
      <span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="number">4096</span><span class="special">&gt;</span> <span class="identifier">buf</span><span class="special">;</span>
 
      <span class="keyword">auto</span> <span class="identifier">read</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">stream</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span>
-         <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">buf</span><span class="special">),</span> <span class="identifier">experimental</span><span class="special">::</span><span class="identifier">use_coro</span><span class="special">);</span>
+         <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">buf</span><span class="special">),</span> <span class="identifier">deferred</span><span class="special">);</span>
 
      <span class="keyword">if</span> <span class="special">(</span><span class="identifier">read</span> <span class="special">==</span> <span class="number">0u</span><span class="special">)</span>
        <span class="keyword">continue</span><span class="special">;</span>
@@ -503,7 +503,7 @@
         </h6>
 <p>
           The @c co_await within a <code class="computeroutput"><span class="identifier">coro</span></code>
-          is not the same as <code class="computeroutput"><span class="identifier">async_resume</span><span class="special">(</span><span class="identifier">use_coro</span><span class="special">)</span></code>, unless both coros use different executors.
+          is not the same as <code class="computeroutput"><span class="identifier">async_resume</span><span class="special">(</span><span class="identifier">deferred</span><span class="special">)</span></code>, unless both coros use different executors.
           If they use the same, the <code class="computeroutput"><span class="identifier">coro</span></code>
           will direclty suspend and resume the executor, without any usage of the
           executor.
@@ -535,7 +535,7 @@
   <span class="special">{</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_read_until</span><span class="special">(</span>
         <span class="identifier">sock</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">dynamic_buffer</span><span class="special">(</span><span class="identifier">buf</span><span class="special">),</span> <span class="char">'\n'</span><span class="special">,</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">use_coro</span><span class="special">);</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
     <span class="identifier">co_yield</span> <span class="identifier">buf</span><span class="special">.</span><span class="identifier">substr</span><span class="special">(</span><span class="number">0</span><span class="special">,</span> <span class="identifier">n</span><span class="special">);</span>
     <span class="identifier">buf</span><span class="special">.</span><span class="identifier">erase</span><span class="special">(</span><span class="number">0</span><span class="special">,</span> <span class="identifier">n</span><span class="special">);</span>
   <span class="special">}</span>

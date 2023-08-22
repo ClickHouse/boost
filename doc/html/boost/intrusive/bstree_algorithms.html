@@ -49,8 +49,8 @@
   <span class="keyword">static</span> <span class="identifier">node_ptr</span> <a class="link" href="bstree_algorithms.html#idm29955-bb"><span class="identifier">root_node</span></a><span class="special">(</span><span class="identifier">const_node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">bool</span> <a class="link" href="bstree_algorithms.html#idm29968-bb"><span class="identifier">unique</span></a><span class="special">(</span><span class="identifier">const_node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="identifier">node_ptr</span> <a class="link" href="bstree_algorithms.html#idm29981-bb"><span class="identifier">get_header</span></a><span class="special">(</span><span class="identifier">const_node_ptr</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../container/exception.html#idm29994-bb"><span class="identifier">swap_nodes</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
-  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../container/out_of_range.html#idm30012-bb"><span class="identifier">swap_nodes</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm29994-bb"><span class="identifier">swap_nodes</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30012-bb"><span class="identifier">swap_nodes</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../interprocess/basic_ibufferstream.html#idm30034-bb"><span class="identifier">replace_node</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30051-bb"><span class="identifier">replace_node</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="identifier">node_ptr</span> <a class="link" href="../interprocess/basic_obufferstream.html#idm30070-bb"><span class="identifier">next_node</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
@@ -128,13 +128,13 @@
     <span class="keyword">static</span> <span class="keyword">bool</span> <a class="link" href="bstree_algorithms.html#idm30737-bb"><span class="identifier">transfer_unique</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">NodePtrCompare</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> 
                                 <span class="identifier">data_for_rebalance</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> NodePtrCompare<span class="special">&gt;</span> 
-    <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../container/vector.html#idm30751-bb"><span class="identifier">transfer_equal</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">NodePtrCompare</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> 
+    <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30751-bb"><span class="identifier">transfer_equal</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">NodePtrCompare</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> 
                                <span class="identifier">data_for_rebalance</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../interprocess/interprocess_condition_any.html#idm30765-bb"><span class="identifier">erase</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">data_for_rebalance</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <a class="link" href="bstree_algorithms.html#idm30773-bb"><span class="identifier">subtree_size</span></a><span class="special">(</span><span class="identifier">const_node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">bool</span> <a class="link" href="bstree_algorithms.html#idm30786-bb"><span class="identifier">is_left_child</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">bool</span> <a class="link" href="bstree_algorithms.html#idm30799-bb"><span class="identifier">is_right_child</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
-  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../container/vector.html#idm30812-bb"><span class="identifier">insert_before_check</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">insert_commit_data</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30812-bb"><span class="identifier">insert_before_check</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">insert_commit_data</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../interprocess/interprocess_mutex.html#idm30820-bb"><span class="identifier">push_back_check</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">insert_commit_data</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30826-bb"><span class="identifier">push_front_check</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">insert_commit_data</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> NodePtrCompare<span class="special">&gt;</span> 
@@ -153,18 +153,18 @@
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../interprocess/interprocess_recu_idm30836.html#idm30876-bb"><span class="identifier">insert_commit</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="keyword">const</span> <span class="identifier">insert_commit_data</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30884-bb"><span class="identifier">set_child</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="keyword">const</span> <span class="keyword">bool</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../interprocess/interprocess_recu_idm30836.html#idm30894-bb"><span class="identifier">rotate_left_no_parent_fix</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
-  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30900-bb"><span class="identifier">rotate_left</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../container/vector.html#idm30900-bb"><span class="identifier">rotate_left</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30910-bb"><span class="identifier">rotate_right_no_parent_fix</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30916-bb"><span class="identifier">rotate_right</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
 
   <span class="comment">// <a class="link" href="bstree_algorithms.html#idm30926-bb">private static functions</a></span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../interprocess/interprocess_semaphore.html#idm30927-bb"><span class="identifier">subtree_to_vine</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30933-bb"><span class="identifier">compress_subtree</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
-  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../container/vector.html#idm30939-bb"><span class="identifier">vine_to_subtree</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+  <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="../interprocess/interprocess_semaphore.html#idm30939-bb"><span class="identifier">vine_to_subtree</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">static</span> <span class="identifier">node_ptr</span> <a class="link" href="bstree_algorithms.html#idm30945-bb"><span class="identifier">get_root</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Cloner<span class="special">,</span> <span class="keyword">typename</span> Disposer<span class="special">&gt;</span> 
     <span class="keyword">static</span> <span class="identifier">node_ptr</span> 
-    <a class="link" href="bstree_algorithms.html#idm30958-bb"><span class="identifier">clone_subtree</span></a><span class="special">(</span><span class="identifier">const_node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">Cloner</span><span class="special">,</span> <span class="identifier">Disposer</span><span class="special">,</span> <span class="identifier">node_ptr</span> <span class="special">&amp;</span><span class="special">,</span> 
+    <a class="link" href="../container/vector.html#idm30958-bb"><span class="identifier">clone_subtree</span></a><span class="special">(</span><span class="identifier">const_node_ptr</span><span class="special">,</span> <span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">Cloner</span><span class="special">,</span> <span class="identifier">Disposer</span><span class="special">,</span> <span class="identifier">node_ptr</span> <span class="special">&amp;</span><span class="special">,</span> 
                   <span class="identifier">node_ptr</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Disposer<span class="special">&gt;</span> 
     <span class="keyword">static</span> <span class="keyword">void</span> <a class="link" href="bstree_algorithms.html#idm30975-bb"><span class="identifier">dispose_subtree</span></a><span class="special">(</span><span class="identifier">node_ptr</span><span class="special">,</span> <span class="identifier">Disposer</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
@@ -287,15 +287,15 @@ header------------------------------&gt;|         |
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">bool</span> <a name="idm29968-bb"></a><span class="identifier">unique</span><span class="special">(</span><span class="identifier">const_node_ptr</span> node<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' is a node of the tree or a node initialized by init(...) or init_node.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">bool</span> <a name="idm29968-bb"></a><span class="identifier">unique</span><span class="special">(</span><span class="identifier">const_node_ptr</span> n<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' is a node of the tree or a node initialized by init(...) or init_node.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns true if the node is initialized by init() or init_node().</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Constant time.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm29981-bb"></a><span class="identifier">get_header</span><span class="special">(</span><span class="identifier">const_node_ptr</span> node<span class="special">)</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' is a node of the tree or a header node.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm29981-bb"></a><span class="identifier">get_header</span><span class="special">(</span><span class="identifier">const_node_ptr</span> n<span class="special">)</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' is a node of the tree or a header node.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns the header of the tree.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Logarithmic.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
@@ -337,54 +337,54 @@ header------------------------------&gt;|         |
 <p><span class="bold"><strong>Note</strong></span>: This function will break container ordering invariants if new_node is not equivalent to node_to_be_replaced according to the ordering rules. This function is faster than erasing and inserting the node, since no rebalancing or comparison is needed. Experimental function </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30070-bb"></a><span class="identifier">next_node</span><span class="special">(</span><span class="identifier">node_ptr</span> node<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' is a node from the tree except the header.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30070-bb"></a><span class="identifier">next_node</span><span class="special">(</span><span class="identifier">node_ptr</span> n<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' is a node from the tree except the header.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns the next node of the tree.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Average constant time.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30083-bb"></a><span class="identifier">prev_node</span><span class="special">(</span><span class="identifier">node_ptr</span> node<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' is a node from the tree except the leftmost node.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30083-bb"></a><span class="identifier">prev_node</span><span class="special">(</span><span class="identifier">node_ptr</span> n<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' is a node from the tree except the leftmost node.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns the previous node of the tree.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Average constant time.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30096-bb"></a><span class="identifier">minimum</span><span class="special">(</span><span class="identifier">node_ptr</span> node<span class="special">)</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' is a node of a tree but not the header.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30096-bb"></a><span class="identifier">minimum</span><span class="special">(</span><span class="identifier">node_ptr</span> n<span class="special">)</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' is a node of a tree but not the header.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns the minimum node of the subtree starting at p.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Logarithmic to the size of the subtree.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30109-bb"></a><span class="identifier">maximum</span><span class="special">(</span><span class="identifier">node_ptr</span> node<span class="special">)</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' is a node of a tree but not the header.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30109-bb"></a><span class="identifier">maximum</span><span class="special">(</span><span class="identifier">node_ptr</span> n<span class="special">)</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' is a node of a tree but not the header.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns the maximum node of the subtree starting at p.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Logarithmic to the size of the subtree.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30122-bb"></a><span class="identifier">init</span><span class="special">(</span><span class="identifier">node_ptr</span> node<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' must not be part of any tree.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30122-bb"></a><span class="identifier">init</span><span class="special">(</span><span class="identifier">node_ptr</span> n<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' must not be part of any tree.</p>
 <p><span class="bold"><strong>Effects</strong></span>: After the function unique(node) == true.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Constant.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing.</p>
 <p><span class="bold"><strong>Nodes</strong></span>: If node is inserted in a tree, this function corrupts the tree. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">bool</span> <a name="idm30137-bb"></a><span class="identifier">inited</span><span class="special">(</span><span class="identifier">const_node_ptr</span> node<span class="special">)</span><span class="special">;</span></pre>
+<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">bool</span> <a name="idm30137-bb"></a><span class="identifier">inited</span><span class="special">(</span><span class="identifier">const_node_ptr</span> n<span class="special">)</span><span class="special">;</span></pre>
 <p><span class="bold"><strong>Effects</strong></span>: Returns true if node is in the same state as if called init(node)</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Constant.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30148-bb"></a><span class="identifier">init_header</span><span class="special">(</span><span class="identifier">node_ptr</span> header<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: node must not be part of any tree.</p>
+<p><span class="bold"><strong>Requires</strong></span>: header must not be part of any tree.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Initializes the header to represent an empty tree. unique(header) == true.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Constant.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing.</p>
-<p><span class="bold"><strong>Nodes</strong></span>: If node is inserted in a tree, this function corrupts the tree. </p>
+<p><span class="bold"><strong>Nodes</strong></span>: If header is inserted in a tree, this function corrupts the tree. </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Disposer<span class="special">&gt;</span> 
@@ -404,8 +404,8 @@ header------------------------------&gt;|         |
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <a name="idm30196-bb"></a><span class="identifier">size</span><span class="special">(</span><span class="identifier">const_node_ptr</span> header<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: node is a node of the tree but it's not the header.</p>
-<p><span class="bold"><strong>Effects</strong></span>: Returns the number of nodes of the subtree.</p>
+<p><span class="bold"><strong>Requires</strong></span>: 'header' the header of the tree.</p>
+<p><span class="bold"><strong>Effects</strong></span>: Returns the number of nodes of the tree.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Linear time.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
 </li>
@@ -589,8 +589,8 @@ header------------------------------&gt;|         |
 <p><span class="bold"><strong>Note</strong></span>: If "new_node" is greater than the lowest inserted key tree invariants are broken. This function is slightly faster than using "insert_before". </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <a name="idm30578-bb"></a><span class="identifier">depth</span><span class="special">(</span><span class="identifier">const_node_ptr</span> node<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: 'node' can't be a header node.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <a name="idm30578-bb"></a><span class="identifier">depth</span><span class="special">(</span><span class="identifier">const_node_ptr</span> n<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' can't be a header node.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Calculates the depth of a node: the depth of a node is the length (number of edges) of the path from the root to that node. (The root node is at depth 0.)</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Logarithmic to the number of nodes in the tree.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
@@ -632,8 +632,8 @@ header------------------------------&gt;|         |
 <p><span class="bold"><strong>Throws</strong></span>: If the comparison throws. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30676-bb"></a><span class="identifier">unlink</span><span class="special">(</span><span class="identifier">node_ptr</span> node<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: node is a tree node but not the header.</p>
+<pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30676-bb"></a><span class="identifier">unlink</span><span class="special">(</span><span class="identifier">node_ptr</span> n<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
+<p><span class="bold"><strong>Requires</strong></span>: 'n' is a tree node but not the header.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Unlinks the node and rebalances the tree.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Average complexity is constant time.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
@@ -679,7 +679,7 @@ header------------------------------&gt;|         |
 <li class="listitem"><pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30765-bb"></a><span class="identifier">erase</span><span class="special">(</span><span class="identifier">node_ptr</span> header<span class="special">,</span> <span class="identifier">node_ptr</span> z<span class="special">,</span> <span class="identifier">data_for_rebalance</span> <span class="special">&amp;</span> info<span class="special">)</span><span class="special">;</span></pre></li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <a name="idm30773-bb"></a><span class="identifier">subtree_size</span><span class="special">(</span><span class="identifier">const_node_ptr</span> subtree<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
-<p><span class="bold"><strong>Requires</strong></span>: node is a node of the tree but it's not the header.</p>
+<p><span class="bold"><strong>Requires</strong></span>: 'subtree' is a node of the tree but it's not the header.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns the number of nodes of the subtree.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Linear time.</p>
 <p><span class="bold"><strong>Throws</strong></span>: Nothing. </p>
@@ -737,7 +737,7 @@ header------------------------------&gt;|         |
 <li class="listitem"><pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30933-bb"></a><span class="identifier">compress_subtree</span><span class="special">(</span><span class="identifier">node_ptr</span> scanner<span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> count<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre></li>
 <li class="listitem"><pre class="literallayout"><span class="keyword">static</span> <span class="keyword">void</span> <a name="idm30939-bb"></a><span class="identifier">vine_to_subtree</span><span class="special">(</span><span class="identifier">node_ptr</span> super_root<span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> count<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre></li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30945-bb"></a><span class="identifier">get_root</span><span class="special">(</span><span class="identifier">node_ptr</span> node<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">node_ptr</span> <a name="idm30945-bb"></a><span class="identifier">get_root</span><span class="special">(</span><span class="identifier">node_ptr</span> n<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>
 <p><span class="bold"><strong>Requires</strong></span>: "n" must be a node inserted in a tree.</p>
 <p><span class="bold"><strong>Effects</strong></span>: Returns a pointer to the header node of the tree.</p>
 <p><span class="bold"><strong>Complexity</strong></span>: Logarithmic.</p>
@@ -759,7 +759,7 @@ header------------------------------&gt;|         |
   <a name="idm30996-bb"></a><span class="identifier">upper_bound_loop</span><span class="special">(</span><span class="identifier">node_ptr</span> x<span class="special">,</span> <span class="identifier">node_ptr</span> y<span class="special">,</span> <span class="keyword">const</span> <span class="identifier">KeyType</span> <span class="special">&amp;</span> key<span class="special">,</span> 
                    <span class="identifier">KeyNodePtrCompare</span> comp<span class="special">)</span><span class="special">;</span></pre></li>
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Checker<span class="special">&gt;</span> 
-  <span class="keyword">static</span> <span class="keyword">void</span> <a name="idm31009-bb"></a><span class="identifier">check_subtree</span><span class="special">(</span><span class="identifier">const_node_ptr</span> node<span class="special">,</span> <span class="identifier">Checker</span> checker<span class="special">,</span> 
+  <span class="keyword">static</span> <span class="keyword">void</span> <a name="idm31009-bb"></a><span class="identifier">check_subtree</span><span class="special">(</span><span class="identifier">const_node_ptr</span> n<span class="special">,</span> <span class="identifier">Checker</span> checker<span class="special">,</span> 
                             <span class="keyword">typename</span> <span class="identifier">Checker</span><span class="special">::</span><span class="identifier">return_type</span> <span class="special">&amp;</span> check_return<span class="special">)</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>

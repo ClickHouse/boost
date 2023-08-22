@@ -81,7 +81,6 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
     std::function< fiber_activation_record*(fiber_activation_record*&) >    ontop{};
     bool                                                        terminated{ false };
     bool                                                        force_unwind{ false };
-    bool                                                        is_started{ false };
 #if defined(BOOST_USE_ASAN)
     void                                                    *   fake_stack{ nullptr };
     void                                                    *   stack_bottom{ nullptr };
@@ -278,7 +277,6 @@ public:
         Ctx c{ from };
         try {
             // invoke context-function
-            is_started = true;
 #if defined(BOOST_NO_CXX17_STD_INVOKE)
             c = boost::context::detail::invoke( fn_, std::move( c) );
 #else
@@ -399,14 +397,6 @@ private:
 	template< typename Ctx, typename StackAlloc, typename Fn >
 	friend detail::fiber_activation_record * detail::create_fiber2( preallocated, StackAlloc &&, Fn &&);
 
-    template< typename StackAlloc, typename Fn >
-    friend fiber
-    callcc( std::allocator_arg_t, StackAlloc &&, Fn &&);
-
-    template< typename StackAlloc, typename Fn >
-    friend fiber
-    callcc( std::allocator_arg_t, preallocated, StackAlloc &&, Fn &&);
-
     detail::fiber_activation_record   *   ptr_{ nullptr };
 
     fiber( detail::fiber_activation_record * ptr) noexcept :
@@ -442,7 +432,7 @@ public:
 
     ~fiber() {
         if ( BOOST_UNLIKELY( nullptr != ptr_) && ! ptr_->main_ctx) {
-            if ( BOOST_LIKELY( ! ptr_->terminated && ptr_->is_started) ) {
+            if ( BOOST_LIKELY( ! ptr_->terminated) ) {
                 ptr_->force_unwind = true;
                 ptr_->resume();
                 BOOST_ASSERT( ptr_->terminated);

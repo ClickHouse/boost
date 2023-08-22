@@ -224,7 +224,8 @@
       <span class="special">{</span>
         <span class="comment">// ...</span>
       <span class="special">},</span>
-    <span class="number">42</span><span class="special">)</span>
+      <span class="number">42</span>
+    <span class="special">)</span>
   <span class="special">);</span>
 
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">future</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">&gt;</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
@@ -252,7 +253,8 @@
       <span class="special">{</span>
         <span class="comment">// ...</span>
       <span class="special">},</span>
-    <span class="number">42</span><span class="special">)</span>
+      <span class="number">42</span>
+    <span class="special">)</span>
   <span class="special">);</span>
 
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">future</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&gt;&gt;</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
@@ -264,6 +266,41 @@
 </pre>
 <h6>
 <a name="boost_asio.overview.composition.token_adapters.h6"></a>
+          <span class="phrase"><a name="boost_asio.overview.composition.token_adapters.consign"></a></span><a class="link" href="token_adapters.html#boost_asio.overview.composition.token_adapters.consign">consign</a>
+        </h6>
+<p>
+          The <a class="link" href="../../reference/consign.html" title="consign"><code class="computeroutput"><span class="identifier">consign</span></code></a>
+          completion token adapter can be used to attach additional values to a completion
+          handler. This is typically used to keep at least one copy of an object,
+          such as a smart pointer, alive until the completion handler is called.
+        </p>
+<p>
+          For example:
+        </p>
+<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">timer1</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">make_shared</span><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">steady_timer</span><span class="special">&gt;(</span><span class="identifier">my_io_context</span><span class="special">);</span>
+<span class="identifier">timer1</span><span class="special">-&gt;</span><span class="identifier">expires_after</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
+<span class="identifier">timer1</span><span class="special">-&gt;</span><span class="identifier">async_wait</span><span class="special">(</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">consign</span><span class="special">(</span>
+      <span class="special">[](</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">)</span>
+      <span class="special">{</span>
+        <span class="comment">// ...</span>
+      <span class="special">},</span>
+      <span class="identifier">timer1</span>
+    <span class="special">)</span>
+  <span class="special">);</span>
+
+<span class="keyword">auto</span> <span class="identifier">timer2</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">make_shared</span><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">steady_timer</span><span class="special">&gt;(</span><span class="identifier">my_io_context</span><span class="special">);</span>
+<span class="identifier">timer2</span><span class="special">-&gt;</span><span class="identifier">expires_after</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">30</span><span class="special">));</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">future</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="identifier">f</span> <span class="special">=</span>
+  <span class="identifier">timer2</span><span class="special">-&gt;</span><span class="identifier">async_wait</span><span class="special">(</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">consign</span><span class="special">(</span>
+      <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_future</span><span class="special">,</span>
+      <span class="identifier">timer2</span>
+    <span class="special">)</span>
+  <span class="special">);</span>
+</pre>
+<h6>
+<a name="boost_asio.overview.composition.token_adapters.h7"></a>
           <span class="phrase"><a name="boost_asio.overview.composition.token_adapters.see_also"></a></span><a class="link" href="token_adapters.html#boost_asio.overview.composition.token_adapters.see_also">See Also</a>
         </h6>
 <p>

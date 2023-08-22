@@ -90,7 +90,7 @@ inline T get_smallest_value(std::true_type const&)
    // when using the SSE2 registers in DAZ or FTZ mode.
    //
    static const T m = std::numeric_limits<T>::denorm_min();
-#if defined(BOOST_MATH_CHECK_SSE2) && !defined(__powerpc64__) /* PowerPC has shim for SSE intrinsics, but not this specific intrinsic */
+#ifdef BOOST_MATH_CHECK_SSE2
    return (_mm_getcsr() & (_MM_FLUSH_ZERO_ON | 0x40)) ? tools::min_value<T>() : m;
 #else
    return ((tools::min_value<T>() / 2) == 0) ? tools::min_value<T>() : m;
@@ -203,7 +203,7 @@ T float_next_imp(const T& val, const std::true_type&, const Policy& pol)
    }
 
    if(val >= tools::max_value<T>())
-      return policies::raise_overflow_error<T>(function, 0, pol);
+      return policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return detail::get_smallest_value<T>();
@@ -252,7 +252,7 @@ T float_next_imp(const T& val, const std::false_type&, const Policy& pol)
    }
 
    if(val >= tools::max_value<T>())
-      return policies::raise_overflow_error<T>(function, 0, pol);
+      return policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return detail::get_smallest_value<T>();
@@ -302,7 +302,7 @@ inline double float_next(const double& val, const Policy& pol)
          "Argument must be finite, but got %1%", val, pol);
 
    if(val >= tools::max_value<double>())
-      return policies::raise_overflow_error<double>(function, 0, pol);
+      return policies::raise_overflow_error<double>(function, nullptr, pol);
 
    return ::_nextafter(val, tools::max_value<double>());
 }
@@ -337,7 +337,7 @@ T float_prior_imp(const T& val, const std::true_type&, const Policy& pol)
    }
 
    if(val <= -tools::max_value<T>())
-      return -policies::raise_overflow_error<T>(function, 0, pol);
+      return -policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return -detail::get_smallest_value<T>();
@@ -387,7 +387,7 @@ T float_prior_imp(const T& val, const std::false_type&, const Policy& pol)
    }
 
    if(val <= -tools::max_value<T>())
-      return -policies::raise_overflow_error<T>(function, 0, pol);
+      return -policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return -detail::get_smallest_value<T>();
@@ -438,7 +438,7 @@ inline double float_prior(const double& val, const Policy& pol)
          "Argument must be finite, but got %1%", val, pol);
 
    if(val <= -tools::max_value<double>())
-      return -policies::raise_overflow_error<double>(function, 0, pol);
+      return -policies::raise_overflow_error<double>(function, nullptr, pol);
 
    return ::_nextafter(val, -tools::max_value<double>());
 }
