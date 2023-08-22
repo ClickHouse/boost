@@ -27,23 +27,15 @@
 <a name="boost_asio.overview.composition.deferred"></a><a class="link" href="deferred.html" title="Deferred Operations">Deferred
         Operations</a>
 </h4></div></div></div>
-<div class="note"><table border="0" summary="Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../../doc/src/images/note.png"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>
-            This is an experimental feature.
-          </p></td></tr>
-</table></div>
 <p>
-          The <a class="link" href="../../reference/experimental__deferred.html" title="experimental::deferred"><code class="computeroutput"><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span></code></a>, completion token takes
-          a call to an asynchronous operation's initiating function and turns it
-          into a function object that accepts a completion token. For example:
+          The <a class="link" href="../../reference/deferred.html" title="deferred"><code class="computeroutput"><span class="identifier">deferred</span></code></a>,
+          completion token takes a call to an asynchronous operation's initiating
+          function and turns it into a function object that accepts a completion
+          token. For example:
         </p>
 <pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">deferred_op</span> <span class="special">=</span>
   <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
-    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">deferred_op</span><span class="special">)(</span>
     <span class="special">[](</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">){</span> <span class="special">...</span> <span class="special">});</span>
@@ -53,7 +45,7 @@
         </p>
 <pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">deferred_op</span> <span class="special">=</span>
   <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
-    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">future</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="special">=</span>
   <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">deferred_op</span><span class="special">)(</span>
@@ -64,14 +56,14 @@
         </p>
 <pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">deferred_op</span> <span class="special">=</span>
   <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
-    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">(</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">(</span>
       <span class="special">[&amp;](</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">)</span>
       <span class="special">{</span>
         <span class="identifier">timer</span><span class="special">.</span><span class="identifier">expires_after</span><span class="special">(</span>
             <span class="identifier">std</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
 
         <span class="keyword">return</span> <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
-            <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
+            <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
       <span class="special">});</span>
 <span class="special">...</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">future</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">deferred_op</span><span class="special">)(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_future</span><span class="special">);</span>
@@ -82,10 +74,10 @@
           Also</a>
         </h6>
 <p>
-          <a class="link" href="../../reference/experimental__deferred.html" title="experimental::deferred">experimental::deferred</a>,
-          <a class="link" href="../../reference/experimental__deferred_t.html" title="experimental::deferred_t">experimental::deferred_t</a>,
+          <a class="link" href="../../reference/deferred.html" title="deferred">deferred</a>, <a class="link" href="../../reference/deferred_t.html" title="deferred_t">deferred_t</a>,
           <a class="link" href="../../examples/cpp14_examples.html#boost_asio.examples.cpp14_examples.deferred">Deferred examples
-          (C++14)</a>.
+          (C++11)</a>, <a class="link" href="../../examples/cpp14_examples.html#boost_asio.examples.cpp14_examples.deferred">Deferred
+          examples (C++14)</a>.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

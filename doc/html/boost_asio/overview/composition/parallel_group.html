@@ -70,10 +70,10 @@
         </p>
 <p>
           The <code class="computeroutput"><span class="identifier">parallel_group</span></code> facility
-          can also be combined with <a class="link" href="../../reference/experimental__deferred.html" title="experimental::deferred"><code class="computeroutput"><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span></code></a> as follows:
+          can also be combined with <a class="link" href="../../reference/deferred.html" title="deferred"><code class="computeroutput"><span class="identifier">deferred</span></code></a> as follows:
         </p>
 <pre class="programlisting"><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">make_parallel_group</span><span class="special">(</span>
-    <span class="identifier">stream</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">),</span>
+    <span class="identifier">stream</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">deferred</span><span class="special">),</span>
     <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">)</span>
   <span class="special">).</span><span class="identifier">async_wait</span><span class="special">(</span>
     <span class="comment">// ...</span>

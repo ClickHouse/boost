@@ -66,14 +66,26 @@
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">use_promise</span><span class="special">);</span>
 
 <span class="keyword">auto</span> <span class="identifier">promise</span> <span class="special">=</span>
-  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">promise</span><span class="special">&lt;&gt;::</span><span class="identifier">race</span><span class="special">(</span>
-    <span class="identifier">timeout_promise</span><span class="special">,</span> <span class="identifier">read_promise</span><span class="special">);</span>
+  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">make_parallel_group</span><span class="special">(</span>
+    <span class="identifier">timeout_promise</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">),</span>
+    <span class="identifier">read_promise</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">)</span>
+  <span class="special">).</span><span class="identifier">async_wait</span><span class="special">(</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">wait_for_one</span><span class="special">(),</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">use_promise</span><span class="special">);</span>
 
 <span class="identifier">promise</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
-    <span class="special">[](</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">variant</span><span class="special">&lt;</span><span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">&gt;&gt;</span> <span class="identifier">v</span><span class="special">)</span>
+    <span class="special">[](</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">,</span> <span class="number">2</span><span class="special">&gt;</span> <span class="identifier">order</span><span class="special">,</span>
+       <span class="identifier">error_code</span> <span class="identifier">timer_ec</span><span class="special">,</span>
+       <span class="identifier">error_code</span> <span class="identifier">read_ec</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">read_size</span><span class="special">)</span>
     <span class="special">{</span>
-      <span class="keyword">if</span> <span class="special">(</span><span class="identifier">v</span><span class="special">.</span><span class="identifier">index</span><span class="special">()</span> <span class="special">==</span> <span class="number">0</span><span class="special">)</span> <span class="special">{}</span> <span class="comment">//timed out</span>
-      <span class="keyword">else</span> <span class="keyword">if</span> <span class="special">(</span><span class="identifier">v</span><span class="special">.</span><span class="identifier">index</span><span class="special">()</span> <span class="special">==</span> <span class="number">1</span><span class="special">)</span> <span class="comment">// completed in time</span>
+      <span class="keyword">if</span> <span class="special">(</span><span class="identifier">order</span><span class="special">[</span><span class="number">0</span><span class="special">]</span> <span class="special">==</span> <span class="number">0</span><span class="special">)</span>
+      <span class="special">{</span>
+        <span class="comment">// timed out</span>
+      <span class="special">}</span>
+      <span class="keyword">else</span>
+      <span class="special">{</span>
+        <span class="comment">// completed in time</span>
+      <span class="special">}</span>
     <span class="special">});</span>
 </pre>
 <p>
@@ -88,12 +100,17 @@
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">use_promise</span><span class="special">);</span>
 
 <span class="keyword">auto</span> <span class="identifier">promise</span> <span class="special">=</span>
-  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">promise</span><span class="special">&lt;&gt;::</span><span class="identifier">all</span><span class="special">(</span>
-    <span class="identifier">write_promise</span><span class="special">,</span> <span class="identifier">read_promise</span><span class="special">);</span>
+  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">make_parallel_group</span><span class="special">(</span>
+    <span class="identifier">timeout_promise</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">),</span>
+    <span class="identifier">read_promise</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">)</span>
+  <span class="special">).</span><span class="identifier">async_wait</span><span class="special">(</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">wait_for_all</span><span class="special">(),</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">use_promise</span><span class="special">);</span>
 
 <span class="identifier">promise</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span>
-    <span class="special">[](</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">&gt;</span> <span class="identifier">write_result</span><span class="special">,</span>
-      <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">&gt;</span> <span class="identifier">read_result</span><span class="special">)</span>
+    <span class="special">[](</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">,</span> <span class="number">2</span><span class="special">&gt;</span> <span class="identifier">order</span><span class="special">,</span>
+       <span class="identifier">error_code</span> <span class="identifier">timer_ec</span><span class="special">,</span>
+       <span class="identifier">error_code</span> <span class="identifier">read_ec</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">read_size</span><span class="special">)</span>
     <span class="special">{</span>
       <span class="comment">// ...</span>
     <span class="special">});</span>

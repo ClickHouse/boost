@@ -165,7 +165,9 @@
                 <p>
                   Construct a basic_writable_pipe without opening it. <br> <span class="silver"> —</span><br>
                   Construct a basic_writable_pipe on an existing native pipe. <br>
-                  <span class="silver"> —</span><br> Move-construct a basic_writable_pipe from another.
+                  <span class="silver"> —</span><br> Move-construct a basic_writable_pipe from another. <br>
+                  <span class="silver"> —</span><br> Move-construct a basic_writable_pipe from a pipe of another
+                  executor type.
                 </p>
               </td>
 </tr>
@@ -250,7 +252,20 @@
               </td>
 <td>
                 <p>
-                  Move-assign a basic_writable_pipe from another.
+                  Move-assign a basic_writable_pipe from another. <br> <span class="silver"> —</span><br> Move-assign
+                  a basic_writable_pipe from a pipe of another executor type.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="basic_writable_pipe/release.html" title="basic_writable_pipe::release"><span class="bold"><strong>release</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Release ownership of the underlying native pipe.
                 </p>
               </td>
 </tr>
