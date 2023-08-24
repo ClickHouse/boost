@@ -27,7 +27,7 @@
 <a name="boost.date_time.iso_format_base"></a><div class="titlepage"></div>
 <div class="refnamediv">
 <h2><span class="refentrytitle">Class template iso_format_base</span></h2>
-<p>boost::date_time::iso_format_base — Class to provide common iso formatting spec. </p>
+<p>boost::date_time::iso_format_base — Class to provide common ISO 8601 formatting spec. </p>
 </div>
 <h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
 <div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../date_time/doxy.html#header.boost.date_time.iso_format_hpp" title="Header &lt;boost/date_time/iso_format.hpp&gt;">boost/date_time/iso_format.hpp</a>&gt;
@@ -65,7 +65,7 @@
 <a name="id-1_3_12_15_3_30_1_1_3_3-bb"></a><code class="computeroutput">iso_format_base</code> public static functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">month_format_spec</span> <a name="id-1_3_12_15_3_30_1_1_3_3_1-bb"></a><span class="identifier">month_format</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Describe month format – its an integer in iso format. </li>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">month_format_spec</span> <a name="id-1_3_12_15_3_30_1_1_3_3_1-bb"></a><span class="identifier">month_format</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Describe month format – its an integer in ISO 8601 format. </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="keyword">const</span> <span class="identifier">charT</span> <span class="special">*</span> <a name="id-1_3_12_15_3_30_1_1_3_3_2-bb"></a><span class="identifier">not_a_date</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>String used printed is date is invalid. </li>
 <li class="listitem">
@@ -73,11 +73,11 @@
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="keyword">const</span> <span class="identifier">charT</span> <span class="special">*</span> <a name="id-1_3_12_15_3_30_1_1_3_3_4-bb"></a><span class="identifier">neg_infinity</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>String used to for positive infinity value. </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_5-bb"></a><span class="identifier">year_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO char for a year – used in durations. </li>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_5-bb"></a><span class="identifier">year_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO 8601 char for a year – used in durations. </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_6-bb"></a><span class="identifier">month_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO char for a month. </li>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_6-bb"></a><span class="identifier">month_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO 8601 char for a month. </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_7-bb"></a><span class="identifier">day_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO char for a day. </li>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_7-bb"></a><span class="identifier">day_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO 8601 char for a day. </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_8-bb"></a><span class="identifier">hour_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>char for minute </li>
 <li class="listitem">
@@ -85,7 +85,7 @@
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_10-bb"></a><span class="identifier">second_sep_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>char for second </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_11-bb"></a><span class="identifier">period_start_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO char for a period. </li>
+<pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_11-bb"></a><span class="identifier">period_start_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>ISO 8601 char for a period. </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="identifier">charT</span> <a name="id-1_3_12_15_3_30_1_1_3_3_12-bb"></a><span class="identifier">time_start_char</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Used in time in mixed strings to set start of time. </li>
 <li class="listitem">

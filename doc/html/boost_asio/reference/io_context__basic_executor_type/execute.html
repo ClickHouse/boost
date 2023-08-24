@@ -36,16 +36,6 @@ Execution
 <span class="keyword">void</span> <span class="identifier">execute</span><span class="special">(</span>
     <span class="identifier">Function</span> <span class="special">&amp;&amp;</span> <span class="identifier">f</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 </pre>
-<p>
-          Do not call this function directly. It is intended for use with the <a class="link" href="../execution__execute.html" title="execution::execute"><code class="computeroutput"><span class="identifier">execution</span><span class="special">::</span><span class="identifier">execute</span></code></a>
-          customisation point.
-        </p>
-<p>
-          For example:
-        </p>
-<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">ex</span> <span class="special">=</span> <span class="identifier">my_io_context</span><span class="special">.</span><span class="identifier">get_executor</span><span class="special">();</span>
-<span class="identifier">execution</span><span class="special">::</span><span class="identifier">execute</span><span class="special">(</span><span class="identifier">ex</span><span class="special">,</span> <span class="identifier">my_function_object</span><span class="special">);</span>
-</pre>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

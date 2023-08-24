@@ -108,12 +108,11 @@
 <p class="simpara">
               If <code class="computeroutput"><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span><span class="identifier">Ex</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is true, performs
             </p>
-<pre class="programlisting"><span class="identifier">execution</span><span class="special">::</span><span class="identifier">execute</span><span class="special">(</span>
-    <span class="identifier">prefer</span><span class="special">(</span>
-      <span class="identifier">require</span><span class="special">(</span><span class="identifier">ex</span><span class="special">,</span> <span class="identifier">execution</span><span class="special">::</span><span class="identifier">blocking</span><span class="special">.</span><span class="identifier">never</span><span class="special">),</span>
-      <span class="identifier">execution</span><span class="special">::</span><span class="identifier">relationship</span><span class="special">.</span><span class="identifier">continuation</span><span class="special">,</span>
-      <span class="identifier">execution</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">(</span><span class="identifier">alloc</span><span class="special">)),</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">CompletionHandler</span><span class="special">&gt;(</span><span class="identifier">completion_handler</span><span class="special">));</span>
+<pre class="programlisting"><span class="identifier">prefer</span><span class="special">(</span>
+    <span class="identifier">require</span><span class="special">(</span><span class="identifier">ex</span><span class="special">,</span> <span class="identifier">execution</span><span class="special">::</span><span class="identifier">blocking</span><span class="special">.</span><span class="identifier">never</span><span class="special">),</span>
+    <span class="identifier">execution</span><span class="special">::</span><span class="identifier">relationship</span><span class="special">.</span><span class="identifier">continuation</span><span class="special">,</span>
+    <span class="identifier">execution</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">(</span><span class="identifier">alloc</span><span class="special">)</span>
+  <span class="special">).</span><span class="identifier">execute</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">CompletionHandler</span><span class="special">&gt;(</span><span class="identifier">completion_handler</span><span class="special">));</span>
 </pre>
 </li>
 <li class="listitem">

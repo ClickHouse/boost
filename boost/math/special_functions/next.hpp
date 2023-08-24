@@ -203,7 +203,7 @@ T float_next_imp(const T& val, const std::true_type&, const Policy& pol)
    }
 
    if(val >= tools::max_value<T>())
-      return policies::raise_overflow_error<T>(function, 0, pol);
+      return policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return detail::get_smallest_value<T>();
@@ -252,7 +252,7 @@ T float_next_imp(const T& val, const std::false_type&, const Policy& pol)
    }
 
    if(val >= tools::max_value<T>())
-      return policies::raise_overflow_error<T>(function, 0, pol);
+      return policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return detail::get_smallest_value<T>();
@@ -302,7 +302,7 @@ inline double float_next(const double& val, const Policy& pol)
          "Argument must be finite, but got %1%", val, pol);
 
    if(val >= tools::max_value<double>())
-      return policies::raise_overflow_error<double>(function, 0, pol);
+      return policies::raise_overflow_error<double>(function, nullptr, pol);
 
    return ::_nextafter(val, tools::max_value<double>());
 }
@@ -337,7 +337,7 @@ T float_prior_imp(const T& val, const std::true_type&, const Policy& pol)
    }
 
    if(val <= -tools::max_value<T>())
-      return -policies::raise_overflow_error<T>(function, 0, pol);
+      return -policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return -detail::get_smallest_value<T>();
@@ -387,7 +387,7 @@ T float_prior_imp(const T& val, const std::false_type&, const Policy& pol)
    }
 
    if(val <= -tools::max_value<T>())
-      return -policies::raise_overflow_error<T>(function, 0, pol);
+      return -policies::raise_overflow_error<T>(function, nullptr, pol);
 
    if(val == 0)
       return -detail::get_smallest_value<T>();
@@ -438,7 +438,7 @@ inline double float_prior(const double& val, const Policy& pol)
          "Argument must be finite, but got %1%", val, pol);
 
    if(val <= -tools::max_value<double>())
-      return -policies::raise_overflow_error<double>(function, 0, pol);
+      return -policies::raise_overflow_error<double>(function, nullptr, pol);
 
    return ::_nextafter(val, -tools::max_value<double>());
 }

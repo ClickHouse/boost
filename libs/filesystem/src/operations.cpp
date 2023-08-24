@@ -70,7 +70,7 @@
 
 #include <unistd.h>
 #include <fcntl.h>
-#if _POSIX_C_SOURCE < 200809L
+#if !defined(BOOST_FILESYSTEM_HAS_POSIX_AT_APIS)
 #include <utime.h>
 #endif
 #include <limits.h>
@@ -1511,7 +1511,7 @@ boost::winapi::NTSTATUS_ nt_create_file_handle_at(HANDLE& out, HANDLE basedir_ha
 
 #endif // !defined(UNDER_CE)
 
-bool is_reparse_point_a_symlink_ioctl(HANDLE h)
+ULONG get_reparse_point_tag_ioctl(HANDLE h)
 {
     boost::scoped_ptr< reparse_data_buffer_with_storage > buf(new reparse_data_buffer_with_storage);
 
@@ -1521,7 +1521,7 @@ bool is_reparse_point_a_symlink_ioctl(HANDLE h)
     if (BOOST_UNLIKELY(!result))
         return false;
 
-    return is_reparse_point_tag_a_symlink(buf->rdb.ReparseTag);
+    return buf->rdb.ReparseTag;
 }
 
 namespace {
@@ -1590,6 +1590,7 @@ fs::file_status status_by_handle(HANDLE h, path const& p, error_code* ec)
 {
     fs::file_type ftype;
     DWORD attrs;
+    ULONG reparse_tag = 0u;
     GetFileInformationByHandleEx_t* get_file_information_by_handle_ex = filesystem::detail::atomic_load_relaxed(get_file_information_by_handle_ex_api);
     if (BOOST_LIKELY(get_file_information_by_handle_ex != NULL))
     {
@@ -1609,12 +1610,7 @@ fs::file_status status_by_handle(HANDLE h, path const& p, error_code* ec)
         }
 
         attrs = info.FileAttributes;
-
-        if (attrs & FILE_ATTRIBUTE_REPARSE_POINT)
-        {
-            ftype = is_reparse_point_tag_a_symlink(info.ReparseTag) ? fs::symlink_file : fs::reparse_file;
-            goto done;
-        }
+        reparse_tag = info.ReparseTag;
     }
     else
     {
@@ -1626,16 +1622,28 @@ fs::file_status status_by_handle(HANDLE h, path const& p, error_code* ec)
 
         attrs = info.dwFileAttributes;
 
-        if (attrs & FILE_ATTRIBUTE_REPARSE_POINT)
-        {
-            ftype = is_reparse_point_a_symlink_ioctl(h) ? fs::symlink_file : fs::reparse_file;
-            goto done;
-        }
+        if ((attrs & FILE_ATTRIBUTE_REPARSE_POINT) != 0u)
+            reparse_tag = get_reparse_point_tag_ioctl(h);
     }
 
-    ftype = (attrs & FILE_ATTRIBUTE_DIRECTORY) ? fs::directory_file : fs::regular_file;
+    if ((attrs & FILE_ATTRIBUTE_REPARSE_POINT) != 0u)
+    {
+        if (reparse_tag == IO_REPARSE_TAG_DEDUP)
+            ftype = fs::regular_file;
+        else if (is_reparse_point_tag_a_symlink(reparse_tag))
+            ftype = fs::symlink_file;
+        else
+            ftype = fs::reparse_file;
+    }
+    else if ((attrs & FILE_ATTRIBUTE_DIRECTORY) != 0u)
+    {
+        ftype = fs::directory_file;
+    }
+    else
+    {
+        ftype = fs::regular_file;
+    }
 
-done:
     return fs::file_status(ftype, make_permissions(p, attrs));
 }
 
@@ -1775,7 +1783,7 @@ DWORD remove_nt6_by_handle(HANDLE handle, remove_impl_type impl)
                 break;
 
             err = ::GetLastError();
-            if (BOOST_UNLIKELY(err == ERROR_INVALID_PARAMETER || err == ERROR_INVALID_FUNCTION || err == ERROR_NOT_SUPPORTED))
+            if (BOOST_UNLIKELY(err == ERROR_INVALID_PARAMETER || err == ERROR_INVALID_FUNCTION || err == ERROR_NOT_SUPPORTED || err == ERROR_CALL_NOT_IMPLEMENTED))
             {
                 // Downgrade to the older implementation
                 impl = remove_disp_ex_flag_posix_semantics;
@@ -1833,7 +1841,7 @@ DWORD remove_nt6_by_handle(HANDLE handle, remove_impl_type impl)
 
                 break;
             }
-            else if (BOOST_UNLIKELY(err == ERROR_INVALID_PARAMETER || err == ERROR_INVALID_FUNCTION || err == ERROR_NOT_SUPPORTED))
+            else if (BOOST_UNLIKELY(err == ERROR_INVALID_PARAMETER || err == ERROR_INVALID_FUNCTION || err == ERROR_NOT_SUPPORTED || err == ERROR_CALL_NOT_IMPLEMENTED))
             {
                 // Downgrade to the older implementation
                 impl = remove_disp;
@@ -2004,7 +2012,7 @@ uintmax_t remove_all_nt6_by_handle(HANDLE h, path const& p, error_code* ec)
                     FILE_LIST_DIRECTORY | DELETE | FILE_READ_ATTRIBUTES | FILE_WRITE_ATTRIBUTES | SYNCHRONIZE,
                     FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
                     FILE_OPEN,
-                    FILE_OPEN_FOR_BACKUP_INTENT | FILE_OPEN_REPARSE_POINT
+                    FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_FOR_BACKUP_INTENT | FILE_OPEN_REPARSE_POINT
                 );
 
                 if (!NT_SUCCESS(status))
@@ -3119,7 +3127,7 @@ bool create_directories(path const& p, system::error_code* ec)
         parent /= fname;
         if (!fname.empty() && fname != dot_p && fname != dot_dot_p)
         {
-            created = create_directory(parent, NULL, &local_ec);
+            created = detail::create_directory(parent, NULL, &local_ec);
             if (BOOST_UNLIKELY(!!local_ec))
             {
                 if (!ec)
@@ -4434,7 +4442,7 @@ path weakly_canonical(path const& p, path const& base, system::error_code* ec)
     path head(p);
     for (; !head.empty(); --itr)
     {
-        file_status head_status = detail::status_impl(head, &local_ec);
+        file_status head_status(detail::status_impl(head, &local_ec));
         if (BOOST_UNLIKELY(head_status.type() == fs::status_error))
         {
             if (!ec)
@@ -4450,32 +4458,83 @@ path weakly_canonical(path const& p, path const& base, system::error_code* ec)
         head.remove_filename();
     }
 
+    if (head.empty())
+        return p.lexically_normal();
+
+    path const& dot_p = dot_path();
+    path const& dot_dot_p = dot_dot_path();
+
 #else
 
-    // On Windows, filesystem APIs such as GetFileAttributesW perform lexical path normalization internally.
-    // As a result, a path like "c:\a\.." can be reported as present even if "c:\a" is not. This would break
-    // canonical, as symlink_status that it calls internally would report an error that the file at the intermediate
-    // path does not exist. To avoid this, scan the initial path in the forward direction.
-    // Also, operate on paths with preferred separators. This can be important on Windows since GetFileAttributesW,
-    // which is called in status() may return "file not found" for paths to network shares and mounted cloud
-    // storages that have forward slashes as separators.
+    // On Windows, filesystem APIs such as GetFileAttributesW and CreateFileW perform lexical path normalization
+    // internally. As a result, a path like "c:\a\.." can be reported as present even if "c:\a" is not. This would
+    // break canonical, as symlink_status that it calls internally would report an error that the file at the
+    // intermediate path does not exist. To avoid this, scan the initial path in the forward direction.
+    // Also, operate on paths with preferred separators. This can be important on Windows since GetFileAttributesW
+    // or CreateFileW, which is called in status() may return "file not found" for paths to network shares and
+    // mounted cloud storages that have forward slashes as separators.
+    // Also, avoid querying status of the root name such as \\?\c: as CreateFileW returns ERROR_INVALID_FUNCTION for
+    // such path. Querying the status of a root name such as c: is also not right as this path refers to the current
+    // directory on drive C:, which is not what we want to test for existence anyway.
     path::iterator itr(p.begin());
     path head;
+    if (p.has_root_name())
+    {
+        BOOST_ASSERT(itr != p_end);
+        head = *itr;
+        ++itr;
+    }
+
+    if (p.has_root_directory())
+    {
+        BOOST_ASSERT(itr != p_end);
+        // Convert generic separator returned by the iterator for the root directory to
+        // the preferred separator.
+        head += path::preferred_separator;
+        ++itr;
+    }
+
+    if (!head.empty())
+    {
+        file_status head_status(detail::status_impl(head, &local_ec));
+        if (BOOST_UNLIKELY(head_status.type() == fs::status_error))
+        {
+            if (!ec)
+                BOOST_FILESYSTEM_THROW(filesystem_error("boost::filesystem::weakly_canonical", head, local_ec));
+
+            *ec = local_ec;
+            return path();
+        }
+
+        if (head_status.type() == fs::file_not_found)
+        {
+            // If the root path does not exist then no path element exists
+            return p.lexically_normal();
+        }
+    }
+
+    path const& dot_p = dot_path();
+    path const& dot_dot_p = dot_dot_path();
     for (; itr != p_end; ++itr)
     {
         path const& p_elem = *itr;
-        if (p_elem.size() == 1u && detail::is_directory_separator(p_elem.native()[0]))
+
+        // Avoid querying status of paths containing dot and dot-dot elements, as this will break
+        // if the root name starts with "\\?\".
+        if (p_elem == dot_p)
+            continue;
+
+        if (p_elem == dot_dot_p)
         {
-            // Convert generic separator returned by the iterator for the root directory to
-            // the preferred separator.
-            head += path::preferred_separator;
-        }
-        else
-        {
-            head /= p_elem;
+            if (head.has_relative_path())
+                head.remove_filename();
+
+            continue;
         }
 
-        file_status head_status = detail::status_impl(head, &local_ec);
+        head /= p_elem;
+
+        file_status head_status(detail::status_impl(head, &local_ec));
         if (BOOST_UNLIKELY(head_status.type() == fs::status_error))
         {
             if (!ec)
@@ -4492,32 +4551,21 @@ path weakly_canonical(path const& p, path const& base, system::error_code* ec)
         }
     }
 
+    if (head.empty())
+        return p.lexically_normal();
+
 #endif
 
-    path const& dot_p = dot_path();
-    path const& dot_dot_p = dot_dot_path();
     path tail;
     bool tail_has_dots = false;
     for (; itr != p_end; ++itr)
     {
         path const& tail_elem = *itr;
-#if defined(BOOST_WINDOWS_API)
-        if (tail_elem.size() == 1u && detail::is_directory_separator(tail_elem.native()[0]))
-        {
-            // Convert generic separator returned by the iterator for the root directory to
-            // the preferred separator.
-            tail += path::preferred_separator;
-            continue;
-        }
-#endif
         tail /= tail_elem;
         // for a later optimization, track if any dot or dot-dot elements are present
         if (!tail_has_dots && (tail_elem == dot_p || tail_elem == dot_dot_p))
             tail_has_dots = true;
     }
-
-    if (head.empty())
-        return p.lexically_normal();
 
     head = detail::canonical(head, base, &local_ec);
     if (BOOST_UNLIKELY(!!local_ec))

@@ -184,13 +184,13 @@ ptime d5(min_date_time);</pre></td></tr>
 ptime t(time_from_string(ts))</pre></td></tr>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">ptime from_iso_string(std::string)</pre></td>
-<td>From non delimited iso form string.</td>
+<td>From non delimited ISO 8601 form string.</td>
 </tr>
 <tr><td><pre class="screen">std::string ts("20020131T235959");
 ptime t(from_iso_string(ts))</pre></td></tr>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">ptime from_iso_extended_string(std::string)</pre></td>
-<td>From delimited iso form string.</td>
+<td>From delimited ISO 8601 form string.</td>
 </tr>
 <tr><td><pre class="screen">std::string ts("2020-01-31T23:59:59.123");
 ptime t(from_iso_extended_string(ts))</pre></td></tr>
@@ -363,19 +363,19 @@ pt3.is_special(); // --&gt; false</pre></td></tr>
 <tbody>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">std::string to_simple_string(ptime)</pre></td>
-<td>To <code class="computeroutput">YYYY-mmm-DD HH:MM:SS.fffffffff</code> string where <code class="computeroutput">mmm</code> 3 char month name. Fractional seconds only included if non-zero.</td>
+<td>To <code class="computeroutput">YYYY-mmm-DD HH:MM:SS.fffffffff</code> string where <code class="computeroutput">mmm</code> 3 char month name and the fractional seconds are only included if non-zero.</td>
 </tr>
 <tr><td><pre class="screen">2002-Jan-01 10:00:01.123456789</pre></td></tr>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">std::string to_iso_string(ptime)</pre></td>
-<td>Convert to form <code class="computeroutput">YYYYMMDDTHHMMSS,fffffffff</code> where <code class="computeroutput">T</code> is the date-time separator</td>
+<td>Convert to form <code class="computeroutput">YYYYMMDDTHHMMSS.fffffffff</code> where <code class="computeroutput">T</code> is the date-time separator and the fractional seconds are only included if non-zero.</td>
 </tr>
-<tr><td><pre class="screen">20020131T100001,123456789</pre></td></tr>
+<tr><td><pre class="screen">20020131T100001.123456789</pre></td></tr>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">std::string to_iso_extended_string(ptime)</pre></td>
-<td>Convert to form <code class="computeroutput">YYYY-MM-DDTHH:MM:SS,fffffffff</code> where <code class="computeroutput">T</code> is the date-time separator</td>
+<td>Convert to form <code class="computeroutput">YYYY-MM-DDTHH:MM:SS.fffffffff</code> where <code class="computeroutput">T</code> is the date-time separator and the fractional seconds are only included if non-zero.</td>
 </tr>
-<tr><td><pre class="screen">2002-01-31T10:00:01,123456789</pre></td></tr>
+<tr><td><pre class="screen">2002-01-31T10:00:01.123456789</pre></td></tr>
 </tbody>
 </table></div>
 <p>
@@ -988,14 +988,14 @@ td3.is_special(); // --&gt; false</pre></td>
 <tbody>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">std::string to_simple_string(time_duration)</pre></td>
-<td>To <code class="computeroutput">HH:MM:SS.fffffffff</code> were <code class="computeroutput">fff</code> is fractional seconds that are only included if non-zero.</td>
+<td>To <code class="computeroutput">HH:MM:SS.fffffffff</code> where <code class="computeroutput">fffffffff</code> is fractional seconds that are only included if non-zero.</td>
 </tr>
 <tr><td><pre class="screen">10:00:01.123456789</pre></td></tr>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">std::string to_iso_string(time_duration)</pre></td>
-<td>Convert to form <code class="computeroutput">HHMMSS,fffffffff</code>.</td>
+<td>Convert to form <code class="computeroutput">HHMMSS.fffffffff</code> where the fractional seconds are only included if non-zero.</td>
 </tr>
-<tr><td><pre class="screen">100001,123456789</pre></td></tr>
+<tr><td><pre class="screen">100001.123456789</pre></td></tr>
 </tbody>
 </table></div>
 <p>
@@ -1274,7 +1274,7 @@ tp.last();// --&gt; 2002-Jan-01 09:59:59.999999999</pre>
 ptime t1(d, seconds(10)); //10 sec after midnight
 ptime t2(d, hours(10)); //10 hours after midnight
 time_period tp(t1, t2);
-tp.last(); // --&gt; 2002-Jan-01 10:00:00</pre>
+tp.end(); // --&gt; 2002-Jan-01 10:00:00</pre>
 	    </td></tr>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">time_duration length()</pre></td>
@@ -1373,7 +1373,7 @@ tp2.intersects(tp1); // --&gt; true</pre>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">std::string 
   to_simple_string(time_period dp)</pre></td>
-<td>To <code class="computeroutput">[YYYY-mmm-DD hh:mm:ss.fffffffff/YYYY-mmm-DD hh:mm:ss.fffffffff]</code> string where <code class="computeroutput">mmm</code> is 3 char month name.</td>
+<td>To <code class="computeroutput">[YYYY-mmm-DD hh:mm:ss.fffffffff/YYYY-mmm-DD hh:mm:ss.fffffffff]</code> string where <code class="computeroutput">mmm</code> is 3 char month name and the fractional seconds are only included if non-zero.</td>
 </tr>
 <tr><td><pre class="screen">[2002-Jan-01 01:25:10.000000001/
                 2002-Jan-31 01:25:10.123456789]
@@ -1401,13 +1401,13 @@ tp2.intersects(tp1); // --&gt; true</pre>
 <tbody>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">operator&lt;&lt;</pre></td>
-<td>Output streaming operator for time duration. Uses facet to output [date time_of_day/date time_of_day]. The default is format is <code class="computeroutput">[YYYY-mmm-DD hh:mm:ss.fffffffff/YYYY-mmm-DD hh:mm:ss.fffffffff]</code> string where <code class="computeroutput">mmm</code> is 3 char month name and the fractional seconds are left out when zero.</td>
+<td>Output streaming operator for time duration. Uses facet to output [date time_of_day/date time_of_day]. The default is format is <code class="computeroutput">[YYYY-mmm-DD hh:mm:ss.fffffffff/YYYY-mmm-DD hh:mm:ss.fffffffff]</code> string where <code class="computeroutput">mmm</code> is 3 char month name and the fractional seconds are only included if non-zero.</td>
 </tr>
 <tr><td><pre class="screen">[2002-Jan-01 01:25:10.000000001/ \
     2002-Jan-31 01:25:10.123456789]</pre></td></tr>
 <tr>
 <td rowspan="2" valign="top"><pre class="screen">operator&gt;&gt;</pre></td>
-<td>Input streaming operator for time duration. Uses facet to read [date time_of_day/date time_of_day]. The default is format is <code class="computeroutput">[YYYY-mmm-DD hh:mm:ss.fffffffff/YYYY-mmm-DD hh:mm:ss.fffffffff]</code> string where <code class="computeroutput">mmm</code> is 3 char month name and the fractional seconds are left out when zero.</td>
+<td>Input streaming operator for time duration. Uses facet to read [date time_of_day/date time_of_day]. The default is format is <code class="computeroutput">[YYYY-mmm-DD hh:mm:ss.fffffffff/YYYY-mmm-DD hh:mm:ss.fffffffff]</code> string where <code class="computeroutput">mmm</code> is 3 char month name and the fractional seconds are only included if non-zero.</td>
 </tr>
 <tr><td><pre class="screen">[2002-Jan-01 01:25:10.000000001/ \
     2002-Jan-31 01:25:10.123456789]</pre></td></tr>

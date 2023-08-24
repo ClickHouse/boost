@@ -754,7 +754,7 @@
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> time_type<span class="special">&gt;</span> 
       <span class="identifier">time_type</span> <a name="boost.date_time.parse_delimited_time"></a><span class="identifier">parse_delimited_time</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> s<span class="special">,</span> <span class="keyword">char</span> sep<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// Parse time duration part of an iso time of form: [-]hhmmss<a href="eg:%20120259.123%20is%2012%20hours,%202%20min,%2059%20seconds,%20123000%20microseconds" target="_top">.fff...</a></span>
+    <span class="comment">// Parse time duration part of an ISO 8601 time of form: [-]hhmmss<a href="eg:%20120259.123%20is%2012%20hours,%202%20min,%2059%20seconds,%20123000%20microseconds" target="_top">.fff...</a></span>
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> time_duration<span class="special">&gt;</span> 
       <a class="link" href="../boost/date_time/time_duration.html" title="Class template time_duration">time_duration</a> <a name="boost.date_time.parse_1_3_12_15_3_52_1_1_6"></a><span class="identifier">parse_undelimited_time_duration</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> s<span class="special">)</span><span class="special">;</span>
 
@@ -951,10 +951,10 @@
     <span class="comment">// Convert date period to simple string. Example: [2002-Jan-01/2002-Jan-02]. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.gregorian.to_sim_1_3_12_15_4_4_1_1_2"></a><span class="identifier">to_simple_string</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">date_period</span> <span class="special">&amp;</span> d<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// Date period to iso standard format CCYYMMDD/CCYYMMDD. Example: 20021225/20021231. </span>
+    <span class="comment">// Date period to ISO 8601 standard format CCYYMMDD/CCYYMMDD. Example: 20021225/20021231. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.gregorian.to_iso_1_3_12_15_4_4_1_1_3"></a><span class="identifier">to_iso_string</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">date_period</span> <span class="special">&amp;</span> d<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// Convert to iso extended format string CCYY-MM-DD. Example 2002-12-31. </span>
+    <span class="comment">// Convert to ISO 8601 extended format string CCYY-MM-DD. Example 2002-12-31. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.gregorian.to_iso_extended_string"></a><span class="identifier">to_iso_extended_string</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="../boost/gregorian/date.html" title="Class date">date</a> <span class="special">&amp;</span> d<span class="special">)</span><span class="special">;</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.gregorian.to_sql_string"></a><span class="identifier">to_sql_string</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="../boost/gregorian/date.html" title="Class date">date</a> <span class="special">&amp;</span> d<span class="special">)</span><span class="special">;</span>
   <span class="special">}</span>
@@ -1164,7 +1164,7 @@
 <pre class="synopsis"><span class="keyword">namespace</span> <span class="identifier">boost</span> <span class="special">{</span>
   <span class="keyword">namespace</span> <span class="identifier">gregorian</span> <span class="special">{</span>
 
-    <span class="comment">// Convert to iso standard string YYYYMMDD. Example: 20021231. </span>
+    <span class="comment">// Convert to ISO 8601 standard string YYYYMMDD. Example: 20021231. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.gregorian.to_is_1_3_12_15_4_13_1_1_1"></a><span class="identifier">to_iso_string</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="../boost/gregorian/date.html" title="Class date">date</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="special">}</span>
   <span class="keyword">namespace</span> <span class="identifier">serialization</span> <span class="special">{</span>
@@ -1564,10 +1564,10 @@
     <span class="comment">// From delimited date string where with order day-month-year eg: 25-1-2002 or 25-Jan-2003 (full month name is also accepted) </span>
     <a class="link" href="../boost/gregorian/date.html" title="Class date">date</a> <a name="boost.gregorian.from_uk_string"></a><span class="identifier">from_uk_string</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> s<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// From iso type date string where with order year-month-day eg: 20020125. </span>
+    <span class="comment">// From ISO 8601 type date string where with order year-month-day eg: 20020125. </span>
     <a class="link" href="../boost/gregorian/date.html" title="Class date">date</a> <a name="boost.gregorian.from_undelimited_string"></a><span class="identifier">from_undelimited_string</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> s<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// From iso type date string where with order year-month-day eg: 20020125. </span>
+    <span class="comment">// From ISO 8601 type date string where with order year-month-day eg: 20020125. </span>
     <a class="link" href="../boost/gregorian/date.html" title="Class date">date</a> <a name="boost.gregorian.date_from_iso_string"></a><span class="identifier">date_from_iso_string</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> s<span class="special">)</span><span class="special">;</span>
 
     <span class="comment">// Stream should hold a date in the form of: 2002-1-25. Month number, abbrev, or name are accepted. </span>
@@ -1823,14 +1823,14 @@
     <span class="comment">// Time duration to wstring -hh::mm::ss.fffffff. Example: 10:09:03.0123456. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">wstring</span> <a name="boost.posix_time.to_si_1_3_12_15_5_12_1_1_7"></a><span class="identifier">to_simple_wstring</span><span class="special">(</span><a class="link" href="../boost/posix_time/time_duration.html" title="Class time_duration">time_duration</a> td<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// Time duration in iso format -hhmmss,fffffff Example: 10:09:03,0123456. </span>
+    <span class="comment">// Time duration in ISO 8601 format -hhmmss.fffffff. Example: 10:09:03.0123456. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">wstring</span> <a name="boost.posix_time.to_is_1_3_12_15_5_12_1_1_8"></a><span class="identifier">to_iso_wstring</span><span class="special">(</span><a class="link" href="../boost/posix_time/time_duration.html" title="Class time_duration">time_duration</a> td<span class="special">)</span><span class="special">;</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">wstring</span> <a name="boost.posix_time.to_si_1_3_12_15_5_12_1_1_9"></a><span class="identifier">to_simple_wstring</span><span class="special">(</span><a class="link" href="../boost/posix_time/ptime.html" title="Class ptime">ptime</a> t<span class="special">)</span><span class="special">;</span>
 
     <span class="comment">// Convert to wstring of form [YYYY-mmm-DD HH:MM::SS.ffffff/YYYY-mmm-DD HH:MM::SS.fffffff]. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">wstring</span> <a name="boost.posix_time.to_s_1_3_12_15_5_12_1_1_10"></a><span class="identifier">to_simple_wstring</span><span class="special">(</span><span class="identifier">time_period</span> tp<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// Convert iso short form YYYYMMDDTHHMMSS where T is the date-time separator. </span>
+    <span class="comment">// Convert ISO 8601 short form YYYYMMDDTHHMMSS where T is the date-time separator. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">wstring</span> <a name="boost.posix_time.to_i_1_3_12_15_5_12_1_1_11"></a><span class="identifier">to_iso_wstring</span><span class="special">(</span><a class="link" href="../boost/posix_time/ptime.html" title="Class ptime">ptime</a> t<span class="special">)</span><span class="special">;</span>
 
     <span class="comment">// Convert to form YYYY-MM-DDTHH:MM:SS where T is the date-time separator. </span>
@@ -1847,7 +1847,7 @@
     <span class="comment">// Time duration to string -hh::mm::ss.fffffff. Example: 10:09:03.0123456. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.posix_time.to_si_1_3_12_15_5_13_1_1_1"></a><span class="identifier">to_simple_string</span><span class="special">(</span><a class="link" href="../boost/posix_time/time_duration.html" title="Class time_duration">time_duration</a> td<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// Time duration in iso format -hhmmss,fffffff Example: 10:09:03,0123456. </span>
+    <span class="comment">// Time duration in ISO 8601 format -hhmmss.fffffff. Example: 10:09:03.0123456. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.posix_time.to_is_1_3_12_15_5_13_1_1_2"></a><span class="identifier">to_iso_string</span><span class="special">(</span><a class="link" href="../boost/posix_time/time_duration.html" title="Class time_duration">time_duration</a> td<span class="special">)</span><span class="special">;</span>
 
     <span class="comment">// Time to simple format CCYY-mmm-dd hh:mm:ss.fffffff. </span>
@@ -1856,7 +1856,7 @@
     <span class="comment">// Convert to string of form [YYYY-mmm-DD HH:MM::SS.ffffff/YYYY-mmm-DD HH:MM::SS.fffffff]. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.posix_time.to_si_1_3_12_15_5_13_1_1_4"></a><span class="identifier">to_simple_string</span><span class="special">(</span><span class="identifier">time_period</span> tp<span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// Convert iso short form YYYYMMDDTHHMMSS where T is the date-time separator. </span>
+    <span class="comment">// Convert ISO 8601 short form YYYYMMDDTHHMMSS where T is the date-time separator. </span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="boost.posix_time.to_is_1_3_12_15_5_13_1_1_5"></a><span class="identifier">to_iso_string</span><span class="special">(</span><a class="link" href="../boost/posix_time/ptime.html" title="Class ptime">ptime</a> t<span class="special">)</span><span class="special">;</span>
 
     <span class="comment">// Convert to form YYYY-MM-DDTHH:MM:SS where T is the date-time separator. </span>
