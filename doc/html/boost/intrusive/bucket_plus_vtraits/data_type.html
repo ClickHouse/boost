@@ -9,6 +9,7 @@
 <link rel="up" href="../bucket_plus_vtraits.html#id-1.3.18.42.14.6.4" title="Description">
 <link rel="prev" href="../bucket_plus_vtraits.html" title="Struct template bucket_plus_vtraits">
 <link rel="next" href="typeof_node_disposer.html" title="Struct template typeof_node_disposer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -29,15 +30,15 @@
 <h2><span class="refentrytitle">Struct data_type</span></h2>
 <p>boost::intrusive::bucket_plus_vtraits::data_type</p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../intrusive/reference.html#header.boost.intrusive.hashtable_hpp" title="Header &lt;boost/intrusive/hashtable.hpp&gt;">boost/intrusive/hashtable.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../intrusive/reference.html#header.boost.intrusive.hashtable_hpp" title="Header &lt;boost/intrusive/hashtable.hpp&gt;">boost/intrusive/hashtable.hpp</a>&gt;
 
 </span>
 
 <span class="keyword">struct</span> <a class="link" href="data_type.html" title="Struct data_type">data_type</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">ValueTraits</span>, <span class="keyword">public</span> <span class="identifier">BucketTraits</span> <span class="special">{</span>
   <span class="comment">// <a class="link" href="data_type.html#boost.intrusive.bucket_plus_vtraits.data_typeconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <a class="link" href="data_type.html#idm32004-bb"><span class="identifier">data_type</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">ValueTraits</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <span class="identifier">BucketTraits</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <a class="link" href="data_type.html#idm32009-bb"><span class="identifier">data_type</span></a><span class="special">(</span><span class="identifier">data_type</span> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="data_type.html#idm32015-bb"><span class="identifier">data_type</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">ValueTraits</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <span class="identifier">BucketTraits</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="data_type.html#idm32020-bb"><span class="identifier">data_type</span></a><span class="special">(</span><span class="identifier">data_type</span> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
 <a name="id-1.3.18.42.14.6.4.5.4"></a><h2>Description</h2>
@@ -47,20 +48,17 @@
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><pre class="literallayout"><a name="idm32004-bb"></a><span class="identifier">data_type</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">ValueTraits</span> <span class="special">&amp;</span> val_traits<span class="special">,</span> <span class="keyword">const</span> <span class="identifier">BucketTraits</span> <span class="special">&amp;</span> b_traits<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><a name="idm32009-bb"></a><span class="identifier">data_type</span><span class="special">(</span><span class="identifier">data_type</span> <span class="special">&amp;&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="idm32015-bb"></a><span class="identifier">data_type</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">ValueTraits</span> <span class="special">&amp;</span> val_traits<span class="special">,</span> <span class="keyword">const</span> <span class="identifier">BucketTraits</span> <span class="special">&amp;</span> b_traits<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="idm32020-bb"></a><span class="identifier">data_type</span><span class="special">(</span><span class="identifier">data_type</span> <span class="special">&amp;&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2005 Olaf Krzikalla<br>Copyright © 2006-2015 Ion Gaztanaga<p>
+<div class="copyright-footer">Copyright © 2005 Olaf Krzikalla<br>Copyright © 2006-2015 Ion Gaztanaga<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="../bucket_plus_vtraits.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../bucket_plus_vtraits.html#id-1.3.18.42.14.6.4"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="typeof_node_disposer.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>

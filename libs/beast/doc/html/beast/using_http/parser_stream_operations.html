@@ -8,6 +8,7 @@
 <link rel="up" href="../using_http.html" title="HTTP">
 <link rel="prev" href="serializer_stream_operations.html" title="Serializer Stream Operations">
 <link rel="next" href="parser_stream_operations/incremental_read.html" title="Incremental Read 💡">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -160,7 +161,7 @@
               </td>
 <td>
                 <p>
-                  Read everything into a parser from a <a href="../../../../../../doc/html/boost_asio/reference/SyncWriteStream.html" target="_top"><span class="emphasis"><em>SyncWriteStream</em></span></a>.
+                  Read everything into a parser from a <a href="../../../../../../doc/html/boost_asio/reference/SyncReadStream.html" target="_top"><span class="emphasis"><em>SyncReadStream</em></span></a>.
                 </p>
               </td>
 </tr>
@@ -172,7 +173,7 @@
               </td>
 <td>
                 <p>
-                  Read everything into a parser asynchronously from an <a href="../../../../../../doc/html/boost_asio/reference/AsyncWriteStream.html" target="_top"><span class="emphasis"><em>AsyncWriteStream</em></span></a>.
+                  Read everything into a parser asynchronously from an <a href="../../../../../../doc/html/boost_asio/reference/AsyncReadStream.html" target="_top"><span class="emphasis"><em>AsyncReadStream</em></span></a>.
                 </p>
               </td>
 </tr>
@@ -184,7 +185,7 @@
               </td>
 <td>
                 <p>
-                  Read only the header octets into a parser from a <a href="../../../../../../doc/html/boost_asio/reference/SyncWriteStream.html" target="_top"><span class="emphasis"><em>SyncWriteStream</em></span></a>.
+                  Read only the header octets into a parser from a <a href="../../../../../../doc/html/boost_asio/reference/SyncReadStream.html" target="_top"><span class="emphasis"><em>SyncReadStream</em></span></a>.
                 </p>
               </td>
 </tr>
@@ -197,7 +198,7 @@
 <td>
                 <p>
                   Read only the header octets into a parser asynchronously from an
-                  <a href="../../../../../../doc/html/boost_asio/reference/AsyncWriteStream.html" target="_top"><span class="emphasis"><em>AsyncWriteStream</em></span></a>.
+                  <a href="../../../../../../doc/html/boost_asio/reference/AsyncReadStream.html" target="_top"><span class="emphasis"><em>AsyncReadStream</em></span></a>.
                 </p>
               </td>
 </tr>
@@ -221,7 +222,7 @@
               </td>
 <td>
                 <p>
-                  Read some octets into a parser asynchronously from an <a href="../../../../../../doc/html/boost_asio/reference/AsyncWriteStream.html" target="_top"><span class="emphasis"><em>AsyncWriteStream</em></span></a>.
+                  Read some octets into a parser asynchronously from an <a href="../../../../../../doc/html/boost_asio/reference/AsyncReadStream.html" target="_top"><span class="emphasis"><em>AsyncReadStream</em></span></a>.
                 </p>
               </td>
 </tr>
@@ -265,15 +266,12 @@
 <span class="special">}</span>
 </pre>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2016-2019 Vinnie
+<div class="copyright-footer">Copyright © 2016-2019 Vinnie
       Falco<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="serializer_stream_operations.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../using_http.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="parser_stream_operations/incremental_read.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>

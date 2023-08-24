@@ -8,6 +8,7 @@
 <link rel="up" href="../connect.html" title="basic_stream::connect">
 <link rel="prev" href="overload7.html" title="basic_stream::connect (7 of 10 overloads)">
 <link rel="next" href="overload9.html" title="basic_stream::connect (9 of 10 overloads)">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -100,7 +101,7 @@
                       A function object that is called prior to each connection attempt.
                       The signature of the function object must be:
                     </p>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="keyword">bool</span> <span class="identifier">connect_condition</span><span class="special">(</span>
+<pre class="table-programlisting"><span class="keyword">bool</span> <span class="identifier">connect_condition</span><span class="special">(</span>
     <span class="identifier">error_code</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">Protocol</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">next</span><span class="special">);</span>
 </pre>
@@ -141,15 +142,12 @@
             endpoint.
           </p>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2016-2019 Vinnie
+<div class="copyright-footer">Copyright © 2016-2019 Vinnie
       Falco<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="overload7.html"><img src="../../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../connect.html"><img src="../../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../../index.html"><img src="../../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="overload9.html"><img src="../../../../../../../../doc/src/images/next.png" alt="Next"></a>

@@ -8,6 +8,7 @@
 <link rel="up" href="../../logging_sources.html#header.boost.log.sources.record_ostream_hpp" title="Header &lt;boost/log/sources/record_ostream.hpp&gt;">
 <link rel="prev" href="sources/wlogger_mt.html" title="Class wlogger_mt">
 <link rel="next" href="operator_idm31190.html" title="Function template operator&lt;&lt;">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../boost.png"></td></tr></table>
@@ -21,8 +22,8 @@
 <h2><span class="refentrytitle">Class template basic_record_ostream</span></h2>
 <p>boost::log::basic_record_ostream — Logging record adapter with a streaming capability. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../logging_sources.html#header.boost.log.sources.record_ostream_hpp" title="Header &lt;boost/log/sources/record_ostream.hpp&gt;">boost/log/sources/record_ostream.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../logging_sources.html#header.boost.log.sources.record_ostream_hpp" title="Header &lt;boost/log/sources/record_ostream.hpp&gt;">boost/log/sources/record_ostream.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="basic_record_ostream.html" title="Class template basic_record_ostream">basic_record_ostream</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">basic_formatting_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span> <span class="special">&gt;</span> <span class="special">{</span>
@@ -79,10 +80,10 @@
   <span class="keyword">void</span> <a class="link" href="basic_record_ostream.html#idm31169-bb"><span class="identifier">init_stream</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm58882"></a><h2>Description</h2>
+<a name="idm58867"></a><h2>Description</h2>
 <p>This class allows to compose the logging record message by streaming operations. It aggregates the log record and provides the standard output stream interface. </p>
 <div class="refsect2">
-<a name="idm58885"></a><h3>
+<a name="idm58870"></a><h3>
 <a name="boost.log.basic_record_ostreamconstruct-copy-destruct"></a><code class="computeroutput">basic_record_ostream</code> 
         public
        construct/copy/destruct</h3>
@@ -149,7 +150,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm58979"></a><h3>
+<a name="idm58964"></a><h3>
 <a name="idm30969-bb"></a><code class="computeroutput">basic_record_ostream</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -273,21 +274,18 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm59441"></a><h3>
+<a name="idm59426"></a><h3>
 <a name="idm31168-bb"></a><code class="computeroutput">basic_record_ostream</code> private member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
 <pre class="literallayout"><span class="keyword">void</span> <a name="idm31169-bb"></a><span class="identifier">init_stream</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>The function initializes the stream and the stream buffer. </li></ol></div>
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="sources/wlogger_mt.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../logging_sources.html#header.boost.log.sources.record_ostream_hpp"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="operator_idm31190.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>

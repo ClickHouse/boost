@@ -8,6 +8,7 @@
 <link rel="up" href="../../utilities.html#header.boost.log.utility.permissions_hpp" title="Header &lt;boost/log/utility/permissions.hpp&gt;">
 <link rel="prev" href="open_mode/open_or_create.html" title="Global open_or_create">
 <link rel="next" href="abstract_ordering.html" title="Class template abstract_ordering">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../boost.png"></td></tr></table>
@@ -21,8 +22,8 @@
 <h2><span class="refentrytitle">Class permissions</span></h2>
 <p>boost::log::permissions — Access permissions wrapper. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../utilities.html#header.boost.log.utility.permissions_hpp" title="Header &lt;boost/log/utility/permissions.hpp&gt;">boost/log/utility/permissions.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../utilities.html#header.boost.log.utility.permissions_hpp" title="Header &lt;boost/log/utility/permissions.hpp&gt;">boost/log/utility/permissions.hpp</a>&gt;
 
 </span>
 <span class="keyword">class</span> <a class="link" href="permissions.html" title="Class permissions">permissions</a> <span class="special">{</span>
@@ -50,11 +51,11 @@
   <span class="keyword">friend</span> <span class="keyword">void</span> <a class="link" href="permissions.html#idm38310-bb"><span class="identifier">swap</span></a><span class="special">(</span><a class="link" href="permissions.html" title="Class permissions">permissions</a> <span class="special">&amp;</span><span class="special">,</span> <a class="link" href="permissions.html" title="Class permissions">permissions</a> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm88219"></a><h2>Description</h2>
+<a name="idm88196"></a><h2>Description</h2>
 <p>On Windows platforms, it represents a pointer to <code class="computeroutput">SECURITY_ATTRIBUTES</code>. The user is responsible for allocating and reclaiming resources associated with the pointer, <code class="computeroutput">permissions</code> instance does not own them.</p>
 <p>On POSIX platforms, it represents a <code class="computeroutput">mode_t</code> value. </p>
 <div class="refsect2">
-<a name="idm88226"></a><h3>
+<a name="idm88203"></a><h3>
 <a name="boost.log.permissionsconstruct-copy-destruct"></a><code class="computeroutput">permissions</code> 
         public
        construct/copy/destruct</h3>
@@ -90,7 +91,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm88328"></a><h3>
+<a name="idm88305"></a><h3>
 <a name="idm38229-bb"></a><code class="computeroutput">permissions</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -137,21 +138,18 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm88409"></a><h3>
+<a name="idm88386"></a><h3>
 <a name="idm38309-bb"></a><code class="computeroutput">permissions</code> friend functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
 <pre class="literallayout"><span class="keyword">friend</span> <span class="keyword">void</span> <a name="idm38310-bb"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="permissions.html" title="Class permissions">permissions</a> <span class="special">&amp;</span> a<span class="special">,</span> <a class="link" href="permissions.html" title="Class permissions">permissions</a> <span class="special">&amp;</span> b<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>Swaps the two <code class="computeroutput">permissions</code> objects. </li></ol></div>
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="open_mode/open_or_create.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../utilities.html#header.boost.log.utility.permissions_hpp"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="abstract_ordering.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>

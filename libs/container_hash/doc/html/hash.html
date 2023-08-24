@@ -661,7 +661,9 @@ pre.rouge {
 <li><a href="#intro">Introduction</a></li>
 <li><a href="#recent">Recent Changes</a>
 <ul class="sectlevel2">
+<li><a href="#recent_boost_1_82_0">Boost 1.82.0</a></li>
 <li><a href="#recent_boost_1_81_0">Boost 1.81.0</a></li>
+<li><a href="#recent_boost_1_78_0">Boost 1.78.0</a></li>
 </ul>
 </li>
 <li><a href="#tutorial">Tutorial</a></li>
@@ -700,12 +702,18 @@ pre.rouge {
 <li><a href="#ref_is_described_classt">is_described_class&lt;T&gt;</a></li>
 </ul>
 </li>
+<li><a href="#ref_boostcontainer_hashis_tuple_like_hpp">&lt;boost/container_hash/&#8203;is_tuple_like.hpp&gt;</a>
+<ul class="sectlevel3">
+<li><a href="#ref_is_tuple_liket">is_tuple_like&lt;T&gt;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#notes">Design and Implementation Notes</a>
 <ul class="sectlevel2">
 <li><a href="#notes_quality_of_the_hash_function">Quality of the Hash Function</a></li>
 <li><a href="#notes_the_hash_value_customization_point">The hash_value Customization Point</a></li>
+<li><a href="#notes_hash_value_stability">Hash Value Stability</a></li>
 <li><a href="#notes_hash_combine">hash_combine</a></li>
 <li><a href="#notes_hash_range">hash_range</a></li>
 </ul>
@@ -748,7 +756,8 @@ indices, and <a href="../../../bimap/index.html">Boost.Bimap</a>'s <code>unorder
 <p>standard floating point types (<code>float</code>, <code>double</code>, <code>long double</code>);</p>
 </li>
 <li>
-<p>pointers (to objects and to functions, but not pointers to members);</p>
+<p>pointers (to objects and to functions, but not pointers to members)
+and <code>nullptr</code>;</p>
 </li>
 <li>
 <p>enumeration types;</p>
@@ -760,7 +769,8 @@ indices, and <a href="../../../bimap/index.html">Boost.Bimap</a>'s <code>unorder
 <p><code>std::complex</code>;</p>
 </li>
 <li>
-<p><code>std::pair</code>, <code>std::tuple</code>;</p>
+<p>tuple-like types, such as <code>std::pair</code>, <code>std::tuple</code>, and user-defined
+types that specialize <code>std::tuple_size</code> and provide <code>get&lt;I&gt;</code>;</p>
 </li>
 <li>
 <p>sequence-like types, both standard and user-defined (sequence-like types
@@ -825,6 +835,27 @@ collisions and is as fast as possible.</p>
 <h2 id="recent"><a class="link" href="#recent">Recent Changes</a></h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="recent_boost_1_82_0"><a class="link" href="#recent_boost_1_82_0">Boost 1.82.0</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added an overload of <code>hash_value</code> for <code>std::nullptr_t</code>.</p>
+</li>
+<li>
+<p>Added <code>is_tuple_like</code> and an overload of <code>hash_value</code> for
+tuple-like types.</p>
+</li>
+<li>
+<p>Changed string hashing to use
+<a href="https://github.com/pdimov/mulxp_hash"><code>mulxp1_hash</code></a>,
+improving both quality and speed. This changes the hash values
+for string-like types (ranges of <code>char</code>, <code>signed char</code>,
+<code>unsigned char</code>, <code>std::byte</code>, <code>char8_t</code>).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="recent_boost_1_81_0"><a class="link" href="#recent_boost_1_81_0">Boost 1.81.0</a></h3>
 <div class="paragraph">
 <p>Major update.</p>
@@ -854,7 +885,9 @@ of the box.</p>
 supported out of the box.</p>
 </li>
 <li>
-<p><code>hash_combine</code> has been improved.</p>
+<p><code>hash_combine</code> has been improved. This changes the hash values
+of composite (container and tuple) types and of scalar types
+bigger than <code>size_t</code>.</p>
 </li>
 <li>
 <p>The performance (and quality, as a result of the above change)
@@ -864,6 +897,19 @@ now passes SMHasher in 64 bit mode.</p>
 <li>
 <p>The documentation has been substantially revised to reflect
 the changes.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="recent_boost_1_78_0"><a class="link" href="#recent_boost_1_78_0">Boost 1.78.0</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Fixed <code>hash_combine</code> so that its behavior no longer depends
+on whether <code>size_t</code> is the exact same type as <code>boost::uint64_t</code>
+(which wasn&#8217;t the case on macOS). This changes the hash values
+of composite (container and tuple) types on macOS.</p>
 </li>
 </ul>
 </div>
@@ -1249,6 +1295,7 @@ wish to physically depend on Boost.ContainerHash.</p>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">struct</span> <span class="nc">is_contiguous_range</span><span class="p">;</span>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">struct</span> <span class="nc">is_unordered_range</span><span class="p">;</span>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">struct</span> <span class="nc">is_described_class</span><span class="p">;</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">struct</span> <span class="nc">is_tuple_like</span><span class="p">;</span>
 
 <span class="p">}</span> <span class="c1">// namespace container_hash</span>
 
@@ -1310,8 +1357,9 @@ wish to physically depend on Boost.ContainerHash.</p>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">A</span><span class="p">,</span> <span class="k">class</span> <span class="nc">B</span><span class="p">&gt;</span>
   <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">hash_value</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">);</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span>
-  <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">hash_value</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">);</span>
+<span class="c1">// Enabled only when container_hash::is_tuple_like&lt;T&gt;::value is true</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+  <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">hash_value</span><span class="p">(</span> <span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">);</span>
 
 <span class="c1">// Enabled only when container_hash::is_range&lt;T&gt;::value is true</span>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
@@ -1503,12 +1551,18 @@ bijection over the <code>std::size_t</code> values, of the form</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Otherwise, bytes from <code>[first, last)</code> are coalesced in an unspecified manner
-and then passed to <code>hash_combine</code>, more than one at a time. This is done in
-order to improve performance when hashing strings.</p>
+<p>Otherwise, bytes from <code>[first, last)</code> are coalesced and hashed in an
+unspecified manner. This is done in order to improve performance when hashing
+strings.</p>
 </div>
 </div>
 </div>
+</dd>
+<dt class="hdlist1">Remarks: </dt>
+<dd>
+<p>For chars, the current implementation uses
+<a href="https://github.com/pdimov/mulxp_hash"><code>mulxp1_hash</code></a> when <code>std::size_t</code> is
+64 bit, and <code>mulxp1_hash32</code> when it&#8217;s 32 bit.</p>
 </dd>
 </dl>
 </div>
@@ -1710,8 +1764,9 @@ utility.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span>
-  <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="nf">hash_value</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">);</span></code></pre>
+<pre class="rouge highlight"><code data-lang="c++"><span class="c1">// Enabled only when container_hash::is_tuple_like&lt;T&gt;::value is true</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+  <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="nf">hash_value</span><span class="p">(</span> <span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">);</span></code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -1722,17 +1777,24 @@ utility.</p>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="n">boost</span><span class="o">::</span><span class="n">hash_combine</span><span class="p">(</span> <span class="n">seed</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">);</span>
-<span class="n">boost</span><span class="o">::</span><span class="n">hash_combine</span><span class="p">(</span> <span class="n">seed</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">);</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="p">;</span>
+
+<span class="n">boost</span><span class="o">::</span><span class="n">hash_combine</span><span class="p">(</span> <span class="n">seed</span><span class="p">,</span> <span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">);</span>
+<span class="n">boost</span><span class="o">::</span><span class="n">hash_combine</span><span class="p">(</span> <span class="n">seed</span><span class="p">,</span> <span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">);</span>
 <span class="c1">// ...</span>
-<span class="n">boost</span><span class="o">::</span><span class="n">hash_combine</span><span class="p">(</span> <span class="n">seed</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">);</span>
+<span class="n">boost</span><span class="o">::</span><span class="n">hash_combine</span><span class="p">(</span> <span class="n">seed</span><span class="p">,</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">);</span>
 
 <span class="k">return</span> <span class="n">seed</span><span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>where <code>N</code> is <code>sizeof&#8230;&#8203;(T)</code>.</p>
+<p>where <code>N</code> is <code>std::tuple_size&lt;T&gt;::value</code>.</p>
 </div>
+</dd>
+<dt class="hdlist1">Remarks: </dt>
+<dd>
+<p>This overload is only enabled when
+<code>container_hash::is_range&lt;T&gt;::value</code> is <code>false</code>.</p>
 </dd>
 </dl>
 </div>
@@ -2114,6 +2176,46 @@ if the default behavior does not deduce the correct value.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="ref_boostcontainer_hashis_tuple_like_hpp"><a class="link" href="#ref_boostcontainer_hashis_tuple_like_hpp">&lt;boost/container_hash/&#8203;is_tuple_like.hpp&gt;</a></h3>
+<div class="paragraph">
+<p>Defines the trait <code>boost::container_hash::is_tuple_like</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">namespace</span> <span class="n">boost</span>
+<span class="p">{</span>
+
+<span class="k">namespace</span> <span class="n">container_hash</span>
+<span class="p">{</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">struct</span> <span class="nc">is_tuple_like</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="c1">// namespace container_hash</span>
+
+<span class="p">}</span> <span class="c1">// namespace boost</span></code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ref_is_tuple_liket"><a class="link" href="#ref_is_tuple_liket">is_tuple_like&lt;T&gt;</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">struct</span> <span class="nc">is_tuple_like</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">value</span> <span class="o">=</span> <span class="cm">/* see below */</span><span class="p">;</span>
+<span class="p">};</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>is_tuple_like&lt;T&gt;::value</code> is <code>true</code> when <code>std::tuple_size&lt;T&gt;::value</code>
+is valid.</p>
+</div>
+<div class="paragraph">
+<p>Users are allowed to specialize <code>is_tuple_like</code> for their types
+if the default behavior does not deduce the correct value.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2169,6 +2271,25 @@ which caused them to hash to 0 or 1, rarely what one expects or wants.</p>
 to be templates constrained on e.g. <code>std::is_integral</code> or its moral
 equivalent. This causes types convertible to an integral to no longer
 match, avoiding the problem.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="notes_hash_value_stability"><a class="link" href="#notes_hash_value_stability">Hash Value Stability</a></h3>
+<div class="paragraph">
+<p>In general, the library does not promise that the hash values will stay
+the same from release to release (otherwise improvements would be
+impossible). However, historically values have been quite stable. Before
+release 1.81, the previous changes have been in 1.56 (a better
+<code>hash_combine</code>) and 1.78 (macOS-specific change to <code>hash_combine</code>.)</p>
+</div>
+<div class="paragraph">
+<p>Code should generally not depend on specific hash values, but for those
+willing to take the risk of occasional breaks due to hash value changes,
+the library now has a test that checks hash values for a number of types
+against reference values (<code>test/hash_reference_values.cpp</code>),
+whose <a href="https://github.com/boostorg/container_hash/commits/develop/test/hash_reference_values.cpp">version history</a>
+can be used as a rough guide to when hash values have changed, and for what
+types.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2337,18 +2458,9 @@ A <code>uint32_t</code> is composed from <code>first[0]</code> to <code>first[3]
 is fed to <code>hash_combine</code>.</p>
 </div>
 <div class="paragraph">
-<p>In principle, when <code>size_t</code> is 64 bit, we could have used <code>uint64_t</code> instead.
-We do not, because this allows producing an arbitrary hash value by choosing
-the input bytes appropriately (because <code>hash_combine</code> is reversible.)</p>
-</div>
-<div class="paragraph">
-<p>Allowing control only over 32 bits of the full 64 bit <code>size_t</code> value makes
-these "chosen plaintext attacks" harder.</p>
-</div>
-<div class="paragraph">
-<p>This is not as harmful to performance as it first appears, because the
-input to <code>hash&lt;string&gt;</code> (e.g. the key in an unordered container) is often
-short (9 to 13 bytes in some typical scenarios.)</p>
+<p>In Boost 1.82, <code>hash_range</code> for these types was changed to use
+<a href="https://github.com/pdimov/mulxp_hash"><code>mulxp1_hash</code></a>. This improves both
+quality and speed of string hashing.</p>
 </div>
 <div class="paragraph">
 <p>Note that <code>hash_range</code> has also traditionally guaranteed that the same element

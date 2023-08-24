@@ -106,7 +106,7 @@ provided parameter and function.</p>
 <span class="p">};</span>
 <span class="c1">// The logger decorator</span>
 <span class="n">BOOST_HOF_STATIC_FUNCTION</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">hof</span><span class="o">::</span><span class="n">decorate</span><span class="p">(</span><span class="n">logger_f</span><span class="p">());</span>
-
+    
 <span class="k">struct</span> <span class="n">sum_f</span>
 <span class="p">{</span>
     <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
@@ -115,7 +115,7 @@ provided parameter and function.</p>
         <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
-
+    
 <span class="n">BOOST_HOF_STATIC_FUNCTION</span><span class="p">(</span><span class="n">sum</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum_f</span><span class="p">();</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Use the logger decorator to print &quot;Calling sum&quot; when the function is called</span>

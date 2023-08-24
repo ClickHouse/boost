@@ -9,6 +9,7 @@
 <link rel="up" href="../../../boost_process/v2.html#header.boost.process.v2.stdio_hpp" title="Header &lt;boost/process/v2/stdio.hpp&gt;">
 <link rel="prev" href="process_start_dir.html" title="Struct process_start_dir">
 <link rel="next" href="../../../program_options.html" title="Chapter 29. Boost.Program_options">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -29,14 +30,14 @@
 <h2><span class="refentrytitle">Struct process_stdio</span></h2>
 <p>boost::process::v2::process_stdio — The initializer for the stdio of a subprocess. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../boost_process/v2.html#header.boost.process.v2.stdio_hpp" title="Header &lt;boost/process/v2/stdio.hpp&gt;">boost/process/v2/stdio.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../boost_process/v2.html#header.boost.process.v2.stdio_hpp" title="Header &lt;boost/process/v2/stdio.hpp&gt;">boost/process/v2/stdio.hpp</a>&gt;
 
 </span>
 <span class="keyword">struct</span> <a class="link" href="process_stdio.html" title="Struct process_stdio">process_stdio</a> <span class="special">{</span>
 
-  <span class="comment">// <a class="link" href="process_stdio.html#idm9671-bb">public member functions</a></span>
-  <span class="identifier">error_code</span> <a class="link" href="process_stdio.html#idm9672-bb"><span class="identifier">on_exec_setup</span></a><span class="special">(</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">default_launcher</span> <span class="special">&amp;</span><span class="special">,</span> 
+  <span class="comment">// <a class="link" href="process_stdio.html#idm9712-bb">public member functions</a></span>
+  <span class="identifier">error_code</span> <a class="link" href="process_stdio.html#idm9713-bb"><span class="identifier">on_exec_setup</span></a><span class="special">(</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">default_launcher</span> <span class="special">&amp;</span><span class="special">,</span> 
                            <span class="keyword">const</span> <span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span><span class="keyword">const</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span>
 
   <span class="comment">// public data members</span>
@@ -72,28 +73,25 @@
 <li class="listitem"><p><code class="computeroutput">FILE*</code> any open file, including <code class="computeroutput">stdin</code>, <code class="computeroutput">stdout</code> and <code class="computeroutput">stderr</code></p></li>
 <li class="listitem"><p>a filesystem::path, which will open a readable or writable depending on the direction of the stream</p></li>
 <li class="listitem"><p><code class="computeroutput">native_handle</code> any native file handle (<code class="computeroutput">HANDLE</code> on windows) or file descriptor (<code class="computeroutput">int</code> on posix)</p></li>
-<li class="listitem"><p>any io-object with a .native_handle() function that is comptaiblie with the above. E.g. a asio::ip::tcp::socket</p></li>
+<li class="listitem"><p>any io-object with a .native_handle() function that is compatible with the above. E.g. a asio::ip::tcp::socket</p></li>
 <li class="listitem"><p>an asio::basic_writeable_pipe for stdin or asio::basic_readable_pipe for stderr/stdout. </p></li>
 </ul></div>
 <p>
 </p>
 <div class="refsect2">
 <a name="id-1.3.29.12.8.16.3.4.10"></a><h3>
-<a name="idm9671-bb"></a><code class="computeroutput">process_stdio</code> public member functions</h3>
-<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="literallayout"><span class="identifier">error_code</span> <a name="idm9672-bb"></a><span class="identifier">on_exec_setup</span><span class="special">(</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">default_launcher</span> <span class="special">&amp;</span> launcher<span class="special">,</span> 
+<a name="idm9712-bb"></a><code class="computeroutput">process_stdio</code> public member functions</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="literallayout"><span class="identifier">error_code</span> <a name="idm9713-bb"></a><span class="identifier">on_exec_setup</span><span class="special">(</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">default_launcher</span> <span class="special">&amp;</span> launcher<span class="special">,</span> 
                          <span class="keyword">const</span> <span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span><span class="keyword">const</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span></pre></li></ol></div>
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2006-2012 Julio M. Merino Vidal, Ilya Sokolov,
+<div class="copyright-footer">Copyright © 2006-2012 Julio M. Merino Vidal, Ilya Sokolov,
       Felipe Tanus, Jeff Flinn, Boris Schaeling<br>Copyright © 2016 Klemens D. Morgenstern<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="process_start_dir.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../boost_process/v2.html#header.boost.process.v2.stdio_hpp"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../../../program_options.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>

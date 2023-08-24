@@ -9,6 +9,7 @@
 <link rel="up" href="../container.html" title="Chapter 8. Boost.Container">
 <link rel="prev" href="acknowledgements_notes.html" title="Acknowledgements, notes and links">
 <link rel="next" href="../conversion.html" title="Chapter 9. The Conversion Library 1.7">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -28,6 +29,8 @@
 <a name="container.release_notes"></a><a class="link" href="release_notes.html" title="Release Notes">Release Notes</a>
 </h2></div></div></div>
 <div class="toc"><dl class="toc">
+<dt><span class="section"><a href="release_notes.html#container.release_notes.release_notes_boost_1_82_00">Boost
+      1.82 Release</a></span></dt>
 <dt><span class="section"><a href="release_notes.html#container.release_notes.release_notes_boost_1_81_00">Boost
       1.81 Release</a></span></dt>
 <dt><span class="section"><a href="release_notes.html#container.release_notes.release_notes_boost_1_80_00">Boost
@@ -95,6 +98,39 @@
 <dt><span class="section"><a href="release_notes.html#container.release_notes.release_notes_boost_1_48_00">Boost
       1.48 Release</a></span></dt>
 </dl></div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="container.release_notes.release_notes_boost_1_82_00"></a><a class="link" href="release_notes.html#container.release_notes.release_notes_boost_1_82_00" title="Boost 1.82 Release">Boost
+      1.82 Release</a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Fixed bugs/issues:
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <a href="https://github.com/boostorg/container/issues/232" target="_top">GitHub
+                  #232: <span class="emphasis"><em>"Fix using pmr::polymorphic_allocator in pre-main"</em></span></a>.
+                </li>
+<li class="listitem">
+                  <a href="https://github.com/boostorg/container/issues/233" target="_top">GitHub
+                  #233: <span class="emphasis"><em>"Can't std::move small_vector with move-only
+                  type"</em></span></a>.
+                </li>
+<li class="listitem">
+                  <a href="https://github.com/boostorg/container/issues/238" target="_top">GitHub
+                  #238: <span class="emphasis"><em>"Containers should not be using memset to
+                  value-initialize POD types"</em></span></a>.
+                </li>
+<li class="listitem">
+                  <a href="https://github.com/boostorg/container/issues/236" target="_top">GitHub
+                  #236: <span class="emphasis"><em>"flat_tree::erase_unique uses wrong iterator"</em></span></a>.
+                </li>
+<li class="listitem">
+                  <a href="https://github.com/boostorg/container/issues/240" target="_top">GitHub
+                  #240: <span class="emphasis"><em>"_GLIBCXX_DEBUG detects issues in flat_set/map"</em></span></a>.
+                </li>
+</ul></div>
+          </li></ul></div>
+</div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="container.release_notes.release_notes_boost_1_81_00"></a><a class="link" href="release_notes.html#container.release_notes.release_notes_boost_1_81_00" title="Boost 1.81 Release">Boost
@@ -738,7 +774,7 @@
                   #76: <span class="emphasis"><em>"flat_set: undefined behaviour on empty range"</em></span></a>.
                 </li>
 <li class="listitem">
-                  Fixed race condition bug in <code class="computeroutput"><a class="link" href="../boost/container/pmr/unsynchronized_po_idm19711.html" title="Class unsynchronized_pool_resource">unsynchronized_pool_resource</a></code>
+                  Fixed race condition bug in <code class="computeroutput"><a class="link" href="../boost/container/pmr/unsynchronized_po_idm19691.html" title="Class unsynchronized_pool_resource">unsynchronized_pool_resource</a></code>
                   found by Arthur O'Dowyer in his blog post <a href="https://quuxplusone.github.io/blog/2018/06/05/libcpp-memory-resource/" target="_top">&lt;memory_resource&gt;
                   for libc++</a>
                 </li>
@@ -1503,14 +1539,11 @@
           </li></ul></div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2009-2018 Ion Gaztanaga<p>
+<div class="copyright-footer">Copyright © 2009-2018 Ion Gaztanaga<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="acknowledgements_notes.html"><img src="../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../container.html"><img src="../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../conversion.html"><img src="../../../doc/src/images/next.png" alt="Next"></a>

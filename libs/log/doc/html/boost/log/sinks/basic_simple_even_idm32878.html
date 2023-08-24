@@ -8,6 +8,7 @@
 <link rel="up" href="../../../sinks.html#header.boost.log.sinks.event_log_backend_hpp" title="Header &lt;boost/log/sinks/event_log_backend.hpp&gt;">
 <link rel="prev" href="basic_event_log_backend.html" title="Class template basic_event_log_backend">
 <link rel="next" href="event_log/make_event_id.html" title="Function make_event_id">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../../boost.png"></td></tr></table>
@@ -21,8 +22,8 @@
 <h2><span class="refentrytitle">Class template basic_simple_event_log_backend</span></h2>
 <p>boost::log::sinks::basic_simple_event_log_backend — An implementation of a simple logging sink backend that emits events into Windows NT event log. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../sinks.html#header.boost.log.sinks.event_log_backend_hpp" title="Header &lt;boost/log/sinks/event_log_backend.hpp&gt;">boost/log/sinks/event_log_backend.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../sinks.html#header.boost.log.sinks.event_log_backend_hpp" title="Header &lt;boost/log/sinks/event_log_backend.hpp&gt;">boost/log/sinks/event_log_backend.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="basic_simple_even_idm32878.html" title="Class template basic_simple_event_log_backend">basic_simple_event_log_backend</a> <span class="special">:</span>
@@ -49,7 +50,7 @@
   <span class="keyword">static</span> <span class="identifier">string_type</span> <a class="link" href="basic_simple_even_idm32878.html#idm32958-bb"><span class="identifier">get_default_source_name</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm67657"></a><h2>Description</h2>
+<a name="idm67634"></a><h2>Description</h2>
 <p>The sink uses Windows NT 5 (Windows 2000) and later event log API to emit events to an event log. The sink acts as an event source in terms of the API, it implements all needed resources and source registration in the Windows registry that is needed for the event delivery.</p>
 <p>The backend performs message text formatting. The composed text is then passed as the first and only string parameter of the event. The resource embedded into the backend describes the event so that the parameter is inserted into the event description text, thus making it visible in the event log.</p>
 <p>The backend allows to customize mapping of application severity levels to the native Windows event types. This allows to write portable code even if OS-specific sinks, such as this one, are used.</p>
@@ -72,7 +73,7 @@
 <p>
 </p>
 <div class="refsect2">
-<a name="idm67667"></a><h3>
+<a name="idm67644"></a><h3>
 <a name="boost.log.sinks.basic_simple_even_idm32878construct-copy-destruct"></a><code class="computeroutput">basic_simple_event_log_backend</code> 
         public
        construct/copy/destruct</h3>
@@ -121,7 +122,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm67738"></a><h3>
+<a name="idm67715"></a><h3>
 <a name="idm32902-bb"></a><code class="computeroutput">basic_simple_event_log_backend</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -135,7 +136,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm67773"></a><h3>
+<a name="idm67750"></a><h3>
 <a name="idm32951-bb"></a><code class="computeroutput">basic_simple_event_log_backend</code> public static functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -172,14 +173,11 @@
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="basic_event_log_backend.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../sinks.html#header.boost.log.sinks.event_log_backend_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="event_log/make_event_id.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>

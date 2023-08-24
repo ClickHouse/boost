@@ -8,6 +8,7 @@
 <link rel="up" href="../../attributes.html#header.boost.log.attributes.value_visitation_fwd_hpp" title="Header &lt;boost/log/attributes/value_visitation_fwd.hpp&gt;">
 <link rel="prev" href="visit_idm26879.html" title="Function template visit">
 <link rel="next" href="../../expressions.html" title="Expressions">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../boost.png"></td></tr></table>
@@ -21,8 +22,8 @@
 <h2><span class="refentrytitle">Class template value_visitor_invoker</span></h2>
 <p>boost::log::value_visitor_invoker — Generic attribute value visitor invoker. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../attributes.html#header.boost.log.attributes.value_visitation_fwd_hpp" title="Header &lt;boost/log/attributes/value_visitation_fwd.hpp&gt;">boost/log/attributes/value_visitation_fwd.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../attributes.html#header.boost.log.attributes.value_visitation_fwd_hpp" title="Header &lt;boost/log/attributes/value_visitation_fwd.hpp&gt;">boost/log/attributes/value_visitation_fwd.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> FallbackPolicyT<span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="value_visitor_invoker.html" title="Class template value_visitor_invoker">value_visitor_invoker</a> <span class="special">:</span> <span class="keyword">private</span> <span class="identifier">FallbackPolicyT</span> <span class="special">{</span>
@@ -45,11 +46,11 @@
   <span class="identifier">fallback_policy</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <a class="link" href="value_visitor_invoker.html#idm27009-bb"><span class="identifier">get_fallback_policy</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm40126"></a><h2>Description</h2>
+<a name="idm40121"></a><h2>Description</h2>
 <p>Attribute value invoker is a functional object that attempts to find and extract the stored attribute value from the attribute value view or a log record. The extracted value is passed to a unary function object (the visitor) provided by user.</p>
 <p>The invoker can be specialized on one or several attribute value types that should be specified in the second template argument. </p>
 <div class="refsect2">
-<a name="idm40130"></a><h3>
+<a name="idm40125"></a><h3>
 <a name="boost.log.value_visitor_invokerconstruct-copy-destruct"></a><code class="computeroutput">value_visitor_invoker</code> 
         public
        construct/copy/destruct</h3>
@@ -87,7 +88,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm40176"></a><h3>
+<a name="idm40171"></a><h3>
 <a name="idm26919-bb"></a><code class="computeroutput">value_visitor_invoker</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -280,14 +281,11 @@
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="visit_idm26879.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../attributes.html#header.boost.log.attributes.value_visitation_fwd_hpp"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../../expressions.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>

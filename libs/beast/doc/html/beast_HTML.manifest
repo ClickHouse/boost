@@ -1124,6 +1124,7 @@ beast/ref/boost__beast__http__basic_file_body__value_type/size.html
 beast/ref/boost__beast__http__basic_file_body__value_type/close.html
 beast/ref/boost__beast__http__basic_file_body__value_type/open.html
 beast/ref/boost__beast__http__basic_file_body__value_type/reset.html
+beast/ref/boost__beast__http__basic_file_body__value_type/seek.html
 beast/ref/boost__beast__http__buffer_body__value_type.html
 beast/ref/boost__beast__http__buffer_body__value_type/data.html
 beast/ref/boost__beast__http__buffer_body__value_type/size.html

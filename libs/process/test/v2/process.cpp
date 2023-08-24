@@ -150,6 +150,8 @@ BOOST_AUTO_TEST_CASE(terminate)
   
   BOOST_CHECK_MESSAGE(!sh.empty(), sh);
   bpv::process proc(ctx, sh, {});
+  proc.suspend();
+  proc.resume();
   proc.terminate();
   proc.wait();
 }
@@ -219,6 +221,8 @@ BOOST_AUTO_TEST_CASE(print_args_out)
   bpv::error_code ec;
 
   auto sz = asio::read(rp, st,  ec);
+  while (ec == asio::error::interrupted)
+      sz += asio::read(rp, st,  ec);
 
   BOOST_CHECK_NE(sz, 0u);
   BOOST_CHECK_MESSAGE((ec == asio::error::broken_pipe) || (ec == asio::error::eof), ec.message());
@@ -265,6 +269,8 @@ BOOST_AUTO_TEST_CASE(print_args_err)
   bpv::error_code ec;
 
   auto sz = asio::read(rp, st,  ec);
+  while (ec == asio::error::interrupted)
+      sz += asio::read(rp, st,  ec);
 
   BOOST_CHECK_NE(sz , 0u);
   BOOST_CHECK_MESSAGE((ec == asio::error::broken_pipe) || (ec == asio::error::eof), ec.message());
@@ -318,6 +324,9 @@ BOOST_AUTO_TEST_CASE(echo_file)
   bpv::error_code ec;
 
   auto sz = asio::read(rp, asio::dynamic_buffer(out),  ec);
+  while (ec == asio::error::interrupted)
+      sz += asio::read(rp, asio::dynamic_buffer(out),  ec);
+
   BOOST_CHECK(sz != 0);
   BOOST_CHECK_MESSAGE((ec == asio::error::broken_pipe) || (ec == asio::error::eof), ec.message());
   BOOST_CHECK_MESSAGE(out == test_data, out);
@@ -342,6 +351,9 @@ BOOST_AUTO_TEST_CASE(print_same_cwd)
   bpv::error_code ec;
 
   auto sz = asio::read(rp, asio::dynamic_buffer(out),  ec);
+  while (ec == asio::error::interrupted)
+      sz += asio::read(rp, asio::dynamic_buffer(out),  ec);
+
   BOOST_CHECK(sz != 0);
   BOOST_CHECK_MESSAGE((ec == asio::error::broken_pipe) || (ec == asio::error::eof), ec.message());
   BOOST_CHECK_MESSAGE(bpv::filesystem::path(out) == bpv::filesystem::current_path(),
@@ -371,6 +383,9 @@ BOOST_AUTO_TEST_CASE(popen)
     std::string res;
     boost::system::error_code ec;
     std::size_t n = asio::read(proc, asio::dynamic_buffer(res), ec);
+    while (ec == asio::error::interrupted)
+        n += asio::read(rp, asio::dynamic_buffer(res),  ec);
+
     BOOST_CHECK_MESSAGE(ec == asio::error::eof || ec == asio::error::broken_pipe, ec.message());
     BOOST_REQUIRE_GE(n, 1u);
     // remove EOF
@@ -404,8 +419,16 @@ BOOST_AUTO_TEST_CASE(print_other_cwd)
   bpv::error_code ec;
 
   auto sz = asio::read(rp, asio::dynamic_buffer(out),  ec);
+  while (ec == asio::error::interrupted)
+    sz += asio::read(rp, asio::dynamic_buffer(out),  ec);
+
   BOOST_CHECK(sz != 0);
   BOOST_CHECK_MESSAGE((ec == asio::error::broken_pipe) || (ec == asio::error::eof), ec.message());
+
+
+  if (out.back() != '/' && target.string().back() == '/')
+      out += '/';
+
   BOOST_CHECK_MESSAGE(bpv::filesystem::path(out) == target,
                       bpv::filesystem::path(out) << " != " << target);
 
@@ -434,7 +457,10 @@ std::string read_env(const char * name, Inits && ... inits)
   std::string out;
   bpv::error_code ec;
 
-  const auto sz = asio::read(rp, asio::dynamic_buffer(out),  ec);
+  auto sz = asio::read(rp, asio::dynamic_buffer(out),  ec);
+  while (ec == asio::error::interrupted)
+    sz += asio::read(rp, asio::dynamic_buffer(out),  ec);
+
   BOOST_CHECK_MESSAGE((ec == asio::error::broken_pipe) || (ec == asio::error::eof), ec.message());
   out.resize(sz);
   trim_end(out);
@@ -527,8 +553,15 @@ BOOST_AUTO_TEST_CASE(bind_launcher)
   bpv::error_code ec;
 
   auto sz = asio::read(rp, asio::dynamic_buffer(out),  ec);
+  while (ec == asio::error::interrupted)
+    sz += asio::read(rp, asio::dynamic_buffer(out),  ec);
+
   BOOST_CHECK(sz != 0);
   BOOST_CHECK_MESSAGE((ec == asio::error::broken_pipe) || (ec == asio::error::eof), ec.message());
+
+  if (out.back() != '/' && target.string().back() == '/')
+      out += '/';
+
   BOOST_CHECK_MESSAGE(bpv::filesystem::path(out) == target,
                       bpv::filesystem::path(out) << " != " << target);
 

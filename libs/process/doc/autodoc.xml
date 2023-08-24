@@ -88,7 +88,7 @@ spawn("gcc", args+={"--version"});
 </namespace>
 </header>
 <header name="boost/process/async.hpp">
-<para>The header which provides the basic asynchrounous features. It provides the on_exit property, which allows callbacks when the process exits. It also implements the necessary traits for passing an boost::asio::io_context, which is needed for asynchronous communication.</para><para>It also pulls the <ulink url="http://www.boost.org/doc/libs/release/doc/html/boost_asio/reference/buffer.html">boost::asio::buffer</ulink> into the boost::process namespace for convenience.</para><para> 
+<para>The header which provides the basic asynchronous features. It provides the on_exit property, which allows callbacks when the process exits. It also implements the necessary traits for passing an boost::asio::io_context, which is needed for asynchronous communication.</para><para>It also pulls the <ulink url="http://www.boost.org/doc/libs/release/doc/html/boost_asio/reference/buffer.html">boost::asio::buffer</ulink> into the boost::process namespace for convenience.</para><para> 
 <programlisting language="c++">
 namespace boost {
   namespace process {
@@ -232,7 +232,7 @@ chlid c2("ls", ios, on_exit=exit_code);
 </namespace>
 </header>
 <header name="boost/process/async_system.hpp">
-<para>Defines the asynchrounous version of the system function. </para><namespace name="boost">
+<para>Defines the asynchronous version of the system function. </para><namespace name="boost">
 <namespace name="process">
 
 
@@ -423,7 +423,7 @@ The following lists contain possible value types, with <computeroutput>char_type
 </sect3>
 <sect3 id="namespaceboost_1_1process_1env_reset">
 <title>Reset variables</title>
-<para>Reseting signle variables can be done in the following way:</para>
+<para>Resetting single variables can be done in the following way:</para>
 <para><programlisting language="c++">env[id] = boost::none;
 env(id, boost::none);
 </programlisting></para>
@@ -828,7 +828,7 @@ else if (pid == 0) //child process
     for (auto &amp; s : seq)
         s.<methodname alt="boost::process::extend::handler::on_exec_error">on_exec_error</methodname>(*this);
 
-    <emphasis>unspecified();</emphasis>//here the error is send to the father process interally
+    <emphasis>unspecified();</emphasis>//here the error is sent to the father process internally
 
     <ulink url="http://en.cppreference.com/w/cpp/utility/program/exit">std::exit</ulink>(<ulink url="http://en.cppreference.com/w/c/program/EXIT_status">EXIT_FAILURE</ulink>);
     return <classname alt="boost::process::child">child</classname>(); //for C++ compliance
@@ -836,7 +836,7 @@ else if (pid == 0) //child process
 
 <classname alt="boost::process::child">child</classname> c(pid, exit_code);
 
-<emphasis>unspecified();</emphasis>//here, we read the the error from the child process
+<emphasis>unspecified();</emphasis>//here, we read the error from the child process
 
 if (<methodname alt="boost::process::extend::posix_executor::error">error</methodname>())
     for (auto &amp; s : seq)
@@ -845,7 +845,7 @@ else
     for (auto &amp; s : seq)
         s.<methodname alt="boost::process::extend::handler::on_error">on_success</methodname>(*this);
 
-//now we check again, because a on_success handler might've errored.
+//now we check again, because an on_success handler might've errored.
 if (<methodname alt="boost::process::extend::posix_executor::error">error</methodname>())
 {
     for (auto &amp; s : seq)
@@ -935,7 +935,7 @@ else
     for (auto &amp; s : seq)
         s.<methodname alt="boost::process::extend::handler::on_error">on_success</methodname>(*this);
 
-//now we check again, because a on_success handler might've errored.
+//now we check again, because an on_success handler might've errored.
 if (<methodname alt="boost::process::extend::windows_executor::error">error</methodname>())
 {
     for (auto &amp; s : seq)
@@ -980,7 +980,7 @@ else
 </para></description></method>
 </method-group>
 </struct><data-member name="on_setup"><type><emphasis>unspecified</emphasis></type><purpose>This handler is invoked before the process in launched, to setup parameters. The required signature is <computeroutput>void(Exec &amp;)</computeroutput>, where <computeroutput>Exec</computeroutput> is a template parameter. </purpose></data-member>
-<data-member name="on_error"><type><emphasis>unspecified</emphasis></type><purpose>This handler is invoked if an error occured. The required signature is <computeroutput>void(auto &amp; exec, const std::error_code&amp;)</computeroutput>, where <computeroutput>Exec</computeroutput> is a template parameter. </purpose></data-member>
+<data-member name="on_error"><type><emphasis>unspecified</emphasis></type><purpose>This handler is invoked if an error occurred. The required signature is <computeroutput>void(auto &amp; exec, const std::error_code&amp;)</computeroutput>, where <computeroutput>Exec</computeroutput> is a template parameter. </purpose></data-member>
 <data-member name="on_success"><type><emphasis>unspecified</emphasis></type><purpose>This handler is invoked if launching the process has succeeded. The required signature is <computeroutput>void(auto &amp; exec)</computeroutput>, where <computeroutput>Exec</computeroutput> is a template parameter. </purpose></data-member>
 <data-member name="on_fork_error"><type><emphasis>unspecified</emphasis></type><purpose>This handler is invoked if the fork failed. The required signature is <computeroutput>void(auto &amp; exec)</computeroutput>, where <computeroutput>Exec</computeroutput> is a template parameter. </purpose><description><para><note><para>Only available on posix. </para>
 </note>
@@ -1100,7 +1100,7 @@ else
 <header name="boost/process/handles.hpp">
 <para>Defines functions to obtain handles of the current process and limit the amount for inherited ones. </para><namespace name="boost">
 <namespace name="process">
-<data-member name="limit_handles" specifiers="static"><type><emphasis>unspecified</emphasis></type><description><para>The limit_handles property sets all properties to be inherited only expcitly. It closes all unused file-descriptors on posix after the fork and removes the inherit flags on windows.</para><para><note><para>This is executed after the fork on posix.</para>
+<data-member name="limit_handles" specifiers="static"><type><emphasis>unspecified</emphasis></type><description><para>The limit_handles property sets all properties to be inherited only explicitly. It closes all unused file-descriptors on posix after the fork and removes the inherit flags on windows.</para><para><note><para>This is executed after the fork on posix.</para>
 </note>
 <programlisting language="c++">system("gcc", limit_handles);
 </programlisting></para><para>Since limit also closes the standard handles unless they are explicitly redirected they can be ignored by <computeroutput>limit_handles</computeroutput> in the following way.</para><para><programlisting language="c++">system("gcc", limit_handles.allowStd())

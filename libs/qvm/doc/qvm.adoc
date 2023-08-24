@@ -53,7 +53,7 @@ QVM requires only {CPP}03 but is tested on many compiler versions and {CPP} stan
 
 == Distribution
 
-Copyright 2008-2022 Emil Dotchevski. Distributed under the http://www.boost.org/LICENSE_1_0.txt[Boost Software License, Version 1.0].
+Copyright 2008-2023 Emil Dotchevski. Distributed under the http://www.boost.org/LICENSE_1_0.txt[Boost Software License, Version 1.0].
 
 There are three distribution channels:
 
@@ -2363,7 +2363,7 @@ NOTE: The <<deduce_quat,`deduce_quat`>> template can be specialized to deduce th
 '''
 
 [[slerp]]
-==== `slerp`
+==== `slerp180` / `slerp360`
 
 .#include <boost/qvm/quat_operations.hpp>
 [source,c++]
@@ -2374,7 +2374,22 @@ namespace boost { namespace qvm {
   //  is_quat<A>::value && is_quat<B>::value && is_scalar<C>
   template <class A,class B,class C>
   typename deduce_quat2<A,B> >::type
-  slerp( A const & a, B const & b, C c );
+  slerp180( A const & a, B const & b, C c );
+
+  //Only enabled if:
+  //  is_quat<A>::value && is_quat<B>::value && is_scalar<C>
+  template <class A,class B,class C>
+  typename deduce_quat2<A,B> >::type
+  slerp360( A const & a, B const & b, C c );
+
+  //Only enabled if:
+  //  is_quat<A>::value && is_quat<B>::value && is_scalar<C>
+  template <class A,class B,class C>
+  typename deduce_quat2<A,B> >::type
+  slerp( A const & a, B const & b, C c ) // Deprecated
+    {
+    return slerp360(a, b, t);
+    }
 
 } }
 ----
@@ -2382,6 +2397,23 @@ namespace boost { namespace qvm {
 Preconditions: :: `t>=0 && t\<=1`.
 
 Returns: :: A quaternion that is the result of Spherical Linear Interpolation of the quaternions `a` and `b` and the interpolation parameter `c`. When `slerp` is applied to unit quaternions, the quaternion path maps to a path through 3D rotations in a standard way. The effect is a rotation with uniform angular velocity around a fixed rotation axis.
+
+When rotations represented by `a` and `b` are separated by more than 180 degrees, `slerp180` always takes the shorter path on the sphere, while `slerp360` does not. There are use cases for both behaviors, since each introduces a discontinuity under different conditions.
+
+Mathematically:
+
+[source,c++]
+----
+auto q = slerp180(a, b, t);
+----
+is equivalent to
+
+[source,c++]
+----
+auto q = slerp360(dot(a, b) < 0 ? -a : a, b, t);
+----
+
+NOTE: Previous versions of QVM implemented only the `slerp360` behavior, but under the name `slerp`. This is preserved for compatibility, but `slerp` is now deprecated. Please use either `slerp180` or `slerp360`.
 
 NOTE: The <<deduce_quat2,`deduce_quat2`>> template can be specialized to deduce the desired return type, given the types `A` and `B`.
 
@@ -4834,14 +4866,15 @@ namespace boost { namespace qvm {
 
   //Only enabled if:
   //  is_mat<A>::value &&
-  //  mat_traits<A>::rows==mat_traits<A>::cols && mat_traits<A>::rows>=3
+  //  (mat_traits<A>::rows==mat_traits<A>::cols || mat_traits<A>::rows+1==mat_traits<A>::cols) &&
+  //  mat_traits<A>::cols>=3
   template <class A>
   -unspecified-return-type- translation( A & a );
 
 } }
 ----
 
-The expression `translation(m)` returns an lvalue <<view_proxy,view proxy>> that accesses the translation component of the square matrix `m`, which is a vector of size `D`-1, where `D` is the size of `m`.
+The expression `translation(m)` returns an lvalue <<view_proxy,view proxy>> that accesses the translation component of the square matrix `m`, which is a vector of size `C`-1, where `C` is the number of column in `m`.
 
 '''
 
@@ -5217,4 +5250,4 @@ Why doesn't QVM use [] or () to access vector and matrix elements?:: Because it'
 Documentation rendered by https://asciidoctor.org/[Asciidoctor] with https://github.com/zajo/asciidoctor_skin[these customizations].
 
 [.text-right]
-Copyright 2008-2022 Emil Dotchevski and Reverge Studios, Inc.
+Copyright 2008-2023 Emil Dotchevski and Reverge Studios, Inc.

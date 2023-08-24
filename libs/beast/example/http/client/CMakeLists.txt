@@ -13,10 +13,13 @@ add_subdirectory (coro)
 add_subdirectory (crawl)
 add_subdirectory (sync)
 add_subdirectory (body)
+add_subdirectory (methods)
 
 if (OPENSSL_FOUND)
     add_subdirectory (async-ssl)
     add_subdirectory (async-ssl-system-executor)
+    add_subdirectory (awaitable-ssl)
     add_subdirectory (coro-ssl)
     add_subdirectory (sync-ssl)
 endif()
+

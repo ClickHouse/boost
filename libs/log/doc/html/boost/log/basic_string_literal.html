@@ -8,6 +8,7 @@
 <link rel="up" href="../../utilities.html#header.boost.log.utility.string_literal_fwd_hpp" title="Header &lt;boost/log/utility/string_literal_fwd.hpp&gt;">
 <link rel="prev" href="str_literal.html" title="Function template str_literal">
 <link rel="next" href="native_date_time_types.html" title="Type definition native_date_time_types">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../boost.png"></td></tr></table>
@@ -21,8 +22,8 @@
 <h2><span class="refentrytitle">Class template basic_string_literal</span></h2>
 <p>boost::log::basic_string_literal — String literal wrapper. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../utilities.html#header.boost.log.utility.string_literal_fwd_hpp" title="Header &lt;boost/log/utility/string_literal_fwd.hpp&gt;">boost/log/utility/string_literal_fwd.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../utilities.html#header.boost.log.utility.string_literal_fwd_hpp" title="Header &lt;boost/log/utility/string_literal_fwd.hpp&gt;">boost/log/utility/string_literal_fwd.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">,</span> <span class="keyword">typename</span> TraitsT<span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="basic_string_literal.html" title="Class template basic_string_literal">basic_string_literal</a> <span class="special">{</span>
@@ -80,11 +81,11 @@
   <span class="keyword">int</span> <a class="link" href="basic_string_literal.html#idm40251-bb"><span class="identifier">compare</span></a><span class="special">(</span>this_type <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm95145"></a><h2>Description</h2>
+<a name="idm95122"></a><h2>Description</h2>
 <p>The <code class="computeroutput"><a class="link" href="basic_string_literal.html" title="Class template basic_string_literal">basic_string_literal</a></code> is a thin wrapper around a constant string literal. It provides interface similar to STL strings, but because of read-only nature of string literals, lacks ability to modify string contents. However, <code class="computeroutput"><a class="link" href="basic_string_literal.html" title="Class template basic_string_literal">basic_string_literal</a></code> objects can be assigned to and cleared.</p>
 <p>The main advantage of this class comparing to other string classes is that it doesn't dynamically allocate memory and therefore is fast, thin and exception safe. </p>
 <div class="refsect2">
-<a name="idm95153"></a><h3>
+<a name="idm95130"></a><h3>
 <a name="boost.log.basic_string_literalconstruct-copy-destruct"></a><code class="computeroutput">basic_string_literal</code> 
         public
        construct/copy/destruct</h3>
@@ -237,7 +238,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm95310"></a><h3>
+<a name="idm95287"></a><h3>
 <a name="idm39740-bb"></a><code class="computeroutput">basic_string_literal</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -1418,14 +1419,11 @@
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="str_literal.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../utilities.html#header.boost.log.utility.string_literal_fwd_hpp"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="native_date_time_types.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>

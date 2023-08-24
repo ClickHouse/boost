@@ -1,10 +1,13 @@
 // Copyright 2021 Peter Dimov.
+// Copyright 2023 Joaquin M Lopez Munoz.
 // Distributed under the Boost Software License, Version 1.0.
 // https://www.boost.org/LICENSE_1_0.txt
 
 #define _SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING
+#define _SILENCE_CXX20_CISO646_REMOVED_WARNING
 
 #include <boost/unordered_map.hpp>
+#include <boost/unordered/unordered_node_map.hpp>
 #include <boost/unordered/unordered_flat_map.hpp>
 #include <boost/core/detail/splitmix64.hpp>
 #include <boost/config.hpp>
@@ -12,11 +15,8 @@
 # include "absl/container/node_hash_map.h"
 # include "absl/container/flat_hash_map.h"
 #endif
-#ifdef HAVE_TSL_HOPSCOTCH
-# include "tsl/hopscotch_map.h"
-#endif
-#ifdef HAVE_TSL_ROBIN
-# include "tsl/robin_map.h"
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+# include "ankerl/unordered_dense.h"
 #endif
 #include <unordered_map>
 #include <string_view>
@@ -275,6 +275,9 @@ template<class K, class V> using std_unordered_map =
 template<class K, class V> using boost_unordered_map =
     boost::unordered_map<K, V, boost::hash<K>, std::equal_to<K>, allocator_for<K, V>>;
 
+template<class K, class V> using boost_unordered_node_map =
+    boost::unordered_node_map<K, V, boost::hash<K>, std::equal_to<K>, allocator_for<K, V>>;
+
 template<class K, class V> using boost_unordered_flat_map =
     boost::unordered_flat_map<K, V, boost::hash<K>, std::equal_to<K>, allocator_for<K, V>>;
 
@@ -288,23 +291,10 @@ template<class K, class V> using absl_flat_hash_map =
 
 #endif
 
-#ifdef HAVE_TSL_HOPSCOTCH
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
 
-template<class K, class V> using tsl_hopscotch_map =
-    tsl::hopscotch_map<K, V, std::hash<K>, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
-
-template<class K, class V> using tsl_hopscotch_pg_map =
-    tsl::hopscotch_pg_map<K, V, std::hash<K>, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
-
-#endif
-
-#ifdef HAVE_TSL_ROBIN
-
-template<class K, class V> using tsl_robin_map =
-    tsl::robin_map<K, V, std::hash<K>, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
-
-template<class K, class V> using tsl_robin_pg_map =
-    tsl::robin_pg_map<K, V, std::hash<K>, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
+template<class K, class V> using ankerl_unordered_dense_map =
+    ankerl::unordered_dense::map<K, V, ankerl::unordered_dense::hash<K>, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
 
 #endif
 
@@ -361,6 +351,9 @@ std::unordered_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
 template<class K, class V> using boost_unordered_map_fnv1a =
     boost::unordered_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
 
+template<class K, class V> using boost_unordered_node_map_fnv1a =
+    boost::unordered_node_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
+
 template<class K, class V> using boost_unordered_flat_map_fnv1a =
     boost::unordered_flat_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
 
@@ -374,23 +367,10 @@ template<class K, class V> using absl_flat_hash_map_fnv1a =
 
 #endif
 
-#ifdef HAVE_TSL_HOPSCOTCH
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
 
-template<class K, class V> using tsl_hopscotch_map_fnv1a =
-    tsl::hopscotch_map<K, V, fnv1a_hash, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
-
-template<class K, class V> using tsl_hopscotch_pg_map_fnv1a =
-    tsl::hopscotch_pg_map<K, V, fnv1a_hash, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
-
-#endif
-
-#ifdef HAVE_TSL_ROBIN
-
-template<class K, class V> using tsl_robin_map_fnv1a =
-    tsl::robin_map<K, V, fnv1a_hash, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
-
-template<class K, class V> using tsl_robin_pg_map_fnv1a =
-    tsl::robin_pg_map<K, V, fnv1a_hash, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
+template<class K, class V> using ankerl_unordered_dense_map_fnv1a =
+    ankerl::unordered_dense::map<K, V, fnv1a_hash, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
 
 #endif
 
@@ -402,7 +382,14 @@ int main()
 
     test<std_unordered_map>( "std::unordered_map" );
     test<boost_unordered_map>( "boost::unordered_map" );
+    test<boost_unordered_node_map>( "boost::unordered_node_map" );
     test<boost_unordered_flat_map>( "boost::unordered_flat_map" );
+
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+
+    test<ankerl_unordered_dense_map>( "ankerl::unordered_dense::map" );
+
+#endif
 
 #ifdef HAVE_ABSEIL
 
@@ -411,23 +398,16 @@ int main()
 
 #endif
 
-#ifdef HAVE_TSL_HOPSCOTCH
-
-    test<tsl_hopscotch_map>( "tsl::hopscotch_map" );
-    test<tsl_hopscotch_pg_map>( "tsl::hopscotch_pg_map" );
-
-#endif
-
-#ifdef HAVE_TSL_ROBIN
-
-    test<tsl_robin_map>( "tsl::robin_map" );
-    test<tsl_robin_pg_map>( "tsl::robin_pg_map" );
-
-#endif
-
     test<std_unordered_map_fnv1a>( "std::unordered_map, FNV-1a" );
     test<boost_unordered_map_fnv1a>( "boost::unordered_map, FNV-1a" );
+    test<boost_unordered_node_map_fnv1a>( "boost::unordered_node_map, FNV-1a" );
     test<boost_unordered_flat_map_fnv1a>( "boost::unordered_flat_map, FNV-1a" );
+
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+
+    test<ankerl_unordered_dense_map_fnv1a>( "ankerl::unordered_dense::map, FNV-1a" );
+
+#endif
 
 #ifdef HAVE_ABSEIL
 
@@ -436,25 +416,11 @@ int main()
 
 #endif
 
-#ifdef HAVE_TSL_HOPSCOTCH
-
-    test<tsl_hopscotch_map_fnv1a>( "tsl::hopscotch_map, FNV-1a" );
-    test<tsl_hopscotch_pg_map_fnv1a>( "tsl::hopscotch_pg_map, FNV-1a" );
-
-#endif
-
-#ifdef HAVE_TSL_ROBIN
-
-    test<tsl_robin_map_fnv1a>( "tsl::robin_map, FNV-1a" );
-    test<tsl_robin_pg_map_fnv1a>( "tsl::robin_pg_map, FNV-1a" );
-
-#endif
-
     std::cout << "---\n\n";
 
     for( auto const& x: times )
     {
-        std::cout << std::setw( 35 ) << ( x.label_ + ": " ) << std::setw( 5 ) << x.time_ << " ms, " << std::setw( 9 ) << x.bytes_ << " bytes in " << x.count_ << " allocations\n";
+        std::cout << std::setw( 38 ) << ( x.label_ + ": " ) << std::setw( 5 ) << x.time_ << " ms, " << std::setw( 9 ) << x.bytes_ << " bytes in " << x.count_ << " allocations\n";
     }
 }
 

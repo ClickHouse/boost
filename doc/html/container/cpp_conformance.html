@@ -9,6 +9,7 @@
 <link rel="up" href="../container.html" title="Chapter 8. Boost.Container">
 <link rel="prev" href="extended_allocators.html" title="Extended functionality: Extended allocators">
 <link rel="next" href="known_issues.html" title="Known Issues">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -141,8 +142,8 @@
         class and <span class="bold"><strong>backports this feature also to C++03 compilers</strong></span>.
         Due to C++03 limitations, in those compilers the allocator propagation implemented
         by <code class="computeroutput"><span class="identifier">scoped_allocator_adaptor</span><span class="special">::</span><span class="identifier">construct</span></code>
-        functions will be based on traits (<code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30725.html" title="Struct template constructible_with_allocator_suffix">constructible_with_allocator_suffix</a></code>
-        and <code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30699.html" title="Struct template constructible_with_allocator_prefix">constructible_with_allocator_prefix</a></code>)
+        functions will be based on traits (<code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30723.html" title="Struct template constructible_with_allocator_suffix">constructible_with_allocator_suffix</a></code>
+        and <code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30697.html" title="Struct template constructible_with_allocator_prefix">constructible_with_allocator_prefix</a></code>)
         proposed in <a href="http://www.open-std.org/jtc1/sc22/WG21/docs/papers/2008/n2554.pdf" target="_top">N2554:
         The Scoped Allocator Model (Rev 2) proposal</a>. In conforming C++11
         compilers or compilers supporting SFINAE expressions (when <code class="computeroutput"><span class="identifier">BOOST_NO_SFINAE_EXPR</span></code> is NOT defined), traits
@@ -272,7 +273,7 @@
                   <code class="computeroutput"><a class="link" href="../boost/container/pmr/monotonic_buffer_resource.html" title="Class monotonic_buffer_resource">monotonic_buffer_resource</a></code>.
                 </li>
 <li class="listitem">
-                  <code class="computeroutput"><a class="link" href="../boost/container/pmr/unsynchronized_po_idm19711.html" title="Class unsynchronized_pool_resource">unsynchronized_pool_resource</a></code>.
+                  <code class="computeroutput"><a class="link" href="../boost/container/pmr/unsynchronized_po_idm19691.html" title="Class unsynchronized_pool_resource">unsynchronized_pool_resource</a></code>.
                 </li>
 <li class="listitem">
                   <code class="computeroutput"><a class="link" href="../boost/container/pmr/synchronized_pool_resource.html" title="Class synchronized_pool_resource">synchronized_pool_resource</a></code>.
@@ -339,8 +340,8 @@
 <p>
         <span class="bold"><strong>Note:</strong></span> <span class="emphasis"><em>In C++03 compilers, it is
         required that the programmer specializes as <code class="computeroutput"><span class="keyword">true</span></code>
-        <code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30725.html" title="Struct template constructible_with_allocator_suffix">constructible_with_allocator_suffix</a></code>
-        or <code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30699.html" title="Struct template constructible_with_allocator_prefix">constructible_with_allocator_prefix</a></code>
+        <code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30723.html" title="Struct template constructible_with_allocator_suffix">constructible_with_allocator_suffix</a></code>
+        or <code class="computeroutput"><a class="link" href="../boost/container/constructible_wit_idm30697.html" title="Struct template constructible_with_allocator_prefix">constructible_with_allocator_prefix</a></code>
         as in C++03 there is no way to automatically detect the chosen option at
         compile time. If no specialization is done, <span class="bold"><strong>Boost.Container</strong></span>
         assumes the suffix option</em></span>.
@@ -655,23 +656,13 @@
         can <code class="computeroutput"><span class="preprocessor">#define</span> <span class="identifier">BOOST_CONTAINER_MEMZEROED_POINTER_IS_NOT_ZERO</span></code>
         before including library headers.
       </p>
-<p>
-        If neither <code class="computeroutput"><span class="identifier">BOOST_CONTAINER_MEMZEROED_FLOATING_POINT_IS_NOT_ZERO</span></code>
-        nor <code class="computeroutput"><span class="identifier">BOOST_CONTAINER_MEMZEROED_POINTER_IS_NOT_ZERO</span></code>
-        is defined <span class="bold"><strong>Boost.Container</strong></span> also considers
-        POD types to be value initializable via <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">memset</span></code>
-        with value zero.
-      </p>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2009-2018 Ion Gaztanaga<p>
+<div class="copyright-footer">Copyright © 2009-2018 Ion Gaztanaga<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="extended_allocators.html"><img src="../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../container.html"><img src="../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="known_issues.html"><img src="../../../doc/src/images/next.png" alt="Next"></a>

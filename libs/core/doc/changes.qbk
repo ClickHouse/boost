@@ -1,10 +1,38 @@
 [/
   Copyright 2021 Peter Dimov
+  Copyright 2022 Andrey Semashev
   Distributed under the Boost Software License, Version 1.0.
   https://boost.org/LICENSE_1_0.txt)
 ]
 
 [section Revision History]
+
+[section Changes in 1.82.0]
+
+* Added [link core.snprintf `boost/core/snprintf.hpp`] header with portable definitions of `snprintf`, `vsnprintf` and
+  their `wchar_t` counterparts.
+* Deprecated `boost/core/is_same.hpp` and `boost::core::is_same`. The header will be removed in a future release.
+  Users are advised to use [@http://www.boost.org/doc/libs/release/libs/type_traits/doc/html/index.html Boost.TypeTraits]
+  or C++ standard library type traits instead.
+* Marked `boost::ref` member functions and associated methods with `noexcept`.
+* Marked `boost::swap` function with `noexcept`, depending on whether the type supports a non-throwing swap operation.
+* Added [link core.launder `boost::core::launder`], a portable implementation of `std::launder`.
+* Added [link core.alignof `BOOST_CORE_ALIGNOF`], a portable implementation of `alignof`.
+* Added [link core.max_align `boost::core::max_align_t`], a portable equivalent of `std::max_align_t`, and
+  `boost::core::max_align`, the alignment of `max_align_t`.
+* Added [link core.memory_resource `boost::core::memory_resource`], a portable equivalent of `std::pmr::memory_resource`
+  from C++17.
+* Added [link core.serialization `boost/core/serialization.hpp`], a collection of primitives allowing libraries to
+  implement Boost.Serialization support for their types without including a Serialization header and thereby making
+  their libraries depend on Serialization.
+* Added [link core.data `boost::data`], an implementation of `std::data`.
+* Added [link core.size `boost::size`], an implementation of `std::size`.
+* Updated `boost::span` to use `boost::data` which adds support for range
+  construction from an `std::initializer_list`.
+* Added [link core.identity `boost::identity`], an implementation of
+  `std::identity`. This facility has been moved from Boost.Functional.
+
+[endsect]
 
 [section Changes in 1.81.0]
 

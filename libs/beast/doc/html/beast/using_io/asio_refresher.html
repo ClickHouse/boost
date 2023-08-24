@@ -8,6 +8,7 @@
 <link rel="up" href="../using_io.html" title="Networking">
 <link rel="prev" href="../using_io.html" title="Networking">
 <link rel="next" href="stream_types.html" title="Streams">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -508,12 +509,14 @@
         launched with <a href="../../../../../../doc/html/boost_asio/reference/spawn/overload1.html" target="_top"><code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">spawn</span></code></a>:
       </p>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">spawn</span><span class="special">(</span>
+    <span class="identifier">sock</span><span class="special">.</span><span class="identifier">get_executor</span><span class="special">(),</span>
     <span class="special">[&amp;</span><span class="identifier">sock</span><span class="special">](</span><span class="identifier">net</span><span class="special">::</span><span class="identifier">yield_context</span> <span class="identifier">yield</span><span class="special">)</span>
     <span class="special">{</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span> <span class="special">=</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">sock</span><span class="special">,</span>
             <span class="identifier">net</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">(</span><span class="string">"Hello, world!"</span><span class="special">,</span> <span class="number">13</span><span class="special">),</span> <span class="identifier">yield</span><span class="special">);</span>
         <span class="special">(</span><span class="keyword">void</span><span class="special">)</span><span class="identifier">bytes_transferred</span><span class="special">;</span>
-    <span class="special">});</span>
+    <span class="special">},</span>
+    <span class="identifier">asio</span><span class="special">::</span><span class="identifier">detached</span><span class="special">);</span>
 </pre>
 <p>
         In both of these cases, an object with a specific type is used in place of
@@ -523,6 +526,11 @@
         when used in this context. The return type transformation is supported by
         customization points in the initiating function signature. Here is the signature
         for <a href="../../../../../../doc/html/boost_asio/reference/async_write/overload1.html" target="_top"><code class="computeroutput"><span class="identifier">net</span><span class="special">::</span><span class="identifier">async_write</span></code></a>:
+      </p>
+<p>
+        Note that a <code class="computeroutput"><span class="identifier">spawn</span></code> function
+        itself has a completion signature, but we're ignoring it's result in the
+        example by using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">detached</span></code>.
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">class</span> <span class="identifier">AsyncWriteStream</span><span class="special">,</span>
@@ -673,15 +681,12 @@
 </div>
 <br class="table-break">
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2016-2019 Vinnie
+<div class="copyright-footer">Copyright © 2016-2019 Vinnie
       Falco<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="../using_io.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../using_io.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="stream_types.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>

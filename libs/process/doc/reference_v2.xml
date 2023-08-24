@@ -71,6 +71,12 @@ This can be used when multiple processes shared some settings, e.g. </para></des
 
 
 
+
+
+
+
+
+
 <function name="bind_launcher"><type>auto</type><template>
           <template-type-parameter name="Launcher"/>
           <template-nontype-parameter name="Init"><type>typename ...</type></template-nontype-parameter>
@@ -160,6 +166,12 @@ This can be used when multiple processes shared some settings, e.g. </para></des
 
 
 
+
+
+
+
+
+
 <function name="operator&lt;&lt;"><type>std::basic_ostream&lt; charT, traits &gt; &amp;</type><template>
           <template-type-parameter name="charT"/>
           <template-type-parameter name="traits"/>
@@ -182,6 +194,12 @@ This can be used when multiple processes shared some settings, e.g. </para></des
 // equivalent to
 process prod = default_launcher()("test", {});
 </programlisting> </para></description><type>implementation_defined</type></typedef>
+
+
+
+
+
+
 
 
 
@@ -679,6 +697,12 @@ The environment type passed in must be a range with value T that fulfills the fo
 
 
 
+
+
+
+
+
+
 </namespace>
 </namespace>
 </namespace>
@@ -748,6 +772,12 @@ The environment type passed in must be a range with value T that fulfills the fo
 
 
 
+
+
+
+
+
+
 </namespace>
 </namespace>
 </namespace>
@@ -756,6 +786,12 @@ The environment type passed in must be a range with value T that fulfills the fo
 <namespace name="boost">
 <namespace name="process">
 <namespace name="v2">
+
+
+
+
+
+
 
 
 
@@ -770,17 +806,17 @@ The environment type passed in must be a range with value T that fulfills the fo
 
 
 </para></description><returns><para>int The exit code of the process </para>
-</returns><throws><simpara><classname>system_error</classname> An error that might have occured during the wait. </simpara></throws></overloaded-function>
+</returns><throws><simpara><classname>system_error</classname> An error that might have occurred during the wait. </simpara></throws></overloaded-function>
 
 <function name="async_execute"><type/><template>
           <template-type-parameter name="Executor"><default>boost::asio::any_io_executor</default></template-type-parameter>
           <template-nontype-parameter name="DEFAULT_TYPE"><type>Token WaitHandler</type></template-nontype-parameter>
-        </template><parameter name="proc"><paramtype><classname>basic_process</classname>&lt; Executor &gt;</paramtype></parameter><parameter name="DEFAULT"><paramtype>WaitHandler &amp;&amp;handler </paramtype></parameter><purpose>Execute a process asynchronously. </purpose><description><para>This function asynchronously for a process to complete.</para><para>Cancelling the execution will signal the child process to exit with the following intepretations:</para><para><itemizedlist>
+        </template><parameter name="proc"><paramtype><classname>basic_process</classname>&lt; Executor &gt;</paramtype></parameter><parameter name="DEFAULT"><paramtype>WaitHandler &amp;&amp;handler </paramtype></parameter><purpose>Execute a process asynchronously. </purpose><description><para>This function asynchronously for a process to complete.</para><para>Cancelling the execution will signal the child process to exit with the following interpretations:</para><para><itemizedlist>
 <listitem><para>cancellation_type::total -&gt; interrupt</para>
 </listitem><listitem><para>cancellation_type::partial -&gt; request_exit</para>
 </listitem><listitem><para>cancellation_type::terminal -&gt; terminate</para>
 </listitem></itemizedlist>
-</para><para>It is to note that <computeroutput>async_execute</computeroutput> will us the lowest seelected cancellation type. A subprocess might ignore anything not terminal. </para></description></function>
+</para><para>It is to note that <computeroutput>async_execute</computeroutput> will us the lowest selected cancellation type. A subprocess might ignore anything not terminal. </para></description></function>
 
 
 
@@ -845,6 +881,12 @@ proc.async_wait(code_as_error(
 </struct><typedef name="native_exit_code_type"><purpose>The native exit-code type, usually an integral value. </purpose><description><para>The OS may have a value different from <computeroutput>int</computeroutput> to represent the exit codes of subprocesses. It might also contain additional information. </para></description><type>implementation_defined</type></typedef>
 
 
+
+
+
+
+
+
 <function name="process_is_running"><type>bool</type><parameter name="code"><paramtype>native_exit_code_type</paramtype></parameter><purpose>Check if the native exit code indicates the process is still running. </purpose></function>
 <function name="evaluate_exit_code"><type>int</type><parameter name="code"><paramtype>native_exit_code_type</paramtype></parameter><purpose>Obtain the portable part of the exit code, i.e. what the subprocess has returned from main. </purpose></function>
 <function name="code_as_error"><type><classname>code_as_error_t</classname>&lt; CompletionToken &gt;</type><template>
@@ -861,6 +903,8 @@ proc.async_wait(code_as_error(
 </namespace>
 </namespace>
 </header>
+<header name="boost/process/v2/ext.hpp">
+</header>
 <header name="boost/process/v2/pid.hpp">
 <namespace name="boost">
 <namespace name="process">
@@ -868,6 +912,12 @@ proc.async_wait(code_as_error(
 <typedef name="pid_type"><type>implementation_defined</type></typedef>
 
 <function name="current_pid"><type>pid_type</type><purpose>Get the process id of the current process. </purpose></function>
+<function name="all_pids"><type>std::vector&lt; pid_type &gt;</type><parameter name="ec"><paramtype>boost::system::error_code &amp;</paramtype></parameter><purpose>List all available pids. </purpose></function>
+<function name="all_pids"><type>std::vector&lt; pid_type &gt;</type><purpose>List all available pids. </purpose></function>
+<function name="parent_pid"><type>pid_type</type><parameter name="pid"><paramtype>pid_type</paramtype></parameter><parameter name="ec"><paramtype>boost::system::error_code &amp;</paramtype></parameter></function>
+<function name="parent_pid"><type>pid_type</type><parameter name="pid"><paramtype>pid_type</paramtype></parameter></function>
+<function name="child_pids"><type>std::vector&lt; pid_type &gt;</type><parameter name="pid"><paramtype>pid_type</paramtype></parameter><parameter name="ec"><paramtype>boost::system::error_code &amp;</paramtype></parameter></function>
+<function name="child_pids"><type>std::vector&lt; pid_type &gt;</type><parameter name="pid"><paramtype>pid_type</paramtype></parameter></function>
 
 
 
@@ -1038,6 +1088,12 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 
 
 
+
+
+
+
+
+
 </namespace>
 </namespace>
 </namespace>
@@ -1072,10 +1128,14 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 <method name="interrupt"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
 <method name="request_exit"><type>void</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
 <method name="request_exit"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Sends the process a signal to ask for a graceful shutdown. Maybe be ignored by the subprocess. </purpose></method>
+<method name="suspend"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Send the process a signal requesting it to stop. This may rely on undocumented functions. </purpose></method>
+<method name="suspend"><type>void</type><purpose>Send the process a signal requesting it to stop. This may rely on undocumented functions. </purpose></method>
+<method name="resume"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Send the process a signal requesting it to resume. This may rely on undocumented functions. </purpose></method>
+<method name="resume"><type>void</type><purpose>Send the process a signal requesting it to resume. This may rely on undocumented functions. </purpose></method>
 <method name="terminate"><type>void</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
 <method name="terminate"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Unconditionally terminates the process and stores the exit code in exit_status. </purpose></method>
 <method name="wait"><type>int</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="wait"><type>int</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Waits for the process to exit, store the exit code internall and return it. </purpose></method>
+<method name="wait"><type>int</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Waits for the process to exit, store the exit code internally and return it. </purpose></method>
 <method name="detach"><type>handle_type</type><purpose>Detach the process. </purpose></method>
 <method name="native_handle"><type>native_handle_type</type></method>
 <method name="exit_code" cv="const"><type>int</type></method>
@@ -1129,6 +1189,12 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
         </template><parameter name="context"><paramtype>ExecutionContext &amp;</paramtype></parameter><parameter name=""><paramtype>typename std::enable_if&lt; is_convertible&lt; ExecutionContext &amp;, boost::asio::execution_context &amp; &gt;::value, void * &gt;::type</paramtype><default>nullptr</default></parameter><purpose>Create an invalid handle. </purpose></constructor>
 <destructor><purpose>Destruct the handle and terminate the process if it wasn't detached. </purpose></destructor>
 </struct><typedef name="process"><purpose>Process with the default executor. </purpose><type><classname>basic_process</classname></type></typedef>
+
+
+
+
+
+
 
 
 
@@ -1198,6 +1264,12 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 
 
 
+
+
+
+
+
+
 </namespace>
 </namespace>
 </namespace>
@@ -1206,7 +1278,7 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 <namespace name="boost">
 <namespace name="process">
 <namespace name="v2">
-<struct name="shell"><purpose>Utility to parse commands. </purpose><description><para>This utility class parses command lines into tokens and allows users to executed based on textual inputs.</para><para>In v1, this was possible directly when starting a process, but has been removed based on the security risks associated with this.</para><para>By making the shell parsing explicity, it is encouraged that a user runs a sanity check on the executable before launching it.</para><para><formalpara><title>Example</title><para><programlisting language="c++">asio::io_context ctx;
+<struct name="shell"><purpose>Utility to parse commands. </purpose><description><para>This utility class parses command lines into tokens and allows users to executed based on textual inputs.</para><para>In v1, this was possible directly when starting a process, but has been removed based on the security risks associated with this.</para><para>By making the shell parsing explicitly, it encourages a user to run a sanity check on the executable before launching it.</para><para><formalpara><title>Example</title><para><programlisting language="c++">asio::io_context ctx;
 
 auto cmd = shell("my-app --help");
 auto exe = cmd.exe();
@@ -1257,6 +1329,12 @@ process proc{ctx, exe, cmd.args()};
 
 
 
+
+
+
+
+
+
 </namespace>
 </namespace>
 </namespace>
@@ -1274,6 +1352,12 @@ process proc{ctx, exe, cmd.args()};
 </method-group>
 <constructor><parameter name="start_dir"><paramtype>filesystem::path</paramtype></parameter></constructor>
 </struct>
+
+
+
+
+
+
 
 
 
@@ -1312,7 +1396,7 @@ v2::process proc17(ctx, "/bin/bash", {}, v2::process_stdio{ {}, {}, nullptr});
 </listitem><listitem><para><computeroutput>FILE*</computeroutput> any open file, including <computeroutput>stdin</computeroutput>, <computeroutput>stdout</computeroutput> and <computeroutput>stderr</computeroutput></para>
 </listitem><listitem><para>a filesystem::path, which will open a readable or writable depending on the direction of the stream</para>
 </listitem><listitem><para><computeroutput>native_handle</computeroutput> any native file handle (<computeroutput>HANDLE</computeroutput> on windows) or file descriptor (<computeroutput>int</computeroutput> on posix)</para>
-</listitem><listitem><para>any io-object with a .native_handle() function that is comptaiblie with the above. E.g. a asio::ip::tcp::socket</para>
+</listitem><listitem><para>any io-object with a .native_handle() function that is compatible with the above. E.g. a asio::ip::tcp::socket</para>
 </listitem><listitem><para>an asio::basic_writeable_pipe for stdin or asio::basic_readable_pipe for stderr/stdout. </para>
 </listitem></itemizedlist>
 </para></description><data-member name="in"><type><emphasis>unspecified</emphasis></type></data-member>
@@ -1322,6 +1406,12 @@ v2::process proc17(ctx, "/bin/bash", {}, v2::process_stdio{ {}, {}, nullptr});
 <method name="on_exec_setup"><type>error_code</type><parameter name="launcher"><paramtype>posix::default_launcher &amp;</paramtype></parameter><parameter name=""><paramtype>const filesystem::path &amp;</paramtype></parameter><parameter name=""><paramtype>const char *const *</paramtype></parameter></method>
 </method-group>
 </struct>
+
+
+
+
+
+
 
 
 

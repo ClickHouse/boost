@@ -8,6 +8,7 @@
 <link rel="up" href="../index.html" title="Chapter 1. Boost.URL">
 <link rel="prev" href="../index.html" title="Chapter 1. Boost.URL">
 <link rel="next" href="urls.html" title="URLs">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -405,7 +406,7 @@
 </tr></thead>
 <tbody><tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="keyword">for</span> <span class="special">(</span><span class="keyword">auto</span> <span class="identifier">seg</span><span class="special">:</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">segments</span><span class="special">())</span>
+<pre class="table-programlisting"><span class="keyword">for</span> <span class="special">(</span><span class="keyword">auto</span> <span class="identifier">seg</span><span class="special">:</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">segments</span><span class="special">())</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">seg</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
 
@@ -415,7 +416,7 @@
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">path
+<pre class="table-programlisting">path
 to
 my-file.txt
 
@@ -473,7 +474,7 @@ name: John Doe Jingleheimer-Schmidt
 </tr></thead>
 <tbody><tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span>
+<pre class="table-programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span>
     <span class="string">"url       : "</span> <span class="special">&lt;&lt;</span> <span class="identifier">u</span>                     <span class="special">&lt;&lt;</span> <span class="string">"\n"</span>
     <span class="string">"scheme    : "</span> <span class="special">&lt;&lt;</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">scheme</span><span class="special">()</span>            <span class="special">&lt;&lt;</span> <span class="string">"\n"</span>
     <span class="string">"authority : "</span> <span class="special">&lt;&lt;</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">encoded_authority</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span>
@@ -488,7 +489,7 @@ name: John Doe Jingleheimer-Schmidt
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">url       : https://user:pass@example.com:443/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe+Jingleheimer%2DSchmidt#page%20anchor
+<pre class="table-programlisting">url       : https://user:pass@example.com:443/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe+Jingleheimer%2DSchmidt#page%20anchor
 scheme    : https
 authority : user:pass@example.com:443
 userinfo  : user:pass
@@ -530,12 +531,12 @@ fragment  : page%20anchor
 </tr></thead>
 <tbody><tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">decode_view</span> <span class="identifier">dv</span><span class="special">(</span><span class="string">"id=42&amp;name=John%20Doe%20Jingleheimer%2DSchmidt"</span><span class="special">);</span>
+<pre class="table-programlisting"><span class="identifier">decode_view</span> <span class="identifier">dv</span><span class="special">(</span><span class="string">"id=42&amp;name=John%20Doe%20Jingleheimer%2DSchmidt"</span><span class="special">);</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">dv</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">id=42&amp;name=John Doe Jingleheimer-Schmidt
+<pre class="table-programlisting">id=42&amp;name=John Doe Jingleheimer-Schmidt
 </pre>
               </td>
 </tr></tbody>
@@ -579,14 +580,14 @@ fragment  : page%20anchor
 </tr></thead>
 <tbody><tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">p</span><span class="special">;</span>
+<pre class="table-programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">p</span><span class="special">;</span>
 <span class="keyword">for</span> <span class="special">(</span><span class="keyword">auto</span> <span class="identifier">seg</span><span class="special">:</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">segments</span><span class="special">())</span>
     <span class="identifier">p</span><span class="special">.</span><span class="identifier">append</span><span class="special">(</span><span class="identifier">seg</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">seg</span><span class="special">.</span><span class="identifier">end</span><span class="special">());</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"path: "</span> <span class="special">&lt;&lt;</span> <span class="identifier">p</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">path: "path/to/my-file.txt"
+<pre class="table-programlisting">path: "path/to/my-file.txt"
 </pre>
               </td>
 </tr></tbody>
@@ -661,7 +662,7 @@ fragment  : page%20anchor
 </tr></thead>
 <tbody><tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">segments_view</span> <span class="identifier">segs</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">segments</span><span class="special">();</span>
+<pre class="table-programlisting"><span class="identifier">segments_view</span> <span class="identifier">segs</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">segments</span><span class="special">();</span>
 <span class="keyword">for</span><span class="special">(</span> <span class="keyword">auto</span> <span class="identifier">v</span> <span class="special">:</span> <span class="identifier">segs</span> <span class="special">)</span>
 <span class="special">{</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
@@ -669,7 +670,7 @@ fragment  : page%20anchor
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">path</span>
+<pre class="table-programlisting"><span class="identifier">path</span>
 <span class="identifier">to</span>
 <span class="identifier">my</span><span class="special">-</span><span class="identifier">file</span><span class="special">.</span><span class="identifier">txt</span>
 </pre>
@@ -706,7 +707,7 @@ fragment  : page%20anchor
 <tbody>
 <tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">segments_view</span> <span class="identifier">segs</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">segments</span><span class="special">();</span>
+<pre class="table-programlisting"><span class="identifier">segments_view</span> <span class="identifier">segs</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">segments</span><span class="special">();</span>
 
 <span class="keyword">for</span><span class="special">(</span> <span class="keyword">auto</span> <span class="identifier">v</span> <span class="special">:</span> <span class="identifier">segs</span> <span class="special">)</span>
 <span class="special">{</span>
@@ -715,7 +716,7 @@ fragment  : page%20anchor
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">path
+<pre class="table-programlisting">path
 to
 my-file.txt
 </pre>
@@ -723,7 +724,7 @@ my-file.txt
 </tr>
 <tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">params_view</span> <span class="identifier">params_ref</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">();</span>
+<pre class="table-programlisting"><span class="identifier">params_view</span> <span class="identifier">params_ref</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">();</span>
 
 <span class="keyword">for</span><span class="special">(</span> <span class="keyword">auto</span> <span class="identifier">v</span> <span class="special">:</span> <span class="identifier">params_ref</span> <span class="special">)</span>
 <span class="special">{</span>
@@ -734,7 +735,7 @@ my-file.txt
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">key = id, value = 42
+<pre class="table-programlisting">key = id, value = 42
 key = name, value = John Doe
 </pre>
               </td>
@@ -812,14 +813,14 @@ key = name, value = John Doe
 </tr></thead>
 <tbody><tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">u</span><span class="special">.</span><span class="identifier">set_host_ipv4</span><span class="special">(</span> <span class="identifier">ipv4_address</span><span class="special">(</span> <span class="string">"192.168.0.1"</span> <span class="special">)</span> <span class="special">)</span>
+<pre class="table-programlisting"><span class="identifier">u</span><span class="special">.</span><span class="identifier">set_host_ipv4</span><span class="special">(</span> <span class="identifier">ipv4_address</span><span class="special">(</span> <span class="string">"192.168.0.1"</span> <span class="special">)</span> <span class="special">)</span>
     <span class="special">.</span><span class="identifier">set_port_number</span><span class="special">(</span> <span class="number">8080</span> <span class="special">)</span>
     <span class="special">.</span><span class="identifier">remove_userinfo</span><span class="special">();</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">u</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">https://192.168.0.1:8080/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe#page%20anchor
+<pre class="table-programlisting">https://192.168.0.1:8080/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe#page%20anchor
 </pre>
               </td>
 </tr></tbody>
@@ -850,27 +851,24 @@ key = name, value = John Doe
 </tr></thead>
 <tbody><tr>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">params_ref</span> <span class="identifier">p</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">();</span>
+<pre class="table-programlisting"><span class="identifier">params_ref</span> <span class="identifier">p</span> <span class="special">=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">();</span>
 <span class="identifier">p</span><span class="special">.</span><span class="identifier">replace</span><span class="special">(</span><span class="identifier">p</span><span class="special">.</span><span class="identifier">find</span><span class="special">(</span><span class="string">"name"</span><span class="special">),</span> <span class="special">{</span><span class="string">"name"</span><span class="special">,</span> <span class="string">"John Doe"</span><span class="special">});</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">u</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
 </pre>
               </td>
 <td>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">https://192.168.0.1:8080/path/to/my%2dfile.txt?id=42&amp;name=Vinnie%20Falco#page%20anchor
+<pre class="table-programlisting">https://192.168.0.1:8080/path/to/my%2dfile.txt?id=42&amp;name=Vinnie%20Falco#page%20anchor
 </pre>
               </td>
 </tr></tbody>
 </table></div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2021, 2022 Vinnie Falco, Alan de Freitas<p>
+<div class="copyright-footer">Copyright © 2021, 2022 Vinnie Falco, Alan de Freitas<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="../index.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="urls.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
