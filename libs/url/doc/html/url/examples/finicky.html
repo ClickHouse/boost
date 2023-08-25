@@ -47,13 +47,16 @@
 
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">/</span><span class="identifier">url</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">/</span><span class="identifier">parse</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">system</span><span class="special">/</span><span class="identifier">result</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">json</span><span class="special">/</span><span class="identifier">stream_parser</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">core</span><span class="special">/</span><span class="identifier">detail</span><span class="special">/</span><span class="identifier">string_view</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">regex</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">fstream</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">urls</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">urls</span><span class="special">;</span>
 <span class="keyword">namespace</span> <span class="identifier">json</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">json</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">core</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">;</span>
 
 <span class="identifier">json</span><span class="special">::</span><span class="identifier">value</span>
 <span class="identifier">read_json</span><span class="special">(</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">istream</span><span class="special">&amp;</span> <span class="identifier">is</span><span class="special">,</span> <span class="identifier">json</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">ec</span> <span class="special">)</span>
@@ -76,8 +79,8 @@
 
 <span class="keyword">bool</span>
 <span class="identifier">glob_match</span><span class="special">(</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">pattern</span><span class="special">,</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">str</span><span class="special">)</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">pattern</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">str</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="comment">// regex</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">str</span><span class="special">.</span><span class="identifier">starts_with</span><span class="special">(</span><span class="string">"/"</span><span class="special">)</span> <span class="special">&amp;&amp;</span>
@@ -141,7 +144,7 @@
     <span class="keyword">else</span> <span class="keyword">if</span> <span class="special">(</span><span class="identifier">mv</span><span class="special">.</span><span class="identifier">is_object</span><span class="special">())</span>
     <span class="special">{</span>
         <span class="identifier">json</span><span class="special">::</span><span class="identifier">object</span><span class="special">&amp;</span> <span class="identifier">m</span> <span class="special">=</span> <span class="identifier">mv</span><span class="special">.</span><span class="identifier">as_object</span><span class="special">();</span>
-        <span class="identifier">std</span><span class="special">::</span><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">,</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">&gt;</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">,</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">&gt;</span>
             <span class="identifier">field_values</span><span class="special">[]</span> <span class="special">=</span> <span class="special">{</span>
                 <span class="special">{</span><span class="string">"protocol"</span><span class="special">,</span>  <span class="identifier">u</span><span class="special">.</span><span class="identifier">scheme</span><span class="special">()},</span>
                 <span class="special">{</span><span class="string">"authority"</span><span class="special">,</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">encoded_authority</span><span class="special">()},</span>
@@ -195,7 +198,7 @@
     <span class="special">}</span>
 
     <span class="comment">// Parse url</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url</span><span class="special">&gt;</span> <span class="identifier">ru</span> <span class="special">=</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri</span><span class="special">(</span><span class="identifier">argv</span><span class="special">[</span><span class="number">2</span><span class="special">]);</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url</span><span class="special">&gt;</span> <span class="identifier">ru</span> <span class="special">=</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri</span><span class="special">(</span><span class="identifier">argv</span><span class="special">[</span><span class="number">2</span><span class="special">]);</span>
     <span class="identifier">CHECK</span><span class="special">(</span><span class="identifier">ru</span><span class="special">,</span> <span class="string">"Invalid URL"</span><span class="special">);</span>
     <span class="identifier">urls</span><span class="special">::</span><span class="identifier">url</span> <span class="identifier">u</span> <span class="special">=</span> <span class="special">*</span><span class="identifier">ru</span><span class="special">;</span>
 

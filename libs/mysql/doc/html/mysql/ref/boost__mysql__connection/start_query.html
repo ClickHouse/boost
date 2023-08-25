@@ -28,20 +28,23 @@
 <a name="mysql.ref.boost__mysql__connection.start_query"></a><a class="link" href="start_query.html" title="connection::start_query">connection::start_query</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm15391"></a>
+          <a class="indexterm" name="idm23713"></a>
         </p>
 <p>
-          Starts a text query as a multi-function operation.
+          (Deprecated) Starts a text query as a multi-function operation.
         </p>
 <pre class="programlisting"><span class="keyword">void</span>
 <a class="link" href="start_query/overload1.html" title="connection::start_query (1 of 2 overloads)">start_query</a><span class="special">(</span>
     <span class="identifier">string_view</span> <span class="identifier">query_string</span><span class="special">,</span>
     <span class="identifier">execution_state</span><span class="special">&amp;</span> <span class="identifier">st</span><span class="special">,</span>
-    <span class="identifier">error_code</span><span class="special">&amp;,</span>
-    <span class="identifier">diagnostics</span><span class="special">&amp;);</span>
+    <span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">err</span><span class="special">,</span>
+    <span class="identifier">diagnostics</span><span class="special">&amp;</span> <span class="identifier">diag</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="start_query/overload1.html" title="connection::start_query (1 of 2 overloads)"><code class="computeroutput"><span class="identifier">more</span><span class="special">...</span></code></a></em></span>
-
-<span class="keyword">void</span>
+</pre>
+<p>
+          (Deprecated) Starts a text query as a multi-function operation.
+        </p>
+<pre class="programlisting"><span class="keyword">void</span>
 <a class="link" href="start_query/overload2.html" title="connection::start_query (2 of 2 overloads)">start_query</a><span class="special">(</span>
     <span class="identifier">string_view</span> <span class="identifier">query_string</span><span class="special">,</span>
     <span class="identifier">execution_state</span><span class="special">&amp;</span> <span class="identifier">st</span><span class="special">);</span>

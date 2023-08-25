@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__encoded_size"></a><a class="link" href="boost__urls__encoded_size.html" title="encoded_size">encoded_size</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm147857"></a>
+        <a class="indexterm" name="idm152391"></a>
       </p>
 <p>
         Return the buffer size needed for percent-encoding.
@@ -44,7 +44,7 @@
     <span class="keyword">class</span> <a class="link" href="../concepts/charset.html" title="CharSet"><span class="emphasis"><em>CharSet</em></span></a><span class="special">&gt;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span>
 <span class="identifier">encoded_size</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="identifier">CharSet</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">unreserved</span><span class="special">,</span>
     <span class="identifier">encoding_opts</span> <span class="identifier">opt</span> <span class="special">=</span> <span class="special">{});</span>
 </pre>
@@ -61,7 +61,7 @@
 <a name="url.ref.boost__urls__encoded_size.h2"></a>
         <span class="phrase"><a name="url.ref.boost__urls__encoded_size.example"></a></span><a class="link" href="boost__urls__encoded_size.html#url.ref.boost__urls__encoded_size.example">Example</a>
       </h5>
-<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">encoded_size</span><span class="special">(</span> <span class="string">"My Stuff"</span><span class="special">,</span> <span class="identifier">pchars</span> <span class="special">)</span> <span class="special">==</span> <span class="number">10</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">encoded_size</span><span class="special">(</span> <span class="string">"My Stuff"</span> <span class="special">,</span> <span class="identifier">pchars</span> <span class="special">)</span> <span class="special">==</span> <span class="number">10</span> <span class="special">);</span>
 </pre>
 <h5>
 <a name="url.ref.boost__urls__encoded_size.h3"></a>

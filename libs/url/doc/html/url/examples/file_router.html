@@ -56,7 +56,8 @@
 
 <span class="keyword">namespace</span> <span class="identifier">urls</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">urls</span><span class="special">;</span>
 <span class="keyword">namespace</span> <span class="identifier">fs</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">filesystem</span><span class="special">;</span>
-<span class="keyword">using</span> <span class="identifier">string_view</span> <span class="special">=</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">core</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">;</span>
+<span class="keyword">using</span> <span class="identifier">string_view</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">;</span>
 
 <span class="comment">/** Check if a target matches a prefix
 
@@ -105,7 +106,7 @@
 <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
     <span class="comment">/// Constructor</span>
-    <span class="identifier">route</span><span class="special">(</span><span class="identifier">string_view</span> <span class="identifier">prefix</span><span class="special">,</span> <span class="identifier">fs</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">root</span><span class="special">)</span>
+    <span class="identifier">route</span><span class="special">(</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">prefix</span><span class="special">,</span> <span class="identifier">fs</span><span class="special">::</span><span class="identifier">path</span> <span class="identifier">root</span><span class="special">)</span>
         <span class="special">:</span> <span class="identifier">prefix_</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri_reference</span><span class="special">(</span><span class="identifier">prefix</span><span class="special">).</span><span class="identifier">value</span><span class="special">())</span>
         <span class="special">,</span> <span class="identifier">root_</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">root</span><span class="special">))</span>
     <span class="special">{}</span>

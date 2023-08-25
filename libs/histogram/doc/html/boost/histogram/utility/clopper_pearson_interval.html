@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="../../../../../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../../index.html" title="Chapter 1. Boost.Histogram">
-<link rel="up" href="../../../histogram/reference.html#header.boost.histogram.fwd_hpp" title="Header &lt;boost/histogram/fwd.hpp&gt;">
-<link rel="prev" href="../axis/null_type.html" title="Struct null_type">
+<link rel="up" href="../../../histogram/reference.html#header.boost.histogram.utility.clopper_pearson_interval_hpp" title="Header &lt;boost/histogram/utility/clopper_pearson_interval.hpp&gt;">
+<link rel="prev" href="deviation.html" title="Class deviation">
 <link rel="next" href="jeffreys_interval.html" title="Class template jeffreys_interval">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -21,7 +21,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="../axis/null_type.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../histogram/reference.html#header.boost.histogram.fwd_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="jeffreys_interval.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="deviation.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../histogram/reference.html#header.boost.histogram.utility.clopper_pearson_interval_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="jeffreys_interval.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="refentry">
 <a name="boost.histogram.utility.clopper_pearson_interval"></a><div class="titlepage"></div>
@@ -30,31 +30,35 @@
 <p>boost::histogram::utility::clopper_pearson_interval — Clopper-Pearson interval. </p>
 </div>
 <h2 class="refsynopsisdiv-title">Synopsis</h2>
-<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../histogram/reference.html#header.boost.histogram.fwd_hpp" title="Header &lt;boost/histogram/fwd.hpp&gt;">boost/histogram/fwd.hpp</a>&gt;
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../histogram/reference.html#header.boost.histogram.utility.clopper_pearson_interval_hpp" title="Header &lt;boost/histogram/utility/clopper_pearson_interval.hpp&gt;">boost/histogram/utility/clopper_pearson_interval.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> ValueType<span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="clopper_pearson_interval.html" title="Class template clopper_pearson_interval">clopper_pearson_interval</a> <span class="special">:</span>
   <span class="keyword">public</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">histogram</span><span class="special">::</span><span class="identifier">utility</span><span class="special">::</span><span class="identifier">binomial_proportion_interval</span><span class="special">&lt;</span> <span class="identifier">ValueType</span> <span class="special">&gt;</span>
 <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
-  <span class="comment">// <a class="link" href="clopper_pearson_interval.html#boost.histogram.utility.clopper_pearson_intervalconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <span class="keyword">explicit</span> <a class="link" href="clopper_pearson_interval.html#idm11386-bb"><span class="identifier">clopper_pearson_interval</span></a><span class="special">(</span><a class="link" href="confidence_level.html" title="Class confidence_level">confidence_level</a> <span class="special">=</span> <a class="link" href="deviation.html" title="Class deviation">deviation</a><span class="special">{</span><span class="number">1</span><span class="special">}</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+  <span class="comment">// types</span>
+  <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">clopper_pearson_interval</span><span class="special">::</span><span class="identifier">value_type</span>    <a name="boost.histogram.utility.clopper_pearson_interval.value_type"></a><span class="identifier">value_type</span><span class="special">;</span>   
+  <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">clopper_pearson_interval</span><span class="special">::</span><span class="identifier">interval_type</span> <a name="boost.histogram.utility.clopper_pearson_interval.interval_type"></a><span class="identifier">interval_type</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="clopper_pearson_interval.html#idm11372-bb">public member functions</a></span>
-  <span class="identifier">interval_type</span> <a class="link" href="clopper_pearson_interval.html#idm11373-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">value_type</span><span class="special">,</span> <span class="identifier">value_type</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="clopper_pearson_interval.html#boost.histogram.utility.clopper_pearson_intervalconstruct-copy-destruct">construct/copy/destruct</a></span>
+  <span class="keyword">explicit</span> <a class="link" href="clopper_pearson_interval.html#idm16033-bb"><span class="identifier">clopper_pearson_interval</span></a><span class="special">(</span><a class="link" href="confidence_level.html" title="Class confidence_level">confidence_level</a> <span class="special">=</span> <a class="link" href="deviation.html" title="Class deviation">deviation</a><span class="special">{</span><span class="number">1</span><span class="special">}</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+
+  <span class="comment">// <a class="link" href="clopper_pearson_interval.html#idm16019-bb">public member functions</a></span>
+  <span class="identifier">interval_type</span> <a class="link" href="clopper_pearson_interval.html#idm16020-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">value_type</span><span class="special">,</span> <span class="identifier">value_type</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm11657"></a><h2>Description</h2>
+<a name="idm31917"></a><h2>Description</h2>
 <p>This is the classic frequentist interval obtained with the Neyman construction. It is therefore often called the 'exact' interval. It is guaranteed to have at least the requested confidence level for all values of the fraction.</p>
 <p>The interval is wider than others that produce coverage closer to the expected confidence level over a random ensemble of factions. The Clopper-Pearson interval essentially always overcovers for such a random ensemble, which is undesirable in practice. The Clopper-Pearson interval is recommended when it is important to be conservative, but the Wilson interval should be preferred in most applications.</p>
 <p>C. Clopper, E.S. Pearson (1934), Biometrika 26 (4): 404-413. doi:10.1093/biomet/26.4.404. </p>
 <div class="refsect2">
-<a name="idm11662"></a><h3>
+<a name="idm31922"></a><h3>
 <a name="boost.histogram.utility.clopper_pearson_intervalconstruct-copy-destruct"></a><code class="computeroutput">clopper_pearson_interval</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
-<pre class="literallayout"><span class="keyword">explicit</span> <a name="idm11386-bb"></a><span class="identifier">clopper_pearson_interval</span><span class="special">(</span><a class="link" href="confidence_level.html" title="Class confidence_level">confidence_level</a> cl <span class="special">=</span> <a class="link" href="deviation.html" title="Class deviation">deviation</a><span class="special">{</span><span class="number">1</span><span class="special">}</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>Construct Clopper-Pearson interval computer. <p>
+<pre class="literallayout"><span class="keyword">explicit</span> <a name="idm16033-bb"></a><span class="identifier">clopper_pearson_interval</span><span class="special">(</span><a class="link" href="confidence_level.html" title="Class confidence_level">confidence_level</a> cl <span class="special">=</span> <a class="link" href="deviation.html" title="Class deviation">deviation</a><span class="special">{</span><span class="number">1</span><span class="special">}</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>Construct Clopper-Pearson interval computer. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -78,11 +82,11 @@
 </li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idm11698"></a><h3>
-<a name="idm11372-bb"></a><code class="computeroutput">clopper_pearson_interval</code> public member functions</h3>
+<a name="idm31958"></a><h3>
+<a name="idm16019-bb"></a><code class="computeroutput">clopper_pearson_interval</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
 <pre class="literallayout"><span class="identifier">interval_type</span> 
-<a name="idm11373-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">value_type</span> successes<span class="special">,</span> <span class="identifier">value_type</span> failures<span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>Compute interval for given number of successes and failures. <p>
+<a name="idm16020-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">value_type</span> successes<span class="special">,</span> <span class="identifier">value_type</span> failures<span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span></pre>Compute interval for given number of successes and failures. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -121,7 +125,7 @@
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="../axis/null_type.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../histogram/reference.html#header.boost.histogram.fwd_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="jeffreys_interval.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="deviation.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../histogram/reference.html#header.boost.histogram.utility.clopper_pearson_interval_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="jeffreys_interval.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

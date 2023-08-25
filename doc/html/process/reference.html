@@ -63,7 +63,7 @@
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="header.boost.process.args_hpp"></a>Header &lt;<a href="../../../../../boost/process/args.hpp" target="_top">boost/process/args.hpp</a>&gt;</h3></div></div></div>
-<p>This header provides the <a class="link" href="../boost/process/args.html" title="Global args">args</a> property. It also provides the alternative name <a class="link" href="../boost/process/argv.html" title="Global argv">argv</a> .</p>
+<p>This header provides the  <a class="link" href="../boost/process/args.html" title="Global args">args</a> property. It also provides the alternative name  <a class="link" href="../boost/process/argv.html" title="Global argv">argv</a> .</p>
 <p> 
 </p>
 <pre class="programlisting">
@@ -132,7 +132,7 @@
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="header.boost.process.cmd_hpp"></a>Header &lt;<a href="../../../../../boost/process/cmd.hpp" target="_top">boost/process/cmd.hpp</a>&gt;</h3></div></div></div>
-<p>This header provides the <a class="link" href="../boost/process/cmd.html" title="Global cmd">cmd</a> property.</p>
+<p>This header provides the  <a class="link" href="../boost/process/cmd.html" title="Global cmd">cmd</a> property.</p>
 <p> 
 </p>
 <pre class="programlisting">
@@ -269,8 +269,8 @@ Please refer to the <a class="link" href="../boost_process/extend.html" title="E
 
       <span class="comment">// Helper function to get the last error code system-independent. </span>
       <span class="identifier">std</span><span class="special">::</span><span class="identifier">error_code</span> <a name="boost.process.extend.get_last_error"></a><span class="identifier">get_last_error</span><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-      <span class="keyword">void</span> <a class="link" href="../boost/process/extend/throw_last_error.html" title="Function throw_last_error"><span class="identifier">throw_last_error</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-      <span class="keyword">void</span> <a class="link" href="../boost/process/extend/throw_last_error.html" title="Function throw_last_error"><span class="identifier">throw_last_error</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+      <span class="keyword">void</span> <a class="link" href="../boost/process/extend/throw_last_error_idm3722.html" title="Function throw_last_error"><span class="identifier">throw_last_error</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+      <span class="keyword">void</span> <a name="boost.process.extend.throw_last_error_idm3733"></a><span class="identifier">throw_last_error</span><span class="special">(</span><span class="special">)</span><span class="special">;</span>
       <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Sequence<span class="special">&gt;</span> 
         <span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_context</span> <span class="special">&amp;</span> <a class="link" href="../boost/process/extend/get_io_context.html" title="Function template get_io_context"><span class="identifier">get_io_context</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Sequence</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
     <span class="special">}</span>
@@ -305,10 +305,10 @@ Please refer to the <a class="link" href="../boost_process/extend.html" title="E
   <span class="special">}</span>
   <span class="keyword">namespace</span> <span class="identifier">this_process</span> <span class="special">{</span>
     <span class="keyword">typedef</span> <span class="emphasis"><em><span class="identifier">unspecified</span></em></span> <a class="link" href="../boost/this_process/native_handle_type.html" title="Type definition native_handle_type"><span class="identifier">native_handle_type</span></a><span class="special">;</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">native_handle_type</span> <span class="special">&gt;</span> <a class="link" href="../boost/this_process/get_handles.html" title="Function get_handles"><span class="identifier">get_handles</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">native_handle_type</span> <span class="special">&gt;</span> <a class="link" href="../boost/this_process/get_handles.html" title="Function get_handles"><span class="identifier">get_handles</span></a><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-    <span class="keyword">bool</span> <a class="link" href="../boost/this_process/is_stream_handle.html" title="Function is_stream_handle"><span class="identifier">is_stream_handle</span></a><span class="special">(</span><span class="identifier">native_handle_type</span><span class="special">)</span><span class="special">;</span>
-    <span class="keyword">bool</span> <a class="link" href="../boost/this_process/is_stream_handle.html" title="Function is_stream_handle"><span class="identifier">is_stream_handle</span></a><span class="special">(</span><span class="identifier">native_handle_type</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">native_handle_type</span> <span class="special">&gt;</span> <a class="link" href="../boost/this_process/get_handles_idm3950.html" title="Function get_handles"><span class="identifier">get_handles</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">native_handle_type</span> <span class="special">&gt;</span> <a name="boost.this_process.get_handles_idm3963"></a><span class="identifier">get_handles</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> ec<span class="special">)</span><span class="special">;</span>
+    <span class="keyword">bool</span> <a class="link" href="../boost/this_process/is_stream_handle_idm3967.html" title="Function is_stream_handle"><span class="identifier">is_stream_handle</span></a><span class="special">(</span><span class="identifier">native_handle_type</span><span class="special">)</span><span class="special">;</span>
+    <span class="keyword">bool</span> <a name="boost.this_process.is_stream_handle_idm3976"></a><span class="identifier">is_stream_handle</span><span class="special">(</span><span class="identifier">native_handle_type</span> handle<span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> ec<span class="special">)</span><span class="special">;</span>
   <span class="special">}</span>
 <span class="special">}</span></pre>
 </div>

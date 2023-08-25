@@ -48,12 +48,12 @@ The single argument form can only be used when <code class="computeroutput">R</c
 Example: </p>
 <pre class="programlisting"><span class="comment">// Assume that typeid_&lt;&gt;, copy_constructible&lt;&gt;, and incrementable&lt;&gt;</span>
 <span class="comment">// have all been registered for int.</span>
-<span class="identifier">any</span><span class="special">&lt;</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span><span class="identifier">typeid_</span><span class="special">&lt;</span><span class="special">&gt;</span><span class="special">,</span> <span class="identifier">copy_constructible</span><span class="special">&lt;</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">x</span><span class="special">(</span><span class="number">1</span><span class="special">)</span><span class="special">;</span>
-<span class="keyword">typedef</span> <span class="identifier">any</span><span class="special">&lt;</span>
+<a class="link" href="any.html" title="Class template any">any&lt;mpl::vector&lt;typeid_&lt;&gt;</a><span class="special">,</span> <a class="link" href="copy_constructible.html" title="Struct template copy_constructible">copy_constructible&lt;&gt;</a> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">x</span><span class="special">(</span><span class="number">1</span><span class="special">)</span><span class="special">;</span>
+<span class="keyword">typedef</span> <a class="link" href="any.html" title="Class template any">any</a><span class="special">&lt;</span>
     <span class="identifier">mpl</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span>
-        <span class="identifier">typeid_</span><span class="special">&lt;</span><span class="special">&gt;</span><span class="special">,</span>
-        <span class="identifier">copy_constructible</span><span class="special">&lt;</span><span class="special">&gt;</span><span class="special">,</span>
-        <span class="identifier">incrementable</span><span class="special">&lt;</span><span class="special">&gt;</span>
+        <a class="link" href="typeid_.html" title="Struct template typeid_">typeid_&lt;&gt;</a><span class="special">,</span>
+        <a class="link" href="copy_constructible.html" title="Struct template copy_constructible">copy_constructible&lt;&gt;</a><span class="special">,</span>
+        <a class="link" href="incrementable.html" title="Struct template incrementable">incrementable&lt;&gt;</a>
     <span class="special">&gt;</span>
 <span class="special">&gt;</span> <span class="identifier">incrementable_any</span><span class="special">;</span>
 <span class="keyword">auto</span> <span class="identifier">y</span> <span class="special">=</span> <span class="identifier">dynamic_any_cast</span><span class="special">&lt;</span><span class="identifier">incrementable_any</span><span class="special">&gt;</span><span class="special">(</span><span class="identifier">x</span><span class="special">)</span><span class="special">;</span>
@@ -82,7 +82,7 @@ Example: </p>
 <tr>
 <td><p><span class="term">Throws:</span></p></td>
 <td>
-<a class="link" href="../bad_any_cast.html" title="Class bad_any_cast">bad_any_cast</a> if the concepts used by R were not previously registered via a call to  <a class="link" href="register_binding.html" title="Function register_binding">register_binding</a>.</td>
+<a class="link" href="bad_any_cast.html" title="Class bad_any_cast">bad_any_cast</a> if the concepts used by R were not previously registered via a call to  <a class="link" href="register_binding.html" title="Function register_binding">register_binding</a>.</td>
 </tr>
 </tbody>
 </table></div>

@@ -58,7 +58,7 @@
           </h6>
 <pre class="programlisting"><span class="identifier">url</span> <span class="identifier">u</span><span class="special">(</span> <span class="string">"?first=John&amp;last=Doe"</span> <span class="special">);</span>
 
-<span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">replace</span><span class="special">(</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">begin</span><span class="special">(),</span> <span class="special">{</span> <span class="string">"title"</span><span class="special">,</span> <span class="string">"Mr"</span> <span class="special">});</span>
+<span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">replace</span><span class="special">(</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">begin</span><span class="special">(),</span> <span class="special">{</span> <span class="string">"title"</span> <span class="special">,</span> <span class="string">"Mr"</span> <span class="special">});</span>
 
 <span class="identifier">assert</span><span class="special">(</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">encoded_query</span><span class="special">()</span> <span class="special">==</span> <span class="string">"title=Mr&amp;last=Doe"</span> <span class="special">);</span>
 </pre>

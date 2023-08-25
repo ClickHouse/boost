@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__http__request_header"></a><a class="link" href="boost__beast__http__request_header.html" title="http::request_header">http::request_header</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm70672"></a>
+        <a class="indexterm" name="idm76311"></a>
       </p>
 <p>
         A typical HTTP request header.
@@ -69,6 +69,30 @@
 <tr>
 <td>
                 <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/allocator_type.html" title="http::header::allocator_type">allocator_type</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  The type of allocator used.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/const_iterator.html" title="http::header::const_iterator">const_iterator</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  A constant iterator to the field sequence.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
                   <span class="bold"><strong><a class="link" href="boost__beast__http__header/fields_type.html" title="http::header::fields_type">fields_type</a></strong></span>
                 </p>
               </td>
@@ -87,6 +111,43 @@
 <td>
                 <p>
                   Indicates if the header is a request or response.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/iterator.html" title="http::header::iterator">iterator</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  A constant iterator to the field sequence.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/key_compare.html" title="http::header::key_compare">key_compare</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  A strictly less predicate for comparing keys, using a case-insensitive
+                  comparison.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/writer.html" title="http::header::writer">writer</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  The algorithm used to serialize the header.
                 </p>
               </td>
 </tr>
@@ -118,12 +179,173 @@
 <tr>
 <td>
                 <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/at.html" title="http::header::at">at</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns the value for a field, or throws an exception.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/begin.html" title="http::header::begin">begin</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Return a const iterator to the beginning of the field sequence.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/cbegin.html" title="http::header::cbegin">cbegin</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Return a const iterator to the beginning of the field sequence.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/cend.html" title="http::header::cend">cend</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Return a const iterator to the end of the field sequence.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/clear.html" title="http::header::clear">clear</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Remove all fields from the container.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/count.html" title="http::header::count">count</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Return the number of fields with the specified name.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/end.html" title="http::header::end">end</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Return a const iterator to the end of the field sequence.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/equal_range.html" title="http::header::equal_range">equal_range</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns a range of iterators to the fields with the specified name.
+                  <br><span class="silver">—</span><br>Returns a range of iterators
+                  to the fields with the specified name.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/erase.html" title="http::header::erase">erase</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Remove a field. <br><span class="silver">—</span><br>Remove all fields
+                  with the specified name.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/find.html" title="http::header::find">find</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns an iterator to the case-insensitive matching field. <br><span class="silver">—</span><br>Returns an iterator to the case-insensitive
+                  matching field name.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/get_allocator.html" title="http::header::get_allocator">get_allocator</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Return a copy of the allocator associated with the container.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
                   <span class="bold"><strong><a class="link" href="boost__beast__http__header/header.html" title="http::header::header">header</a></strong></span>
                 </p>
               </td>
 <td>
                 <p>
                   Constructor.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/insert.html" title="http::header::insert">insert</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Insert a field. <br><span class="silver">—</span><br>
+
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/key_comp.html" title="http::header::key_comp">key_comp</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns a copy of the key comparison function.
                 </p>
               </td>
 </tr>
@@ -162,6 +384,20 @@
 <td>
                 <p>
                   Assignment.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/operator__lb__rb_.html" title="http::header::operator[]">operator[]</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns the value for a field, or <code class="computeroutput"><span class="string">""</span></code>
+                  if it does not exist. <br><span class="silver">—</span><br>Returns
+                  the value for a case-insensitive matching header, or <code class="computeroutput"><span class="string">""</span></code> if it does not exist.
                 </p>
               </td>
 </tr>
@@ -207,6 +443,32 @@
 <tr>
 <td>
                 <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/set.html" title="http::header::set">set</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Set a field value, removing any other instances of that field.
+                  <br><span class="silver">—</span><br>
+
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/swap.html" title="http::header::swap">swap</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Return a buffer sequence representing the trailers.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
                   <span class="bold"><strong><a class="link" href="boost__beast__http__header/target.html" title="http::header::target">target</a></strong></span>
                 </p>
               </td>
@@ -227,6 +489,176 @@
                 <p>
                   Return the HTTP-version. <br><span class="silver">—</span><br>Set
                   the HTTP-version.
+                </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
+<h5>
+<a name="beast.ref.boost__beast__http__request_header.h3"></a>
+        <span class="phrase"><a name="beast.ref.boost__beast__http__request_header.protected_member_functions"></a></span><a class="link" href="boost__beast__http__request_header.html#beast.ref.boost__beast__http__request_header.protected_member_functions">Protected
+        Member Functions</a>
+      </h5>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>
+                  Name
+                </p>
+              </th>
+<th>
+                <p>
+                  Description
+                </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/get_chunked_impl.html" title="http::header::get_chunked_impl">get_chunked_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns the chunked Transfer-Encoding setting.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/get_keep_alive_impl.html" title="http::header::get_keep_alive_impl">get_keep_alive_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns the keep-alive setting.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/get_method_impl.html" title="http::header::get_method_impl">get_method_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns the request-method string.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/get_reason_impl.html" title="http::header::get_reason_impl">get_reason_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns the response reason-phrase string.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/get_target_impl.html" title="http::header::get_target_impl">get_target_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns the request-target string.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/has_content_length_impl.html" title="http::header::has_content_length_impl">has_content_length_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns <code class="computeroutput"><span class="keyword">true</span></code> if the
+                  Content-Length field is present.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/set_chunked_impl.html" title="http::header::set_chunked_impl">set_chunked_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Adjusts the chunked Transfer-Encoding value.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/set_content_length_impl.html" title="http::header::set_content_length_impl">set_content_length_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Sets or clears the Content-Length field.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/set_keep_alive_impl.html" title="http::header::set_keep_alive_impl">set_keep_alive_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Adjusts the Connection field.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/set_method_impl.html" title="http::header::set_method_impl">set_method_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Set or clear the method string.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/set_reason_impl.html" title="http::header::set_reason_impl">set_reason_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Set or clear the reason string.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/set_target_impl.html" title="http::header::set_target_impl">set_target_impl</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Set or clear the target string.
                 </p>
               </td>
 </tr>

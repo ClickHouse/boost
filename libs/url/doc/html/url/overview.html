@@ -79,9 +79,6 @@
           Control over storage and allocation for URLs
         </li>
 <li class="listitem">
-          Optionally header-only library, without linking
-        </li>
-<li class="listitem">
           Support for <code class="computeroutput">-fno-exceptions</code>, detected automatically
         </li>
 <li class="listitem">
@@ -110,22 +107,6 @@
 <p>
         Aliases for standard types, such as <a class="link" href="ref/boost__urls__error_code.html" title="error_code"><code class="computeroutput"><span class="identifier">error_code</span></code></a> or <a class="link" href="ref/boost__urls__string_view.html" title="string_view"><code class="computeroutput"><span class="identifier">string_view</span></code></a>, use their Boost equivalents.
       </p>
-<h5>
-<a name="url.overview.requirements.h0"></a>
-        <span class="phrase"><a name="url.overview.requirements.header_only"></a></span><a class="link" href="overview.html#url.overview.requirements.header_only">Header-Only</a>
-      </h5>
-<p>
-        To use the library as header-only; that is, to eliminate the requirement
-        to link a program to a static or dynamic Boost.URL library, simply place
-        the following line in <span class="bold"><strong>exactly one</strong></span> source
-        file in your project.
-      </p>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">/</span><span class="identifier">src</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-</pre>
-<h5>
-<a name="url.overview.requirements.h1"></a>
-        <span class="phrase"><a name="url.overview.requirements.embedded"></a></span><a class="link" href="overview.html#url.overview.requirements.embedded">Embedded</a>
-      </h5>
 <p>
         Boost.URL works great on embedded devices. It can be used in a way that avoids
         all dynamic memory allocations. Furthermore it offers alternative interfaces
@@ -153,6 +134,9 @@
 </ul></div>
 <p>
       and these architectures: x86, x64, ARM64, S390x.
+    </p>
+<p>
+      We do not test and support gcc 8.0.1.
     </p>
 <h4>
 <a name="url.overview.h2"></a>
@@ -244,11 +228,6 @@
 </pre>
 </td></tr>
 </table></div>
-<h5>
-<a name="url.overview.quick_look.h1"></a>
-        <span class="phrase"><a name="url.overview.quick_look.compiled_library"></a></span><a class="link" href="overview.html#url.overview.quick_look.compiled_library">Compiled
-        library</a>
-      </h5>
 <p>
         We begin by including the library header file which brings all the symbols
         into scope.
@@ -260,47 +239,22 @@
         for specific types.
       </p>
 <p>
-        You need to link your program with the Boost.URL built library. You must
-        install binaries in a location that can be found by your linker.
+        Boost.URL is a compiled library. You need to link your program with the Boost.URL
+        built library. You must install binaries in a location that can be found
+        by your linker.
       </p>
 <p>
         If you followed the <a href="http://www.boost.org/doc/libs/release/more/getting_started/index.html" target="_top">Boost
         Getting Started</a> instructions, that's already been done for you.
       </p>
-<h5>
-<a name="url.overview.quick_look.h2"></a>
-        <span class="phrase"><a name="url.overview.quick_look.header_only"></a></span><a class="link" href="overview.html#url.overview.quick_look.header_only">Header-only</a>
-      </h5>
-<p>
-        To use Boost.URL as header-only; that is, to eliminate the requirement to
-        link a program to a static or dynamic Boost.URL library, place the following
-        line in <span class="bold"><strong>exactly one</strong></span> new or existing source
-        file in your project.
-      </p>
-<pre class="programlisting"><span class="comment">// In exactly *one* source file</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">/</span><span class="identifier">src</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-</pre>
-<p>
-        Then define <code class="computeroutput"><span class="identifier">BOOST_URL_NO_LIB</span></code>
-        and include the library headers in any file that might uses Boost.URL.
-      </p>
-<pre class="programlisting"><span class="comment">// In any other source file</span>
-<span class="preprocessor">#define</span> <span class="identifier">BOOST_URL_NO_LIB</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-</pre>
-<p>
-        This "header-only" configuration needs <code class="computeroutput"><span class="identifier">BOOST_URL_NO_LIB</span></code>
-        defined when building with compilers supporting auto-linking, such as Microsoft
-        Visual C++. The macro instructs Boost to deactivate auto-linking.
-      </p>
 <h4>
-<a name="url.overview.quick_look.h3"></a>
+<a name="url.overview.quick_look.h1"></a>
         <span class="phrase"><a name="url.overview.quick_look.parsing"></a></span><a class="link" href="overview.html#url.overview.quick_look.parsing">Parsing</a>
       </h4>
 <p>
         Say you have the following URL that you want to parse:
       </p>
-<pre class="programlisting"><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">=</span> <span class="string">"https://user:pass@example.com:443/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe+Jingleheimer%2DSchmidt#page%20anchor"</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">=</span> <span class="string">"https://user:pass@example.com:443/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe+Jingleheimer%2DSchmidt#page%20anchor"</span><span class="special">;</span>
 </pre>
 <p>
         In this example, <a class="link" href="ref/boost__urls__string_view.html" title="string_view"><code class="computeroutput"><span class="identifier">string_view</span></code></a> is an alias to <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span></code>, a <code class="computeroutput"><span class="identifier">string_view</span></code>
@@ -310,7 +264,7 @@
 <p>
         You can parse the string by calling this function:
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span> <span class="identifier">parse_uri</span><span class="special">(</span> <span class="identifier">s</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span> <span class="identifier">parse_uri</span><span class="special">(</span> <span class="identifier">s</span> <span class="special">);</span>
 </pre>
 <p>
         The function <a class="link" href="ref/boost__urls__parse_uri.html" title="parse_uri"><code class="computeroutput"><span class="identifier">parse_uri</span></code></a> returns an object of type
@@ -361,7 +315,7 @@
 </td></tr>
 </table></div>
 <h4>
-<a name="url.overview.quick_look.h4"></a>
+<a name="url.overview.quick_look.h2"></a>
         <span class="phrase"><a name="url.overview.quick_look.accessing"></a></span><a class="link" href="overview.html#url.overview.quick_look.accessing">Accessing</a>
       </h4>
 <p>
@@ -505,7 +459,7 @@ fragment  : page%20anchor
 </tr></tbody>
 </table></div>
 <h5>
-<a name="url.overview.quick_look.h5"></a>
+<a name="url.overview.quick_look.h3"></a>
         <span class="phrase"><a name="url.overview.quick_look.percent_encoding"></a></span><a class="link" href="overview.html#url.overview.quick_look.percent_encoding">Percent-Encoding</a>
       </h5>
 <p>
@@ -624,13 +578,13 @@ fragment  : page%20anchor
 <p>
         For many simpler use cases, converting the view to a string might be sufficient:
       </p>
-<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">function</span> <span class="special">=</span> <span class="special">[](</span><span class="identifier">string_view</span> <span class="identifier">str</span><span class="special">)</span>
+<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">function</span> <span class="special">=</span> <span class="special">[](</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">str</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">str</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
 <span class="special">};</span>
 </pre>
 <a name="compound-elements"></a><h4>
-<a name="url.overview.quick_look.h6"></a>
+<a name="url.overview.quick_look.h4"></a>
         <span class="phrase"><a name="url.overview.quick_look.compound_elements"></a></span><a class="link" href="overview.html#url.overview.quick_look.compound_elements">Compound
         elements</a>
       </h4>
@@ -743,7 +697,7 @@ key = name, value = John Doe
 </tbody>
 </table></div>
 <h4>
-<a name="url.overview.quick_look.h7"></a>
+<a name="url.overview.quick_look.h5"></a>
         <span class="phrase"><a name="url.overview.quick_look.modifying"></a></span><a class="link" href="overview.html#url.overview.quick_look.modifying">Modifying</a>
       </h4>
 <p>

@@ -34,7 +34,7 @@
 <div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../boost_typeerasure/reference.html#header.boost.type_erasure.builtin_hpp" title="Header &lt;boost/type_erasure/builtin.hpp&gt;">boost/type_erasure/builtin.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T <span class="special">=</span> <a class="link" href="_self.html" title="Struct _self">_self</a><span class="special">&gt;</span> 
-<span class="keyword">struct</span> <a class="link" href="copy_constructible.html" title="Struct template copy_constructible">copy_constructible</a> <span class="special">:</span> <span class="keyword">public</span> boost::mpl::vector&lt; constructible&lt; T(const T &amp;)&gt;, destructible&lt; T &gt; &gt;
+<span class="keyword">struct</span> <a class="link" href="copy_constructible.html" title="Struct template copy_constructible">copy_constructible</a> <span class="special">:</span> <span class="keyword">public</span> boost::mpl::vector&lt; constructible&lt; _self(const _self &amp;)&gt;, destructible&lt; _self &gt; &gt;
 <span class="special">{</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">

@@ -28,7 +28,7 @@
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> SubactorT<span class="special">,</span> <span class="keyword">typename</span> ImplT<span class="special">,</span> 
          <span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="special">&gt;</span> <span class="keyword">class</span> ActorT <span class="special">=</span> <span class="identifier">phoenix</span><span class="special">::</span><span class="identifier">actor</span><span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="char_decorator_actor.html" title="Class template char_decorator_actor">char_decorator_actor</a> <span class="special">:</span>
-  <span class="keyword">public</span> <span class="identifier">ActorT</span><span class="special">&lt;</span> <span class="identifier">char_decorator_terminal</span><span class="special">&lt;</span> <span class="identifier">SubactorT</span><span class="special">,</span> <span class="identifier">ImplT</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
+  <span class="keyword">public</span> <span class="identifier">phoenix</span><span class="special">::</span><span class="identifier">actor</span><span class="special">&lt;</span> <span class="identifier">char_decorator_terminal</span><span class="special">&lt;</span> <span class="identifier">SubactorT</span><span class="special">,</span> <span class="identifier">ImplT</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
 <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// types</span>
@@ -37,27 +37,27 @@
   <span class="keyword">typedef</span> <span class="identifier">ActorT</span><span class="special">&lt;</span> <span class="identifier">terminal_type</span> <span class="special">&gt;</span>                     <a name="boost.log.expressions.char_decorator_actor.base_type"></a><span class="identifier">base_type</span><span class="special">;</span>      <span class="comment">// Base actor type. </span>
 
   <span class="comment">// <a class="link" href="char_decorator_actor.html#boost.log.expressions.char_decorator_actorconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <span class="keyword">explicit</span> <a class="link" href="char_decorator_actor.html#idm27493-bb"><span class="identifier">char_decorator_actor</span></a><span class="special">(</span><span class="identifier">base_type</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">explicit</span> <a class="link" href="char_decorator_actor.html#idm27568-bb"><span class="identifier">char_decorator_actor</span></a><span class="special">(</span><span class="identifier">base_type</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="char_decorator_actor.html#idm27489-bb">public member functions</a></span>
-  <span class="identifier">terminal_type</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <a class="link" href="char_decorator_actor.html#idm27490-bb"><span class="identifier">get_terminal</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="char_decorator_actor.html#idm27564-bb">public member functions</a></span>
+  <span class="identifier">terminal_type</span> <span class="keyword">const</span> <span class="special">&amp;</span> <a class="link" href="char_decorator_actor.html#idm27565-bb"><span class="identifier">get_terminal</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm42400"></a><h2>Description</h2>
+<a name="idm42822"></a><h2>Description</h2>
 <p>Character decorator actor </p>
 <div class="refsect2">
-<a name="idm42403"></a><h3>
+<a name="idm42825"></a><h3>
 <a name="boost.log.expressions.char_decorator_actorconstruct-copy-destruct"></a><code class="computeroutput">char_decorator_actor</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
-<pre class="literallayout"><span class="keyword">explicit</span> <a name="idm27493-bb"></a><span class="identifier">char_decorator_actor</span><span class="special">(</span><span class="identifier">base_type</span> <span class="keyword">const</span> <span class="special">&amp;</span> act<span class="special">)</span><span class="special">;</span></pre>Initializing constructor. </li></ol></div>
+<pre class="literallayout"><span class="keyword">explicit</span> <a name="idm27568-bb"></a><span class="identifier">char_decorator_actor</span><span class="special">(</span><span class="identifier">base_type</span> <span class="keyword">const</span> <span class="special">&amp;</span> act<span class="special">)</span><span class="special">;</span></pre>Initializing constructor. </li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idm42420"></a><h3>
-<a name="idm27489-bb"></a><code class="computeroutput">char_decorator_actor</code> public member functions</h3>
+<a name="idm42842"></a><h3>
+<a name="idm27564-bb"></a><code class="computeroutput">char_decorator_actor</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
-<pre class="literallayout"><span class="identifier">terminal_type</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <a name="idm27490-bb"></a><span class="identifier">get_terminal</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Returns reference to the terminal. </li></ol></div>
+<pre class="literallayout"><span class="identifier">terminal_type</span> <span class="keyword">const</span> <span class="special">&amp;</span> <a name="idm27565-bb"></a><span class="identifier">get_terminal</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Returns reference to the terminal. </li></ol></div>
 </div>
 </div>
 </div>

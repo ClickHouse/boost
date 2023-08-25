@@ -5,16 +5,16 @@
 <link rel="stylesheet" href="../../../../../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../../index.html" title="Chapter 1. Boost.Log v2">
-<link rel="up" href="../tuple_manipulator.html#idm87058" title="Description">
+<link rel="up" href="../tuple_manipulator.html#idm88436" title="Description">
 <link rel="prev" href="../tuple_manipulator.html" title="Class template tuple_manipulator">
-<link rel="next" href="../tuple_manipulator_idm38020.html" title="Class template tuple_manipulator&lt;TupleT, void&gt;">
+<link rel="next" href="../tuple_manipulator_idm38277.html" title="Class template tuple_manipulator&lt;TupleT, void&gt;">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../../boost.png"></td></tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="../tuple_manipulator.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../tuple_manipulator.html#idm87058"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../tuple_manipulator_idm38020.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="../tuple_manipulator.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../tuple_manipulator.html#idm88436"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../tuple_manipulator_idm38277.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="refentry">
 <a name="boost.log.tuple_manipulator.output_visitor"></a><div class="titlepage"></div>
@@ -32,31 +32,31 @@
   <span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">true_type</span> <a name="boost.log.tuple_manipulator.output_visitor.result_type"></a><span class="identifier">result_type</span><span class="special">;</span>
 
   <span class="comment">// <a class="link" href="output_visitor.html#boost.log.tuple_manipulator.output_visitorconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <a class="link" href="output_visitor.html#idm38001-bb"><span class="identifier">output_visitor</span></a><span class="special">(</span><span class="identifier">StreamT</span> <span class="special">&amp;</span><span class="special">,</span> <span class="identifier">stored_delimiter_type</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+  <a class="link" href="output_visitor.html#idm38258-bb"><span class="identifier">output_visitor</span></a><span class="special">(</span><span class="identifier">StreamT</span> <span class="special">&amp;</span><span class="special">,</span> <span class="identifier">stored_delimiter_type</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="output_visitor.html#idm37984-bb">public member functions</a></span>
+  <span class="comment">// <a class="link" href="output_visitor.html#idm38241-bb">public member functions</a></span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> 
-    <span class="identifier">result_type</span> <a class="link" href="output_visitor.html#idm37985-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">true_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+    <span class="identifier">result_type</span> <a class="link" href="output_visitor.html#idm38242-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">true_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> 
-    <span class="identifier">result_type</span> <a class="link" href="output_visitor.html#idm37993-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">false_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+    <span class="identifier">result_type</span> <a class="link" href="output_visitor.html#idm38250-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">false_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm87183"></a><h2>Description</h2>
+<a name="idm88561"></a><h2>Description</h2>
 <div class="refsect2">
-<a name="idm87185"></a><h3>
+<a name="idm88563"></a><h3>
 <a name="boost.log.tuple_manipulator.output_visitorconstruct-copy-destruct"></a><code class="computeroutput">output_visitor</code> 
         public
        construct/copy/destruct</h3>
-<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="literallayout"><a name="idm38001-bb"></a><span class="identifier">output_visitor</span><span class="special">(</span><span class="identifier">StreamT</span> <span class="special">&amp;</span> stream<span class="special">,</span> <span class="identifier">stored_delimiter_type</span> delimiter<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre></li></ol></div>
+<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="literallayout"><a name="idm38258-bb"></a><span class="identifier">output_visitor</span><span class="special">(</span><span class="identifier">StreamT</span> <span class="special">&amp;</span> stream<span class="special">,</span> <span class="identifier">stored_delimiter_type</span> delimiter<span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span></pre></li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idm87203"></a><h3>
-<a name="idm37984-bb"></a><code class="computeroutput">output_visitor</code> public member functions</h3>
+<a name="idm88581"></a><h3>
+<a name="idm38241-bb"></a><code class="computeroutput">output_visitor</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> 
-  <span class="identifier">result_type</span> <a name="idm37985-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">true_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span> elem<span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+  <span class="identifier">result_type</span> <a name="idm38242-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">true_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span> elem<span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> 
-  <span class="identifier">result_type</span> <a name="idm37993-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">false_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span> elem<span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+  <span class="identifier">result_type</span> <a name="idm38250-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">false_type</span><span class="special">,</span> <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span> elem<span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 </div>
@@ -68,7 +68,7 @@
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="../tuple_manipulator.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../tuple_manipulator.html#idm87058"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../tuple_manipulator_idm38020.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="../tuple_manipulator.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../tuple_manipulator.html#idm88436"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../tuple_manipulator_idm38277.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

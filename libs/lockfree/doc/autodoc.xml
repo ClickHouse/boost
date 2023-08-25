@@ -26,7 +26,7 @@
 </listitem><listitem><para><classname alt="boost::lockfree::capacity">boost::lockfree::capacity</classname>, optional <sbr/>
  If this template argument is passed to the options, the size of the queue is set at compile-time.<sbr/>
  This option implies <computeroutput>fixed_sized&lt;true&gt;</computeroutput> </para>
-</listitem><listitem><para><classname alt="boost::lockfree::allocator">boost::lockfree::allocator</classname>, defaults to <computeroutput><classname alt="boost::lockfree::allocator">boost::lockfree::allocator</classname>&lt;std::allocator&lt;void&gt;&gt;</computeroutput> <sbr/>
+</listitem><listitem><para><classname alt="boost::lockfree::allocator">boost::lockfree::allocator</classname>, defaults to <computeroutput>boost::lockfree::allocator&lt;std::allocator&lt;void&gt;&gt;</computeroutput> <sbr/>
  Specifies the allocator that is used for the internal freelist</para>
 </listitem></itemizedlist>
 </para><para><emphasis role="bold">Requirements:</emphasis> <itemizedlist>
@@ -43,8 +43,16 @@
 </warning>
 </para></description><returns><para>true, if implementation is lock-free.</para>
 </returns></method>
-<method name="reserve"><type>void</type><parameter name="n"><paramtype>size_type</paramtype></parameter></method>
-<method name="reserve_unsafe"><type>void</type><parameter name="n"><paramtype>size_type</paramtype></parameter></method>
+<method name="reserve"><type>void</type><parameter name="n"><paramtype>size_type</paramtype></parameter><description><para>Allocate n nodes for freelist</para><para>
+<note><para>thread-safe, may block if memory allocator blocks  </para>
+</note>
+</para></description><requires><para>only valid if no capacity&lt;&gt; argument given </para>
+</requires></method>
+<method name="reserve_unsafe"><type>void</type><parameter name="n"><paramtype>size_type</paramtype></parameter><description><para>Allocate n nodes for freelist</para><para>
+<note><para>not thread-safe, may block if memory allocator blocks  </para>
+</note>
+</para></description><requires><para>only valid if no capacity&lt;&gt; argument given </para>
+</requires></method>
 <method name="empty" cv="const"><type>bool</type><parameter name=""><paramtype>void</paramtype></parameter><description><para>Check if the queue is empty</para><para>
 <note><para>The result is only accurate, if no other thread modifies the queue. Therefore it is rarely practical to use this value in program logic. </para>
 </note>
@@ -119,7 +127,7 @@
 <method name="consume_one"><type>bool</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes one element via a functor</para><para>pops one element from the queue and applies the functor on this object</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>true, if one element was consumed</para>
 </returns></method>
@@ -133,7 +141,7 @@
 <method name="consume_all"><type>size_t</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes all elements via a functor</para><para>sequentially pops all elements from the queue and applies the functor on each object</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>number of elements that are consumed</para>
 </returns></method>
@@ -166,24 +174,18 @@
 <namespace name="lockfree">
 <class name="spsc_queue"><template>
       <template-type-parameter name="T"/>
-      <template-type-parameter name="A0"/>
-      <template-type-parameter name="A1"/>
+      <template-nontype-parameter name="Options"><type>typename ...</type></template-nontype-parameter>
     </template><description><para>The <classname alt="boost::lockfree::spsc_queue">spsc_queue</classname> class provides a single-writer/single-reader fifo queue, pushing and popping is wait-free.</para><para><emphasis role="bold">Policies:</emphasis> <itemizedlist>
 <listitem><para><computeroutput>boost::lockfree::capacity&lt;&gt;</computeroutput>, optional <sbr/>
  If this template argument is passed to the options, the size of the ringbuffer is set at compile-time.</para>
-</listitem><listitem><para><computeroutput>boost::lockfree::allocator&lt;&gt;</computeroutput>, defaults to <computeroutput><classname alt="boost::lockfree::allocator">boost::lockfree::allocator</classname>&lt;std::allocator&lt;T&gt;&gt;</computeroutput> <sbr/>
+</listitem><listitem><para><computeroutput>boost::lockfree::allocator&lt;&gt;</computeroutput>, defaults to <computeroutput>boost::lockfree::allocator&lt;std::allocator&lt;T&gt;&gt;</computeroutput> <sbr/>
  Specifies the allocator that is used to allocate the ringbuffer. This option is only valid, if the ringbuffer is configured to be sized at run-time</para>
 </listitem></itemizedlist>
 </para><para><emphasis role="bold">Requirements:</emphasis> <itemizedlist>
 <listitem><para>T must have a default constructor</para>
 </listitem><listitem><para>T must be copyable </para>
 </listitem></itemizedlist>
-</para></description><struct name="implementation_defined"><template>
-      <template-type-parameter name="T"/>
-      <template-nontype-parameter name="Options"><type>typename ...</type></template-nontype-parameter>
-    </template><typedef name="allocator"><type>allocator_arg</type></typedef>
-<typedef name="size_type"><type>std::size_t</type></typedef>
-</struct><typedef name="value_type"><type>T</type></typedef>
+</para></description><typedef name="value_type"><type>T</type></typedef>
 <typedef name="allocator"><type>implementation_defined::allocator</type></typedef>
 <typedef name="size_type"><type>implementation_defined::size_type</type></typedef>
 <method-group name="public member functions">
@@ -205,7 +207,7 @@
 </requires><postconditions><para>if ringbuffer is not empty, object will be discarded. </para>
 </postconditions><returns><para>true, if the pop operation is successful, false if ringbuffer was empty.</para>
 </returns></method>
-<method name="pop"><type>boost::enable_if&lt; typename is_convertible&lt; T, U &gt;::type, bool &gt;::type</type><template>
+<method name="pop"><type>boost::enable_if&lt; typenameis_convertible&lt; T, U &gt;::type, bool &gt;::type</type><template>
           <template-type-parameter name="U"/>
         </template><parameter name="ret"><paramtype>U &amp;</paramtype></parameter><description><para>Pops one object from ringbuffer.</para><para>
 
@@ -257,7 +259,7 @@
 </para></description><requires><para>only one thread is allowed to pop data to the <classname alt="boost::lockfree::spsc_queue">spsc_queue</classname> </para>
 </requires><returns><para>number of popped items</para>
 </returns></method>
-<method name="pop"><type>boost::disable_if&lt; typename is_convertible&lt; T, OutputIterator &gt;::type, size_type &gt;::type</type><template>
+<method name="pop"><type>boost::disable_if&lt; typenameis_convertible&lt; T, OutputIterator &gt;::type, size_type &gt;::type</type><template>
           <template-type-parameter name="OutputIterator"/>
         </template><parameter name="it"><paramtype>OutputIterator</paramtype></parameter><description><para>Pops objects to the output iterator it</para><para>
 
@@ -276,7 +278,7 @@
 <method name="consume_one"><type>bool</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes one element via a functor</para><para>pops one element from the queue and applies the functor on this object</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>true, if one element was consumed</para>
 </returns></method>
@@ -290,7 +292,7 @@
 <method name="consume_all"><type>size_type</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes all elements via a functor</para><para>sequentially pops all elements from the queue and applies the functor on each object</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>number of elements that are consumed</para>
 </returns></method>
@@ -316,7 +318,7 @@
 <method name="front"><type>T &amp;</type><description><para>get reference to element in the front of the queue</para><para>Availability of front element can be checked using read_available().</para><para>
 
 
-<note><para>Thread-safe and wait-free </para>
+<note><para>Thread-safe and wait-free  </para>
 </note>
 </para></description><requires><para>only a consuming thread is allowed to check front element </para>
 </requires><requires><para>read_available() &gt; 0. If ringbuffer is empty, it's undefined behaviour to invoke this method. </para>
@@ -370,7 +372,7 @@
 </listitem><listitem><para><computeroutput>boost::lockfree::capacity&lt;&gt;</computeroutput>, optional <sbr/>
  If this template argument is passed to the options, the size of the stack is set at compile-time. <sbr/>
  It this option implies <computeroutput>fixed_sized&lt;true&gt;</computeroutput> </para>
-</listitem><listitem><para><computeroutput>boost::lockfree::allocator&lt;&gt;</computeroutput>, defaults to <computeroutput><classname alt="boost::lockfree::allocator">boost::lockfree::allocator</classname>&lt;std::allocator&lt;void&gt;&gt;</computeroutput> <sbr/>
+</listitem><listitem><para><computeroutput>boost::lockfree::allocator&lt;&gt;</computeroutput>, defaults to <computeroutput>boost::lockfree::allocator&lt;std::allocator&lt;void&gt;&gt;</computeroutput> <sbr/>
  Specifies the allocator that is used for the internal freelist</para>
 </listitem></itemizedlist>
 </para><para><emphasis role="bold">Requirements:</emphasis> <itemizedlist>
@@ -378,12 +380,16 @@
 </listitem></itemizedlist>
 </para></description><struct name="implementation_defined"><template>
       <template-type-parameter name="T"/>
-      <template-nontype-parameter name="Options"><type>typename ...</type></template-nontype-parameter>
+      <template-type-parameter name="A0"/>
+      <template-type-parameter name="A1"/>
+      <template-type-parameter name="A2"/>
     </template><typedef name="allocator"><type>node_allocator</type></typedef>
 <typedef name="size_type"><type>std::size_t</type></typedef>
 </struct><struct name="node"><template>
       <template-type-parameter name="T"/>
-      <template-nontype-parameter name="Options"><type>typename ...</type></template-nontype-parameter>
+      <template-type-parameter name="A0"/>
+      <template-type-parameter name="A1"/>
+      <template-type-parameter name="A2"/>
     </template><typedef name="handle_t"><type><emphasis>unspecified</emphasis></type></typedef>
 <data-member name="next"><type>handle_t</type></data-member>
 <data-member name="v"><type>const T</type></data-member>
@@ -545,7 +551,7 @@
 <method name="consume_one"><type>bool</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes one element via a functor</para><para>pops one element from the stack and applies the functor on this object</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>true, if one element was consumed</para>
 </returns></method>
@@ -559,7 +565,7 @@
 <method name="consume_all"><type>size_t</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes all elements via a functor</para><para>sequentially pops all elements from the stack and applies the functor on each object</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>number of elements that are consumed</para>
 </returns></method>
@@ -573,7 +579,7 @@
 <method name="consume_all_atomic"><type>size_t</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes all elements via a functor</para><para>atomically pops all elements from the stack and applies the functor on each object</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>number of elements that are consumed</para>
 </returns></method>
@@ -587,7 +593,7 @@
 <method name="consume_all_atomic_reversed"><type>size_t</type><template>
           <template-type-parameter name="Functor"/>
         </template><parameter name="f"><paramtype>Functor const &amp;</paramtype></parameter><description><para>consumes all elements via a functor</para><para>atomically pops all elements from the stack and applies the functor on each object in reversed order</para><para>
-<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </para>
+<note><para>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </para>
 </note>
 </para></description><returns><para>number of elements that are consumed</para>
 </returns></method>

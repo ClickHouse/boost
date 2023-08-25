@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../../index.html" title="Chapter 1. Boost.Log v2">
 <link rel="up" href="../../../attributes.html#header.boost.log.attributes.function_hpp" title="Header &lt;boost/log/attributes/function.hpp&gt;">
-<link rel="prev" href="../fallback_to_default.html" title="Struct template fallback_to_default">
+<link rel="prev" href="../fallback_to_throw.html" title="Struct fallback_to_throw">
 <link rel="next" href="function/impl.html" title="Class impl">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -14,7 +14,7 @@
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../../boost.png"></td></tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="../fallback_to_default.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../attributes.html#header.boost.log.attributes.function_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="function/impl.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="../fallback_to_throw.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../attributes.html#header.boost.log.attributes.function_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="function/impl.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="refentry">
 <a name="boost.log.attributes.function"></a><div class="titlepage"></div>
@@ -43,26 +43,22 @@
   <span class="keyword">class</span> <a class="link" href="function/impl_template.html" title="Class template impl_template">impl_template</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">function</span><span class="special">&lt;</span> <span class="identifier">R</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">impl</span> <span class="special">{</span>
   <span class="keyword">public</span><span class="special">:</span>
     <span class="comment">// <a class="link" href="function/impl_template.html#boost.log.attributes.function.impl_templateconstruct-copy-destruct">construct/copy/destruct</a></span>
-    <span class="keyword">explicit</span> <a class="link" href="function/impl_template.html#idm25353-bb"><span class="identifier">impl_template</span></a><span class="special">(</span><span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+    <span class="keyword">explicit</span> <a class="link" href="function/impl_template.html#idm25360-bb"><span class="identifier">impl_template</span></a><span class="special">(</span><span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 
-    <span class="comment">// <a class="link" href="function/impl_template.html#idm25345-bb">public member functions</a></span>
-    <span class="keyword">virtual</span> <a class="link" href="../attribute_value.html" title="Class attribute_value">attribute_value</a> <a class="link" href="function/impl_template.html#idm25346-bb"><span class="identifier">get_value</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+    <span class="comment">// <a class="link" href="function/impl_template.html#idm25352-bb">public member functions</a></span>
+    <span class="keyword">virtual</span> <a class="link" href="../attribute_value.html" title="Class attribute_value">attribute_value</a> <a class="link" href="function/impl_template.html#idm25353-bb"><span class="identifier">get_value</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
   <span class="special">}</span><span class="special">;</span>
 
   <span class="comment">// <a class="link" href="function.html#boost.log.attributes.functionconstruct-copy-destruct">construct/copy/destruct</a></span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <span class="keyword">explicit</span> <a class="link" href="function.html#idm25369-bb"><span class="identifier">function</span></a><span class="special">(</span><span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">explicit</span> <a class="link" href="function.html#idm25376-bb"><span class="identifier">function</span></a><span class="special">(</span><a class="link" href="cast_source.html" title="Class cast_source">cast_source</a> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-
-  <span class="comment">// <a class="link" href="function.html#idm25361-bb">private member functions</a></span>
-   <a class="link" href="function.html#idm25362-bb"><span class="identifier">BOOST_STATIC_ASSERT_MSG</span></a><span class="special">(</span><span class="special">!</span><span class="identifier">is_void</span><span class="special">&lt;</span> <span class="identifier">R</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">value</span><span class="special">,</span> 
-                           <span class="string">"Boost.Log: Function object return type must not be void"</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm33498"></a><h2>Description</h2>
+<a name="idm33508"></a><h2>Description</h2>
 <p>The attribute calls a stored nullary function object to acquire each value. The result type of the function object is the attribute value type.</p>
 <p>It is not recommended to use this class directly. Use <code class="computeroutput">make_function</code> convenience functions to construct the attribute instead. </p>
 <div class="refsect2">
-<a name="idm33503"></a><h3>
+<a name="idm33513"></a><h3>
 <a name="boost.log.attributes.functionconstruct-copy-destruct"></a><code class="computeroutput">function</code> 
         public
        construct/copy/destruct</h3>
@@ -77,12 +73,6 @@
 </li>
 </ol></div>
 </div>
-<div class="refsect2">
-<a name="idm33538"></a><h3>
-<a name="idm25361-bb"></a><code class="computeroutput">function</code> private member functions</h3>
-<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="literallayout"> <a name="idm25362-bb"></a><span class="identifier">BOOST_STATIC_ASSERT_MSG</span><span class="special">(</span><span class="special">!</span><span class="identifier">is_void</span><span class="special">&lt;</span> <span class="identifier">R</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">value</span><span class="special">,</span> 
-                         <span class="string">"Boost.Log: Function object return type must not be void"</span><span class="special">)</span><span class="special">;</span></pre></li></ol></div>
-</div>
 </div>
 </div>
 <div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
@@ -92,7 +82,7 @@
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="../fallback_to_default.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../attributes.html#header.boost.log.attributes.function_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="function/impl.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="../fallback_to_throw.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../attributes.html#header.boost.log.attributes.function_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="function/impl.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

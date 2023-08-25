@@ -7,7 +7,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../index.html" title="The Boost C++ Libraries BoostBook Documentation Subset">
 <link rel="up" href="../../lockfree/reference.html#header.boost.lockfree.stack_hpp" title="Header &lt;boost/lockfree/stack.hpp&gt;">
-<link rel="prev" href="spsc_queue/implementation_defined.html" title="Struct template implementation_defined">
+<link rel="prev" href="spsc_queue.html" title="Class template spsc_queue">
 <link rel="next" href="stack/implementation_defined.html" title="Struct template implementation_defined">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -22,7 +22,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="spsc_queue/implementation_defined.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../lockfree/reference.html#header.boost.lockfree.stack_hpp"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="stack/implementation_defined.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="spsc_queue.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../lockfree/reference.html#header.boost.lockfree.stack_hpp"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="stack/implementation_defined.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="refentry">
 <a name="boost.lockfree.stack"></a><div class="titlepage"></div>
@@ -37,13 +37,13 @@
 <span class="keyword">class</span> <a class="link" href="stack.html" title="Class template stack">stack</a> <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// member classes/structs/unions</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> <span class="special">...</span> Options<span class="special">&gt;</span> 
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> A0<span class="special">,</span> <span class="keyword">typename</span> A1<span class="special">,</span> <span class="keyword">typename</span> A2<span class="special">&gt;</span> 
   <span class="keyword">struct</span> <a class="link" href="stack/implementation_defined.html" title="Struct template implementation_defined">implementation_defined</a> <span class="special">{</span>
     <span class="comment">// types</span>
     <span class="keyword">typedef</span> <span class="identifier">node_allocator</span> <a class="link" href="stack/implementation_defined.html#boost.lockfree.stack.implementation_defined.allocator"><span class="identifier">allocator</span></a><span class="special">;</span>
     <span class="keyword">typedef</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span>    <a class="link" href="stack/implementation_defined.html#boost.lockfree.stack.implementation_defined.size_type"><span class="identifier">size_type</span></a><span class="special">;</span>
   <span class="special">}</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> <span class="special">...</span> Options<span class="special">&gt;</span> 
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> A0<span class="special">,</span> <span class="keyword">typename</span> A1<span class="special">,</span> <span class="keyword">typename</span> A2<span class="special">&gt;</span> 
   <span class="keyword">struct</span> <a class="link" href="stack/node.html" title="Struct template node">node</a> <span class="special">{</span>
     <span class="comment">// types</span>
     <span class="keyword">typedef</span> <span class="emphasis"><em><span class="identifier">unspecified</span></em></span> <a class="link" href="stack/node.html#boost.lockfree.stack.node.handle_t"><span class="identifier">handle_t</span></a><span class="special">;</span>
@@ -119,7 +119,7 @@
 <li class="listitem"><p><code class="computeroutput">boost::lockfree::capacity&lt;&gt;</code>, optional <br>
  If this template argument is passed to the options, the size of the stack is set at compile-time. <br>
  It this option implies <code class="computeroutput">fixed_sized&lt;true&gt;</code> </p></li>
-<li class="listitem"><p><code class="computeroutput">boost::lockfree::allocator&lt;&gt;</code>, defaults to <code class="computeroutput"><a class="link" href="allocator.html" title="Struct template allocator">boost::lockfree::allocator</a>&lt;std::allocator&lt;void&gt;&gt;</code> <br>
+<li class="listitem"><p><code class="computeroutput">boost::lockfree::allocator&lt;&gt;</code>, defaults to <code class="computeroutput">boost::lockfree::allocator&lt;std::allocator&lt;void&gt;&gt;</code> <br>
  Specifies the allocator that is used for the internal freelist</p></li>
 </ul></div>
 <p>
@@ -729,7 +729,7 @@
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </p></td></tr>
+<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </p></td></tr>
 </table></div>
 <p>
 </p>
@@ -781,7 +781,7 @@
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </p></td></tr>
+<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </p></td></tr>
 </table></div>
 <p>
 </p>
@@ -833,7 +833,7 @@
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </p></td></tr>
+<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </p></td></tr>
 </table></div>
 <p>
 </p>
@@ -886,7 +886,7 @@
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </p></td></tr>
+<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </p></td></tr>
 </table></div>
 <p>
 </p>
@@ -937,7 +937,7 @@
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="spsc_queue/implementation_defined.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../lockfree/reference.html#header.boost.lockfree.stack_hpp"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="stack/implementation_defined.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="spsc_queue.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../lockfree/reference.html#header.boost.lockfree.stack_hpp"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="stack/implementation_defined.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

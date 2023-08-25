@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__grammar__squelch"></a><a class="link" href="boost__urls__grammar__squelch.html" title="grammar::squelch">grammar::squelch</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm150100"></a>
+        <a class="indexterm" name="idm154683"></a>
       </p>
 <p>
         Squelch the value of a rule.
@@ -71,10 +71,10 @@
 <p>
         With <code class="computeroutput"><span class="identifier">squelch</span></code>:
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span> <span class="identifier">decode_view</span><span class="special">,</span> <span class="identifier">string_view</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span>
-    <span class="string">"www.example.com:443"</span><span class="special">,</span>
+<pre class="programlisting"><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span> <span class="identifier">decode_view</span><span class="special">,</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span>
+    <span class="string">"www.example.com:443"</span> <span class="special">,</span>
     <span class="identifier">tuple_rule</span><span class="special">(</span>
-        <span class="identifier">pct_encoded_rule</span><span class="special">(</span><span class="identifier">unreserved_chars</span> <span class="special">+</span> <span class="char">'-'</span> <span class="special">+</span> <span class="char">'.'</span><span class="special">),</span>
+        <span class="identifier">pct_encoded_rule</span><span class="special">(</span><span class="identifier">unreserved_chars</span> <span class="special">+</span> <span class="char">'-'</span> <span class="special">+</span> <span class="char">'.'</span> <span class="special">),</span>
         <span class="identifier">squelch</span><span class="special">(</span> <span class="identifier">delim_rule</span><span class="special">(</span> <span class="char">':'</span> <span class="special">)</span> <span class="special">),</span>
         <span class="identifier">token_rule</span><span class="special">(</span> <span class="identifier">digit_chars</span> <span class="special">)</span> <span class="special">)</span> <span class="special">);</span>
 </pre>
@@ -86,10 +86,10 @@
 <p>
         Without <code class="computeroutput"><span class="identifier">squelch</span></code>:
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span> <span class="identifier">decode_view</span><span class="special">,</span> <span class="identifier">string_view</span><span class="special">,</span> <span class="identifier">string_view</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span>
-    <span class="string">"www.example.com:443"</span><span class="special">,</span>
+<pre class="programlisting"><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span> <span class="identifier">decode_view</span><span class="special">,</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">,</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span>
+    <span class="string">"www.example.com:443"</span> <span class="special">,</span>
     <span class="identifier">tuple_rule</span><span class="special">(</span>
-        <span class="identifier">pct_encoded_rule</span><span class="special">(</span><span class="identifier">unreserved_chars</span> <span class="special">+</span> <span class="char">'-'</span> <span class="special">+</span> <span class="char">'.'</span><span class="special">),</span>
+        <span class="identifier">pct_encoded_rule</span><span class="special">(</span><span class="identifier">unreserved_chars</span> <span class="special">+</span> <span class="char">'-'</span> <span class="special">+</span> <span class="char">'.'</span> <span class="special">),</span>
         <span class="identifier">delim_rule</span><span class="special">(</span> <span class="char">':'</span> <span class="special">),</span>
         <span class="identifier">token_rule</span><span class="special">(</span> <span class="identifier">digit_chars</span> <span class="special">)</span> <span class="special">)</span> <span class="special">);</span>
 </pre>

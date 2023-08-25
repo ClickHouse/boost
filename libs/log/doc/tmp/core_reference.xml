@@ -108,7 +108,7 @@ This header contains a logging record class definition. </para><namespace name="
 </para></description><requires><para><computeroutput>!!*this</computeroutput> </para>
 </requires><returns><para>A reference to the set of attribute values attached to this record</para>
 </returns></method>
-<method name="attribute_values" cv="const noexcept"><type>attribute_value_set const  &amp;</type><description><para>
+<method name="attribute_values" cv="const noexcept"><type>attribute_value_set const &amp;</type><description><para>
 
 </para></description><requires><para><computeroutput>!!*this</computeroutput> </para>
 </requires><returns><para>A reference to the set of attribute values attached to this record</para>
@@ -128,7 +128,7 @@ This header contains a logging record class definition. </para><namespace name="
 
 </para></description><returns><para>An <computeroutput>attribute_value</computeroutput>, non-empty if it is found, empty otherwise. </para>
 </returns></method>
-<method name="operator[]" cv="const"><type>result_of::extract&lt; typename expressions::attribute_keyword&lt; DescriptorT, ActorT &gt;::value_type, DescriptorT &gt;::type</type><template>
+<method name="operator[]" cv="const"><type>result_of::extract&lt; typenameexpressions::attribute_keyword&lt; DescriptorT, ActorT &gt;::value_type, DescriptorT &gt;::type</type><template>
           <template-type-parameter name="DescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
         </template><parameter name="keyword"><paramtype>expressions::attribute_keyword&lt; DescriptorT, ActorT &gt; const &amp;</paramtype><description><para>Attribute keyword. </para></description></parameter><description><para>Attribute value lookup.</para><para>
@@ -162,7 +162,7 @@ This header contains a logging record class definition. </para><namespace name="
 This header contains a logging record view class definition. </para><namespace name="boost">
 <namespace name="log">
 <class name="record_view"><purpose>Logging record view class. </purpose><description><para>The logging record encapsulates all information related to a single logging statement, in particular, attribute values view and the log message string. The view is immutable, it is implemented as a wrapper around a reference-counted implementation. </para></description><method-group name="public member functions">
-<method name="attribute_values" cv="const noexcept"><type>attribute_value_set const  &amp;</type><description><para>
+<method name="attribute_values" cv="const noexcept"><type>attribute_value_set const &amp;</type><description><para>
 
 </para></description><requires><para><computeroutput>!!*this</computeroutput> </para>
 </requires><returns><para>A reference to the set of attribute values attached to this record</para>
@@ -190,7 +190,7 @@ This header contains a logging record view class definition. </para><namespace n
 
 </para></description><returns><para>An <computeroutput>attribute_value</computeroutput>, non-empty if it is found, empty otherwise. </para>
 </returns></method>
-<method name="operator[]" cv="const"><type>result_of::extract&lt; typename expressions::attribute_keyword&lt; DescriptorT, ActorT &gt;::value_type, DescriptorT &gt;::type</type><template>
+<method name="operator[]" cv="const"><type>result_of::extract&lt; typenameexpressions::attribute_keyword&lt; DescriptorT, ActorT &gt;::value_type, DescriptorT &gt;::type</type><template>
           <template-type-parameter name="DescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
         </template><parameter name="keyword"><paramtype>expressions::attribute_keyword&lt; DescriptorT, ActorT &gt; const &amp;</paramtype><description><para>Attribute keyword. </para></description></parameter><description><para>Attribute value lookup.</para><para>

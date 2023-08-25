@@ -28,7 +28,7 @@
 <a name="mysql.ref.boost__mysql__handshake_params.handshake_params"></a><a class="link" href="handshake_params.html" title="handshake_params::handshake_params">handshake_params::handshake_params</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm30101"></a>
+          <a class="indexterm" name="idm40735"></a>
         </p>
 <p>
           Initializing constructor.
@@ -42,7 +42,8 @@
     <span class="identifier">string_view</span> <span class="identifier">password</span><span class="special">,</span>
     <span class="identifier">string_view</span> <span class="identifier">db</span> <span class="special">=</span> <span class="string">""</span><span class="special">,</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">uint16_t</span> <span class="identifier">connection_col</span> <span class="special">=</span> <a class="link" href="default_collation.html" title="handshake_params::default_collation">default_collation</a><span class="special">,</span>
-    <span class="identifier">ssl_mode</span> <span class="identifier">mode</span> <span class="special">=</span> <a class="link" href="../boost__mysql__ssl_mode.html" title="ssl_mode">ssl_mode::require</a><span class="special">);</span>
+    <span class="identifier">ssl_mode</span> <span class="identifier">mode</span> <span class="special">=</span> <a class="link" href="../boost__mysql__ssl_mode.html" title="ssl_mode">ssl_mode::require</a><span class="special">,</span>
+    <span class="keyword">bool</span> <span class="identifier">multi_queries</span> <span class="special">=</span> <span class="keyword">false</span><span class="special">);</span>
 </pre>
 <h6>
 <a name="mysql.ref.boost__mysql__handshake_params.handshake_params.h1"></a>
@@ -138,6 +139,20 @@
                     The <a class="link" href="../boost__mysql__ssl_mode.html" title="ssl_mode"><code class="computeroutput"><span class="identifier">ssl_mode</span></code></a> to use with
                     this connection; ignored if the connection's <code class="computeroutput"><span class="identifier">Stream</span></code>
                     does not support SSL.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="identifier">multi_queries</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Whether to enable support for executing semicolon-separated queries
+                    using <a class="link" href="../boost__mysql__connection/execute.html" title="connection::execute"><code class="computeroutput"><span class="identifier">connection</span><span class="special">::</span><span class="identifier">execute</span></code></a> and <a class="link" href="../boost__mysql__connection/start_execution.html" title="connection::start_execution"><code class="computeroutput"><span class="identifier">connection</span><span class="special">::</span><span class="identifier">start_execution</span></code></a>. Disabled
+                    by default.
                   </p>
                 </td>
 </tr>

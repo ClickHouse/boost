@@ -38,7 +38,7 @@
 <pre class="programlisting"><span class="identifier">iterator</span>
 <span class="identifier">find_last</span><span class="special">(</span>
     <span class="identifier">iterator</span> <span class="identifier">before</span><span class="special">,</span>
-    <span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">,</span>
     <span class="identifier">ignore_case_param</span> <span class="identifier">ic</span> <span class="special">=</span> <span class="special">{})</span> <span class="keyword">const</span><span class="special">;</span>
 </pre>
 <h6>
@@ -61,7 +61,7 @@
           </h6>
 <pre class="programlisting"><span class="identifier">url_view</span> <span class="identifier">u</span><span class="special">(</span> <span class="string">"?First=John&amp;Last=Doe"</span> <span class="special">);</span>
 
-<span class="identifier">assert</span><span class="special">(</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">find_last</span><span class="special">(</span> <span class="string">"last"</span> <span class="special">)</span> <span class="special">!=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">find_last</span><span class="special">(</span> <span class="string">"last"</span><span class="special">,</span> <span class="identifier">ignore_case</span> <span class="special">)</span> <span class="special">);</span>
+<span class="identifier">assert</span><span class="special">(</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">find_last</span><span class="special">(</span> <span class="string">"last"</span> <span class="special">)</span> <span class="special">!=</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">find_last</span><span class="special">(</span> <span class="string">"last"</span> <span class="special">,</span> <span class="identifier">ignore_case</span> <span class="special">)</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__params_base.find_last.overload2.h3"></a>

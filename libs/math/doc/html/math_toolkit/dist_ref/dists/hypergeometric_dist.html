@@ -42,11 +42,11 @@
    <span class="keyword">typedef</span> <span class="identifier">RealType</span> <span class="identifier">value_type</span><span class="special">;</span>
    <span class="keyword">typedef</span> <span class="identifier">Policy</span>   <span class="identifier">policy_type</span><span class="special">;</span>
    <span class="comment">// Construct:</span>
-   <span class="identifier">hypergeometric_distribution</span><span class="special">(</span><span class="keyword">unsigned</span> <span class="identifier">r</span><span class="special">,</span> <span class="keyword">unsigned</span> <span class="identifier">n</span><span class="special">,</span> <span class="keyword">unsigned</span> <span class="identifier">N</span><span class="special">);</span> <span class="comment">// r=defective/failures/success, n=trials/draws, N=total population.</span>
+   <span class="identifier">hypergeometric_distribution</span><span class="special">(</span><span class="identifier">uint64_t</span> <span class="identifier">r</span><span class="special">,</span> <span class="identifier">uint64_t</span> <span class="identifier">n</span><span class="special">,</span> <span class="identifier">uint64_t</span> <span class="identifier">N</span><span class="special">);</span> <span class="comment">// r=defective/failures/success, n=trials/draws, N=total population.</span>
    <span class="comment">// Accessors:</span>
-   <span class="keyword">unsigned</span> <span class="identifier">total</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
-   <span class="keyword">unsigned</span> <span class="identifier">defective</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
-   <span class="keyword">unsigned</span> <span class="identifier">sample_count</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
+   <span class="identifier">uint64_t</span> <span class="identifier">total</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
+   <span class="identifier">uint64_t</span> <span class="identifier">defective</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
+   <span class="identifier">uint64_t</span> <span class="identifier">sample_count</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
 <span class="special">};</span>
 
 <span class="keyword">typedef</span> <span class="identifier">hypergeometric_distribution</span><span class="special">&lt;&gt;</span> <span class="identifier">hypergeometric</span><span class="special">;</span>
@@ -105,25 +105,25 @@
           <span class="phrase"><a name="math_toolkit.dist_ref.dists.hypergeometric_dist.member_functions"></a></span><a class="link" href="hypergeometric_dist.html#math_toolkit.dist_ref.dists.hypergeometric_dist.member_functions">Member
           Functions</a>
         </h5>
-<pre class="programlisting"><span class="identifier">hypergeometric_distribution</span><span class="special">(</span><span class="keyword">unsigned</span> <span class="identifier">r</span><span class="special">,</span> <span class="keyword">unsigned</span> <span class="identifier">n</span><span class="special">,</span> <span class="keyword">unsigned</span> <span class="identifier">N</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">hypergeometric_distribution</span><span class="special">(</span><span class="identifier">uint64_t</span> <span class="identifier">r</span><span class="special">,</span> <span class="identifier">uint64_t</span> <span class="identifier">n</span><span class="special">,</span> <span class="identifier">uint64_t</span> <span class="identifier">N</span><span class="special">);</span>
 </pre>
 <p>
           Constructs a hypergeometric distribution with a population of <span class="emphasis"><em>N</em></span>
           objects, of which <span class="emphasis"><em>r</em></span> are defective, and from which
           <span class="emphasis"><em>n</em></span> are sampled.
         </p>
-<pre class="programlisting"><span class="keyword">unsigned</span> <span class="identifier">total</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">uint64_t</span> <span class="identifier">total</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
 </pre>
 <p>
           Returns the total number of objects <span class="emphasis"><em>N</em></span>.
         </p>
-<pre class="programlisting"><span class="keyword">unsigned</span> <span class="identifier">defective</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">uint64_t</span> <span class="identifier">defective</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
 </pre>
 <p>
           Returns the number of objects <span class="emphasis"><em>r</em></span> in population <span class="emphasis"><em>N</em></span>
           which are defective.
         </p>
-<pre class="programlisting"><span class="keyword">unsigned</span> <span class="identifier">sample_count</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">uint64_t</span> <span class="identifier">sample_count</span><span class="special">()</span><span class="keyword">const</span><span class="special">;</span>
 </pre>
 <p>
           Returns the number of objects <span class="emphasis"><em>n</em></span> which are sampled
@@ -159,8 +159,8 @@
           <a class="link" href="../nmp.html#math_toolkit.dist_ref.nmp.range">range</a> and <a class="link" href="../nmp.html#math_toolkit.dist_ref.nmp.support">support</a>.
         </p>
 <p>
-          The domain of the random variable is the unsigned integers in the range
-          [max(0, n + r - N), min(n, r)]. A <a class="link" href="../../error_handling.html#math_toolkit.error_handling.domain_error">domain_error</a>
+          The domain of the random variable are the 64-bit unsigned integers in the
+          range [max(0, n + r - N), min(n, r)]. A <a class="link" href="../../error_handling.html#math_toolkit.error_handling.domain_error">domain_error</a>
           is raised if the random variable is outside this range, or is not an integral
           value.
         </p>

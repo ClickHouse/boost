@@ -59,17 +59,17 @@
 <p>
         Use with <code class="computeroutput"><span class="keyword">static_assert</span></code>:
       </p>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">File</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span> <span class="keyword">class</span> <span class="identifier">File</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">f</span><span class="special">(</span><span class="identifier">File</span><span class="special">&amp;</span> <span class="identifier">file</span><span class="special">)</span>
 <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_file</span><span class="special">&lt;</span><span class="identifier">File</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"File type requirements not met"</span><span class="special">);</span>
+    <span class="keyword">static_assert</span> <span class="special">(</span><span class="identifier">is_file</span><span class="special">&lt;</span><span class="identifier">File</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
+        <span class="string">"File type requirements not met"</span> <span class="special">);</span>
 <span class="special">...</span>
 </pre>
 <p>
         Use with <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_if</span></code> (SFINAE):
       </p>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">File</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span> <span class="keyword">class</span> <span class="identifier">File</span><span class="special">&gt;</span>
 <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_if</span><span class="special">&lt;</span><span class="identifier">is_file</span><span class="special">&lt;</span><span class="identifier">File</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">&gt;::</span><span class="identifier">type</span>
 <span class="identifier">f</span><span class="special">(</span><span class="identifier">File</span><span class="special">&amp;</span> <span class="identifier">file</span><span class="special">);</span>
 </pre>

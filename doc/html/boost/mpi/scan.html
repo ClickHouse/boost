@@ -77,7 +77,8 @@
 </tr>
 <tr>
 <td><p><span class="term"><code class="computeroutput">out_value</code></span></p></td>
-<td><p>If provided, the ith process will receive the value <code class="computeroutput">op</code>(in_value[0], op(in_value[1], op(..., in_value[i]) ... )). For the array variant, <code class="computeroutput">out_values</code> contains a pointer to storage for the <code class="computeroutput">n</code> output values. The prefix reduction occurs independently for each of the <code class="computeroutput">n</code> values referenced by <code class="computeroutput">in_values</code>, e.g., calling scan on an array of <code class="computeroutput">n</code> values is like calling <code class="computeroutput">scan</code> <code class="computeroutput">n</code> separate times, one for each location in <code class="computeroutput">in_values</code> and <code class="computeroutput">out_values</code>.</p></td>
+<td><p>If provided, the ith process will receive the value <code class="computeroutput">op</code>(in_value[0], op(in_value[1], op(..., in_value[i])
+  ... )). For the array variant, <code class="computeroutput">out_values</code> contains a pointer to storage for the <code class="computeroutput">n</code> output values. The prefix reduction occurs independently for each of the <code class="computeroutput">n</code> values referenced by <code class="computeroutput">in_values</code>, e.g., calling scan on an array of <code class="computeroutput">n</code> values is like calling <code class="computeroutput">scan</code> <code class="computeroutput">n</code> separate times, one for each location in <code class="computeroutput">in_values</code> and <code class="computeroutput">out_values</code>.</p></td>
 </tr>
 </tbody>
 </table></div></td>

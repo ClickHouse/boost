@@ -34,7 +34,7 @@
 <div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../program_options/reference.html#header.boost.program_options.value_semantic_hpp" title="Header &lt;boost/program_options/value_semantic.hpp&gt;">boost/program_options/value_semantic.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> charT <span class="special">=</span> <span class="keyword">char</span><span class="special">&gt;</span> 
-<span class="keyword">class</span> <a class="link" href="typed_value.html" title="Class template typed_value">typed_value</a> <span class="special">:</span> <span class="keyword">public</span> boost::program_options::value_semantic_codecvt_helper&lt; charT &gt;,
+<span class="keyword">class</span> <a class="link" href="typed_value.html" title="Class template typed_value">typed_value</a> <span class="special">:</span> <span class="keyword">public</span> boost::program_options::value_semantic_codecvt_helper&lt; char &gt;,
                     <span class="keyword">public</span> boost::program_options::typed_value_base
 <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
@@ -93,7 +93,8 @@
 </li>
 <li class="listitem">
 <pre class="literallayout"><a class="link" href="typed_value.html" title="Class template typed_value">typed_value</a> <span class="special">*</span> <a name="id-1_3_30_9_10_1_1_1_5_4-bb"></a><span class="identifier">value_name</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> name<span class="special">)</span><span class="special">;</span></pre>
-<p>Specifies the name used to to the value in help message. </p>
+<p>Specifies the name used to to the value in help message. <br>
+ </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><a class="link" href="typed_value.html" title="Class template typed_value">typed_value</a> <span class="special">*</span> <a name="id-1_3_30_9_10_1_1_1_5_5-bb"></a><span class="identifier">implicit_value</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;</span> v<span class="special">,</span> <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> textual<span class="special">)</span><span class="special">;</span></pre>

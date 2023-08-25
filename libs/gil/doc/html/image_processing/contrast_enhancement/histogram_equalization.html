@@ -17,9 +17,12 @@
           FILE_SUFFIX: '.html'
       };
     </script>
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="top" title="Boost.GIL  documentation" href="../../index.html" /> 
@@ -80,24 +83,24 @@ the image contrast.</p>
 <div class="section" id="algorithm">
 <h2>Algorithm</h2>
 <ol class="arabic simple">
-<li>First calculate the histogram corresponding to input image.</li>
-<li>If it is a multi channeled image (e.g. RGB), convert it to a independent color space
-(like YCbCr, HSV etc.).</li>
-<li>Then calculate the cumulative histogram over the input image.</li>
-<li>Normalize the histogram to bring bin values between 0-1. For multi-channeled images
-normalize each channel independently (by the number of pixels in image).</li>
-<li>If the histogram of image is H(p<sub>x</sub>)  p<sub>x</sub> in  [0, 255], then apply
-the transformation p<sub>x&#8217;</sub> = H(p<sub>x</sub>),  p<sub>x&#8217;</sub> is pixel in output
-image.</li>
+<li><p>First calculate the histogram corresponding to input image.</p></li>
+<li><p>If it is a multi channeled image (e.g. RGB), convert it to a independent color space
+(like YCbCr, HSV etc.).</p></li>
+<li><p>Then calculate the cumulative histogram over the input image.</p></li>
+<li><p>Normalize the histogram to bring bin values between 0-1. For multi-channeled images
+normalize each channel independently (by the number of pixels in image).</p></li>
+<li><p>If the histogram of image is H(p<sub>x</sub>)  p<sub>x</sub> in  [0, 255], then apply
+the transformation p<sub>x’</sub> = H(p<sub>x</sub>),  p<sub>x’</sub> is pixel in output
+image.</p></li>
 </ol>
 <p><strong>Explanation</strong></p>
 <p>Since we will be transforming the image to match a flat histogram, we match
 the cumulative histogram of the image to the cumulative histogram of a flat histogram.</p>
-<p>Cumulative histogram of flat image is  H(p<sub>x&#8217;</sub>)  =  p<sub>x&#8217;</sub> .</p>
+<p>Cumulative histogram of flat image is  H(p<sub>x’</sub>)  =  p<sub>x’</sub> .</p>
 <p>Hence,</p>
 <blockquote>
-<div><p>=&gt;  H(p<sub>x&#8217;</sub>)  =  H(p<sub>x</sub>)</p>
-<p>=&gt;  p<sub>x&#8217;</sub>    =  H(p<sub>x</sub>)</p>
+<div><p>=&gt;  H(p<sub>x’</sub>)  =  H(p<sub>x</sub>)</p>
+<p>=&gt;  p<sub>x’</sub>    =  H(p<sub>x</sub>)</p>
 </div></blockquote>
 </div>
 <div class="section" id="results">
@@ -116,20 +119,20 @@ the cumulative histogram of the image to the cumulative histogram of a flat hist
 <h2>Demo</h2>
 <p>Usage Syntax:</p>
 <blockquote>
-<div><div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">gray8_image_t</span> <span class="n">inp_img</span><span class="p">;</span>
-<span class="n">read_image</span><span class="p">(</span><span class="s">&quot;your_image.png&quot;</span><span class="p">,</span> <span class="n">inp_img</span><span class="p">,</span> <span class="n">png_tag</span><span class="p">{});</span>
-<span class="n">gray8_image_t</span> <span class="nf">dst_img</span><span class="p">(</span><span class="n">inp_img</span><span class="p">.</span><span class="n">dimensions</span><span class="p">());</span>
-<span class="n">histogram_equalization</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">inp_img</span><span class="p">),</span> <span class="n">view</span><span class="p">(</span><span class="n">dst_img</span><span class="p">));</span>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">gray8_image_t</span><span class="w"> </span><span class="n">inp_img</span><span class="p">;</span><span class="w"></span>
+<span class="n">read_image</span><span class="p">(</span><span class="s">&quot;your_image.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inp_img</span><span class="p">,</span><span class="w"> </span><span class="n">png_tag</span><span class="p">{});</span><span class="w"></span>
+<span class="n">gray8_image_t</span><span class="w"> </span><span class="nf">dst_img</span><span class="p">(</span><span class="n">inp_img</span><span class="p">.</span><span class="n">dimensions</span><span class="p">());</span><span class="w"></span>
+<span class="n">histogram_equalization</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">inp_img</span><span class="p">),</span><span class="w"> </span><span class="n">view</span><span class="p">(</span><span class="n">dst_img</span><span class="p">));</span><span class="w"></span>
 
 <span class="c1">// To specify mask over input image</span>
 
-<span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">mask</span><span class="p">(</span><span class="n">inp_img</span><span class="p">.</span><span class="n">height</span><span class="p">(),</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">inp_img</span><span class="p">.</span><span class="n">width</span><span class="p">(),</span> <span class="nb">true</span><span class="p">));</span>
-<span class="n">histogram_equalization</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">inp_img</span><span class="p">),</span> <span class="n">view</span><span class="p">(</span><span class="n">dst_img</span><span class="p">),</span> <span class="nb">true</span><span class="p">,</span> <span class="n">mask</span><span class="p">);</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mask</span><span class="p">(</span><span class="n">inp_img</span><span class="p">.</span><span class="n">height</span><span class="p">(),</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">inp_img</span><span class="p">.</span><span class="n">width</span><span class="p">(),</span><span class="w"> </span><span class="nb">true</span><span class="p">));</span><span class="w"></span>
+<span class="n">histogram_equalization</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">inp_img</span><span class="p">),</span><span class="w"> </span><span class="n">view</span><span class="p">(</span><span class="n">dst_img</span><span class="p">),</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Convert an RGB image to a channel independent color space
+<p class="admonition-title">Tip</p>
+<p>Convert an RGB image to a channel independent color space
 before trying the histogram equalization algorithm.</p>
 </div>
 </div></blockquote>
@@ -144,8 +147,8 @@ before trying the histogram equalization algorithm.</p>
     </div>
     </div>
     <div class="footer" role="contentinfo">
-      Last updated on 2023-04-10 13:04:15.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+      Last updated on 2023-08-08 21:08:21.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.2.1.
     </div>
   </body>
 </html>

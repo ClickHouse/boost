@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__async_detect_ssl"></a><a class="link" href="boost__beast__async_detect_ssl.html" title="async_detect_ssl">async_detect_ssl</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm64010"></a>
+        <a class="indexterm" name="idm69647"></a>
       </p>
 <p>
         Detect a TLS/SSL handshake asynchronously on a stream.
@@ -48,7 +48,7 @@
 <span class="identifier">async_detect_ssl</span><span class="special">(</span>
     <span class="identifier">AsyncReadStream</span><span class="special">&amp;</span> <span class="identifier">stream</span><span class="special">,</span>
     <span class="identifier">DynamicBuffer</span><span class="special">&amp;</span> <span class="identifier">buffer</span><span class="special">,</span>
-    <span class="identifier">CompletionToken</span><span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <a class="link" href="boost__beast__executor_type.html" title="executor_type">beast::executor_type</a><span class="special">&lt;</span> <span class="identifier">AsyncReadStream</span> <span class="special">&gt;&gt;{});</span>
+    <span class="identifier">CompletionToken</span><span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <a class="link" href="boost__beast__executor_type.html" title="executor_type">beast::executor_type</a><span class="special">&lt;</span> <span class="identifier">AsyncReadStream</span> <span class="special">&gt;</span> <span class="special">&gt;{});</span>
 </pre>
 <h5>
 <a name="beast.ref.boost__beast__async_detect_ssl.h1"></a>
@@ -143,7 +143,7 @@
                   must be:
                 </p>
 <pre class="table-programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
-    <span class="identifier">error_code</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span>    <span class="comment">// Set to the error, if any</span>
+    <span class="identifier">error_code</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span>    <span class="comment">// Set to the error, if any</span>
     <span class="keyword">bool</span> <span class="identifier">result</span>                 <span class="comment">// The result of the detector</span>
 <span class="special">);</span>
 </pre>

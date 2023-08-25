@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="author" content="Peter Dimov">
 <title>Boost.Mp11: A C++11 metaprogramming library</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -194,7 +194,8 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
 details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
 details{margin-left:1.25rem}
-details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;-webkit-tap-highlight-color:transparent}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
 details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
 details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
 details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
@@ -236,9 +237,8 @@ pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
 table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
 table.linenotable td.code{padding-left:.75em}
-table.linenotable td.linenos{border-right:1px solid;opacity:.35;padding-right:.5em}
-pre.pygments .lineno{border-right:1px solid;opacity:.35;display:inline-block;margin-right:.75em}
-pre.pygments .lineno::before{content:"";margin-right:-.125em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
 .quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
@@ -275,7 +275,7 @@ table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-c
 table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
 table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
 table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
-table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -291,10 +291,11 @@ ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
 ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
 ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
 ul.checklist>li>p:first-child{margin-left:-1em}
 ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
 ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
@@ -337,8 +338,6 @@ sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
-.gist .file-data>table td.line-data{width:99%}
 div.unbreakable{page-break-inside:avoid}
 .big{font-size:larger}
 .small{font-size:smaller}
@@ -674,6 +673,9 @@ pre.rouge {
 </li>
 <li><a href="#changelog">Revision History</a>
 <ul class="sectlevel2">
+<li><a href="#changes_in_1_83_0">Changes in 1.83.0</a></li>
+<li><a href="#changes_in_1_79_0">Changes in 1.79.0</a></li>
+<li><a href="#changes_in_1_78_0">Changes in 1.78.0</a></li>
 <li><a href="#changes_in_1_77_0">Changes in 1.77.0</a></li>
 <li><a href="#changes_in_1_75_0">Changes in 1.75.0</a></li>
 <li><a href="#changes_in_1_74_0">Changes in 1.74.0</a></li>
@@ -693,13 +695,16 @@ pre.rouge {
 <li><a href="#mp_nott">mp_not&lt;T&gt;</a></li>
 <li><a href="#mp_inti">mp_int&lt;I&gt;</a></li>
 <li><a href="#mp_size_tn">mp_size_t&lt;N&gt;</a></li>
+<li><a href="#mp_valuea">mp_value&lt;A&gt;</a></li>
 </ul>
 </li>
 <li><a href="#list">List Operations, &lt;boost/mp11/list.hpp&gt;</a>
 <ul class="sectlevel3">
 <li><a href="#mp_listt">mp_list&lt;T&#8230;&#8203;&gt;</a></li>
 <li><a href="#mp_list_ct_i">mp_list_c&lt;T, I&#8230;&#8203;&gt;</a></li>
+<li><a href="#mp_list_va">mp_list_v&lt;A&#8230;&#8203;&gt;</a></li>
 <li><a href="#mp_is_listl">mp_is_list&lt;L&gt;</a></li>
+<li><a href="#mp_is_value_listl">mp_is_value_list&lt;L&gt;</a></li>
 <li><a href="#mp_sizel">mp_size&lt;L&gt;</a></li>
 <li><a href="#mp_emptyl">mp_empty&lt;L&gt;</a></li>
 <li><a href="#mp_assignl1_l2">mp_assign&lt;L1, L2&gt;</a></li>
@@ -715,6 +720,7 @@ pre.rouge {
 <li><a href="#mp_renamel_y">mp_rename&lt;L, Y&gt;</a></li>
 <li><a href="#mp_applyf_l">mp_apply&lt;F, L&gt;</a></li>
 <li><a href="#mp_apply_qq_l">mp_apply_q&lt;Q, L&gt;</a></li>
+<li><a href="#mp_rename_vl_y">mp_rename_v&lt;L, Y&gt;</a></li>
 <li><a href="#mp_appendl">mp_append&lt;L&#8230;&#8203;&gt;</a></li>
 <li><a href="#mp_replace_frontl_t">mp_replace_front&lt;L, T&gt;</a></li>
 <li><a href="#mp_replace_firstl_t">mp_replace_first&lt;L, T&gt;</a></li>
@@ -780,9 +786,9 @@ pre.rouge {
 <li><a href="#mp_power_setl">mp_power_set&lt;L&gt;</a></li>
 <li><a href="#mp_drop_cl_n">mp_drop_c&lt;L, N&gt;</a></li>
 <li><a href="#mp_dropl_n">mp_drop&lt;L, N&gt;</a></li>
-<li><a href="#mp_from_sequences">mp_from_sequence&lt;S&gt;</a></li>
-<li><a href="#mp_iota_cn">mp_iota_c&lt;N&gt;</a></li>
-<li><a href="#mp_iotan">mp_iota&lt;N&gt;</a></li>
+<li><a href="#mp_from_sequences_f">mp_from_sequence&lt;S, F&gt;</a></li>
+<li><a href="#mp_iota_cn_f">mp_iota_c&lt;N, F&gt;</a></li>
+<li><a href="#mp_iotan_f">mp_iota&lt;N, F&gt;</a></li>
 <li><a href="#mp_at_cl_i">mp_at_c&lt;L, I&gt;</a></li>
 <li><a href="#mp_atl_i">mp_at&lt;L, I&gt;</a></li>
 <li><a href="#mp_take_cl_n">mp_take_c&lt;L, N&gt;</a></li>
@@ -1019,6 +1025,15 @@ for example <code>mp_list&lt;char[], void&gt;</code>, <code>mp_list&lt;&gt;</cod
     <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="p">;</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>A <em>value list</em> is a template class whose parameters are all values (non-type template parameters.) Value lists
+match <code>template&lt;auto&#8230;&#8203;&gt; class L</code>, and require C&#43;&#43;17 (because <code>auto</code> template parameters are a C&#43;&#43;17 feature.)</p>
+</div>
+<div class="paragraph">
+<p>Value lists are only supported by a handful of the primitives. Mp11&#8217;s primary focus is on type manipulation. For
+working with lists of values, the usual approach is to convert the value list to a type list using <code>mp_rename</code>,
+manipulate the type list, then convert back to a value list using <code>mp_rename_v</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1074,11 +1089,11 @@ how we can leverage Mp11 to automate the task:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;boost/mp11.hpp&gt;
-#include &lt;boost/core/demangle.hpp&gt;
-#include &lt;type_traits&gt;
-#include &lt;iostream&gt;
-#include &lt;typeinfo&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;boost/mp11.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;boost/core/demangle.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;type_traits&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;typeinfo&gt;</span><span class="cp">
 </span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">boost</span><span class="o">::</span><span class="n">mp11</span><span class="p">;</span>
 
@@ -1092,7 +1107,7 @@ how we can leverage Mp11 to automate the task:</p>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">result</span> <span class="o">=</span>
     <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">common_type</span><span class="o">&lt;</span><span class="n">promote</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">promote</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;&gt;::</span><span class="n">type</span><span class="p">;</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T2</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">test_result</span><span class="p">(</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="p">)</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T2</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="n">test_result</span><span class="p">(</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="n">T3</span> <span class="o">=</span> <span class="k">decltype</span><span class="p">(</span> <span class="n">T1</span><span class="p">()</span> <span class="o">+</span> <span class="n">T2</span><span class="p">()</span> <span class="p">);</span>
     <span class="k">using</span> <span class="n">T4</span> <span class="o">=</span> <span class="n">result</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;</span><span class="p">;</span>
@@ -1102,7 +1117,7 @@ how we can leverage Mp11 to automate the task:</p>
         <span class="o">&lt;&lt;</span> <span class="s">", result: "</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="o">&lt;</span><span class="n">T4</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="n">L</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">short</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">unsigned</span><span class="p">,</span> <span class="kt">long</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="n">tuple_for_each</span><span class="p">(</span> <span class="n">mp_product</span><span class="o">&lt;</span><span class="n">mp_list</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">){</span> <span class="n">test_result</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="p">}</span> <span class="p">);</span>
@@ -1144,7 +1159,7 @@ a templated <code>operator()</code> and pass that to <code>tuple_for_each</code>
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="n">L</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">short</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">unsigned</span><span class="p">,</span> <span class="kt">long</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="n">tuple_for_each</span><span class="p">(</span> <span class="n">mp_product</span><span class="o">&lt;</span><span class="n">mp_list</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">test_result</span><span class="p">()</span> <span class="p">);</span>
@@ -1253,7 +1268,7 @@ implementation of the standard function <code>tuple_cat</code>, with the end res
 
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">Tp</span><span class="p">,</span>
     <span class="k">class</span> <span class="nc">R</span> <span class="o">=</span> <span class="n">mp_append</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="p">&gt;,</span> <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">Tp</span><span class="o">&gt;::</span><span class="n">type</span><span class="p">...</span><span class="o">&gt;&gt;</span>
-    <span class="n">R</span> <span class="nf">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
+    <span class="n">R</span> <span class="n">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="k">const</span> <span class="n">N</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">Tp</span><span class="p">);</span>
 
@@ -1431,7 +1446,7 @@ as <code>L1</code> (an <code>mp_list</code>) with contents <code>tuple_element&l
 
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">Tp</span><span class="p">,</span>
     <span class="k">class</span> <span class="nc">R</span> <span class="o">=</span> <span class="n">mp_append</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="p">&gt;,</span> <span class="n">from_tuple_like</span><span class="o">&lt;</span><span class="n">remove_cv_ref</span><span class="o">&lt;</span><span class="n">Tp</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="o">&gt;&gt;</span>
-    <span class="n">R</span> <span class="nf">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
+    <span class="n">R</span> <span class="n">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="k">const</span> <span class="n">N</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">Tp</span><span class="p">);</span>
 
@@ -1561,12 +1576,12 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;boost/mp11.hpp&gt;
-#include &lt;boost/core/demangle.hpp&gt;
-#include &lt;variant&gt;
-#include &lt;type_traits&gt;
-#include &lt;typeinfo&gt;
-#include &lt;iostream&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;boost/mp11.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;boost/core/demangle.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;variant&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;type_traits&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;typeinfo&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">boost</span><span class="o">::</span><span class="n">mp11</span><span class="p">;</span>
 
@@ -1584,12 +1599,12 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
         <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">v</span> <span class="p">)...</span> <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="nf">name</span><span class="p">()</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">boost</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">demangle</span><span class="p">(</span> <span class="k">typeid</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">V</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print_variant</span><span class="p">(</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="n">V</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">)</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">V</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="n">print_variant</span><span class="p">(</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="n">V</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"("</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">")"</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">": "</span><span class="p">;</span>
 
@@ -1597,7 +1612,7 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
         <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"("</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">")"</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">},</span> <span class="n">v</span> <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">variant</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span>
 
@@ -1619,6 +1634,45 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
 <div class="sect1">
 <h2 id="changelog">Revision History</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="changes_in_1_83_0">Changes in 1.83.0</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added an offset/from parameter to <code>mp_from_sequence</code>, <code>mp_iota</code>, <code>mp_iota_c</code>.</p>
+</li>
+<li>
+<p>Added <code>mp_value</code>, <code>mp_list_v</code>, <code>mp_rename_v</code>, <code>mp_is_value_list</code>.</p>
+</li>
+<li>
+<p>Added value list support to the primitives in <code>&lt;boost/mp11/list.hpp&gt;</code>.</p>
+</li>
+<li>
+<p>Added value list support to <code>mp_repeat</code>, <code>mp_fill</code>, <code>mp_at</code>, <code>mp_back</code>, <code>mp_take</code>, <code>mp_pop_back</code>, <code>mp_drop</code>, <code>mp_insert</code>, <code>mp_erase</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changes_in_1_79_0">Changes in 1.79.0</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added <code>mp_valid_and_true</code> (contributed by Dmitry Arkhipov)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changes_in_1_78_0">Changes in 1.78.0</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added support for n-ary functions to <code>mp_compose</code> (contributed by Dmitry Arkhipov)</p>
+</li>
+</ul>
+</div>
+</div>
 <div class="sect2">
 <h3 id="changes_in_1_77_0">Changes in 1.77.0</h3>
 <div class="ulist">
@@ -1814,6 +1868,22 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="mp_valuea">mp_value&lt;A&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;auto A&gt; using mp_value = std::integral_constant&lt;decltype(A), A&gt;;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a value list is converted to a type list, either explicitly via <code>mp_rename</code>, or
+implicitly by a primitive that supports value lists directly, its values are converted
+to types by wrapping then with <code>mp_value</code>.</p>
+</div>
+<div class="paragraph">
+<p>Requires C&#43;&#43;17.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="list">List Operations, &lt;boost/mp11/list.hpp&gt;</h3>
@@ -1849,6 +1919,17 @@ the list.</p>
 </div>
 </div>
 <div class="sect3">
+<h4 id="mp_list_va">mp_list_v&lt;A&#8230;&#8203;&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;auto... A&gt; struct mp_list_v {};</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The standard value list type of Mp11. Requires C&#43;&#43;17.</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="mp_is_listl">mp_is_list&lt;L&gt;</h4>
 <div class="literalblock">
 <div class="content">
@@ -1857,6 +1938,17 @@ the list.</p>
 </div>
 <div class="paragraph">
 <p><code>mp_is_list&lt;L&gt;</code> is <code>mp_true</code> if <code>L</code> is a list (an instantiation of a class template whose template parameters are types), <code>mp_false</code> otherwise.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mp_is_value_listl">mp_is_value_list&lt;L&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class L&gt; using mp_is_value_list = /*...*/;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>mp_is_value_list&lt;L&gt;</code> is <code>mp_true</code> under C&#43;&#43;17 if <code>L</code> is a value list (an instantiation of a class template whose template parameters are all values), <code>mp_false</code> otherwise.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1869,6 +1961,9 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_size&lt;L&gt;</code> returns the number of elements in the list <code>L</code>, as a <code>mp_size_t</code>. In other words, <code>mp_size&lt;L&lt;T&#8230;&#8203;&gt;&gt;</code> is an alias for
 <code>mp_size_t&lt;sizeof&#8230;&#8203;(T)&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17.</p>
 </div>
 <div class="listingblock">
 <div class="title">Code Example 2. Using mp_size with mp_list</div>
@@ -1891,6 +1986,13 @@ the list.</p>
 <span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_size</span><span class="o">&lt;</span><span class="n">L3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_size_t&lt;1&gt;</span></code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Code Example 5. Using mp_size with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L4</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mi">8ull</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_size</span><span class="o">&lt;</span><span class="n">L4</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_size_t&lt;3&gt;</span></code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="mp_emptyl">mp_empty&lt;L&gt;</h4>
@@ -1902,8 +2004,11 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_empty&lt;L&gt;</code> is an alias for <code>mp_true</code> if the list <code>L</code> is empty, for <code>mp_false</code> otherwise.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 5. Using mp_empty with std::tuple</div>
+<div class="title">Code Example 6. Using mp_empty with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_empty</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_false</span>
@@ -1923,8 +2028,12 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_assign&lt;L1&lt;T1&#8230;&#8203;&gt;, L2&lt;T2&#8230;&#8203;&gt;&gt;</code> is an alias for <code>L1&lt;T2&#8230;&#8203;&gt;</code>. That is, it replaces the elements of <code>L1</code> with those of <code>L2</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L1</code> or <code>L2</code> under C&#43;&#43;17. When assigning values to types, wraps them in <code>mp_value</code>. When assigning
+types to values, unwraps them by using <code>T::value</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 6. Using mp_assign with mp_list and std::tuple</div>
+<div class="title">Code Example 7. Using mp_assign with mp_list and std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
@@ -1933,12 +2042,21 @@ the list.</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 7. Using mp_assign with mp_list and std::pair</div>
+<div class="title">Code Example 8. Using mp_assign with mp_list and std::pair</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span><span class="p">,</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_assign</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::pair&lt;int, float&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 9. Using mp_assign with value lists</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="nb">false</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_assign</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;mp_int&lt;0&gt;, mp_false&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -1952,11 +2070,21 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_clear&lt;L&lt;T&#8230;&#8203;&gt;&gt;</code> is an alias for <code>L&lt;&gt;</code>, that is, it removes the elements of <code>L</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 8. Using mp_clear with std::tuple</div>
+<div class="title">Code Example 10. Using mp_clear with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_clear</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 11. Using mp_clear with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_clear</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -1970,25 +2098,35 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_front&lt;L&gt;</code> is the first element of the list <code>L</code>. That is, <code>mp_front&lt;L&lt;T1, T&#8230;&#8203;&gt;&gt;</code> is an alias for <code>T1</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, the returned element is wrapped with <code>mp_value</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 9. Using mp_front with std::pair</div>
+<div class="title">Code Example 12. Using mp_front with std::pair</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_front</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// int</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 10. Using mp_front with std::tuple</div>
+<div class="title">Code Example 13. Using mp_front with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_front</span><span class="o">&lt;</span><span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// float</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 11. Using mp_front with mp_list</div>
+<div class="title">Code Example 14. Using mp_front with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_front</span><span class="o">&lt;</span><span class="n">L3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// char[1]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 15. Using mp_front with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L4</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_front</span><span class="o">&lt;</span><span class="n">L4</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_int&lt;1&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2002,18 +2140,28 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_pop_front&lt;L&gt;</code> removes the first element of the list <code>L</code>. That is, <code>mp_pop_front&lt;L&lt;T1, T&#8230;&#8203;&gt;&gt;</code> is an alias for <code>L&lt;T&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 12. Using mp_pop_front with std::tuple</div>
+<div class="title">Code Example 16. Using mp_pop_front with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_pop_front</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;double, long double&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 13. Using mp_pop_front with mp_list</div>
+<div class="title">Code Example 17. Using mp_pop_front with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_pop_front</span><span class="o">&lt;</span><span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 18. Using mp_pop_front with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_pop_front</span><span class="o">&lt;</span><span class="n">L3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;2, 3, 4&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2049,25 +2197,35 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_second&lt;L&gt;</code> is the second element of the list <code>L</code>. That is, <code>mp_second&lt;L&lt;T1, T2, T&#8230;&#8203;&gt;&gt;</code> is an alias for <code>T2</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, the returned element is wrapped with <code>mp_value</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 14. Using mp_second with std::pair</div>
+<div class="title">Code Example 19. Using mp_second with std::pair</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_second</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// float</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 15. Using mp_second with std::tuple</div>
+<div class="title">Code Example 20. Using mp_second with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_second</span><span class="o">&lt;</span><span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// double</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 16. Using mp_second with mp_list</div>
+<div class="title">Code Example 21. Using mp_second with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_second</span><span class="o">&lt;</span><span class="n">L3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// char[2]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 22. Using mp_second with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L4</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_second</span><span class="o">&lt;</span><span class="n">L4</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_int&lt;2&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2081,18 +2239,28 @@ the list.</p>
 <div class="paragraph">
 <p><code>mp_third&lt;L&gt;</code> is the third element of the list <code>L</code>. That is, <code>mp_third&lt;L&lt;T1, T2, T3, T&#8230;&#8203;&gt;&gt;</code> is an alias for <code>T3</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, the returned element is wrapped with <code>mp_value</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 17. Using mp_third with std::tuple</div>
+<div class="title">Code Example 23. Using mp_third with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_third</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// long double</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 18. Using mp_third with mp_list</div>
+<div class="title">Code Example 24. Using mp_third with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_third</span><span class="o">&lt;</span><span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// char[3]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 25. Using mp_third with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_third</span><span class="o">&lt;</span><span class="n">L3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_int&lt;3&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2107,18 +2275,28 @@ the list.</p>
 <p><code>mp_push_front&lt;L, T&#8230;&#8203;&gt;</code> inserts the elements <code>T&#8230;&#8203;</code> at the front of the list <code>L</code>. That is, <code>mp_push_front&lt;L&lt;U&#8230;&#8203;&gt;, T&#8230;&#8203;&gt;</code>
 is an alias for <code>L&lt;T&#8230;&#8203;, U&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, <code>mp_push_front&lt;L&lt;A&#8230;&#8203;&gt;, T&#8230;&#8203;&gt;</code> is <code>L&lt;T::value&#8230;&#8203;, A&#8230;&#8203;&gt;</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 19. Using mp_push_front with std::tuple</div>
+<div class="title">Code Example 26. Using mp_push_front with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_push_front</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;float, double, long double&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 20. Using mp_push_front with mp_list</div>
+<div class="title">Code Example 27. Using mp_push_front with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_push_front</span><span class="o">&lt;</span><span class="n">L2</span><span class="p">,</span> <span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;char[1], char[2], void&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 28. Using mp_push_front with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_push_front</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;true, false, 0, 1&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2133,18 +2311,28 @@ is an alias for <code>L&lt;T&#8230;&#8203;, U&#8230;&#8203;&gt;</code>.</p>
 <p><code>mp_push_back&lt;L, T&#8230;&#8203;&gt;</code> inserts the elements <code>T&#8230;&#8203;</code> at the back of the list <code>L</code>. That is, <code>mp_push_back&lt;L&lt;U&#8230;&#8203;&gt;, T&#8230;&#8203;&gt;</code>
 is an alias for <code>L&lt;U&#8230;&#8203;, T&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, <code>mp_push_back&lt;L&lt;A&#8230;&#8203;&gt;, T&#8230;&#8203;&gt;</code> is <code>L&lt;A&#8230;&#8203;, T::value&#8230;&#8203;&gt;</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 21. Using mp_push_back with std::tuple</div>
+<div class="title">Code Example 29. Using mp_push_back with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_push_back</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;double, long double, float&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 22. Using mp_push_back with mp_list</div>
+<div class="title">Code Example 30. Using mp_push_back with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_push_back</span><span class="o">&lt;</span><span class="n">L2</span><span class="p">,</span> <span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;void, char[1], char[2]&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 31. Using mp_push_back with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_push_front</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;0, 1, true, false&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2158,18 +2346,28 @@ is an alias for <code>L&lt;U&#8230;&#8203;, T&#8230;&#8203;&gt;</code>.</p>
 <div class="paragraph">
 <p><code>mp_rename&lt;L, Y&gt;</code> changes the type of the list <code>L</code> to <code>Y</code>. That is, <code>mp_rename&lt;L&lt;T&#8230;&#8203;&gt;, Y&gt;</code> is an alias for <code>Y&lt;T&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, <code>mp_rename&lt;L&lt;A&#8230;&#8203;&gt;, Y&gt;</code> is <code>Y&lt;mp_value&lt;A&gt;&#8230;&#8203;&gt;</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 23. Using mp_rename to rename std::pair to std::tuple</div>
+<div class="title">Code Example 32. Using mp_rename to rename std::pair to std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_rename</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;double, long double&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 24. Using mp_rename to rename std::tuple to mp_list</div>
+<div class="title">Code Example 33. Using mp_rename to rename std::tuple to mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_rename</span><span class="o">&lt;</span><span class="n">L2</span><span class="p">,</span> <span class="n">mp_list</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;void&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 34. Using mp_rename to convert a value list to a type list</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="nb">false</span><span class="p">,</span> <span class="mi">7</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_rename</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="n">mp_list</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;mp_false, mp_int&lt;7&gt;&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2185,7 +2383,7 @@ is an alias for <code>L&lt;U&#8230;&#8203;, T&#8230;&#8203;&gt;</code>.</p>
 (<code>mp_apply</code> is the same as <code>mp_rename</code> with the arguments reversed.)</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 25. Using mp_apply with std::pair</div>
+<div class="title">Code Example 35. Using mp_apply with std::pair</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_apply</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="p">,</span> <span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::is_same&lt;double, long double&gt;</span></code></pre>
@@ -2203,13 +2401,37 @@ is an alias for <code>L&lt;U&#8230;&#8203;, T&#8230;&#8203;&gt;</code>.</p>
 <p>Same as <code>mp_apply</code>, but takes a quoted metafunction.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 26. Using mp_apply_q with mp_bind_front</div>
+<div class="title">Code Example 36. Using mp_apply_q with mp_bind_front</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">;</span>
 
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_apply_q</span><span class="o">&lt;</span><span class="n">mp_bind_front</span><span class="o">&lt;</span><span class="n">mp_push_back</span><span class="p">,</span> <span class="n">L1</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span>
   <span class="c1">// R1 is std::tuple&lt;double, long double, int, long&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mp_rename_vl_y">mp_rename_v&lt;L, Y&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class L, template&lt;auto...&gt; class Y&gt; using mp_rename_v = /*...*/;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Requires C&#43;&#43;17.</p>
+</div>
+<div class="paragraph">
+<p>For a value list <code>L</code>, <code>mp_rename_v&lt;L&lt;A&#8230;&#8203;&gt;, Y&gt;</code> is <code>Y&lt;A&#8230;&#8203;&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>For a type list <code>L</code>, <code>mp_rename_v&lt;L&lt;T&#8230;&#8203;&gt;, Y&gt;</code> is an alias for <code>Y&lt;T::value&#8230;&#8203;&gt;</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 37. Using mp_rename_v to convert a type list to a value list</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">mp_false</span><span class="p">,</span> <span class="n">mp_int</span><span class="o">&lt;</span><span class="mi">7</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_rename_v</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">mp_list_v</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;false, 7&gt;;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2224,8 +2446,11 @@ is an alias for <code>L&lt;U&#8230;&#8203;, T&#8230;&#8203;&gt;</code>.</p>
 <p><code>mp_append&lt;L&#8230;&#8203;&gt;</code> concatenates the lists in <code>L&#8230;&#8203;</code> into a single list that has the same type as the first list. <code>mp_append&lt;&gt;</code>
 is an alias for <code>mp_list&lt;&gt;</code>. <code>mp_append&lt;L1&lt;T1&#8230;&#8203;&gt;, L2&lt;T2&#8230;&#8203;&gt;, &#8230;&#8203;, Ln&lt;Tn&#8230;&#8203;&gt;&gt;</code> is an alias for <code>L1&lt;T1&#8230;&#8203;, T2&#8230;&#8203;, &#8230;&#8203;, Tn&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists under C&#43;&#43;17, but mixing type lists and value lists in the same <code>mp_append</code> is not supported.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 27. Using mp_append with lists of various types</div>
+<div class="title">Code Example 38. Using mp_append with lists of various types</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
@@ -2234,6 +2459,15 @@ is an alias for <code>mp_list&lt;&gt;</code>. <code>mp_append&lt;L1&lt;T1&#8230;
 
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_append</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">,</span> <span class="n">L3</span><span class="p">,</span> <span class="n">L4</span><span class="o">&gt;</span><span class="p">;</span>
   <span class="c1">// std::tuple&lt;double, long double, int, short, long&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 39. Using mp_append with value lists</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_append</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;true, false, 0, 1, 2, 3&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2248,25 +2482,35 @@ is an alias for <code>mp_list&lt;&gt;</code>. <code>mp_append&lt;L1&lt;T1&#8230;
 <p><code>mp_replace_front&lt;L, T&gt;</code> replaces the first element of the list <code>L</code> with <code>T</code>. That is, <code>mp_replace_front&lt;L&lt;U1, U&#8230;&#8203;&gt;, T&gt;</code> is
 an alias for <code>L&lt;T, U&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, <code>mp_replace_front&lt;L&lt;A1, A&#8230;&#8203;&gt;, T&gt;</code> is <code>L&lt;T::value, A&#8230;&#8203;&gt;</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 28. Using mp_replace_front with std::pair</div>
+<div class="title">Code Example 40. Using mp_replace_front with std::pair</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_replace_front</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::pair&lt;void, float&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 29. Using mp_replace_front with std::tuple</div>
+<div class="title">Code Example 41. Using mp_replace_front with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_replace_front</span><span class="o">&lt;</span><span class="n">L2</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;void, double, long double&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 30. Using mp_replace_front with mp_list</div>
+<div class="title">Code Example 42. Using mp_replace_front with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_replace_front</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;void, char[2], char[3], char[4]&gt;;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 43. Using mp_replace_front with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L4</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_replace_front</span><span class="o">&lt;</span><span class="n">L4</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;false, 2, 3, 4&gt;;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2292,25 +2536,35 @@ an alias for <code>L&lt;T, U&#8230;&#8203;&gt;</code>.</p>
 <p><code>mp_replace_second&lt;L, T&gt;</code> replaces the second element of the list <code>L</code> with <code>T</code>. That is, <code>mp_replace_second&lt;L&lt;U1, U2, U&#8230;&#8203;&gt;, T&gt;</code>
 is an alias for <code>L&lt;U1, T, U&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, <code>mp_replace_second&lt;L&lt;A1, A2, A&#8230;&#8203;&gt;, T&gt;</code> is <code>L&lt;A1, T::value, A&#8230;&#8203;&gt;</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 31. Using mp_replace_second with std::pair</div>
+<div class="title">Code Example 44. Using mp_replace_second with std::pair</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_replace_second</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::pair&lt;int, void&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 32. Using mp_replace_second with std::tuple</div>
+<div class="title">Code Example 45. Using mp_replace_second with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_replace_second</span><span class="o">&lt;</span><span class="n">L2</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;float, void, long double&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 33. Using mp_replace_front with mp_list</div>
+<div class="title">Code Example 46. Using mp_replace_second with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_replace_second</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;char[1], void, char[3], char[4]&gt;;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 47. Using mp_replace_second with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L4</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_replace_second</span><span class="o">&lt;</span><span class="n">L4</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;1, false, 3, 4&gt;;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2325,18 +2579,28 @@ is an alias for <code>L&lt;U1, T, U&#8230;&#8203;&gt;</code>.</p>
 <p><code>mp_replace_third&lt;L, T&gt;</code> replaces the third element of the list <code>L</code> with <code>T</code>. That is, <code>mp_replace_third&lt;L&lt;U1, U2, U3, U&#8230;&#8203;&gt;, T&gt;</code>
 is an alias for <code>L&lt;U1, U2, T, U&#8230;&#8203;&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, <code>mp_replace_third&lt;L&lt;A1, A2, A3, A&#8230;&#8203;&gt;, T&gt;</code> is <code>L&lt;A1, A2, T::value, A&#8230;&#8203;&gt;</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 34. Using mp_replace_third with std::tuple</div>
+<div class="title">Code Example 48. Using mp_replace_third with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_replace_third</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;float, double, void&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 35. Using mp_replace_third with mp_list</div>
+<div class="title">Code Example 49. Using mp_replace_third with mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_replace_third</span><span class="o">&lt;</span><span class="n">L2</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;char[1], char[2], void, char[4]&gt;;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 50. Using mp_replace_third with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L4</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_replace_third</span><span class="o">&lt;</span><span class="n">L4</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;1, 2, false, 4&gt;;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2350,6 +2614,9 @@ is an alias for <code>L&lt;U1, U2, T, U&#8230;&#8203;&gt;</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>mp_transform_front&lt;L, F&gt;</code> replaces the first element <code>T1</code> of the list <code>L</code> with <code>F&lt;T1&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, the replacement is <code>F&lt;mp_value&lt;T1&gt;&gt;::value</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2399,6 +2666,9 @@ is an alias for <code>L&lt;U1, U2, T, U&#8230;&#8203;&gt;</code>.</p>
 <div class="paragraph">
 <p><code>mp_transform_second&lt;L, F&gt;</code> replaces the second element <code>T2</code> of the list <code>L</code> with <code>F&lt;T2&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, the replacement is <code>F&lt;mp_value&lt;T2&gt;&gt;::value</code>.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="mp_transform_second_ql_q">mp_transform_second_q&lt;L, Q&gt;</h4>
@@ -2422,6 +2692,9 @@ is an alias for <code>L&lt;U1, U2, T, U&#8230;&#8203;&gt;</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>mp_transform_third&lt;L, F&gt;</code> replaces the third element <code>T3</code> of the list <code>L</code> with <code>F&lt;T3&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17. In that case, the replacement is <code>F&lt;mp_value&lt;T3&gt;&gt;::value</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2455,26 +2728,26 @@ that just returns the same type. It&#8217;s useful both as such, and as a type w
 for passing types as values to functions.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 36. Using mp_identity as a type trait</div>
+<div class="title">Code Example 51. Using mp_identity as a type trait</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">addp_if_not_ref</span> <span class="o">=</span>
     <span class="k">typename</span> <span class="n">mp_if</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_reference</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">mp_identity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">add_pointer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;::</span><span class="n">type</span><span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 37. Using mp_identity to protect qualifiers and references</div>
+<div class="title">Code Example 52. Using mp_identity to protect qualifiers and references</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print1</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print2</span><span class="p">()</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="n">print2</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="n">mp_identity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">print1</span><span class="o">&lt;</span><span class="kt">int</span> <span class="k">const</span><span class="o">&amp;&gt;</span><span class="p">();</span> <span class="c1">// 'int'</span>
     <span class="n">print2</span><span class="o">&lt;</span><span class="kt">int</span> <span class="k">const</span><span class="o">&amp;&gt;</span><span class="p">();</span> <span class="c1">// 'mp_identity&lt;int const &amp;&gt;'</span>
@@ -2509,7 +2782,7 @@ for passing types as values to functions.</p>
 <p><code>mp_if_c&lt;true, T, E&#8230;&#8203;&gt;</code> is an alias for <code>T</code>. <code>mp_if_c&lt;false, T, E&gt;</code> is an alias for <code>E</code>. Otherwise, the result is a substitution failure.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 38. Using mp_if_c to select between two alternatives</div>
+<div class="title">Code Example 53. Using mp_if_c to select between two alternatives</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_if_c</span><span class="o">&lt;</span><span class="nb">true</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// int</span>
 
@@ -2517,7 +2790,7 @@ for passing types as values to functions.</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 39. Using mp_if_c to fail substitution when a condition is not met</div>
+<div class="title">Code Example 54. Using mp_if_c to fail substitution when a condition is not met</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">void_if_5</span> <span class="o">=</span> <span class="n">mp_if_c</span><span class="o">&lt;</span><span class="n">I</span><span class="o">::</span><span class="n">value</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span></code></pre>
 </div>
@@ -2540,7 +2813,7 @@ otherwise. It&#8217;s the same as <code>std::enable_if_t&lt;I::value == 5&gt;</c
 <p>Like <code>mp_if_c</code>, but the first argument is a type.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 40. Using mp_if to select between two alternatives</div>
+<div class="title">Code Example 55. Using mp_if to select between two alternatives</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_if</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// int</span>
 
@@ -2548,7 +2821,7 @@ otherwise. It&#8217;s the same as <code>std::enable_if_t&lt;I::value == 5&gt;</c
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 41. Using mp_if to fail substitution when a condition is not met</div>
+<div class="title">Code Example 56. Using mp_if to fail substitution when a condition is not met</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">void_if_const</span> <span class="o">=</span> <span class="n">mp_if</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_const</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -2572,7 +2845,7 @@ otherwise. It&#8217;s the same as <code>std::enable_if_t&lt;I::value == 5&gt;</c
 is to avoid evaluating <code>F&lt;U&#8230;&#8203;&gt;</code> when the condition is <code>true</code> as it may not be valid in this case.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 42. Using mp_eval_if_c to select the first pack element, or void</div>
+<div class="title">Code Example 57. Using mp_eval_if_c to select the first pack element, or void</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">first_or_void</span> <span class="o">=</span>
     <span class="n">mp_eval_if_c</span><span class="o">&lt;</span><span class="k">sizeof</span><span class="p">...(</span><span class="n">T</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">void</span><span class="p">,</span> <span class="n">mp_first</span><span class="p">,</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;&gt;</span><span class="p">;</span></code></pre>
@@ -2591,7 +2864,7 @@ is to avoid evaluating <code>F&lt;U&#8230;&#8203;&gt;</code> when the condition 
 <p>Like <code>mp_eval_if_c</code>, but the first argument is a type.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 43. Using mp_eval_if to select the first list element, or void</div>
+<div class="title">Code Example 58. Using mp_eval_if to select the first list element, or void</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">L</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">first_or_void</span> <span class="o">=</span> <span class="n">mp_eval_if</span><span class="o">&lt;</span><span class="n">mp_empty</span><span class="o">&lt;</span><span class="n">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">void</span><span class="p">,</span> <span class="n">mp_first</span><span class="p">,</span> <span class="n">L</span><span class="o">&gt;</span><span class="p">;</span></code></pre>
 </div>
@@ -2644,7 +2917,7 @@ is to avoid evaluating <code>F&lt;U&#8230;&#8203;&gt;</code> when the condition 
 <p><code>mp_valid&lt;F, T&#8230;&#8203;&gt;</code> is an alias for <code>mp_true</code> when <code>F&lt;T&#8230;&#8203;&gt;</code> is a valid expression, for <code>mp_false</code> otherwise.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 44. Using mp_valid to write a metafunction that checks for the existence of a nested type</div>
+<div class="title">Code Example 59. Using mp_valid to write a metafunction that checks for the existence of a nested type</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">get_nested_type</span> <span class="o">=</span> <span class="k">typename</span> <span class="n">T</span><span class="o">::</span><span class="n">type</span><span class="p">;</span>
 
@@ -2675,7 +2948,7 @@ is to avoid evaluating <code>F&lt;U&#8230;&#8203;&gt;</code> when the condition 
 <p><code>mp_eval_or&lt;T, F, U&#8230;&#8203;&gt;</code> is an alias for <code>F&lt;U&#8230;&#8203;&gt;</code> when this expression is valid, for <code>T</code> otherwise.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 45. Using mp_eval_or to select the first pack element, or void</div>
+<div class="title">Code Example 60. Using mp_eval_or to select the first pack element, or void</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">first_or_void</span> <span class="o">=</span>
     <span class="n">mp_eval_or</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="n">mp_first</span><span class="p">,</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;&gt;</span><span class="p">;</span></code></pre>
@@ -2734,7 +3007,7 @@ When <code>static_cast&lt;bool&gt;(C::value)</code> is <code>false</code>, it&#8
 failure.)</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 46. Using mp_cond</div>
+<div class="title">Code Example 61. Using mp_cond</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span> <span class="n">N</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">unsigned_</span> <span class="o">=</span> <span class="n">mp_cond</span><span class="o">&lt;</span>
     <span class="n">mp_bool</span><span class="o">&lt;</span><span class="n">N</span> <span class="o">==</span>  <span class="mi">8</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">uint8_t</span><span class="p">,</span>
@@ -2772,7 +3045,7 @@ failure.)</p>
 <p><code>mp_quote&lt;F&gt;</code> transforms the template <code>F</code> into a <em>quoted metafunction</em>, a type with a nested template <code>fn</code> such that <code>fn&lt;T&#8230;&#8203;&gt;</code> returns <code>F&lt;T&#8230;&#8203;&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 47. Using mp_quote to make a list of metafunctions</div>
+<div class="title">Code Example 62. Using mp_quote to make a list of metafunctions</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">LQ</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">mp_quote</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_const</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">mp_quote</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_volatile</span><span class="o">&gt;&gt;</span><span class="p">;</span></code></pre>
 </div>
@@ -2792,7 +3065,7 @@ failure.)</p>
 <p><code>mp_quote_trait&lt;F&gt;</code> transforms the C++03-style trait <code>F</code> into a quoted metafunction.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 48. Using mp_quote_trait with std::add_pointer</div>
+<div class="title">Code Example 63. Using mp_quote_trait with std::add_pointer</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">void</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_transform_q</span><span class="o">&lt;</span><span class="n">mp_quote_trait</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">add_pointer</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span>
@@ -2811,7 +3084,7 @@ failure.)</p>
 <p><code>mp_invoke_q&lt;Q, T&#8230;&#8203;&gt;</code> evaluates the nested template <code>fn</code> of a quoted metafunction. <code>mp_invoke_q&lt;mp_quote&lt;F&gt;, T&#8230;&#8203;&gt;</code> returns <code>F&lt;T&#8230;&#8203;&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 49. Using mp_invoke_q to invoke a list of metafunctions, technique 1</div>
+<div class="title">Code Example 64. Using mp_invoke_q to invoke a list of metafunctions, technique 1</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">LQ</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">mp_quote</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_const</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">mp_quote</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_volatile</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 
@@ -2820,14 +3093,14 @@ failure.)</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 50. Using mp_invoke_q to invoke a list of metafunctions, technique 2</div>
+<div class="title">Code Example 65. Using mp_invoke_q to invoke a list of metafunctions, technique 2</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">is_const_and_volatile</span> <span class="o">=</span>
     <span class="n">mp_apply</span><span class="o">&lt;</span><span class="n">mp_all</span><span class="p">,</span> <span class="n">mp_transform_q</span><span class="o">&lt;</span><span class="n">mp_bind_back</span><span class="o">&lt;</span><span class="n">mp_invoke_q</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">LQ</span><span class="o">&gt;&gt;</span><span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 51. Using mp_invoke_q to invoke a list of metafunctions, technique 3</div>
+<div class="title">Code Example 66. Using mp_invoke_q to invoke a list of metafunctions, technique 3</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">is_const_and_volatile</span> <span class="o">=</span>
     <span class="n">mp_apply</span><span class="o">&lt;</span><span class="n">mp_all</span><span class="p">,</span> <span class="n">mp_transform</span><span class="o">&lt;</span><span class="n">mp_invoke_q</span><span class="p">,</span> <span class="n">LQ</span><span class="p">,</span> <span class="n">mp_fill</span><span class="o">&lt;</span><span class="n">LQ</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;&gt;&gt;</span><span class="p">;</span></code></pre>
@@ -2900,7 +3173,7 @@ failure.)</p>
 <p><code>mp_transform&lt;F, L1&lt;T1&#8230;&#8203;&gt;, L2&lt;T2&#8230;&#8203;&gt;, &#8230;&#8203;, Ln&lt;Tn&#8230;&#8203;&gt;&gt;</code> applies <code>F</code> to each successive tuple of elements and returns <code>L1&lt;F&lt;T1, T2, &#8230;&#8203;, Tn&gt;&#8230;&#8203;&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 52. Using mp_transform to produce a list of pointers from a list of pointees</div>
+<div class="title">Code Example 67. Using mp_transform to produce a list of pointers from a list of pointees</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">add_pointer_t</span> <span class="o">=</span>
     <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">add_pointer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="p">;</span>  <span class="c1">// std::add_pointer_t in C++14</span>
@@ -2910,7 +3183,7 @@ failure.)</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 53. Using mp_transform to compare the contents of two lists of types</div>
+<div class="title">Code Example 68. Using mp_transform to compare the contents of two lists of types</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
@@ -2919,7 +3192,7 @@ failure.)</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 54. Using mp_transform to compare the contents of two lists of integral constants</div>
+<div class="title">Code Example 69. Using mp_transform to compare the contents of two lists of integral constants</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T2</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">eq</span> <span class="o">=</span> <span class="n">mp_bool</span><span class="o">&lt;</span><span class="n">T1</span><span class="o">::</span><span class="n">value</span> <span class="o">==</span> <span class="n">T2</span><span class="o">::</span><span class="n">value</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -3010,7 +3283,7 @@ failure.)</p>
 <p>As <code>mp_transform</code>, but takes a quoted metafunction.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 55. Using mp_transform_q to count the occurrences of <code>void</code> in a list</div>
+<div class="title">Code Example 70. Using mp_transform_q to count the occurrences of <code>void</code> in a list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -3071,7 +3344,7 @@ failure.)</p>
 <code>F&lt;T1, T2, &#8230;&#8203;, Tn&gt;</code>, and returns the result, where <code>Ti</code> are the corresponding elements of <code>Li</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 56. Using mp_transform_if to replace the occurrences of 'void' in a list with the corresponding elements of a second list</div>
+<div class="title">Code Example 71. Using mp_transform_if to replace the occurrences of 'void' in a list with the corresponding elements of a second list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
@@ -3145,7 +3418,7 @@ failure.)</p>
 <p>As <code>mp_transform_if</code>, but takes quoted metafunctions.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 57. Using mp_transform_if_q to replace the occurrences of 'void' in a list with the corresponding elements of a second list</div>
+<div class="title">Code Example 72. Using mp_transform_if_q to replace the occurrences of 'void' in a list with the corresponding elements of a second list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="kt">char</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
@@ -3231,7 +3504,7 @@ is <code>mp_false</code> and returns the result, where <code>Ti</code> are the c
 <p>As <code>mp_filter</code>, but takes a quoted metafunction.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 58. Using mp_filter_q to pick elements of a list based on a mask in another list</div>
+<div class="title">Code Example 73. Using mp_filter_q to pick elements of a list based on a mask in another list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">L2</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="p">,</span> <span class="n">mp_true</span><span class="o">&gt;</span><span class="p">;</span>
@@ -3249,18 +3522,28 @@ is <code>mp_false</code> and returns the result, where <code>Ti</code> are the c
 <div class="paragraph">
 <p><code>mp_fill&lt;L&lt;T&#8230;&#8203;&gt;, V&gt;</code> returns <code>L&lt;V, V, &#8230;&#8203;, V&gt;</code>, with the result having the same size as the input.</p>
 </div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17. In that case, the elements are replaced with <code>V::value</code>.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 59. Using mp_fill with std::tuple</div>
+<div class="title">Code Example 74. Using mp_fill with std::tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_fill</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::tuple&lt;double, double, double&gt;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 60. Using mp_fill with std::pair</div>
+<div class="title">Code Example 75. Using mp_fill with std::pair</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_fill</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::pair&lt;void, void&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 76. Using mp_fill with mp_list_v</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_fill</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">mp_int</span><span class="o">&lt;</span><span class="mi">7</span><span class="o">&gt;&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;7, 7&gt;</span></code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
@@ -3359,8 +3642,11 @@ otherwise.</p>
 <div class="paragraph">
 <p><code>mp_repeat_c&lt;L, N&gt;</code> returns a list of the same form as <code>L</code> that consists of <code>N</code> concatenated copies of <code>L</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17.</p>
+</div>
 <div class="listingblock">
-<div class="title">Code Example 61. Using mp_repeat_c</div>
+<div class="title">Code Example 77. Using mp_repeat_c</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_repeat_c</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// tuple&lt;int, int, int&gt;</span>
@@ -3372,7 +3658,10 @@ otherwise.</p>
 <span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_repeat_c</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;int, float, int, float&gt;</span>
 
 <span class="k">using</span> <span class="n">L4</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_repeat_c</span><span class="o">&lt;</span><span class="n">L4</span><span class="p">,</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;&gt;</span></code></pre>
+<span class="k">using</span> <span class="n">R4</span> <span class="o">=</span> <span class="n">mp_repeat_c</span><span class="o">&lt;</span><span class="n">L4</span><span class="p">,</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;&gt;</span>
+
+<span class="k">using</span> <span class="n">L5</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="nb">true</span><span class="p">,</span> <span class="mi">8</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">R5</span> <span class="o">=</span> <span class="n">mp_repeat_c</span><span class="o">&lt;</span><span class="n">L5</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;true, 8, true, 8&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -3385,6 +3674,9 @@ otherwise.</p>
 </div>
 <div class="paragraph">
 <p>Same as <code>mp_repeat_c</code> but with a type argument <code>N</code>. The number of copies is <code>N::value</code> and must be nonnegative.</p>
+</div>
+<div class="paragraph">
+<p>Supports value lists as <code>L</code> under C&#43;&#43;17.</p>
 </div>
 </div>
 <div class="sect3">
@@ -3502,6 +3794,9 @@ of zero lists, <code>mp_product&lt;F&gt;</code>, returns <code>mp_list&lt;F&lt;&
 <div class="paragraph">
 <p><code>mp_drop_c&lt;L, N&gt;</code> removes the first <code>N</code> elements of <code>L</code> and returns the result.</p>
 </div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17.</p>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
 <caption class="title">Illustration 8. mp_drop_c</caption>
 <colgroup>
@@ -3548,15 +3843,19 @@ of zero lists, <code>mp_product&lt;F&gt;</code>, returns <code>mp_list&lt;F&lt;&
 </div>
 </div>
 <div class="sect3">
-<h4 id="mp_from_sequences">mp_from_sequence&lt;S&gt;</h4>
+<h4 id="mp_from_sequences_f">mp_from_sequence&lt;S, F&gt;</h4>
 <div class="literalblock">
 <div class="content">
-<pre>template&lt;class S&gt; using mp_from_sequence = /*...*/</pre>
+<pre>template&lt;class S, class F = mp_int&lt;0&gt;&gt; using mp_from_sequence = /*...*/</pre>
 </div>
 </div>
 <div class="paragraph">
 <p><code>mp_from_sequence</code> transforms an integer sequence produced by <code>make_integer_sequence</code> into an <code>mp_list</code>
-of the corresponding <code>std::integral_constant</code> types. Given</p>
+of the corresponding <code>std::integral_constant</code> types. If the optional second parameter <code>F</code> is supplied,
+an offset of <code>F::value</code> is added to all values.</p>
+</div>
+<div class="paragraph">
+<p>Given</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -3564,34 +3863,21 @@ of the corresponding <code>std::integral_constant</code> types. Given</p>
 </div>
 </div>
 <div class="paragraph">
-<p><code>mp_from_sequence&lt;S&lt;T, I&#8230;&#8203;&gt;&gt;</code> is an alias for <code>mp_list&lt;std::integral_constant&lt;T, I&gt;&#8230;&#8203;&gt;</code>.</p>
+<p><code>mp_from_sequence&lt;S&lt;T, I&#8230;&#8203;&gt;, F&gt;</code> is an alias for <code>mp_list&lt;std::integral_constant&lt;T, I + F::value&gt;&#8230;&#8203;&gt;</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mp_iota_cn">mp_iota_c&lt;N&gt;</h4>
+<h4 id="mp_iota_cn_f">mp_iota_c&lt;N, F&gt;</h4>
 <div class="literalblock">
 <div class="content">
-<pre>template&lt;std::size_t N&gt; using mp_iota_c = /*...*/;</pre>
+<pre>template&lt;std::size_t N, std::size_t F = 0&gt; using mp_iota_c = /*...*/;</pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>mp_iota_c&lt;N&gt;</code> is an alias for <code>mp_list&lt;mp_size_t&lt;0&gt;, mp_size_t&lt;1&gt;, &#8230;&#8203;, mp_size_t&lt;N-1&gt;&gt;</code>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="mp_iotan">mp_iota&lt;N&gt;</h4>
-<div class="literalblock">
-<div class="content">
-<pre>template&lt;class N&gt; using mp_iota = /*...*/;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Same as <code>mp_iota_c</code>, but with a type argument <code>N</code>. <code>N::value</code> must be a nonnegative number. Returns
-<code>mp_list&lt;std::integral_constant&lt;T, 0&gt;, std::integral_constant&lt;T, 1&gt;, &#8230;&#8203;, std::integral_constant&lt;T, N::value-1&gt;&gt;</code>
-where <code>T</code> is the type of <code>N::value</code>.</p>
+<p><code>mp_iota_c&lt;N, F&gt;</code> is an alias for <code>mp_list&lt;mp_size_t&lt;F+0&gt;, mp_size_t&lt;F+1&gt;, &#8230;&#8203;, mp_size_t&lt;F+N-1&gt;&gt;</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 9. mp_iota</caption>
+<caption class="title">Illustration 9. mp_iota_c</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 12.5%;">
@@ -3601,11 +3887,57 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code><strong>mp_iota&lt;mp_int&lt;4&gt;&gt;</strong></code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code><strong>mp_iota_c&lt;4&gt;</strong></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;0&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;1&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;2&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;3&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code><strong>mp_iota_c&lt;4, 2&gt;</strong></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;2&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;3&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;4&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;5&gt;</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="mp_iotan_f">mp_iota&lt;N, F&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class N, class F = mp_int&lt;0&gt;&gt; using mp_iota = /*...*/;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Same as <code>mp_iota_c</code>, but with a type arguments <code>N</code> and <code>F</code>. <code>N::value</code> must be a nonnegative number. Returns
+<code>mp_list&lt;std::integral_constant&lt;T, F::value+0&gt;, std::integral_constant&lt;T, F::value+1&gt;, &#8230;&#8203;, std::integral_constant&lt;T, F::value+N::value-1&gt;&gt;</code>
+where <code>T</code> is the type of <code>N::value</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 85%;">
+<caption class="title">Illustration 10. mp_iota</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code><strong>mp_iota&lt;mp_size_t&lt;4&gt;&gt;</strong></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;0&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;1&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;2&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_size_t&lt;3&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code><strong>mp_iota&lt;mp_int&lt;4&gt;, mp_int&lt;-2&gt;&gt;</strong></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_int&lt;-2&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_int&lt;-1&gt;</code></p></td>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_int&lt;0&gt;</code></p></td>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_int&lt;1&gt;</code></p></td>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_int&lt;2&gt;</code></p></td>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_int&lt;3&gt;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>mp_int&lt;+1&gt;</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -3619,6 +3951,9 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>mp_at_c&lt;L, I&gt;</code> returns the <code>I</code>-th element of <code>L</code>, zero-based.</p>
+</div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17. In that case, the element is returned wrapped with <code>mp_value</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -3642,8 +3977,11 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <div class="paragraph">
 <p><code>mp_take_c&lt;L, N&gt;</code> returns a list of the same form as <code>L</code> containing the first <code>N</code> elements of <code>L</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17.</p>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 10. mp_take_c</caption>
+<caption class="title">Illustration 11. mp_take_c</caption>
 <colgroup>
 <col style="width: 40%;">
 <col style="width: 10%;">
@@ -3697,6 +4035,9 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <div class="paragraph">
 <p><code>mp_back&lt;L&gt;</code> returns the last element of the list <code>L</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17. In that case, the element is returned wrapped with <code>mp_value</code>.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="mp_pop_backl">mp_pop_back&lt;L&gt;</h4>
@@ -3707,6 +4048,9 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>mp_pop_back&lt;L&gt;</code> removes the last element of the list <code>L</code> and returns the result.</p>
+</div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17.</p>
 </div>
 </div>
 <div class="sect3">
@@ -3720,8 +4064,11 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <div class="paragraph">
 <p>Inserts the elements <code>T&#8230;&#8203;</code> into the list <code>L</code> at position <code>I</code> (a zero-based index).</p>
 </div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17. In that case, the elements <code>T::value&#8230;&#8203;</code> are inserted.</p>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 11. mp_insert_c with two elements</caption>
+<caption class="title">Illustration 12. mp_insert_c with two elements</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 8.3333%;">
@@ -3784,8 +4131,11 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <div class="paragraph">
 <p>Removes from the list <code>L</code> the elements with indices from <code>I</code> (inclusive) to <code>J</code> (exclusive).</p>
 </div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17.</p>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 12. mp_erase_c</caption>
+<caption class="title">Illustration 13. mp_erase_c</caption>
 <colgroup>
 <col style="width: 30.7692%;">
 <col style="width: 7.6923%;">
@@ -3850,7 +4200,7 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <p>Replaces all <code>V</code> elements of <code>L</code> with <code>W</code> and returns the result.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 13. mp_replace</caption>
+<caption class="title">Illustration 14. mp_replace</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 12.5%;">
@@ -3890,7 +4240,7 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <p>Replaces all <code>T</code> elements of <code>L</code> for which <code>mp_to_bool&lt;P&lt;T&gt;&gt;</code> is <code>mp_true</code> with <code>W</code> and returns the result.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 14. mp_replace_if</caption>
+<caption class="title">Illustration 15. mp_replace_if</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 12.5%;">
@@ -4076,7 +4426,7 @@ lists are unchanged.</p>
 <code>mp_similar&lt;T, L2&gt;</code> is <code>mp_true</code>) with their elements and returns the result.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 62. Using mp_flatten</div>
+<div class="title">Code Example 78. Using mp_flatten</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">tuple</span><span class="o">&lt;&gt;</span><span class="p">,</span> <span class="kt">void</span><span class="p">,</span> <span class="n">tuple</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_flatten</span><span class="o">&lt;</span><span class="n">L1</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// tuple&lt;int, void, float, double&gt;</span>
@@ -4180,9 +4530,9 @@ for the elements of <code>L&lt;U1&#8230;&#8203;&gt;</code> and <code>mp_false</c
 <p><code>mp_sort&lt;L, P&gt;</code> sorts the list <code>L</code> according to the strict weak ordering <code>mp_to_bool&lt;P&lt;T, U&gt;&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 63. Using mp_sort to sort a list of std::ratio values</div>
+<div class="title">Code Example 79. Using mp_sort to sort a list of std::ratio values</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;ratio&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;ratio&gt;</span><span class="cp">
 </span>
 <span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_sort</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ratio_less</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list&lt;ratio&lt;1,4&gt;, ratio&lt;1,2&gt;&gt;</span></code></pre>
@@ -4332,7 +4682,7 @@ is <code>mp_size&lt;L&gt;</code>.</p>
 <p><code>mp_reverse&lt;L&lt;T1, T2, &#8230;&#8203;, Tn&gt;&gt;</code> is <code>L&lt;Tn, &#8230;&#8203;, T2, T1&gt;</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 15. mp_reverse</caption>
+<caption class="title">Illustration 16. mp_reverse</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 12.5%;">
@@ -4372,9 +4722,9 @@ is <code>mp_size&lt;L&gt;</code>.</p>
 <p><code>mp_fold&lt;L&lt;T1, T2, &#8230;&#8203;, Tn&gt;, V, F&gt;</code> is <code>F&lt; F&lt; F&lt; F&lt;V, T1&gt;, T2&gt;, &#8230;&#8203;&gt;, Tn&gt;</code>, or <code>V</code>, if <code>L</code> is empty.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 64. Using mp_fold to add the contents of a list of std::ratio values</div>
+<div class="title">Code Example 80. Using mp_fold to add the contents of a list of std::ratio values</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;ratio&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;ratio&gt;</span><span class="cp">
 </span>
 <span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_fold</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ratio_add</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// std::ratio&lt;7,8&gt;</span></code></pre>
@@ -4437,7 +4787,7 @@ result of <code>mp_partial_sum</code> is the same as the result of <code>mp_fold
 <p>It&#8217;s common for <code>F</code> to be <code>mp_plus</code>, in which case the result contains the partial sums of <code>L</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 65. Using mp_partial_sum</div>
+<div class="title">Code Example 81. Using mp_partial_sum</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">mp_list_c</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_partial_sum</span><span class="o">&lt;</span><span class="n">L1</span><span class="p">,</span> <span class="n">mp_int</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">mp_plus</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_c&lt;int, 1, 3, 6, 10&gt;</span></code></pre>
@@ -4474,7 +4824,7 @@ elements of <code>L</code>. That is, <code>mp_pairwise_fold&lt;L&lt;T1, T2, T3&g
 result is an empty list. If <code>L</code> is an empty list, the result is also an empty list.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 66. Using mp_pairwise_fold</div>
+<div class="title">Code Example 82. Using mp_pairwise_fold</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">L</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">is_increasing</span> <span class="o">=</span> <span class="n">mp_all_of</span><span class="o">&lt;</span>
     <span class="n">mp_pairwise_fold</span><span class="o">&lt;</span><span class="n">L</span><span class="p">,</span> <span class="n">mp_less</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">mp_to_bool</span><span class="o">&gt;</span><span class="p">;</span></code></pre>
@@ -4493,7 +4843,7 @@ result is an empty list. If <code>L</code> is an empty list, the result is also 
 <p>As <code>mp_pairwise_fold</code>, but takes a quoted metafunction.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 67. Using mp_pairwise_fold_q</div>
+<div class="title">Code Example 83. Using mp_pairwise_fold_q</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">L</span><span class="p">,</span> <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span><span class="p">&gt;</span> <span class="k">class</span> <span class="nc">P</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">is_sorted</span> <span class="o">=</span>
     <span class="n">mp_none_of</span><span class="o">&lt;</span><span class="n">mp_pairwise_fold_q</span><span class="o">&lt;</span><span class="n">L</span><span class="p">,</span> <span class="n">mp_bind</span><span class="o">&lt;</span><span class="n">P</span><span class="p">,</span> <span class="n">_2</span><span class="p">,</span> <span class="n">_1</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">mp_to_bool</span><span class="o">&gt;</span><span class="p">;</span></code></pre>
@@ -4531,7 +4881,7 @@ which when passed as <code>V</code> to <code>mp_iterate&lt;V, mp_first, mp_secon
 <code>mp_list&lt;X1, X2, X3&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 68. Using mp_iterate</div>
+<div class="title">Code Example 84. Using mp_iterate</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">struct</span> <span class="nc">X1</span> <span class="p">{};</span>
 <span class="k">struct</span> <span class="nc">X2</span> <span class="p">{};</span>
@@ -4688,7 +5038,7 @@ which when passed as <code>V</code> to <code>mp_iterate&lt;V, mp_first, mp_secon
 <p>Returns <code>std::forward&lt;F&gt;(f)</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 69. Using mp_for_each and a C++14 lambda to print a tuple</div>
+<div class="title">Code Example 85. Using mp_for_each and a C++14 lambda to print a tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">tp</span> <span class="p">)</span>
 <span class="p">{</span>
@@ -4734,7 +5084,7 @@ Only <code>constexpr</code> on C++14 and higher.</p>
 <p>Returns <code>mp_with_index&lt;N::value&gt;(i, f)</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 70. Using mp_with_index and a C++14 lambda to print the active element of a variant</div>
+<div class="title">Code Example 86. Using mp_with_index and a C++14 lambda to print the active element of a variant</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">variant</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">)</span>
 <span class="p">{</span>
@@ -4911,7 +5261,7 @@ replaces the existing element with <code>T</code>.</p>
 replaces the existing element <code>L&lt;X, Y&#8230;&#8203;&gt;</code> with <code>L&lt;X, F&lt;X, Y&#8230;&#8203;&gt;&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 71. Using mp_map_update to count the number of occurrences of types in a list</div>
+<div class="title">Code Example 87. Using mp_map_update to count the number of occurrences of types in a list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">inc2nd</span> <span class="o">=</span> <span class="n">mp_int</span><span class="o">&lt;</span><span class="n">U</span><span class="o">::</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -4986,7 +5336,7 @@ returns <code>mp_false</code>. If the application causes a substitution failure,
 returns <code>mp_true</code>. <code>mp_and&lt;&gt;</code> is <code>mp_true</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 72. mp_and behavior</div>
+<div class="title">Code Example 88. mp_and behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_and</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_true</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// mp_true</span>
 
@@ -5012,7 +5362,7 @@ is an error because <code>void</code> does not have a nested <code>value</code>.
 mask substitution failures as <code>mp_and</code> does.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 73. mp_all behavior</div>
+<div class="title">Code Example 89. mp_all behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_all</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_true</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// mp_true</span>
 
@@ -5036,7 +5386,7 @@ mask substitution failures as <code>mp_and</code> does.</p>
 returns <code>mp_true</code>. If all results are <code>mp_false</code>, returns <code>mp_false</code>. <code>mp_or&lt;&gt;</code> is <code>mp_false</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 74. mp_or behavior</div>
+<div class="title">Code Example 90. mp_or behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_or</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// mp_true</span>
 
@@ -5060,7 +5410,7 @@ returns <code>mp_true</code>. If all results are <code>mp_false</code>, returns 
 <code>mp_or</code>, but does not perform short-circuit evaluation.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 75. mp_any behavior</div>
+<div class="title">Code Example 91. mp_any behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_any</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// mp_true</span>
 
@@ -5095,7 +5445,7 @@ returns <code>mp_true</code>. If all results are <code>mp_false</code>, returns 
 whose parameters are all types, <code>mp_false</code> otherwise. <code>mp_similar&lt;&gt;</code> is <code>mp_true</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 76. mp_similar</div>
+<div class="title">Code Example 92. mp_similar</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_similar</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>                        <span class="c1">// mp_true</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_similar</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>                  <span class="c1">// mp_true</span>
@@ -5434,7 +5784,7 @@ because some libraries, such as Boost.Fusion, contain their own MPL
 support for <code>std::tuple</code>, which conflicts with Mp11&#8217;s one.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 77. Converting an existing MPL Sequence into an mp_list</div>
+<div class="title">Code Example 93. Converting an existing MPL Sequence into an mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">::</span><span class="n">copy</span><span class="o">&lt;</span><span class="n">Sequence</span><span class="p">,</span> <span class="n">mpl</span><span class="o">::</span><span class="n">back_inserter</span><span class="o">&lt;</span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list</span><span class="o">&lt;&gt;&gt;&gt;::</span><span class="n">type</span><span class="p">;</span></code></pre>
 </div>
@@ -5470,7 +5820,7 @@ into this documentation by Glen Fernandes.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-10 13:47:36 UTC
+Last updated 2023-08-08 21:02:53 UTC
 </div>
 </div>
 <style>

@@ -41,7 +41,7 @@
     <span class="keyword">class</span> <span class="identifier">AcceptHandler</span> <span class="special">=</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">default_completion_token_t</span><span class="special">&lt;</span><a class="link" href="../executor_type.html" title="websocket::stream::executor_type">executor_type</a><span class="special">&gt;&gt;</span>
 <a href="../../../../../../../../doc/html/boost_asio/reference/asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type" target="_top"><span class="emphasis"><em>DEDUCED</em></span></a>
 <span class="identifier">async_accept</span><span class="special">(</span>
-    <span class="identifier">http</span><span class="special">::</span><span class="identifier">request</span><span class="special">&lt;</span> <span class="identifier">Body</span><span class="special">,</span> <span class="identifier">http</span><span class="special">::</span><span class="identifier">basic_fields</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;&gt;</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">req</span><span class="special">,</span>
+    <span class="identifier">http</span><span class="special">::</span><span class="identifier">request</span><span class="special">&lt;</span> <span class="identifier">Body</span><span class="special">,</span> <span class="identifier">http</span><span class="special">::</span><span class="identifier">basic_fields</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">req</span><span class="special">,</span>
     <span class="identifier">AcceptHandler</span><span class="special">&amp;&amp;</span> <span class="identifier">handler</span> <span class="special">=</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <a class="link" href="../executor_type.html" title="websocket::stream::executor_type">executor_type</a> <span class="special">&gt;{});</span>
 </pre>
 <h6>
@@ -126,7 +126,7 @@
                       must be:
                     </p>
 <pre class="table-programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
-    <span class="identifier">error_code</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">ec</span>    <span class="comment">// Result of operation</span>
+    <span class="identifier">error_code</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">ec</span>    <span class="comment">// Result of operation</span>
 <span class="special">);</span>
 </pre>
                     <p>

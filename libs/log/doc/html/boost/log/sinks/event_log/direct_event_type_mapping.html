@@ -27,22 +27,22 @@
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> AttributeValueT <span class="special">=</span> <span class="keyword">int</span><span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="direct_event_type_mapping.html" title="Class template direct_event_type_mapping">direct_event_type_mapping</a> <span class="special">:</span>
-  <span class="keyword">public</span> <span class="identifier">basic_direct_mapping</span><span class="special">&lt;</span> <span class="identifier">event_type</span><span class="special">,</span> <span class="identifier">AttributeValueT</span> <span class="special">&gt;</span>
+  <span class="keyword">public</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">log</span><span class="special">::</span><span class="identifier">sinks</span><span class="special">::</span><span class="identifier">basic_direct_mapping</span><span class="special">&lt;</span> <span class="identifier">event_type</span><span class="special">,</span> <span class="keyword">int</span> <span class="special">&gt;</span>
 <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// <a class="link" href="direct_event_type_mapping.html#boost.log.sinks.event_log.direct_event_type_mappingconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <span class="keyword">explicit</span> <a class="link" href="direct_event_type_mapping.html#idm33164-bb"><span class="identifier">direct_event_type_mapping</span></a><span class="special">(</span><span class="identifier">attribute_name</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">explicit</span> <a class="link" href="direct_event_type_mapping.html#idm33285-bb"><span class="identifier">direct_event_type_mapping</span></a><span class="special">(</span><span class="identifier">attribute_name</span> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm67071"></a><h2>Description</h2>
+<a name="idm67850"></a><h2>Description</h2>
 <p>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the native event types. The mapping simply returns the extracted attribute value converted to the native event type. </p>
 <div class="refsect2">
-<a name="idm67074"></a><h3>
+<a name="idm67853"></a><h3>
 <a name="boost.log.sinks.event_log.direct_event_type_mappingconstruct-copy-destruct"></a><code class="computeroutput">direct_event_type_mapping</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
-<pre class="literallayout"><span class="keyword">explicit</span> <a name="idm33164-bb"></a><span class="identifier">direct_event_type_mapping</span><span class="special">(</span><span class="identifier">attribute_name</span> <span class="keyword">const</span> <span class="special">&amp;</span> name<span class="special">)</span><span class="special">;</span></pre>
+<pre class="literallayout"><span class="keyword">explicit</span> <a name="idm33285-bb"></a><span class="identifier">direct_event_type_mapping</span><span class="special">(</span><span class="identifier">attribute_name</span> <span class="keyword">const</span> <span class="special">&amp;</span> name<span class="special">)</span><span class="special">;</span></pre>
 <p>Constructor</p>
 <p>
 </p>

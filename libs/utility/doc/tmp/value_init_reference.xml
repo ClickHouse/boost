@@ -4,11 +4,11 @@
 <class name="initialized"><template>
       <template-type-parameter name="T"/>
     </template><method-group name="public member functions">
-<method name="data" cv="const"><type>T const  &amp;</type></method>
+<method name="data" cv="const"><type>T const &amp;</type></method>
 <method name="data"><type>T &amp;</type></method>
 <method name="swap"><type>void</type><parameter name="arg"><paramtype><classname>initialized</classname> &amp;</paramtype></parameter></method>
 <method name="conversion-operator" cv="const"><type>T const &amp;</type></method>
-<method name="conversion-operator"><type>T &amp;</type></method>
+<method name="conversion-operator"><type>T&amp;</type></method>
 </method-group>
 <constructor/>
 <constructor specifiers="explicit"><parameter name="arg"><paramtype>T const &amp;</paramtype></parameter></constructor>
@@ -20,15 +20,15 @@
 </class><class name="value_initialized"><template>
       <template-type-parameter name="T"/>
     </template><method-group name="public member functions">
-<method name="data" cv="const"><type>T const  &amp;</type></method>
+<method name="data" cv="const"><type>T const &amp;</type></method>
 <method name="data"><type>T &amp;</type></method>
 <method name="swap"><type>void</type><parameter name="arg"><paramtype><classname>value_initialized</classname> &amp;</paramtype></parameter></method>
 <method name="conversion-operator" cv="const"><type>T const &amp;</type></method>
-<method name="conversion-operator"><type>T &amp;</type></method>
+<method name="conversion-operator"><type>T&amp;</type></method>
 </method-group>
 <constructor/>
 </class><data-member name="initialized_value"><type><classname>initialized_value_t</classname> const</type></data-member>
-<function name="get"><type>T const  &amp;</type><template>
+<function name="get"><type>T const &amp;</type><template>
           <template-type-parameter name="T"/>
         </template><parameter name="x"><paramtype><classname>initialized</classname>&lt; T &gt; const &amp;</paramtype></parameter></function>
 <function name="get"><type>T &amp;</type><template>
@@ -37,7 +37,7 @@
 <function name="swap"><type>void</type><template>
           <template-type-parameter name="T"/>
         </template><parameter name="lhs"><paramtype><classname>initialized</classname>&lt; T &gt; &amp;</paramtype></parameter><parameter name="rhs"><paramtype><classname>initialized</classname>&lt; T &gt; &amp;</paramtype></parameter></function>
-<function name="get"><type>T const  &amp;</type><template>
+<function name="get"><type>T const &amp;</type><template>
           <template-type-parameter name="T"/>
         </template><parameter name="x"><paramtype><classname>value_initialized</classname>&lt; T &gt; const &amp;</paramtype></parameter></function>
 <function name="get"><type>T &amp;</type><template>

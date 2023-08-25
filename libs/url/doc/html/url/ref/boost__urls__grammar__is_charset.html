@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__grammar__is_charset"></a><a class="link" href="boost__urls__grammar__is_charset.html" title="grammar::is_charset">grammar::is_charset</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm148982"></a>
+        <a class="indexterm" name="idm153532"></a>
       </p>
 <p>
         Alias for <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code> if T satisfies <span class="emphasis"><em>CharSet</em></span>.
@@ -57,7 +57,7 @@
             An instance of <code class="computeroutput"><span class="identifier">T</span></code> is invocable
             with this equivalent function signature:
           </p>
-<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">T</span><span class="special">::</span><span class="keyword">operator</span><span class="special">()(</span> <span class="keyword">char</span> <span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
+<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">T</span><span class="special">::</span><span class="keyword">operator</span><span class="special">()(</span> <span class="keyword">char</span> <span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="special">;</span>
 </pre>
 </li></ul></div>
 <h5>
@@ -68,9 +68,9 @@
         Use with <code class="computeroutput"><span class="identifier">enable_if</span></code> on the
         return value:
       </p>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">class</span> <span class="identifier">CharSet</span> <span class="special">&gt;</span>
+<pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span> <span class="keyword">class</span> <span class="identifier">CharSet</span> <span class="special">&gt;</span>
 <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_if</span><span class="special">&lt;</span> <span class="identifier">is_charset</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>
-<span class="identifier">func</span><span class="special">(</span> <span class="identifier">CharSet</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">cs</span> <span class="special">);</span>
+<span class="identifier">func</span><span class="special">(</span> <span class="identifier">CharSet</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">cs</span> <span class="special">);</span>
 </pre>
 <h5>
 <a name="url.ref.boost__urls__grammar__is_charset.h3"></a>

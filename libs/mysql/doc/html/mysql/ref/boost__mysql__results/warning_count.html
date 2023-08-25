@@ -28,7 +28,7 @@
 <a name="mysql.ref.boost__mysql__results.warning_count"></a><a class="link" href="warning_count.html" title="results::warning_count">results::warning_count</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm32371"></a>
+          <a class="indexterm" name="idm43817"></a>
         </p>
 <p>
           Returns the number of warnings produced by the executed SQL statement.
@@ -42,6 +42,14 @@
 </pre>
 <h6>
 <a name="mysql.ref.boost__mysql__results.warning_count.h1"></a>
+          <span class="phrase"><a name="mysql.ref.boost__mysql__results.warning_count.description"></a></span><a class="link" href="warning_count.html#mysql.ref.boost__mysql__results.warning_count.description">Description</a>
+        </h6>
+<p>
+          For operations returning more than one resultset, returns the first resultset's
+          warning count.
+        </p>
+<h6>
+<a name="mysql.ref.boost__mysql__results.warning_count.h2"></a>
           <span class="phrase"><a name="mysql.ref.boost__mysql__results.warning_count.preconditions"></a></span><a class="link" href="warning_count.html#mysql.ref.boost__mysql__results.warning_count.preconditions">Preconditions</a>
         </h6>
 <p>
@@ -49,12 +57,19 @@
           <span class="special">==</span> <span class="keyword">true</span></code>
         </p>
 <h6>
-<a name="mysql.ref.boost__mysql__results.warning_count.h2"></a>
+<a name="mysql.ref.boost__mysql__results.warning_count.h3"></a>
           <span class="phrase"><a name="mysql.ref.boost__mysql__results.warning_count.exception_safety"></a></span><a class="link" href="warning_count.html#mysql.ref.boost__mysql__results.warning_count.exception_safety">Exception
           safety</a>
         </h6>
 <p>
           No-throw guarantee.
+        </p>
+<h6>
+<a name="mysql.ref.boost__mysql__results.warning_count.h4"></a>
+          <span class="phrase"><a name="mysql.ref.boost__mysql__results.warning_count.complexity"></a></span><a class="link" href="warning_count.html#mysql.ref.boost__mysql__results.warning_count.complexity">Complexity</a>
+        </h6>
+<p>
+          Constant.
         </p>
 </div>
 <div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>

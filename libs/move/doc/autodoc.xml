@@ -466,7 +466,7 @@
 <copy-assignment><type><classname>default_delete</classname> &amp;</type><parameter name=""><paramtype>const <classname>default_delete</classname> &amp;</paramtype></parameter><description><para>Trivial assignment </para></description></copy-assignment>
 <constructor cv="noexcept"><template>
           <template-type-parameter name="U"/>
-        </template><parameter name=""><paramtype>const <classname>default_delete</classname>&lt; U &gt; &amp;</paramtype></parameter><description><para><emphasis role="bold">Effects</emphasis>: Constructs a <classname alt="boost::movelib::default_delete">default_delete</classname> object from another <computeroutput><classname alt="boost::movelib::default_delete">default_delete</classname><underline> object.</underline></computeroutput></para><para><computeroutput><underline><emphasis role="bold">Remarks</emphasis>: This constructor shall not participate in overload resolution unless:<itemizedlist>
+        </template><parameter name="BOOST_MOVE_DOCIGN"><paramtype>const <classname>default_delete</classname>&lt; U &gt; &amp;</paramtype></parameter><description><para><emphasis role="bold">Effects</emphasis>: Constructs a <classname alt="boost::movelib::default_delete">default_delete</classname> object from another <computeroutput><classname alt="boost::movelib::default_delete">default_delete</classname><underline> object.</underline></computeroutput></para><para><computeroutput><underline><emphasis role="bold">Remarks</emphasis>: This constructor shall not participate in overload resolution unless:<itemizedlist>
 <listitem><para>If T is not an array type and U* is implicitly convertible to T*.</para>
 </listitem><listitem><para>If T is an array type and U* is a more CV qualified pointer to remove_extent&lt;T&gt;::type. </para>
 </listitem></itemizedlist>
@@ -548,7 +548,7 @@
 <typedef name="difference_type"><type>C::difference_type</type></typedef>
 <typedef name="iterator_category"><type>std::output_iterator_tag</type></typedef>
 <method-group name="public member functions">
-<method name="operator *"><type><classname>back_move_insert_iterator</classname> &amp;</type></method>
+<method name="operator*"><type><classname>back_move_insert_iterator</classname> &amp;</type></method>
 <method name="operator++"><type><classname>back_move_insert_iterator</classname> &amp;</type></method>
 <method name="operator++"><type><classname>back_move_insert_iterator</classname> &amp;</type><parameter name=""><paramtype>int</paramtype></parameter></method>
 </method-group>
@@ -564,7 +564,7 @@
 <typedef name="difference_type"><type>C::difference_type</type></typedef>
 <typedef name="iterator_category"><type>std::output_iterator_tag</type></typedef>
 <method-group name="public member functions">
-<method name="operator *"><type><classname>front_move_insert_iterator</classname> &amp;</type></method>
+<method name="operator*"><type><classname>front_move_insert_iterator</classname> &amp;</type></method>
 <method name="operator++"><type><classname>front_move_insert_iterator</classname> &amp;</type></method>
 <method name="operator++"><type><classname>front_move_insert_iterator</classname> &amp;</type><parameter name=""><paramtype>int</paramtype></parameter></method>
 </method-group>
@@ -580,7 +580,7 @@
 <typedef name="difference_type"><type>C::difference_type</type></typedef>
 <typedef name="iterator_category"><type>std::output_iterator_tag</type></typedef>
 <method-group name="public member functions">
-<method name="operator *"><type>move_insert_iterator &amp;</type></method>
+<method name="operator*"><type>move_insert_iterator &amp;</type></method>
 <method name="operator++"><type>move_insert_iterator &amp;</type></method>
 <method name="operator++"><type>move_insert_iterator &amp;</type><parameter name=""><paramtype>int</paramtype></parameter></method>
 </method-group>
@@ -596,7 +596,7 @@
 <typedef name="difference_type"><type>boost::movelib::iterator_traits&lt; iterator_type &gt;::difference_type</type></typedef>
 <typedef name="iterator_category"><type>boost::movelib::iterator_traits&lt; iterator_type &gt;::iterator_category</type></typedef>
 <method-group name="public member functions">
-<method name="operator *" cv="const"><type>reference</type></method>
+<method name="operator*" cv="const"><type>reference</type></method>
 <method name="operator-&gt;" cv="const"><type>pointer</type></method>
 <method name="operator++"><type><classname>move_iterator</classname> &amp;</type></method>
 <method name="operator++"><type><classname>move_iterator</classname>&lt; iterator_type &gt;</type><parameter name=""><paramtype>int</paramtype></parameter></method>
@@ -734,8 +734,6 @@
 
 </namespace>
 </header>
-<header name="boost/move/move.hpp">
-<para>A general library header that includes the rest of top-level headers. </para></header>
 <header name="boost/move/algo/move.hpp">
 <namespace name="boost">
 
@@ -771,6 +769,8 @@
 </programlisting></para><para><emphasis role="bold">Returns</emphasis>: result </para></description></function>
 </namespace>
 </header>
+<header name="boost/move/move.hpp">
+<para>A general library header that includes the rest of top-level headers. </para></header>
 <header name="boost/move/traits.hpp">
 <namespace name="boost">
 <struct name="has_nothrow_move"><template>
@@ -830,14 +830,15 @@
 <typedef name="element_type"><description><para>If T is an array type, then element_type is equal to T. Otherwise, if T is a type in the form U[], element_type is equal to U. </para></description><type>see_documentation</type></typedef>
 <typedef name="deleter_type"><type>D</type></typedef>
 <method-group name="public member functions">
-<method name="operator *" cv="const noexcept"><type>element_type &amp;</type><description><para><emphasis role="bold">Requires</emphasis>: <computeroutput>get() != nullptr</computeroutput>.</para><para><emphasis role="bold">Returns</emphasis>: <computeroutput>*get()</computeroutput>.</para><para><emphasis role="bold">Remarks&lt;/b: If T is an array type, the program is ill-formed. </emphasis></para></description></method>
+<method name="operator*" cv="const noexcept"><type>element_type &amp;</type><description><para><emphasis role="bold">Requires</emphasis>: <computeroutput>get() != nullptr</computeroutput>.</para><para><emphasis role="bold">Returns</emphasis>: <computeroutput>*get()</computeroutput>.</para><para><emphasis role="bold">Remarks&lt;/b: If T is an array type, the program is ill-formed. </emphasis></para></description></method>
 <method name="operator[]" cv="const noexcept"><type>element_type &amp;</type><parameter name="i"><paramtype>std::size_t</paramtype></parameter><description><para><emphasis role="bold">Requires</emphasis>: i &lt; the number of elements in the array to which the stored pointer points.</para><para><emphasis role="bold">Returns</emphasis>: <computeroutput>get()[i]</computeroutput>.</para><para><emphasis role="bold">Remarks&lt;/b: If T is not an array type, the program is ill-formed. </emphasis></para></description></method>
 <method name="operator-&gt;" cv="const noexcept"><type>pointer</type><description><para><emphasis role="bold">Requires</emphasis>: <computeroutput>get() != nullptr</computeroutput>.</para><para><emphasis role="bold">Returns</emphasis>: <computeroutput>get()</computeroutput>.</para><para><emphasis role="bold">Note</emphasis>: use typically requires that T be a complete type.</para><para><emphasis role="bold">Remarks&lt;/b: If T is an array type, the program is ill-formed. </emphasis></para></description></method>
 <method name="get" cv="const noexcept"><type>pointer</type><description><para><emphasis role="bold">Returns</emphasis>: The stored pointer. </para></description></method>
 <method name="get_deleter" cv="noexcept"><type>D &amp;</type><description><para><emphasis role="bold">Returns</emphasis>: A reference to the stored deleter. </para></description></method>
 <method name="get_deleter" cv="const noexcept"><type>const D &amp;</type><description><para><emphasis role="bold">Returns</emphasis>: A reference to the stored deleter. </para></description></method>
 <method name="conversion-operator" cv="const noexcept" specifiers="explicit"><type>bool</type><description><para><emphasis role="bold">Returns</emphasis>: Returns: get() != nullptr. </para></description></method>
-<method name="release" cv="noexcept"><type>pointer</type><description><para><emphasis role="bold">Postcondition</emphasis>: <computeroutput>get() == nullptr</computeroutput>.</para><para><emphasis role="bold">Returns</emphasis>: The value <computeroutput>get()</computeroutput> had at the start of the call to release. </para></description></method>
+<method name="release" cv="noexcept"><type>pointer</type><description><para><emphasis role="bold">Postcondition</emphasis>: <computeroutput>get() == nullptr</computeroutput>.</para><para><emphasis role="bold">Returns</emphasis>: The value <computeroutput>get()</computeroutput> had at the start of the call to release. <sbr/>
+ </para></description></method>
 <method name="reset" cv="noexcept"><type>void</type><template>
           <template-type-parameter name="Pointer"/>
         </template><parameter name="p"><paramtype>Pointer</paramtype></parameter><description><para><emphasis role="bold">Requires</emphasis>: The expression <computeroutput>get_deleter()(get())</computeroutput> shall be well formed, shall have well-defined behavior, and shall not throw exceptions.</para><para><emphasis role="bold">Effects</emphasis>: assigns p to the stored pointer, and then if the old value of the stored pointer, old_p, was not equal to nullptr, calls <computeroutput>get_deleter()(old_p)</computeroutput>. Note: The order of these operations is significant because the call to <computeroutput>get_deleter()</computeroutput> may destroy *this.</para><para><emphasis role="bold">Postconditions</emphasis>: <computeroutput>get() == p</computeroutput>. Note: The postcondition does not hold if the call to <computeroutput>get_deleter()</computeroutput> destroys *this since <computeroutput>this-&gt;get()</computeroutput> is no longer a valid expression.</para><para><emphasis role="bold">Remarks</emphasis>: This constructor shall not participate in overload resolution unless:<itemizedlist>
@@ -851,18 +852,19 @@
 </method-group>
 <constructor cv="= delete"><parameter name=""><paramtype>const <classname>unique_ptr</classname> &amp;</paramtype></parameter></constructor>
 <copy-assignment cv="= delete"><type><classname>unique_ptr</classname> &amp;</type><parameter name=""><paramtype>const <classname>unique_ptr</classname> &amp;</paramtype></parameter></copy-assignment>
-<constructor cv="noexcept"><description><para><emphasis role="bold">Requires</emphasis>: D shall satisfy the requirements of DefaultConstructible, and that construction shall not throw an exception.</para><para><emphasis role="bold">Effects</emphasis>: Constructs a <classname alt="boost::movelib::unique_ptr">unique_ptr</classname> object that owns nothing, value-initializing the stored pointer and the stored deleter.</para><para><emphasis role="bold">Postconditions</emphasis>: <computeroutput>get() == nullptr</computeroutput>. <computeroutput>get_deleter()</computeroutput> returns a reference to the stored deleter.</para><para><emphasis role="bold">Remarks</emphasis>: If this constructor is instantiated with a pointer type or reference type for the template argument D, the program is ill-formed. </para></description></constructor>
+<constructor cv="noexcept"><description><para><emphasis role="bold">Requires</emphasis>: D shall satisfy the requirements of DefaultConstructible, and that construction shall not throw an exception.</para><para><emphasis role="bold">Effects</emphasis>: Constructs a <classname alt="boost::movelib::unique_ptr">unique_ptr</classname> object that owns nothing, value-initializing the stored pointer and the stored deleter.</para><para><emphasis role="bold">Postconditions</emphasis>: <computeroutput>get() == nullptr</computeroutput>. <computeroutput>get_deleter()</computeroutput> returns a reference to the stored deleter.</para><para><emphasis role="bold">Remarks</emphasis>: If this constructor is instantiated with a pointer type or reference type for the template argument D, the program is ill-formed. <sbr/>
+ </para></description></constructor>
 <constructor cv="noexcept"><parameter name=""><paramtype>std::nullptr_t</paramtype></parameter><description><para><emphasis role="bold">Effects</emphasis>: Same as <computeroutput>unique_ptr()</computeroutput> (default constructor). </para></description></constructor>
 <constructor specifiers="explicit" cv="noexcept"><template>
           <template-type-parameter name="Pointer"/>
-        </template><parameter name="p"><paramtype>Pointer</paramtype></parameter><description><para><emphasis role="bold">Requires</emphasis>: D shall satisfy the requirements of DefaultConstructible, and that construction shall not throw an exception.</para><para><emphasis role="bold">Effects</emphasis>: Constructs a <classname alt="boost::movelib::unique_ptr">unique_ptr</classname> which owns p, initializing the stored pointer with p and value initializing the stored deleter.</para><para><emphasis role="bold">Postconditions</emphasis>: <computeroutput>get() == p</computeroutput>. <computeroutput>get_deleter()</computeroutput> returns a reference to the stored deleter.</para><para><emphasis role="bold">Remarks</emphasis>: If this constructor is instantiated with a pointer type or reference type for the template argument D, the program is ill-formed. This constructor shall not participate in overload resolution unless:<itemizedlist>
+        </template><parameter name="BOOST_MOVE_DOCIGN"><paramtype>Pointer p </paramtype></parameter><description><para><emphasis role="bold">Requires</emphasis>: D shall satisfy the requirements of DefaultConstructible, and that construction shall not throw an exception.</para><para><emphasis role="bold">Effects</emphasis>: Constructs a <classname alt="boost::movelib::unique_ptr">unique_ptr</classname> which owns p, initializing the stored pointer with p and value initializing the stored deleter.</para><para><emphasis role="bold">Postconditions</emphasis>: <computeroutput>get() == p</computeroutput>. <computeroutput>get_deleter()</computeroutput> returns a reference to the stored deleter.</para><para><emphasis role="bold">Remarks</emphasis>: If this constructor is instantiated with a pointer type or reference type for the template argument D, the program is ill-formed. This constructor shall not participate in overload resolution unless:<itemizedlist>
 <listitem><para>If T is not an array type and Pointer is implicitly convertible to pointer.</para>
 </listitem><listitem><para>If T is an array type and Pointer is a more CV qualified pointer to element_type. </para>
 </listitem></itemizedlist>
 </para></description></constructor>
 <constructor cv="noexcept"><template>
           <template-type-parameter name="Pointer"/>
-        </template><parameter name="p"><paramtype>Pointer</paramtype></parameter><parameter name="d1"><paramtype>see_documentation</paramtype></parameter><description><para>The signature of this constructor depends upon whether D is a reference type.<itemizedlist>
+        </template><parameter name="p"><paramtype>Pointer</paramtype></parameter><parameter name="BOOST_MOVE_DOCIGN"><paramtype>see_documentation d1 </paramtype></parameter><description><para>The signature of this constructor depends upon whether D is a reference type.<itemizedlist>
 <listitem><para>If D is non-reference type A, then the signature is <computeroutput>unique_ptr(pointer p, const A&amp; d)</computeroutput>.</para>
 </listitem><listitem><para>If D is an lvalue-reference type A&amp;, then the signature is <computeroutput>unique_ptr(pointer p, A&amp; d)</computeroutput>.</para>
 </listitem><listitem><para>If D is an lvalue-reference type const A&amp;, then the signature is <computeroutput>unique_ptr(pointer p, const A&amp; d)</computeroutput>.</para>
@@ -879,7 +881,7 @@
 <constructor cv="noexcept"><parameter name=""><paramtype>std::nullptr_t</paramtype></parameter><parameter name="d1"><paramtype>see_documentation</paramtype></parameter><description><para><emphasis role="bold">Effects</emphasis>: Same effects as <computeroutput>template&lt;class Pointer&gt; unique_ptr(Pointer p, deleter_arg_type1 d1)</computeroutput> and additionally <computeroutput>get() == nullptr</computeroutput> </para></description></constructor>
 <constructor cv="noexcept"><template>
           <template-type-parameter name="Pointer"/>
-        </template><parameter name="p"><paramtype>Pointer</paramtype></parameter><parameter name="d2"><paramtype>see_documentation</paramtype></parameter><description><para>The signature of this constructor depends upon whether D is a reference type.<itemizedlist>
+        </template><parameter name="p"><paramtype>Pointer</paramtype></parameter><parameter name="BOOST_MOVE_DOCIGN"><paramtype>see_documentation d2 </paramtype></parameter><description><para>The signature of this constructor depends upon whether D is a reference type.<itemizedlist>
 <listitem><para>If D is non-reference type A, then the signature is <computeroutput>unique_ptr(pointer p, A&amp;&amp; d)</computeroutput>.</para>
 </listitem><listitem><para>If D is an lvalue-reference type A&amp;, then the signature is <computeroutput>unique_ptr(pointer p, A&amp;&amp; d)</computeroutput>.</para>
 </listitem><listitem><para>If D is an lvalue-reference type const A&amp;, then the signature is <computeroutput>unique_ptr(pointer p, const A&amp;&amp; d)</computeroutput>.</para>
@@ -898,7 +900,7 @@
 <constructor cv="noexcept"><template>
           <template-type-parameter name="U"/>
           <template-type-parameter name="E"/>
-        </template><parameter name="u"><paramtype>BOOST_RV_REF_BEG_IF_CXX11 <classname>unique_ptr</classname>&lt; U, E &gt; BOOST_RV_REF_END_IF_CXX11</paramtype></parameter><description><para><emphasis role="bold">Requires</emphasis>: If E is not a reference type, construction of the deleter from an rvalue of type E shall be well formed and shall not throw an exception. Otherwise, E is a reference type and construction of the deleter from an lvalue of type E shall be well formed and shall not throw an exception.</para><para><emphasis role="bold">Remarks</emphasis>: This constructor shall not participate in overload resolution unless:<itemizedlist>
+        </template><parameter name="BOOST_MOVE_DOCIGN"><paramtype>BOOST_RV_REF_BEG_IF_CXX11 <classname>unique_ptr</classname>&lt; U, E &gt; BOOST_RV_REF_END_IF_CXX11 u </paramtype></parameter><description><para><emphasis role="bold">Requires</emphasis>: If E is not a reference type, construction of the deleter from an rvalue of type E shall be well formed and shall not throw an exception. Otherwise, E is a reference type and construction of the deleter from an lvalue of type E shall be well formed and shall not throw an exception.</para><para><emphasis role="bold">Remarks</emphasis>: This constructor shall not participate in overload resolution unless:<itemizedlist>
 <listitem><para><computeroutput>unique_ptr&lt;U, E&gt;::pointer</computeroutput> is implicitly convertible to pointer,</para>
 </listitem><listitem><para>U is not an array type, and</para>
 </listitem><listitem><para>either D is a reference type and E is the same type as D, or D is not a reference type and E is implicitly convertible to D.</para>

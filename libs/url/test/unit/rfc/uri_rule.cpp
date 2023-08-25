@@ -25,7 +25,7 @@ public:
     {
         // javadoc
         {
-            result< url_view > rv = grammar::parse( "https://www.example.com/index.htm?id=guest#s1", uri_rule );
+            system::result< url_view > rv = grammar::parse( "https://www.example.com/index.htm?id=guest#s1", uri_rule );
             (void)rv;
         }
 
@@ -33,7 +33,6 @@ public:
 
         bad(t, "");
         bad(t, ":");
-        bad(t, "http://##");
 
         ok(t, "http:");
         ok(t, "http:x");
@@ -42,6 +41,7 @@ public:
         ok(t, "http:x//");
         ok(t, "http://");
         ok(t, "http://x");
+        ok(t, "http://##");
         ok(t, "http://x.y.z");
         ok(t, "http://x.y.z/");
         ok(t, "http://x.y.z/?");

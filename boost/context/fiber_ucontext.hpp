@@ -7,7 +7,7 @@
 #ifndef BOOST_CONTEXT_FIBER_H
 #define BOOST_CONTEXT_FIBER_H
 
-#include <boost/predef.h>
+#include <boost/predef/os.h>
 #if BOOST_OS_MACOS
 #define _XOPEN_SOURCE 600
 #endif
@@ -16,6 +16,7 @@ extern "C" {
 #include <ucontext.h>
 }
 
+#include <boost/predef.h>
 #include <boost/context/detail/config.hpp>
 
 #include <algorithm>
@@ -65,12 +66,19 @@ namespace detail {
 // tampoline function
 // entered if the execution context
 // is resumed for the first time
-template< typename Record >
-static void fiber_entry_func( void * data) noexcept {
-    Record * record = static_cast< Record * >( data);
-    BOOST_ASSERT( nullptr != record);
-    // start execution of toplevel context-function
-    record->run();
+template <typename Record>
+#ifdef BOOST_OS_MACOS
+static void fiber_entry_func(std::uint32_t data_high,
+                             std::uint32_t data_low) noexcept {
+  auto data =
+      reinterpret_cast<void *>(std::uint64_t(data_high) << 32 | data_low);
+#else
+static void fiber_entry_func(void *data) noexcept {
+#endif
+  Record *record = static_cast<Record *>(data);
+  BOOST_ASSERT(nullptr != record);
+  // start execution of toplevel context-function
+  record->run();
 }
 
 struct BOOST_CONTEXT_DECL fiber_activation_record {
@@ -81,7 +89,6 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
     std::function< fiber_activation_record*(fiber_activation_record*&) >    ontop{};
     bool                                                        terminated{ false };
     bool                                                        force_unwind{ false };
-    bool                                                        is_started{ false };
 #if defined(BOOST_USE_ASAN)
     void                                                    *   fake_stack{ nullptr };
     void                                                    *   stack_bottom{ nullptr };
@@ -278,7 +285,6 @@ public:
         Ctx c{ from };
         try {
             // invoke context-function
-            is_started = true;
 #if defined(BOOST_NO_CXX17_STD_INVOKE)
             c = boost::context::detail::invoke( fn_, std::move( c) );
 #else
@@ -330,7 +336,15 @@ static fiber_activation_record * create_fiber1( StackAlloc && salloc, Fn && fn) 
     record->uctx.uc_stack.ss_size = reinterpret_cast< uintptr_t >( storage) -
             reinterpret_cast< uintptr_t >( stack_bottom) - static_cast< uintptr_t >( 64);
     record->uctx.uc_link = nullptr;
-    ::makecontext( & record->uctx, ( void (*)() ) & fiber_entry_func< capture_t >, 1, record);
+#ifdef BOOST_OS_MACOS
+    const auto integer = std::uint64_t(record);
+    ::makecontext(&record->uctx, (void (*)()) & fiber_entry_func<capture_t>, 2,
+                  std::uint32_t((integer >> 32) & 0xFFFFFFFF),
+                  std::uint32_t(integer));
+#else
+    ::makecontext(&record->uctx, (void (*)()) & fiber_entry_func<capture_t>, 1,
+                  record);
+#endif
 #if defined(BOOST_USE_ASAN)
     record->stack_bottom = record->uctx.uc_stack.ss_sp;
     record->stack_size = record->uctx.uc_stack.ss_size;
@@ -373,7 +387,15 @@ static fiber_activation_record * create_fiber2( preallocated palloc, StackAlloc 
     record->uctx.uc_stack.ss_size = reinterpret_cast< uintptr_t >( storage) -
             reinterpret_cast< uintptr_t >( stack_bottom) - static_cast< uintptr_t >( 64);
     record->uctx.uc_link = nullptr;
-    ::makecontext( & record->uctx,  ( void (*)() ) & fiber_entry_func< capture_t >, 1, record);
+#ifdef BOOST_OS_MACOS
+    const auto integer = std::uint64_t(record);
+    ::makecontext(&record->uctx, (void (*)()) & fiber_entry_func<capture_t>, 2,
+                  std::uint32_t((integer >> 32) & 0xFFFFFFFF),
+                  std::uint32_t(integer));
+#else
+    ::makecontext(&record->uctx, (void (*)()) & fiber_entry_func<capture_t>, 1,
+                  record);
+#endif
 #if defined(BOOST_USE_ASAN)
     record->stack_bottom = record->uctx.uc_stack.ss_sp;
     record->stack_size = record->uctx.uc_stack.ss_size;
@@ -434,7 +456,7 @@ public:
 
     ~fiber() {
         if ( BOOST_UNLIKELY( nullptr != ptr_) && ! ptr_->main_ctx) {
-            if ( BOOST_LIKELY( ! ptr_->terminated && ptr_->is_started) ) {
+            if ( BOOST_LIKELY( ! ptr_->terminated) ) {
                 ptr_->force_unwind = true;
                 ptr_->resume();
                 BOOST_ASSERT( ptr_->terminated);

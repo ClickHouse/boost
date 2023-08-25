@@ -28,7 +28,7 @@
 <a name="mysql.ref.boost__mysql__tcp_ssl_connection"></a><a class="link" href="boost__mysql__tcp_ssl_connection.html" title="tcp_ssl_connection">tcp_ssl_connection</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm50488"></a>
+        <a class="indexterm" name="idm66510"></a>
       </p>
 <p>
         A connection to MySQL over a TCP socket using TLS.
@@ -134,7 +134,8 @@
               </td>
 <td>
                 <p>
-                  Closes the connection to the server.
+                  Closes the connection to the server. <br><span class="silver">—</span><br>Closes
+                  the connection to the server.
                 </p>
               </td>
 </tr>
@@ -146,7 +147,8 @@
               </td>
 <td>
                 <p>
-                  Closes a statement, deallocating it from the server.
+                  Closes a statement, deallocating it from the server. <br><span class="silver">—</span><br>Closes
+                  a statement, deallocating it from the server.
                 </p>
               </td>
 </tr>
@@ -158,7 +160,21 @@
               </td>
 <td>
                 <p>
-                  Establishes a connection to a MySQL server.
+                  Establishes a connection to a MySQL server. <br><span class="silver">—</span><br>Establishes
+                  a connection to a MySQL server.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_execute.html" title="connection::async_execute">async_execute</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Executes a text query or prepared statement. <br><span class="silver">—</span><br>Executes
+                  a text query or prepared statement.
                 </p>
               </td>
 </tr>
@@ -170,6 +186,7 @@
               </td>
 <td>
                 <p>
+                  (Deprecated) Executes a prepared statement. <br><span class="silver">—</span><br>(Deprecated)
                   Executes a prepared statement.
                 </p>
               </td>
@@ -182,7 +199,8 @@
               </td>
 <td>
                 <p>
-                  Performs the MySQL-level handshake.
+                  Performs the MySQL-level handshake. <br><span class="silver">—</span><br>Performs
+                  the MySQL-level handshake.
                 </p>
               </td>
 </tr>
@@ -194,7 +212,8 @@
               </td>
 <td>
                 <p>
-                  Checks whether the server is alive.
+                  Checks whether the server is alive. <br><span class="silver">—</span><br>Checks
+                  whether the server is alive.
                 </p>
               </td>
 </tr>
@@ -206,7 +225,8 @@
               </td>
 <td>
                 <p>
-                  Prepares a statement server-side.
+                  Prepares a statement server-side. <br><span class="silver">—</span><br>Prepares
+                  a statement server-side.
                 </p>
               </td>
 </tr>
@@ -218,6 +238,7 @@
               </td>
 <td>
                 <p>
+                  (Deprecated) Executes a SQL text query. <br><span class="silver">—</span><br>(Deprecated)
                   Executes a SQL text query.
                 </p>
               </td>
@@ -231,7 +252,23 @@
 <td>
                 <p>
                   Notifies the MySQL server that the client wants to end the session
-                  and shutdowns SSL.
+                  and shutdowns SSL. <br><span class="silver">—</span><br>Notifies the
+                  MySQL server that the client wants to end the session and shutdowns
+                  SSL.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_read_resultset_head.html" title="connection::async_read_resultset_head">async_read_resultset_head</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Reads metadata for subsequent resultsets in a multi-resultset operation.
+                  <br><span class="silver">—</span><br>Reads metadata for subsequent
+                  resultsets in a multi-resultset operation.
                 </p>
               </td>
 </tr>
@@ -243,7 +280,22 @@
               </td>
 <td>
                 <p>
-                  Reads a batch of rows.
+                  Reads a batch of rows. <br><span class="silver">—</span><br>Reads
+                  a batch of rows. <br><span class="silver">—</span><br>Reads a batch
+                  of rows.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_start_execution.html" title="connection::async_start_execution">async_start_execution</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Starts a SQL execution as a multi-function operation. <br><span class="silver">—</span><br>Starts
+                  a SQL execution as a multi-function operation.
                 </p>
               </td>
 </tr>
@@ -255,7 +307,9 @@
               </td>
 <td>
                 <p>
-                  Starts a text query as a multi-function operation.
+                  (Deprecated) Starts a text query as a multi-function operation.
+                  <br><span class="silver">—</span><br>(Deprecated) Starts a text query
+                  as a multi-function operation.
                 </p>
               </td>
 </tr>
@@ -267,7 +321,9 @@
               </td>
 <td>
                 <p>
-                  Starts a statement execution as a multi-function operation.
+                  (Deprecated) Starts a statement execution as a multi-function operation.
+                  <br><span class="silver">—</span><br>(Deprecated) Starts a statement
+                  execution as a multi-function operation.
                 </p>
               </td>
 </tr>
@@ -279,7 +335,8 @@
               </td>
 <td>
                 <p>
-                  Closes the connection to the server.
+                  Closes the connection to the server. <br><span class="silver">—</span><br>Closes
+                  the connection to the server.
                 </p>
               </td>
 </tr>
@@ -291,7 +348,8 @@
               </td>
 <td>
                 <p>
-                  Closes a statement, deallocating it from the server.
+                  Closes a statement, deallocating it from the server. <br><span class="silver">—</span><br>Closes
+                  a statement, deallocating it from the server.
                 </p>
               </td>
 </tr>
@@ -303,7 +361,8 @@
               </td>
 <td>
                 <p>
-                  Establishes a connection to a MySQL server.
+                  Establishes a connection to a MySQL server. <br><span class="silver">—</span><br>Establishes
+                  a connection to a MySQL server.
                 </p>
               </td>
 </tr>
@@ -324,11 +383,25 @@
 <tr>
 <td>
                 <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/execute.html" title="connection::execute">execute</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Executes a text query or prepared statement. <br><span class="silver">—</span><br>Executes
+                  a text query or prepared statement.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
                   <span class="bold"><strong><a class="link" href="boost__mysql__connection/execute_statement.html" title="connection::execute_statement">execute_statement</a></strong></span>
                 </p>
               </td>
 <td>
                 <p>
+                  (Deprecated) Executes a prepared statement. <br><span class="silver">—</span><br>(Deprecated)
                   Executes a prepared statement.
                 </p>
               </td>
@@ -353,7 +426,8 @@
               </td>
 <td>
                 <p>
-                  Performs the MySQL-level handshake.
+                  Performs the MySQL-level handshake. <br><span class="silver">—</span><br>Performs
+                  the MySQL-level handshake.
                 </p>
               </td>
 </tr>
@@ -389,7 +463,8 @@
               </td>
 <td>
                 <p>
-                  Checks whether the server is alive.
+                  Checks whether the server is alive. <br><span class="silver">—</span><br>Checks
+                  whether the server is alive.
                 </p>
               </td>
 </tr>
@@ -401,7 +476,8 @@
               </td>
 <td>
                 <p>
-                  Prepares a statement server-side.
+                  Prepares a statement server-side. <br><span class="silver">—</span><br>Prepares
+                  a statement server-side.
                 </p>
               </td>
 </tr>
@@ -413,6 +489,7 @@
               </td>
 <td>
                 <p>
+                  (Deprecated) Executes a SQL text query. <br><span class="silver">—</span><br>(Deprecated)
                   Executes a SQL text query.
                 </p>
               </td>
@@ -426,7 +503,23 @@
 <td>
                 <p>
                   Notifies the MySQL server that the client wants to end the session
-                  and shutdowns SSL.
+                  and shutdowns SSL. <br><span class="silver">—</span><br>Notifies the
+                  MySQL server that the client wants to end the session and shutdowns
+                  SSL.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/read_resultset_head.html" title="connection::read_resultset_head">read_resultset_head</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Reads metadata for subsequent resultsets in a multi-resultset operation.
+                  <br><span class="silver">—</span><br>Reads metadata for subsequent
+                  resultsets in a multi-resultset operation.
                 </p>
               </td>
 </tr>
@@ -438,7 +531,8 @@
               </td>
 <td>
                 <p>
-                  Reads a batch of rows.
+                  Reads a batch of rows. <br><span class="silver">—</span><br>Reads
+                  a batch of rows.
                 </p>
               </td>
 </tr>
@@ -457,12 +551,27 @@
 <tr>
 <td>
                 <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/start_execution.html" title="connection::start_execution">start_execution</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Starts a SQL execution as a multi-function operation. <br><span class="silver">—</span><br>Starts
+                  a SQL execution as a multi-function operation.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
                   <span class="bold"><strong><a class="link" href="boost__mysql__connection/start_query.html" title="connection::start_query">start_query</a></strong></span>
                 </p>
               </td>
 <td>
                 <p>
-                  Starts a text query as a multi-function operation.
+                  (Deprecated) Starts a text query as a multi-function operation.
+                  <br><span class="silver">—</span><br>(Deprecated) Starts a text query
+                  as a multi-function operation.
                 </p>
               </td>
 </tr>
@@ -474,7 +583,9 @@
               </td>
 <td>
                 <p>
-                  Starts a statement execution as a multi-function operation.
+                  (Deprecated) Starts a statement execution as a multi-function operation.
+                  <br><span class="silver">—</span><br>(Deprecated) Starts a statement
+                  execution as a multi-function operation.
                 </p>
               </td>
 </tr>

@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__grammar__is_rule"></a><a class="link" href="boost__urls__grammar__is_rule.html" title="grammar::is_rule">grammar::is_rule</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm148663"></a>
+        <a class="indexterm" name="idm153211"></a>
       </p>
 <p>
         Determine if T meets the requirements of Rule.
@@ -63,12 +63,12 @@
 
     <span class="keyword">auto</span>
     <span class="identifier">parse</span><span class="special">(</span>
-        <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*&amp;</span> <span class="identifier">it</span><span class="special">,</span>
-        <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*</span> <span class="identifier">end</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">-&gt;</span>
-            <span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">value_type</span><span class="special">&gt;</span>
+        <span class="keyword">char</span> <span class="keyword">const</span> <span class="special">*&amp;</span> <span class="identifier">it</span><span class="special">,</span>
+        <span class="keyword">char</span> <span class="keyword">const</span> <span class="special">*</span> <span class="identifier">end</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">-&gt;</span>
+            <span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">value_type</span><span class="special">&gt;</span>
 <span class="special">};</span>
 
-<span class="keyword">static_assert</span><span class="special">(</span> <span class="identifier">is_rule</span><span class="special">&lt;</span><span class="identifier">U</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">"Requirements not met"</span> <span class="special">);</span>
+<span class="keyword">static_assert</span> <span class="special">(</span> <span class="identifier">is_rule</span><span class="special">&lt;</span><span class="identifier">U</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">"Requirements not met"</span> <span class="special">);</span>
 </pre>
 <h5>
 <a name="url.ref.boost__urls__grammar__is_rule.h3"></a>

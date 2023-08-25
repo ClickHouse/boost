@@ -81,11 +81,11 @@
         </p>
 <pre class="programlisting"><span class="comment">// range    = [ token ] *( "," token )</span>
 
-<span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">range</span><span class="special">&lt;</span> <span class="identifier">string_view</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span> <span class="string">"whiskey,tango,foxtrot"</span><span class="special">,</span>
+<span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">range</span><span class="special">&lt;</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span> <span class="string">"whiskey,tango,foxtrot"</span> <span class="special">,</span>
     <span class="identifier">range_rule</span><span class="special">(</span>
         <span class="identifier">token_rule</span><span class="special">(</span> <span class="identifier">alpha_chars</span> <span class="special">),</span>          <span class="comment">// first</span>
         <span class="identifier">tuple_rule</span><span class="special">(</span>                      <span class="comment">// next</span>
-            <span class="identifier">squelch</span><span class="special">(</span> <span class="identifier">delim_rule</span><span class="special">(</span><span class="char">','</span><span class="special">)</span> <span class="special">),</span>
+            <span class="identifier">squelch</span><span class="special">(</span> <span class="identifier">delim_rule</span><span class="special">(</span> <span class="char">','</span> <span class="special">)</span> <span class="special">),</span>
             <span class="identifier">token_rule</span><span class="special">(</span> <span class="identifier">alpha_chars</span> <span class="special">)</span> <span class="special">)</span> <span class="special">)</span> <span class="special">);</span>
 </pre>
 <h6>

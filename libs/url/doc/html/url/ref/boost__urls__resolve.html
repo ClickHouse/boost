@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__resolve"></a><a class="link" href="boost__urls__resolve.html" title="resolve">resolve</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm145183"></a>
+        <a class="indexterm" name="idm149619"></a>
       </p>
 <p>
         Resolve a URL reference against a base URL.
@@ -40,7 +40,7 @@
 <p>
         Defined in header <code class="literal">&lt;<a href="https://github.com/boostorg/url/blob/master/include/boost/url/url_base.hpp" target="_top">boost/url/url_base.hpp</a>&gt;</code>
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="keyword">void</span> <span class="special">&gt;</span>
+<pre class="programlisting"><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="keyword">void</span> <span class="special">&gt;</span>
 <span class="identifier">resolve</span><span class="special">(</span>
     <span class="identifier">url_view_base</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">base</span><span class="special">,</span>
     <span class="identifier">url_view_base</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">ref</span><span class="special">,</span>
@@ -88,18 +88,18 @@
         <span class="phrase"><a name="url.ref.boost__urls__resolve.example"></a></span><a class="link" href="boost__urls__resolve.html#url.ref.boost__urls__resolve.example">Example</a>
       </h5>
 <pre class="programlisting"><span class="identifier">url</span> <span class="identifier">dest</span><span class="special">;</span>
-<span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
+<span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
 
-<span class="identifier">resolve</span><span class="special">(</span><span class="string">"/one/two/three"</span><span class="special">,</span> <span class="string">"four"</span><span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
+<span class="identifier">resolve</span><span class="special">(</span> <span class="string">"/one/two/three"</span> <span class="special">,</span> <span class="string">"four"</span> <span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
 <span class="identifier">assert</span><span class="special">(</span> <span class="identifier">dest</span><span class="special">.</span><span class="identifier">str</span><span class="special">()</span> <span class="special">==</span> <span class="string">"/one/two/four"</span> <span class="special">);</span>
 
-<span class="identifier">resolve</span><span class="special">(</span><span class="string">"http://example.com/"</span><span class="special">,</span> <span class="string">"/one"</span><span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
+<span class="identifier">resolve</span><span class="special">(</span> <span class="string">"http://example.com/"</span> <span class="special">,</span> <span class="string">"/one"</span> <span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
 <span class="identifier">assert</span><span class="special">(</span> <span class="identifier">dest</span><span class="special">.</span><span class="identifier">str</span><span class="special">()</span> <span class="special">==</span> <span class="string">"http://example.com/one"</span> <span class="special">);</span>
 
-<span class="identifier">resolve</span><span class="special">(</span><span class="string">"http://example.com/one"</span><span class="special">,</span> <span class="string">"/two"</span><span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
+<span class="identifier">resolve</span><span class="special">(</span> <span class="string">"http://example.com/one"</span> <span class="special">,</span> <span class="string">"/two"</span> <span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
 <span class="identifier">assert</span><span class="special">(</span> <span class="identifier">dest</span><span class="special">.</span><span class="identifier">str</span><span class="special">()</span> <span class="special">==</span> <span class="string">"http://example.com/two"</span> <span class="special">);</span>
 
-<span class="identifier">resolve</span><span class="special">(</span><span class="string">"http://a/b/c/d;p?q"</span><span class="special">,</span> <span class="string">"g#s"</span><span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
+<span class="identifier">resolve</span><span class="special">(</span> <span class="string">"http://a/b/c/d;p?q"</span> <span class="special">,</span> <span class="string">"g#s"</span> <span class="special">,</span> <span class="identifier">dest</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
 <span class="identifier">assert</span><span class="special">(</span> <span class="identifier">dest</span><span class="special">.</span><span class="identifier">str</span><span class="special">()</span> <span class="special">==</span> <span class="string">"http://a/b/c/g#s"</span> <span class="special">);</span>
 </pre>
 <h5>

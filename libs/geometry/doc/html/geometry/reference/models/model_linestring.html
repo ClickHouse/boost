@@ -28,7 +28,7 @@
 <a name="geometry.reference.models.model_linestring"></a><a class="link" href="model_linestring.html" title="model::linestring">model::linestring</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="idm77421"></a><a class="indexterm" name="idm77423"></a>
+          <a class="indexterm" name="idm77430"></a><a class="indexterm" name="idm77432"></a>
 A linestring (named so by OGC) is a collection (default a vector) of points.
         </p>
 <h6>
@@ -47,7 +47,7 @@ A linestring (named so by OGC) is a collection (default a vector) of points.
 </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Point</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">typename</span><span class="special">,</span> <span class="keyword">typename</span> <span class="special">&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="special">&gt;</span> <span class="keyword">class</span> <span class="identifier">Allocator</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">model</span><span class="special">::</span><span class="identifier">linestring</span>
-      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">Container</span><span class="special">&lt;</span> <span class="identifier">Point</span><span class="special">,</span> <span class="identifier">Allocator</span><span class="special">&lt;</span> <span class="identifier">Point</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
+      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">Point</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">&lt;</span> <span class="identifier">Point</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
 <span class="special">{</span>
   <span class="comment">// ...</span>
 <span class="special">};</span>
@@ -260,13 +260,7 @@ A linestring (named so by OGC) is a collection (default a vector) of points.
     <span class="keyword">typedef</span> <span class="identifier">bg</span><span class="special">::</span><span class="identifier">model</span><span class="special">::</span><span class="identifier">linestring</span><span class="special">&lt;</span><span class="identifier">point_t</span><span class="special">&gt;</span> <span class="identifier">linestring_t</span><span class="special">;</span>
 
     <span class="identifier">linestring_t</span> <span class="identifier">ls1</span><span class="special">;</span> <a class="co" name="geometry.reference.models.model_linestring.c0" href="model_linestring.html#geometry.reference.models.model_linestring.c1"><img src="../../../../../../../doc/src/images/callouts/1.png" alt="1" border="0"></a>
-
-<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX</span><span class="special">)</span> <span class="special">\</span>
- <span class="special">&amp;&amp;</span> <span class="special">!</span><span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_NO_CXX11_HDR_INITIALIZER_LIST</span><span class="special">)</span>
-
     <span class="identifier">linestring_t</span> <span class="identifier">ls2</span><span class="special">{{</span><span class="number">0.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">},</span> <span class="special">{</span><span class="number">1.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">},</span> <span class="special">{</span><span class="number">1.0</span><span class="special">,</span> <span class="number">2.0</span><span class="special">}};</span> <a class="co" name="geometry.reference.models.model_linestring.c2" href="model_linestring.html#geometry.reference.models.model_linestring.c3"><img src="../../../../../../../doc/src/images/callouts/2.png" alt="2" border="0"></a>
-
-<span class="preprocessor">#endif</span>
 
     <span class="identifier">bg</span><span class="special">::</span><span class="identifier">append</span><span class="special">(</span><span class="identifier">ls1</span><span class="special">,</span> <span class="identifier">point_t</span><span class="special">(</span><span class="number">0.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">));</span> <a class="co" name="geometry.reference.models.model_linestring.c4" href="model_linestring.html#geometry.reference.models.model_linestring.c5"><img src="../../../../../../../doc/src/images/callouts/3.png" alt="3" border="0"></a>
     <span class="identifier">bg</span><span class="special">::</span><span class="identifier">append</span><span class="special">(</span><span class="identifier">ls1</span><span class="special">,</span> <span class="identifier">point_t</span><span class="special">(</span><span class="number">1.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">));</span>

@@ -45,17 +45,17 @@
 <p> returns the following string: </p>
 <pre class="programlisting"><span class="string">"static const char *boost::detail::ctti&lt;int&gt;::n() [T = int]"</span> 
 </pre>
-<p> and</p>
+<p> and </p>
 <pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">typeindex</span><span class="special">::</span><span class="identifier">ctti_type_index</span><span class="special">::</span><span class="identifier">type_id</span><span class="special">&lt;</span><span class="keyword">short</span><span class="special">&gt;</span><span class="special">(</span><span class="special">)</span><span class="special">.</span><span class="identifier">pretty_name</span><span class="special">(</span><span class="special">)</span> 
 </pre>
 <p> returns the following: </p>
 <pre class="programlisting"><span class="string">"static const char *boost::detail::ctti&lt;short&gt;::n() [T = short]"</span> 
 </pre>
 <p>As we may see first 39 characters are "static const char *boost::detail::ctti&lt;" and they do not depend on the type T. After first 39 characters we have a human readable type name which is duplicated at the end of a string. String always ends on ']', which consumes 1 character.</p>
-<p>Now if we define <code class="computeroutput">BOOST_TYPE_INDEX_CTTI_USER_DEFINED_PARSING</code> to <code class="computeroutput">(39, 1, false, "")</code> we'll be getting</p>
+<p>Now if we define <code class="computeroutput">BOOST_TYPE_INDEX_CTTI_USER_DEFINED_PARSING</code> to <code class="computeroutput">(39, 1, false, "")</code> we'll be getting </p>
 <pre class="programlisting"><span class="string">"int&gt;::n() [T = int"</span> 
 </pre>
-<p> for <code class="computeroutput">boost::typeindex::ctti_type_index::type_id&lt;int&gt;().pretty_name()</code> and</p>
+<p> for <code class="computeroutput">boost::typeindex::ctti_type_index::type_id&lt;int&gt;().pretty_name()</code> and </p>
 <pre class="programlisting"><span class="string">"short&gt;::n() [T = short"</span> 
 </pre>
 <p> for <code class="computeroutput">boost::typeindex::ctti_type_index::type_id&lt;short&gt;().pretty_name()</code>.</p>

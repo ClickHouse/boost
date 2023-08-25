@@ -90,13 +90,13 @@
   <span class="keyword">static</span> <span class="keyword">const</span> <span class="identifier">order_type</span> <span class="identifier">order_value</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm31907"></a><h2>Description</h2>
+<a name="idm31904"></a><h2>Description</h2>
 <p>The Adams-Bashforth method is a multi-step predictor-corrector algorithm with configurable step number. The step number is specified as template parameter Steps and it then uses the result from the previous Steps steps. See also <a href="http://en.wikipedia.org/wiki/Linear_multistep_method" target="_top">en.wikipedia.org/wiki/Linear_multistep_method</a>. Currently, a maximum of Steps=8 is supported. The method is explicit and fulfills the Stepper concept. Step size control or continuous output are not provided.</p>
 <p>This class derives from algebra_base and inherits its interface via CRTP (current recurring template pattern). For more details see algebra_stepper_base.</p>
 <p>
 </p>
 <div class="refsect2">
-<a name="idm31913"></a><h3>Template Parameters</h3>
+<a name="idm31910"></a><h3>Template Parameters</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
 <pre class="literallayout"><span class="identifier">size_t</span> Steps</pre>
@@ -137,7 +137,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm32011"></a><h3>
+<a name="idm32008"></a><h3>
 <a name="boost.numeric.odeint.adams_bashforth_moultonconstruct-copy-destruct"></a><code class="computeroutput">adams_bashforth_moulton</code> 
         public
        construct/copy/destruct</h3>
@@ -170,7 +170,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm32051"></a><h3>
+<a name="idm32048"></a><h3>
 <a name="idm25346-bb"></a><code class="computeroutput">adams_bashforth_moulton</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -392,7 +392,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm32386"></a><h3>
+<a name="idm32383"></a><h3>
 <a name="idm25526-bb"></a><code class="computeroutput">adams_bashforth_moulton</code> private member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> System<span class="special">,</span> <span class="keyword">typename</span> StateInOut<span class="special">&gt;</span> 

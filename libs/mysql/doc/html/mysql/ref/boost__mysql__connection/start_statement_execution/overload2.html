@@ -29,19 +29,19 @@
           (2 of 4 overloads)</a>
 </h6></div></div></div>
 <p>
-            Starts a statement execution as a multi-function operation.
+            (Deprecated) Starts a statement execution as a multi-function operation.
           </p>
 <h6>
 <a name="mysql.ref.boost__mysql__connection.start_statement_execution.overload2.h0"></a>
             <span class="phrase"><a name="mysql.ref.boost__mysql__connection.start_statement_execution.overload2.synopsis"></a></span><a class="link" href="overload2.html#mysql.ref.boost__mysql__connection.start_statement_execution.overload2.synopsis">Synopsis</a>
           </h6>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">class</span> <a class="link" href="../../boost__mysql__FieldLikeTuple.html" title="FieldLikeTuple concept"><code class="literal"><span class="emphasis"><em>FieldLikeTuple</em></span></code></a><span class="special">,</span>
-    <span class="keyword">class</span> <span class="identifier">EnableIf</span> <span class="special">=</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">enable_if_field_like_tuple</span><span class="special">&lt;</span><span class="identifier">FieldLikeTuple</span><span class="special">&gt;&gt;</span>
+    <span class="keyword">class</span> <a class="link" href="../../boost__mysql__WritableFieldTuple.html" title="WritableFieldTuple concept"><code class="literal"><span class="emphasis"><em>WritableFieldTuple</em></span></code></a><span class="special">,</span>
+    <span class="keyword">class</span> <span class="identifier">EnableIf</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_if</span><span class="special">&lt;</span><span class="identifier">detail</span><span class="special">::</span><span class="identifier">is_writable_field_tuple</span><span class="special">&lt;</span><span class="identifier">WritableFieldTuple</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">&gt;</span>
 <span class="keyword">void</span>
 <span class="identifier">start_statement_execution</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">statement</span><span class="special">&amp;</span> <span class="identifier">stmt</span><span class="special">,</span>
-    <span class="keyword">const</span> <span class="identifier">FieldLikeTuple</span><span class="special">&amp;</span> <span class="identifier">params</span><span class="special">,</span>
+    <span class="keyword">const</span> <span class="identifier">WritableFieldTuple</span><span class="special">&amp;</span> <span class="identifier">params</span><span class="special">,</span>
     <span class="identifier">execution_state</span><span class="special">&amp;</span> <span class="identifier">st</span><span class="special">);</span>
 </pre>
 <h6>
@@ -50,18 +50,16 @@
           </h6>
 <p>
             Writes the execute request and reads the initial server response and
-            the column metadata, but not the generated rows, if any. After this operation
-            completes, <code class="computeroutput"><span class="identifier">st</span></code> will have
-            <a class="link" href="../../boost__mysql__execution_state/meta.html" title="execution_state::meta"><code class="computeroutput"><span class="identifier">execution_state</span><span class="special">::</span><span class="identifier">meta</span></code></a> populated, and may become
-            <a class="link" href="../../boost__mysql__execution_state/complete.html" title="execution_state::complete"><code class="computeroutput"><span class="identifier">execution_state</span><span class="special">::</span><span class="identifier">complete</span></code></a> if the operation did
-            not generate any rows (e.g. it was an <code class="computeroutput"><span class="identifier">UPDATE</span></code>).
-            Metadata will be populated according to <code class="computeroutput"><span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">meta_mode</span><span class="special">()</span></code>.
+            the column metadata, but not the generated rows or subsequent resultsets,
+            if any. After this operation completes, <code class="computeroutput"><span class="identifier">st</span></code>
+            will have <a class="link" href="../../boost__mysql__execution_state/meta.html" title="execution_state::meta"><code class="computeroutput"><span class="identifier">execution_state</span><span class="special">::</span><span class="identifier">meta</span></code></a> populated. Metadata will
+            be populated according to <code class="computeroutput"><span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">meta_mode</span><span class="special">()</span></code>.
           </p>
 <p>
-            If the operation generated any rows, these <span class="bold"><strong>must</strong></span>
-            be read (by using <a class="link" href="../read_some_rows.html" title="connection::read_some_rows"><code class="computeroutput"><span class="identifier">read_some_rows</span></code></a>) before engaging
-            in any further operation involving server communication. Otherwise, the
-            results are undefined.
+            If the operation generated any rows or more than one resultset, these
+            <span class="bold"><strong>must</strong></span> be read (by using <a class="link" href="../read_some_rows.html" title="connection::read_some_rows"><code class="computeroutput"><span class="identifier">read_some_rows</span></code></a> and <a class="link" href="../read_resultset_head.html" title="connection::read_resultset_head"><code class="computeroutput"><span class="identifier">read_resultset_head</span></code></a>) before
+            engaging in any further network operation. Otherwise, the results are
+            undefined.
           </p>
 <p>
             The statement actual parameters (<code class="computeroutput"><span class="identifier">params</span></code>)
@@ -70,6 +68,15 @@
           </p>
 <h6>
 <a name="mysql.ref.boost__mysql__connection.start_statement_execution.overload2.h2"></a>
+            <span class="phrase"><a name="mysql.ref.boost__mysql__connection.start_statement_execution.overload2.deprecation_notice"></a></span><a class="link" href="overload2.html#mysql.ref.boost__mysql__connection.start_statement_execution.overload2.deprecation_notice">Deprecation
+            notice</a>
+          </h6>
+<p>
+            This function is only provided for backwards-compatibility. For new code,
+            please use <a class="link" href="../start_execution.html" title="connection::start_execution"><code class="computeroutput"><span class="identifier">start_execution</span></code></a> or <a class="link" href="../async_start_execution.html" title="connection::async_start_execution"><code class="computeroutput"><span class="identifier">async_start_execution</span></code></a> instead.
+          </p>
+<h6>
+<a name="mysql.ref.boost__mysql__connection.start_statement_execution.overload2.h3"></a>
             <span class="phrase"><a name="mysql.ref.boost__mysql__connection.start_statement_execution.overload2.preconditions"></a></span><a class="link" href="overload2.html#mysql.ref.boost__mysql__connection.start_statement_execution.overload2.preconditions">Preconditions</a>
           </h6>
 <p>

@@ -385,7 +385,7 @@
         of params, first we define this function <code class="computeroutput">parms</code> which returns
         a list of params corresponding to the elements in a container of params:
       </p>
-<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">parms</span><span class="special">(</span> <span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="special">-&gt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">param</span> <span class="special">&gt;</span>
+<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">parms</span><span class="special">(</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="special">-&gt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">param</span> <span class="special">&gt;</span>
 <span class="special">{</span>
     <span class="identifier">url_view</span> <span class="identifier">u</span><span class="special">(</span> <span class="identifier">s</span> <span class="special">);</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;</span> <span class="identifier">param</span> <span class="special">&gt;</span> <span class="identifier">seq</span><span class="special">;</span>

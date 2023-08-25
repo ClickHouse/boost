@@ -38,7 +38,8 @@
          <span class="keyword">typename</span> Algebra <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">algebra_dispatcher</span><span class="special">&lt;</span> <span class="identifier">Coor</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">algebra_type</span><span class="special">,</span> 
          <span class="keyword">typename</span> Operations <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">operations_dispatcher</span><span class="special">&lt;</span> <span class="identifier">Coor</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">operations_type</span><span class="special">,</span> 
          <span class="keyword">typename</span> Resizer <span class="special">=</span> <span class="identifier">initially_resizer</span><span class="special">&gt;</span> 
-<span class="keyword">class</span> <a class="link" href="velocity_verlet.html" title="Class template velocity_verlet">velocity_verlet</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">algebra_stepper_base</span><span class="special">&lt;</span> <span class="identifier">Algebra</span><span class="special">,</span> <span class="identifier">Operations</span> <span class="special">&gt;</span> <span class="special">{</span>
+<span class="keyword">class</span> <a class="link" href="velocity_verlet.html" title="Class template velocity_verlet">velocity_verlet</a> <span class="special">:</span> <span class="keyword">public</span> algebra_stepper_base&lt; typename algebra_dispatcher&lt; Coor &gt;::algebra_type, typename operations_dispatcher&lt; Coor &gt;::operations_type &gt;
+<span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// types</span>
   <span class="keyword">typedef</span> <span class="identifier">algebra_stepper_base</span><span class="special">&lt;</span> <span class="identifier">Algebra</span><span class="special">,</span> <span class="identifier">Operations</span> <span class="special">&gt;</span>   <a name="boost.numeric.odeint.velocity_verlet.algebra_stepper_base_type"></a><span class="identifier">algebra_stepper_base_type</span><span class="special">;</span>
@@ -95,12 +96,12 @@
   <span class="keyword">static</span> <span class="keyword">const</span> <span class="identifier">order_type</span> <span class="identifier">order_value</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm52958"></a><h2>Description</h2>
+<a name="idm52943"></a><h2>Description</h2>
 <p><a href="http://en.wikipedia.org/wiki/Verlet_integration" target="_top">The Velocity-Verlet algorithm</a> is a method for simulation of molecular dynamics systems. It solves the ODE a=f(r,v',t) where r are the coordinates, v are the velocities and a are the accelerations, hence v = dr/dt, a=dv/dt.</p>
 <p>
 </p>
 <div class="refsect2">
-<a name="idm52963"></a><h3>Template Parameters</h3>
+<a name="idm52948"></a><h3>Template Parameters</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">typename</span> Coor</pre>
@@ -141,7 +142,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm53048"></a><h3>
+<a name="idm53033"></a><h3>
 <a name="boost.numeric.odeint.velocity_verletconstruct-copy-destruct"></a><code class="computeroutput">velocity_verlet</code> 
         public
        construct/copy/destruct</h3>
@@ -170,7 +171,7 @@
 </li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idm53081"></a><h3>
+<a name="idm53066"></a><h3>
 <a name="idm30618-bb"></a><code class="computeroutput">velocity_verlet</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -408,7 +409,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm53510"></a><h3>
+<a name="idm53495"></a><h3>
 <a name="idm30790-bb"></a><code class="computeroutput">velocity_verlet</code> private member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> System<span class="special">,</span> <span class="keyword">typename</span> CoorIn<span class="special">,</span> <span class="keyword">typename</span> VelocityIn<span class="special">&gt;</span> 

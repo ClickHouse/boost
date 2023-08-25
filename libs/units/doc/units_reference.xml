@@ -172,7 +172,7 @@
 <class name="base_dimension"><template>
       <template-type-parameter name="Derived"/>
       <template-nontype-parameter name="N"><type>long</type></template-nontype-parameter>
-    </template><inherit access="public">ordinal&lt; N &gt;</inherit><description><para>Defines a base dimension. To define a dimension you need to provide the derived class (CRTP) and a unique integer. <programlisting language="c++">struct my_dimension : boost::units::base_dimension&lt;my_dimension, 1&gt; {};
+    </template><inherit access="public">ordinal&lt; N &gt;</inherit><description><para>Defines a base dimension. To define a dimension you need to provide the derived class (CRTP) and a unique integer. <programlisting language="c++">struct my_dimension : <classname alt="boost::units::base_dimension">boost::units::base_dimension</classname>&lt;my_dimension, 1&gt; {};
 </programlisting> It is designed so that you will get an error message if you try to use the same value in multiple definitions. </para></description><typedef name="dimension_type"><purpose>A convenience typedef. Equivalent to boost::units::derived_dimension&lt;Derived,1&gt;::type. </purpose><type><emphasis>unspecified</emphasis></type></typedef>
 <typedef name="type"><purpose>Provided for mpl compatability. </purpose><type>Derived</type></typedef>
 <method-group name="friend functions">
@@ -313,7 +313,7 @@
       <template-type-parameter name="Derived"/>
       <template-type-parameter name="Dim"/>
       <template-nontype-parameter name="N"><type>long</type></template-nontype-parameter>
-    </template><inherit access="public">ordinal&lt; N &gt;</inherit><description><para>Defines a base unit. To define a unit you need to provide the derived class (CRTP), a dimension list and a unique integer. <programlisting language="c++">struct my_unit : boost::units::base_unit&lt;my_unit, length_dimension, 1&gt; {};
+    </template><inherit access="public">ordinal&lt; N &gt;</inherit><description><para>Defines a base unit. To define a unit you need to provide the derived class (CRTP), a dimension list and a unique integer. <programlisting language="c++">struct my_unit : <classname alt="boost::units::base_unit">boost::units::base_unit</classname>&lt;my_unit, length_dimension, 1&gt; {};
 </programlisting> It is designed so that you will get an error message if you try to use the same value in multiple definitions. </para></description><typedef name="dimension_type"><purpose>The dimensions of this base unit. </purpose><type>Dim</type></typedef>
 <typedef name="type"><purpose>Provided for mpl compatability. </purpose><type>Derived</type></typedef>
 <typedef name="unit_type"><purpose>The unit corresponding to this base unit. </purpose><type><emphasis>unspecified</emphasis></type></typedef>
@@ -598,7 +598,7 @@
           <template-type-parameter name="Unit"/>
           <template-type-parameter name="Y"/>
         </template><parameter name="q"><paramtype>const <classname>quantity</classname>&lt; Unit, Y &gt; &amp;</paramtype></parameter></function>
-<function name="hypot"><type>BOOST_CONSTEXPR <classname>root_typeof_helper</classname>&lt; typename <classname>add_typeof_helper</classname>&lt; typename <classname>power_typeof_helper</classname>&lt; <classname>quantity</classname>&lt; Unit, Y &gt;, <classname>static_rational</classname>&lt; 2 &gt; &gt;::type, typename <classname>power_typeof_helper</classname>&lt; <classname>quantity</classname>&lt; Unit, Y &gt;, <classname>static_rational</classname>&lt; 2 &gt; &gt;::type &gt;::type, <classname>static_rational</classname>&lt; 2 &gt; &gt;::type</type><template>
+<function name="hypot"><type>BOOST_CONSTEXPR <classname>root_typeof_helper</classname>&lt; typenameadd_typeof_helper&lt; typenamepower_typeof_helper&lt; <classname>quantity</classname>&lt; Unit, Y &gt;, <classname>static_rational</classname>&lt; 2 &gt; &gt;::type, typenamepower_typeof_helper&lt; <classname>quantity</classname>&lt; Unit, Y &gt;, <classname>static_rational</classname>&lt; 2 &gt; &gt;::type &gt;::type, <classname>static_rational</classname>&lt; 2 &gt; &gt;::type</type><template>
           <template-type-parameter name="Unit"/>
           <template-type-parameter name="Y"/>
         </template><parameter name="q1"><paramtype>const <classname>quantity</classname>&lt; Unit, Y &gt; &amp;</paramtype></parameter><parameter name="q2"><paramtype>const <classname>quantity</classname>&lt; Unit, Y &gt; &amp;</paramtype></parameter></function>
@@ -1043,9 +1043,9 @@ struct conversion_helper&lt;quantity&lt;dozen, T0&gt;, quantity&lt;pair, T1&gt; 
     </template><purpose>Dimension tag/exponent pair for a single fundamental dimension. </purpose><description><para>The dim class represents a single dimension tag/dimension exponent pair. That is, <computeroutput>dim&lt;tag_type,value_type&gt;</computeroutput> is a pair where <computeroutput>tag_type</computeroutput> represents the fundamental dimension being represented and <computeroutput>value_type</computeroutput> represents the exponent of that fundamental dimension as a <computeroutput><classname alt="boost::units::static_rational">static_rational</classname></computeroutput>. <computeroutput>tag_type</computeroutput> must be a derived from a specialization of <computeroutput><classname alt="boost::units::base_dimension">base_dimension</classname></computeroutput>. Specialization of the following Boost.MPL metafunctions are provided - @c mpl::plus for two @c dims
 - @c mpl::minus for two @c dims
 - @c mpl::negate for a @c dim
-</para><para>These metafunctions all operate on the exponent, and require that the <computeroutput>dim</computeroutput> operands have the same base dimension tag. In addition, multiplication and division by <computeroutput><classname alt="boost::units::static_rational">static_rational</classname></computeroutput> is supported. - @c mpl::times for a @c static_rational and a @c dim in either order
+ These metafunctions all operate on the exponent, and require that the <computeroutput>dim</computeroutput> operands have the same base dimension tag. In addition, multiplication and division by <computeroutput><classname alt="boost::units::static_rational">static_rational</classname></computeroutput> is supported. - @c mpl::times for a @c static_rational and a @c dim in either order
 - @c mpl::divides for a @c static_rational and a @c dim in either order
-</para><para>These metafunctions likewise operate on the exponent only. </para></description><typedef name="type"><type><classname>dim</classname></type></typedef>
+ These metafunctions likewise operate on the exponent only. </para></description><typedef name="type"><type><classname>dim</classname></type></typedef>
 <typedef name="tag"><type><emphasis>unspecified</emphasis></type></typedef>
 <typedef name="tag_type"><type>T</type></typedef>
 <typedef name="value_type"><type>V</type></typedef>
@@ -1183,7 +1183,8 @@ struct conversion_helper&lt;quantity&lt;dozen, T0&gt;, quantity&lt;pair, T1&gt; 
 <namespace name="units">
 <struct name="make_dimension_list"><template>
       <template-type-parameter name="Seq"/>
-    </template><description><para>Reduce dimension list to cardinal form. This algorithm collapses duplicate base dimension tags and sorts the resulting list by the tag ordinal value. Dimension lists that resolve to the same dimension are guaranteed to be</para><para>represented by an identical type.</para><para>The argument should be an MPL forward sequence containing instances of the <computeroutput>dim</computeroutput> template.</para><para>The result is also an MPL forward sequence. It also supports the following metafunctions to allow use as a dimension.</para><para><itemizedlist>
+    </template><description><para>Reduce dimension list to cardinal form. This algorithm collapses duplicate base dimension tags and sorts the resulting list by the tag ordinal value. Dimension lists that resolve to the same dimension are guaranteed to be <sbr/>
+ represented by an identical type.</para><para>The argument should be an MPL forward sequence containing instances of the <computeroutput>dim</computeroutput> template.</para><para>The result is also an MPL forward sequence. It also supports the following metafunctions to allow use as a dimension.</para><para><itemizedlist>
 <listitem><para><computeroutput>mpl::plus</computeroutput> is defined only on two equal dimensions and returns the argument unchanged.</para>
 </listitem><listitem><para><computeroutput>mpl::minus</computeroutput> is defined only for two equal dimensions and returns the argument unchanged.</para>
 </listitem><listitem><para><computeroutput>mpl::negate</computeroutput> will return its argument unchanged.</para>
@@ -1193,6 +1194,14 @@ struct conversion_helper&lt;quantity&lt;dozen, T0&gt;, quantity&lt;pair, T1&gt; 
 </listitem><listitem><para><computeroutput><classname alt="boost::units::static_root">static_root</classname></computeroutput> takes a dimension and a <classname alt="boost::units::static_rational">static_rational</classname> and divides all the exponents of the dimension by the <classname alt="boost::units::static_rational">static_rational</classname>. </para>
 </listitem></itemizedlist>
 </para></description><typedef name="type"><type><emphasis>unspecified</emphasis></type></typedef>
+</struct><struct name="static_power"><template>
+      <template-type-parameter name="DL"/>
+      <template-type-parameter name="Ex"/>
+    </template><purpose>Raise a dimension list to a scalar power. </purpose><typedef name="type"><type><emphasis>unspecified</emphasis></type></typedef>
+</struct><struct name="static_root"><template>
+      <template-type-parameter name="DL"/>
+      <template-type-parameter name="Rt"/>
+    </template><purpose>Take a scalar root of a dimension list. </purpose><typedef name="type"><type><emphasis>unspecified</emphasis></type></typedef>
 </struct>
 
 
@@ -2023,7 +2032,9 @@ struct conversion_helper&lt;quantity&lt;dozen, T0&gt;, quantity&lt;pair, T1&gt; 
 <namespace name="mpl">
 </namespace>
 <namespace name="units">
-
+<struct name="heterogeneous_system"><template>
+      <template-type-parameter name="T"/>
+    </template><inherit access="public">T</inherit><description><para>A system that can represent any possible combination of units at the expense of not preserving information about how it was created. Do not create specializations of this template directly. Instead use <computeroutput><classname alt="boost::units::reduce_unit">reduce_unit</classname></computeroutput> and <computeroutput>base_unit&lt;...&gt;::unit_type</computeroutput>. </para></description></struct>
 
 
 
@@ -2157,13 +2168,7 @@ struct conversion_helper&lt;quantity&lt;dozen, T0&gt;, quantity&lt;pair, T1&gt; 
 <namespace name="units">
 <struct name="homogeneous_system"><template>
       <template-type-parameter name="L"/>
-    </template><description><para>A system that can uniquely represent any unit which can be composed from a linearly independent set of base units. It is safe to rebind a unit with such a system to different dimensions.</para><para>Do not construct this template directly. Use <classname alt="boost::units::make_system">make_system</classname> instead. </para></description></struct><struct name="static_power"><template>
-      <template-type-parameter name="DL"/>
-      <template-type-parameter name="Ex"/>
-    </template><purpose>Raise a dimension list to a scalar power. </purpose></struct><struct name="static_root"><template>
-      <template-type-parameter name="DL"/>
-      <template-type-parameter name="Rt"/>
-    </template><purpose>Take a scalar root of a dimension list. </purpose></struct>
+    </template><description><para>A system that can uniquely represent any unit which can be composed from a linearly independent set of base units. It is safe to rebind a unit with such a system to different dimensions.</para><para>Do not construct this template directly. Use <classname alt="boost::units::make_system">make_system</classname> instead. </para></description></struct>
 
 
 
@@ -2307,7 +2312,15 @@ struct conversion_helper&lt;quantity&lt;dozen, T0&gt;, quantity&lt;pair, T1&gt; 
         </template><parameter name="ar"><paramtype>Archive &amp;</paramtype></parameter><parameter name="q"><paramtype><classname>boost::units::quantity</classname>&lt; Unit, Y &gt; &amp;</paramtype></parameter><parameter name=""><paramtype>const unsigned int</paramtype></parameter><purpose>Boost Serialization library support for quantities. </purpose></function>
 </namespace>
 <namespace name="units">
-<enum name="format_mode"><enumvalue name="symbol_fmt"><default>= 0</default></enumvalue><enumvalue name="name_fmt"><default>= 1</default><purpose>default - reduces unit names to known symbols for both base and derived units. </purpose></enumvalue><enumvalue name="raw_fmt"><default>= 2</default><purpose>output full unit names for base and derived units, for example "meter". </purpose></enumvalue><enumvalue name="typename_fmt"><default>= 3</default><purpose>output only symbols for base units (but not derived units), for example "m". </purpose></enumvalue><enumvalue name="fmt_mask"><default>= 3</default><purpose>output demangled typenames (useful only for diagnosis). </purpose></enumvalue><purpose>format of output of units, for example "m" or "meter". </purpose></enum>
+<struct name="base_unit_info"><template>
+      <template-type-parameter name="BaseUnit"/>
+    </template><purpose>traits template for unit names. </purpose><method-group name="public static functions">
+<method name="name" specifiers="static"><type>std::string</type><purpose>The full name of the unit (returns BaseUnit::name() by default) </purpose></method>
+<method name="symbol" specifiers="static"><type>std::string</type><purpose>The symbol for the base unit (Returns BaseUnit::symbol() by default) </purpose><description><para>
+</para></description><returns><para>BaseUnit::symbol(), for example "m"</para>
+</returns></method>
+</method-group>
+</struct><enum name="format_mode"><enumvalue name="symbol_fmt"><default>= 0</default></enumvalue><enumvalue name="name_fmt"><default>= 1</default><purpose>default - reduces unit names to known symbols for both base and derived units. </purpose></enumvalue><enumvalue name="raw_fmt"><default>= 2</default><purpose>output full unit names for base and derived units, for example "meter". </purpose></enumvalue><enumvalue name="typename_fmt"><default>= 3</default><purpose>output only symbols for base units (but not derived units), for example "m". </purpose></enumvalue><enumvalue name="fmt_mask"><default>= 3</default><purpose>output demangled typenames (useful only for diagnosis). </purpose></enumvalue><purpose>format of output of units, for example "m" or "meter". </purpose></enum>
 <enum name="autoprefix_mode"><enumvalue name="autoprefix_none"><default>= 0</default></enumvalue><enumvalue name="autoprefix_engineering"><default>= 4</default><purpose>No automatic prefix. </purpose></enumvalue><enumvalue name="autoprefix_binary"><default>= 8</default><purpose>Scale and prefix with 10^3 multiples, 1234.5 m output as 1.2345 km. </purpose></enumvalue><enumvalue name="autoprefix_mask"><default>= 12</default><purpose>Scale and prefix with 2^10 (1024) multiples, 1024 as 1 kb. </purpose></enumvalue><purpose>automatic scaling and prefix (controlled by value of quantity) a, if any, </purpose></enum>
 
 
@@ -2408,7 +2421,8 @@ struct conversion_helper&lt;quantity&lt;dozen, T0&gt;, quantity&lt;pair, T1&gt; 
         </template><parameter name="os"><paramtype>std::basic_ostream&lt; Char, Traits &gt; &amp;</paramtype></parameter><parameter name="u"><paramtype>const <classname>unit</classname>&lt; Dimension, System &gt; &amp;</paramtype></parameter><description><para>Print a <computeroutput>unit</computeroutput> as a list of base units and their exponents. for @c symbol_format outputs e.g. "m s^-1" or "J".
 for @c name_format  outputs e.g. "meter second^-1" or "joule".
 for @c raw_format  outputs e.g. "m s^-1" or "meter kilogram^2 second^-2".
-for @c typename_format  outputs the typename itself (currently demangled only on GCC).  </para></description></function>
+for @c typename_format  outputs the typename itself (currently demangled only on GCC). 
+ </para></description></function>
 <function name="operator&lt;&lt;"><type>std::basic_ostream&lt; Char, Traits &gt; &amp;</type><template>
           <template-type-parameter name="Char"/>
           <template-type-parameter name="Traits"/>
@@ -2479,10 +2493,10 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <namespace name="units">
 <struct name="is_dim"><template>
       <template-type-parameter name="T"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a valid <computeroutput>dim</computeroutput>. </purpose></struct><struct-specialization name="is_dim"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a valid <computeroutput>dim</computeroutput>. </purpose></struct><struct-specialization name="is_dim"><template>
       <template-type-parameter name="T"/>
       <template-type-parameter name="V"/>
-    </template><specialization><template-arg>dim&lt; T</template-arg><template-arg>V &gt;</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization>
+    </template><specialization><template-arg>dim&lt; T</template-arg><template-arg>V &gt;</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization>
 
 
 
@@ -2616,11 +2630,11 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <namespace name="units">
 <struct name="is_dimension_list"><template>
       <template-type-parameter name="Seq"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a valid dimension list. </purpose></struct><struct-specialization name="is_dimension_list"><template>
-    </template><specialization><template-arg>dimensionless_type</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization><struct-specialization name="is_dimension_list"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a valid dimension list. </purpose></struct><struct-specialization name="is_dimension_list"><template>
+    </template><specialization><template-arg>dimensionless_type</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization><struct-specialization name="is_dimension_list"><template>
       <template-type-parameter name="Item"/>
       <template-type-parameter name="Next"/>
-    </template><specialization><template-arg>list&lt; Item</template-arg><template-arg>Next &gt;</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization>
+    </template><specialization><template-arg>list&lt; Item</template-arg><template-arg>Next &gt;</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization>
 
 
 
@@ -2754,12 +2768,12 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <namespace name="units">
 <struct name="is_dimensionless"><template>
       <template-type-parameter name="T"/>
-    </template><inherit access="public">false_</inherit></struct><struct-specialization name="is_dimensionless"><template>
+    </template><inherit access="public">mpl::false_</inherit></struct><struct-specialization name="is_dimensionless"><template>
       <template-type-parameter name="Unit"/>
       <template-type-parameter name="Y"/>
     </template><specialization><template-arg>quantity&lt; Unit</template-arg><template-arg>Y &gt;</template-arg></specialization><inherit access="public">boost::units::is_dimensionless&lt; Unit &gt;</inherit><purpose>Check if a quantity is dimensionless. </purpose></struct-specialization><struct-specialization name="is_dimensionless"><template>
       <template-type-parameter name="System"/>
-    </template><specialization><template-arg>unit&lt; dimensionless_type</template-arg><template-arg>System &gt;</template-arg></specialization><inherit access="public">true_</inherit><purpose>Check if a unit is dimensionless. </purpose></struct-specialization>
+    </template><specialization><template-arg>unit&lt; dimensionless_type</template-arg><template-arg>System &gt;</template-arg></specialization><inherit access="public">mpl::true_</inherit><purpose>Check if a unit is dimensionless. </purpose></struct-specialization>
 
 
 
@@ -3161,10 +3175,10 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <namespace name="units">
 <struct name="is_quantity"><template>
       <template-type-parameter name="T"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a quantity. </purpose></struct><struct-specialization name="is_quantity"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a quantity. </purpose></struct><struct-specialization name="is_quantity"><template>
       <template-type-parameter name="Unit"/>
       <template-type-parameter name="Y"/>
-    </template><specialization><template-arg>quantity&lt; Unit</template-arg><template-arg>Y &gt;</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization>
+    </template><specialization><template-arg>quantity&lt; Unit</template-arg><template-arg>Y &gt;</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization>
 
 
 
@@ -3299,7 +3313,7 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <struct name="is_quantity_of_dimension"><template>
       <template-type-parameter name="T"/>
       <template-type-parameter name="Dim"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a quantity of the specified dimension. </purpose></struct><struct-specialization name="is_quantity_of_dimension"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a quantity of the specified dimension. </purpose></struct><struct-specialization name="is_quantity_of_dimension"><template>
       <template-type-parameter name="Unit"/>
       <template-type-parameter name="Y"/>
       <template-type-parameter name="Dim"/>
@@ -3438,7 +3452,7 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <struct name="is_quantity_of_system"><template>
       <template-type-parameter name="T"/>
       <template-type-parameter name="System"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a quantity in a specified system. </purpose></struct><struct-specialization name="is_quantity_of_system"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a quantity in a specified system. </purpose></struct><struct-specialization name="is_quantity_of_system"><template>
       <template-type-parameter name="Unit"/>
       <template-type-parameter name="Y"/>
       <template-type-parameter name="System"/>
@@ -3576,10 +3590,10 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <namespace name="units">
 <struct name="is_unit"><template>
       <template-type-parameter name="T"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a unit. </purpose></struct><struct-specialization name="is_unit"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a unit. </purpose></struct><struct-specialization name="is_unit"><template>
       <template-type-parameter name="Dim"/>
       <template-type-parameter name="System"/>
-    </template><specialization><template-arg>unit&lt; Dim</template-arg><template-arg>System &gt;</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization>
+    </template><specialization><template-arg>unit&lt; Dim</template-arg><template-arg>System &gt;</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization>
 
 
 
@@ -3714,13 +3728,13 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <struct name="is_unit_of_dimension"><template>
       <template-type-parameter name="T"/>
       <template-type-parameter name="Dim"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a unit of the specified dimension. </purpose></struct><struct-specialization name="is_unit_of_dimension"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a unit of the specified dimension. </purpose></struct><struct-specialization name="is_unit_of_dimension"><template>
       <template-type-parameter name="Dim"/>
       <template-type-parameter name="System"/>
-    </template><specialization><template-arg>absolute&lt; unit&lt; Dim</template-arg><template-arg>System &gt; &gt;</template-arg><template-arg>Dim</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization><struct-specialization name="is_unit_of_dimension"><template>
+    </template><specialization><template-arg>absolute&lt; unit&lt; Dim</template-arg><template-arg>System &gt; &gt;</template-arg><template-arg>Dim</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization><struct-specialization name="is_unit_of_dimension"><template>
       <template-type-parameter name="Dim"/>
       <template-type-parameter name="System"/>
-    </template><specialization><template-arg>unit&lt; Dim</template-arg><template-arg>System &gt;</template-arg><template-arg>Dim</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization>
+    </template><specialization><template-arg>unit&lt; Dim</template-arg><template-arg>System &gt;</template-arg><template-arg>Dim</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization>
 
 
 
@@ -3855,13 +3869,13 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 <struct name="is_unit_of_system"><template>
       <template-type-parameter name="T"/>
       <template-type-parameter name="System"/>
-    </template><inherit access="public">false_</inherit><purpose>Check that a type is a unit in a specified system. </purpose></struct><struct-specialization name="is_unit_of_system"><template>
+    </template><inherit access="public">mpl::false_</inherit><purpose>Check that a type is a unit in a specified system. </purpose></struct><struct-specialization name="is_unit_of_system"><template>
       <template-type-parameter name="Dim"/>
       <template-type-parameter name="System"/>
-    </template><specialization><template-arg>absolute&lt; unit&lt; Dim</template-arg><template-arg>System &gt; &gt;</template-arg><template-arg>System</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization><struct-specialization name="is_unit_of_system"><template>
+    </template><specialization><template-arg>absolute&lt; unit&lt; Dim</template-arg><template-arg>System &gt; &gt;</template-arg><template-arg>System</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization><struct-specialization name="is_unit_of_system"><template>
       <template-type-parameter name="Dim"/>
       <template-type-parameter name="System"/>
-    </template><specialization><template-arg>unit&lt; Dim</template-arg><template-arg>System &gt;</template-arg><template-arg>System</template-arg></specialization><inherit access="public">true_</inherit></struct-specialization>
+    </template><specialization><template-arg>unit&lt; Dim</template-arg><template-arg>System &gt;</template-arg><template-arg>System</template-arg></specialization><inherit access="public">mpl::true_</inherit></struct-specialization>
 
 
 
@@ -3995,7 +4009,7 @@ for @c typename_format  outputs the typename itself (currently demangled only on
 
 <para>2008-06-16</para>
 
-Boost.Lambda's return type deduction system is extented to make use of Boost.Units' typeof_helper trait classes for Boost.Units' quantity, absolute, and unit template classes.  </para><namespace name="boost">
+Boost.Lambda's return type deduction system is extented to make use of Boost.Units' typeof_helper trait classes for Boost.Units' quantity, absolute, and unit template classes. </para><namespace name="boost">
 <namespace name="lambda">
 <struct-specialization name="plain_return_type_1"><template>
       <template-type-parameter name="Unit"/>
@@ -4353,7 +4367,7 @@ Boost.Lambda's return type deduction system is extented to make use of Boost.Uni
 <class-specialization name="numeric_limits"><template>
       <template-type-parameter name="Unit"/>
       <template-type-parameter name="T"/>
-    </template><specialization><template-arg>::boost::units::quantity&lt; Unit</template-arg><template-arg>T &gt;</template-arg></specialization><typedef name="quantity_type"><type>::<classname>boost::units::quantity</classname>&lt; Unit, T &gt;</type></typedef>
+    </template><specialization><template-arg>::boost::units::quantity&lt; Unit</template-arg><template-arg>T &gt;</template-arg></specialization><typedef name="quantity_type"><type><classname>::boost::units::quantity</classname>&lt; Unit, T &gt;</type></typedef>
 <data-member name="is_specialized"><type>BOOST_STATIC_CONSTEXPR bool</type></data-member>
 <data-member name="digits"><type>BOOST_STATIC_CONSTEXPR int</type></data-member>
 <data-member name="digits10"><type>BOOST_STATIC_CONSTEXPR int</type></data-member>
@@ -4396,7 +4410,7 @@ Boost.Lambda's return type deduction system is extented to make use of Boost.Uni
 <struct name="make_scaled_unit"><template>
       <template-type-parameter name="Unit"/>
       <template-type-parameter name="Scale"/>
-    </template><typedef name="type"><type><classname>make_scaled_unit</classname>&lt; typename <classname>reduce_unit</classname>&lt; Unit &gt;::type, Scale &gt;::type</type></typedef>
+    </template><typedef name="type"><type><classname>make_scaled_unit</classname>&lt; typenamereduce_unit&lt; Unit &gt;::type, Scale &gt;::type</type></typedef>
 </struct><struct-specialization name="make_scaled_unit"><template>
       <template-type-parameter name="Dimension"/>
       <template-type-parameter name="UnitList"/>
@@ -5038,7 +5052,7 @@ Boost.Lambda's return type deduction system is extented to make use of Boost.Uni
           <template-type-parameter name="Unit2"/>
           <template-type-parameter name="YY"/>
         </template><parameter name="source"><paramtype>const <classname>quantity</classname>&lt; Unit2, YY &gt; &amp;</paramtype></parameter></method>
-<method name="operator *="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><template>
+<method name="operator*="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><template>
           <template-type-parameter name="Unit2"/>
           <template-type-parameter name="YY"/>
         </template><parameter name="source"><paramtype>const <classname>quantity</classname>&lt; Unit2, YY &gt; &amp;</paramtype></parameter></method>
@@ -5046,7 +5060,7 @@ Boost.Lambda's return type deduction system is extented to make use of Boost.Uni
           <template-type-parameter name="Unit2"/>
           <template-type-parameter name="YY"/>
         </template><parameter name="source"><paramtype>const <classname>quantity</classname>&lt; Unit2, YY &gt; &amp;</paramtype></parameter><purpose>can multiply a quantity by a scalar value_type if multiply_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </purpose></method>
-<method name="operator *="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="source"><paramtype>const value_type &amp;</paramtype></parameter><purpose>can divide a quantity by a scalar value_type if divide_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </purpose></method>
+<method name="operator*="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="source"><paramtype>const value_type &amp;</paramtype></parameter><purpose>can divide a quantity by a scalar value_type if divide_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </purpose></method>
 <method name="operator/="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="source"><paramtype>const value_type &amp;</paramtype></parameter></method>
 </method-group>
 <constructor/>
@@ -5093,7 +5107,7 @@ Boost.Lambda's return type deduction system is extented to make use of Boost.Uni
 <method name="value" cv="const"><type>BOOST_CONSTEXPR const value_type &amp;</type><purpose>constant accessor to value </purpose><description><para>can add a quantity of the same type if add_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </para></description></method>
 <method name="operator+="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="source"><paramtype>const this_type &amp;</paramtype></parameter><purpose>can subtract a quantity of the same type if subtract_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </purpose></method>
 <method name="operator-="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="source"><paramtype>const this_type &amp;</paramtype></parameter><purpose>can multiply a quantity by a scalar value_type if multiply_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </purpose></method>
-<method name="operator *="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="val"><paramtype>const value_type &amp;</paramtype></parameter><purpose>can divide a quantity by a scalar value_type if divide_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </purpose></method>
+<method name="operator*="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="val"><paramtype>const value_type &amp;</paramtype></parameter><purpose>can divide a quantity by a scalar value_type if divide_typeof_helper&lt;value_type,value_type&gt;::type is convertible to value_type </purpose></method>
 <method name="operator/="><type>BOOST_CXX14_CONSTEXPR this_type &amp;</type><parameter name="val"><paramtype>const value_type &amp;</paramtype></parameter></method>
 </method-group>
 <constructor/>
@@ -5659,17 +5673,7 @@ Boost.Lambda's return type deduction system is extented to make use of Boost.Uni
 <header name="boost/units/scaled_base_unit.hpp">
 <namespace name="boost">
 <namespace name="units">
-<struct name="base_unit_info"><template>
-      <template-type-parameter name="BaseUnit"/>
-    </template><purpose>traits template for unit names. </purpose><method-group name="public static functions">
-<method name="name" specifiers="static"><type>std::string</type><purpose>The full name of the unit (returns BaseUnit::name() by default) </purpose></method>
-<method name="symbol" specifiers="static"><type>std::string</type><purpose>The symbol for the base unit (Returns BaseUnit::symbol() by default) </purpose><description><para>
-</para></description><returns><para>BaseUnit::symbol(), for example "m" </para>
-</returns></method>
-</method-group>
-</struct><struct name="heterogeneous_system"><template>
-      <template-type-parameter name="T"/>
-    </template><inherit access="public">T</inherit><description><para>A system that can represent any possible combination of units at the expense of not preserving information about how it was created. Do not create specializations of this template directly. Instead use <computeroutput><classname alt="boost::units::reduce_unit">reduce_unit</classname></computeroutput> and <computeroutput>base_unit&lt;...&gt;::unit_type</computeroutput>. </para></description></struct><struct name="scaled_base_unit"><template>
+<struct name="scaled_base_unit"><template>
       <template-type-parameter name="S"/>
       <template-type-parameter name="Scale"/>
     </template><typedef name="type"><type><classname>scaled_base_unit</classname></type></typedef>

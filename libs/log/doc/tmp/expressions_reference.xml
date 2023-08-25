@@ -7,13 +7,75 @@
 The header contains implementation of a generic attribute placeholder in template expressions. </para><namespace name="boost">
 <namespace name="log">
 <namespace name="expressions">
-<function name="attr"><type><classname>attribute_actor</classname>&lt; AttributeValueT &gt;</type><template>
+<class name="attribute_actor"><template>
+      <template-type-parameter name="T"/>
+      <template-type-parameter name="FallbackPolicyT"/>
+      <template-type-parameter name="TagT"/>
+      <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+    </template><inherit access="public">ActorT&lt; attribute_terminal&lt; T, FallbackPolicyT, TagT &gt; &gt;</inherit><description><para>An attribute value extraction terminal actor </para></description><typedef name="tag_type"><purpose>Attribute tag type. </purpose><type>TagT</type></typedef>
+<typedef name="fallback_policy"><purpose>Fallback policy. </purpose><type>FallbackPolicyT</type></typedef>
+<typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>attribute_terminal</classname>&lt; T, fallback_policy, tag_type &gt;</type></typedef>
+<typedef name="value_type"><purpose>Attribute value type. </purpose><type>terminal_type::value_type</type></typedef>
+<typedef name="base_type"><purpose>Base actor type. </purpose><type>ActorT&lt; terminal_type &gt;</type></typedef>
+<typedef name="or_none_result_type"><purpose>Expression with cached attribute name. </purpose><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_none, tag_type, ActorT &gt;</type></typedef>
+<typedef name="or_throw_result_type"><purpose>Expression with cached attribute name. </purpose><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_throw, tag_type, ActorT &gt;</type></typedef>
+<method-group name="public member functions">
+<method name="get_name" cv="const"><type>attribute_name</type><description><para>
+</para></description><returns><para>The attribute name </para>
+</returns></method>
+<method name="get_fallback_policy" cv="const"><type>fallback_policy const &amp;</type><description><para>
+</para></description><returns><para>Fallback policy </para>
+</returns></method>
+<method name="or_none" cv="const"><type>or_none_result_type</type><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
+<method name="or_throw" cv="const"><type>or_throw_result_type</type><purpose>Generates an expression that extracts the attribute value or throws an exception. </purpose></method>
+<method name="or_default" cv="const"><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_default&lt; DefaultT &gt;, tag_type, ActorT &gt;</type><template>
+          <template-type-parameter name="DefaultT"/>
+        </template><parameter name="def_val"><paramtype>DefaultT const &amp;</paramtype></parameter><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
+</method-group>
+<constructor specifiers="explicit"><parameter name="act"><paramtype>base_type const &amp;</paramtype></parameter><purpose>Initializing constructor. </purpose></constructor>
+</class><class name="attribute_terminal"><template>
+      <template-type-parameter name="T"/>
+      <template-type-parameter name="FallbackPolicyT"/>
+      <template-type-parameter name="TagT"/>
+    </template><description><para>An attribute value extraction terminal </para></description><struct name="result"><template>
+      <template-type-parameter name=""/>
+    </template><purpose>Function result type. </purpose></struct><struct-specialization name="result"><template>
+      <template-type-parameter name="ThisT"/>
+      <template-type-parameter name="ContextT"/>
+    </template><specialization><template-arg>ThisT(ContextT)</template-arg></specialization><typedef name="env_type"><type>remove_cv&lt; typenameremove_reference&lt; typenamephoenix::result_of::env&lt; ContextT &gt;::type &gt;::type &gt;::type</type></typedef>
+<typedef name="args_type"><type>env_type::args_type</type></typedef>
+<typedef name="cv_value_extractor_type"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="type"><type>boost::result_of&lt; cv_value_extractor_type(attribute_nameconst &amp;, typenamefusion::result_of::at_c&lt; args_type, 0 &gt;::type)&gt;::type</type></typedef>
+</struct-specialization><typedef name="tag_type"><purpose>Attribute tag type. </purpose><type>TagT</type></typedef>
+<typedef name="value_type"><purpose>Attribute value type. </purpose><type>value_extractor_type::value_type</type></typedef>
+<typedef name="fallback_policy"><purpose>Fallback policy type. </purpose><type>value_extractor_type::fallback_policy</type></typedef>
+<method-group name="public member functions">
+<method name="get_name" cv="const"><type>attribute_name</type><description><para>
+</para></description><returns><para>Attribute value name </para>
+</returns></method>
+<method name="get_fallback_policy" cv="const"><type>fallback_policy const &amp;</type><description><para>
+</para></description><returns><para>Fallback policy </para>
+</returns></method>
+<method name="operator()"><type><classname>result</classname>&lt; <classname>this_type</classname>(ContextTconst &amp;)&gt;::type</type><template>
+          <template-type-parameter name="ContextT"/>
+        </template><parameter name="ctx"><paramtype>ContextT const &amp;</paramtype></parameter><description><para>The operator extracts attribute value </para></description></method>
+<method name="operator()" cv="const"><type><classname>result</classname>&lt; constthis_type(ContextTconst &amp;)&gt;::type</type><template>
+          <template-type-parameter name="ContextT"/>
+        </template><parameter name="ctx"><paramtype>ContextT const &amp;</paramtype></parameter><description><para>The operator extracts attribute value </para></description></method>
+</method-group>
+<constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>Initializing constructor </para></description></constructor>
+<constructor><template>
+          <template-type-parameter name="U"/>
+        </template><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="arg"><paramtype>U const &amp;</paramtype></parameter><description><para>Initializing constructor </para></description></constructor>
+<constructor cv="= delete"/>
+</class><function name="attr"><type><classname>attribute_actor</classname>&lt; AttributeValueT &gt;</type><template>
           <template-type-parameter name="AttributeValueT"/>
         </template><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>The function generates a terminal node in a template expression. The node will extract the value of the attribute with the specified name and type. </para></description></function>
 <function name="attr"><type><classname>attribute_actor</classname>&lt; AttributeValueT, fallback_to_none, TagT &gt;</type><template>
           <template-type-parameter name="AttributeValueT"/>
           <template-type-parameter name="TagT"/>
         </template><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>The function generates a terminal node in a template expression. The node will extract the value of the attribute with the specified name and type. </para></description></function>
+
 
 
 
@@ -95,49 +157,8 @@ The header contains implementation of a generic attribute placeholder in templat
 The header contains forward declaration of a generic attribute placeholder in template expressions. </para><namespace name="boost">
 <namespace name="log">
 <namespace name="expressions">
-<class name="attribute_actor"><template>
-      <template-type-parameter name="T"/>
-      <template-type-parameter name="FallbackPolicyT"/>
-      <template-type-parameter name="TagT"/>
-      <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-    </template><inherit access="public">ActorT&lt; attribute_terminal&lt; T, FallbackPolicyT, TagT &gt; &gt;</inherit><description><para>An attribute value extraction terminal actor </para></description><method-group name="public member functions">
-<method name="get_name" cv="const"><type>attribute_name</type><description><para>
-</para></description><returns><para>The attribute name </para>
-</returns></method>
-<method name="get_fallback_policy" cv="const"><type>fallback_policy const  &amp;</type><description><para>
-</para></description><returns><para>Fallback policy </para>
-</returns></method>
-<method name="or_none" cv="const"><type>or_none_result_type</type><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
-<method name="or_throw" cv="const"><type>or_throw_result_type</type><purpose>Generates an expression that extracts the attribute value or throws an exception. </purpose></method>
-<method name="or_default" cv="const"><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_default&lt; DefaultT &gt;, tag_type, ActorT &gt;</type><template>
-          <template-type-parameter name="DefaultT"/>
-        </template><parameter name="def_val"><paramtype>DefaultT const &amp;</paramtype></parameter><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
-</method-group>
-<constructor specifiers="explicit"><parameter name="act"><paramtype>base_type const &amp;</paramtype></parameter><purpose>Initializing constructor. </purpose></constructor>
-</class><class name="attribute_terminal"><template>
-      <template-type-parameter name="T"/>
-      <template-type-parameter name="FallbackPolicyT"/>
-      <template-type-parameter name="TagT"/>
-    </template><description><para>An attribute value extraction terminal </para></description><method-group name="public member functions">
-<method name="get_name" cv="const"><type>attribute_name</type><description><para>
-</para></description><returns><para>Attribute value name </para>
-</returns></method>
-<method name="get_fallback_policy" cv="const"><type>fallback_policy const  &amp;</type><description><para>
-</para></description><returns><para>Fallback policy </para>
-</returns></method>
-<method name="operator()"><type><classname>result</classname>&lt; <classname>this_type</classname>(ContextT const  &amp;) &gt;::type</type><template>
-          <template-type-parameter name="ContextT"/>
-        </template><parameter name="ctx"><paramtype>ContextT const &amp;</paramtype></parameter><description><para>The operator extracts attribute value </para></description></method>
-<method name="operator()" cv="const"><type><classname>result</classname>&lt; const <classname>this_type</classname>(ContextT const  &amp;) &gt;::type</type><template>
-          <template-type-parameter name="ContextT"/>
-        </template><parameter name="ctx"><paramtype>ContextT const &amp;</paramtype></parameter><description><para>The operator extracts attribute value </para></description></method>
-</method-group>
-<constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>Initializing constructor </para></description></constructor>
-<constructor><template>
-          <template-type-parameter name="U"/>
-        </template><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="arg"><paramtype>U const &amp;</paramtype></parameter><description><para>Initializing constructor </para></description></constructor>
-<constructor cv="= delete"/>
-</class>
+
+
 
 
 
@@ -347,6 +368,7 @@ The header contains a formatter function object definition. </para><namespace na
 
 
 
+
 </namespace>
 <typedef name="formatter"><type><classname>basic_formatter</classname>&lt; char &gt;</type></typedef>
 <typedef name="wformatter"><type><classname>basic_formatter</classname>&lt; wchar_t &gt;</type></typedef>
@@ -371,6 +393,7 @@ The header includes all template expression formatters. </para></header>
 The header contains implementation of formatter for inserting a newline, unless there is already one inserted. </para><namespace name="boost">
 <namespace name="log">
 <namespace name="expressions">
+
 
 
 
@@ -534,6 +557,7 @@ The header contains implementation of C-style character decorators. </para><name
 
 
 
+
 <function name="make_c_decor"><type><emphasis>unspecified</emphasis></type><template>
           <template-type-parameter name="CharT"/>
         </template><description><para>The function creates a C-style decorator generator for arbitrary character type. </para></description></function>
@@ -558,11 +582,11 @@ The header contains implementation of a character decorator. </para><namespace n
       <template-type-parameter name="SubactorT"/>
       <template-type-parameter name="ImplT"/>
       <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type><default>phoenix::actor</default></template-nontype-parameter>
-    </template><inherit access="public">ActorT&lt; char_decorator_terminal&lt; SubactorT, ImplT &gt; &gt;</inherit><description><para>Character decorator actor </para></description><typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>char_decorator_terminal</classname>&lt; SubactorT, ImplT &gt;</type></typedef>
+    </template><inherit access="public">phoenix::actor&lt; char_decorator_terminal&lt; SubactorT, ImplT &gt; &gt;</inherit><description><para>Character decorator actor </para></description><typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>char_decorator_terminal</classname>&lt; SubactorT, ImplT &gt;</type></typedef>
 <typedef name="char_type"><purpose>Character type. </purpose><type>terminal_type::char_type</type></typedef>
 <typedef name="base_type"><purpose>Base actor type. </purpose><type>ActorT&lt; terminal_type &gt;</type></typedef>
 <method-group name="public member functions">
-<method name="get_terminal" cv="const"><type>terminal_type const  &amp;</type><purpose>Returns reference to the terminal. </purpose></method>
+<method name="get_terminal" cv="const"><type>terminal_type const &amp;</type><purpose>Returns reference to the terminal. </purpose></method>
 </method-group>
 <constructor specifiers="explicit"><parameter name="act"><paramtype>base_type const &amp;</paramtype></parameter><purpose>Initializing constructor. </purpose></constructor>
 </class><class name="char_decorator_terminal"><template>
@@ -575,10 +599,10 @@ The header contains implementation of a character decorator. </para><namespace n
 <typedef name="subactor_type"><purpose>Adopted actor type. </purpose><type>SubactorT</type></typedef>
 <typedef name="result_type"><purpose>Result type definition. </purpose><type>string_type</type></typedef>
 <method-group name="public member functions">
-<method name="get_subactor" cv="const"><type>subactor_type const  &amp;</type><description><para>
+<method name="get_subactor" cv="const"><type>subactor_type const &amp;</type><description><para>
 </para></description><returns><para>Adopted subactor </para>
 </returns></method>
-<method name="get_impl" cv="const"><type>impl_type const  &amp;</type><description><para>
+<method name="get_impl" cv="const"><type>impl_type const &amp;</type><description><para>
 </para></description><returns><para>Implementation </para>
 </returns></method>
 <method name="operator()"><type>result_type</type><template>
@@ -622,6 +646,7 @@ The header contains implementation of a character decorator. </para><namespace n
         </template><parameter name="r"><paramtype>RangeT const &amp;</paramtype></parameter></method>
 </method-group>
 </class>
+
 
 
 
@@ -779,6 +804,7 @@ The header contains implementation of a CSV-style character decorator. See: <uli
 
 
 
+
 <function name="make_csv_decor"><type><emphasis>unspecified</emphasis></type><template>
           <template-type-parameter name="CharT"/>
         </template><description><para>The function creates an CSV-style decorator generator for arbitrary character type. </para></description></function>
@@ -805,7 +831,7 @@ The header contains a formatter function for date and time attribute values. </p
       <template-type-parameter name="FallbackPolicyT"/>
       <template-type-parameter name="CharT"/>
       <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type><default>phoenix::actor</default></template-nontype-parameter>
-    </template><inherit access="public">ActorT&lt; format_date_time_terminal&lt; T, FallbackPolicyT, CharT &gt; &gt;</inherit><description><para>Date and time formatter actor. </para></description><typedef name="value_type"><purpose>Attribute value type. </purpose><type>T</type></typedef>
+    </template><inherit access="public">phoenix::actor&lt; format_date_time_terminal&lt; T, FallbackPolicyT, CharT &gt; &gt;</inherit><description><para>Date and time formatter actor. </para></description><typedef name="value_type"><purpose>Attribute value type. </purpose><type>T</type></typedef>
 <typedef name="char_type"><purpose>Character type. </purpose><type>CharT</type></typedef>
 <typedef name="fallback_policy"><purpose>Fallback policy. </purpose><type>FallbackPolicyT</type></typedef>
 <typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>format_date_time_terminal</classname>&lt; value_type, fallback_policy, char_type &gt;</type></typedef>
@@ -815,10 +841,10 @@ The header contains a formatter function for date and time attribute values. </p
 <method name="get_name" cv="const"><type>attribute_name</type><description><para>
 </para></description><returns><para>The attribute name </para>
 </returns></method>
-<method name="get_fallback_policy" cv="const"><type>fallback_policy const  &amp;</type><description><para>
+<method name="get_fallback_policy" cv="const"><type>fallback_policy const &amp;</type><description><para>
 </para></description><returns><para>Fallback policy </para>
 </returns></method>
-<method name="get_formatter_function" cv="const"><type>formatter_function_type const  &amp;</type><description><para>
+<method name="get_formatter_function" cv="const"><type>formatter_function_type const &amp;</type><description><para>
 </para></description><returns><para>Formatter function </para>
 </returns></method>
 </method-group>
@@ -836,8 +862,8 @@ The header contains a formatter function for date and time attribute values. </p
 <typedef name="result_type"><purpose>Function result type. </purpose><type>string_type</type></typedef>
 <method-group name="public member functions">
 <method name="get_name" cv="const"><type>attribute_name</type><purpose>Returns attribute name. </purpose></method>
-<method name="get_fallback_policy" cv="const"><type>fallback_policy const  &amp;</type><purpose>Returns fallback policy. </purpose></method>
-<method name="get_formatter_function" cv="const"><type>formatter_function_type const  &amp;</type><purpose>Retruns formatter function. </purpose></method>
+<method name="get_fallback_policy" cv="const"><type>fallback_policy const &amp;</type><purpose>Returns fallback policy. </purpose></method>
+<method name="get_formatter_function" cv="const"><type>formatter_function_type const &amp;</type><purpose>Retruns formatter function. </purpose></method>
 <method name="operator()"><type>result_type</type><template>
           <template-type-parameter name="ContextT"/>
         </template><parameter name="ctx"><paramtype>ContextT const &amp;</paramtype></parameter><purpose>Invokation operator. </purpose></method>
@@ -849,6 +875,7 @@ The header contains a formatter function for date and time attribute values. </p
 <constructor><parameter name="that"><paramtype><classname>format_date_time_terminal</classname> const &amp;</paramtype></parameter><purpose>Copy constructor. </purpose></constructor>
 <constructor cv="= delete"/>
 </class>
+
 
 
 
@@ -1032,6 +1059,7 @@ The header contains a generic log record formatter function. </para><namespace n
 
 
 
+
 <function name="format"><type>phoenix::actor&lt; <classname>format_terminal</classname>&lt; CharT &gt; &gt;</type><template>
           <template-type-parameter name="CharT"/>
         </template><parameter name="fmt"><paramtype>const CharT *</paramtype></parameter><description><para>The function generates a terminal node in a template expression. The node will perform log record formatting according to the provided format string. </para></description></function>
@@ -1065,6 +1093,7 @@ The header contains a generic log record formatter function. </para><namespace n
 The header contains implementation of a conditional formatter. </para><namespace name="boost">
 <namespace name="log">
 <namespace name="expressions">
+
 
 
 
@@ -1155,11 +1184,11 @@ The header contains implementation of a string length limiting decorator. </para
       <template-type-parameter name="SubactorT"/>
       <template-type-parameter name="CharT"/>
       <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type><default>phoenix::actor</default></template-nontype-parameter>
-    </template><inherit access="public">ActorT&lt; max_size_decorator_terminal&lt; SubactorT, CharT &gt; &gt;</inherit><description><para>Character decorator actor </para></description><typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>max_size_decorator_terminal</classname>&lt; SubactorT, CharT &gt;</type></typedef>
+    </template><inherit access="public">phoenix::actor&lt; max_size_decorator_terminal&lt; SubactorT, CharT &gt; &gt;</inherit><description><para>Character decorator actor </para></description><typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>max_size_decorator_terminal</classname>&lt; SubactorT, CharT &gt;</type></typedef>
 <typedef name="char_type"><purpose>Character type. </purpose><type>terminal_type::char_type</type></typedef>
 <typedef name="base_type"><purpose>Base actor type. </purpose><type>ActorT&lt; terminal_type &gt;</type></typedef>
 <method-group name="public member functions">
-<method name="get_terminal" cv="const"><type>terminal_type const  &amp;</type><purpose>Returns reference to the terminal. </purpose></method>
+<method name="get_terminal" cv="const"><type>terminal_type const &amp;</type><purpose>Returns reference to the terminal. </purpose></method>
 </method-group>
 <constructor specifiers="explicit"><parameter name="act"><paramtype>base_type const &amp;</paramtype></parameter><purpose>Initializing constructor. </purpose></constructor>
 </class><class name="max_size_decorator_terminal"><template>
@@ -1172,13 +1201,13 @@ The header contains implementation of a string length limiting decorator. </para
 <typedef name="subactor_type"><purpose>Adopted actor type. </purpose><type>SubactorT</type></typedef>
 <typedef name="result_type"><purpose>Result type definition. </purpose><type>string_type</type></typedef>
 <method-group name="public member functions">
-<method name="get_subactor" cv="const"><type>subactor_type const  &amp;</type><description><para>
+<method name="get_subactor" cv="const"><type>subactor_type const &amp;</type><description><para>
 </para></description><returns><para>Adopted subactor </para>
 </returns></method>
 <method name="get_max_size" cv="const"><type>size_type</type><description><para>
 </para></description><returns><para>Max string size limit </para>
 </returns></method>
-<method name="get_overflow_marker" cv="const"><type>string_type const  &amp;</type><description><para>
+<method name="get_overflow_marker" cv="const"><type>string_type const &amp;</type><description><para>
 </para></description><returns><para>Max string size limit </para>
 </returns></method>
 <method name="operator()"><type>result_type</type><template>
@@ -1192,6 +1221,7 @@ The header contains implementation of a string length limiting decorator. </para
 <constructor><parameter name="that"><paramtype><classname>max_size_decorator_terminal</classname> const &amp;</paramtype></parameter><description><para>Copy constructor </para></description></constructor>
 <constructor cv="= delete"/>
 </class>
+
 
 
 
@@ -1291,7 +1321,7 @@ The header contains a formatter function for named scope attribute values. </par
       <template-type-parameter name="FallbackPolicyT"/>
       <template-type-parameter name="CharT"/>
       <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type><default>phoenix::actor</default></template-nontype-parameter>
-    </template><inherit access="public">ActorT&lt; format_named_scope_terminal&lt; FallbackPolicyT, CharT &gt; &gt;</inherit><description><para>Named scope formatter actor. </para></description><typedef name="char_type"><purpose>Character type. </purpose><type>CharT</type></typedef>
+    </template><inherit access="public">phoenix::actor&lt; format_named_scope_terminal&lt; FallbackPolicyT, CharT &gt; &gt;</inherit><description><para>Named scope formatter actor. </para></description><typedef name="char_type"><purpose>Character type. </purpose><type>CharT</type></typedef>
 <typedef name="fallback_policy"><purpose>Fallback policy. </purpose><type>FallbackPolicyT</type></typedef>
 <typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>format_named_scope_terminal</classname>&lt; fallback_policy, char_type &gt;</type></typedef>
 <typedef name="value_type"><purpose>Attribute value type. </purpose><type>terminal_type::value_type</type></typedef>
@@ -1301,10 +1331,10 @@ The header contains a formatter function for named scope attribute values. </par
 <method name="get_name" cv="const"><type>attribute_name</type><description><para>
 </para></description><returns><para>The attribute name </para>
 </returns></method>
-<method name="get_fallback_policy" cv="const"><type>fallback_policy const  &amp;</type><description><para>
+<method name="get_fallback_policy" cv="const"><type>fallback_policy const &amp;</type><description><para>
 </para></description><returns><para>Fallback policy </para>
 </returns></method>
-<method name="get_formatter_function" cv="const"><type>formatter_function_type const  &amp;</type><description><para>
+<method name="get_formatter_function" cv="const"><type>formatter_function_type const &amp;</type><description><para>
 </para></description><returns><para>Formatter function </para>
 </returns></method>
 </method-group>
@@ -1321,8 +1351,8 @@ The header contains a formatter function for named scope attribute values. </par
 <typedef name="result_type"><purpose>Function result type. </purpose><type>string_type</type></typedef>
 <method-group name="public member functions">
 <method name="get_name" cv="const"><type>attribute_name</type><purpose>Returns attribute name. </purpose></method>
-<method name="get_fallback_policy" cv="const"><type>fallback_policy const  &amp;</type><purpose>Returns fallback policy. </purpose></method>
-<method name="get_formatter_function" cv="const"><type>formatter_function_type const  &amp;</type><purpose>Retruns formatter function. </purpose></method>
+<method name="get_fallback_policy" cv="const"><type>fallback_policy const &amp;</type><purpose>Returns fallback policy. </purpose></method>
+<method name="get_formatter_function" cv="const"><type>formatter_function_type const &amp;</type><purpose>Retruns formatter function. </purpose></method>
 <method name="operator()"><type>result_type</type><template>
           <template-type-parameter name="ContextT"/>
         </template><parameter name="ctx"><paramtype>ContextT const &amp;</paramtype></parameter><purpose>Invokation operator. </purpose></method>
@@ -1336,6 +1366,7 @@ The header contains a formatter function for named scope attribute values. </par
 <constructor><parameter name="that"><paramtype><classname>format_named_scope_terminal</classname> const &amp;</paramtype></parameter><purpose>Copy constructor. </purpose></constructor>
 <constructor cv="= delete"/>
 </class><enum name="scope_iteration_direction"><enumvalue name="forward"><purpose>Iterate through scopes from outermost to innermost. </purpose></enumvalue><enumvalue name="reverse"><purpose>Iterate through scopes from innermost to outermost. </purpose></enumvalue><purpose>Scope iteration directions. </purpose></enum>
+
 
 
 
@@ -1547,6 +1578,7 @@ The header contains implementation of a stream placeholder in template expressio
 
 
 
+
 </namespace>
 
 
@@ -1565,12 +1597,12 @@ The header contains a formatter function wrapper that enables third-party functi
       <template-type-parameter name="FunT"/>
       <template-type-parameter name="CharT"/>
       <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type><default>phoenix::actor</default></template-nontype-parameter>
-    </template><inherit access="public">ActorT&lt; wrapped_formatter_terminal&lt; FunT, CharT &gt; &gt;</inherit><description><para>Wrapped formatter function actor. </para></description><typedef name="char_type"><purpose>Character type. </purpose><type>CharT</type></typedef>
+    </template><inherit access="public">phoenix::actor&lt; wrapped_formatter_terminal&lt; FunT, CharT &gt; &gt;</inherit><description><para>Wrapped formatter function actor. </para></description><typedef name="char_type"><purpose>Character type. </purpose><type>CharT</type></typedef>
 <typedef name="function_type"><purpose>Wrapped function type. </purpose><type>FunT</type></typedef>
 <typedef name="terminal_type"><purpose>Base terminal type. </purpose><type><classname>wrapped_formatter_terminal</classname>&lt; function_type, char_type &gt;</type></typedef>
 <typedef name="base_type"><purpose>Base actor type. </purpose><type>ActorT&lt; terminal_type &gt;</type></typedef>
 <method-group name="public member functions">
-<method name="get_function" cv="const"><type>function_type const  &amp;</type><description><para>
+<method name="get_function" cv="const"><type>function_type const &amp;</type><description><para>
 </para></description><returns><para>The wrapped function </para>
 </returns></method>
 </method-group>
@@ -1584,7 +1616,7 @@ The header contains a formatter function wrapper that enables third-party functi
 <typedef name="function_type"><purpose>Wrapped function type. </purpose><type>FunT</type></typedef>
 <typedef name="result_type"><purpose>Formatter result type. </purpose><type>string_type</type></typedef>
 <method-group name="public member functions">
-<method name="get_function" cv="const"><type>function_type const  &amp;</type><purpose>Returns the wrapped function. </purpose></method>
+<method name="get_function" cv="const"><type>function_type const &amp;</type><purpose>Returns the wrapped function. </purpose></method>
 <method name="operator()"><type>result_type</type><template>
           <template-type-parameter name="ContextT"/>
         </template><parameter name="ctx"><paramtype>ContextT const &amp;</paramtype></parameter><purpose>Invokation operator. </purpose></method>
@@ -1595,6 +1627,7 @@ The header contains a formatter function wrapper that enables third-party functi
 <constructor specifiers="explicit"><parameter name="fun"><paramtype>function_type const &amp;</paramtype></parameter><purpose>Initializing construction. </purpose></constructor>
 <constructor><parameter name="that"><paramtype><classname>wrapped_formatter_terminal</classname> const &amp;</paramtype></parameter><purpose>Copy constructor. </purpose></constructor>
 </class>
+
 
 
 
@@ -1688,6 +1721,7 @@ The header contains implementation of a XML-style character decorator. </para><n
 <namespace name="expressions">
 <data-member name="xml_decor"><type><emphasis>unspecified</emphasis></type><description><para>XML-style decorator generator object. The decorator replaces characters that have special meaning in XML documents with the corresponding decorated counterparts. The generator provides <computeroutput>operator[]</computeroutput> that can be used to construct the actual decorator. For example:</para><para><computeroutput> xml_decor[ stream &lt;&lt; attr&lt; std::string &gt;("MyAttr") ] </computeroutput></para><para>For wide-character formatting there is the similar <computeroutput>wxml_decor</computeroutput> decorator generator object. </para></description></data-member>
 <data-member name="wxml_decor"><type><emphasis>unspecified</emphasis></type></data-member>
+
 
 
 
@@ -1845,6 +1879,7 @@ The header contains attribute keyword descriptor detection trait. </para><namesp
 
 
 
+
 </namespace>
 
 
@@ -1859,6 +1894,23 @@ The header contains attribute keyword descriptor detection trait. </para><namesp
 The header contains attribute keyword declaration. </para><namespace name="boost">
 <namespace name="log">
 <namespace name="expressions">
+<struct name="attribute_keyword"><template>
+      <template-type-parameter name="DescriptorT"/>
+      <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+    </template><purpose>This class implements an expression template keyword. </purpose><description><para>This class implements an expression template keyword. It is used to start template expressions involving attribute values. </para></description><typedef name="this_type"><purpose>Self type. </purpose><type><classname>attribute_keyword</classname></type></typedef>
+<typedef name="descriptor_type"><purpose>Attribute descriptor type. </purpose><type>DescriptorT</type></typedef>
+<typedef name="value_type"><purpose>Attribute value type. </purpose><type>descriptor_type::value_type</type></typedef>
+<typedef name="or_none_result_type"><purpose>Expression with cached attribute name. </purpose><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_none, descriptor_type, ActorT &gt;</type></typedef>
+<typedef name="or_throw_result_type"><purpose>Expression with cached attribute name. </purpose><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_throw, descriptor_type, ActorT &gt;</type></typedef>
+<method-group name="public static functions">
+<method name="get_name" specifiers="static"><type>attribute_name</type><purpose>Returns attribute name. </purpose></method>
+<method name="or_none" specifiers="static"><type>or_none_result_type</type><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
+<method name="or_throw" specifiers="static"><type>or_throw_result_type</type><purpose>Generates an expression that extracts the attribute value or throws an exception. </purpose></method>
+<method name="or_default" specifiers="static"><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_default&lt; DefaultT &gt;, descriptor_type, ActorT &gt;</type><template>
+          <template-type-parameter name="DefaultT"/>
+        </template><parameter name="def_val"><paramtype>DefaultT const &amp;</paramtype></parameter><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
+</method-group>
+</struct>
 
 
 
@@ -1959,18 +2011,8 @@ typedef boost::log::expressions::attribute_keyword&lt; tag::keyword_ &gt; keywor
 The header contains attribute keyword forward declaration. </para><namespace name="boost">
 <namespace name="log">
 <namespace name="expressions">
-<struct name="attribute_keyword"><template>
-      <template-type-parameter name="DescriptorT"/>
-      <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-    </template><purpose>This class implements an expression template keyword. </purpose><description><para>This class implements an expression template keyword. It is used to start template expressions involving attribute values. </para></description><method-group name="public static functions">
-<method name="get_name" specifiers="static"><type>attribute_name</type><purpose>Returns attribute name. </purpose></method>
-<method name="or_none" specifiers="static"><type>or_none_result_type</type><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
-<method name="or_throw" specifiers="static"><type>or_throw_result_type</type><purpose>Generates an expression that extracts the attribute value or throws an exception. </purpose></method>
-<method name="or_default" specifiers="static"><type><classname>attribute_actor</classname>&lt; value_type, fallback_to_default&lt; DefaultT &gt;, descriptor_type, ActorT &gt;</type><template>
-          <template-type-parameter name="DefaultT"/>
-        </template><parameter name="def_val"><paramtype>DefaultT const &amp;</paramtype></parameter><purpose>Generates an expression that extracts the attribute value or a default value. </purpose></method>
-</method-group>
-</struct>
+
+
 
 
 
@@ -2145,6 +2187,7 @@ The header contains log message keyword declaration. </para><namespace name="boo
 
 
 
+
 </namespace>
 
 
@@ -2166,6 +2209,7 @@ The header contains implementation of a <computeroutput>begins_with</computerout
 <namespace name="log">
 <namespace name="expressions">
 <typedef name="attribute_begins_with"><description><para>The predicate checks if the attribute value begins with a substring. The attribute value is assumed to be of a string type. </para></description><type><emphasis>unspecified</emphasis></type></typedef>
+
 
 
 
@@ -2271,7 +2315,7 @@ The header contains implementation of a minimal severity per channel filter. </p
       <template-type-parameter name="SeverityCompareT"><default>greater_equal</default></template-type-parameter>
       <template-type-parameter name="AllocatorT"><default>use_std_allocator</default></template-type-parameter>
       <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type><default>phoenix::actor</default></template-nontype-parameter>
-    </template><inherit access="public">ActorT&lt; channel_severity_filter_terminal&lt; ChannelT, SeverityT, ChannelFallbackT, SeverityFallbackT, ChannelOrderT, SeverityCompareT, AllocatorT &gt; &gt;</inherit><class name="subscript_result"><purpose>An auxiliary pseudo-reference to implement insertion through subscript operator. </purpose><method-group name="public member functions">
+    </template><inherit access="public">phoenix::actor&lt; channel_severity_filter_terminal&lt; ChannelT, SeverityT, fallback_to_none, fallback_to_none, less, greater_equal, use_std_allocator &gt; &gt;</inherit><class name="subscript_result"><purpose>An auxiliary pseudo-reference to implement insertion through subscript operator. </purpose><method-group name="public member functions">
 </method-group>
 <constructor><parameter name="owner"><paramtype>channel_severity_filter_actor &amp;</paramtype></parameter><parameter name="channel"><paramtype>channel_value_type const &amp;</paramtype></parameter></constructor>
 <copy-assignment><type>void</type><parameter name="severity"><paramtype>severity_value_type const &amp;</paramtype></parameter></copy-assignment>
@@ -2343,75 +2387,41 @@ The header contains implementation of a minimal severity per channel filter. </p
 
 
 
-<overloaded-function name="channel_severity_filter"><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT &gt;</type><template>
+
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="SeverityT"/>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, SeverityT, fallback_to_none, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>The function generates a filtering predicate that checks the severity levels of log records in different channels. The predicate will return <computeroutput>true</computeroutput> if the record severity level is not less than the threshold for the channel the record belongs to. </para></description></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, SeverityT, fallback_to_none, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="SeverityT"/>
           <template-type-parameter name="ChannelDescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="SeverityDescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelDescriptorT"/>
           <template-type-parameter name="SeverityDescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, fallback_to_none, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="SeverityT"/>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="ChannelFallbackT"/>
           <template-type-parameter name="ChannelTagT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, SeverityFallbackT, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, SeverityFallbackT, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="SeverityT"/>
           <template-type-parameter name="SeverityFallbackT"/>
           <template-type-parameter name="SeverityTagT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, SeverityFallbackT, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
-          <template-type-parameter name="ChannelT"/>
-          <template-type-parameter name="ChannelFallbackT"/>
-          <template-type-parameter name="ChannelTagT"/>
-          <template-type-parameter name="SeverityT"/>
-          <template-type-parameter name="SeverityFallbackT"/>
-          <template-type-parameter name="SeverityTagT"/>
-          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, fallback_to_none, less, SeverityCompareT &gt;</type><template>
-          <template-type-parameter name="ChannelT"/>
-          <template-type-parameter name="SeverityT"/>
-          <template-type-parameter name="SeverityCompareT"/>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, SeverityT, fallback_to_none, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
-          <template-type-parameter name="SeverityT"/>
-          <template-type-parameter name="ChannelDescriptorT"/>
-          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-          <template-type-parameter name="SeverityCompareT"/>
-        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
-          <template-type-parameter name="ChannelT"/>
-          <template-type-parameter name="SeverityDescriptorT"/>
-          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-          <template-type-parameter name="SeverityCompareT"/>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
-          <template-type-parameter name="ChannelDescriptorT"/>
-          <template-type-parameter name="SeverityDescriptorT"/>
-          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-          <template-type-parameter name="SeverityCompareT"/>
-        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
-          <template-type-parameter name="SeverityT"/>
-          <template-type-parameter name="ChannelT"/>
-          <template-type-parameter name="ChannelFallbackT"/>
-          <template-type-parameter name="ChannelTagT"/>
-          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-          <template-type-parameter name="SeverityCompareT"/>
-        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, SeverityFallbackT, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
-          <template-type-parameter name="ChannelT"/>
-          <template-type-parameter name="SeverityT"/>
-          <template-type-parameter name="SeverityFallbackT"/>
-          <template-type-parameter name="SeverityTagT"/>
-          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-          <template-type-parameter name="SeverityCompareT"/>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, SeverityFallbackT, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, SeverityFallbackT, less, greater_equal, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="ChannelFallbackT"/>
           <template-type-parameter name="ChannelTagT"/>
@@ -2419,47 +2429,47 @@ The header contains implementation of a minimal severity per channel filter. </p
           <template-type-parameter name="SeverityFallbackT"/>
           <template-type-parameter name="SeverityTagT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
-          <template-type-parameter name="SeverityCompareT"/>
-        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT &gt;</type><template>
+        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, fallback_to_none, less, SeverityCompareT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="SeverityT"/>
           <template-type-parameter name="SeverityCompareT"/>
-          <template-type-parameter name="ChannelOrderT"/>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, SeverityT, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, SeverityT, fallback_to_none, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="SeverityT"/>
           <template-type-parameter name="ChannelDescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
           <template-type-parameter name="SeverityCompareT"/>
-          <template-type-parameter name="ChannelOrderT"/>
-        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="SeverityDescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
           <template-type-parameter name="SeverityCompareT"/>
-          <template-type-parameter name="ChannelOrderT"/>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelDescriptorT"/>
           <template-type-parameter name="SeverityDescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
           <template-type-parameter name="SeverityCompareT"/>
-          <template-type-parameter name="ChannelOrderT"/>
-        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, fallback_to_none, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="SeverityT"/>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="ChannelFallbackT"/>
           <template-type-parameter name="ChannelTagT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
           <template-type-parameter name="SeverityCompareT"/>
-          <template-type-parameter name="ChannelOrderT"/>
-        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, SeverityFallbackT, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, SeverityFallbackT, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="SeverityT"/>
           <template-type-parameter name="SeverityFallbackT"/>
           <template-type-parameter name="SeverityTagT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
           <template-type-parameter name="SeverityCompareT"/>
-          <template-type-parameter name="ChannelOrderT"/>
-        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter></signature><signature><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, SeverityFallbackT, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, SeverityFallbackT, less, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
           <template-type-parameter name="ChannelT"/>
           <template-type-parameter name="ChannelFallbackT"/>
           <template-type-parameter name="ChannelTagT"/>
@@ -2468,28 +2478,63 @@ The header contains implementation of a minimal severity per channel filter. </p
           <template-type-parameter name="SeverityTagT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
           <template-type-parameter name="SeverityCompareT"/>
+        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT &gt;</type><template>
+          <template-type-parameter name="ChannelT"/>
+          <template-type-parameter name="SeverityT"/>
+          <template-type-parameter name="SeverityCompareT"/>
           <template-type-parameter name="ChannelOrderT"/>
-        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter></signature><description><para>The function generates a filtering predicate that checks the severity levels of log records in different channels. The predicate will return <computeroutput>true</computeroutput> if the record severity level is not less than the threshold for the channel the record belongs to. </para></description></overloaded-function>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, SeverityT, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+          <template-type-parameter name="SeverityT"/>
+          <template-type-parameter name="ChannelDescriptorT"/>
+          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+          <template-type-parameter name="SeverityCompareT"/>
+          <template-type-parameter name="ChannelOrderT"/>
+        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+          <template-type-parameter name="ChannelT"/>
+          <template-type-parameter name="SeverityDescriptorT"/>
+          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+          <template-type-parameter name="SeverityCompareT"/>
+          <template-type-parameter name="ChannelOrderT"/>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; typename ChannelDescriptorT::value_type, typename SeverityDescriptorT::value_type, fallback_to_none, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+          <template-type-parameter name="ChannelDescriptorT"/>
+          <template-type-parameter name="SeverityDescriptorT"/>
+          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+          <template-type-parameter name="SeverityCompareT"/>
+          <template-type-parameter name="ChannelOrderT"/>
+        </template><parameter name="channel_keyword"><paramtype><classname>attribute_keyword</classname>&lt; ChannelDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_keyword"><paramtype><classname>attribute_keyword</classname>&lt; SeverityDescriptorT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, fallback_to_none, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+          <template-type-parameter name="SeverityT"/>
+          <template-type-parameter name="ChannelT"/>
+          <template-type-parameter name="ChannelFallbackT"/>
+          <template-type-parameter name="ChannelTagT"/>
+          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+          <template-type-parameter name="SeverityCompareT"/>
+          <template-type-parameter name="ChannelOrderT"/>
+        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, fallback_to_none, SeverityFallbackT, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+          <template-type-parameter name="ChannelT"/>
+          <template-type-parameter name="SeverityT"/>
+          <template-type-parameter name="SeverityFallbackT"/>
+          <template-type-parameter name="SeverityTagT"/>
+          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+          <template-type-parameter name="SeverityCompareT"/>
+          <template-type-parameter name="ChannelOrderT"/>
+        </template><parameter name="channel_name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
+<function name="channel_severity_filter"><type>channel_severity_filter_actor&lt; ChannelT, SeverityT, ChannelFallbackT, SeverityFallbackT, ChannelOrderT, SeverityCompareT, use_std_allocator, ActorT &gt;</type><template>
+          <template-type-parameter name="ChannelT"/>
+          <template-type-parameter name="ChannelFallbackT"/>
+          <template-type-parameter name="ChannelTagT"/>
+          <template-type-parameter name="SeverityT"/>
+          <template-type-parameter name="SeverityFallbackT"/>
+          <template-type-parameter name="SeverityTagT"/>
+          <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
+          <template-type-parameter name="SeverityCompareT"/>
+          <template-type-parameter name="ChannelOrderT"/>
+        </template><parameter name="channel_placeholder"><paramtype><classname>attribute_actor</classname>&lt; ChannelT, ChannelFallbackT, ChannelTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_placeholder"><paramtype><classname>attribute_actor</classname>&lt; SeverityT, SeverityFallbackT, SeverityTagT, ActorT &gt; const &amp;</paramtype></parameter><parameter name="severity_compare"><paramtype>SeverityCompareT const &amp;</paramtype></parameter><parameter name="channel_order"><paramtype>ChannelOrderT const &amp;</paramtype></parameter><purpose>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </purpose></function>
 
 
 
@@ -2537,6 +2582,7 @@ The header contains implementation of a <computeroutput>contains</computeroutput
 <namespace name="log">
 <namespace name="expressions">
 <typedef name="attribute_contains"><description><para>The predicate checks if the attribute value contains a substring. The attribute value is assumed to be of a string type. </para></description><type><emphasis>unspecified</emphasis></type></typedef>
+
 
 
 
@@ -2634,6 +2680,7 @@ The header contains implementation of a <computeroutput>ends_with</computeroutpu
 <namespace name="log">
 <namespace name="expressions">
 <typedef name="attribute_ends_with"><description><para>The predicate checks if the attribute value ends with a substring. The attribute value is assumed to be of a string type. </para></description><type><emphasis>unspecified</emphasis></type></typedef>
+
 
 
 
@@ -2769,7 +2816,8 @@ The header contains implementation of a generic attribute presence checker in te
 
 <function name="has_attr"><type><emphasis>unspecified</emphasis></type><template>
           <template-type-parameter name="AttributeValueT"/>
-        </template><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>The function generates a terminal node in a template expression. The node will check for the attribute value presence in a log record. The node will also check that the attribute value has the specified type, if present.</para><para>The function generates a terminal node in a template expression. The node will check for the attribute value presence in a log record. </para></description></function>
+        </template><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>The function generates a terminal node in a template expression. The node will check for the attribute value presence in a log record. The node will also check that the attribute value has the specified type, if present. </para></description></function>
+<function name="has_attr"><type><emphasis>unspecified</emphasis></type><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><description><para>The function generates a terminal node in a template expression. The node will check for the attribute value presence in a log record. </para></description></function>
 <function name="has_attr"><type><emphasis>unspecified</emphasis></type><template>
           <template-type-parameter name="DescriptorT"/>
           <template-nontype-parameter name="ActorT"><type>template&lt; typename &gt; class</type></template-nontype-parameter>
@@ -2875,6 +2923,7 @@ The header contains implementation of an <computeroutput>is_in_range</computerou
           <template-type-parameter name="T"/>
           <template-type-parameter name="BoundaryT"/>
         </template><parameter name="name"><paramtype>attribute_name const &amp;</paramtype></parameter><parameter name="least"><paramtype>BoundaryT const &amp;</paramtype></parameter><parameter name="most"><paramtype>BoundaryT const &amp;</paramtype></parameter><description><para>The function generates a terminal node in a template expression. The node will check if the attribute value is in the specified range. The range must be half-open, that is the predicate will be equivalent to <computeroutput>least &lt;= attr &lt; most</computeroutput>. </para></description></function>
+
 
 
 
@@ -3044,6 +3093,7 @@ The header contains implementation of a <computeroutput>matches</computeroutput>
 
 
 
+
 </namespace>
 
 
@@ -3061,6 +3111,7 @@ The header contains implementation of a log record placeholder in template expre
 <namespace name="expressions">
 <typedef name="record_type"><description><para>Log record placeholder type in formatter template expressions. </para></description><type>phoenix::expression::argument&lt; 1 &gt;::type</type></typedef>
 <data-member name="record"><type>const record_type</type><description><para>Log record placeholder in formatter template expressions. </para></description></data-member>
+
 
 
 

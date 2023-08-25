@@ -28,7 +28,7 @@
 <a name="geometry.reference.models.model_multi_point"></a><a class="link" href="model_multi_point.html" title="model::multi_point">model::multi_point</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="idm78411"></a><a class="indexterm" name="idm78413"></a>
+          <a class="indexterm" name="idm78396"></a><a class="indexterm" name="idm78398"></a>
 multi_point, a collection of points
         </p>
 <h6>
@@ -47,7 +47,7 @@ multi_point, a collection of points
 </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Point</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">typename</span><span class="special">,</span> <span class="keyword">typename</span> <span class="special">&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="special">&gt;</span> <span class="keyword">class</span> <span class="identifier">Allocator</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">model</span><span class="special">::</span><span class="identifier">multi_point</span>
-      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">Container</span><span class="special">&lt;</span> <span class="identifier">Point</span><span class="special">,</span> <span class="identifier">Allocator</span><span class="special">&lt;</span> <span class="identifier">Point</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
+      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">Point</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">&lt;</span> <span class="identifier">Point</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
 <span class="special">{</span>
   <span class="comment">// ...</span>
 <span class="special">};</span>
@@ -260,13 +260,7 @@ multi_point, a collection of points
     <span class="keyword">typedef</span> <span class="identifier">bg</span><span class="special">::</span><span class="identifier">model</span><span class="special">::</span><span class="identifier">multi_point</span><span class="special">&lt;</span><span class="identifier">point_t</span><span class="special">&gt;</span> <span class="identifier">mpoint_t</span><span class="special">;</span>
 
     <span class="identifier">mpoint_t</span> <span class="identifier">mpt1</span><span class="special">;</span> <a class="co" name="geometry.reference.models.model_multi_point.c0" href="model_multi_point.html#geometry.reference.models.model_multi_point.c1"><img src="../../../../../../../doc/src/images/callouts/1.png" alt="1" border="0"></a>
-
-<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX</span><span class="special">)</span> <span class="special">\</span>
- <span class="special">&amp;&amp;</span> <span class="special">!</span><span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_NO_CXX11_HDR_INITIALIZER_LIST</span><span class="special">)</span>
-
     <span class="identifier">mpoint_t</span> <span class="identifier">mpt2</span><span class="special">{{{</span><span class="number">0.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">},</span> <span class="special">{</span><span class="number">1.0</span><span class="special">,</span> <span class="number">1.0</span><span class="special">},</span> <span class="special">{</span><span class="number">2.0</span><span class="special">,</span> <span class="number">2.0</span><span class="special">}}};</span> <a class="co" name="geometry.reference.models.model_multi_point.c2" href="model_multi_point.html#geometry.reference.models.model_multi_point.c3"><img src="../../../../../../../doc/src/images/callouts/2.png" alt="2" border="0"></a>
-
-<span class="preprocessor">#endif</span>
 
     <span class="identifier">bg</span><span class="special">::</span><span class="identifier">append</span><span class="special">(</span><span class="identifier">mpt1</span><span class="special">,</span> <span class="identifier">point_t</span><span class="special">(</span><span class="number">0.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">));</span> <a class="co" name="geometry.reference.models.model_multi_point.c4" href="model_multi_point.html#geometry.reference.models.model_multi_point.c5"><img src="../../../../../../../doc/src/images/callouts/3.png" alt="3" border="0"></a>
     <span class="identifier">bg</span><span class="special">::</span><span class="identifier">append</span><span class="special">(</span><span class="identifier">mpt1</span><span class="special">,</span> <span class="identifier">point_t</span><span class="special">(</span><span class="number">1.0</span><span class="special">,</span> <span class="number">1.0</span><span class="special">));</span>

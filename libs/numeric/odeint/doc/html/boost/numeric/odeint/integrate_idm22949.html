@@ -34,11 +34,11 @@
 
 </span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> System<span class="special">,</span> <span class="keyword">typename</span> State<span class="special">,</span> <span class="keyword">typename</span> Time<span class="special">,</span> <span class="keyword">typename</span> Observer<span class="special">&gt;</span> 
-  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">enable_if</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">has_value_type</span><span class="special">&lt;</span> <span class="identifier">State</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">type</span><span class="special">,</span> <span class="identifier">size_t</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">type</span> 
+  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">enable_if</span><span class="special">&lt;</span> <span class="identifier">typenamehas_value_type</span><span class="special">&lt;</span> <span class="identifier">State</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">type</span><span class="special">,</span> <span class="identifier">size_t</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">type</span> 
   <span class="identifier">integrate</span><span class="special">(</span><span class="identifier">System</span> system<span class="special">,</span> <span class="identifier">State</span> <span class="special">&amp;</span> start_state<span class="special">,</span> <span class="identifier">Time</span> start_time<span class="special">,</span> 
             <span class="identifier">Time</span> end_time<span class="special">,</span> <span class="identifier">Time</span> dt<span class="special">,</span> <span class="identifier">Observer</span> observer<span class="special">)</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm23862"></a><h2>Description</h2>
+<a name="idm23860"></a><h2>Description</h2>
 <p>Integrates the ODE given by system from start_time to end_time starting with start_state as initial condition and dt as initial time step. This function uses a dense output dopri5 stepper and performs an adaptive integration with step size control, thus dt changes during the integration. This method uses standard error bounds of 1E-6. After each step, the observer is called.</p>
 <div class="note"><table border="0" summary="Note">
 <tr>

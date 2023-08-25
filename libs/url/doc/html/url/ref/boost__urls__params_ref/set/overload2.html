@@ -37,8 +37,8 @@
           </h6>
 <pre class="programlisting"><span class="identifier">iterator</span>
 <span class="identifier">set</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">,</span>
-    <span class="identifier">string_view</span> <span class="identifier">value</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">value</span><span class="special">,</span>
     <span class="identifier">ignore_case_param</span> <span class="identifier">ic</span> <span class="special">=</span> <span class="special">{});</span>
 </pre>
 <h6>
@@ -73,7 +73,7 @@
           </h6>
 <pre class="programlisting"><span class="identifier">url</span> <span class="identifier">u</span><span class="special">(</span> <span class="string">"?id=42&amp;id=69"</span> <span class="special">);</span>
 
-<span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">set</span><span class="special">(</span> <span class="string">"id"</span><span class="special">,</span> <span class="string">"none"</span> <span class="special">);</span>
+<span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">set</span><span class="special">(</span> <span class="string">"id"</span> <span class="special">,</span> <span class="string">"none"</span> <span class="special">);</span>
 
 <span class="identifier">assert</span><span class="special">(</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">params</span><span class="special">().</span><span class="identifier">count</span><span class="special">(</span> <span class="string">"id"</span> <span class="special">)</span> <span class="special">==</span> <span class="number">1</span> <span class="special">);</span>
 </pre>

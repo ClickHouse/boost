@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__url.set_path"></a><a class="link" href="set_path.html" title="url::set_path">url::set_path</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm104224"></a>
+          <a class="indexterm" name="idm107640"></a>
         </p>
 <p>
           Set if the path is absolute.
@@ -39,7 +39,7 @@
         </h6>
 <pre class="programlisting"><span class="identifier">url</span><span class="special">&amp;</span>
 <span class="identifier">set_path</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__url.set_path.h1"></a>
@@ -116,9 +116,9 @@
           Also</a>
         </h6>
 <p>
-          <a class="link" href="encoded_segments.html" title="url::encoded_segments"><code class="computeroutput"><span class="identifier">encoded_segments</span></code></a>, <a class="link" href="segments.html" title="url::segments"><code class="computeroutput"><span class="identifier">segments</span></code></a>, <a class="link" href="set_encoded_path.html" title="url::set_encoded_path"><code class="computeroutput"><span class="identifier">set_encoded_path</span></code></a>, <a class="link" href="set_path.html" title="url::set_path"><code class="computeroutput"><span class="identifier">set_path</span></code></a>. Set the path. This function
-          sets the path to the string, which may be empty. Reserved characters in
-          the string are percent-escaped in the result.
+          <a class="link" href="encoded_segments.html" title="url::encoded_segments"><code class="computeroutput"><span class="identifier">encoded_segments</span></code></a>, <a class="link" href="segments.html" title="url::segments"><code class="computeroutput"><span class="identifier">segments</span></code></a>, <a class="link" href="set_encoded_path.html" title="url::set_encoded_path"><code class="computeroutput"><span class="identifier">set_encoded_path</span></code></a>, /root/project/libs/url/include/boost/url/url.hpp
+          Set the path. This function sets the path to the string, which may be empty.
+          Reserved characters in the string are percent-escaped in the result.
         </p>
 <h6>
 <a name="url.ref.boost__urls__url.set_path.h10"></a>
@@ -130,6 +130,16 @@
         </p>
 <h6>
 <a name="url.ref.boost__urls__url.set_path.h11"></a>
+          <span class="phrase"><a name="url.ref.boost__urls__url.set_path.remarks1"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.remarks1">Remarks</a>
+        </h6>
+<p>
+          This function does not encode '<span class="emphasis"><em>' chars, which are unreserved
+          for paths but reserved for path segments. If a path segment should include
+          encoded '</em></span>'s to differentiate it from path separators, the functions
+          <a class="link" href="set_encoded_path.html" title="url::set_encoded_path"><code class="computeroutput"><span class="identifier">set_encoded_path</span></code></a> or <a class="link" href="segments.html" title="url::segments"><code class="computeroutput"><span class="identifier">segments</span></code></a> should be used instead.
+        </p>
+<h6>
+<a name="url.ref.boost__urls__url.set_path.h12"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_path.example0"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.example0">Example</a>
         </h6>
 <pre class="programlisting"><span class="identifier">url</span> <span class="identifier">u</span><span class="special">(</span> <span class="string">"http://www.example.com"</span> <span class="special">);</span>
@@ -139,14 +149,14 @@
 <span class="identifier">assert</span><span class="special">(</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">path</span><span class="special">()</span> <span class="special">==</span> <span class="string">"/path/to/file.txt"</span> <span class="special">);</span>
 </pre>
 <h6>
-<a name="url.ref.boost__urls__url.set_path.h12"></a>
+<a name="url.ref.boost__urls__url.set_path.h13"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_path.complexity0"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.complexity0">Complexity</a>
         </h6>
 <p>
           Linear in <code class="computeroutput"><span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">size</span><span class="special">()</span> <span class="special">+</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span></code>.
         </p>
 <h6>
-<a name="url.ref.boost__urls__url.set_path.h13"></a>
+<a name="url.ref.boost__urls__url.set_path.h14"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_path.exception_safety"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.exception_safety">Exception
           Safety</a>
         </h6>
@@ -154,7 +164,7 @@
           Strong guarantee. Calls to allocate may throw.
         </p>
 <h6>
-<a name="url.ref.boost__urls__url.set_path.h14"></a>
+<a name="url.ref.boost__urls__url.set_path.h15"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_path.parameters"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.parameters">Parameters</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -188,7 +198,7 @@
 </tr></tbody>
 </table></div>
 <h6>
-<a name="url.ref.boost__urls__url.set_path.h15"></a>
+<a name="url.ref.boost__urls__url.set_path.h16"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_path.bnf0"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.bnf0">BNF</a>
         </h6>
 <pre class="programlisting"><span class="identifier">path</span>          <span class="special">=</span> <span class="identifier">path</span><span class="special">-</span><span class="identifier">abempty</span>    <span class="special">;</span> <span class="identifier">begins</span> <span class="identifier">with</span> <span class="string">"/"</span> <span class="keyword">or</span> <span class="identifier">is</span> <span class="identifier">empty</span>
@@ -204,7 +214,7 @@
 <span class="identifier">path</span><span class="special">-</span><span class="identifier">empty</span>    <span class="special">=</span> <span class="number">0</span><span class="special">&lt;</span><span class="identifier">pchar</span><span class="special">&gt;</span>
 </pre>
 <h6>
-<a name="url.ref.boost__urls__url.set_path.h16"></a>
+<a name="url.ref.boost__urls__url.set_path.h17"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_path.specification0"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.specification0">Specification</a>
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
@@ -212,12 +222,12 @@
               Path (rfc3986)</a>
             </li></ul></div>
 <h6>
-<a name="url.ref.boost__urls__url.set_path.h17"></a>
+<a name="url.ref.boost__urls__url.set_path.h18"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_path.see_also0"></a></span><a class="link" href="set_path.html#url.ref.boost__urls__url.set_path.see_also0">See
           Also</a>
         </h6>
 <p>
-          <a class="link" href="encoded_segments.html" title="url::encoded_segments"><code class="computeroutput"><span class="identifier">encoded_segments</span></code></a>, <a class="link" href="segments.html" title="url::segments"><code class="computeroutput"><span class="identifier">segments</span></code></a>, <a class="link" href="set_encoded_path.html" title="url::set_encoded_path"><code class="computeroutput"><span class="identifier">set_encoded_path</span></code></a>, <a class="link" href="set_path_absolute.html" title="url::set_path_absolute"><code class="computeroutput"><span class="identifier">set_path_absolute</span></code></a>.
+          <a class="link" href="encoded_segments.html" title="url::encoded_segments"><code class="computeroutput"><span class="identifier">encoded_segments</span></code></a>, <a class="link" href="segments.html" title="url::segments"><code class="computeroutput"><span class="identifier">segments</span></code></a>, <a class="link" href="set_encoded_path.html" title="url::set_encoded_path"><code class="computeroutput"><span class="identifier">set_encoded_path</span></code></a>, /root/project/libs/url/include/boost/url/url.hpp
         </p>
 </div>
 <div class="copyright-footer">Copyright © 2021, 2022 Vinnie Falco, Alan de Freitas<p>

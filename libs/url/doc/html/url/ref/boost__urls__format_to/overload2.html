@@ -41,7 +41,7 @@
 <pre class="programlisting"><span class="keyword">void</span>
 <span class="identifier">format_to</span><span class="special">(</span>
     <span class="identifier">url_base</span><span class="special">&amp;</span> <span class="identifier">u</span><span class="special">,</span>
-    <span class="identifier">string_view</span> <span class="identifier">fmt</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">fmt</span><span class="special">,</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">initializer_list</span><span class="special">&lt;</span> <span class="emphasis"><em>see-below</em></span> <span class="special">&gt;</span> <span class="identifier">args</span><span class="special">);</span>
 </pre>
 <h6>
@@ -70,8 +70,8 @@
           <span class="phrase"><a name="url.ref.boost__urls__format_to.overload2.example"></a></span><a class="link" href="overload2.html#url.ref.boost__urls__format_to.overload2.example">Example</a>
         </h6>
 <pre class="programlisting"><span class="identifier">static_url</span><span class="special">&lt;</span><span class="number">30</span><span class="special">&gt;</span> <span class="identifier">u</span><span class="special">;</span>
-<span class="identifier">format_to</span><span class="special">(</span><span class="identifier">u</span><span class="special">,</span> <span class="string">"user/{id}"</span><span class="special">,</span> <span class="special">{{</span><span class="string">"id"</span><span class="special">,</span> <span class="number">1</span><span class="special">}})</span>
-<span class="identifier">assert</span><span class="special">(</span><span class="identifier">u</span><span class="special">.</span><span class="identifier">buffer</span><span class="special">()</span> <span class="special">==</span> <span class="string">"user/1"</span><span class="special">);</span>
+<span class="identifier">format_to</span><span class="special">(</span><span class="identifier">u</span><span class="special">,</span> <span class="string">"user/{id}"</span> <span class="special">,</span> <span class="special">{{</span> <span class="string">"id"</span> <span class="special">,</span> <span class="number">1</span><span class="special">}})</span>
+<span class="identifier">assert</span><span class="special">(</span><span class="identifier">u</span><span class="special">.</span><span class="identifier">buffer</span><span class="special">()</span> <span class="special">==</span> <span class="string">"user/1"</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__format_to.overload2.h3"></a>
@@ -192,12 +192,12 @@
 <a name="url.ref.boost__urls__format_to.overload2.h7"></a>
           <span class="phrase"><a name="url.ref.boost__urls__format_to.overload2.bnf"></a></span><a class="link" href="overload2.html#url.ref.boost__urls__format_to.overload2.bnf">BNF</a>
         </h6>
-<pre class="programlisting"><span class="identifier">replacement_field</span> <span class="special">::=</span>  <span class="string">"{"</span> <span class="special">[</span><span class="identifier">arg_id</span><span class="special">]</span> <span class="special">[</span><span class="string">":"</span> <span class="special">(</span><span class="identifier">format_spec</span> <span class="special">|</span> <span class="identifier">chrono_format_spec</span><span class="special">)]</span> <span class="string">"}"</span>
+<pre class="programlisting"><span class="identifier">replacement_field</span> <span class="special">::=</span>  <span class="string">"{"</span> <span class="special">[</span><span class="identifier">arg_id</span><span class="special">]</span> <span class="special">[</span> <span class="string">":"</span> <span class="special">(</span><span class="identifier">format_spec</span> <span class="special">|</span> <span class="identifier">chrono_format_spec</span><span class="special">)]</span> <span class="string">"}"</span>
 <span class="identifier">arg_id</span>            <span class="special">::=</span>  <span class="identifier">integer</span> <span class="special">|</span> <span class="identifier">identifier</span>
 <span class="identifier">integer</span>           <span class="special">::=</span>  <span class="identifier">digit</span><span class="special">+</span>
-<span class="identifier">digit</span>             <span class="special">::=</span>  <span class="string">"0"</span><span class="special">...</span><span class="string">"9"</span>
+<span class="identifier">digit</span>             <span class="special">::=</span>  <span class="string">"0"</span> <span class="special">...</span> <span class="string">"9"</span>
 <span class="identifier">identifier</span>        <span class="special">::=</span>  <span class="identifier">id_start</span> <span class="identifier">id_continue</span><span class="special">*</span>
-<span class="identifier">id_start</span>          <span class="special">::=</span>  <span class="string">"a"</span><span class="special">...</span><span class="string">"z"</span> <span class="special">|</span> <span class="string">"A"</span><span class="special">...</span><span class="string">"Z"</span> <span class="special">|</span> <span class="string">"_"</span>
+<span class="identifier">id_start</span>          <span class="special">::=</span>  <span class="string">"a"</span> <span class="special">...</span> <span class="string">"z"</span> <span class="special">|</span> <span class="string">"A"</span> <span class="special">...</span> <span class="string">"Z"</span> <span class="special">|</span> <span class="string">"_"</span>
 <span class="identifier">id_continue</span>       <span class="special">::=</span>  <span class="identifier">id_start</span> <span class="special">|</span> <span class="identifier">digit</span>
 </pre>
 <h6>

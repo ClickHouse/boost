@@ -23,7 +23,7 @@ The function perimeter returns the perimeter of a geometry, using the default di
 
 [heading Synopsis]
 ``template<typename Geometry>
-default_length_result<Geometry>::type perimeter(Geometry const & geometry)``
+default_length_result< Geometry >::type perimeter(Geometry const & geometry)``
 
 [heading Parameters]
 
@@ -64,7 +64,7 @@ The function perimeter returns the perimeter of a geometry, using specified stra
 
 [heading Synopsis]
 ``template<typename Geometry, typename Strategy>
-default_length_result<Geometry>::type perimeter(Geometry const & geometry, Strategy const & strategy)``
+default_length_result< Geometry >::type perimeter(Geometry const & geometry, Strategy const & strategy)``
 
 [heading Parameters]
 

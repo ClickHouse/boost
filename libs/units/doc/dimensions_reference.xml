@@ -165,7 +165,8 @@
 <header name="boost/units/physical_dimensions/impedance.hpp">
 <namespace name="boost">
 <namespace name="units">
-<typedef name="impedance_dimension"><purpose>derived dimension for impedance : L^2 M T^-3 I^-2 </purpose><type>derived_dimension&lt; <classname>length_base_dimension</classname>, 2, <classname>mass_base_dimension</classname>, 1, <classname>time_base_dimension</classname>,-3, <classname>current_base_dimension</classname>,-2 &gt;::type</type></typedef>
+<typedef name="impedance_dimension"><purpose>derived dimension for impedance : L^2 M T^-3 I^-2 <sbr/>
+ </purpose><type>derived_dimension&lt; <classname>length_base_dimension</classname>, 2, <classname>mass_base_dimension</classname>, 1, <classname>time_base_dimension</classname>,-3, <classname>current_base_dimension</classname>,-2 &gt;::type</type></typedef>
 </namespace>
 </namespace>
 </header>
@@ -326,7 +327,8 @@
 <header name="boost/units/physical_dimensions/resistance.hpp">
 <namespace name="boost">
 <namespace name="units">
-<typedef name="resistance_dimension"><purpose>derived dimension for resistance : L^2 M T^-3 I^-2 </purpose><type>derived_dimension&lt; <classname>length_base_dimension</classname>, 2, <classname>mass_base_dimension</classname>, 1, <classname>time_base_dimension</classname>,-3, <classname>current_base_dimension</classname>,-2 &gt;::type</type></typedef>
+<typedef name="resistance_dimension"><purpose>derived dimension for resistance : L^2 M T^-3 I^-2 <sbr/>
+ </purpose><type>derived_dimension&lt; <classname>length_base_dimension</classname>, 2, <classname>mass_base_dimension</classname>, 1, <classname>time_base_dimension</classname>,-3, <classname>current_base_dimension</classname>,-2 &gt;::type</type></typedef>
 </namespace>
 </namespace>
 </header>

@@ -55,7 +55,7 @@
 <namespace name="boost">
 <namespace name="units">
 <namespace name="angle">
-<struct name="radian_base_unit"><inherit access="public">base_unit&lt; radian_base_unit, plane_angle_dimension, -2 &gt;</inherit><method-group name="public static functions">
+<struct name="radian_base_unit"><inherit access="public">boost::units::base_unit&lt; radian_base_unit, plane_angle_dimension, -2 &gt;</inherit><method-group name="public static functions">
 <method name="name" specifiers="static"><type>std::string</type></method>
 <method name="symbol" specifiers="static"><type>std::string</type></method>
 </method-group>
@@ -81,7 +81,7 @@
 <namespace name="boost">
 <namespace name="units">
 <namespace name="angle">
-<struct name="steradian_base_unit"><inherit access="public">base_unit&lt; steradian_base_unit, solid_angle_dimension, -1 &gt;</inherit><method-group name="public static functions">
+<struct name="steradian_base_unit"><inherit access="public">boost::units::base_unit&lt; steradian_base_unit, solid_angle_dimension, -1 &gt;</inherit><method-group name="public static functions">
 <method name="name" specifiers="static"><type>std::string</type></method>
 <method name="symbol" specifiers="static"><type>std::string</type></method>
 </method-group>

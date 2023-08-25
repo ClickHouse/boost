@@ -28,7 +28,7 @@
 <a name="geometry.reference.models.model_multi_linestring"></a><a class="link" href="model_multi_linestring.html" title="model::multi_linestring">model::multi_linestring</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="idm78782"></a><a class="indexterm" name="idm78784"></a>
+          <a class="indexterm" name="idm78757"></a><a class="indexterm" name="idm78759"></a>
 multi_line, a collection of linestring
         </p>
 <h6>
@@ -56,7 +56,7 @@ multi_line, a collection of linestring
 </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">LineString</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">typename</span><span class="special">,</span> <span class="keyword">typename</span> <span class="special">&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="special">&gt;</span> <span class="keyword">class</span> <span class="identifier">Allocator</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">model</span><span class="special">::</span><span class="identifier">multi_linestring</span>
-      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">Container</span><span class="special">&lt;</span> <span class="identifier">LineString</span><span class="special">,</span> <span class="identifier">Allocator</span><span class="special">&lt;</span> <span class="identifier">LineString</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
+      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">LineString</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">&lt;</span> <span class="identifier">LineString</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
 <span class="special">{</span>
   <span class="comment">// ...</span>
 <span class="special">};</span>
@@ -238,14 +238,8 @@ multi_line, a collection of linestring
     <span class="keyword">typedef</span> <span class="identifier">bg</span><span class="special">::</span><span class="identifier">model</span><span class="special">::</span><span class="identifier">multi_linestring</span><span class="special">&lt;</span><span class="identifier">linestring_t</span><span class="special">&gt;</span> <span class="identifier">mlinestring_t</span><span class="special">;</span>
 
     <span class="identifier">mlinestring_t</span> <span class="identifier">mls1</span><span class="special">;</span> <a class="co" name="geometry.reference.models.model_multi_linestring.c0" href="model_multi_linestring.html#geometry.reference.models.model_multi_linestring.c1"><img src="../../../../../../../doc/src/images/callouts/1.png" alt="1" border="0"></a>
-
-<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX</span><span class="special">)</span> <span class="special">\</span>
- <span class="special">&amp;&amp;</span> <span class="special">!</span><span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_NO_CXX11_HDR_INITIALIZER_LIST</span><span class="special">)</span>
-
     <span class="identifier">mlinestring_t</span> <span class="identifier">mls2</span><span class="special">{{{</span><span class="number">0.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">},</span> <span class="special">{</span><span class="number">0.0</span><span class="special">,</span> <span class="number">1.0</span><span class="special">},</span> <span class="special">{</span><span class="number">2.0</span><span class="special">,</span> <span class="number">1.0</span><span class="special">}},</span>
                        <span class="special">{{</span><span class="number">1.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">},</span> <span class="special">{</span><span class="number">2.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">}}};</span> <a class="co" name="geometry.reference.models.model_multi_linestring.c2" href="model_multi_linestring.html#geometry.reference.models.model_multi_linestring.c3"><img src="../../../../../../../doc/src/images/callouts/2.png" alt="2" border="0"></a>
-
-<span class="preprocessor">#endif</span>
 
     <span class="identifier">mls1</span><span class="special">.</span><span class="identifier">resize</span><span class="special">(</span><span class="number">2</span><span class="special">);</span> <a class="co" name="geometry.reference.models.model_multi_linestring.c4" href="model_multi_linestring.html#geometry.reference.models.model_multi_linestring.c5"><img src="../../../../../../../doc/src/images/callouts/3.png" alt="3" border="0"></a>
 

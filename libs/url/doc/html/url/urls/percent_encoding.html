@@ -60,7 +60,7 @@
         We can also use <a class="link" href="../ref/boost__urls__encoded_size.html" title="encoded_size"><code class="computeroutput">encoded_size</code></a>
         to determine the required size before attempting to encode:
       </p>
-<pre class="programlisting"><span class="identifier">string_view</span> <span class="identifier">e</span> <span class="special">=</span> <span class="string">"hello world"</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">e</span> <span class="special">=</span> <span class="string">"hello world"</span><span class="special">;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">s</span><span class="special">;</span>
 <span class="identifier">s</span><span class="special">.</span><span class="identifier">reserve</span><span class="special">(</span><span class="identifier">encoded_size</span><span class="special">(</span><span class="identifier">e</span><span class="special">,</span> <span class="identifier">pchars</span><span class="special">));</span>
 <span class="identifier">encode</span><span class="special">(</span><span class="identifier">e</span><span class="special">,</span> <span class="identifier">pchars</span><span class="special">,</span> <span class="special">{},</span> <span class="identifier">string_token</span><span class="special">::</span><span class="identifier">assign_to</span><span class="special">(</span><span class="identifier">s</span><span class="special">));</span>
@@ -69,7 +69,7 @@
 <p>
         In other scenarios, strings can also be directly encoded into buffers:
       </p>
-<pre class="programlisting"><span class="identifier">string_view</span> <span class="identifier">e</span> <span class="special">=</span> <span class="string">"hello world"</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">e</span> <span class="special">=</span> <span class="string">"hello world"</span><span class="special">;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">s</span><span class="special">;</span>
 <span class="identifier">s</span><span class="special">.</span><span class="identifier">resize</span><span class="special">(</span><span class="identifier">encoded_size</span><span class="special">(</span><span class="identifier">e</span><span class="special">,</span> <span class="identifier">pchars</span><span class="special">));</span>
 <span class="identifier">encode</span><span class="special">(&amp;</span><span class="identifier">s</span><span class="special">[</span><span class="number">0</span><span class="special">],</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">size</span><span class="special">(),</span> <span class="identifier">e</span><span class="special">,</span> <span class="identifier">pchars</span><span class="special">);</span>
@@ -97,7 +97,7 @@
         To simply validate a string without recurring to exceptions, a <a class="link" href="../ref/boost__urls__result.html" title="result"><code class="computeroutput"><span class="identifier">result</span></code></a> can be returned with the
         <a class="link" href="../ref/boost__urls__make_pct_string_view.html" title="make_pct_string_view"><code class="computeroutput">make_pct_string_view</code></a>:
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span> <span class="identifier">rs</span> <span class="special">=</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span> <span class="identifier">rs</span> <span class="special">=</span>
     <span class="identifier">make_pct_string_view</span><span class="special">(</span><span class="string">"hello%20world"</span><span class="special">);</span>
 <span class="identifier">assert</span><span class="special">(</span><span class="identifier">rs</span><span class="special">.</span><span class="identifier">has_value</span><span class="special">());</span>
 <span class="identifier">pct_string_view</span> <span class="identifier">sv</span> <span class="special">=</span> <span class="identifier">rs</span><span class="special">.</span><span class="identifier">value</span><span class="special">();</span>
@@ -160,10 +160,10 @@
 </pre>
 <p>
         A <a class="link" href="../ref/boost__urls__decode_view.html" title="decode_view"><code class="computeroutput"><span class="identifier">decode_view</span></code></a>
-        can also be created from a <a class="link" href="../ref/boost__urls__pct_string_view.html" title="pct_string_view"><code class="computeroutput"><span class="identifier">pct_string_view</span></code></a> with the <a class="link" href="../ref/boost__urls__pct_string_view/operator__star_.html" title="pct_string_view::operator *"><code class="computeroutput">operator*</code></a>.
+        can also be created from a <a class="link" href="../ref/boost__urls__pct_string_view.html" title="pct_string_view"><code class="computeroutput"><span class="identifier">pct_string_view</span></code></a> with the <a class="link" href="../ref/boost__urls__pct_string_view/operator__star_.html" title="pct_string_view::operator*"><code class="computeroutput">operator*</code></a>.
         The also gives us an opportunity to validate external strings:
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span> <span class="identifier">rs</span> <span class="special">=</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span> <span class="identifier">rs</span> <span class="special">=</span>
     <span class="identifier">make_pct_string_view</span><span class="special">(</span><span class="string">"hello%20world"</span><span class="special">);</span>
 <span class="identifier">assert</span><span class="special">(</span><span class="identifier">rs</span><span class="special">.</span><span class="identifier">has_value</span><span class="special">());</span>
 <span class="identifier">pct_string_view</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">rs</span><span class="special">.</span><span class="identifier">value</span><span class="special">();</span>
@@ -189,7 +189,7 @@
 <span class="special">{</span>
     <span class="identifier">pct_string_view</span> <span class="identifier">seg0</span> <span class="special">=</span> <span class="special">*</span><span class="identifier">it0</span><span class="special">;</span>
     <span class="identifier">decode_view</span> <span class="identifier">dseg0</span> <span class="special">=</span> <span class="special">*</span><span class="identifier">seg0</span><span class="special">;</span>
-    <span class="identifier">string_view</span> <span class="identifier">seg1</span> <span class="special">=</span> <span class="special">*</span><span class="identifier">it1</span><span class="special">;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">seg1</span> <span class="special">=</span> <span class="special">*</span><span class="identifier">it1</span><span class="special">;</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">dseg0</span> <span class="special">==</span> <span class="identifier">seg1</span><span class="special">)</span>
     <span class="special">{</span>
         <span class="special">++</span><span class="identifier">it0</span><span class="special">;</span>

@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__close_socket"></a><a class="link" href="boost__beast__close_socket.html" title="close_socket">close_socket</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm63311"></a>
+        <a class="indexterm" name="idm68948"></a>
       </p>
 <p>
         Close a socket or socket-like object.
@@ -76,10 +76,10 @@
         The following generic function synchronously sends a message on the stream,
         then closes the socket.
       </p>
-<pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">WriteStream</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span> <span class="keyword">class</span> <span class="identifier">WriteStream</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">hello_and_close</span> <span class="special">(</span><span class="identifier">WriteStream</span><span class="special">&amp;</span> <span class="identifier">stream</span><span class="special">)</span>
 <span class="special">{</span>
-    <span class="identifier">net</span><span class="special">::</span><span class="identifier">write</span><span class="special">(</span><span class="identifier">stream</span><span class="special">,</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">(</span><span class="string">"Hello, world!"</span><span class="special">,</span> <span class="number">13</span><span class="special">));</span>
+    <span class="identifier">net</span><span class="special">::</span><span class="identifier">write</span><span class="special">(</span><span class="identifier">stream</span><span class="special">,</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">(</span> <span class="string">"Hello, world!"</span> <span class="special">,</span> <span class="number">13</span><span class="special">));</span>
     <span class="identifier">close_socket</span><span class="special">(</span><span class="identifier">get_lowest_layer</span><span class="special">(</span><span class="identifier">stream</span><span class="special">));</span>
 <span class="special">}</span>
 </pre>
@@ -102,7 +102,7 @@
 <span class="special">{</span>
     <span class="identifier">net</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">sock_</span><span class="special">;</span>
 
-<span class="keyword">public</span><span class="special">:</span>
+<span class="keyword">public</span> <span class="special">:</span>
     <span class="identifier">my_socket</span><span class="special">(</span><span class="identifier">net</span><span class="special">::</span><span class="identifier">io_context</span><span class="special">&amp;</span> <span class="identifier">ioc</span><span class="special">)</span>
         <span class="special">:</span> <span class="identifier">sock_</span><span class="special">(</span><span class="identifier">ioc</span><span class="special">)</span>
     <span class="special">{</span>

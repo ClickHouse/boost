@@ -118,7 +118,7 @@ Main WKT-streaming function.
 
 [heading Synopsis]
 ``template<typename Geometry>
-wkt_manipulator<Geometry> wkt(Geometry const & geometry)``
+wkt_manipulator< Geometry > wkt(Geometry const & geometry)``
 
 [heading Parameters]
 

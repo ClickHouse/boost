@@ -32,7 +32,7 @@
         character buffer without taking ownership, avoiding memory allocations and
         copies. The following example parses a string literal containing a <a href="https://datatracker.ietf.org/doc/html/rfc3986#section-3" target="_top"><span class="emphasis"><em>URI</em></span></a>:
       </p>
-<pre class="programlisting"><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">=</span> <span class="string">"https://user:pass@example.com:443/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe+Jingleheimer%2DSchmidt#page%20anchor"</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">=</span> <span class="string">"https://user:pass@example.com:443/path/to/my%2dfile.txt?id=42&amp;name=John%20Doe+Jingleheimer%2DSchmidt#page%20anchor"</span><span class="special">;</span>
 </pre>
 <p>
         The function returns a <a class="link" href="../ref/boost__urls__result.html" title="result"><code class="computeroutput"><span class="identifier">result</span></code></a> which holds a <a class="link" href="../ref/boost__urls__url_view.html" title="url_view"><code class="computeroutput"><span class="identifier">url_view</span></code></a> if the string is a valid
@@ -58,7 +58,7 @@
         grammar, throwing an exception upon failure. The following two statements
         are equivalent:
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span> <span class="identifier">parse_uri</span><span class="special">(</span> <span class="identifier">s</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span> <span class="identifier">parse_uri</span><span class="special">(</span> <span class="identifier">s</span> <span class="special">);</span>
 </pre>
 <p>
         In this library, free functions which parse things are named with the word
@@ -223,9 +223,9 @@
         from <a class="link" href="../ref/boost__urls__url_view.html" title="url_view"><code class="computeroutput"><span class="identifier">url_view</span></code></a>,
         it allocates dynamic storage to hold a copy of the string.
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"https://www.example.com/path/to/file.txt"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"https://www.example.com/path/to/file.txt"</span> <span class="special">);</span>
 
-<span class="keyword">static_assert</span><span class="special">(</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url_view</span> <span class="special">&gt;,</span> <span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span> <span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url_view</span> <span class="special">&gt;,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span> <span class="special">);</span>
 </pre>
 <p>
         A <a class="link" href="../ref/boost__urls__static_url.html" title="static_url"><code class="computeroutput"><span class="identifier">static_url</span></code></a>
@@ -233,9 +233,9 @@
         is known. Upon construction from <a class="link" href="../ref/boost__urls__url_view.html" title="url_view"><code class="computeroutput"><span class="identifier">url_view</span></code></a>, it does not perform any
         dynamic memory allocations.
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">static_url</span><span class="special">&lt;</span><span class="number">1024</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"https://www.example.com/path/to/file.txt"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">static_url</span><span class="special">&lt;</span><span class="number">1024</span><span class="special">&gt;</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"https://www.example.com/path/to/file.txt"</span> <span class="special">);</span>
 
-<span class="keyword">static_assert</span><span class="special">(</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">static_url</span><span class="special">&lt;</span><span class="number">1024</span><span class="special">&gt;</span> <span class="special">&gt;,</span> <span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span> <span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">static_url</span><span class="special">&lt;</span><span class="number">1024</span><span class="special">&gt;</span> <span class="special">&gt;,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span> <span class="special">);</span>
 </pre>
 <h5>
 <a name="url.urls.parsing.h0"></a>
@@ -250,7 +250,7 @@
         The functions <code class="computeroutput">result::operator bool()</code> and <code class="computeroutput">result::operator*</code>
         can be used to check if the result contains an error.
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="identifier">ru</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"https://www.example.com/path/to/file.txt"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url</span> <span class="special">&gt;</span> <span class="identifier">ru</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"https://www.example.com/path/to/file.txt"</span> <span class="special">);</span>
 <span class="keyword">if</span> <span class="special">(</span> <span class="identifier">ru</span> <span class="special">)</span>
 <span class="special">{</span>
     <span class="identifier">url</span> <span class="identifier">u</span> <span class="special">=</span> <span class="special">*</span><span class="identifier">ru</span><span class="special">;</span>
@@ -258,7 +258,7 @@
 <span class="special">}</span>
 <span class="keyword">else</span>
 <span class="special">{</span>
-    <span class="identifier">error_code</span> <span class="identifier">e</span> <span class="special">=</span> <span class="identifier">ru</span><span class="special">.</span><span class="identifier">error</span><span class="special">();</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">e</span> <span class="special">=</span> <span class="identifier">ru</span><span class="special">.</span><span class="identifier">error</span><span class="special">();</span>
     <span class="identifier">handle_error</span><span class="special">(</span><span class="identifier">e</span><span class="special">);</span>
 <span class="special">}</span>
 </pre>
@@ -273,7 +273,7 @@
     <span class="identifier">url</span> <span class="identifier">u</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"https://www.example.com/path/to/file.txt"</span> <span class="special">).</span><span class="identifier">value</span><span class="special">();</span>
     <span class="identifier">assert</span><span class="special">(</span><span class="identifier">u</span><span class="special">.</span><span class="identifier">encoded_path</span><span class="special">()</span> <span class="special">==</span> <span class="string">"/path/to/file.txt"</span><span class="special">);</span>
 <span class="special">}</span>
-<span class="keyword">catch</span> <span class="special">(</span><span class="identifier">system_error</span> <span class="special">&amp;</span><span class="identifier">e</span><span class="special">)</span>
+<span class="keyword">catch</span> <span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">system_error</span> <span class="special">&amp;</span><span class="identifier">e</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="identifier">handle_error</span><span class="special">(</span><span class="identifier">e</span><span class="special">);</span>
 <span class="special">}</span>

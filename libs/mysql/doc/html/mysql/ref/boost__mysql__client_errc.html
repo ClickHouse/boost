@@ -28,7 +28,7 @@
 <a name="mysql.ref.boost__mysql__client_errc"></a><a class="link" href="boost__mysql__client_errc.html" title="client_errc">client_errc</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm49703"></a>
+        <a class="indexterm" name="idm65423"></a>
       </p>
 <p>
         MySQL client-defined error codes.
@@ -175,6 +175,60 @@
                 <p>
                   The connection mandatory SSL, but the server doesn't accept SSL
                   connections.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">metadata_check_failed</span></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  The static interface detected a mismatch between your C++ type
+                  definitions and what the server returned in the query.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">num_resultsets_mismatch</span></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  The static interface detected a mismatch between the number of
+                  row types passed to <code class="computeroutput"><span class="identifier">static_results</span></code>
+                  or <code class="computeroutput"><span class="identifier">static_execution_state</span></code>
+                  and the number of resultsets returned by your query.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">row_type_mismatch</span></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  The StaticRow type passed to read_some_rows does not correspond
+                  to the resultset type being read.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">static_row_parsing_error</span></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  The static interface encountered an error when parsing a field
+                  into a C++ data structure.
                 </p>
               </td>
 </tr>

@@ -20,7 +20,7 @@
 </method-group>
 </struct><struct name="one_or_default"><template>
       <template-type-parameter name="T"/>
-    </template><inherit access="public">mpl::if_::type&lt; is_empty&lt; T &gt;, default_&lt; T &gt;, one&lt; T &gt; &gt;</inherit></struct><struct name="zero"><template>
+    </template><inherit access="public">mpl::if_::type</inherit></struct><struct name="zero"><template>
       <template-type-parameter name="T"/>
     </template><typedef name="type"><type><classname>zero</classname></type></typedef>
 <typedef name="value_type"><type>T</type></typedef>
@@ -30,7 +30,7 @@
 </method-group>
 </struct><struct name="zero_or_default"><template>
       <template-type-parameter name="T"/>
-    </template><inherit access="public">mpl::if_::type&lt; is_empty&lt; T &gt;, default_&lt; T &gt;, zero&lt; T &gt; &gt;</inherit></struct><namespace name="functional">
+    </template><inherit access="public">mpl::if_::type</inherit></struct><namespace name="functional">
 <struct name="as_max"><template>
       <template-type-parameter name="Arg"/>
       <template-type-parameter name="Tag"/>
@@ -443,7 +443,7 @@
           <template-type-parameter name="To"/>
           <template-type-parameter name="From"/>
         </template><parameter name="from"><paramtype>From &amp;</paramtype></parameter></function>
-<function name="promote"><type>mpl::if_&lt; is_same&lt; To const, From const  &gt;, To const &amp;, To const  &gt;::type</type><template>
+<function name="promote"><type>mpl::if_&lt; is_same&lt; Toconst, Fromconst &gt;, Toconst &amp;, Toconst &gt;::type</type><template>
           <template-type-parameter name="To"/>
           <template-type-parameter name="From"/>
         </template><parameter name="from"><paramtype>From const &amp;</paramtype></parameter></function>
@@ -516,7 +516,7 @@
       <template-type-parameter name="Left"/>
       <template-type-parameter name="Right"/>
       <template-type-parameter name="RightTag"/>
-    </template><specialization><template-arg>Left</template-arg><template-arg>Right</template-arg><template-arg>std_valarray_tag</template-arg><template-arg>RightTag</template-arg></specialization><inherit access="public">mpl::if_::type&lt; are_integral&lt; Left::value_type, Right &gt;, divides&lt; Left, double const &gt;, divides&lt; Left, Right &gt; &gt;</inherit></struct-specialization><struct-specialization name="max_assign"><template>
+    </template><specialization><template-arg>Left</template-arg><template-arg>Right</template-arg><template-arg>std_valarray_tag</template-arg><template-arg>RightTag</template-arg></specialization><inherit access="public">mpl::if_::type</inherit></struct-specialization><struct-specialization name="max_assign"><template>
       <template-type-parameter name="Left"/>
       <template-type-parameter name="Right"/>
     </template><specialization><template-arg>Left</template-arg><template-arg>Right</template-arg><template-arg>std_valarray_tag</template-arg><template-arg>std_valarray_tag</template-arg></specialization><typedef name="first_argument_type"><type>Left</type></typedef>
@@ -627,7 +627,7 @@
 </struct-specialization><struct-specialization name="fdiv"><template>
       <template-type-parameter name="Left"/>
       <template-type-parameter name="Right"/>
-    </template><specialization><template-arg>Left</template-arg><template-arg>Right</template-arg><template-arg>std_vector_tag</template-arg><template-arg>void</template-arg></specialization><inherit access="public">mpl::if_::type&lt; are_integral&lt; Left::value_type, Right &gt;, divides&lt; Left, double const &gt;, divides&lt; Left, Right &gt; &gt;</inherit></struct-specialization><struct-specialization name="max_assign"><template>
+    </template><specialization><template-arg>Left</template-arg><template-arg>Right</template-arg><template-arg>std_vector_tag</template-arg><template-arg>void</template-arg></specialization><inherit access="public">mpl::if_::type</inherit></struct-specialization><struct-specialization name="max_assign"><template>
       <template-type-parameter name="Left"/>
       <template-type-parameter name="Right"/>
     </template><specialization><template-arg>Left</template-arg><template-arg>Right</template-arg><template-arg>std_vector_tag</template-arg><template-arg>std_vector_tag</template-arg></specialization><typedef name="first_argument_type"><type>Left</type></typedef>

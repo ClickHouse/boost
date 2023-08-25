@@ -38,13 +38,13 @@
 <a name="id-1.3.46.8.2.7.13.4"></a><h2>Description</h2>
 <p>Defines a free/non-member operator overload for binary operator <span class="emphasis"><em>op_name</em></span> that produces an expression instantiated from the <span class="emphasis"><em>expr_template</em></span> expression template.</p>
 <p>The <span class="emphasis"><em>lhs</em></span> and <span class="emphasis"><em>rhs</em></span> parameters to the defined operator overload may be any types that are <span class="bold"><strong>not</strong></span> expressions. Each parameter is wrapped in a terminal expression.</p>
-<p>At least one of the parameters to the defined operator overload must be a type <code class="computeroutput">T</code> for which</p>
+<p>At least one of the parameters to the defined operator overload must be a type <code class="computeroutput">T</code> for which </p>
 <pre class="programlisting"><span class="identifier">udt_trait</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_cv_t</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_reference_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span><span class="special">&gt;</span><span class="special">::</span><span class="identifier">value</span> 
 </pre>
 <p> is true.</p>
 <p>Example: </p>
 <pre class="programlisting"></pre>
-<p> 
+<p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
