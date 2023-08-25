@@ -23,7 +23,7 @@ The free function comparable\u005fdistance does not necessarily calculate the di
 
 [heading Synopsis]
 ``template<typename Geometry1, typename Geometry2, typename Strategy>
-comparable_distance_result<Geometry1, Geometry2, Strategy>::type comparable_distance(Geometry1 const & geometry1, Geometry2 const & geometry2, Strategy const & strategy)``
+auto comparable_distance(Geometry1 const & geometry1, Geometry2 const & geometry2, Strategy const & strategy)``
 
 [heading Parameters]
 
@@ -61,7 +61,7 @@ The free function comparable\u005fdistance does not necessarily calculate the di
 
 [heading Synopsis]
 ``template<typename Geometry1, typename Geometry2>
-default_comparable_distance_result<Geometry1, Geometry2>::type comparable_distance(Geometry1 const & geometry1, Geometry2 const & geometry2)``
+auto comparable_distance(Geometry1 const & geometry1, Geometry2 const & geometry2)``
 
 [heading Parameters]
 

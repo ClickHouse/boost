@@ -8,6 +8,7 @@
 <link rel="up" href="../strategies.html" title="Strategies">
 <link rel="prev" href="strategy_buffer_point_square.html" title="strategy::buffer::point_square">
 <link rel="next" href="strategy_buffer_side_straight.html" title="strategy::buffer::side_straight">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -27,7 +28,7 @@
 <a name="geometry.reference.strategies.strategy_buffer_geographic_point_circle"></a><a class="link" href="strategy_buffer_geographic_point_circle.html" title="strategy::buffer::geographic_point_circle">strategy::buffer::geographic_point_circle</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="idm94778"></a><a class="indexterm" name="idm94780"></a><a class="indexterm" name="idm94782"></a>
+          <a class="indexterm" name="idm94764"></a><a class="indexterm" name="idm94766"></a><a class="indexterm" name="idm94768"></a>
 Create a circular buffer around a point, on the Earth.
         </p>
 <h6>
@@ -153,11 +154,36 @@ Create a circular buffer around a point, on the Earth.
                   </p>
                 </th>
 </tr></thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>
                   <p>
 </p>
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><span class="identifier">geographic_point_circle</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">count</span> <span class="special">=</span> <span class="number">90</span><span class="special">)</span></pre>
+<pre class="table-programlisting"><span class="identifier">geographic_point_circle</span><span class="special">(</span><span class="identifier">Spheroid</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">spheroid</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">count</span> <span class="special">=</span> <span class="identifier">default_points_per_circle</span><span class="special">)</span></pre>
+<p>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Constructs the strategy with a spheroid.
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <span class="bold"><strong>Spheroid const &amp;</strong></span>: <span class="emphasis"><em>spheroid</em></span>:
+                    The spheroid to be used
+                  </p>
+                  <p>
+                    <span class="bold"><strong>std::size_t</strong></span>: <span class="emphasis"><em>count</em></span>:
+                    Number of points (minimum 3) for the created circle
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+</p>
+<pre class="table-programlisting"><span class="identifier">geographic_point_circle</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">count</span> <span class="special">=</span> <span class="identifier">default_points_per_circle</span><span class="special">)</span></pre>
 <p>
                   </p>
                 </td>
@@ -169,11 +195,11 @@ Create a circular buffer around a point, on the Earth.
 <td>
                   <p>
                     <span class="bold"><strong>std::size_t</strong></span>: <span class="emphasis"><em>count</em></span>:
-                    number of points for the created circle (if count is smaller
-                    than 3, count is internally set to 3)
+                    Number of points (minimum 3) for the created circle
                   </p>
                 </td>
-</tr></tbody>
+</tr>
+</tbody>
 </table></div>
 <h6>
 <a name="geometry.reference.strategies.strategy_buffer_geographic_point_circle.h4"></a>
@@ -253,15 +279,12 @@ Create a circular buffer around a point, on the Earth.
             </li>
 </ul></div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2009-2021 Barend Gehrels,
+<div class="copyright-footer">Copyright © 2009-2021 Barend Gehrels,
       Bruno Lalande, Mateusz Loskot, Adam Wulkiewicz, Oracle and/or its affiliates<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="strategy_buffer_point_square.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../strategies.html"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="strategy_buffer_side_straight.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>

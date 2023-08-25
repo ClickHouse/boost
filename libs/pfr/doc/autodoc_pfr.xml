@@ -1,6 +1,18 @@
 <?xml version="1.0" standalone="yes"?>
 <library-reference id="reference_section"><title>Reference Section</title><header name="boost/pfr.hpp">
 <para>Includes all the Boost.PFR headers </para></header>
+<header name="boost/pfr/config.hpp">
+<para>Contains all the macros that describe Boost.PFR configuration, like BOOST_PFR_ENABLED</para><para><note><para>This header file doesn't require C++14 Standard and supports all C++ compilers, even pre C++14 compilers (C++11, C++03...). </para>
+</note>
+</para><macro name="BOOST_PFR_NOT_SUPPORTED"/>
+<macro name="BOOST_PFR_USE_LOOPHOLE"/>
+<macro name="BOOST_PFR_USE_CPP17"/>
+<macro name="BOOST_PFR_USE_STD_MAKE_INTEGRAL_SEQUENCE"/>
+<macro name="BOOST_PFR_HAS_GUARANTEED_COPY_ELISION"/>
+<macro name="BOOST_PFR_ENABLE_IMPLICIT_REFLECTION"/>
+<macro name="BOOST_PFR_MAYBE_UNUSED"/>
+<macro name="BOOST_PFR_ENABLED"/>
+</header>
 <header name="boost/pfr/core.hpp">
 <para>Contains all the basic tuple-like interfaces <link linkend="boost.pfr.get"> boost::pfr::get </link>, <link linkend="boost.pfr.tuple_size"> boost::pfr::tuple_size </link>, <link linkend="boost.pfr.tuple_element_t"> boost::pfr::tuple_element_t </link>, and others.</para><para><emphasis role="bold">Synopsis:</emphasis> </para><namespace name="boost">
 <namespace name="pfr">
@@ -43,11 +55,31 @@
         </template><parameter name=""><paramtype>T &amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt;!std::is_assignable&lt; T, T &gt;::value &gt; *</paramtype><default>nullptr</default></parameter></signature><signature><type>constexpr auto</type><template>
           <template-nontype-parameter name="I"><type>std::size_t</type></template-nontype-parameter>
           <template-type-parameter name="T"/>
-        </template><parameter name="val"><paramtype>T &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt; std::is_rvalue_reference&lt; T &amp;&amp; &gt;::value &gt; *</paramtype><default>0</default></parameter></signature><purpose>Returns reference or const reference to a field with index <computeroutput>I</computeroutput> in <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>val</computeroutput>. </purpose><description><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct { int i, short s; };
+        </template><parameter name="val"><paramtype>T &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt; std::is_rvalue_reference&lt; T &amp;&amp; &gt;::value &gt; *</paramtype><default>nullptr</default></parameter></signature><signature><type>constexpr const U &amp;</type><template>
+          <template-type-parameter name="U"/>
+          <template-type-parameter name="T"/>
+        </template><parameter name="val"><paramtype>const T &amp;</paramtype></parameter></signature><signature><type>constexpr U &amp;</type><template>
+          <template-type-parameter name="U"/>
+          <template-type-parameter name="T"/>
+        </template><parameter name="val"><paramtype>T &amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt; std::is_assignable&lt; T, T &gt;::value &gt; *</paramtype><default>nullptr</default></parameter></signature><signature><type>constexpr U &amp;</type><template>
+          <template-type-parameter name="U"/>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt;!std::is_assignable&lt; T, T &gt;::value &gt; *</paramtype><default>nullptr</default></parameter></signature><signature><type>constexpr U &amp;&amp;</type><template>
+          <template-type-parameter name="U"/>
+          <template-type-parameter name="T"/>
+        </template><parameter name="val"><paramtype>T &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt; std::is_rvalue_reference&lt; T &amp;&amp; &gt;::value &gt; *</paramtype><default>nullptr</default></parameter></signature><purpose>Returns reference or const reference to a field with index <computeroutput>I</computeroutput> in <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>val</computeroutput>. Overload taking the type <computeroutput>U</computeroutput> returns reference or const reference to a field with provided type <computeroutput>U</computeroutput> in <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>val</computeroutput> if there's only one field of such type in <computeroutput>val</computeroutput>. </purpose><description><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct { int i, short s; };
 my_struct s {10, 11};
+
 assert(boost::pfr::get&lt;0&gt;(s) == 10);
 boost::pfr::get&lt;1&gt;(s) = 0;
+
+assert(boost::pfr::get&lt;int&gt;(s) == 10);
+boost::pfr::get&lt;short&gt;(s) = 11;
 </programlisting> </para></description></overloaded-function>
+
+
+
+
 
 
 
@@ -55,7 +87,7 @@ boost::pfr::get&lt;1&gt;(s) = 0;
           <template-type-parameter name="T"/>
         </template><parameter name="val"><paramtype>const T &amp;</paramtype></parameter><purpose>Creates a <computeroutput>std::tuple</computeroutput> from fields of an <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>val</computeroutput>. </purpose><description><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct { int i, short s; };
 my_struct s {10, 11};
-std::tuple&lt;int, short&gt; t = make_tuple(s);
+std::tuple&lt;int, short&gt; t = boost::pfr::structure_to_tuple(s);
 assert(get&lt;0&gt;(t) == 10);
 </programlisting> </para></description></function>
 <overloaded-function name="structure_tie"><signature><type>constexpr auto</type><template>
@@ -66,15 +98,15 @@ assert(get&lt;0&gt;(t) == 10);
           <template-type-parameter name="T"/>
         </template><parameter name=""><paramtype>T &amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt;!std::is_assignable&lt; T, T &gt;::value &gt; *</paramtype><default>nullptr</default></parameter></signature><signature><type>constexpr auto</type><template>
           <template-type-parameter name="T"/>
-        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt; std::is_rvalue_reference&lt; T &amp;&amp; &gt;::value &gt; *</paramtype><default>0</default></parameter></signature><purpose>std::tie` like function that ties fields of a structure. </purpose><description><para>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>std::enable_if_t&lt; std::is_rvalue_reference&lt; T &amp;&amp; &gt;::value &gt; *</paramtype><default>nullptr</default></parameter></signature><purpose>std::tie` like function that ties fields of a structure. </purpose><description><para>
 <emphasis role="bold">Example:</emphasis> <programlisting language="c++">void foo(const int&amp;, const short&amp;);
 struct my_struct { int i, short s; };
 
 const my_struct const_s{1, 2};
-std::apply(foo, structure_tie(const_s));
+std::apply(foo, boost::pfr::structure_tie(const_s));
 
 my_struct s;
-structure_tie(s) = std::tuple&lt;int, short&gt;{10, 11};
+boost::pfr::structure_tie(s) = std::tuple&lt;int, short&gt;{10, 11};
 assert(s.s == 11);
 </programlisting> </para></description><returns><para>a <computeroutput>std::tuple</computeroutput> with lvalue and const lvalue references to fields of an <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>val</computeroutput>.</para>
 </returns></overloaded-function>
@@ -92,7 +124,7 @@ assert(s.s == 11);
 </para></description></parameter><description><para>Calls <computeroutput>func</computeroutput> for each field of a <computeroutput>value</computeroutput>.</para><para>
 <emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct { int i, short s; };
 int sum = 0;
-for_each_field(my_struct{20, 22}, [&amp;sum](const auto&amp; field) { sum += field; });
+boost::pfr::for_each_field(my_struct{20, 22}, [&amp;sum](const auto&amp; field) { sum += field; });
 assert(sum == 42);
 </programlisting> </para></description></function>
 <function name="tie_from_structure"><type><emphasis>unspecified</emphasis></type><template>
@@ -103,7 +135,7 @@ assert(sum == 42);
   return res;
 }
 auto [p, s] = f();
-tie_from_structure(p, s) = f();
+boost::pfr::tie_from_structure(p, s) = f();
 </programlisting> </para></description><returns><para>an object with lvalue references to <computeroutput>args...</computeroutput>; on assignment of an <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> value to that object each field of an aggregate is assigned to the corresponding <computeroutput>args...</computeroutput> reference.</para>
 </returns></function>
 </namespace>
@@ -162,24 +194,45 @@ std::unordered_set&lt;
 <namespace name="pfr">
 <struct name="equal_to"><template>
       <template-type-parameter name="T"><default>void</default></template-type-parameter>
-    </template><purpose>std::equal_to like comparator that returns <link linkend="boost.pfr.eq"> boost::pfr::eq </link>(x, y) </purpose><method-group name="public member functions">
+    </template><purpose>std::equal_to like comparator that returns <link linkend="boost.pfr.eq"> boost::pfr::eq </link>(x, y) </purpose><typedef name="is_transparent"><purpose>This typedef exists only if T <emphasis role="bold">is</emphasis> void. </purpose><type>std::true_type</type></typedef>
+<method-group name="public member functions">
 <method name="operator()" cv="const"><type>bool</type><parameter name="x"><paramtype>const T &amp;</paramtype></parameter><parameter name="y"><paramtype>const T &amp;</paramtype></parameter><description><para>
 </para></description><returns><para><emphasis role="bold">true</emphasis> if each field of <emphasis role="bold">x</emphasis> equals the field with same index of <emphasis role="bold">y</emphasis>. </para>
 </returns></method>
+<method name="operator()" cv="const"><type>bool</type><template>
+          <template-type-parameter name="V"/>
+          <template-type-parameter name="U"/>
+        </template><parameter name="x"><paramtype>const V &amp;</paramtype></parameter><parameter name="y"><paramtype>const U &amp;</paramtype></parameter><description><para>This operator allows comparison of <emphasis role="bold">x</emphasis> and <emphasis role="bold">y</emphasis> that have different type. 
+</para></description><requires><para>Exists only if T <emphasis role="bold">is</emphasis> void. </para>
+</requires></method>
 </method-group>
 </struct><struct name="greater"><template>
       <template-type-parameter name="T"><default>void</default></template-type-parameter>
-    </template><purpose>std::greater like comparator that returns <link linkend="boost.pfr.gt"> boost::pfr::gt </link>(x, y) </purpose><method-group name="public member functions">
+    </template><purpose>std::greater like comparator that returns <link linkend="boost.pfr.gt"> boost::pfr::gt </link>(x, y) </purpose><typedef name="is_transparent"><purpose>This typedef exists only if T <emphasis role="bold">is</emphasis> void. </purpose><type>std::true_type</type></typedef>
+<method-group name="public member functions">
 <method name="operator()" cv="const"><type>bool</type><parameter name="x"><paramtype>const T &amp;</paramtype></parameter><parameter name="y"><paramtype>const T &amp;</paramtype></parameter><description><para>
 </para></description><returns><para><emphasis role="bold">true</emphasis> if field of <emphasis role="bold">x</emphasis> greater than the field with same index of <emphasis role="bold">y</emphasis> and all previous fields of <emphasis role="bold">x</emphasis> equal to the same fields of <emphasis role="bold">y</emphasis>. </para>
 </returns></method>
+<method name="operator()" cv="const"><type>bool</type><template>
+          <template-type-parameter name="V"/>
+          <template-type-parameter name="U"/>
+        </template><parameter name="x"><paramtype>const V &amp;</paramtype></parameter><parameter name="y"><paramtype>const U &amp;</paramtype></parameter><description><para>This operator allows comparison of <emphasis role="bold">x</emphasis> and <emphasis role="bold">y</emphasis> that have different type. 
+</para></description><requires><para>Exists only if T <emphasis role="bold">is</emphasis> void. </para>
+</requires></method>
 </method-group>
 </struct><struct name="greater_equal"><template>
       <template-type-parameter name="T"><default>void</default></template-type-parameter>
-    </template><purpose>std::greater_equal like comparator that returns <link linkend="boost.pfr.ge"> boost::pfr::ge </link>(x, y) </purpose><method-group name="public member functions">
+    </template><purpose>std::greater_equal like comparator that returns <link linkend="boost.pfr.ge"> boost::pfr::ge </link>(x, y) </purpose><typedef name="is_transparent"><purpose>This typedef exists only if T <emphasis role="bold">is</emphasis> void. </purpose><type>std::true_type</type></typedef>
+<method-group name="public member functions">
 <method name="operator()" cv="const"><type>bool</type><parameter name="x"><paramtype>const T &amp;</paramtype></parameter><parameter name="y"><paramtype>const T &amp;</paramtype></parameter><description><para>
 </para></description><returns><para><emphasis role="bold">true</emphasis> if field of <emphasis role="bold">x</emphasis> greater than the field with same index of <emphasis role="bold">y</emphasis> and all previous fields of <emphasis role="bold">x</emphasis> equal to the same fields of <emphasis role="bold">y</emphasis>; or if each field of <emphasis role="bold">x</emphasis> equals the field with same index of <emphasis role="bold">y</emphasis>. </para>
 </returns></method>
+<method name="operator()" cv="const"><type>bool</type><template>
+          <template-type-parameter name="V"/>
+          <template-type-parameter name="U"/>
+        </template><parameter name="x"><paramtype>const V &amp;</paramtype></parameter><parameter name="y"><paramtype>const U &amp;</paramtype></parameter><description><para>This operator allows comparison of <emphasis role="bold">x</emphasis> and <emphasis role="bold">y</emphasis> that have different type. 
+</para></description><requires><para>Exists only if T <emphasis role="bold">is</emphasis> void. </para>
+</requires></method>
 </method-group>
 </struct><struct name="hash"><template>
       <template-type-parameter name="T"/>
@@ -190,26 +243,51 @@ std::unordered_set&lt;
 </method-group>
 </struct><struct name="less"><template>
       <template-type-parameter name="T"><default>void</default></template-type-parameter>
-    </template><purpose>std::less like comparator that returns <link linkend="boost.pfr.lt"> boost::pfr::lt </link>(x, y) </purpose><method-group name="public member functions">
+    </template><purpose>std::less like comparator that returns <link linkend="boost.pfr.lt"> boost::pfr::lt </link>(x, y) </purpose><typedef name="is_transparent"><purpose>This typedef exists only if T <emphasis role="bold">is</emphasis> void. </purpose><type>std::true_type</type></typedef>
+<method-group name="public member functions">
 <method name="operator()" cv="const"><type>bool</type><parameter name="x"><paramtype>const T &amp;</paramtype></parameter><parameter name="y"><paramtype>const T &amp;</paramtype></parameter><description><para>
 </para></description><returns><para><emphasis role="bold">true</emphasis> if field of <emphasis role="bold">x</emphasis> less than the field with same index of <emphasis role="bold">y</emphasis> and all previous fields of <emphasis role="bold">x</emphasis> equal to the same fields of <emphasis role="bold">y</emphasis>. </para>
 </returns></method>
+<method name="operator()" cv="const"><type>bool</type><template>
+          <template-type-parameter name="V"/>
+          <template-type-parameter name="U"/>
+        </template><parameter name="x"><paramtype>const V &amp;</paramtype></parameter><parameter name="y"><paramtype>const U &amp;</paramtype></parameter><description><para>This operator allows comparison of <emphasis role="bold">x</emphasis> and <emphasis role="bold">y</emphasis> that have different type. 
+</para></description><requires><para>Exists only if T <emphasis role="bold">is</emphasis> void. </para>
+</requires></method>
 </method-group>
 </struct><struct name="less_equal"><template>
       <template-type-parameter name="T"><default>void</default></template-type-parameter>
-    </template><purpose>std::less_equal like comparator that returns <link linkend="boost.pfr.le"> boost::pfr::le </link>(x, y) </purpose><method-group name="public member functions">
+    </template><purpose>std::less_equal like comparator that returns <link linkend="boost.pfr.le"> boost::pfr::le </link>(x, y) </purpose><typedef name="is_transparent"><purpose>This typedef exists only if T <emphasis role="bold">is</emphasis> void. </purpose><type>std::true_type</type></typedef>
+<method-group name="public member functions">
 <method name="operator()" cv="const"><type>bool</type><parameter name="x"><paramtype>const T &amp;</paramtype></parameter><parameter name="y"><paramtype>const T &amp;</paramtype></parameter><description><para>
 </para></description><returns><para><emphasis role="bold">true</emphasis> if field of <emphasis role="bold">x</emphasis> less than the field with same index of <emphasis role="bold">y</emphasis> and all previous fields of <emphasis role="bold">x</emphasis> equal to the same fields of <emphasis role="bold">y</emphasis>; or if each field of <emphasis role="bold">x</emphasis> equals the field with same index of <emphasis role="bold">y</emphasis>. </para>
 </returns></method>
+<method name="operator()" cv="const"><type>bool</type><template>
+          <template-type-parameter name="V"/>
+          <template-type-parameter name="U"/>
+        </template><parameter name="x"><paramtype>const V &amp;</paramtype></parameter><parameter name="y"><paramtype>const U &amp;</paramtype></parameter><description><para>This operator allows comparison of <emphasis role="bold">x</emphasis> and <emphasis role="bold">y</emphasis> that have different type. 
+</para></description><requires><para>Exists only if T <emphasis role="bold">is</emphasis> void. </para>
+</requires></method>
 </method-group>
 </struct><struct name="not_equal"><template>
       <template-type-parameter name="T"><default>void</default></template-type-parameter>
-    </template><purpose>std::not_equal like comparator that returns <link linkend="boost.pfr.ne"> boost::pfr::ne </link>(x, y) </purpose><method-group name="public member functions">
+    </template><purpose>std::not_equal like comparator that returns <link linkend="boost.pfr.ne"> boost::pfr::ne </link>(x, y) </purpose><typedef name="is_transparent"><purpose>This typedef exists only if T <emphasis role="bold">is</emphasis> void. </purpose><type>std::true_type</type></typedef>
+<method-group name="public member functions">
 <method name="operator()" cv="const"><type>bool</type><parameter name="x"><paramtype>const T &amp;</paramtype></parameter><parameter name="y"><paramtype>const T &amp;</paramtype></parameter><description><para>
 </para></description><returns><para><emphasis role="bold">true</emphasis> if at least one field <emphasis role="bold">x</emphasis> not equals the field with same index of <emphasis role="bold">y</emphasis>. </para>
 </returns></method>
+<method name="operator()" cv="const"><type>bool</type><template>
+          <template-type-parameter name="V"/>
+          <template-type-parameter name="U"/>
+        </template><parameter name="x"><paramtype>const V &amp;</paramtype></parameter><parameter name="y"><paramtype>const U &amp;</paramtype></parameter><description><para>This operator allows comparison of <emphasis role="bold">x</emphasis> and <emphasis role="bold">y</emphasis> that have different type. 
+</para></description><requires><para>Exists only if T <emphasis role="bold">is</emphasis> void. </para>
+</requires></method>
 </method-group>
 </struct>
+
+
+
+
 
 
 
@@ -281,14 +359,18 @@ std::cout &lt;&lt; boost::pfr::io(s1);  // Outputs: {0, 1, H, e, l, l, o, , , 0,
 
 <function name="io"><type>auto</type><template>
           <template-type-parameter name="T"/>
-        </template><parameter name="value"><paramtype>T &amp;&amp;</paramtype></parameter><description><para>IO manupulator to read/write <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>value</computeroutput> using its IO stream operators or using <link linkend="boost.pfr.io_fields"> boost::pfr::io_fields </link> if operators are not awailable.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct { int i; short s; };
-my_struct s;
+        </template><parameter name="value"><paramtype>T &amp;&amp;</paramtype></parameter><description><para>IO manipulator to read/write <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>value</computeroutput> using its IO stream operators or using <link linkend="boost.pfr.io_fields"> boost::pfr::io_fields </link> if operators are not available.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct { int i; short s; };
+my_struct x;
 std::stringstream ss;
 ss &lt;&lt; "{ 12, 13 }";
-ss &gt;&gt; boost::pfr::io(s);
-assert(s.i == 12);
-assert(s.i == 13);
+ss &gt;&gt; boost::pfr::io(x);
+assert(x.i == 12);
+assert(x.s == 13);
 </programlisting></para><para><emphasis role="bold">See</emphasis> <emphasis role="bold">Also</emphasis> : <link linkend="boost_pfr.tutorial.custom_printing_of_aggregates"> 'Custom printing of aggregates' </link> for info on how to implement your own manipulator with custom format. </para></description></function>
+
+
+
+
 
 
 
@@ -304,7 +386,7 @@ assert(s.i == 13);
 </namespace>
 </header>
 <header name="boost/pfr/io_fields.hpp">
-<para>Contains IO manupulator <link linkend="boost.pfr.io_fields"> boost::pfr::io_fields </link> to read/write <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>value</computeroutput> field-by-field.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct {
+<para>Contains IO manipulator <link linkend="boost.pfr.io_fields"> boost::pfr::io_fields </link> to read/write any <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> field-by-field.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct {
     int i;
     short s;
 };
@@ -341,7 +423,7 @@ std::istream&amp; operator&gt;&gt;(std::istream&amp; is, my_struct&amp; x) {
 
 <function name="io_fields"><type>auto</type><template>
           <template-type-parameter name="T"/>
-        </template><parameter name="value"><paramtype>T &amp;&amp;</paramtype></parameter><description><para>IO manupulator to read/write <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>value</computeroutput> field-by-field.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct {
+        </template><parameter name="value"><paramtype>T &amp;&amp;</paramtype></parameter><description><para>IO manipulator to read/write <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link> <computeroutput>value</computeroutput> field-by-field.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">struct my_struct {
     int i;
     short s;
 };
@@ -354,6 +436,10 @@ std::istream&amp; operator&gt;&gt;(std::istream&amp; is, my_struct&amp; x) {
     return is &gt;&gt; boost::pfr::io_fields(x);  // Equivalent to: is &gt;&gt; "{ " &gt;&gt; x.i &gt;&gt; " ," &gt;&gt;  x.s &gt;&gt; " }"
 }
 </programlisting></para><para>Input and output streaming operators for <computeroutput>boost::pfr::io_fields</computeroutput> are symmetric, meaning that you get the original value by streaming it and reading back if each fields streaming operator is symmetric.</para><para><emphasis role="bold">See</emphasis> <emphasis role="bold">Also</emphasis> : <link linkend="boost_pfr.tutorial.custom_printing_of_aggregates"> 'Custom printing of aggregates' </link> for info on how to implement your own manipulator with custom format. </para></description></function>
+
+
+
+
 
 
 
@@ -469,6 +555,10 @@ assert(boost::pfr::lt(s1, s2));
 
 
 
+
+
+
+
 </namespace>
 </namespace>
 </header>
@@ -552,16 +642,132 @@ assert(boost::pfr::lt_fields(s1, s2));
 
 
 
+
+
+
+
+</namespace>
+</namespace>
+</header>
+<header name="boost/pfr/traits.hpp">
+<para>Contains traits <link linkend="boost.pfr.is_reflectable"> <classname alt="boost::pfr::is_reflectable">boost::pfr::is_reflectable</classname> </link> and <link linkend="boost.pfr.is_implicitly_reflectable"> boost::pfr::is_implicitly_reflectable </link> for detecting an ability to reflect type.</para><para><emphasis role="bold">Synopsis:</emphasis> </para><namespace name="boost">
+<namespace name="pfr">
+<struct-specialization name="is_reflectable"><template>
+      <template-type-parameter name="T"/>
+      <template-type-parameter name="WhatFor"/>
+    </template><specialization><template-arg>const T</template-arg><template-arg>WhatFor</template-arg></specialization><inherit access="public">boost::pfr::is_reflectable&lt; T, WhatFor &gt;</inherit></struct-specialization><struct-specialization name="is_reflectable"><template>
+      <template-type-parameter name="T"/>
+      <template-type-parameter name="WhatFor"/>
+    </template><specialization><template-arg>const volatile T</template-arg><template-arg>WhatFor</template-arg></specialization><inherit access="public">boost::pfr::is_reflectable&lt; T, WhatFor &gt;</inherit></struct-specialization><struct-specialization name="is_reflectable"><template>
+      <template-type-parameter name="T"/>
+      <template-type-parameter name="WhatFor"/>
+    </template><specialization><template-arg>volatile T</template-arg><template-arg>WhatFor</template-arg></specialization><inherit access="public">boost::pfr::is_reflectable&lt; T, WhatFor &gt;</inherit></struct-specialization><typedef name="is_implicitly_reflectable"><description><para>Checks the input type for the potential to be reflected. Specialize <classname alt="boost::pfr::is_reflectable">is_reflectable</classname> if you disagree with is_implicitly_reflectable's default decision. </para></description><type><emphasis>unspecified</emphasis></type></typedef>
+<data-member name="is_implicitly_reflectable_v"><type>constexpr bool</type><description><para>Checks the input type for the potential to be reflected. Specialize <classname alt="boost::pfr::is_reflectable">is_reflectable</classname> if you disagree with is_implicitly_reflectable_v's default decision. </para></description></data-member>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</namespace>
+</header>
+<header name="boost/pfr/traits_fwd.hpp">
+<namespace name="boost">
+<namespace name="pfr">
+<struct name="is_reflectable"><template>
+      <template-type-parameter name="T"/>
+      <template-type-parameter name="WhatFor"/>
+    </template><description><para>Has a static const member variable <computeroutput>value</computeroutput> when it is known that type T can or can't be reflected using Boost.PFR; otherwise, there is no member variable. Every user may (and in some difficult cases - should) specialize <classname alt="boost::pfr::is_reflectable">is_reflectable</classname> on his own.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">namespace boost { namespace pfr {
+    template&lt;class All&gt; struct is_reflectable&lt;A, All&gt; : std::false_type {};       // 'A' won't be interpreted as reflectable everywhere
+    template&lt;&gt; struct is_reflectable&lt;B, boost_fusion_tag&gt; : std::false_type {};   // 'B' won't be interpreted as reflectable in only Boost Fusion
+}}
+</programlisting> <note><para><classname alt="boost::pfr::is_reflectable">is_reflectable</classname> affects is_implicitly_reflectable, the decision made by <classname alt="boost::pfr::is_reflectable">is_reflectable</classname> is used by is_implicitly_reflectable. </para>
+</note>
+</para></description></struct>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </namespace>
 </namespace>
 </header>
 <header name="boost/pfr/tuple_size.hpp">
 <para>Contains tuple-like interfaces to get fields count <link linkend="boost.pfr.tuple_size"> boost::pfr::tuple_size </link>, <link linkend="boost.pfr.tuple_size_v"> boost::pfr::tuple_size_v </link>.</para><para><emphasis role="bold">Synopsis:</emphasis> </para><namespace name="boost">
 <namespace name="pfr">
-<typedef name="tuple_size"><description><para>Has a static const member variable <computeroutput>value</computeroutput> that contains fields count in a T. Works for any T that supports aggregate initialization.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">std::array&lt;int, boost::pfr::tuple_size&lt;my_structure&gt;::value &gt; a;
+<typedef name="tuple_size"><description><para>Has a static const member variable <computeroutput>value</computeroutput> that contains fields count in a T. Works for any T that satisfies <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link>.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">std::array&lt;int, boost::pfr::tuple_size&lt;my_structure&gt;::value &gt; a;
 </programlisting> </para></description><type><emphasis>unspecified</emphasis></type></typedef>
-<data-member name="tuple_size_v"><type>constexpr std::size_t</type><description><para><computeroutput>tuple_size_v</computeroutput> is a template variable that contains fields count in a T and works for any T that supports aggregate initialization.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">std::array&lt;int, boost::pfr::tuple_size_v&lt;my_structure&gt; &gt; a;
+<data-member name="tuple_size_v"><type>constexpr std::size_t</type><description><para><computeroutput>tuple_size_v</computeroutput> is a template variable that contains fields count in a T and works for any T that satisfies <link linkend="boost_pfr.limitations_and_configuration"> simple aggregate </link>.</para><para><emphasis role="bold">Example:</emphasis> <programlisting language="c++">std::array&lt;int, boost::pfr::tuple_size_v&lt;my_structure&gt; &gt; a;
 </programlisting> </para></description></data-member>
+
+
+
+
 
 
 

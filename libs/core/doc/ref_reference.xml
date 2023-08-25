@@ -10,31 +10,32 @@
       <template-type-parameter name="T"/>
     </template><purpose>Contains a reference to an object of type <computeroutput>T</computeroutput>. </purpose><description><para><computeroutput><classname alt="boost::reference_wrapper">reference_wrapper</classname></computeroutput> is primarily used to "feed" references to function templates (algorithms) that take their parameter by value. It provides an implicit conversion to <computeroutput>T&amp;</computeroutput>, which usually allows the function templates to work on references unmodified. </para></description><typedef name="type"><description><para>Type <computeroutput>T</computeroutput>. </para></description><type>T</type></typedef>
 <method-group name="public member functions">
-<method name="conversion-operator" cv="const"><type>T &amp;</type><description><para>
+<method name="conversion-operator" cv="const noexcept"><type>T &amp;</type><description><para>
 <para>Does not throw. </para>
 
 </para></description><returns><para>The stored reference. </para>
 </returns></method>
-<method name="get" cv="const"><type>T &amp;</type><description><para>
+<method name="get" cv="const noexcept"><type>T &amp;</type><description><para>
 <para>Does not throw. </para>
 
 </para></description><returns><para>The stored reference. </para>
 </returns></method>
-<method name="get_pointer" cv="const"><type>T *</type><description><para>
+<method name="get_pointer" cv="const noexcept"><type>T *</type><description><para>
 <para>Does not throw. </para>
 
 </para></description><returns><para>A pointer to the object referenced by the stored reference. </para>
 </returns></method>
 </method-group>
-<constructor specifiers="explicit"><parameter name="t"><paramtype>T &amp;</paramtype></parameter><description><para>Constructs a <computeroutput><classname alt="boost::reference_wrapper">reference_wrapper</classname></computeroutput> object that stores a reference to <computeroutput>t</computeroutput>.</para><para><para>Does not throw. </para>
+<constructor specifiers="explicit" cv="noexcept"><parameter name="t"><paramtype>T &amp;</paramtype></parameter><description><para>Constructs a <computeroutput><classname alt="boost::reference_wrapper">reference_wrapper</classname></computeroutput> object that stores a reference to <computeroutput>t</computeroutput>.</para><para><para>Does not throw. </para>
 
 </para></description></constructor>
 <constructor cv="= delete"><parameter name="t"><paramtype>T &amp;&amp;</paramtype></parameter><description><para><para>Construction from a temporary object is disabled. </para>
 
 </para></description></constructor>
-<constructor><template>
+<constructor cv="noexcept"><template>
           <template-type-parameter name="Y"/>
-        </template><parameter name="r"><paramtype><classname>reference_wrapper</classname>&lt; Y &gt;</paramtype></parameter><parameter name=""><paramtype><emphasis>unspecified</emphasis></paramtype><default><emphasis>unspecified</emphasis></default></parameter><description><para>Constructs a <computeroutput><classname alt="boost::reference_wrapper">reference_wrapper</classname></computeroutput> object that stores the reference stored in the compatible <computeroutput><classname alt="boost::reference_wrapper">reference_wrapper</classname></computeroutput> <computeroutput>r</computeroutput>.</para><para><para>Only enabled when <computeroutput>Y*</computeroutput> is convertible to <computeroutput>T*</computeroutput>. </para>
+          <template-type-parameter name=""><default>typename enable_if_c&lt;<classname alt="boost::detail::ref_convertible">boost::detail::ref_convertible</classname>&lt;Y, T&gt;::value&gt;::type</default></template-type-parameter>
+        </template><parameter name="r"><paramtype><classname>reference_wrapper</classname>&lt; Y &gt;</paramtype></parameter><description><para>Constructs a <computeroutput><classname alt="boost::reference_wrapper">reference_wrapper</classname></computeroutput> object that stores the reference stored in the compatible <computeroutput><classname alt="boost::reference_wrapper">reference_wrapper</classname></computeroutput> <computeroutput>r</computeroutput>.</para><para><para>Only enabled when <computeroutput>Y*</computeroutput> is convertible to <computeroutput>T*</computeroutput>. </para>
 
 <para>Does not throw. </para>
 

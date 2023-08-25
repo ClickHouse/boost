@@ -1,4 +1,5 @@
 // Copyright 2021, 2022 Peter Dimov.
+// Copyright 2023 Joaquin M Lopez Munoz.
 // Distributed under the Boost Software License, Version 1.0.
 // https://www.boost.org/LICENSE_1_0.txt
 
@@ -6,11 +7,15 @@
 #define _SILENCE_CXX20_CISO646_REMOVED_WARNING
 
 #include <boost/unordered_map.hpp>
+#include <boost/unordered/unordered_node_map.hpp>
 #include <boost/unordered/unordered_flat_map.hpp>
 #include <boost/regex.hpp>
 #ifdef HAVE_ABSEIL
 # include "absl/container/node_hash_map.h"
 # include "absl/container/flat_hash_map.h"
+#endif
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+# include "ankerl/unordered_dense.h"
 #endif
 #include <unordered_map>
 #include <vector>
@@ -38,7 +43,15 @@ static std::vector<std::string> words;
 
 static void init_words()
 {
+#if SIZE_MAX > UINT32_MAX
+
     char const* fn = "enwik9"; // http://mattmahoney.net/dc/textdata
+
+#else
+
+    char const* fn = "enwik8"; // ditto
+
+#endif
 
     auto t1 = std::chrono::steady_clock::now();
 
@@ -216,6 +229,9 @@ template<class K, class V> using std_unordered_map =
 template<class K, class V> using boost_unordered_map =
     boost::unordered_map<K, V, boost::hash<K>, std::equal_to<K>, allocator_for<K, V>>;
 
+template<class K, class V> using boost_unordered_node_map =
+    boost::unordered_node_map<K, V, boost::hash<K>, std::equal_to<K>, allocator_for<K, V>>;
+
 template<class K, class V> using boost_unordered_flat_map =
     boost::unordered_flat_map<K, V, boost::hash<K>, std::equal_to<K>, allocator_for<K, V>>;
 
@@ -226,6 +242,13 @@ template<class K, class V> using absl_node_hash_map =
 
 template<class K, class V> using absl_flat_hash_map =
     absl::flat_hash_map<K, V, absl::container_internal::hash_default_hash<K>, absl::container_internal::hash_default_eq<K>, allocator_for<K, V>>;
+
+#endif
+
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+
+template<class K, class V> using ankerl_unordered_dense_map =
+    ankerl::unordered_dense::map<K, V, ankerl::unordered_dense::hash<K>, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
 
 #endif
 
@@ -282,6 +305,9 @@ std::unordered_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
 template<class K, class V> using boost_unordered_map_fnv1a =
     boost::unordered_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
 
+template<class K, class V> using boost_unordered_node_map_fnv1a =
+    boost::unordered_node_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
+
 template<class K, class V> using boost_unordered_flat_map_fnv1a =
     boost::unordered_flat_map<K, V, fnv1a_hash, std::equal_to<K>, allocator_for<K, V>>;
 
@@ -295,6 +321,13 @@ template<class K, class V> using absl_flat_hash_map_fnv1a =
 
 #endif
 
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+
+template<class K, class V> using ankerl_unordered_dense_map_fnv1a =
+    ankerl::unordered_dense::map<K, V, fnv1a_hash, std::equal_to<K>, ::allocator< std::pair<K, V> >>;
+
+#endif
+
 //
 
 int main()
@@ -303,7 +336,14 @@ int main()
 
     test<std_unordered_map>( "std::unordered_map" );
     test<boost_unordered_map>( "boost::unordered_map" );
+    test<boost_unordered_node_map>( "boost::unordered_node_map" );
     test<boost_unordered_flat_map>( "boost::unordered_flat_map" );
+
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+
+    test<ankerl_unordered_dense_map>( "ankerl::unordered_dense::map" );
+
+#endif
 
 #ifdef HAVE_ABSEIL
 
@@ -314,7 +354,14 @@ int main()
 
     test<std_unordered_map_fnv1a>( "std::unordered_map, FNV-1a" );
     test<boost_unordered_map_fnv1a>( "boost::unordered_map, FNV-1a" );
+    test<boost_unordered_node_map_fnv1a>( "boost::unordered_node_map, FNV-1a" );
     test<boost_unordered_flat_map_fnv1a>( "boost::unordered_flat_map, FNV-1a" );
+
+#ifdef HAVE_ANKERL_UNORDERED_DENSE
+
+    test<ankerl_unordered_dense_map_fnv1a>( "ankerl::unordered_dense::map, FNV-1a" );
+
+#endif
 
 #ifdef HAVE_ABSEIL
 
@@ -327,7 +374,7 @@ int main()
 
     for( auto const& x: times )
     {
-        std::cout << std::setw( 35 ) << ( x.label_ + ": " ) << std::setw( 5 ) << x.time_ << " ms, " << std::setw( 9 ) << x.bytes_ << " bytes in " << x.count_ << " allocations\n";
+        std::cout << std::setw( 38 ) << ( x.label_ + ": " ) << std::setw( 5 ) << x.time_ << " ms, " << std::setw( 9 ) << x.bytes_ << " bytes in " << x.count_ << " allocations\n";
     }
 }
 

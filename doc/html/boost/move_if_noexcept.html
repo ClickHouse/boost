@@ -9,6 +9,7 @@
 <link rel="up" href="../move/reference.html#header.boost.move.utility_hpp" title="Header &lt;boost/move/utility.hpp&gt;">
 <link rel="prev" href="movelib/operat_1_3_24_20_14_3_1_20.html" title="Function template operator&gt;=">
 <link rel="next" href="enable_mo_1_3_24_20_16_2_1.html" title="Struct template enable_move_utility_emulation">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -29,8 +30,8 @@
 <h2><span class="refentrytitle">Function template move_if_noexcept</span></h2>
 <p>boost::move_if_noexcept</p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../move/reference.html#header.boost.move.utility_hpp" title="Header &lt;boost/move/utility.hpp&gt;">boost/move/utility.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../move/reference.html#header.boost.move.utility_hpp" title="Header &lt;boost/move/utility.hpp&gt;">boost/move/utility.hpp</a>&gt;
 
 </span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> 
@@ -40,14 +41,11 @@
 <p>This function provides a way to convert a reference into a rvalue reference in compilers with rvalue references. For other compilers converts T &amp; into <span class="emphasis"><em>::boost::rv&lt;T&gt; &amp;</em></span> so that move emulation is activated. Reference would be converted to rvalue reference only if input type is nothrow move constructible or if it has no copy constructor. In all other cases const reference would be returned </p>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2008-2014 Ion Gaztanaga<p>
+<div class="copyright-footer">Copyright © 2008-2014 Ion Gaztanaga<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="movelib/operat_1_3_24_20_14_3_1_20.html"><img src="../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../move/reference.html#header.boost.move.utility_hpp"><img src="../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="enable_mo_1_3_24_20_16_2_1.html"><img src="../../../doc/src/images/next.png" alt="Next"></a>

@@ -104,18 +104,23 @@ messages while still keeping the function SFINAE-friendly.</p>
 </div>
 <p>However, if we pass a type that can&#8217;t be printed, we get an error like
 this:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>print.cpp:49:5: error: no matching function for call to object of type &#39;boost::hof::fix_adaptor&lt;boost::hof::first_of_adaptor&lt;(lambda at print.cpp:29:9), (lambda at print.cpp:33:9), (lambda at print.cpp:37:9)&gt; &gt;&#39;
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>
+
+print.cpp:49:5: error: no matching function for call to object of type &#39;boost::hof::fix_adaptor&lt;boost::hof::first_of_adaptor&lt;(lambda at print.cpp:29:9), (lambda at print.cpp:33:9), (lambda at print.cpp:37:9)&gt; &gt;&#39;
     print(foo{});
     ^~~~~
 fix.hpp:158:5: note: candidate template ignored: substitution failure [with Ts = &lt;foo&gt;]: no matching function for call to object of type &#39;const boost::hof::first_of_adaptor&lt;(lambda at
       print.cpp:29:9), (lambda at print.cpp:33:9), (lambda at print.cpp:37:9)&gt;&#39;
     operator()(Ts&amp;&amp;... xs) const BOOST_HOF_SFINAE_RETURNS
+
 </pre></div>
 </div>
 <p>Which is short and gives very little information why it can&#8217;t be called.
 It doesn&#8217;t even show the overloads that were try. However, using the
 <code class="docutils literal"><span class="pre">reveal</span></code> adaptor we can get more info about the error like this:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span>print.cpp:49:5: error: no matching function for call to object of type &#39;boost::hof::reveal_adaptor&lt;boost::hof::fix_adaptor&lt;boost::hof::first_of_adaptor&lt;(lambda at print.cpp:29:9), (lambda at print.cpp:33:9),
+<div class="highlight-cpp"><div class="highlight"><pre><span></span>
+
+print.cpp:49:5: error: no matching function for call to object of type &#39;boost::hof::reveal_adaptor&lt;boost::hof::fix_adaptor&lt;boost::hof::first_of_adaptor&lt;(lambda at print.cpp:29:9), (lambda at print.cpp:33:9),
       (lambda at print.cpp:37:9)&gt; &gt;, boost::hof::fix_adaptor&lt;boost::hof::first_of_adaptor&lt;(lambda at print.cpp:29:9), (lambda at print.cpp:33:9), (lambda at print.cpp:37:9)&gt; &gt; &gt;&#39;
     boost::hof::reveal(print)(foo{});
     ^~~~~~~~~~~~~~~~~~
@@ -131,6 +136,7 @@ reveal.hpp:149:20: note: candidate template ignored: substitution failure [with 
 fix.hpp:158:5: note: candidate template ignored: substitution failure [with Ts = &lt;foo&gt;]: no matching function for call to object of type &#39;const boost::hof::first_of_adaptor&lt;(lambda at
       print.cpp:29:9), (lambda at print.cpp:33:9), (lambda at print.cpp:37:9)&gt;&#39;
     operator()(Ts&amp;&amp;... xs) const BOOST_HOF_SFINAE_RETURNS
+
 </pre></div>
 </div>
 <p>So now the error has a note for each of the lambda overloads it tried. Of

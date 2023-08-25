@@ -58,13 +58,13 @@ has to be written over and over again for template classes:</p>
 <span class="p">{</span>
     <span class="k">typedef</span> <span class="n">T</span> <span class="n">type</span><span class="p">;</span>
 <span class="p">};</span>
- 
+     
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">unwrap_refwrapper</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span>
 <span class="p">{</span>
     <span class="k">typedef</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">type</span><span class="p">;</span>
 <span class="p">};</span>
- 
+     
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">unwrap_ref_decay</span>
 <span class="p">:</span> <span class="n">unwrap_refwrapper</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">decay</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&gt;</span>

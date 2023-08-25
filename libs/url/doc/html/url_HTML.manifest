@@ -8,6 +8,7 @@ url/urls/params.html
 url/urls/normalization.html
 url/urls/string_token.html
 url/urls/percent_encoding.html
+url/urls/formatting.html
 url/grammar.html
 url/grammar/parse_rules.html
 url/grammar/character_sets.html
@@ -23,7 +24,8 @@ url/examples/qr_code.html
 url/examples/finicky.html
 url/examples/mailto_urls.html
 url/examples/magnet_link.html
-url/examples/route.html
+url/examples/file_router.html
+url/examples/router.html
 url/ref.html
 pt01.html
 url/ref/boost__urls__grammar__aligned_storage.html
@@ -73,6 +75,13 @@ url/ref/boost__urls__authority_view/has_port.html
 url/ref/boost__urls__authority_view/port.html
 url/ref/boost__urls__authority_view/port_number.html
 url/ref/boost__urls__authority_view/encoded_host_and_port.html
+url/ref/boost__urls__authority_view/compare.html
+url/ref/boost__urls__authority_view/operator_eq__eq_.html
+url/ref/boost__urls__authority_view/operator_not__eq_.html
+url/ref/boost__urls__authority_view/operator_lt_.html
+url/ref/boost__urls__authority_view/operator_lt__eq_.html
+url/ref/boost__urls__authority_view/operator_gt_.html
+url/ref/boost__urls__authority_view/operator_gt__eq_.html
 url/ref/boost__urls__authority_view/operator_lt__lt_.html
 url/ref/boost__urls__decode_view.html
 url/ref/boost__urls__decode_view/value_type.html
@@ -91,6 +100,16 @@ url/ref/boost__urls__decode_view/begin.html
 url/ref/boost__urls__decode_view/end.html
 url/ref/boost__urls__decode_view/front.html
 url/ref/boost__urls__decode_view/back.html
+url/ref/boost__urls__decode_view/starts_with.html
+url/ref/boost__urls__decode_view/starts_with/overload1.html
+url/ref/boost__urls__decode_view/starts_with/overload2.html
+url/ref/boost__urls__decode_view/ends_with.html
+url/ref/boost__urls__decode_view/ends_with/overload1.html
+url/ref/boost__urls__decode_view/ends_with/overload2.html
+url/ref/boost__urls__decode_view/find.html
+url/ref/boost__urls__decode_view/rfind.html
+url/ref/boost__urls__decode_view/remove_prefix.html
+url/ref/boost__urls__decode_view/remove_suffix.html
 url/ref/boost__urls__decode_view/options.html
 url/ref/boost__urls__decode_view/compare.html
 url/ref/boost__urls__decode_view/compare/overload1.html
@@ -779,11 +798,14 @@ url/ref/boost__urls__static_url/params/overload4.html
 url/ref/boost__urls__static_url/encoded_params.html
 url/ref/boost__urls__static_url/encoded_params/overload1.html
 url/ref/boost__urls__static_url/encoded_params/overload2.html
+url/ref/boost__urls__static_url/set_params.html
+url/ref/boost__urls__static_url/set_encoded_params.html
 url/ref/boost__urls__static_url/resolve.html
 url/ref/boost__urls__static_url/size.html
 url/ref/boost__urls__static_url/empty.html
 url/ref/boost__urls__static_url/data.html
 url/ref/boost__urls__static_url/buffer.html
+url/ref/boost__urls__static_url/operator_string_view.html
 url/ref/boost__urls__static_url/persist.html
 url/ref/boost__urls__static_url/has_scheme.html
 url/ref/boost__urls__static_url/scheme.html
@@ -876,6 +898,8 @@ url/ref/boost__urls__static_url_base/params/overload4.html
 url/ref/boost__urls__static_url_base/encoded_params.html
 url/ref/boost__urls__static_url_base/encoded_params/overload1.html
 url/ref/boost__urls__static_url_base/encoded_params/overload2.html
+url/ref/boost__urls__static_url_base/set_params.html
+url/ref/boost__urls__static_url_base/set_encoded_params.html
 url/ref/boost__urls__static_url_base/remove_query.html
 url/ref/boost__urls__static_url_base/remove_fragment.html
 url/ref/boost__urls__static_url_base/set_fragment.html
@@ -892,6 +916,7 @@ url/ref/boost__urls__static_url_base/size.html
 url/ref/boost__urls__static_url_base/empty.html
 url/ref/boost__urls__static_url_base/data.html
 url/ref/boost__urls__static_url_base/buffer.html
+url/ref/boost__urls__static_url_base/operator_string_view.html
 url/ref/boost__urls__static_url_base/persist.html
 url/ref/boost__urls__static_url_base/has_scheme.html
 url/ref/boost__urls__static_url_base/scheme.html
@@ -1075,6 +1100,8 @@ url/ref/boost__urls__url/set_path.html
 url/ref/boost__urls__url/set_encoded_path.html
 url/ref/boost__urls__url/set_query.html
 url/ref/boost__urls__url/set_encoded_query.html
+url/ref/boost__urls__url/set_params.html
+url/ref/boost__urls__url/set_encoded_params.html
 url/ref/boost__urls__url/remove_query.html
 url/ref/boost__urls__url/remove_fragment.html
 url/ref/boost__urls__url/set_fragment.html
@@ -1110,6 +1137,7 @@ url/ref/boost__urls__url/size.html
 url/ref/boost__urls__url/empty.html
 url/ref/boost__urls__url/data.html
 url/ref/boost__urls__url/buffer.html
+url/ref/boost__urls__url/operator_string_view.html
 url/ref/boost__urls__url/persist.html
 url/ref/boost__urls__url/has_scheme.html
 url/ref/boost__urls__url/scheme.html
@@ -1154,6 +1182,7 @@ url/ref/boost__urls__url/encoded_target.html
 url/ref/boost__urls__url/compare.html
 url/ref/boost__urls__url/max_size.html
 url/ref/boost__urls__url_base.html
+url/ref/boost__urls__url_base/detail__pattern.html
 url/ref/boost__urls__url_base/resolve.html
 url/ref/boost__urls__url_base/resolve/overload1.html
 url/ref/boost__urls__url_base/resolve/overload2.html
@@ -1205,6 +1234,8 @@ url/ref/boost__urls__url_base/params/overload4.html
 url/ref/boost__urls__url_base/encoded_params.html
 url/ref/boost__urls__url_base/encoded_params/overload1.html
 url/ref/boost__urls__url_base/encoded_params/overload2.html
+url/ref/boost__urls__url_base/set_params.html
+url/ref/boost__urls__url_base/set_encoded_params.html
 url/ref/boost__urls__url_base/remove_query.html
 url/ref/boost__urls__url_base/remove_fragment.html
 url/ref/boost__urls__url_base/set_fragment.html
@@ -1220,6 +1251,7 @@ url/ref/boost__urls__url_base/size.html
 url/ref/boost__urls__url_base/empty.html
 url/ref/boost__urls__url_base/data.html
 url/ref/boost__urls__url_base/buffer.html
+url/ref/boost__urls__url_base/operator_string_view.html
 url/ref/boost__urls__url_base/persist.html
 url/ref/boost__urls__url_base/has_scheme.html
 url/ref/boost__urls__url_base/scheme.html
@@ -1270,6 +1302,7 @@ url/ref/boost__urls__url_view/url_view/overload1.html
 url/ref/boost__urls__url_view/url_view/overload2.html
 url/ref/boost__urls__url_view/url_view/overload3.html
 url/ref/boost__urls__url_view/url_view/overload4.html
+url/ref/boost__urls__url_view/url_view/overload5.html
 url/ref/boost__urls__url_view/operator_eq_.html
 url/ref/boost__urls__url_view/operator_eq_/overload1.html
 url/ref/boost__urls__url_view/operator_eq_/overload2.html
@@ -1277,6 +1310,7 @@ url/ref/boost__urls__url_view/size.html
 url/ref/boost__urls__url_view/empty.html
 url/ref/boost__urls__url_view/data.html
 url/ref/boost__urls__url_view/buffer.html
+url/ref/boost__urls__url_view/operator_string_view.html
 url/ref/boost__urls__url_view/persist.html
 url/ref/boost__urls__url_view/has_scheme.html
 url/ref/boost__urls__url_view/scheme.html
@@ -1327,6 +1361,7 @@ url/ref/boost__urls__url_view/encoded_target.html
 url/ref/boost__urls__url_view/compare.html
 url/ref/boost__urls__url_view/max_size.html
 url/ref/boost__urls__url_view_base.html
+url/ref/boost__urls__url_view_base/detail__pattern.html
 url/ref/boost__urls__url_view_base/operator_eq__eq_.html
 url/ref/boost__urls__url_view_base/operator_not__eq_.html
 url/ref/boost__urls__url_view_base/operator_lt_.html
@@ -1339,6 +1374,7 @@ url/ref/boost__urls__url_view_base/size.html
 url/ref/boost__urls__url_view_base/empty.html
 url/ref/boost__urls__url_view_base/data.html
 url/ref/boost__urls__url_view_base/buffer.html
+url/ref/boost__urls__url_view_base/operator_string_view.html
 url/ref/boost__urls__url_view_base/persist.html
 url/ref/boost__urls__url_view_base/has_scheme.html
 url/ref/boost__urls__url_view_base/scheme.html
@@ -1440,6 +1476,13 @@ url/ref/boost__urls__parse_uri.html
 url/ref/boost__urls__parse_uri_reference.html
 url/ref/boost__urls__parse_ipv6_address.html
 url/ref/boost__urls__parse_ipv4_address.html
+url/ref/boost__urls__format.html
+url/ref/boost__urls__format/overload1.html
+url/ref/boost__urls__format/overload2.html
+url/ref/boost__urls__format_to.html
+url/ref/boost__urls__format_to/overload1.html
+url/ref/boost__urls__format_to/overload2.html
+url/ref/boost__urls__arg.html
 url/ref/boost__urls__generic_category.html
 url/ref/boost__urls__system_category.html
 url/ref/boost__urls__encoded_size.html

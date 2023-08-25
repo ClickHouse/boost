@@ -9,6 +9,7 @@
 <link rel="up" href="../../process/reference.html#header.boost.process.pipe_hpp" title="Header &lt;boost/process/pipe.hpp&gt;">
 <link rel="prev" href="std_err.html" title="Global std_err">
 <link rel="next" href="basic_opstream.html" title="Class template basic_opstream">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -29,8 +30,8 @@
 <h2><span class="refentrytitle">Class template basic_ipstream</span></h2>
 <p>boost::process::basic_ipstream</p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../process/reference.html#header.boost.process.pipe_hpp" title="Header &lt;boost/process/pipe.hpp&gt;">boost/process/pipe.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../process/reference.html#header.boost.process.pipe_hpp" title="Header &lt;boost/process/pipe.hpp&gt;">boost/process/pipe.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">,</span> <span class="keyword">typename</span> Traits <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">char_traits</span><span class="special">&lt;</span><span class="identifier">CharT</span><span class="special">&gt;</span> <span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_istream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">{</span>
@@ -48,14 +49,14 @@
   <a class="link" href="basic_ipstream.html#idm4402-bb"><span class="identifier">basic_ipstream</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span><span class="special">)</span> <span class="special">=</span> <span class="keyword">delete</span><span class="special">;</span>
   <a class="link" href="../container/adaptive_pool.html#idm4407-bb"><span class="identifier">basic_ipstream</span></a><span class="special">(</span><a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
   <a class="link" href="basic_ipstream.html#idm4412-bb"><span class="identifier">basic_ipstream</span></a><span class="special">(</span><a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
-  <a class="link" href="basic_ipstream.html#idm4417-bb"><span class="identifier">basic_ipstream</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span> <a class="link" href="basic_ipstream.html#idm4422-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span><span class="special">)</span> <span class="special">=</span> <span class="keyword">delete</span><span class="special">;</span>
+  <a class="link" href="../container/adaptive_pool.html#idm4417-bb"><span class="identifier">basic_ipstream</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span> <a class="link" href="../container/adaptive_pool.html#idm4422-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span><span class="special">)</span> <span class="special">=</span> <span class="keyword">delete</span><span class="special">;</span>
   <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span> <a class="link" href="basic_ipstream.html#idm4429-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
   <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span> <a class="link" href="basic_ipstream.html#idm4436-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
   <a class="link" href="basic_ipstream.html" title="Class template basic_ipstream">basic_ipstream</a> <span class="special">&amp;</span> <a class="link" href="basic_ipstream.html#idm4443-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="basic_ipstream.html#idm4357-bb">public member functions</a></span>
-  <a class="link" href="basic_pipebuf.html" title="Struct template basic_pipebuf">basic_pipebuf</a><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">*</span> <a class="link" href="../container/adaptive_pool.html#idm4358-bb"><span class="identifier">rdbuf</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="../container/adaptive_pool.html#idm4357-bb">public member functions</a></span>
+  <a class="link" href="basic_pipebuf.html" title="Struct template basic_pipebuf">basic_pipebuf</a><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">*</span> <a class="link" href="basic_ipstream.html#idm4358-bb"><span class="identifier">rdbuf</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
   <span class="keyword">void</span> <a class="link" href="basic_ipstream.html#idm4362-bb"><span class="identifier">pipe</span></a><span class="special">(</span><a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">void</span> <a class="link" href="basic_ipstream.html#idm4368-bb"><span class="identifier">pipe</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <a class="link" href="basic_ipstream.html#boost.process.basic_ipstream.pipe_type">pipe_type</a> <span class="special">&amp;</span> <a class="link" href="basic_ipstream.html#idm4374-bb"><span class="identifier">pipe</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
@@ -64,7 +65,7 @@
   <span class="keyword">bool</span> <a class="link" href="basic_ipstream.html#idm4386-bb"><span class="identifier">is_open</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
   <span class="keyword">void</span> <a class="link" href="basic_ipstream.html#idm4389-bb"><span class="identifier">open</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">void</span> <a class="link" href="basic_ipstream.html#idm4392-bb"><span class="identifier">open</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">void</span> <a class="link" href="../container/adaptive_pool.html#idm4397-bb"><span class="identifier">close</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">void</span> <a class="link" href="basic_ipstream.html#idm4397-bb"><span class="identifier">close</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
 <a name="id-1.3.29.10.20.3.4"></a><h2>Description</h2>
@@ -123,15 +124,12 @@
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2006-2012 Julio M. Merino Vidal, Ilya Sokolov,
+<div class="copyright-footer">Copyright © 2006-2012 Julio M. Merino Vidal, Ilya Sokolov,
       Felipe Tanus, Jeff Flinn, Boris Schaeling<br>Copyright © 2016 Klemens D. Morgenstern<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="std_err.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../process/reference.html#header.boost.process.pipe_hpp"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="basic_opstream.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>

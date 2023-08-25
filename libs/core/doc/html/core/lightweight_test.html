@@ -6,8 +6,9 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="Chapter 1. Boost.Core">
 <link rel="up" href="../index.html" title="Chapter 1. Boost.Core">
-<link rel="prev" href="is_same.html" title="is_same">
-<link rel="next" href="no_exceptions_support.html" title="no_exceptions_support">
+<link rel="prev" href="launder.html" title="launder">
+<link rel="next" href="make_span.html" title="make_span">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,7 +21,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="is_same.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="no_exceptions_support.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="launder.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="make_span.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -34,7 +35,7 @@
 </dl></div>
 <div class="simplesect">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idm7592"></a>Authors</h3></div></div></div>
+<a name="idm8277"></a>Authors</h3></div></div></div>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
           Peter Dimov
@@ -83,8 +84,16 @@
 
 <span class="keyword">namespace</span> <span class="identifier">boost</span>
 <span class="special">{</span>
-    <span class="keyword">int</span> <span class="identifier">report_errors</span><span class="special">();</span>
-<span class="special">}</span>
+
+<span class="keyword">int</span> <span class="identifier">report_errors</span><span class="special">();</span>
+
+<span class="keyword">namespace</span> <span class="identifier">core</span>
+<span class="special">{</span>
+
+<span class="keyword">void</span> <span class="identifier">lwt_init</span><span class="special">();</span>
+
+<span class="special">}</span> <span class="comment">// namespace core</span>
+<span class="special">}</span> <span class="comment">// namespace boost</span>
 </pre>
 </div>
 <div class="section">
@@ -302,6 +311,27 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h4 class="title">
+<a name="core.lightweight_test.header_boost_core_lightweight_te.lwt_init"></a><a class="link" href="lightweight_test.html#core.lightweight_test.header_boost_core_lightweight_te.lwt_init" title="lwt_init">lwt_init</a>
+</h4></div></div></div>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">lwt_init</span><span class="special">()</span>
+</pre>
+<p>
+          Performs one-time initialization. Disables the interactive message boxes
+          displayed by the Microsoft Windows debug runtime library on <code class="computeroutput"><span class="identifier">abort</span></code>, failing <code class="computeroutput"><span class="identifier">assert</span></code>,
+          and other abnormal program terminations (to facilitate unattended testing),
+          and ensures that in case <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">report_errors</span></code>
+          is not called (a common mistake), the program ends with a nonzero exit
+          code.
+        </p>
+<p>
+          <code class="computeroutput"><span class="identifier">lwt_init</span></code> is automatically
+          called by the test macros. There is no need to call it explicitly, except
+          in cases where a test fails due to e.g. an assertion failure before the
+          first test macro is invoked.
+        </p>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h4 class="title">
 <a name="core.lightweight_test.header_boost_core_lightweight_te.example"></a><a class="link" href="lightweight_test.html#core.lightweight_test.header_boost_core_lightweight_te.example" title="Example">Example</a>
 </h4></div></div></div>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">core</span><span class="special">/</span><span class="identifier">lightweight_test</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
@@ -385,14 +415,14 @@
 <a name="core.lightweight_test.header_boost_core_lightweight_t0.example"></a><a class="link" href="lightweight_test.html#core.lightweight_test.header_boost_core_lightweight_t0.example" title="Example">Example</a>
 </h4></div></div></div>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">core</span><span class="special">/</span><span class="identifier">lightweight_test_trait</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">core</span><span class="special">/</span><span class="identifier">is_same</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">type_traits</span><span class="special">/</span><span class="identifier">is_same</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">U</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">X</span>
 <span class="special">{</span>
     <span class="keyword">typedef</span> <span class="identifier">T</span> <span class="identifier">type</span><span class="special">;</span>
 <span class="special">};</span>
 
-<span class="keyword">using</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">;</span>
+<span class="keyword">using</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">;</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span>
 <span class="special">{</span>
@@ -406,17 +436,14 @@
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2014 Peter Dimov<br>Copyright © 2014 Glen Fernandes<br>Copyright © 2014 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2014 Peter Dimov<br>Copyright © 2014 Glen Fernandes<br>Copyright © 2014 Andrey Semashev<p>
         Distributed under the <a href="http://boost.org/LICENSE_1_0.txt" target="_top">Boost
         Software License, Version 1.0</a>.
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="is_same.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="no_exceptions_support.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="launder.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="make_span.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

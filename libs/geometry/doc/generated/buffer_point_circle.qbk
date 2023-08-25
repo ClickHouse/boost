@@ -31,9 +31,9 @@ This strategy can be used as PointStrategy for the buffer algorithm. It creates 
 [heading Constructor(s)]
 [table
 [[Function] [Description] [Parameters] ]
-[[``point_circle(std::size_t count = 90)``
+[[``point_circle(std::size_t count = default_points_per_circle)``
 
-] [Constructs the strategy. ] [[* std::size_t]: ['count]:  number of points for the created circle (if count is smaller than 3, count is internally set to 3) 
+] [Constructs the strategy. ] [[* std::size_t]: ['count]:  Number of points (minimum 3) for the created circle 
 
 
 

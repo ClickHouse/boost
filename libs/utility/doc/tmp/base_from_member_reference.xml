@@ -6,7 +6,7 @@
       <template-nontype-parameter name="UniqueID"><type>int</type><default>0</default></template-nontype-parameter>
     </template><method-group name="protected member functions">
 </method-group>
-<constructor specifiers="explicit" cv="noexcept(BOOST_NOEXCEPT_EXPR(::new((void *) 0) MemberType(static_cast&lt; T &amp;&amp; &gt;(x)...))))"><template>
+<constructor specifiers="explicit" cv="noexcept(BOOST_NOEXCEPT_EXPR(::new((void *) 0) MemberType(static_cast&lt; T &amp;&amp; &gt;(x)...)))"><template>
           <template-nontype-parameter name="T"><type>typename ...</type></template-nontype-parameter>
           <template-type-parameter name="EnableIf"><default>typename ::boost::detail::enable_if_unrelated&lt;<classname alt="boost::base_from_member">base_from_member</classname>, T...&gt;::type</default></template-type-parameter>
         </template><parameter name="x"><paramtype>T &amp;&amp;...</paramtype></parameter></constructor>

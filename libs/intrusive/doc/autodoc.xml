@@ -2830,8 +2830,8 @@ header------------------------------&gt;|         |
 <method name="split_count" cv="noexcept"><type>void</type><parameter name="s"><paramtype>SizeType</paramtype></parameter></method>
 <method name="inc_split_count" cv="noexcept"><type>void</type></method>
 <method name="dec_split_count" cv="noexcept"><type>void</type></method>
-<method name="iterator_to" cv="noexcept(!linear_buckets))"><type>iterator</type><parameter name="value"><paramtype>reference</paramtype></parameter></method>
-<method name="iterator_to" cv="const noexcept(!linear_buckets))"><type>const_iterator</type><parameter name="value"><paramtype>const_reference</paramtype></parameter></method>
+<method name="iterator_to" cv="noexcept(!linear_buckets)"><type>iterator</type><parameter name="value"><paramtype>reference</paramtype></parameter></method>
+<method name="iterator_to" cv="const noexcept(!linear_buckets)"><type>const_iterator</type><parameter name="value"><paramtype>const_reference</paramtype></parameter></method>
 <method name="iterator_to"><type>iterator</type><parameter name="value"><paramtype>reference</paramtype></parameter><parameter name=""><paramtype><emphasis>unspecified</emphasis></paramtype></parameter></method>
 <method name="iterator_to" cv="const"><type>const_iterator</type><parameter name="value"><paramtype>const_reference</paramtype></parameter><parameter name=""><paramtype><emphasis>unspecified</emphasis></paramtype></parameter></method>
 <method name="priv_hash_to_bucket" cv="const"><type>bucket_type &amp;</type><parameter name="hash_value"><paramtype>std::size_t</paramtype></parameter></method>

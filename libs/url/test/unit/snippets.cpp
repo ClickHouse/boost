@@ -277,7 +277,45 @@ void
 parsing_urls()
 {
     {
+        auto handle_error = [](error_code e)
+        {
+            boost::ignore_unused(e);
+        };
         //[snippet_parsing_url_1
+        result< url > ru = parse_uri_reference( "https://www.example.com/path/to/file.txt" );
+        if ( ru )
+        {
+            url u = *ru;
+            assert(u.encoded_path() == "/path/to/file.txt");
+        }
+        else
+        {
+            error_code e = ru.error();
+            handle_error(e);
+        }
+        //]
+    }
+
+    {
+        auto handle_error = [](system_error& e)
+        {
+            boost::ignore_unused(e);
+        };
+        //[snippet_parsing_url_1b
+        try
+        {
+            url u = parse_uri_reference( "https://www.example.com/path/to/file.txt" ).value();
+            assert(u.encoded_path() == "/path/to/file.txt");
+        }
+        catch (system_error &e)
+        {
+            handle_error(e);
+        }
+        //]
+    }
+
+    {
+        //[snippet_parsing_url_1b2
         result< url > ru = parse_uri_reference( "https://www.example.com/path/to/file.txt" );
         if ( ru.has_value() )
         {
@@ -415,6 +453,76 @@ parsing_components()
         assert(u.query() == "xt=urn:btih:d2474e86c95b19b8bcfdb92bc12c9d44667cfa36");
         //]
     }
+}
+
+void
+formatting_components()
+{
+    // I have spent a lot of time on this and have no
+    // idea how to fix this bug in GCC 4.8 and GCC 5.0
+    // without help from the pros.
+#if !BOOST_WORKAROUND( BOOST_GCC_VERSION, < 60000 )
+    {
+        //[snippet_format_1
+        url u = format("{}://{}:{}/rfc/{}", "https", "www.ietf.org", 80, "rfc2396.txt");
+        assert(u.buffer() == "https://www.ietf.org:80/rfc/rfc2396.txt");
+        //]
+    }
+
+    {
+        //[snippet_format_2
+        url u = format("https://{}/{}", "www.boost.org", "Hello world!");
+        assert(u.buffer() == "https://www.boost.org/Hello%20world!");
+        //]
+    }
+
+    {
+        //[snippet_format_3a
+        url u = format("{}:{}", "mailto", "someone@example.com");
+        assert(u.buffer() == "mailto:someone@example.com");
+        assert(u.scheme() == "mailto");
+        assert(u.path() == "someone@example.com");
+        //]
+    }
+    {
+        //[snippet_format_3b
+        url u = format("{}{}", "mailto:", "someone@example.com");
+        assert(u.buffer() == "mailto%3Asomeone@example.com");
+        assert(!u.has_scheme());
+        assert(u.path() == "mailto:someone@example.com");
+        assert(u.encoded_path() == "mailto%3Asomeone@example.com");
+        //]
+    }
+
+    {
+        //[snippet_format_4
+        static_url<50> u;
+        format_to(u, "{}://{}:{}/rfc/{}", "https", "www.ietf.org", 80, "rfc2396.txt");
+        assert(u.buffer() == "https://www.ietf.org:80/rfc/rfc2396.txt");
+        //]
+    }
+
+    {
+        //[snippet_format_5a
+        url u = format("{0}://{2}:{1}/{3}{4}{3}", "https", 80, "www.ietf.org", "abra", "cad");
+        assert(u.buffer() == "https://www.ietf.org:80/abracadabra");
+        //]
+    }
+    {
+        //[snippet_format_5b
+        url u = format("https://example.com/~{username}", arg("username", "mark"));
+        assert(u.buffer() == "https://example.com/~mark");
+        //]
+    }
+
+    {
+        //[snippet_format_5c
+        string_view fmt = "{scheme}://{host}:{port}/{dir}/{file}";
+        url u = format(fmt, {{"scheme", "https"}, {"port", 80}, {"host", "example.com"}, {"dir", "path/to"}, {"file", "file.txt"}});
+        assert(u.buffer() == "https://example.com:80/path/to/file.txt");
+        //]
+    }
+#endif
 }
 
 void
@@ -1612,6 +1720,39 @@ encoding()
     }
 }
 
+void
+readme_snippets()
+{
+    // Parse a URL. This allocates no memory. The view
+    // references the character buffer without taking ownership.
+    //
+    url_view uv( "https://www.example.com/path/to/file.txt?id=1001&name=John%20Doe&results=full" );
+
+    // Print the query parameters with percent-decoding applied
+    //
+    for( auto v : uv.params() )
+    {
+        std::cout << v.key << "=" << v.value << " ";
+    }
+
+    // Prints: id=1001 name=John Doe results=full
+
+    // Create a modifiable copy of `uv`, with ownership of the buffer
+    //
+    url u = uv;
+
+    // Change some elements in the URL
+    //
+    u.set_scheme( "http" )
+        .set_encoded_host( "boost.org" )
+        .set_encoded_path( "/index.htm" )
+        .remove_query()
+        .remove_fragment()
+        .params().append( {"key", "value"} );
+
+    std::cout << u;
+}
+
 //[snippet_using_static_pool_1
 // VFALCO NOPE
 //]
@@ -1629,6 +1770,7 @@ public:
         ignore_unused(&using_urls);
         // parsing_urls();
         parsing_components();
+        formatting_components();
         ignore_unused(&parsing_scheme);
         ignore_unused(&parsing_authority);
         ignore_unused(&parsing_path);
@@ -1640,6 +1782,7 @@ public:
         ignore_unused(&modifying_path);
         normalizing();
         encoding();
+        ignore_unused(&readme_snippets);
 
         BOOST_TEST_PASS();
     }

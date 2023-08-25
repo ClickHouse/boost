@@ -4,7 +4,20 @@ weight = 80
 +++
 
 ---
-## v2.2.4 ? 2022 (Boost 1.80) [[release]](https://github.com/ned14/outcome/releases/tag/v2.2.4)
+## v2.2.6 24th March 2023 (Boost 1.82) [[release]](https://github.com/ned14/outcome/releases/tag/v2.2.6)
+
+### Enhancements:
+
+- Update to latest `status-code` in Experimental.Outcome, which relocates its header files and may
+cause some end user inclusions to need path changes.
+
+### Bug fixes:
+
+- Latest `status-code` fixes a number of nasty bugs, some mild build breakage in Experimental.Outcome
+may occur as a result. See its commit log for more information.
+
+---
+## v2.2.4 11th August 2022 (Boost 1.80) [[release]](https://github.com/ned14/outcome/releases/tag/v2.2.4)
 
 ### Enhancements:
 

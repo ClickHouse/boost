@@ -8,6 +8,7 @@
 <link rel="up" href="../../../attributes.html#header.boost.log.attributes.function_hpp" title="Header &lt;boost/log/attributes/function.hpp&gt;">
 <link rel="prev" href="../fallback_to_default.html" title="Struct template fallback_to_default">
 <link rel="next" href="function/impl.html" title="Class impl">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../../boost.png"></td></tr></table>
@@ -21,8 +22,8 @@
 <h2><span class="refentrytitle">Class template function</span></h2>
 <p>boost::log::attributes::function — A class of an attribute that acquires its value from a third-party function object. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../attributes.html#header.boost.log.attributes.function_hpp" title="Header &lt;boost/log/attributes/function.hpp&gt;">boost/log/attributes/function.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../attributes.html#header.boost.log.attributes.function_hpp" title="Header &lt;boost/log/attributes/function.hpp&gt;">boost/log/attributes/function.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> R<span class="special">&gt;</span> 
 <span class="keyword">class</span> <a class="link" href="function.html" title="Class template function">function</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">attribute</span> <span class="special">{</span>
@@ -57,11 +58,11 @@
                            <span class="string">"Boost.Log: Function object return type must not be void"</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm33503"></a><h2>Description</h2>
+<a name="idm33498"></a><h2>Description</h2>
 <p>The attribute calls a stored nullary function object to acquire each value. The result type of the function object is the attribute value type.</p>
 <p>It is not recommended to use this class directly. Use <code class="computeroutput">make_function</code> convenience functions to construct the attribute instead. </p>
 <div class="refsect2">
-<a name="idm33508"></a><h3>
+<a name="idm33503"></a><h3>
 <a name="boost.log.attributes.functionconstruct-copy-destruct"></a><code class="computeroutput">function</code> 
         public
        construct/copy/destruct</h3>
@@ -77,21 +78,18 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm33543"></a><h3>
+<a name="idm33538"></a><h3>
 <a name="idm25361-bb"></a><code class="computeroutput">function</code> private member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="literallayout"> <a name="idm25362-bb"></a><span class="identifier">BOOST_STATIC_ASSERT_MSG</span><span class="special">(</span><span class="special">!</span><span class="identifier">is_void</span><span class="special">&lt;</span> <span class="identifier">R</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">value</span><span class="special">,</span> 
                          <span class="string">"Boost.Log: Function object return type must not be void"</span><span class="special">)</span><span class="special">;</span></pre></li></ol></div>
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="../fallback_to_default.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../attributes.html#header.boost.log.attributes.function_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="function/impl.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>

@@ -48,51 +48,51 @@
 <typedef name="pointer"><type><emphasis>unspecified</emphasis></type></typedef>
 <typedef name="difference_type"><type>DifferenceType</type></typedef>
 <method-group name="public member functions">
-<method name="operator *" cv="noexcept(noexcept(*access::base(std::declval&lt; D &amp; &gt;()))))"><type>constexpr auto</type><template>
+<method name="operator *" cv="noexcept(noexcept(*access::base(std::declval&lt; D &amp; &gt;())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator *" cv="const noexcept(noexcept(*access::base(std::declval&lt; D const &amp; &gt;()))))"><type>constexpr auto</type><template>
+<method name="operator *" cv="const noexcept(noexcept(*access::base(std::declval&lt; D const &amp; &gt;())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator-&gt;" cv="noexcept(noexcept(detail::make_pointer&lt; pointer &gt;(*std::declval&lt; D &amp; &gt;()))))"><type>constexpr auto</type><template>
+<method name="operator-&gt;" cv="noexcept(noexcept(detail::make_pointer&lt; pointer &gt;(*std::declval&lt; D &amp; &gt;())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator-&gt;" cv="const noexcept(noexcept(detail::make_pointer&lt; pointer &gt;(*std::declval&lt; D const &amp; &gt;()))))"><type>constexpr auto</type><template>
+<method name="operator-&gt;" cv="const noexcept(noexcept(detail::make_pointer&lt; pointer &gt;(*std::declval&lt; D const &amp; &gt;())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator[]" cv="const noexcept(noexcept(D(std::declval&lt; D const &amp; &gt;()), std::declval&lt; D &amp; &gt;()+=i, *std::declval&lt; D &amp; &gt;())))"><type>constexpr auto</type><template>
+<method name="operator[]" cv="const noexcept(noexcept(D(std::declval&lt; D const &amp; &gt;()), std::declval&lt; D &amp; &gt;()+=i, *std::declval&lt; D &amp; &gt;()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="i"><paramtype>difference_type</paramtype></parameter></method>
-<method name="operator++" cv="noexcept(noexcept(++access::base(std::declval&lt; D &amp; &gt;()))))"><type>constexpr auto</type><template>
+<method name="operator++" cv="noexcept(noexcept(++access::base(std::declval&lt; D &amp; &gt;())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;!<classname alt="boost::stl_interfaces::v1_dtl::plus_eq">v1_dtl::plus_eq</classname>&lt;D, difference_type&gt;::value&gt;</default></template-type-parameter>
         </template></method>
-<method name="operator++" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;()+=difference_type(1))))"><type>constexpr auto</type><template>
+<method name="operator++" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;()+=difference_type(1)))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator++" cv="noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()),++std::declval&lt; D &amp; &gt;())))"><type>constexpr auto</type><template>
+<method name="operator++" cv="noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()),++std::declval&lt; D &amp; &gt;()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name=""><paramtype>int</paramtype></parameter></method>
-<method name="operator+=" cv="noexcept(noexcept(access::base(std::declval&lt; D &amp; &gt;())+=n)))"><type>constexpr auto</type><template>
+<method name="operator+=" cv="noexcept(noexcept(access::base(std::declval&lt; D &amp; &gt;())+=n))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="n"><paramtype>difference_type</paramtype></parameter></method>
-<method name="operator+" cv="const noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()), std::declval&lt; D &amp; &gt;()+=i)))"><type>constexpr auto</type><template>
+<method name="operator+" cv="const noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()), std::declval&lt; D &amp; &gt;()+=i))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="i"><paramtype>difference_type</paramtype></parameter></method>
-<method name="operator--" cv="noexcept(noexcept(--access::base(std::declval&lt; D &amp; &gt;()))))"><type>constexpr auto</type><template>
+<method name="operator--" cv="noexcept(noexcept(--access::base(std::declval&lt; D &amp; &gt;())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;!<classname alt="boost::stl_interfaces::v1_dtl::plus_eq">v1_dtl::plus_eq</classname>&lt;D, difference_type&gt;::value&gt;</default></template-type-parameter>
         </template></method>
-<method name="operator--" cv="noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()), std::declval&lt; D &amp; &gt;()+=-difference_type(1))))"><type>constexpr auto</type><template>
+<method name="operator--" cv="noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()), std::declval&lt; D &amp; &gt;()+=-difference_type(1)))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator--" cv="noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()), --std::declval&lt; D &amp; &gt;())))"><type>constexpr auto</type><template>
+<method name="operator--" cv="noexcept(noexcept(D(std::declval&lt; D &amp; &gt;()), --std::declval&lt; D &amp; &gt;()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name=""><paramtype>int</paramtype></parameter></method>
 <method name="operator-=" cv="noexcept"><type>constexpr D &amp;</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="i"><paramtype>difference_type</paramtype></parameter></method>
-<method name="operator-" cv="const noexcept(noexcept(access::base(std::declval&lt; D const &amp; &gt;()) - access::base(other))))"><type>constexpr auto</type><template>
+<method name="operator-" cv="const noexcept(noexcept(access::base(std::declval&lt; D const &amp; &gt;()) - access::base(other)))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="other"><paramtype>D</paramtype></parameter></method>
 </method-group>
@@ -102,8 +102,8 @@
 <method name="operator-&gt;" cv="const noexcept"><type>constexpr T const  *</type></method>
 <method name="operator-&gt;" cv="noexcept"><type>constexpr T *</type></method>
 </method-group>
-<constructor cv="noexcept(noexcept(T(value))))"><parameter name="value"><paramtype>T const &amp;</paramtype></parameter></constructor>
-<constructor cv="noexcept(noexcept(T(std::move(value)))))"><parameter name="value"><paramtype>T &amp;&amp;</paramtype></parameter></constructor>
+<constructor cv="noexcept(noexcept(T(value)))"><parameter name="value"><paramtype>T const &amp;</paramtype></parameter></constructor>
+<constructor cv="noexcept(noexcept(T(std::move(value))))"><parameter name="value"><paramtype>T &amp;&amp;</paramtype></parameter></constructor>
 </struct><namespace name="v1_dtl">
 <struct name="plus_eq"><template>
       <template-type-parameter name="Iterator"/>
@@ -236,64 +236,64 @@
       <template-type-parameter name="Derived"/>
       <template-nontype-parameter name="Contiguity"><type>element_layout</type></template-nontype-parameter>
     </template><method-group name="public member functions">
-<method name="empty" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()==std::declval&lt; D &amp; &gt;().end())))"><type>constexpr auto</type><template>
+<method name="empty" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()==std::declval&lt; D &amp; &gt;().end()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="empty" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()==std::declval&lt; D const &amp; &gt;().end())))"><type>constexpr auto</type><template>
+<method name="empty" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()==std::declval&lt; D const &amp; &gt;().end()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="data" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr auto</type><template>
-          <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
-          <template-nontype-parameter name="C"><type>element_layout</type><default>Contiguity</default></template-nontype-parameter>
-          <template-type-parameter name="Enable"><default>std::enable_if_t&lt;C == element_layout::contiguous&gt;</default></template-type-parameter>
-        </template></method>
-<method name="data" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="data" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-nontype-parameter name="C"><type>element_layout</type><default>Contiguity</default></template-nontype-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;C == element_layout::contiguous&gt;</default></template-type-parameter>
         </template></method>
-<method name="size" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().end() - std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="data" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()))"><type>constexpr auto</type><template>
+          <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
+          <template-nontype-parameter name="C"><type>element_layout</type><default>Contiguity</default></template-nontype-parameter>
+          <template-type-parameter name="Enable"><default>std::enable_if_t&lt;C == element_layout::contiguous&gt;</default></template-type-parameter>
+        </template></method>
+<method name="size" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().end() - std::declval&lt; D &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="size" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().end() - std::declval&lt; D const &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="size" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().end() - std::declval&lt; D const &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="front" cv="noexcept(noexcept(*std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="front" cv="noexcept(noexcept(*std::declval&lt; D &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="front" cv="const noexcept(noexcept(*std::declval&lt; D const &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="front" cv="const noexcept(noexcept(*std::declval&lt; D const &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="push_front" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_front(x))))"><type>constexpr auto</type><template>
+<method name="push_front" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_front(x)))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="x"><paramtype>typename D::value_type const &amp;</paramtype></parameter></method>
-<method name="push_front" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_front(std::move(x)))))"><type>constexpr auto</type><template>
+<method name="push_front" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_front(std::move(x))))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="x"><paramtype>typename D::value_type &amp;&amp;</paramtype></parameter></method>
 <method name="pop_front" cv="noexcept"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="back" cv="noexcept(noexcept(*std::prev(std::declval&lt; D &amp; &gt;().end()))))"><type>constexpr auto</type><template>
+<method name="back" cv="noexcept(noexcept(*std::prev(std::declval&lt; D &amp; &gt;().end())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;                v1_dtl::decrementable_sentinel&lt;D&gt;::value &amp;&amp;                v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
         </template></method>
-<method name="back" cv="const noexcept(noexcept(*std::prev(std::declval&lt; D const &amp; &gt;().end()))))"><type>constexpr auto</type><template>
+<method name="back" cv="const noexcept(noexcept(*std::prev(std::declval&lt; D const &amp; &gt;().end())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;                v1_dtl::decrementable_sentinel&lt;D&gt;::value &amp;&amp;                v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
         </template></method>
-<method name="push_back" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_back(x))))"><type>constexpr auto</type><template>
+<method name="push_back" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_back(x)))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="x"><paramtype>typename D::value_type const &amp;</paramtype></parameter></method>
-<method name="push_back" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_back(std::move(x)))))"><type>constexpr auto</type><template>
+<method name="push_back" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace_back(std::move(x))))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="x"><paramtype>typename D::value_type &amp;&amp;</paramtype></parameter></method>
 <method name="pop_back" cv="noexcept"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator[]" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()[n])))"><type>constexpr auto</type><template>
+<method name="operator[]" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()[n]))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="n"><paramtype>typename D::size_type</paramtype></parameter></method>
-<method name="operator[]" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()[n])))"><type>constexpr auto</type><template>
+<method name="operator[]" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()[n]))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="n"><paramtype>typename D::size_type</paramtype></parameter></method>
 <method name="at"><type>constexpr auto</type><template>
@@ -302,71 +302,71 @@
 <method name="at" cv="const"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="i"><paramtype>typename D::size_type</paramtype></parameter></method>
-<method name="begin" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr Iter</type><template>
+<method name="begin" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()))"><type>constexpr Iter</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Iter"><default>typename D::const_iterator</default></template-type-parameter>
         </template></method>
-<method name="end" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().end())))"><type>constexpr Iter</type><template>
+<method name="end" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().end()))"><type>constexpr Iter</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Iter"><default>typename D::const_iterator</default></template-type-parameter>
         </template></method>
-<method name="cbegin" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="cbegin" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="cend" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().end())))"><type>constexpr auto</type><template>
+<method name="cend" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().end()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="rbegin" cv="noexcept(noexcept(stl_interfaces::make_reverse_iterator(std::declval&lt; D &amp; &gt;().end()))))"><type>constexpr auto</type><template>
-          <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
-          <template-type-parameter name="Enable"><default>std::enable_if_t&lt;v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
-        </template></method>
-<method name="rend" cv="noexcept(noexcept(stl_interfaces::make_reverse_iterator(std::declval&lt; D &amp; &gt;().begin()))))"><type>constexpr auto</type><template>
+<method name="rbegin" cv="noexcept(noexcept(stl_interfaces::make_reverse_iterator(std::declval&lt; D &amp; &gt;().end())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
         </template></method>
-<method name="rbegin" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().rbegin())))"><type>constexpr auto</type><template>
+<method name="rend" cv="noexcept(noexcept(stl_interfaces::make_reverse_iterator(std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+          <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
+          <template-type-parameter name="Enable"><default>std::enable_if_t&lt;v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
+        </template></method>
+<method name="rbegin" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().rbegin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="rend" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().rend())))"><type>constexpr auto</type><template>
+<method name="rend" cv="const noexcept(noexcept(std::declval&lt; D &amp; &gt;().rend()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="crbegin" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().rbegin())))"><type>constexpr auto</type><template>
+<method name="crbegin" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().rbegin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="crend" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().rend())))"><type>constexpr auto</type><template>
+<method name="crend" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().rend()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace(pos, x))))"><type>constexpr auto</type><template>
+<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().emplace(pos, x)))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="pos"><paramtype>typename D::const_iterator</paramtype></parameter><parameter name="x"><paramtype>typename D::value_type const &amp;</paramtype></parameter></method>
-<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;() .emplace(pos, std::move(x)))))"><type>constexpr auto</type><template>
+<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;() .emplace(pos, std::move(x))))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="pos"><paramtype>typename D::const_iterator</paramtype></parameter><parameter name="x"><paramtype>typename D::value_type &amp;&amp;</paramtype></parameter></method>
-<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().insert(pos, detail::make_n_iter(x, n), detail::make_n_iter_end(x, n)))))"><type>constexpr auto</type><template>
+<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().insert(pos, detail::make_n_iter(x, n), detail::make_n_iter_end(x, n))))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="pos"><paramtype>typename D::const_iterator</paramtype></parameter><parameter name="n"><paramtype>typename D::size_type</paramtype></parameter><parameter name="x"><paramtype>typename D::value_type const &amp;</paramtype></parameter></method>
-<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;() .insert(pos, il.begin(), il.end()))))"><type>constexpr auto</type><template>
+<method name="insert" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;() .insert(pos, il.begin(), il.end())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="pos"><paramtype>typename D::const_iterator</paramtype></parameter><parameter name="il"><paramtype>std::initializer_list&lt; typename D::value_type &gt;</paramtype></parameter></method>
 <method name="erase" cv="noexcept"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="pos"><paramtype>typename D::const_iterator</paramtype></parameter></method>
-<method name="assign" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().insert(std::declval&lt; D &amp; &gt;().begin(), first, last))))"><type>constexpr auto</type><template>
+<method name="assign" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().insert(std::declval&lt; D &amp; &gt;().begin(), first, last)))"><type>constexpr auto</type><template>
           <template-type-parameter name="InputIterator"/>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;v1_dtl::in_iter&lt;InputIterator&gt;::value&gt;</default></template-type-parameter>
         </template><parameter name="first"><paramtype>InputIterator</paramtype></parameter><parameter name="last"><paramtype>InputIterator</paramtype></parameter></method>
-<method name="assign" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;() .insert(std::declval&lt; D &amp; &gt;().begin(), detail::make_n_iter(x, n), detail::make_n_iter_end(x, n)))))"><type>constexpr auto</type><template>
+<method name="assign" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;() .insert(std::declval&lt; D &amp; &gt;().begin(), detail::make_n_iter(x, n), detail::make_n_iter_end(x, n))))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="n"><paramtype>typename D::size_type</paramtype></parameter><parameter name="x"><paramtype>typename D::value_type const &amp;</paramtype></parameter></method>
-<method name="assign" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().assign(il.begin(), il.end()))))"><type>constexpr auto</type><template>
+<method name="assign" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().assign(il.begin(), il.end())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="il"><paramtype>std::initializer_list&lt; typename D::value_type &gt;</paramtype></parameter></method>
 <method name="clear" cv="noexcept"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
 </method-group>
-<copy-assignment cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().assign(il.begin(), il.end()))))"><type>constexpr auto</type><template>
+<copy-assignment cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().assign(il.begin(), il.end())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="il"><paramtype>std::initializer_list&lt; typename D::value_type &gt;</paramtype></parameter></copy-assignment>
 </struct><namespace name="v1_dtl">
@@ -493,54 +493,54 @@
       <template-type-parameter name="Derived"/>
       <template-nontype-parameter name="Contiguity"><type>element_layout</type></template-nontype-parameter>
     </template><method-group name="public member functions">
-<method name="empty" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()==std::declval&lt; D &amp; &gt;().end())))"><type>constexpr auto</type><template>
+<method name="empty" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()==std::declval&lt; D &amp; &gt;().end()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="empty" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()==std::declval&lt; D const &amp; &gt;().end())))"><type>constexpr auto</type><template>
+<method name="empty" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()==std::declval&lt; D const &amp; &gt;().end()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="operator bool" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().empty())))" specifiers="explicit"><type>constexpr</type><template>
+<method name="operator bool" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().empty()))" specifiers="explicit"><type>constexpr</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="R"><default>decltype(std::declval&lt;D &amp;&gt;().empty())</default></template-type-parameter>
         </template></method>
-<method name="operator bool" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().empty())))" specifiers="explicit"><type>constexpr</type><template>
+<method name="operator bool" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().empty()))" specifiers="explicit"><type>constexpr</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="R"><default>decltype(std::declval&lt;D const &amp;&gt;().empty())</default></template-type-parameter>
         </template></method>
-<method name="data" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="data" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-nontype-parameter name="C"><type>element_layout</type><default>Contiguity</default></template-nontype-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;C == element_layout::contiguous&gt;</default></template-type-parameter>
         </template></method>
-<method name="data" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="data" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-nontype-parameter name="C"><type>element_layout</type><default>Contiguity</default></template-nontype-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;C == element_layout::contiguous&gt;</default></template-type-parameter>
         </template></method>
-<method name="size" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().end() - std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="size" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().end() - std::declval&lt; D &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="size" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().end() - std::declval&lt; D const &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="size" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().end() - std::declval&lt; D const &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="front" cv="noexcept(noexcept(*std::declval&lt; D &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="front" cv="noexcept(noexcept(*std::declval&lt; D &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="front" cv="const noexcept(noexcept(*std::declval&lt; D const &amp; &gt;().begin())))"><type>constexpr auto</type><template>
+<method name="front" cv="const noexcept(noexcept(*std::declval&lt; D const &amp; &gt;().begin()))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template></method>
-<method name="back" cv="noexcept(noexcept(*std::prev(std::declval&lt; D &amp; &gt;().end()))))"><type>constexpr auto</type><template>
-          <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
-          <template-type-parameter name="Enable"><default>std::enable_if_t&lt;                v1_dtl::decrementable_sentinel&lt;D&gt;::value &amp;&amp;                v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
-        </template></method>
-<method name="back" cv="const noexcept(noexcept(*std::prev(std::declval&lt; D const &amp; &gt;().end()))))"><type>constexpr auto</type><template>
+<method name="back" cv="noexcept(noexcept(*std::prev(std::declval&lt; D &amp; &gt;().end())))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
           <template-type-parameter name="Enable"><default>std::enable_if_t&lt;                v1_dtl::decrementable_sentinel&lt;D&gt;::value &amp;&amp;                v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
         </template></method>
-<method name="operator[]" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()[n])))"><type>constexpr auto</type><template>
+<method name="back" cv="const noexcept(noexcept(*std::prev(std::declval&lt; D const &amp; &gt;().end())))"><type>constexpr auto</type><template>
+          <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
+          <template-type-parameter name="Enable"><default>std::enable_if_t&lt;                v1_dtl::decrementable_sentinel&lt;D&gt;::value &amp;&amp;                v1_dtl::common_range&lt;D&gt;::value&gt;</default></template-type-parameter>
+        </template></method>
+<method name="operator[]" cv="noexcept(noexcept(std::declval&lt; D &amp; &gt;().begin()[n]))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="n"><paramtype>v1_dtl::range_difference_t&lt; D &gt;</paramtype></parameter></method>
-<method name="operator[]" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()[n])))"><type>constexpr auto</type><template>
+<method name="operator[]" cv="const noexcept(noexcept(std::declval&lt; D const &amp; &gt;().begin()[n]))"><type>constexpr auto</type><template>
           <template-type-parameter name="D"><default>Derived</default></template-type-parameter>
         </template><parameter name="n"><paramtype>v1_dtl::range_difference_t&lt; D &gt;</paramtype></parameter></method>
 </method-group>

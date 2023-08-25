@@ -147,6 +147,7 @@ boost_typetraits/reference/is_scalar.html
 boost_typetraits/reference/is_scoped_enum.html
 boost_typetraits/reference/is_signed.html
 boost_typetraits/reference/is_stateless.html
+boost_typetraits/reference/is_swappable.html
 boost_typetraits/reference/is_trivially_copyable.html
 boost_typetraits/reference/is_unbounded_array.html
 boost_typetraits/reference/is_union.html

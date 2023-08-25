@@ -90,6 +90,24 @@ public:
             BOOST_TEST_THROWS(url_view("{}"),
                 std::exception);
         }
+
+        // url_view(string_view) no ambiguous
+        {
+            string_view s = "";
+            BOOST_TEST_NO_THROW(url_view( s ));
+        }
+
+        // implicit url_view(string_view)
+        {
+            auto const f = []( url_view ) {};
+            f( "x" );
+        }
+
+        // implicit url_view(String)
+        {
+            auto const f = []( url_view ) {};
+            f( "x" );
+        }
     }
 
     void
@@ -123,8 +141,8 @@ public:
         {
             string_view s = "/index.htm";
             url_view u = parse_relative_ref(s).value();
-            BOOST_TEST_EQ(u.buffer(), s);
-            BOOST_TEST_EQ(u.buffer().data(), s.data());
+            BOOST_TEST_EQ(u, s);
+            BOOST_TEST_EQ(u.data(), s.data());
         }
 
         // persist()
@@ -145,6 +163,13 @@ public:
             // becomes invalid, but sp remains valid.
         }
         }
+
+        // operator string_view()
+        {
+            auto const f = []( string_view ) {};
+            f( url_view("x") );
+        }
+
     }
 
     void
@@ -516,6 +541,16 @@ public:
             BOOST_TEST_EQ(u.authority().port(), "65536");
             BOOST_TEST_EQ(u.authority().port_number(), 0);
         }
+        // issue 666
+        {
+            url_view u("http://:233337");
+            BOOST_TEST(u.has_port());
+            BOOST_TEST_EQ(u.port(), "233337");
+            BOOST_TEST_EQ(u.port_number(), 0);
+            BOOST_TEST(u.authority().has_port());
+            BOOST_TEST_EQ(u.authority().port(), "233337");
+            BOOST_TEST_EQ(u.authority().port_number(), 0);
+        }
     }
 
     void
@@ -752,6 +787,9 @@ public:
             BOOST_TEST(r.has_error());
             BOOST_TEST_THROWS(
                 r.value(), std::exception);
+
+            BOOST_TEST(parse_uri(
+                "http://example.com:a").has_error());
         }
 
         // parse_relative_ref

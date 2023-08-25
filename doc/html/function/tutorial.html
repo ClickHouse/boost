@@ -9,6 +9,7 @@
 <link rel="up" href="../function.html" title="Chapter 14. Boost.Function">
 <link rel="prev" href="history.html" title="History &amp; Compatibility Notes">
 <link rel="next" href="reference.html" title="Reference">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -103,10 +104,10 @@ following declares a function object wrapper
 </tr></thead>
 <tbody><tr>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;float (int x, int y)&gt; f;</pre>
+<pre class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;float (int x, int y)&gt; f;</pre>
 </td>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function2</a></code>&lt;float, int, int&gt; f;</pre>
+<pre class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function2</a></code>&lt;float, int, int&gt; f;</pre>
 </td>
 </tr></tbody>
 </table></div>
@@ -145,7 +146,7 @@ CopyConstructible, so we can even use references and arrays:
 <colgroup><col></colgroup>
 <thead><tr><th align="left">Preferred syntax</th></tr></thead>
 <tbody><tr><td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;void (int values[], int n, int&amp; sum, float&amp; avg)&gt; sum_avg;</pre>
+<pre class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;void (int values[], int n, int&amp; sum, float&amp; avg)&gt; sum_avg;</pre>
 </td></tr></tbody>
 </table></div>
 <p>
@@ -154,7 +155,7 @@ CopyConstructible, so we can even use references and arrays:
 <colgroup><col></colgroup>
 <thead><tr><th align="left">Portable syntax</th></tr></thead>
 <tbody><tr><td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function4</a></code>&lt;void, int*, int, int&amp;, float&amp;&gt; sum_avg;</pre>
+<pre class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function4</a></code>&lt;void, int*, int, int&amp;, float&amp;&gt; sum_avg;</pre>
 </td></tr></tbody>
 </table></div>
 <p>
@@ -233,7 +234,7 @@ directly, however, is supported, so the following code is valid:
 </tr></thead>
 <tbody><tr>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;int (X*, int)&gt; f;
+<pre class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;int (X*, int)&gt; f;
 
 f = &amp;X::foo;
   
@@ -241,7 +242,7 @@ X x;
 f(&amp;x, 5);</pre>
 </td>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function2</a></code>&lt;int, X*, int&gt; f;
+<pre class="table-programlisting"><code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function2</a></code>&lt;int, X*, int&gt; f;
 
 f = &amp;X::foo;
   
@@ -277,14 +278,14 @@ f(&amp;x, 5);</pre>
 </tr></thead>
 <tbody><tr>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">  <code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;int (int)&gt; f;
+<pre class="table-programlisting">  <code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;int (int)&gt; f;
 X x;
 f = std::bind1st(
       std::mem_fun(&amp;X::foo), &amp;x);
 f(5); // Call x.foo(5)</pre>
 </td>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">  <code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function1</a></code>&lt;int, int&gt; f;
+<pre class="table-programlisting">  <code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function1</a></code>&lt;int, int&gt; f;
 X x;
 f = std::bind1st(
       std::mem_fun(&amp;X::foo), &amp;x);
@@ -323,14 +324,14 @@ f(5); // Call x.foo(5)</pre>
 </tr></thead>
 <tbody><tr>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">stateful_type a_function_object;
+<pre class="table-programlisting">stateful_type a_function_object;
 <code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;int (int)&gt; f;
 f = <code class="computeroutput">boost::ref</code>(a_function_object);
 
 <code class="computeroutput"><a class="link" href="../boost/function.html" title="Class template function">boost::function</a></code>&lt;int (int)&gt; f2(f);</pre>
 </td>
 <td align="left">
-<pre xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="table-programlisting">stateful_type a_function_object;
+<pre class="table-programlisting">stateful_type a_function_object;
 <code class="computeroutput"><a class="link" href="../boost/functionN.html" title="Class template functionN">boost::function1</a></code>&lt;int, int&gt; f;
 f = <code class="computeroutput">boost::ref</code>(a_function_object);
 
@@ -376,13 +377,10 @@ assert(f == so1); <span class="emphasis"><em>// Only if a_stateful_object is <a 
 assert(f != <code class="computeroutput">boost::ref</code>(so2));</pre>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2001-2004 Douglas Gregor<p>Use, modification and distribution is subject to the Boost
+<div class="copyright-footer">Copyright © 2001-2004 Douglas Gregor<p>Use, modification and distribution is subject to the Boost
     Software License, Version 1.0. (See accompanying file
     <code class="filename">LICENSE_1_0.txt</code> or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)</p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="history.html"><img src="../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../function.html"><img src="../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="reference.html"><img src="../../../doc/src/images/next.png" alt="Next"></a>

@@ -31,9 +31,9 @@ This strategy can be used as EndStrategy for the buffer algorithm. It creates a 
 [heading Constructor(s)]
 [table
 [[Function] [Description] [Parameters] ]
-[[``end_round(std::size_t points_per_circle = 90)``
+[[``end_round(std::size_t points_per_circle = default_points_per_circle)``
 
-] [Constructs the strategy. ] [[* std::size_t]: ['points_per_circle]:  points which would be used for a full circle (if points_per_circle is smaller than 4, it is internally set to 4) 
+] [Constructs the strategy. ] [[* std::size_t]: ['points_per_circle]:  Number of points (minimum 4) that would be used for a full circle 
 
 
 

@@ -23,6 +23,12 @@
 #include <iomanip>
 #include <sstream>
 
+#ifdef BOOST_TEST_CSTR_EQ
+#undef BOOST_TEST_CSTR_EQ
+#define BOOST_TEST_CSTR_EQ(expr1,expr2) \
+    BOOST_TEST_EQ( boost::urls::detail::to_sv(expr1), boost::urls::detail::to_sv(expr2) )
+#endif
+
 /*  Legend
 
     '#' 0x23    ':' 0x3a
@@ -302,6 +308,36 @@ struct url_test
             u.set_path_absolute( false );
             BOOST_TEST_EQ( u.buffer(), "./kyle:xy" );
         }
+        {
+            // issue 674
+            {
+                auto ok = [](string_view u0, string_view p)
+                {
+                  urls::url u(u0);
+                  u.set_path(p);
+                  BOOST_TEST_CSTR_EQ(u.buffer(), p);
+                  u.normalize();
+                  BOOST_TEST_CSTR_EQ(u.buffer(), p);
+                };
+                ok("/", "/");
+                ok("/", "");
+                ok("", "/");
+                ok("", "");
+            }
+            {
+                urls::url u;
+                BOOST_TEST_EQ(u.encoded_segments().size(), 0);
+                u.set_path("/");
+                BOOST_TEST_EQ(u.encoded_segments().size(), 0);
+                u.set_path("/./");
+                BOOST_TEST_EQ(u.encoded_segments().size(), 1);
+                BOOST_TEST_CSTR_EQ(u.buffer(), "/./");
+                u.normalize();
+                BOOST_TEST_CSTR_EQ(u.buffer(), "/");
+                BOOST_TEST_CSTR_EQ(u.encoded_target(), "/");
+                BOOST_TEST_EQ(u.encoded_segments().size(), 0);
+            }
+        }
 
         // set_encoded_path
         {
@@ -367,8 +403,8 @@ struct url_test
             {
                 url u = parse_uri_reference(s0).value();
                 u.set_encoded_path(arg);
-                BOOST_TEST(
-                    u.buffer() == match);
+                BOOST_TEST_CSTR_EQ(
+                    u.buffer(), match);
             };
             check(
                 "",
@@ -964,6 +1000,8 @@ struct url_test
                   "http://cppalliance.org/g");
             check("http://cppalliance.org/a/b/../../../g",
                   "http://cppalliance.org/../g");
+            check("http://cppalliance.org/a/b/../../../../g",
+                  "http://cppalliance.org/../../g");
             check("http://cppalliance.org/..",
                   "http://cppalliance.org/..");
             check("http://cppalliance.org?%61=b",
@@ -995,6 +1033,14 @@ struct url_test
             // issue 579
             check("https://www.boost.org/doc/../%69%6e%64%65%78%20file.html",
                   "https://www.boost.org/index%20file.html");
+            // issue 646
+            BOOST_TEST_NE(
+                url("https://@www.boost.org/"),
+                url("https://www.boost.org/"));
+            BOOST_TEST_NE(
+                url("https://:@www.boost.org/"),
+                url("https://@www.boost.org/"));
+
         }
 
         // normalize path
@@ -1080,6 +1126,9 @@ struct url_test
             check("http://cppalliance.org#frag", "http://cppalliance.org#glob", -1);
             check("http://cppalliance.org#fra", "http://cppalliance.org#frag", -1);
             check("http://cppalliance.org#frag", "http://cppalliance.org#fra", 1);
+            // issue 653
+            check("http://httpbin.org/redirect/10", "http://httpbin.org/get", +1);
+            check("http://httpbin.org/redirect/10//10", "http://httpbin.org/11/../get", +1);
         }
 
         // path inequality
@@ -1213,6 +1262,21 @@ struct url_test
     }
 
     void
+    testConst()
+    {
+        auto f1 = [](segments_view /*seg*/) {};
+        auto f2 = [](params_view /*ps*/) {};
+        auto f3 = [](segments_encoded_view /*seg*/) {};
+        auto f4 = [](params_encoded_view /*ps*/) {};
+
+        const url u("/foobar");
+        f1(u.segments());
+        f2(u.params());
+        f3(u.encoded_segments());
+        f4(u.encoded_params());
+    }
+
+    void
     run()
     {
         testSpecial();
@@ -1226,6 +1290,7 @@ struct url_test
         testNormalize();
         testSwap();
         testNull();
+        testConst();
     }
 };
 

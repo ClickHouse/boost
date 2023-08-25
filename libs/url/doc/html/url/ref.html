@@ -6,8 +6,9 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="Chapter 1. Boost.URL">
 <link rel="up" href="../index.html" title="Chapter 1. Boost.URL">
-<link rel="prev" href="examples/route.html" title="Route">
+<link rel="prev" href="examples/router.html" title="Router">
 <link rel="next" href="../pt01.html" title="Part Two: Reference. ">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,7 +21,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="examples/route.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../pt01.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="examples/router.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../pt01.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -38,21 +39,21 @@
 <thead><tr>
 <th colspan="3" valign="center">
         <h3>
-<a name="idm13639"></a>URL</h3>
+<a name="idm15740"></a>URL</h3>
       </th>
 <th valign="center">
         <h3>
-<a name="idm13641"></a>Encoding</h3>
+<a name="idm15742"></a>Encoding</h3>
       </th>
 <th valign="center">
         <h3>
-<a name="idm13643"></a>Aliases</h3>
+<a name="idm15744"></a>Aliases</h3>
       </th>
 </tr></thead>
 <tbody><tr>
 <td valign="top">
         <h4>
-<a name="idm13647"></a>Types (1/2)</h4>
+<a name="idm15748"></a>Types (1/2)</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__authority_view.html" title="authority_view">authority_view</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__ignore_case_param.html" title="ignore_case_param">ignore_case_param</a></td></tr>
@@ -75,7 +76,7 @@
       </td>
 <td valign="top">
         <h4>
-<a name="idm13684"></a>Types (2/2)</h4>
+<a name="idm15785"></a>Types (2/2)</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__segments_encoded_ref.html" title="segments_encoded_ref">segments_encoded_ref</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__segments_encoded_view.html" title="segments_encoded_view">segments_encoded_view</a></td></tr>
@@ -88,7 +89,7 @@
 <tr><td><a class="link" href="ref/boost__urls__url_view_base.html" title="url_view_base">url_view_base</a></td></tr>
 </table>
         <h4>
-<a name="idm13704"></a>Constants</h4>
+<a name="idm15805"></a>Constants</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__error.html" title="error">error</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__ignore_case.html" title="ignore_case">ignore_case</a></td></tr>
@@ -99,9 +100,12 @@
       </td>
 <td valign="top">
         <h4>
-<a name="idm13717"></a>Functions</h4>
+<a name="idm15818"></a>Functions</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__operator_lt__lt_.html" title="operator&lt;&lt;">operator&lt;&lt;</a></td></tr>
+<tr><td><a class="link" href="ref/boost__urls__arg.html" title="arg">arg</a></td></tr>
+<tr><td><a class="link" href="ref/boost__urls__format.html" title="format">format</a></td></tr>
+<tr><td><a class="link" href="ref/boost__urls__format_to.html" title="format_to">format_to</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__parse_absolute_uri.html" title="parse_absolute_uri">parse_absolute_uri</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__parse_authority.html" title="parse_authority">parse_authority</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__parse_origin_form.html" title="parse_origin_form">parse_origin_form</a></td></tr>
@@ -114,7 +118,7 @@
       </td>
 <td valign="top">
         <h4>
-<a name="idm13738"></a>Functions</h4>
+<a name="idm15845"></a>Functions</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__encode.html" title="encode">encode</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__encoded_size.html" title="encoded_size">encoded_size</a></td></tr>
@@ -122,7 +126,7 @@
 </table>
 
         <h4>
-<a name="idm13746"></a>Types</h4>
+<a name="idm15853"></a>Types</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__decode_view.html" title="decode_view">decode_view</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__encoding_opts.html" title="encoding_opts">encoding_opts</a></td></tr>
@@ -133,7 +137,7 @@
 <td valign="top">
 
         <h4>
-<a name="idm13755"></a>Types</h4>
+<a name="idm15862"></a>Types</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__errc.html" title="errc">errc</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__error_category.html" title="error_category">error_category</a></td></tr>
@@ -161,11 +165,11 @@
 <thead><tr>
 <th valign="center">
         <h3>
-<a name="idm13788"></a>RFC3986</h3>
+<a name="idm15895"></a>RFC3986</h3>
       </th>
 <th colspan="4" valign="center">
         <h3>
-<a name="idm13790"></a>Grammar</h3>
+<a name="idm15897"></a>Grammar</h3>
       </th>
 </tr></thead>
 <tbody><tr>
@@ -192,7 +196,7 @@
 <td valign="top">
 
         <h4>
-<a name="idm13824"></a>Functions (1/2)</h4>
+<a name="idm15931"></a>Functions (1/2)</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__grammar__ci_compare.html" title="grammar::ci_compare">ci_compare</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__grammar__ci_digest.html" title="grammar::ci_digest">ci_digest</a></td></tr>
@@ -213,7 +217,7 @@
 <td valign="top">
 
         <h4>
-<a name="idm13853"></a>Functions (2/2)</h4>
+<a name="idm15960"></a>Functions (2/2)</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__grammar__squelch.html" title="grammar::squelch">squelch</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__grammar__to_lower.html" title="grammar::to_lower">to_lower</a></td></tr>
@@ -224,7 +228,7 @@
 </table>
 
         <h4>
-<a name="idm13867"></a>Type Traits</h4>
+<a name="idm15974"></a>Type Traits</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__grammar__is_charset.html" title="grammar::is_charset">is_charset</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__grammar__is_rule.html" title="grammar::is_rule">is_rule</a></td></tr>
@@ -234,7 +238,7 @@
 <td valign="top">
 
         <h4>
-<a name="idm13874"></a>Types</h4>
+<a name="idm15981"></a>Types</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__grammar__aligned_storage.html" title="grammar::aligned_storage">aligned_storage</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__grammar__ci_hash.html" title="grammar::ci_hash">ci_hash</a></td></tr>
@@ -249,7 +253,7 @@
 </table>
 
         <h4>
-<a name="idm13896"></a>StringToken</h4>
+<a name="idm16003"></a>StringToken</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__string_token__append_to.html" title="string_token::append_to">append_to</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__string_token__arg.html" title="string_token::arg">arg</a></td></tr>
@@ -263,7 +267,7 @@
 <td valign="top">
 
         <h4>
-<a name="idm13911"></a>Constants</h4>
+<a name="idm16018"></a>Constants</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="ref/boost__urls__grammar__all_chars.html" title="grammar::all_chars">all_chars</a></td></tr>
 <tr><td><a class="link" href="ref/boost__urls__grammar__alnum_chars.html" title="grammar::alnum_chars">alnum_chars</a></td></tr>
@@ -278,7 +282,7 @@
 </table>
 
         <h4>
-<a name="idm13933"></a>Concepts</h4>
+<a name="idm16040"></a>Concepts</h4>
         <table border="0" summary="Simple list" class="simplelist">
 <tr><td><a class="link" href="concepts/charset.html" title="CharSet"><span class="emphasis"><em>CharSet</em></span></a></td></tr>
 <tr><td><a class="link" href="concepts/rule.html" title="Rule"><span class="emphasis"><em>Rule</em></span></a></td></tr>
@@ -290,17 +294,14 @@
 </table>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2021, 2022 Vinnie Falco, Alan de Freitas<p>
+<div class="copyright-footer">Copyright © 2021, 2022 Vinnie Falco, Alan de Freitas<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="examples/route.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../pt01.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="examples/router.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../pt01.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

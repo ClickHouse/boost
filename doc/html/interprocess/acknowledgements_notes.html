@@ -9,6 +9,7 @@
 <link rel="up" href="../interprocess.html" title="Chapter 16. Boost.Interprocess">
 <link rel="prev" href="customizing_interprocess.html" title="Customizing Boost.Interprocess">
 <link rel="next" href="indexes_reference.html" title="Indexes and Reference">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -35,6 +36,8 @@
       for Linux users</a></span></dt>
 <dt><span class="section"><a href="acknowledgements_notes.html#interprocess.acknowledgements_notes.notes_freebsd">Notes
       for FreeBSD users</a></span></dt>
+<dt><span class="section"><a href="acknowledgements_notes.html#interprocess.acknowledgements_notes.notes_freebsd0">Notes
+      for MacOs users</a></span></dt>
 <dt><span class="section"><a href="acknowledgements_notes.html#interprocess.acknowledgements_notes.thanks_to">Thanks
       to...</a></span></dt>
 <dt><span class="section"><a href="acknowledgements_notes.html#interprocess.acknowledgements_notes.release_notes">Release
@@ -241,6 +244,35 @@
 <p>
           If you want mapped files to remain useful after the last handle is closed,
           set this variable to 1.
+        </p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="interprocess.acknowledgements_notes.notes_freebsd0"></a><a class="link" href="acknowledgements_notes.html#interprocess.acknowledgements_notes.notes_freebsd0" title="Notes for MacOs users">Notes
+      for MacOs users</a>
+</h3></div></div></div>
+<div class="toc"><dl class="toc"><dt><span class="section"><a href="acknowledgements_notes.html#interprocess.acknowledgements_notes.notes_freebsd.notes_macos_sandboxed">Limitations
+        for sandboxed applications</a></span></dt></dl></div>
+<div class="section">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="interprocess.acknowledgements_notes.notes_freebsd.notes_macos_sandboxed"></a><a class="link" href="acknowledgements_notes.html#interprocess.acknowledgements_notes.notes_freebsd.notes_macos_sandboxed" title="Limitations for sandboxed applications">Limitations
+        for sandboxed applications</a>
+</h4></div></div></div>
+<p>
+          <span class="bold"><strong>Boost.Interprocess</strong></span> uses POSIX shared memory
+          in MacOS to implement shared memory classes in MacOS.
+        </p>
+<p>
+          But sandboxed apps cannot use System V (XSI) semaphores and POSIX semaphores
+          and shared memory can't be used by default. However, by specifying an entitlement
+          that requests membership in an application group, an app can use these
+          technologies to communicate with other members of that application group.
+        </p>
+<p>
+          Please see Apple documentation <a href="https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AppSandboxInDepth/AppSandboxInDepth.html#//apple_ref/doc/uid/TP40011183-CH3-SW24" target="_top">for
+          limitations and guide on how to use interprocess communications on sandboxed
+          applications</a>.
         </p>
 </div>
 </div>
@@ -2148,14 +2180,11 @@
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2005-2015 Ion Gaztanaga<p>
+<div class="copyright-footer">Copyright © 2005-2015 Ion Gaztanaga<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="customizing_interprocess.html"><img src="../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../interprocess.html"><img src="../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="indexes_reference.html"><img src="../../../doc/src/images/next.png" alt="Next"></a>

@@ -8,6 +8,7 @@
 <link rel="up" href="../../../utilities.html#header.boost.log.utility.ipc.object_name_hpp" title="Header &lt;boost/log/utility/ipc/object_name.hpp&gt;">
 <link rel="prev" href="../save_result.html" title="Function template save_result">
 <link rel="next" href="reliable_message_queue.html" title="Class reliable_message_queue">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../../boost.png"></td></tr></table>
@@ -21,8 +22,8 @@
 <h2><span class="refentrytitle">Class object_name</span></h2>
 <p>boost::log::ipc::object_name — A system object name class. </p>
 </div>
-<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
-<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../utilities.html#header.boost.log.utility.ipc.object_name_hpp" title="Header &lt;boost/log/utility/ipc/object_name.hpp&gt;">boost/log/utility/ipc/object_name.hpp</a>&gt;
+<h2 class="refsynopsisdiv-title">Synopsis</h2>
+<div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../utilities.html#header.boost.log.utility.ipc.object_name_hpp" title="Header &lt;boost/log/utility/ipc/object_name.hpp&gt;">boost/log/utility/ipc/object_name.hpp</a>&gt;
 
 </span>
 <span class="keyword">class</span> <a class="link" href="object_name.html" title="Class object_name">object_name</a> <span class="special">{</span>
@@ -63,7 +64,7 @@
     <a class="link" href="object_name.html#idm36469-bb"><span class="keyword">operator</span><span class="special">&lt;&lt;</span></a><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">TraitsT</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">,</span> <a class="link" href="object_name.html" title="Class object_name">object_name</a> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm80639"></a><h2>Description</h2>
+<a name="idm80616"></a><h2>Description</h2>
 <p>In order to identify a system-wide object such as a shared memory segment or a named synchronization primitive the object has to be given a name. The format of the name is specific to the operating system and the <code class="computeroutput"><a class="link" href="object_name.html" title="Class object_name">object_name</a></code> class provides an abstraction for names of objects. It also provides means for scoping, which allows to avoid name clashes between different processes.</p>
 <p>The object name is a UTF-8 encoded string. The portable object name should consist of the following characters:</p>
 <pre class="programlisting">
@@ -91,7 +92,7 @@ Use of other characters may result in non-portable system-specific behavior.</p>
 The scopes are not overlapping. For instance, if an object is created in the global scope, the object cannot be opened with the same name but in user's scope.</p>
 <p>Note that name scoping is not a security feature. On some systems any process on the system has technical capability to open objects within any scope. The scope is only used to help avoid name clashes between processes using <code class="computeroutput"><a class="link" href="object_name.html" title="Class object_name">object_name</a></code> to identify objects. </p>
 <div class="refsect2">
-<a name="idm80733"></a><h3>
+<a name="idm80710"></a><h3>
 <a name="boost.log.ipc.object_nameconstruct-copy-destruct"></a><code class="computeroutput">object_name</code> 
         public
        construct/copy/destruct</h3>
@@ -191,7 +192,7 @@ The scopes are not overlapping. For instance, if an object is created in the glo
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm80869"></a><h3>
+<a name="idm80846"></a><h3>
 <a name="idm36291-bb"></a><code class="computeroutput">object_name</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -213,7 +214,7 @@ The scopes are not overlapping. For instance, if an object is created in the glo
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm80928"></a><h3>
+<a name="idm80905"></a><h3>
 <a name="idm36369-bb"></a><code class="computeroutput">object_name</code> public static functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -269,7 +270,7 @@ The scopes are not overlapping. For instance, if an object is created in the glo
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm80986"></a><h3>
+<a name="idm80963"></a><h3>
 <a name="idm36391-bb"></a><code class="computeroutput">object_name</code> friend functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -315,14 +316,11 @@ The scopes are not overlapping. For instance, if an object is created in the glo
 </div>
 </div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
+<div class="copyright-footer">Copyright © 2007-2022 Andrey Semashev<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
       </p>
-</div></td>
-</tr></table>
+</div>
 <hr>
 <div class="spirit-nav">
 <a accesskey="p" href="../save_result.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../utilities.html#header.boost.log.utility.ipc.object_name_hpp"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="reliable_message_queue.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>

@@ -8260,7 +8260,6 @@ The header contains forward declaration of a value reference wrapper. </para><na
       <template-type-parameter name="T"/>
       <template-type-parameter name="TagT"/>
     </template><purpose>Reference wrapper for a stored attribute value. </purpose><description><para>The <computeroutput><classname alt="boost::log::value_ref">value_ref</classname></computeroutput> class template provides access to the stored attribute value. It is not a traditional reference wrapper since it may be empty (i.e. refer to no value at all) and it can also refer to values of different types. Therefore its interface and behavior combines features of Boost.Ref, Boost.Optional and Boost.Variant, depending on the use case.</para><para>The template parameter <computeroutput>T</computeroutput> can be a single type or an MPL sequence of possible types being referred. The reference wrapper will act as either an optional reference or an optional variant of references to the specified types. In any case, the referred values will not be modifiable (i.e. <computeroutput><classname alt="boost::log::value_ref">value_ref</classname></computeroutput> always models a const reference).</para><para>Template parameter <computeroutput>TagT</computeroutput> is optional. It can be used for customizing the operations on this reference wrapper, such as putting the referred value to log. </para></description><method-group name="public member functions">
-<method name="BOOST_DEFAULTED_FUNCTION" cv="const noexcept"><type/><parameter name=""><paramtype><classname>value_ref</classname>(<classname>value_ref</classname> const &amp;that)</paramtype></parameter><parameter name=""><paramtype>noexcept :base_type(static_cast&lt; base_type const &amp; &gt;(that)) {}</paramtype></parameter><description><para>Default constructor. Creates a reference wrapper that does not refer to a value.</para><para>Copy constructor.</para><para>Initializing constructor. Creates a reference wrapper that refers to the specified value. </para></description></method>
 <method name="conversion-operator" cv="const noexcept" specifiers="explicit"><type>bool</type><description><para>The operator verifies if the wrapper refers to a value. </para></description></method>
 <method name="operator!" cv="const noexcept"><type>bool</type><description><para>The operator verifies if the wrapper does not refer to a value. </para></description></method>
 <method name="empty" cv="const noexcept"><type>bool</type><description><para>
@@ -8268,6 +8267,9 @@ The header contains forward declaration of a value reference wrapper. </para><na
 </returns></method>
 <method name="swap" cv="noexcept"><type>void</type><parameter name="that"><paramtype><classname>value_ref</classname> &amp;</paramtype></parameter><description><para>Swaps two reference wrappers </para></description></method>
 </method-group>
+<constructor specifiers="explicit" cv="noexcept"><template>
+          <template-type-parameter name="U"/>
+        </template><parameter name="val"><paramtype>U const &amp;</paramtype></parameter><description><para>Default constructor. Creates a reference wrapper that does not refer to a value.</para><para>Initializing constructor. Creates a reference wrapper that refers to the specified value. </para></description></constructor>
 </class>
 
 

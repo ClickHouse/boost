@@ -14,8 +14,6 @@ project : requirements
   <warnings>extra
   <toolset>msvc:<warnings-as-errors>on
   <toolset>clang:<warnings-as-errors>on
-  # https://github.com/boostorg/type_traits/issues/173
-  <toolset>clang-15:<cxxflags>-Wno-deprecated-builtins
   <toolset>gcc:<warnings-as-errors>on
   <toolset>gcc-4.4:<cxxflags>-Wno-sign-compare ;
 
@@ -150,6 +148,7 @@ run-fail lightweight_test_fail12.cpp ;
 run-fail lightweight_test_fail13.cpp ;
 run-fail lightweight_test_fail14.cpp ;
 run-fail lightweight_test_fail15.cpp ;
+run-fail lightweight_test_fail16.cpp : ;
 run-fail lightweight_test_lt_fail.cpp ;
 run-fail lightweight_test_le_fail.cpp ;
 run-fail lightweight_test_gt_fail.cpp ;
@@ -303,6 +302,8 @@ compile-fail bit_width_fail.cpp
 
 run type_name_test.cpp ;
 
+run snprintf_test.cpp ;
+
 run sv_types_test.cpp ;
 run sv_construct_test.cpp ;
 run sv_iteration_test.cpp ;
@@ -342,6 +343,7 @@ run span_deduction_guide_test.cpp ;
 run as_bytes_test.cpp ;
 run as_writable_bytes_test.cpp ;
 compile span_boost_begin_test.cpp ;
+run make_span_test.cpp ;
 
 run splitmix64_test.cpp
   : : : $(pedantic-errors) ;
@@ -350,6 +352,24 @@ run-fail verbose_terminate_handler_fail.cpp : ;
 run-fail verbose_terminate_handler_fail.cpp : : : <exception-handling>off : verbose_terminate_handler_fail_nx ;
 run-fail verbose_terminate_handler_fail.cpp : : : <rtti>off : verbose_terminate_handler_fail_nr ;
 run-fail verbose_terminate_handler_fail.cpp : : : <exception-handling>off <rtti>off : verbose_terminate_handler_fail_nxr ;
+
+run launder_test.cpp ;
+
+run alignof_test.cpp ;
+run max_align_test.cpp ;
+
+run memory_resource_test.cpp ;
+
+run data_test.cpp ;
+run size_test.cpp ;
+
+run serialization_nvp_test.cpp : : : <library>/boost//serialization/<warnings>off <undefined-sanitizer>norecover:<build>no ;
+run serialization_split_free_test.cpp : : : <library>/boost//serialization/<warnings>off <undefined-sanitizer>norecover:<link>static ;
+run serialization_split_member_test.cpp : : : <library>/boost//serialization/<warnings>off <undefined-sanitizer>norecover:<link>static ;
+run serialization_construct_data_test.cpp : : : <library>/boost//serialization/<warnings>off <undefined-sanitizer>norecover:<link>static ;
+
+run identity_test.cpp ;
+run identity_rvalue_test.cpp ;
 
 use-project /boost/core/swap : ./swap ;
 build-project ./swap ;
