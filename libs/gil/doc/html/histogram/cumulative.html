@@ -17,9 +17,12 @@
           FILE_SUFFIX: '.html'
       };
     </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="Boost.GIL  documentation" href="../index.html" />
@@ -70,18 +73,18 @@
 <div class="section" id="overview">
 <h2>Overview</h2>
 <p>A cumulative histogram is a histogram in which each bin stores the count / frequency of itself
-as well as all the bins with keys &#8216;smaller&#8217; than the particular bin.
+as well as all the bins with keys ‘smaller’ than the particular bin.
 As such, a notion of ordering among its keys should be existant in the histogram.</p>
 <p>The GIL histogram class has the ability to convert itself into its cumulative version.</p>
 <p>Since the container needs to first get an ordering
 over the keys a key sorting takes place before calculating the cumulative histogram.</p>
 <p>Example:</p>
 <blockquote>
-<div><div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">histogram</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">h</span><span class="p">;</span>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">histogram</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h</span><span class="p">;</span><span class="w"></span>
 <span class="cm">/*</span>
 <span class="cm">Fill histogram ...</span>
-<span class="cm">*/</span>
-<span class="k">auto</span> <span class="n">h1</span> <span class="o">=</span> <span class="n">cumulative_histogram</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">h1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cumulative_histogram</span><span class="p">(</span><span class="n">h</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -101,8 +104,8 @@ and then call the function</em>.</p>
     </div>
     </div>
     <div class="footer" role="contentinfo">
-      Last updated on 2023-04-10 13:04:15.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+      Last updated on 2023-08-08 21:08:21.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.2.1.
     </div>
   </body>
 </html>

@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__websocket__stream.async_close"></a><a class="link" href="async_close.html" title="websocket::stream::async_close">websocket::stream::async_close</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm54580"></a>
+          <a class="indexterm" name="idm60208"></a>
         </p>
 <p>
           Send a websocket close control frame asynchronously.
@@ -104,9 +104,9 @@
 <td>
                   <p>
                     The reason for the close. If the close reason specifies a close
-                    code other than beast::websocket::close_code::none, the close
-                    frame is sent with the close code and optional reason string.
-                    Otherwise, the close frame is sent with no payload.
+                    code other than <a class="link" href="../boost__beast__websocket__close_code.html" title="websocket::close_code"><code class="computeroutput"><span class="identifier">beast</span><span class="special">::</span><span class="identifier">websocket</span><span class="special">::</span><span class="identifier">close_code</span><span class="special">::</span><span class="identifier">none</span></code></a>, the close frame
+                    is sent with the close code and optional reason string. Otherwise,
+                    the close frame is sent with no payload.
                   </p>
                 </td>
 </tr>
@@ -124,7 +124,7 @@
                     must be:
                   </p>
 <pre class="table-programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
-    <span class="identifier">error_code</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">ec</span>     <span class="comment">// Result of operation</span>
+    <span class="identifier">error_code</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">ec</span>     <span class="comment">// Result of operation</span>
 <span class="special">);</span>
 </pre>
                   <p>

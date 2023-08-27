@@ -46,7 +46,7 @@
 
 \param[in] first Iterator pointer to first element.
 \param[in] last Iterator pointing to one beyond the end of data.
-</para><para>Some performance plots of runtime vs. n and log(range) are provided:<sbr/>
+ Some performance plots of runtime vs. n and log(range) are provided:<sbr/>
  <ulink url="../../doc/graph/windows_float_sort.htm">windows_float_sort</ulink> <sbr/>
  <ulink url="../../doc/graph/osx_float_sort.htm">osx_float_sort</ulink></para><para><formalpara><title>A simple example of sorting some floating-point is:</title><para><programlisting language="c++">vector&lt;float&gt; vec;
 vec.push_back(1.0);
@@ -334,7 +334,7 @@ Some performance plots of runtime vs. n and log(range) are provided:<sbr/>
 
 
 
-<function name="spreadsort"><type>boost::enable_if_c&lt; std::numeric_limits&lt; typename std::iterator_traits&lt; RandomAccessIter &gt;::value_type &gt;::is_integer, void &gt;::type</type><template>
+<function name="spreadsort"><type>boost::enable_if_c&lt; std::numeric_limits&lt; typenamestd::iterator_traits&lt; RandomAccessIter &gt;::value_type &gt;::is_integer, void &gt;::type</type><template>
           <template-type-parameter name="RandomAccessIter"/>
         </template><parameter name="first"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointer to first element. </para></description></parameter><parameter name="last"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointing to one beyond the end of data.</para></description></parameter><purpose>Generic <computeroutput>spreadsort</computeroutput> variant detecting integer-type elements so call to <computeroutput>integer_sort</computeroutput>. </purpose><description><para>If the data type provided is an integer, <computeroutput>integer_sort</computeroutput> is used. <note><para>Sorting other data types requires picking between <computeroutput>integer_sort</computeroutput>, <computeroutput>float_sort</computeroutput> and <computeroutput>string_sort</computeroutput> directly, as <computeroutput>spreadsort</computeroutput> won't accept types that don't have the appropriate <computeroutput>type_traits</computeroutput>. </para>
 </note>
@@ -350,7 +350,7 @@ Some performance plots of runtime vs. n and log(range) are provided:<sbr/>
 </requires><requires><para><computeroutput>RandomAccessIter</computeroutput> <computeroutput>value_type</computeroutput> supports the <computeroutput>operator&gt;&gt;</computeroutput>, which returns an integer-type right-shifted a specified number of bits. </para>
 </requires><postconditions><para>The elements in the range [<computeroutput>first</computeroutput>, <computeroutput>last</computeroutput>) are sorted in ascending order. </para>
 </postconditions></function>
-<function name="spreadsort"><type>boost::enable_if_c&lt; !std::numeric_limits&lt; typename std::iterator_traits&lt; RandomAccessIter &gt;::value_type &gt;::is_integer &amp;&amp;std::numeric_limits&lt; typename std::iterator_traits&lt; RandomAccessIter &gt;::value_type &gt;::is_iec559, void &gt;::type</type><template>
+<function name="spreadsort"><type>boost::enable_if_c&lt;!std::numeric_limits&lt; typenamestd::iterator_traits&lt; RandomAccessIter &gt;::value_type &gt;::is_integer &amp;&amp;std::numeric_limits&lt; typenamestd::iterator_traits&lt; RandomAccessIter &gt;::value_type &gt;::is_iec559, void &gt;::type</type><template>
           <template-type-parameter name="RandomAccessIter"/>
         </template><parameter name="first"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointer to first element. </para></description></parameter><parameter name="last"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointing to one beyond the end of data.</para></description></parameter><purpose>Generic <computeroutput>spreadsort</computeroutput> variant detecting float element type so call to <computeroutput>float_sort</computeroutput>. </purpose><description><para>If the data type provided is a float or castable-float, <computeroutput>float_sort</computeroutput> is used. <note><para>Sorting other data types requires picking between <computeroutput>integer_sort</computeroutput>, <computeroutput>float_sort</computeroutput> and <computeroutput>string_sort</computeroutput> directly, as <computeroutput>spreadsort</computeroutput> won't accept types that don't have the appropriate <computeroutput>type_traits</computeroutput>.</para>
 </note>
@@ -366,7 +366,7 @@ Some performance plots of runtime vs. n and log(range) are provided:<sbr/>
 </requires><requires><para><computeroutput>RandomAccessIter</computeroutput> <computeroutput>value_type</computeroutput> supports the <computeroutput>operator&gt;&gt;</computeroutput>, which returns an integer-type right-shifted a specified number of bits. </para>
 </requires><postconditions><para>The elements in the range [<computeroutput>first</computeroutput>, <computeroutput>last</computeroutput>) are sorted in ascending order. </para>
 </postconditions></function>
-<function name="spreadsort"><type>boost::enable_if_c&lt; is_same&lt; typename std::iterator_traits&lt; RandomAccessIter &gt;::value_type, typename std::string &gt;::value, void &gt;::type</type><template>
+<function name="spreadsort"><type>boost::enable_if_c&lt; is_same&lt; typenamestd::iterator_traits&lt; RandomAccessIter &gt;::value_type, typenamestd::string &gt;::value, void &gt;::type</type><template>
           <template-type-parameter name="RandomAccessIter"/>
         </template><parameter name="first"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointer to first element. </para></description></parameter><parameter name="last"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointing to one beyond the end of data.</para></description></parameter><purpose>Generic <computeroutput>spreadsort</computeroutput> variant detecting string element type so call to <computeroutput>string_sort</computeroutput> for <computeroutput>std::strings</computeroutput>. </purpose><description><para>If the data type provided is a string, <computeroutput>string_sort</computeroutput> is used. <note><para>Sorting other data types requires picking between <computeroutput>integer_sort</computeroutput>, <computeroutput>float_sort</computeroutput> and <computeroutput>string_sort</computeroutput> directly, as <computeroutput>spreadsort</computeroutput> won't accept types that don't have the appropriate <computeroutput>type_traits</computeroutput>.</para>
 </note>
@@ -382,7 +382,7 @@ Some performance plots of runtime vs. n and log(range) are provided:<sbr/>
 </requires><requires><para><computeroutput>RandomAccessIter</computeroutput> <computeroutput>value_type</computeroutput> supports the <computeroutput>operator&gt;&gt;</computeroutput>, which returns an integer-type right-shifted a specified number of bits. </para>
 </requires><postconditions><para>The elements in the range [<computeroutput>first</computeroutput>, <computeroutput>last</computeroutput>) are sorted in ascending order. </para>
 </postconditions></function>
-<function name="spreadsort"><type>boost::enable_if_c&lt; is_same&lt; typename std::iterator_traits&lt; RandomAccessIter &gt;::value_type, typename std::wstring &gt;::value &amp;&amp;sizeof(wchar_t)==2, void &gt;::type</type><template>
+<function name="spreadsort"><type>boost::enable_if_c&lt; is_same&lt; typenamestd::iterator_traits&lt; RandomAccessIter &gt;::value_type, typenamestd::wstring &gt;::value &amp;&amp;sizeof(wchar_t)==2, void &gt;::type</type><template>
           <template-type-parameter name="RandomAccessIter"/>
         </template><parameter name="first"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointer to first element. </para></description></parameter><parameter name="last"><paramtype>RandomAccessIter</paramtype><description><para>Iterator pointing to one beyond the end of data.</para></description></parameter><purpose>Generic <computeroutput>spreadsort</computeroutput> variant detecting string element type so call to <computeroutput>string_sort</computeroutput> for <computeroutput>std::wstrings</computeroutput>. </purpose><description><para>If the data type provided is a wstring, <computeroutput>string_sort</computeroutput> is used. <note><para>Sorting other data types requires picking between <computeroutput>integer_sort</computeroutput>, <computeroutput>float_sort</computeroutput> and <computeroutput>string_sort</computeroutput> directly, as <computeroutput>spreadsort</computeroutput> won't accept types that don't have the appropriate <computeroutput>type_traits</computeroutput>. Also, 2-byte wide-characters are the limit above which string_sort is inefficient, so on platforms with wider characters, this will not accept wstrings.</para>
 </note>

@@ -69,7 +69,19 @@
               </td>
 <td>
                 <p>
-                  Clears the error message.
+                  Clears the error messages.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__diagnostics/client_message.html" title="diagnostics::client_message">client_message</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Gets the client-generated error message.
                 </p>
               </td>
 </tr>
@@ -81,7 +93,7 @@
               </td>
 <td>
                 <p>
-                  Constructs a diagnostics object with an empty error message.
+                  Constructs a diagnostics object with empty error messages.
                 </p>
               </td>
 </tr>
@@ -136,7 +148,7 @@
 <tr>
 <td>
                 <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__diagnostics/operator_not__eq_.html" title="diagnostics::operator!=">operator!=</a></strong></span>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__diagnostics/operator__not__eq_.html" title="diagnostics::operator!=">operator!=</a></strong></span>
                 </p>
               </td>
 <td>
@@ -153,8 +165,8 @@
       </h5>
 <p>
         This class is a container for additional diagnostics about an operation that
-        failed. Currently, it's used to hold any error messages sent by the server
-        on error (<a class="link" href="boost__mysql__diagnostics/server_message.html" title="diagnostics::server_message"><code class="computeroutput"><span class="identifier">server_message</span></code></a>). More members may
+        failed. It can contain server-generated messages (<a class="link" href="boost__mysql__diagnostics/server_message.html" title="diagnostics::server_message"><code class="computeroutput"><span class="identifier">server_message</span></code></a>) or client-side messages
+        (<a class="link" href="boost__mysql__diagnostics/client_message.html" title="diagnostics::client_message"><code class="computeroutput"><span class="identifier">client_message</span></code></a>). More members may
         be added in the future.
       </p>
 <p>

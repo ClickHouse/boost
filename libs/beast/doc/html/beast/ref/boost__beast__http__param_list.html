@@ -190,7 +190,7 @@
         <span class="phrase"><a name="beast.ref.boost__beast__http__param_list.bnf"></a></span><a class="link" href="boost__beast__http__param_list.html#beast.ref.boost__beast__http__param_list.bnf">BNF</a>
       </h5>
 <pre class="programlisting"><span class="identifier">param</span><span class="special">-</span><span class="identifier">list</span>  <span class="special">=</span> <span class="special">*(</span> <span class="identifier">OWS</span> <span class="string">";"</span> <span class="identifier">OWS</span> <span class="identifier">param</span> <span class="special">)</span>
-<span class="identifier">param</span>       <span class="special">=</span> <span class="identifier">token</span> <span class="identifier">OWS</span> <span class="special">[</span> <span class="string">"="</span> <span class="identifier">OWS</span> <span class="special">(</span> <span class="identifier">token</span> <span class="special">/</span> <span class="identifier">quoted</span><span class="special">-</span><span class="identifier">string</span> <span class="special">)</span> <span class="special">]</span>
+<span class="identifier">param</span>       <span class="special">=</span> <span class="identifier">token</span> <span class="identifier">OWS</span> <span class="special">[</span> <span class="string">"="</span> <span class="identifier">OWS</span> <span class="special">(</span> <span class="identifier">token</span> <span class="special">/</span> <span class="identifier">quoted</span><span class="special">-</span> <span class="identifier">string</span> <span class="special">)</span> <span class="special">]</span>
 </pre>
 <p>
         To use this class, construct with the string to be parsed and then use <a class="link" href="boost__beast__http__param_list/begin.html" title="http::param_list::begin"><code class="computeroutput"><span class="identifier">begin</span></code></a>
@@ -201,12 +201,12 @@
 <a name="beast.ref.boost__beast__http__param_list.h5"></a>
         <span class="phrase"><a name="beast.ref.boost__beast__http__param_list.example"></a></span><a class="link" href="boost__beast__http__param_list.html#beast.ref.boost__beast__http__param_list.example">Example</a>
       </h5>
-<pre class="programlisting"><span class="keyword">for</span><span class="special">(</span><span class="keyword">auto</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">param</span> <span class="special">:</span> <span class="identifier">param_list</span><span class="special">{</span><span class="string">";level=9;no_context_takeover;bits=15"</span><span class="special">})</span>
+<pre class="programlisting"><span class="keyword">for</span> <span class="special">(</span> <span class="keyword">auto</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">param</span> <span class="special">:</span> <span class="identifier">param_list</span><span class="special">{</span> <span class="string">";level=9;no_context_takeover;bits=15"</span> <span class="special">})</span>
 <span class="special">{</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">";"</span> <span class="special">&lt;&lt;</span> <span class="identifier">param</span><span class="special">.</span><span class="identifier">first</span><span class="special">;</span>
-    <span class="keyword">if</span><span class="special">(!</span> <span class="identifier">param</span><span class="special">.</span><span class="identifier">second</span><span class="special">.</span><span class="identifier">empty</span><span class="special">())</span>
+    <span class="keyword">if</span> <span class="special">(!</span> <span class="identifier">param</span><span class="special">.</span><span class="identifier">second</span><span class="special">.</span><span class="identifier">empty</span><span class="special">())</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"="</span> <span class="special">&lt;&lt;</span> <span class="identifier">param</span><span class="special">.</span><span class="identifier">second</span><span class="special">;</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span><span class="special">;</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"\n"</span> <span class="special">;</span>
 <span class="special">}</span>
 </pre>
 </div>

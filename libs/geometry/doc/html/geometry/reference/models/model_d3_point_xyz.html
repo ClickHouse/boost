@@ -28,7 +28,7 @@
 <a name="geometry.reference.models.model_d3_point_xyz"></a><a class="link" href="model_d3_point_xyz.html" title="model::d3::point_xyz">model::d3::point_xyz</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="idm76962"></a><a class="indexterm" name="idm76964"></a><a class="indexterm" name="idm76966"></a>
+          <a class="indexterm" name="idm76969"></a><a class="indexterm" name="idm76971"></a><a class="indexterm" name="idm76973"></a>
 3D point in Cartesian coordinate system
         </p>
 <h6>
@@ -46,7 +46,7 @@
 </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">CoordinateType</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">CoordinateSystem</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">model</span><span class="special">::</span><span class="identifier">d3</span><span class="special">::</span><span class="identifier">point_xyz</span>
-      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">model</span><span class="special">::</span><span class="identifier">point</span><span class="special">&lt;</span> <span class="identifier">CoordinateType</span><span class="special">,</span> <span class="number">3</span><span class="special">,</span> <span class="identifier">CoordinateSystem</span> <span class="special">&gt;</span>
+      <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">model</span><span class="special">::</span><span class="identifier">point</span><span class="special">&lt;</span> <span class="identifier">CoordinateType</span><span class="special">,</span> <span class="number">3</span><span class="special">,</span> <span class="identifier">cs</span><span class="special">::</span><span class="identifier">cartesian</span> <span class="special">&gt;</span>
 <span class="special">{</span>
   <span class="comment">// ...</span>
 <span class="special">};</span>
@@ -228,7 +228,7 @@
 <td>
                   <p>
 </p>
-<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">CoordinateType</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <span class="identifier">x</span><span class="special">()</span></pre>
+<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">CoordinateType</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">x</span><span class="special">()</span></pre>
 <p>
                   </p>
                 </td>
@@ -246,7 +246,7 @@
 <td>
                   <p>
 </p>
-<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">CoordinateType</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <span class="identifier">y</span><span class="special">()</span></pre>
+<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">CoordinateType</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">y</span><span class="special">()</span></pre>
 <p>
                   </p>
                 </td>
@@ -264,7 +264,7 @@
 <td>
                   <p>
 </p>
-<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">CoordinateType</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <span class="identifier">z</span><span class="special">()</span></pre>
+<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">CoordinateType</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">z</span><span class="special">()</span></pre>
 <p>
                   </p>
                 </td>

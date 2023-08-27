@@ -7,7 +7,7 @@
 <link rel="home" href="../../../index.html" title="Chapter 1. Boost.MySQL">
 <link rel="up" href="../boost__mysql__connection.html" title="connection">
 <link rel="prev" href="async_close_statement/overload2.html" title="connection::async_close_statement (2 of 2 overloads)">
-<link rel="next" href="read_some_rows/overload1.html" title="connection::read_some_rows (1 of 2 overloads)">
+<link rel="next" href="read_some_rows/overload1.html" title="connection::read_some_rows (1 of 4 overloads)">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -28,22 +28,45 @@
 <a name="mysql.ref.boost__mysql__connection.read_some_rows"></a><a class="link" href="read_some_rows.html" title="connection::read_some_rows">connection::read_some_rows</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm18101"></a>
+          <a class="indexterm" name="idm26715"></a>
         </p>
 <p>
           Reads a batch of rows.
         </p>
 <pre class="programlisting"><span class="identifier">rows_view</span>
-<a class="link" href="read_some_rows/overload1.html" title="connection::read_some_rows (1 of 2 overloads)">read_some_rows</a><span class="special">(</span>
+<a class="link" href="read_some_rows/overload1.html" title="connection::read_some_rows (1 of 4 overloads)">read_some_rows</a><span class="special">(</span>
     <span class="identifier">execution_state</span><span class="special">&amp;</span> <span class="identifier">st</span><span class="special">,</span>
     <span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">err</span><span class="special">,</span>
-    <span class="identifier">diagnostics</span><span class="special">&amp;</span> <span class="identifier">info</span><span class="special">);</span>
-  <span class="emphasis"><em>» <a class="link" href="read_some_rows/overload1.html" title="connection::read_some_rows (1 of 2 overloads)"><code class="computeroutput"><span class="identifier">more</span><span class="special">...</span></code></a></em></span>
+    <span class="identifier">diagnostics</span><span class="special">&amp;</span> <span class="identifier">diag</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_some_rows/overload1.html" title="connection::read_some_rows (1 of 4 overloads)"><code class="computeroutput"><span class="identifier">more</span><span class="special">...</span></code></a></em></span>
 
-<span class="identifier">rows_view</span>
-<a class="link" href="read_some_rows/overload2.html" title="connection::read_some_rows (2 of 2 overloads)">read_some_rows</a><span class="special">(</span>
+<span class="keyword">template</span><span class="special">&lt;</span>
+    <span class="keyword">class</span> <span class="identifier">SpanStaticRow</span><span class="special">,</span>
+    <span class="keyword">class</span><span class="special">...</span> <a class="link" href="../boost__mysql__StaticRow.html" title="StaticRow concept"><code class="literal"><span class="emphasis"><em>StaticRow</em></span></code></a><span class="special">&gt;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span>
+<a class="link" href="read_some_rows/overload3.html" title="connection::read_some_rows (3 of 4 overloads)">read_some_rows</a><span class="special">(</span>
+    <span class="identifier">static_execution_state</span><span class="special">&lt;</span> <span class="identifier">StaticRow</span><span class="special">...</span> <span class="special">&gt;&amp;</span> <span class="identifier">st</span><span class="special">,</span>
+    <span class="identifier">span</span><span class="special">&lt;</span> <span class="identifier">SpanStaticRow</span> <span class="special">&gt;</span> <span class="identifier">output</span><span class="special">,</span>
+    <span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">err</span><span class="special">,</span>
+    <span class="identifier">diagnostics</span><span class="special">&amp;</span> <span class="identifier">diag</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_some_rows/overload3.html" title="connection::read_some_rows (3 of 4 overloads)"><code class="computeroutput"><span class="identifier">more</span><span class="special">...</span></code></a></em></span>
+
+<span class="keyword">template</span><span class="special">&lt;</span>
+    <span class="keyword">class</span> <span class="identifier">SpanStaticRow</span><span class="special">,</span>
+    <span class="keyword">class</span><span class="special">...</span> <a class="link" href="../boost__mysql__StaticRow.html" title="StaticRow concept"><code class="literal"><span class="emphasis"><em>StaticRow</em></span></code></a><span class="special">&gt;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span>
+<a class="link" href="read_some_rows/overload4.html" title="connection::read_some_rows (4 of 4 overloads)">read_some_rows</a><span class="special">(</span>
+    <span class="identifier">static_execution_state</span><span class="special">&lt;</span> <span class="identifier">StaticRow</span><span class="special">...</span> <span class="special">&gt;&amp;</span> <span class="identifier">st</span><span class="special">,</span>
+    <span class="identifier">span</span><span class="special">&lt;</span> <span class="identifier">SpanStaticRow</span> <span class="special">&gt;</span> <span class="identifier">output</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_some_rows/overload4.html" title="connection::read_some_rows (4 of 4 overloads)"><code class="computeroutput"><span class="identifier">more</span><span class="special">...</span></code></a></em></span>
+</pre>
+<p>
+          Reads a batch of rows.
+        </p>
+<pre class="programlisting"><span class="identifier">rows_view</span>
+<a class="link" href="read_some_rows/overload2.html" title="connection::read_some_rows (2 of 4 overloads)">read_some_rows</a><span class="special">(</span>
     <span class="identifier">execution_state</span><span class="special">&amp;</span> <span class="identifier">st</span><span class="special">);</span>
-  <span class="emphasis"><em>» <a class="link" href="read_some_rows/overload2.html" title="connection::read_some_rows (2 of 2 overloads)"><code class="computeroutput"><span class="identifier">more</span><span class="special">...</span></code></a></em></span>
+  <span class="emphasis"><em>» <a class="link" href="read_some_rows/overload2.html" title="connection::read_some_rows (2 of 4 overloads)"><code class="computeroutput"><span class="identifier">more</span><span class="special">...</span></code></a></em></span>
 </pre>
 </div>
 <div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>

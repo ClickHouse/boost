@@ -80,7 +80,7 @@
 <li class="listitem"><p><a class="link" href="capacity.html" title="Struct template capacity">boost::lockfree::capacity</a>, optional <br>
  If this template argument is passed to the options, the size of the queue is set at compile-time.<br>
  This option implies <code class="computeroutput">fixed_sized&lt;true&gt;</code> </p></li>
-<li class="listitem"><p><a class="link" href="allocator.html" title="Struct template allocator">boost::lockfree::allocator</a>, defaults to <code class="computeroutput"><a class="link" href="allocator.html" title="Struct template allocator">boost::lockfree::allocator</a>&lt;std::allocator&lt;void&gt;&gt;</code> <br>
+<li class="listitem"><p><a class="link" href="allocator.html" title="Struct template allocator">boost::lockfree::allocator</a>, defaults to <code class="computeroutput">boost::lockfree::allocator&lt;std::allocator&lt;void&gt;&gt;</code> <br>
  Specifies the allocator that is used for the internal freelist</p></li>
 </ul></div>
 <p>
@@ -218,8 +218,56 @@
 </tr></tbody>
 </table></div>
 </li>
-<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="id-1_3_21_6_3_1_1_1_6_2-bb"></a><span class="identifier">reserve</span><span class="special">(</span><span class="identifier">size_type</span> n<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="id-1_3_21_6_3_1_1_1_6_3-bb"></a><span class="identifier">reserve_unsafe</span><span class="special">(</span><span class="identifier">size_type</span> n<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">void</span> <a name="id-1_3_21_6_3_1_1_1_6_2-bb"></a><span class="identifier">reserve</span><span class="special">(</span><span class="identifier">size_type</span> n<span class="special">)</span><span class="special">;</span></pre>
+<p>Allocate n nodes for freelist</p>
+<p>
+</p>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>thread-safe, may block if memory allocator blocks  </p></td></tr>
+</table></div>
+<p>
+</p>
+<div class="variablelist"><table border="0" class="variablelist compact">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term">Requires:</span></p></td>
+<td><p>only valid if no capacity&lt;&gt; argument given </p></td>
+</tr></tbody>
+</table></div>
+</li>
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">void</span> <a name="id-1_3_21_6_3_1_1_1_6_3-bb"></a><span class="identifier">reserve_unsafe</span><span class="special">(</span><span class="identifier">size_type</span> n<span class="special">)</span><span class="special">;</span></pre>
+<p>Allocate n nodes for freelist</p>
+<p>
+</p>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>not thread-safe, may block if memory allocator blocks  </p></td></tr>
+</table></div>
+<p>
+</p>
+<div class="variablelist"><table border="0" class="variablelist compact">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term">Requires:</span></p></td>
+<td><p>only valid if no capacity&lt;&gt; argument given </p></td>
+</tr></tbody>
+</table></div>
+</li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">bool</span> <a name="id-1_3_21_6_3_1_1_1_6_4-bb"></a><span class="identifier">empty</span><span class="special">(</span><span class="keyword">void</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>
 <p>Check if the queue is empty</p>
@@ -526,7 +574,7 @@
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </p></td></tr>
+<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </p></td></tr>
 </table></div>
 <p>
 </p>
@@ -578,7 +626,7 @@
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../../doc/src/images/note.png"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking </p></td></tr>
+<tr><td align="left" valign="top"><p>Thread-safe and non-blocking, if functor is thread-safe and non-blocking  </p></td></tr>
 </table></div>
 <p>
 </p>

@@ -28,10 +28,11 @@
 <a name="mysql.ref.boost__mysql__execution_state.affected_rows"></a><a class="link" href="affected_rows.html" title="execution_state::affected_rows">execution_state::affected_rows</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm21237"></a>
+          <a class="indexterm" name="idm31306"></a>
         </p>
 <p>
-          Returns the number of rows affected by the executed SQL statement.
+          Returns the number of rows affected by the SQL statement associated to
+          this resultset.
         </p>
 <h6>
 <a name="mysql.ref.boost__mysql__execution_state.affected_rows.h0"></a>
@@ -54,7 +55,8 @@
         </h6>
 <p>
           <code class="computeroutput"><span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">complete</span><span class="special">()</span>
-          <span class="special">==</span> <span class="keyword">true</span></code>
+          <span class="special">==</span> <span class="keyword">true</span>
+          <span class="special">||</span> <span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">should_read_head</span><span class="special">()</span> <span class="special">==</span> <span class="keyword">true</span></code>
         </p>
 </div>
 <div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>

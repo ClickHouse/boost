@@ -49,14 +49,14 @@ Or
 
 [endsect]
 
-[section:intersects_3_with_strategy intersects (with strategy)]
+[section:intersects_2_two_geometries intersects (two geometries)]
 
 '''<indexterm><primary>intersects</primary></indexterm>'''
 Checks if two geometries have at least one intersection. 
 
 [heading Synopsis]
-``template<typename Geometry1, typename Geometry2, typename Strategy>
-bool intersects(Geometry1 const & geometry1, Geometry2 const & geometry2, Strategy const & strategy)``
+``template<typename Geometry1, typename Geometry2>
+bool intersects(Geometry1 const & geometry1, Geometry2 const & geometry2)``
 
 [heading Parameters]
 
@@ -64,7 +64,6 @@ bool intersects(Geometry1 const & geometry1, Geometry2 const & geometry2, Strate
 [[Type] [Concept] [Name] [Description] ]
 [[Geometry1 const &] [Any type fulfilling a Geometry Concept ] [geometry1] [A model of the specified concept ]]
 [[Geometry2 const &] [Any type fulfilling a Geometry Concept ] [geometry2] [A model of the specified concept ]]
-[[Strategy const &] [Any type fulfilling a Intersects Strategy Concept ] [strategy] [The strategy which will be used for intersects calculations ]]
 ]
 
 
@@ -86,14 +85,14 @@ Or
 
 [endsect]
 
-[section:intersects_2_two_geometries intersects (two geometries)]
+[section:intersects_3_with_strategy intersects (with strategy)]
 
 '''<indexterm><primary>intersects</primary></indexterm>'''
 Checks if two geometries have at least one intersection. 
 
 [heading Synopsis]
-``template<typename Geometry1, typename Geometry2>
-bool intersects(Geometry1 const & geometry1, Geometry2 const & geometry2)``
+``template<typename Geometry1, typename Geometry2, typename Strategy>
+bool intersects(Geometry1 const & geometry1, Geometry2 const & geometry2, Strategy const & strategy)``
 
 [heading Parameters]
 
@@ -101,6 +100,7 @@ bool intersects(Geometry1 const & geometry1, Geometry2 const & geometry2)``
 [[Type] [Concept] [Name] [Description] ]
 [[Geometry1 const &] [Any type fulfilling a Geometry Concept ] [geometry1] [A model of the specified concept ]]
 [[Geometry2 const &] [Any type fulfilling a Geometry Concept ] [geometry2] [A model of the specified concept ]]
+[[Strategy const &] [Any type fulfilling a Intersects Strategy Concept ] [strategy] [The strategy which will be used for intersects calculations ]]
 ]
 
 

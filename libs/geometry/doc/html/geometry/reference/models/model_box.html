@@ -28,7 +28,7 @@
 <a name="geometry.reference.models.model_box"></a><a class="link" href="model_box.html" title="model::box">model::box</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="idm79856"></a><a class="indexterm" name="idm79858"></a>
+          <a class="indexterm" name="idm79811"></a><a class="indexterm" name="idm79813"></a>
 Class box: defines a box made of two describing points.
         </p>
 <h6>
@@ -232,7 +232,7 @@ Class box: defines a box made of two describing points.
 <td>
                   <p>
 </p>
-<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">Point</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <span class="identifier">min_corner</span><span class="special">()</span></pre>
+<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">Point</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">min_corner</span><span class="special">()</span></pre>
 <p>
                   </p>
                 </td>
@@ -247,7 +247,7 @@ Class box: defines a box made of two describing points.
 <td>
                   <p>
 </p>
-<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">Point</span> <span class="keyword">const</span>  <span class="special">&amp;</span> <span class="identifier">max_corner</span><span class="special">()</span></pre>
+<pre class="table-programlisting"><span class="keyword">constexpr</span> <span class="identifier">Point</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">max_corner</span><span class="special">()</span></pre>
 <p>
                   </p>
                 </td>
@@ -328,12 +328,7 @@ Class box: defines a box made of two describing points.
 
     <span class="identifier">box_t</span> <span class="identifier">box1</span><span class="special">;</span> <a class="co" name="geometry.reference.models.model_box.c0" href="model_box.html#geometry.reference.models.model_box.c1"><img src="../../../../../../../doc/src/images/callouts/1.png" alt="1" border="0"></a>
     <span class="identifier">box_t</span> <span class="identifier">box2</span><span class="special">(</span><span class="identifier">point_t</span><span class="special">(</span><span class="number">0.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">),</span> <span class="identifier">point_t</span><span class="special">(</span><span class="number">5.0</span><span class="special">,</span> <span class="number">5.0</span><span class="special">));</span> <a class="co" name="geometry.reference.models.model_box.c2" href="model_box.html#geometry.reference.models.model_box.c3"><img src="../../../../../../../doc/src/images/callouts/2.png" alt="2" border="0"></a>
-
-<span class="preprocessor">#ifndef</span> <span class="identifier">BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX</span>
-
     <span class="identifier">box_t</span> <span class="identifier">box3</span><span class="special">{{</span><span class="number">0.0</span><span class="special">,</span> <span class="number">0.0</span><span class="special">},</span> <span class="special">{</span><span class="number">5.0</span><span class="special">,</span> <span class="number">5.0</span><span class="special">}};</span> <a class="co" name="geometry.reference.models.model_box.c4" href="model_box.html#geometry.reference.models.model_box.c5"><img src="../../../../../../../doc/src/images/callouts/3.png" alt="3" border="0"></a>
-
-<span class="preprocessor">#endif</span>
 
     <span class="identifier">bg</span><span class="special">::</span><span class="identifier">set</span><span class="special">&lt;</span><span class="identifier">bg</span><span class="special">::</span><span class="identifier">min_corner</span><span class="special">,</span> <span class="number">0</span><span class="special">&gt;(</span><span class="identifier">box1</span><span class="special">,</span> <span class="number">1.0</span><span class="special">);</span> <a class="co" name="geometry.reference.models.model_box.c6" href="model_box.html#geometry.reference.models.model_box.c7"><img src="../../../../../../../doc/src/images/callouts/4.png" alt="4" border="0"></a>
     <span class="identifier">bg</span><span class="special">::</span><span class="identifier">set</span><span class="special">&lt;</span><span class="identifier">bg</span><span class="special">::</span><span class="identifier">min_corner</span><span class="special">,</span> <span class="number">1</span><span class="special">&gt;(</span><span class="identifier">box1</span><span class="special">,</span> <span class="number">2.0</span><span class="special">);</span>

@@ -150,7 +150,7 @@
 <namespace name="logic">
 <class name="indeterminate_name"><template>
       <template-type-parameter name="CharT"/>
-    </template><inherit access="public">facet</inherit><inherit access="private">noncopyable</inherit><purpose>A locale facet specifying the name of the indeterminate value of a tribool. </purpose><description><para>The facet is used to perform I/O on tribool values when <computeroutput>std::boolalpha</computeroutput> has been specified. This class template is only available if the C++ standard library implementation supports locales. </para></description><typedef name="char_type"><type>CharT</type></typedef>
+    </template><inherit access="public">std::locale::facet</inherit><inherit access="private">boost::noncopyable</inherit><purpose>A locale facet specifying the name of the indeterminate value of a tribool. </purpose><description><para>The facet is used to perform I/O on tribool values when <computeroutput>std::boolalpha</computeroutput> has been specified. This class template is only available if the C++ standard library implementation supports locales. </para></description><typedef name="char_type"><type>CharT</type></typedef>
 <typedef name="string_type"><type>std::basic_string&lt; CharT &gt;</type></typedef>
 <data-member name="id" specifiers="static"><type>std::locale::id</type><purpose>Uniquily identifies this facet with the locale. </purpose></data-member>
 <method-group name="public member functions">

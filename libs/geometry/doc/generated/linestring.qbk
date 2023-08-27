@@ -24,7 +24,7 @@ A linestring (named so by OGC) is a collection (default a vector) of points.
 [heading Synopsis]
 ``template<typename Point, template< typename, typename > class Container, template< typename > class Allocator>
 class model::linestring
-      : public Container< Point, Allocator< Point > >
+      : public std::vector< Point, std::allocator< Point > >
 {
   // ...
 };

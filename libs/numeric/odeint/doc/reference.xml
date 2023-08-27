@@ -164,7 +164,7 @@
 
 
 
-<function name="integrate"><type>boost::enable_if&lt; typename has_value_type&lt; State &gt;::type, size_t &gt;::type</type><template>
+<function name="integrate"><type>boost::enable_if&lt; typenamehas_value_type&lt; State &gt;::type, size_t &gt;::type</type><template>
           <template-type-parameter name="System"/>
           <template-type-parameter name="State"/>
           <template-type-parameter name="Time"/>
@@ -1446,7 +1446,7 @@ This function needs the TimeIterator type specifically defined as a template par
       <template-type-parameter name="Operations"><default>typename operations_dispatcher&lt; State &gt;::operations_type</default><purpose><para>The operations type. </para></purpose></template-type-parameter>
       <template-type-parameter name="Resizer"><default>initially_resizer</default><purpose><para>The resizer policy type. </para></purpose></template-type-parameter>
       <template-type-parameter name="InitializingStepper"><default><classname alt="boost::numeric::odeint::extrapolation_stepper">extrapolation_stepper</classname>&lt; order_helper&lt;Steps&gt;::value,                                                    State, Value, Deriv, Time,                                                   Algebra, Operations, Resizer &gt;</default><purpose><para>The stepper for the first two steps. </para></purpose></template-type-parameter>
-    </template><inherit access="public">algebra_stepper_base&lt; Algebra, Operations &gt;</inherit><purpose>The Adams-Bashforth multistep algorithm. </purpose><description><para>The Adams-Bashforth method is a multi-step algorithm with configurable step number. The step number is specified as template parameter Steps and it then uses the result from the previous Steps steps. See also <ulink url="http://en.wikipedia.org/wiki/Linear_multistep_method">en.wikipedia.org/wiki/Linear_multistep_method</ulink>. Currently, a maximum of Steps=8 is supported. The method is explicit and fulfills the Stepper concept. Step size control or continuous output are not provided.</para><para>This class derives from algebra_base and inherits its interface via CRTP (current recurring template pattern). For more details see algebra_stepper_base.</para><para>
+    </template><inherit access="public">algebra_stepper_base&lt; typename algebra_dispatcher&lt; State &gt;::algebra_type, typename operations_dispatcher&lt; State &gt;::operations_type &gt;</inherit><purpose>The Adams-Bashforth multistep algorithm. </purpose><description><para>The Adams-Bashforth method is a multi-step algorithm with configurable step number. The step number is specified as template parameter Steps and it then uses the result from the previous Steps steps. See also <ulink url="http://en.wikipedia.org/wiki/Linear_multistep_method">en.wikipedia.org/wiki/Linear_multistep_method</ulink>. Currently, a maximum of Steps=8 is supported. The method is explicit and fulfills the Stepper concept. Step size control or continuous output are not provided.</para><para>This class derives from algebra_base and inherits its interface via CRTP (current recurring template pattern). For more details see algebra_stepper_base.</para><para>
 </para></description><typedef name="state_type"><type>State</type></typedef>
 <typedef name="wrapped_state_type"><type>state_wrapper&lt; state_type &gt;</type></typedef>
 <typedef name="value_type"><type>Value</type></typedef>
@@ -1535,7 +1535,7 @@ This function needs the TimeIterator type specifically defined as a template par
 </method-group>
 </class><struct name="order_helper"><template>
       <template-nontype-parameter name="N"><type>int</type></template-nontype-parameter>
-    </template><inherit access="public">boost::mpl::max::type&lt; mpl::eval_if&lt; mpl::equal_to&lt; mpl::modulus&lt; int_&lt; N &gt;, int_&lt; 2 &gt; &gt;, int_&lt; 0 &gt; &gt;, int_&lt; N &gt;, int_&lt; N+1 &gt; &gt;::type, int_&lt; 4 &gt; &gt;</inherit></struct>
+    </template><inherit access="public">mpl::max::type</inherit></struct>
 
 
 
@@ -1882,7 +1882,7 @@ This function needs the TimeIterator type specifically defined as a template par
       <template-type-parameter name="Algebra"><default>typename algebra_dispatcher&lt; State &gt;::algebra_type</default></template-type-parameter>
       <template-type-parameter name="Operations"><default>typename operations_dispatcher&lt; State &gt;::operations_type</default></template-type-parameter>
       <template-type-parameter name="Resizer"><default>initially_resizer</default></template-type-parameter>
-    </template><inherit access="public">algebra_stepper_base&lt; Algebra, Operations &gt;</inherit><typedef name="order_type"><type>unsigned short</type></typedef>
+    </template><inherit access="public">algebra_stepper_base&lt; typename algebra_dispatcher&lt; State &gt;::algebra_type, typename operations_dispatcher&lt; State &gt;::operations_type &gt;</inherit><typedef name="order_type"><type>unsigned short</type></typedef>
 <typedef name="state_type"><type>State</type></typedef>
 <typedef name="value_type"><type>Value</type></typedef>
 <typedef name="deriv_type"><type>Deriv</type></typedef>
@@ -4954,7 +4954,7 @@ The dense-output functionality allows to interpolate the solution between subseq
       <template-type-parameter name="Algebra"><default>typename algebra_dispatcher&lt; Coor &gt;::algebra_type</default><purpose><para>The algebra. </para></purpose></template-type-parameter>
       <template-type-parameter name="Operations"><default>typename operations_dispatcher&lt; Coor &gt;::operations_type</default><purpose><para>The operations type. </para></purpose></template-type-parameter>
       <template-type-parameter name="Resizer"><default>initially_resizer</default><purpose><para>The resizer policy type. </para></purpose></template-type-parameter>
-    </template><inherit access="public">algebra_stepper_base&lt; Algebra, Operations &gt;</inherit><purpose>The Velocity-Verlet algorithm. </purpose><description><para><ulink url="http://en.wikipedia.org/wiki/Verlet_integration">The Velocity-Verlet algorithm</ulink> is a method for simulation of molecular dynamics systems. It solves the ODE a=f(r,v',t) where r are the coordinates, v are the velocities and a are the accelerations, hence v = dr/dt, a=dv/dt.</para><para>
+    </template><inherit access="public">algebra_stepper_base&lt; typename algebra_dispatcher&lt; Coor &gt;::algebra_type, typename operations_dispatcher&lt; Coor &gt;::operations_type &gt;</inherit><purpose>The Velocity-Verlet algorithm. </purpose><description><para><ulink url="http://en.wikipedia.org/wiki/Verlet_integration">The Velocity-Verlet algorithm</ulink> is a method for simulation of molecular dynamics systems. It solves the ODE a=f(r,v',t) where r are the coordinates, v are the velocities and a are the accelerations, hence v = dr/dt, a=dv/dt.</para><para>
 </para></description><typedef name="algebra_stepper_base_type"><type>algebra_stepper_base&lt; Algebra, Operations &gt;</type></typedef>
 <typedef name="algebra_type"><type>algebra_stepper_base_type::algebra_type</type></typedef>
 <typedef name="operations_type"><type>algebra_stepper_base_type::operations_type</type></typedef>

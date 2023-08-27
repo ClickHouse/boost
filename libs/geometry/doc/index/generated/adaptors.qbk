@@ -4,10 +4,10 @@
 [heading Functions]
 [table
 [[Function][Description]]
-[[[link group__adaptors_1ga4716cd5423bfed3ff3e69e9ec274ac81 `queried(Predicates const &)`]][The query index adaptor generator. ]]
+[[[link group__adaptors_1ga10b38041675efb62a1c2bad53cc22d2e `queried(Predicates const &)`]][The query index adaptor generator. ]]
 ]
 
-[#group__adaptors_1ga4716cd5423bfed3ff3e69e9ec274ac81]
+[#group__adaptors_1ga10b38041675efb62a1c2bad53cc22d2e]
 [section queried(Predicates const &)]
 '''<indexterm><primary>queried</primary></indexterm>'''
 The query index adaptor generator. 

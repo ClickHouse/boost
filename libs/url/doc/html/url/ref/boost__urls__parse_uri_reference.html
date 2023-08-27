@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__parse_uri_reference"></a><a class="link" href="boost__urls__parse_uri_reference.html" title="parse_uri_reference">parse_uri_reference</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm146497"></a>
+        <a class="indexterm" name="idm150977"></a>
       </p>
 <p>
         Return a reference to a parsed URL string.
@@ -40,9 +40,9 @@
 <p>
         Defined in header <code class="literal">&lt;<a href="https://github.com/boostorg/url/blob/master/include/boost/url/parse.hpp" target="_top">boost/url/parse.hpp</a>&gt;</code>
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url_view</span> <span class="special">&gt;</span>
+<pre class="programlisting"><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url_view</span> <span class="special">&gt;</span>
 <span class="identifier">parse_uri_reference</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
 </pre>
 <h5>
 <a name="url.ref.boost__urls__parse_uri_reference.h1"></a>
@@ -59,7 +59,7 @@
 <a name="url.ref.boost__urls__parse_uri_reference.h2"></a>
         <span class="phrase"><a name="url.ref.boost__urls__parse_uri_reference.example"></a></span><a class="link" href="boost__urls__parse_uri_reference.html#url.ref.boost__urls__parse_uri_reference.example">Example</a>
       </h5>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url_view</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"ws://echo.example.com/?name=boost#demo"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">url_view</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="identifier">parse_uri_reference</span><span class="special">(</span> <span class="string">"ws://echo.example.com/?name=boost#demo"</span> <span class="special">);</span>
 </pre>
 <h5>
 <a name="url.ref.boost__urls__parse_uri_reference.h3"></a>

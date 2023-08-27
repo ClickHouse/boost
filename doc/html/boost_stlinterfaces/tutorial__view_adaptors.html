@@ -488,7 +488,9 @@
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Iter</span><span class="special">&gt;</span>
     <span class="keyword">struct</span> <span class="identifier">take_iterator</span>
         <span class="special">:</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
               <span class="identifier">take_iterator</span><span class="special">&lt;</span><span class="identifier">Iter</span><span class="special">&gt;,</span>
+<span class="preprocessor">#endif</span>
               <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward_iterator_tag</span><span class="special">,</span>
               <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">iterator_traits</span><span class="special">&lt;</span><span class="identifier">Iter</span><span class="special">&gt;::</span><span class="identifier">value_type</span><span class="special">,</span>
               <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">iterator_traits</span><span class="special">&lt;</span><span class="identifier">Iter</span><span class="special">&gt;::</span><span class="identifier">reference</span><span class="special">,</span>

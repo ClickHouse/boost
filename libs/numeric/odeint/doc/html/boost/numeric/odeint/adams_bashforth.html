@@ -38,7 +38,8 @@
          <span class="keyword">typename</span> Operations <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">operations_dispatcher</span><span class="special">&lt;</span> <span class="identifier">State</span> <span class="special">&gt;</span><span class="special">::</span><span class="identifier">operations_type</span><span class="special">,</span> 
          <span class="keyword">typename</span> Resizer <span class="special">=</span> <span class="identifier">initially_resizer</span><span class="special">,</span> 
          <span class="keyword">typename</span> InitializingStepper <span class="special">=</span> <a class="link" href="extrapolation_stepper.html" title="Class template extrapolation_stepper">extrapolation_stepper</a><span class="special">&lt;</span> <span class="identifier">order_helper</span><span class="special">&lt;</span><span class="identifier">Steps</span><span class="special">&gt;</span><span class="special">::</span><span class="identifier">value</span><span class="special">,</span>                                                    <span class="identifier">State</span><span class="special">,</span> <span class="identifier">Value</span><span class="special">,</span> <span class="identifier">Deriv</span><span class="special">,</span> <span class="identifier">Time</span><span class="special">,</span>                                                   <span class="identifier">Algebra</span><span class="special">,</span> <span class="identifier">Operations</span><span class="special">,</span> <span class="identifier">Resizer</span> <span class="special">&gt;</span> <span class="special">&gt;</span> 
-<span class="keyword">class</span> <a class="link" href="adams_bashforth.html" title="Class template adams_bashforth">adams_bashforth</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">algebra_stepper_base</span><span class="special">&lt;</span> <span class="identifier">Algebra</span><span class="special">,</span> <span class="identifier">Operations</span> <span class="special">&gt;</span> <span class="special">{</span>
+<span class="keyword">class</span> <a class="link" href="adams_bashforth.html" title="Class template adams_bashforth">adams_bashforth</a> <span class="special">:</span> <span class="keyword">public</span> algebra_stepper_base&lt; typename algebra_dispatcher&lt; State &gt;::algebra_type, typename operations_dispatcher&lt; State &gt;::operations_type &gt;
+<span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// types</span>
   <span class="keyword">typedef</span> <span class="identifier">State</span>                                       <a name="boost.numeric.odeint.adams_bashforth.state_type"></a><span class="identifier">state_type</span><span class="special">;</span>               
@@ -94,13 +95,13 @@
   <span class="keyword">static</span> <span class="keyword">const</span> <span class="identifier">order_type</span> <span class="identifier">order_value</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm30784"></a><h2>Description</h2>
+<a name="idm30776"></a><h2>Description</h2>
 <p>The Adams-Bashforth method is a multi-step algorithm with configurable step number. The step number is specified as template parameter Steps and it then uses the result from the previous Steps steps. See also <a href="http://en.wikipedia.org/wiki/Linear_multistep_method" target="_top">en.wikipedia.org/wiki/Linear_multistep_method</a>. Currently, a maximum of Steps=8 is supported. The method is explicit and fulfills the Stepper concept. Step size control or continuous output are not provided.</p>
 <p>This class derives from algebra_base and inherits its interface via CRTP (current recurring template pattern). For more details see algebra_stepper_base.</p>
 <p>
 </p>
 <div class="refsect2">
-<a name="idm30790"></a><h3>Template Parameters</h3>
+<a name="idm30782"></a><h3>Template Parameters</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
 <pre class="literallayout"><span class="identifier">size_t</span> Steps</pre>
@@ -141,7 +142,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm30895"></a><h3>
+<a name="idm30887"></a><h3>
 <a name="boost.numeric.odeint.adams_bashforthconstruct-copy-destruct"></a><code class="computeroutput">adams_bashforth</code> 
         public
        construct/copy/destruct</h3>
@@ -170,7 +171,7 @@
 </li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idm30928"></a><h3>
+<a name="idm30920"></a><h3>
 <a name="idm25022-bb"></a><code class="computeroutput">adams_bashforth</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -462,7 +463,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm31350"></a><h3>
+<a name="idm31342"></a><h3>
 <a name="idm25242-bb"></a><code class="computeroutput">adams_bashforth</code> private member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> System<span class="special">,</span> <span class="keyword">typename</span> StateIn<span class="special">,</span> <span class="keyword">typename</span> StateOut<span class="special">&gt;</span> 

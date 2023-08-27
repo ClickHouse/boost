@@ -44,13 +44,13 @@
   <span class="keyword">explicit</span> <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_7-bb"><span class="identifier">faure_engine</span></a><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">)</span><span class="special">;</span>
 
   <span class="comment">// <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_4-bb">friend functions</a></span>
-  <span class="keyword">friend</span> <span class="keyword">bool</span> <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_4_1-bb"><span class="keyword">operator</span><span class="special">==</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">friend</span> <span class="keyword">bool</span> <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_4_2-bb"><span class="keyword">operator</span><span class="special">!=</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_4_1-bb"><span class="keyword">operator</span><span class="special">==</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_4_2-bb"><span class="keyword">operator</span><span class="special">!=</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">,</span> <span class="keyword">typename</span> Traits<span class="special">&gt;</span> 
-    <span class="keyword">friend</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
     <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_4_3-bb"><span class="keyword">operator</span><span class="special">&lt;&lt;</span></a><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">,</span> <span class="keyword">typename</span> Traits<span class="special">&gt;</span> 
-    <span class="keyword">friend</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_istream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_istream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
     <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_4_4-bb"><span class="keyword">operator</span><span class="special">&gt;&gt;</span></a><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_istream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 
   <span class="comment">// <a class="link" href="faure_engine.html#id-1_3_33_5_6_13_1_1_1_5-bb">public static functions</a></span>
@@ -65,7 +65,7 @@
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
 <a name="id-1.3.33.5.6.12.3.4"></a><h2>Description</h2>
-<p>Instantiations of class template <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> model a <a class="link" href="../../boost_random/reference.html#boost_random.reference.concepts.quasi_random_number_generator" title="Quasi-Random Number Generator">quasi-random number generator</a> . The <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> uses the algorithm described in  </p>
+<p>Instantiations of class template <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> model a  <a class="link" href="../../boost_random/reference.html#boost_random.reference.concepts.quasi_random_number_generator" title="Quasi-Random Number Generator">quasi-random number generator</a> . The <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> uses the algorithm described in  </p>
 <div class="blockquote"><blockquote class="blockquote"><p>  Henri Faure, Discrepance de suites associees a un systeme de numeration (en dimension s), Acta Arithmetica, Volume 41, 1982, pages 337-351.  </p></blockquote></div>
 <p>   </p>
 <div class="blockquote"><blockquote class="blockquote"><p>  Bennett Fox, Algorithm 647: Implementation and Relative Efficiency of Quasirandom Sequence Generators, ACM Transactions on Mathematical Software, Volume 12, Number 4, December 1986, pages 362-376.  </p></blockquote></div>
@@ -88,22 +88,22 @@
 <a name="id-1_3_33_5_6_13_1_1_1_4-bb"></a><code class="computeroutput">faure_engine</code> friend functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">friend</span> <span class="keyword">bool</span> <a name="id-1_3_33_5_6_13_1_1_1_4_1-bb"></a><span class="keyword">operator</span><span class="special">==</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> x<span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> y<span class="special">)</span><span class="special">;</span></pre>
+<pre class="literallayout"><span class="keyword">bool</span> <a name="id-1_3_33_5_6_13_1_1_1_4_1-bb"></a><span class="keyword">operator</span><span class="special">==</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> x<span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> y<span class="special">)</span><span class="special">;</span></pre>
 <p>Returns true if the two generators will produce identical sequences of outputs. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">friend</span> <span class="keyword">bool</span> <a name="id-1_3_33_5_6_13_1_1_1_4_2-bb"></a><span class="keyword">operator</span><span class="special">!=</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> lhs<span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> rhs<span class="special">)</span><span class="special">;</span></pre>
+<pre class="literallayout"><span class="keyword">bool</span> <a name="id-1_3_33_5_6_13_1_1_1_4_2-bb"></a><span class="keyword">operator</span><span class="special">!=</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> lhs<span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> rhs<span class="special">)</span><span class="special">;</span></pre>
 <p>Returns true if the two generators will produce different sequences of outputs. </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">,</span> <span class="keyword">typename</span> Traits<span class="special">&gt;</span> 
-  <span class="keyword">friend</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
   <a name="id-1_3_33_5_6_13_1_1_1_4_3-bb"></a><span class="keyword">operator</span><span class="special">&lt;&lt;</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_ostream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> os<span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> s<span class="special">)</span><span class="special">;</span></pre>
 <p>Writes the textual representation of the generator to a <code class="computeroutput">std::ostream</code>. </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">,</span> <span class="keyword">typename</span> Traits<span class="special">&gt;</span> 
-  <span class="keyword">friend</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_istream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_istream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> 
   <a name="id-1_3_33_5_6_13_1_1_1_4_4-bb"></a><span class="keyword">operator</span><span class="special">&gt;&gt;</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_istream</span><span class="special">&lt;</span> <span class="identifier">CharT</span><span class="special">,</span> <span class="identifier">Traits</span> <span class="special">&gt;</span> <span class="special">&amp;</span> is<span class="special">,</span> <span class="keyword">const</span> <a class="link" href="faure_engine.html" title="Class template faure_engine">faure_engine</a> <span class="special">&amp;</span> s<span class="special">)</span><span class="special">;</span></pre>
 <p>Reads the textual representation of the generator from a <code class="computeroutput">std::istream</code>. </p>
 </li>
@@ -116,12 +116,12 @@
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="identifier">result_type</span> <a name="id-1_3_33_5_6_13_1_1_1_5_1-bb"></a><span class="identifier">min</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>
 <p>Returns: Tight lower bound on the set of values returned by operator().</p>
-<p>Throws: nothing. </p>
+<p>Throws: nothing.   </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="identifier">result_type</span> <a name="id-1_3_33_5_6_13_1_1_1_5_2-bb"></a><span class="identifier">max</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>
 <p>Returns: Tight upper bound on the set of values returned by operator().</p>
-<p>Throws: nothing. </p>
+<p>Throws: nothing.   </p>
 </li>
 </ol></div>
 </div>
@@ -139,17 +139,17 @@
 <span class="identifier">v</span><span class="special">.</span><span class="identifier">seed</span><span class="special">(</span><span class="identifier">N</span><span class="special">)</span><span class="special">;</span>
 <span class="identifier">assert</span><span class="special">(</span><span class="identifier">u</span><span class="special">(</span><span class="special">)</span> <span class="special">==</span> <span class="identifier">v</span><span class="special">(</span><span class="special">)</span><span class="special">)</span><span class="special">;</span>
 </pre>
-<p> Throws: bad_alloc. </p>
+<p>  Throws: bad_alloc. </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <a name="id-1_3_33_5_6_13_1_1_1_6_2-bb"></a><span class="identifier">dimension</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>
 <p>Returns: The dimension of of the quasi-random domain.</p>
-<p>Throws: nothing. </p>
+<p>Throws: nothing.   </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="identifier">result_type</span> <a name="id-1_3_33_5_6_13_1_1_1_6_3-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>
 <p>Returns: Returns a successive element of an <code class="computeroutput">s</code>-dimensional (s = X::dimension()) vector at each invocation. When all elements are exhausted, X::operator() begins anew with the starting element of a subsequent <code class="computeroutput">s</code>-dimensional vector.</p>
-<p>Throws: range_error. </p>
+<p>Throws: range_error.   </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">void</span> <a name="id-1_3_33_5_6_13_1_1_1_6_4-bb"></a><span class="identifier">discard</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">uintmax_t</span> z<span class="special">)</span><span class="special">;</span></pre>
@@ -160,7 +160,7 @@
 <span class="identifier">v</span><span class="special">.</span><span class="identifier">discard</span><span class="special">(</span><span class="identifier">N</span><span class="special">)</span><span class="special">;</span>
 <span class="identifier">assert</span><span class="special">(</span><span class="identifier">u</span><span class="special">(</span><span class="special">)</span> <span class="special">==</span> <span class="identifier">v</span><span class="special">(</span><span class="special">)</span><span class="special">)</span><span class="special">;</span>
 </pre>
-<p>Throws: range_error. Throws: bad_alloc. </p>
+<p>Throws: range_error.   Throws: bad_alloc. </p>
 </li>
 </ol></div>
 </div>

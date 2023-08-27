@@ -70,7 +70,7 @@
         iterated. It also supports equality and comparison to unencoded strings,
         without allocating memory. In the example below we parse the string <code class="computeroutput"><span class="identifier">s</span></code> as a series of zero or more <a class="link" href="../ref/boost__urls__pchars.html" title="pchars"><code class="computeroutput"><span class="identifier">pchars</span></code></a>:
       </p>
-<pre class="programlisting"><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">pct_string_view</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span> <span class="identifier">s</span><span class="special">,</span> <span class="identifier">pct_encoded_rule</span><span class="special">(</span> <span class="identifier">pchars</span> <span class="special">)</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">pct_string_view</span> <span class="special">&gt;</span> <span class="identifier">rv</span> <span class="special">=</span> <span class="identifier">parse</span><span class="special">(</span> <span class="identifier">s</span><span class="special">,</span> <span class="identifier">pct_encoded_rule</span><span class="special">(</span> <span class="identifier">pchars</span> <span class="special">)</span> <span class="special">);</span>
 </pre>
 <p>
         These constants are used and provided by the library to specify rules for

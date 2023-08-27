@@ -2,7 +2,7 @@
 <library-reference><header name="boost/process.hpp">
 <para>Convenience header which includes all public and platform-independent boost.process header files. </para></header>
 <header name="boost/process/args.hpp">
-<para>This header provides the <globalname alt="boost::process::args">args</globalname> property. It also provides the alternative name <globalname alt="boost::process::argv">argv</globalname> .</para><para> 
+<para>This header provides the  <globalname alt="boost::process::args">args</globalname> property. It also provides the alternative name  <globalname alt="boost::process::argv">argv</globalname> .</para><para> 
 <programlisting language="c++">
 namespace boost {
   namespace process {
@@ -76,7 +76,7 @@ spawn("gcc", args+={"--version"});
 </para>
 </sect2>
 </sect1></description></data-member>
-<data-member name="argv"><type><emphasis>unspecified</emphasis></type><purpose>Alias for <globalname alt="boost::process::args">args</globalname>  . </purpose></data-member>
+<data-member name="argv"><type><emphasis>unspecified</emphasis></type><purpose>Alias for  <globalname alt="boost::process::args">args</globalname>  . </purpose></data-member>
 
 
 
@@ -106,7 +106,7 @@ on_exit(function);
 </formalpara>
 <programlisting language="c++">io_context ios;
 
-child c("ls", ios, on_exit=[](int exit, const std::error_code&amp; ec_in){});
+<classname alt="boost::process::child">child</classname> c("ls", ios, on_exit=[](int exit, const std::error_code&amp; ec_in){});
 
 std::future&lt;int&gt; exit_code;
 chlid c2("ls", ios, on_exit=exit_code);
@@ -141,7 +141,8 @@ chlid c2("ls", ios, on_exit=exit_code);
 <method name="conversion-operator" cv="const" specifiers="explicit"><type>basic_pipe&lt; CharT, Traits &gt;</type><template>
           <template-type-parameter name="CharT"/>
           <template-type-parameter name="Traits"><default>std::char_traits&lt;CharT&gt;</default></template-type-parameter>
-        </template><description><para>Explicit cast to <classname alt="boost::process::basic_pipe">basic_pipe</classname>. </para></description></method>
+        </template><description><para>Explicit cast to <classname alt="boost::process::basic_pipe">basic_pipe</classname>. <sbr/>
+ </para></description></method>
 <method name="cancel"><type>void</type><description><para>Cancel the current asynchronous operations. </para></description></method>
 <method name="close"><type>void</type><description><para>Close the pipe handles. </para></description></method>
 <method name="close"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>Close the pipe handles. While passing an error_code </para></description></method>
@@ -263,32 +264,32 @@ chlid c2("ls", ios, on_exit=exit_code);
 <method name="exit_code" cv="const"><type>int</type><description><para>Get the exit_code. The return value is without any meaning if the child wasn't waited for or if it was terminated. </para></description></method>
 <method name="id" cv="const"><type>pid_t</type><description><para>Get the Process Identifier. </para></description></method>
 <method name="native_exit_code" cv="const"><type>int</type><description><para>Get the native, uninterpreted exit code. The return value is without any meaning if the child wasn't waited for or if it was terminated. </para></description></method>
-<method name="running"><type>bool</type><description><para>Check if the child process is running. </para></description></method>
-<method name="running" cv="noexcept"><type>bool</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="wait"><type>void</type><description><para>Wait for the child process to exit. </para></description></method>
-<method name="wait" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="running"><type>bool</type><description><para>Check if the child process is running.</para><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description></method>
+<method name="running" cv="noexcept"><type>bool</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
+<method name="wait"><type>void</type><description><para>Wait for the child process to exit.</para><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description></method>
+<method name="wait" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 <method name="wait_for"><type>bool</type><template>
           <template-type-parameter name="Rep"/>
           <template-type-parameter name="Period"/>
         </template><parameter name="rel_time"><paramtype>const std::chrono::duration&lt; Rep, Period &gt; &amp;</paramtype></parameter><description><para>Wait for the child process to exit for a period of time. 
-</para></description><returns><para>True if child exited while waiting. </para>
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description><returns><para>True if child exited while waiting.</para>
 </returns></method>
-<method name="wait_for" cv="noexcept"><type>bool</type><parameter name="rel_time"><paramtype>const std::chrono::duration&lt; Rep, Period &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="wait_for" cv="noexcept"><type>bool</type><parameter name="rel_time"><paramtype>const std::chrono::duration&lt; Rep, Period &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 <method name="wait_until"><type>bool</type><template>
           <template-type-parameter name="Clock"/>
           <template-type-parameter name="Duration"/>
         </template><parameter name="timeout_time"><paramtype>const std::chrono::time_point&lt; Clock, Duration &gt; &amp;</paramtype></parameter><description><para>Wait for the child process to exit until a point in time. 
-</para></description><returns><para>True if child exited while waiting. </para>
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description><returns><para>True if child exited while waiting.</para>
 </returns></method>
-<method name="wait_until" cv="noexcept"><type>bool</type><parameter name="timeout_time"><paramtype>const std::chrono::time_point&lt; Clock, Duration &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="wait_until" cv="noexcept"><type>bool</type><parameter name="timeout_time"><paramtype>const std::chrono::time_point&lt; Clock, Duration &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 <method name="valid" cv="const"><type>bool</type><description><para>Check if this handle holds a child process. <note><para>That does not mean, that the process is still running. It only means, that the handle does or did exist. </para>
 </note>
 </para></description></method>
 <method name="conversion-operator" cv="const" specifiers="explicit"><type>bool</type><description><para>Same as valid, for convenience. </para></description></method>
-<method name="in_group" cv="const"><type>bool</type><description><para>Check if the the chlid process is in any process group. </para></description></method>
-<method name="in_group" cv="const noexcept"><type>bool</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="terminate"><type>void</type><description><para>Terminate the child process.</para><para>This function will cause the child process to unconditionally and immediately exit. It is implement with <ulink url="http://pubs.opengroup.org/onlinepubs/009695399/functions/kill.html">SIGKILL</ulink> on posix and <ulink url="https://technet.microsoft.com/en-us/library/ms686714.aspx">TerminateProcess</ulink> on windows. </para></description></method>
-<method name="terminate" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="in_group" cv="const"><type>bool</type><description><para>Check if the the chlid process is in any process group.</para><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description></method>
+<method name="in_group" cv="const noexcept"><type>bool</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
+<method name="terminate"><type>void</type><description><para>Terminate the child process.</para><para>This function will cause the child process to unconditionally and immediately exit. It is implement with <ulink url="http://pubs.opengroup.org/onlinepubs/009695399/functions/kill.html">SIGKILL</ulink> on posix and <ulink url="https://technet.microsoft.com/en-us/library/ms686714.aspx">TerminateProcess</ulink> on windows.</para><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description></method>
+<method name="terminate" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 </method-group>
 <constructor specifiers="explicit"><parameter name="pid"><paramtype>pid_t &amp;</paramtype></parameter><description><para>Construct the child from a pid.</para><para><note><para>There is no guarantee that this will work. The process need the right access rights, which are very platform specific. </para>
 </note>
@@ -314,7 +315,7 @@ chlid c2("ls", ios, on_exit=exit_code);
 </namespace>
 </header>
 <header name="boost/process/cmd.hpp">
-<para>This header provides the <globalname alt="boost::process::cmd">cmd</globalname> property.</para><para> 
+<para>This header provides the  <globalname alt="boost::process::cmd">cmd</globalname> property.</para><para> 
 <programlisting language="c++">
 namespace boost {
   namespace process {
@@ -470,7 +471,7 @@ env(env);
 <para><programlisting language="c++">spawn("b2", env["PATH"]+="F:/boost", env["SOME_VAR"]=boost::none, env["NEW_VAR"]="VALUE");
 </programlisting></para>
 <para>If the overload style should be done by passing an instance of  <classname>boost::process::environment</classname>  the above example would look like this.</para>
-<para><programlisting language="c++">environment e = this_process::environment();
+<para><programlisting language="c++"><classname alt="boost::process::basic_environment">environment</classname> e = this_process::environment();
 e["PATH"]   += "F:/boost";
 e.erase("SOME_VAR");
 e["NEW_VAR"] = "VALUE";
@@ -682,8 +683,8 @@ system("gcc", error(ec));
 </programlisting></para><para>The following syntax is valid:</para><para><programlisting language="c++">error(ec);
 error=ec;
 </programlisting></para><para>The overload version is achieved by just passing an object of <ulink url="http://en.cppreference.com/w/cpp/error/error_code">std::error_code</ulink> to the function. </para></description></data-member>
-<data-member name="error_ref"><type><emphasis>unspecified</emphasis></type><purpose>Alias for <globalname alt="boost::process::error">error</globalname>  . </purpose></data-member>
-<data-member name="error_code"><type><emphasis>unspecified</emphasis></type><purpose>Alias for <globalname alt="boost::process::error">error</globalname>  . </purpose></data-member>
+<data-member name="error_ref"><type><emphasis>unspecified</emphasis></type><purpose>Alias for  <globalname alt="boost::process::error">error</globalname>  . </purpose></data-member>
+<data-member name="error_code"><type><emphasis>unspecified</emphasis></type><purpose>Alias for  <globalname alt="boost::process::error">error</globalname>  . </purpose></data-member>
 
 
 
@@ -697,7 +698,7 @@ error=ec;
 <header name="boost/process/exception.hpp">
 <namespace name="boost">
 <namespace name="process">
-<struct name="process_error"><inherit access="public">system_error</inherit><purpose>The exception usually thrown by boost.process. </purpose><description><para>It merely inherits <ulink url="http://en.cppreference.com/w/cpp/error/system_error">std::system_error</ulink> but can then be distinguished in the catch-block from other system errors. </para></description></struct>
+<struct name="process_error"><inherit access="public">std::system_error</inherit><purpose>The exception usually thrown by boost.process. </purpose><description><para>It merely inherits <ulink url="http://en.cppreference.com/w/cpp/error/system_error">std::system_error</ulink> but can then be distinguished in the catch-block from other system errors. </para></description></struct>
 
 
 
@@ -889,14 +890,14 @@ else
 <data-member name="exe"><type>const char *</type><purpose>A pointer to the name of the executable. </purpose></data-member>
 <data-member name="cmd_line"><type>char *const  *</type><purpose>A pointer to the argument-vector. </purpose></data-member>
 <data-member name="env"><type>char **</type><purpose>A pointer to the environment variables, as default it is set to <ulink url="http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html">environ</ulink> </purpose></data-member>
-<data-member name="pid"><type>pid_t</type><purpose>The pid of the process - it will be -1 before invoking <ulink url="http://pubs.opengroup.org/onlinepubs/009695399/functions/fork.html">fork</ulink>, and after forking either 0 for the new process or a positive value if in the current process. */. </purpose></data-member>
+<data-member name="pid"><type>pid_t</type><purpose>The pid of the process - it will be -1 before invoking <ulink url="http://pubs.opengroup.org/onlinepubs/009695399/functions/fork.html">fork</ulink>, and after forking either 0 for the new process or a positive value if in the current process. *<zwj/>/. </purpose></data-member>
 <data-member name="exit_status"><type>std::shared_ptr&lt; std::atomic&lt; int &gt; &gt;</type><purpose>This shared-pointer holds the exit code. It's done this way, so it can be shared between an <computeroutput>asio::io_context</computeroutput> and <classname alt="boost::process::child">child</classname>. </purpose></data-member>
 <method-group name="public member functions">
 <method name="error" cv="const"><type>const std::error_code &amp;</type><purpose>This function returns a const reference to the error state of the executor. </purpose></method>
-<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const std::string &amp;</paramtype></parameter><description><para>This function can be used to report an error to the executor. This will be handled according to the configuration of the executor, i.e. it might throw an exception. <note><para>This is the required way to handle errors in initializers. </para>
+<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const std::string &amp;</paramtype></parameter><description><para>This function can be used to report an error to the executor. This will be handled according to the configuration of the executor, i.e. it might throw an exception. <note><para>This is the required way to handle errors in initializers.</para>
 </note>
-</para></description></method>
-<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const char *</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const char *</paramtype></parameter></method>
 </method-group>
 </struct><struct name="require_io_context"><description><para>Inheriting the class will tell the launching process that an <computeroutput>io_context</computeroutput> is needed. This should always be used when get_io_context is used. </para></description></struct><struct name="windows_executor"><template>
       <template-type-parameter name="Char"><purpose><para>The used char-type, either <computeroutput>char</computeroutput> or <computeroutput>wchar_t</computeroutput>.</para></purpose></template-type-parameter>
@@ -971,10 +972,10 @@ else
 <data-member name="startup_info_ex"><type>startup_info_ex_t</type><purpose>This element is the instance of the <ulink url="https://msdn.microsoft.com/de-de/library/windows/desktop/ms686329.aspx">extended startup-info</ulink>. It is only available with a winapi-version equal or highter than 6. </purpose></data-member>
 <method-group name="public member functions">
 <method name="error" cv="const"><type>const std::error_code &amp;</type><purpose>This function returns a const reference to the error state of the executor. </purpose></method>
-<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const std::string &amp;</paramtype></parameter><description><para>This function can be used to report an error to the executor. This will be handled according to the configuration of the executor, i.e. it might throw an exception. <note><para>This is the required way to handle errors in initializers. </para>
+<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const std::string &amp;</paramtype></parameter><description><para>This function can be used to report an error to the executor. This will be handled according to the configuration of the executor, i.e. it might throw an exception. <note><para>This is the required way to handle errors in initializers.</para>
 </note>
-</para></description></method>
-<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const char *</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="set_error"><type>void</type><parameter name="ec"><paramtype>const std::error_code &amp;</paramtype></parameter><parameter name="msg"><paramtype>const char *</paramtype></parameter></method>
 <method name="set_startup_info_ex"><type>void</type><purpose>This function switches the information, so that the extended structure is used. </purpose><description><para><note><para>It's only defined with winapi-version equal or higher than 6. </para>
 </note>
 </para></description></method>
@@ -992,10 +993,10 @@ else
 </note>
 </para></description></data-member>
 <function name="get_last_error"><type>std::error_code</type><purpose>Helper function to get the last error code system-independent. </purpose></function>
-<overloaded-function name="throw_last_error"><signature><type>void</type><parameter name="msg"><paramtype>const std::string &amp;</paramtype><description><para>A message to add to the error code. </para></description></parameter></signature><signature><type>void</type></signature><description><para>Helper function to get and throw the last system error. 
+<function name="throw_last_error"><type>void</type><parameter name="msg"><paramtype>const std::string &amp;</paramtype><description><para>A message to add to the error code. </para></description></parameter><description><para>Helper function to get and throw the last system error. 
 
-</para></description><throws><simpara><classname>boost::process::process_error</classname> </simpara></throws></overloaded-function>
-
+</para></description><throws><simpara><classname>boost::process::process_error</classname> </simpara></throws></function>
+<function name="throw_last_error"><type>void</type></function>
 <function name="get_io_context"><type>asio::io_context &amp;</type><template>
           <template-type-parameter name="Sequence"/>
         </template><parameter name="seq"><paramtype>const Sequence &amp;</paramtype><description><para>The Sequence of the initializer. </para></description></parameter><description><para>This function gets the io_context from the initializer sequence.</para><para><note><para>Yields a compile-time error if no <computeroutput>io_context</computeroutput> is provided. </para>
@@ -1046,36 +1047,36 @@ else
 <method name="join"><type>void</type><description><para>Join the child. This just calls wait, but that way the naming is similar to std::thread </para></description></method>
 <method name="joinable"><type>bool</type><description><para>Check if the child is joinable. </para></description></method>
 <method name="native_handle" cv="const"><type>native_handle_t</type><purpose>Obtain the native handle of the group. </purpose></method>
-<method name="wait"><type>void</type><purpose>Wait for the process group to exit. </purpose></method>
-<method name="wait" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="wait"><type>void</type><purpose>Wait for the process group to exit. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="wait" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 <method name="wait_for"><type>bool</type><template>
           <template-type-parameter name="Rep"/>
           <template-type-parameter name="Period"/>
         </template><parameter name="rel_time"><paramtype>const std::chrono::duration&lt; Rep, Period &gt; &amp;</paramtype></parameter><description><para>Wait for the process group to exit for period of time. 
-</para></description><returns><para>True if all child processes exited while waiting. </para>
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description><returns><para>True if all child processes exited while waiting.</para>
 </returns></method>
 <method name="wait_for" cv="noexcept"><type>bool</type><template>
           <template-type-parameter name="Rep"/>
           <template-type-parameter name="Period"/>
-        </template><parameter name="rel_time"><paramtype>const std::chrono::duration&lt; Rep, Period &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+        </template><parameter name="rel_time"><paramtype>const std::chrono::duration&lt; Rep, Period &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 <method name="wait_until"><type>bool</type><template>
           <template-type-parameter name="Clock"/>
           <template-type-parameter name="Duration"/>
         </template><parameter name="timeout_time"><paramtype>const std::chrono::time_point&lt; Clock, Duration &gt; &amp;</paramtype></parameter><description><para>Wait for the process group to exit until a point in time. 
-</para></description><returns><para>True if all child processes exited while waiting. </para>
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</para></description><returns><para>True if all child processes exited while waiting.</para>
 </returns></method>
 <method name="wait_until" cv="noexcept"><type>bool</type><template>
           <template-type-parameter name="Clock"/>
           <template-type-parameter name="Duration"/>
-        </template><parameter name="timeout_time"><paramtype>const std::chrono::time_point&lt; Clock, Duration &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+        </template><parameter name="timeout_time"><paramtype>const std::chrono::time_point&lt; Clock, Duration &gt; &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 <method name="valid" cv="const"><type>bool</type><purpose>Check if the group has a valid handle. </purpose></method>
 <method name="conversion-operator" cv="const" specifiers="explicit"><type>bool</type><purpose>Convenience to call valid. </purpose></method>
-<method name="terminate"><type>void</type><purpose>Terminate the process group, i.e. all processes in the group. </purpose></method>
-<method name="terminate" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="terminate"><type>void</type><purpose>Terminate the process group, i.e. all processes in the group. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="terminate" cv="noexcept"><type>void</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 <method name="add"><type>void</type><parameter name="c"><paramtype>const <classname>child</classname> &amp;</paramtype></parameter><purpose>Assign a child process to the group. </purpose></method>
-<method name="add" cv="noexcept"><type>void</type><parameter name="c"><paramtype>const <classname>child</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="has"><type>bool</type><parameter name="c"><paramtype>const <classname>child</classname> &amp;</paramtype></parameter><purpose>Check if the child process is in the group. </purpose></method>
-<method name="has" cv="noexcept"><type>bool</type><parameter name="c"><paramtype>const <classname>child</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="add" cv="noexcept"><type>void</type><parameter name="c"><paramtype>const <classname>child</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
+<method name="has"><type>bool</type><parameter name="c"><paramtype>const <classname>child</classname> &amp;</paramtype></parameter><purpose>Check if the child process is in the group. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="has" cv="noexcept"><type>bool</type><parameter name="c"><paramtype>const <classname>child</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></method>
 </method-group>
 <constructor specifiers="explicit"><parameter name="ch"><paramtype>group_handle &amp;&amp;</paramtype></parameter></constructor>
 <constructor specifiers="explicit"><parameter name="handle"><paramtype>native_handle_t &amp;</paramtype></parameter><purpose>Construct the group from a native_handle. </purpose></constructor>
@@ -1115,20 +1116,20 @@ else
 </namespace>
 <namespace name="this_process">
 <typedef name="native_handle_type"><purpose>The native type for handles. </purpose><description><para>Definition of the native handle type. </para></description><type><emphasis>unspecified</emphasis></type></typedef>
-<overloaded-function name="get_handles"><signature><type>std::vector&lt; native_handle_type &gt;</type></signature><signature><type>std::vector&lt; native_handle_type &gt;</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></signature><description><para>Get a snapshot of all handles of the process (i.e. file descriptors on posix and handles on windows) of the current process.</para><para><note><para>This function might not work on certain posix systems.</para>
+<function name="get_handles"><type>std::vector&lt; native_handle_type &gt;</type><description><para>Get a snapshot of all handles of the process (i.e. file descriptors on posix and handles on windows) of the current process.</para><para><note><para>This function might not work on certain posix systems.</para>
 </note>
 <note><para>On Windows version older than windows 8 this function will iterate all the system handles, meaning it might be quite slow.</para>
 </note>
 <warning><para>This functionality is utterly prone to race conditions, since other threads might open or close handles.</para>
 </warning>
 
-</para></description><returns><para>The list of all open handles of the current process </para>
-</returns></overloaded-function>
-
-<overloaded-function name="is_stream_handle"><signature><type>bool</type><parameter name="handle"><paramtype>native_handle_type</paramtype></parameter></signature><signature><type>bool</type><parameter name="handle"><paramtype>native_handle_type</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></signature><description><para>Determines if a given handle is a a stream-handle, i.e. any handle that can be used with read and write functions. Stream handles include pipes, regular files and sockets.</para><para>
-</para></description><returns><para>Indicates if it's a stream handle. </para>
-</returns></overloaded-function>
-
+</para></description><returns><para>The list of all open handles of the current process</para>
+</returns></function>
+<function name="get_handles"><type>std::vector&lt; native_handle_type &gt;</type><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></function>
+<function name="is_stream_handle"><type>bool</type><parameter name="handle"><paramtype>native_handle_type</paramtype></parameter><description><para>Determines if a given handle is a a stream-handle, i.e. any handle that can be used with read and write functions. Stream handles include pipes, regular files and sockets.</para><para>
+</para></description><returns><para>Indicates if it's a stream handle.</para>
+</returns></function>
+<function name="is_stream_handle"><type>bool</type><parameter name="handle"><paramtype>native_handle_type</paramtype></parameter><parameter name="ec"><paramtype>std::error_code &amp;</paramtype></parameter></function>
 
 
 
@@ -1215,8 +1216,8 @@ std_in = file;
 <para><note><para>Technically the <classname alt="boost::process::async_pipe">async_pipe</classname> works synchronous here, since no asio implementation is used by the library here. The async-operation will then however not end if the process is finished, since the pipe remains open. You can use the async_close function with on_exit to fix that.</para>
 </note>
 Valid expressions with pipes are these:</para>
-<para><programlisting language="c++">std_in &lt; pipe;
-std_in = pipe;
+<para><programlisting language="c++">std_in &lt; <classname alt="boost::process::basic_pipe">pipe</classname>;
+std_in = <classname alt="boost::process::basic_pipe">pipe</classname>;
 </programlisting></para>
 <para>Where the valid types for <computeroutput>pipe</computeroutput> are the following:</para>
 <para><itemizedlist>
@@ -1227,9 +1228,9 @@ std_in = pipe;
 </listitem></itemizedlist>
 </para>
 <para>Note that the pipe may also be used between several processes, like this:</para>
-<para><programlisting language="c++">pipe p;
-child c1("nm", "a.out", std_out&gt;p);
-child c2("c++filt", std_in&lt;p);
+<para><programlisting language="c++"><classname alt="boost::process::basic_pipe">pipe</classname> p;
+<classname alt="boost::process::child">child</classname> c1("nm", "a.out", std_out&gt;p);
+<classname alt="boost::process::child">child</classname> c2("c++filt", std_in&lt;p);
 </programlisting></para>
 </sect2>
 <sect2 id="namespaceboost_1_1process_1stdin_async_pipe">
@@ -1237,8 +1238,8 @@ child c2("c++filt", std_in&lt;p);
 <para>Asynchronous Pipe I/O classifies communication which has automatically handling of the asynchronous operations by the process library. This means, that a pipe will be constructed, the async_read/-write will be automatically started, and that the end of the child process will also close the pipe.</para>
 <para>Valid types for pipe I/O are the following:</para>
 <para><itemizedlist>
-<listitem><para><computeroutput>boost::asio::const_buffer</computeroutput> <footnote><para> Constructed with <code>boost::asio::buffer</code></para></footnote> </para>
-</listitem><listitem><para><computeroutput>boost::asio::mutable_buffer</computeroutput> <footnote><para> Constructed with <code>boost::asio::buffer</code></para></footnote> </para>
+<listitem><para><computeroutput>boost::asio::const_buffer</computeroutput>  <footnote><para> Constructed with <code>boost::asio::buffer</code></para></footnote> </para>
+</listitem><listitem><para><computeroutput>boost::asio::mutable_buffer</computeroutput>  <footnote><para> Constructed with <code>boost::asio::buffer</code></para></footnote> </para>
 </listitem><listitem><para><computeroutput>boost::asio::streambuf</computeroutput></para>
 </listitem></itemizedlist>
 </para>
@@ -1255,7 +1256,7 @@ std_err = buffer;
 <para><note><para>It is also possible to get a future for std_in, by chaining another <computeroutput>std::future&lt;void&gt;</computeroutput> onto it, so you can wait for the input to be completed. It looks like this: <programlisting language="c++">std::future&lt;void&gt; fut;
 boost::asio::io_context ios;
 std::string data;
-child c("prog", std_in &lt; buffer(data) &gt;  fut, ios);
+<classname alt="boost::process::child">child</classname> c("prog", std_in &lt; buffer(data) &gt;  fut, ios);
 fut.get();
 </programlisting></para>
 </note>
@@ -1284,7 +1285,7 @@ std_in.null();
 </programlisting> </para>
 </sect2>
 </sect1></description></data-member>
-<data-member name="std_out"><type><emphasis>unspecified</emphasis></type><description><para>This property allows to set the output stream for the child process.</para><para><note><para>The Semantic is the same as for <globalname alt="boost::process::std_err">std_err</globalname> </para>
+<data-member name="std_out"><type><emphasis>unspecified</emphasis></type><description><para>This property allows to set the output stream for the child process.</para><para><note><para>The Semantic is the same as for  <globalname alt="boost::process::std_err">std_err</globalname> </para>
 </note>
 <note><para><computeroutput>std_err</computeroutput> and <computeroutput>std_out</computeroutput> can be combined into one stream, with the <computeroutput>operator &amp;</computeroutput>, i.e. <computeroutput>std_out &amp; std_err</computeroutput>.</para>
 </note>
@@ -1318,8 +1319,8 @@ std_out = file;
 <para><note><para>Technically the <classname alt="boost::process::async_pipe">async_pipe</classname> works like a synchronous pipe here, since no asio implementation is used by the library here. The asynchronous operation will then however not end if the process is finished, since the pipe remains open. You can use the async_close function with on_exit to fix that.</para>
 </note>
 Valid expressions with pipes are these:</para>
-<para><programlisting language="c++">std_out &gt; pipe;
-std_out = pipe;
+<para><programlisting language="c++">std_out &gt; <classname alt="boost::process::basic_pipe">pipe</classname>;
+std_out = <classname alt="boost::process::basic_pipe">pipe</classname>;
 </programlisting></para>
 <para>Where the valid types for <computeroutput>pipe</computeroutput> are the following:</para>
 <para><itemizedlist>
@@ -1330,9 +1331,9 @@ std_out = pipe;
 </listitem></itemizedlist>
 </para>
 <para>Note that the pipe may also be used between several processes, like this:</para>
-<para><programlisting language="c++">pipe p;
-child c1("nm", "a.out", std_out&gt;p);
-child c2("c++filt", std_in&lt;p);
+<para><programlisting language="c++"><classname alt="boost::process::basic_pipe">pipe</classname> p;
+<classname alt="boost::process::child">child</classname> c1("nm", "a.out", std_out&gt;p);
+<classname alt="boost::process::child">child</classname> c2("c++filt", std_in&lt;p);
 </programlisting></para>
 </sect2>
 <sect2 id="namespaceboost_1_1process_1stdout_async_pipe">
@@ -1340,7 +1341,7 @@ child c2("c++filt", std_in&lt;p);
 <para>Asynchronous Pipe I/O classifies communication which has automatically handling of the async operations by the process library. This means, that a pipe will be constructed, the async_read/-write will be automatically started, and that the end of the child process will also close the pipe.</para>
 <para>Valid types for pipe I/O are the following:</para>
 <para><itemizedlist>
-<listitem><para><computeroutput>boost::asio::mutable_buffer</computeroutput> <footnote><para> Constructed with <code>boost::asio::buffer</code></para></footnote> </para>
+<listitem><para><computeroutput>boost::asio::mutable_buffer</computeroutput>  <footnote><para> Constructed with <code>boost::asio::buffer</code></para></footnote> </para>
 </listitem><listitem><para><computeroutput>boost::asio::streambuf</computeroutput></para>
 </listitem><listitem><para><computeroutput>std::future&lt;std::vector&lt;char&gt;&gt;</computeroutput></para>
 </listitem><listitem><para><computeroutput>std::future&lt;std::string&gt;</computeroutput></para>
@@ -1410,7 +1411,7 @@ std_out.null();
 <class name="basic_ipstream"><template>
       <template-type-parameter name="CharT"/>
       <template-type-parameter name="Traits"><default>std::char_traits&lt;CharT&gt;</default></template-type-parameter>
-    </template><inherit access="public">std::basic_istream&lt; CharT, Traits &gt;</inherit><description><para>Implementation of a reading pipe stream. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
+    </template><inherit access="public">std::basic_istream&lt; CharT, std::char_traits&lt; CharT &gt; &gt;</inherit><description><para>Implementation of a reading pipe stream. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
 <typedef name="char_type"><type>CharT</type></typedef>
 <typedef name="traits_type"><type>Traits</type></typedef>
 <typedef name="int_type"><type>Traits::int_type</type></typedef>
@@ -1440,7 +1441,7 @@ std_out.null();
 </class><class name="basic_opstream"><template>
       <template-type-parameter name="CharT"/>
       <template-type-parameter name="Traits"><default>std::char_traits&lt;CharT&gt;</default></template-type-parameter>
-    </template><inherit access="public">std::basic_ostream&lt; CharT, Traits &gt;</inherit><description><para>Implementation of a write pipe stream. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
+    </template><inherit access="public">std::basic_ostream&lt; CharT, std::char_traits&lt; CharT &gt; &gt;</inherit><description><para>Implementation of a write pipe stream. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
 <typedef name="char_type"><type>CharT</type></typedef>
 <typedef name="traits_type"><type>Traits</type></typedef>
 <typedef name="int_type"><type>Traits::int_type</type></typedef>
@@ -1499,7 +1500,7 @@ std_out.null();
 </class><struct name="basic_pipebuf"><template>
       <template-type-parameter name="CharT"/>
       <template-type-parameter name="Traits"><default>std::char_traits&lt;CharT&gt;</default></template-type-parameter>
-    </template><inherit access="public">std::basic_streambuf&lt; CharT, Traits &gt;</inherit><description><para>Implementation of the stream buffer for a pipe. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
+    </template><inherit access="public">std::basic_streambuf&lt; CharT, std::char_traits&lt; CharT &gt; &gt;</inherit><description><para>Implementation of the stream buffer for a pipe. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
 <typedef name="char_type"><type>CharT</type></typedef>
 <typedef name="traits_type"><type>Traits</type></typedef>
 <typedef name="int_type"><type>Traits::int_type</type></typedef>
@@ -1536,7 +1537,7 @@ std_out.null();
 </struct><class name="basic_pstream"><template>
       <template-type-parameter name="CharT"/>
       <template-type-parameter name="Traits"><default>std::char_traits&lt;CharT&gt;</default></template-type-parameter>
-    </template><inherit access="public">std::basic_iostream&lt; CharT, Traits &gt;</inherit><description><para>Implementation of a read-write pipe stream. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
+    </template><inherit access="public">std::basic_iostream&lt; CharT, std::char_traits&lt; CharT &gt; &gt;</inherit><description><para>Implementation of a read-write pipe stream. </para></description><typedef name="pipe_type"><type><classname>basic_pipe</classname>&lt; CharT, Traits &gt;</type></typedef>
 <typedef name="char_type"><type>CharT</type></typedef>
 <typedef name="traits_type"><type>Traits</type></typedef>
 <typedef name="int_type"><type>Traits::int_type</type></typedef>

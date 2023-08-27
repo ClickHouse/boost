@@ -25,12 +25,12 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="geometry.reference.spatial_indexes.group__predicates.satisfies_unarypredicate_const___"></a><a name="group__predicates_1ga3213772dd3e54ad03340c2ca66b4f58c"></a><a class="link" href="satisfies_unarypredicate_const___.html" title="satisfies(UnaryPredicate const &amp;)">satisfies(UnaryPredicate
+<a name="geometry.reference.spatial_indexes.group__predicates.satisfies_unarypredicate_const___"></a><a name="group__predicates_1gaf23b2a001cdc392f58c22f64d96aa97b"></a><a class="link" href="satisfies_unarypredicate_const___.html" title="satisfies(UnaryPredicate const &amp;)">satisfies(UnaryPredicate
           const &amp;)</a>
 </h5></div></div></div>
 <p>
-            <a class="indexterm" name="idm91199"></a>
-Generate <a class="link" href="satisfies_unarypredicate_const___.html#group__predicates_1ga3213772dd3e54ad03340c2ca66b4f58c">satisfies()</a>
+            <a class="indexterm" name="idm91152"></a>
+Generate <a class="link" href="satisfies_unarypredicate_const___.html#group__predicates_1gaf23b2a001cdc392f58c22f64d96aa97b">satisfies()</a>
             predicate.
           </p>
 <h6>
@@ -148,10 +148,8 @@ Generate <a class="link" href="satisfies_unarypredicate_const___.html#group__pre
 <span class="identifier">rt</span><span class="special">.</span><span class="identifier">query</span><span class="special">(</span><span class="identifier">index</span><span class="special">::</span><span class="identifier">intersects</span><span class="special">(</span><span class="identifier">box</span><span class="special">)</span> <span class="special">&amp;&amp;</span> <span class="identifier">index</span><span class="special">::</span><span class="identifier">satisfies</span><span class="special">(</span><span class="identifier">is_red_o</span><span class="special">()),</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">back_inserter</span><span class="special">(</span><span class="identifier">result</span><span class="special">));</span>
 
-<span class="preprocessor">#ifndef</span> <span class="identifier">BOOST_NO_CXX11_LAMBDAS</span>
 <span class="identifier">rt</span><span class="special">.</span><span class="identifier">query</span><span class="special">(</span><span class="identifier">index</span><span class="special">::</span><span class="identifier">intersects</span><span class="special">(</span><span class="identifier">box</span><span class="special">)</span> <span class="special">&amp;&amp;</span> <span class="identifier">index</span><span class="special">::</span><span class="identifier">satisfies</span><span class="special">([](</span><span class="identifier">Value</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">v</span><span class="special">)</span> <span class="special">{</span> <span class="keyword">return</span> <span class="identifier">v</span><span class="special">.</span><span class="identifier">is_red</span><span class="special">();</span> <span class="special">}),</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">back_inserter</span><span class="special">(</span><span class="identifier">result</span><span class="special">));</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <p>
           </p>

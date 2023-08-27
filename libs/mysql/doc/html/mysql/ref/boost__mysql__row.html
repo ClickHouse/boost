@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../index.html" title="Chapter 1. Boost.MySQL">
 <link rel="up" href="../../pt01.html" title="Part Two: Reference. ">
-<link rel="prev" href="boost__mysql__results/info.html" title="results::info">
+<link rel="prev" href="boost__mysql__resultset_view/is_out_params.html" title="resultset_view::is_out_params">
 <link rel="next" href="boost__mysql__row/iterator.html" title="row::iterator">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -21,7 +21,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="boost__mysql__results/info.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__row/iterator.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="boost__mysql__resultset_view/is_out_params.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__row/iterator.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h4 class="title">
@@ -273,7 +273,7 @@
 <tr>
 <td>
                 <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__row/operator_lb__rb_.html" title="row::operator[]">operator[]</a></strong></span>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__row/operator__lb__rb_.html" title="row::operator[]">operator[]</a></strong></span>
                 </p>
               </td>
 <td>
@@ -367,19 +367,21 @@
               </td>
 <td>
                 <p>
-                  Equality operator.
+                  Equality operator. <br><span class="silver">—</span><br>
+
                 </p>
               </td>
 </tr>
 <tr>
 <td>
                 <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__row/operator_not__eq_.html" title="row::operator!=">operator!=</a></strong></span>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__row/operator__not__eq_.html" title="row::operator!=">operator!=</a></strong></span>
                 </p>
               </td>
 <td>
                 <p>
-                  Inequality operator.
+                  Inequality operator. <br><span class="silver">—</span><br>
+
                 </p>
               </td>
 </tr>
@@ -402,7 +404,7 @@
         A <code class="computeroutput"><span class="identifier">row</span></code> object owns a chunk
         of memory in which it stores its elements. On element access (using iterators,
         <a class="link" href="boost__mysql__row/at.html" title="row::at"><code class="computeroutput"><span class="identifier">row</span><span class="special">::</span><span class="identifier">at</span></code></a>
-        or <a class="link" href="boost__mysql__row/operator_lb__rb_.html" title="row::operator[]"><code class="computeroutput"><span class="identifier">row</span><span class="special">::</span><span class="keyword">operator</span><span class="special">[]</span></code></a>) it returns <a class="link" href="boost__mysql__field_view.html" title="field_view"><code class="computeroutput"><span class="identifier">field_view</span></code></a>'s pointing into the
+        or <a class="link" href="boost__mysql__row/operator__lb__rb_.html" title="row::operator[]"><code class="computeroutput"><span class="identifier">row</span><span class="special">::</span><span class="keyword">operator</span><span class="special">[]</span></code></a>) it returns <a class="link" href="boost__mysql__field_view.html" title="field_view"><code class="computeroutput"><span class="identifier">field_view</span></code></a>'s pointing into the
         <code class="computeroutput"><span class="identifier">row</span></code>'s internal storage. These
         views behave like references, and are valid as long as pointers, iterators
         and references into the <code class="computeroutput"><span class="identifier">row</span></code>
@@ -419,7 +421,7 @@
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="boost__mysql__results/info.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__row/iterator.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="boost__mysql__resultset_view/is_out_params.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__row/iterator.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

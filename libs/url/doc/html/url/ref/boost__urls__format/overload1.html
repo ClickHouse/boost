@@ -42,7 +42,7 @@
     <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="identifier">url</span>
 <span class="identifier">format</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">fmt</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">fmt</span><span class="special">,</span>
     <span class="identifier">Args</span><span class="special">&amp;&amp;...</span> <span class="identifier">args</span><span class="special">);</span>
 </pre>
 <h6>
@@ -66,7 +66,7 @@
 <a name="url.ref.boost__urls__format.overload1.h2"></a>
           <span class="phrase"><a name="url.ref.boost__urls__format.overload1.example"></a></span><a class="link" href="overload1.html#url.ref.boost__urls__format.overload1.example">Example</a>
         </h6>
-<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span><span class="identifier">format</span><span class="special">(</span><span class="string">"{}"</span><span class="special">,</span> <span class="string">"Hello world!"</span><span class="special">).</span><span class="identifier">buffer</span><span class="special">()</span> <span class="special">==</span> <span class="string">"Hello%20world%21"</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span><span class="identifier">format</span><span class="special">(</span> <span class="string">"{}"</span> <span class="special">,</span> <span class="string">"Hello world!"</span> <span class="special">).</span><span class="identifier">buffer</span><span class="special">()</span> <span class="special">==</span> <span class="string">"Hello%20world%21"</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__format.overload1.h3"></a>
@@ -174,12 +174,12 @@
 <a name="url.ref.boost__urls__format.overload1.h7"></a>
           <span class="phrase"><a name="url.ref.boost__urls__format.overload1.bnf"></a></span><a class="link" href="overload1.html#url.ref.boost__urls__format.overload1.bnf">BNF</a>
         </h6>
-<pre class="programlisting"><span class="identifier">replacement_field</span> <span class="special">::=</span>  <span class="string">"{"</span> <span class="special">[</span><span class="identifier">arg_id</span><span class="special">]</span> <span class="special">[</span><span class="string">":"</span> <span class="special">(</span><span class="identifier">format_spec</span> <span class="special">|</span> <span class="identifier">chrono_format_spec</span><span class="special">)]</span> <span class="string">"}"</span>
+<pre class="programlisting"><span class="identifier">replacement_field</span> <span class="special">::=</span>  <span class="string">"{"</span> <span class="special">[</span><span class="identifier">arg_id</span><span class="special">]</span> <span class="special">[</span> <span class="string">":"</span> <span class="special">(</span><span class="identifier">format_spec</span> <span class="special">|</span> <span class="identifier">chrono_format_spec</span><span class="special">)]</span> <span class="string">"}"</span>
 <span class="identifier">arg_id</span>            <span class="special">::=</span>  <span class="identifier">integer</span> <span class="special">|</span> <span class="identifier">identifier</span>
 <span class="identifier">integer</span>           <span class="special">::=</span>  <span class="identifier">digit</span><span class="special">+</span>
-<span class="identifier">digit</span>             <span class="special">::=</span>  <span class="string">"0"</span><span class="special">...</span><span class="string">"9"</span>
+<span class="identifier">digit</span>             <span class="special">::=</span>  <span class="string">"0"</span> <span class="special">...</span> <span class="string">"9"</span>
 <span class="identifier">identifier</span>        <span class="special">::=</span>  <span class="identifier">id_start</span> <span class="identifier">id_continue</span><span class="special">*</span>
-<span class="identifier">id_start</span>          <span class="special">::=</span>  <span class="string">"a"</span><span class="special">...</span><span class="string">"z"</span> <span class="special">|</span> <span class="string">"A"</span><span class="special">...</span><span class="string">"Z"</span> <span class="special">|</span> <span class="string">"_"</span>
+<span class="identifier">id_start</span>          <span class="special">::=</span>  <span class="string">"a"</span> <span class="special">...</span> <span class="string">"z"</span> <span class="special">|</span> <span class="string">"A"</span> <span class="special">...</span> <span class="string">"Z"</span> <span class="special">|</span> <span class="string">"_"</span>
 <span class="identifier">id_continue</span>       <span class="special">::=</span>  <span class="identifier">id_start</span> <span class="special">|</span> <span class="identifier">digit</span>
 </pre>
 <h6>

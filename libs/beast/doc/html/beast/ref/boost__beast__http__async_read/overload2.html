@@ -49,8 +49,8 @@
 <span class="identifier">async_read</span><span class="special">(</span>
     <span class="identifier">AsyncReadStream</span><span class="special">&amp;</span> <span class="identifier">stream</span><span class="special">,</span>
     <span class="identifier">DynamicBuffer</span><span class="special">&amp;</span> <span class="identifier">buffer</span><span class="special">,</span>
-    <span class="identifier">message</span><span class="special">&lt;</span> <span class="identifier">isRequest</span><span class="special">,</span> <span class="identifier">Body</span><span class="special">,</span> <span class="identifier">basic_fields</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;&gt;&amp;</span> <span class="identifier">msg</span><span class="special">,</span>
-    <span class="identifier">ReadHandler</span><span class="special">&amp;&amp;</span> <span class="identifier">handler</span> <span class="special">=</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <a class="link" href="../boost__beast__executor_type.html" title="executor_type">executor_type</a><span class="special">&lt;</span> <span class="identifier">AsyncReadStream</span> <span class="special">&gt;&gt;{});</span>
+    <span class="identifier">message</span><span class="special">&lt;</span> <span class="identifier">isRequest</span><span class="special">,</span> <span class="identifier">Body</span><span class="special">,</span> <span class="identifier">basic_fields</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&gt;&amp;</span> <span class="identifier">msg</span><span class="special">,</span>
+    <span class="identifier">ReadHandler</span><span class="special">&amp;&amp;</span> <span class="identifier">handler</span> <span class="special">=</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <a class="link" href="../boost__beast__executor_type.html" title="executor_type">executor_type</a><span class="special">&lt;</span> <span class="identifier">AsyncReadStream</span> <span class="special">&gt;</span> <span class="special">&gt;{});</span>
 </pre>
 <h6>
 <a name="beast.ref.boost__beast__http__async_read.overload2.h1"></a>
@@ -178,7 +178,7 @@
                     must be:
                   </p>
 <pre class="table-programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
-    <span class="identifier">error_code</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span>        <span class="comment">// result of operation</span>
+    <span class="identifier">error_code</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span>        <span class="comment">// result of operation</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>   <span class="comment">// the total number of bytes transferred from the stream</span>
 <span class="special">);</span>
 </pre>
@@ -186,7 +186,7 @@
                     Regardless of whether the asynchronous operation completes immediately
                     or not, the handler will not be invoked from within this function.
                     Invocation of the handler will be performed in a manner equivalent
-                    to using <a class="link" href="../boost__beast__http__verb.html" title="http::verb"><code class="computeroutput"><span class="identifier">net</span><span class="special">::</span><span class="identifier">post</span></code></a>.
+                    to using <code class="computeroutput"><span class="identifier">net</span><span class="special">::</span><span class="identifier">post</span></code>.
                   </p>
                 </td>
 </tr>

@@ -58,7 +58,7 @@
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
 <a name="id-1.3.33.5.6.34.3.4"></a><h2>Description</h2>
-<p>Class <a class="link" href="random_device.html" title="Class random_device">random_device</a> models a <a class="link" href="../../boost_random/reference.html#boost_random.reference.concepts.non_deterministic_uniform_random_number_generator" title="Non-deterministic Uniform Random Number Generator">non-deterministic random number generator</a> . It uses one or more implementation-defined stochastic processes to generate a sequence of uniformly distributed non-deterministic random numbers. For those environments where a non-deterministic random number generator is not available, class <a class="link" href="random_device.html" title="Class random_device">random_device</a> must not be implemented. See</p>
+<p>Class  <a class="link" href="random_device.html" title="Class random_device">random_device</a> models a  <a class="link" href="../../boost_random/reference.html#boost_random.reference.concepts.non_deterministic_uniform_random_number_generator" title="Non-deterministic Uniform Random Number Generator">non-deterministic random number generator</a> . It uses one or more implementation-defined stochastic processes to generate a sequence of uniformly distributed non-deterministic random numbers. For those environments where a non-deterministic random number generator is not available, class <a class="link" href="random_device.html" title="Class random_device">random_device</a> must not be implemented. See</p>
 <p> </p>
 <div class="blockquote"><blockquote class="blockquote"><p>  "Randomness Recommendations for Security", D. Eastlake, S. Crocker, J. Schiller, Network Working Group, RFC 1750, December 1994  </p></blockquote></div>
 <p> </p>
@@ -75,7 +75,7 @@
 <p><span class="bold"><strong>Implementation Note for Linux</strong></span></p>
 <p>On the Linux operating system, token is interpreted as a filesystem path. It is assumed that this path denotes an operating system pseudo-device which generates a stream of non-deterministic random numbers. The pseudo-device should never signal an error or end-of-file. Otherwise, <code class="computeroutput">std::ios_base::failure</code> is thrown. By default,  <a class="link" href="random_device.html" title="Class random_device">random_device</a> uses the /dev/urandom pseudo-device to retrieve the random numbers. Another option would be to specify the /dev/random pseudo-device, which blocks on reads if the entropy pool has no more random bits available.</p>
 <p><span class="bold"><strong>Implementation Note for Windows</strong></span></p>
-<p>On the Windows operating system, token is interpreted as the name of a cryptographic service provider. By default <a class="link" href="random_device.html" title="Class random_device">random_device</a> uses MS_DEF_PROV.</p>
+<p>On the Windows operating system, token is interpreted as the name of a cryptographic service provider. By default  <a class="link" href="random_device.html" title="Class random_device">random_device</a> uses MS_DEF_PROV.</p>
 <p><span class="bold"><strong>Performance</strong></span></p>
 <p>The test program <a href="../../../../libs/random/performance/nondet_random_speed.cpp" target="_top">nondet_random_speed.cpp</a> measures the execution times of the random_device.hpp implementation of the above algorithms in a tight loop. The performance has been evaluated on an Intel(R) Core(TM) i7 CPU Q 840 @ 1.87GHz, 1867 Mhz with Visual C++ 2010, Microsoft Windows 7 Professional and with gcc 4.4.5, Ubuntu Linux 2.6.35-25-generic.</p>
 <div class="informaltable"><table class="table">
@@ -124,11 +124,11 @@
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="identifier">result_type</span> <a name="id-1_3_33_5_6_35_1_1_1_5_1-bb"></a><span class="identifier">min</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>
-<p>Returns the smallest value that the <code class="computeroutput"><a class="link" href="random_device.html" title="Class random_device">random_device</a></code> can produce. </p>
+<p>Returns the smallest value that the  <code class="computeroutput"><a class="link" href="random_device.html" title="Class random_device">random_device</a></code> can produce. </p>
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="identifier">result_type</span> <a name="id-1_3_33_5_6_35_1_1_1_5_2-bb"></a><span class="identifier">max</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>
-<p>Returns the largest value that the <code class="computeroutput"><a class="link" href="random_device.html" title="Class random_device">random_device</a></code> can produce. </p>
+<p>Returns the largest value that the  <code class="computeroutput"><a class="link" href="random_device.html" title="Class random_device">random_device</a></code> can produce. </p>
 </li>
 </ol></div>
 </div>

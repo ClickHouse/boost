@@ -23,7 +23,7 @@ The free functions [*get] and [*set] are two of the most important functions of 
 
 [heading Synopsis]
 ``template<std::size_t Dimension, typename Geometry>
-constexpr coordinate_type<Geometry>::type get(Geometry const & geometry)``
+constexpr coordinate_type< Geometry >::type get(Geometry const & geometry)``
 
 [heading Parameters]
 
@@ -62,7 +62,7 @@ The free functions [*get] and [*set] are two of the most important functions of 
 
 [heading Synopsis]
 ``template<std::size_t Index, std::size_t Dimension, typename Geometry>
-constexpr coordinate_type<Geometry>::type get(Geometry const & geometry)``
+constexpr coordinate_type< Geometry >::type get(Geometry const & geometry)``
 
 [heading Parameters]
 
@@ -102,7 +102,7 @@ Result is in Radian, even if source coordinate system is in Degrees
 
 [heading Synopsis]
 ``template<std::size_t Dimension, typename Geometry>
-fp_coordinate_type<Geometry>::type get_as_radian(Geometry const & geometry)``
+fp_coordinate_type< Geometry >::type get_as_radian(Geometry const & geometry)``
 
 [heading Parameters]
 
@@ -139,7 +139,7 @@ Result is in Radian, even if source coordinate system is in Degrees
 
 [heading Synopsis]
 ``template<std::size_t Index, std::size_t Dimension, typename Geometry>
-fp_coordinate_type<Geometry>::type get_as_radian(Geometry const & geometry)``
+fp_coordinate_type< Geometry >::type get_as_radian(Geometry const & geometry)``
 
 [heading Parameters]
 

@@ -132,7 +132,11 @@
 <tr><td align="left" valign="top"><p>
         C++20 versions of <code class="computeroutput">iterator_interface</code> and <code class="computeroutput">sequence_container_interface</code>
         are provided (C++20 provides <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">view_interface</span></code>).
-        These are constrained templates using C++20 concepts. These are in the <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">v2</span></code> namespace.
+        These are constrained templates using C++20 concepts. These are in the <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">v2</span></code> namespace. There is also a C++23 version
+        of <code class="computeroutput">iterator_interface</code> that uses
+        deducing <code class="computeroutput"><span class="keyword">this</span></code> instead of <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern" target="_top">CRTP</a>.
+        If you do nothing, you'll get the latest <code class="computeroutput"><span class="identifier">vN</span></code>
+        namespace inlined, depending on your compiler's language support.
       </p></td></tr>
 </table></div>
 <h4>
@@ -291,7 +295,9 @@
 <p>
 </p>
 <pre class="programlisting"><span class="keyword">struct</span> <span class="identifier">repeated_chars_iterator</span> <span class="special">:</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
                                      <span class="identifier">repeated_chars_iterator</span><span class="special">,</span>
+<span class="preprocessor">#endif</span>
                                      <span class="identifier">std</span><span class="special">::</span><span class="identifier">random_access_iterator_tag</span><span class="special">,</span>
                                      <span class="keyword">char</span><span class="special">,</span>
                                      <span class="keyword">char</span><span class="special">&gt;</span>

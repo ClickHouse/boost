@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__http__parser.value_type"></a><a class="link" href="value_type.html" title="http::parser::value_type">http::parser::value_type</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm38368"></a>
+          <a class="indexterm" name="idm43698"></a>
         </p>
 <p>
           The type of message returned by the parser.
@@ -64,12 +64,36 @@
 <tr>
 <td>
                   <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/allocator_type.html" title="http::message::allocator_type">allocator_type</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    The type of allocator used.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
                     <span class="bold"><strong><a class="link" href="../boost__beast__http__message/body_type.html" title="http::message::body_type">body_type</a></strong></span>
                   </p>
                 </td>
 <td>
                   <p>
                     The type providing the body traits.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/const_iterator.html" title="http::message::const_iterator">const_iterator</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    A constant iterator to the field sequence.
                   </p>
                 </td>
 </tr>
@@ -109,6 +133,43 @@
                   </p>
                 </td>
 </tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/iterator.html" title="http::message::iterator">iterator</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    A constant iterator to the field sequence.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/key_compare.html" title="http::message::key_compare">key_compare</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    A strictly less predicate for comparing keys, using a case-insensitive
+                    comparison.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/writer.html" title="http::message::writer">writer</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    The algorithm used to serialize the header.
+                  </p>
+                </td>
+</tr>
 </tbody>
 </table></div>
 <h6>
@@ -137,6 +198,18 @@
 <tr>
 <td>
                   <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/at.html" title="http::message::at">at</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns the value for a field, or throws an exception.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
                     <span class="bold"><strong><a class="link" href="../boost__beast__http__message/base.html" title="http::message::base">base</a></strong></span>
                   </p>
                 </td>
@@ -149,12 +222,48 @@
 <tr>
 <td>
                   <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/begin.html" title="http::message::begin">begin</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Return a const iterator to the beginning of the field sequence.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
                     <span class="bold"><strong><a class="link" href="../boost__beast__http__message/body.html" title="http::message::body">body</a></strong></span>
                   </p>
                 </td>
 <td>
                   <p>
                     Returns the body.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/cbegin.html" title="http::message::cbegin">cbegin</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Return a const iterator to the beginning of the field sequence.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/cend.html" title="http::message::cend">cend</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Return a const iterator to the end of the field sequence.
                   </p>
                 </td>
 </tr>
@@ -175,12 +284,101 @@
 <tr>
 <td>
                   <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/clear.html" title="http::message::clear">clear</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Remove all fields from the container.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
                     <span class="bold"><strong><a class="link" href="../boost__beast__http__message/content_length.html" title="http::message::content_length">content_length</a></strong></span>
                   </p>
                 </td>
 <td>
                   <p>
                     Set or clear the Content-Length field.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/count.html" title="http::message::count">count</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Return the number of fields with the specified name.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/end.html" title="http::message::end">end</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Return a const iterator to the end of the field sequence.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/equal_range.html" title="http::message::equal_range">equal_range</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns a range of iterators to the fields with the specified
+                    name. <br><span class="silver">—</span><br>Returns a range of iterators
+                    to the fields with the specified name.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/erase.html" title="http::message::erase">erase</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Remove a field. <br><span class="silver">—</span><br>Remove all
+                    fields with the specified name.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/find.html" title="http::message::find">find</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns an iterator to the case-insensitive matching field. <br>
+                    <span class="silver">—</span><br>Returns an iterator to the
+                    case-insensitive matching field name.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/get_allocator.html" title="http::message::get_allocator">get_allocator</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Return a copy of the allocator associated with the container.
                   </p>
                 </td>
 </tr>
@@ -200,6 +398,19 @@
 <tr>
 <td>
                   <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/insert.html" title="http::message::insert">insert</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Insert a field. <br><span class="silver">—</span><br>
+
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
                     <span class="bold"><strong><a class="link" href="../boost__beast__http__message/keep_alive.html" title="http::message::keep_alive">keep_alive</a></strong></span>
                   </p>
                 </td>
@@ -208,6 +419,18 @@
                     Returns <code class="computeroutput"><span class="keyword">true</span></code> if
                     the message semantics indicate keep-alive. <br><span class="silver">—</span><br>Set
                     the keep-alive message semantic option.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/key_comp.html" title="http::message::key_comp">key_comp</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns a copy of the key comparison function.
                   </p>
                 </td>
 </tr>
@@ -277,6 +500,20 @@
 <tr>
 <td>
                   <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/operator__lb__rb_.html" title="http::message::operator[]">operator[]</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns the value for a field, or <code class="computeroutput"><span class="string">""</span></code>
+                    if it does not exist. <br><span class="silver">—</span><br>Returns
+                    the value for a case-insensitive matching header, or <code class="computeroutput"><span class="string">""</span></code> if it does not exist.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
                     <span class="bold"><strong><a class="link" href="../boost__beast__http__message/payload_size.html" title="http::message::payload_size">payload_size</a></strong></span>
                   </p>
                 </td>
@@ -340,6 +577,32 @@
 <tr>
 <td>
                   <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/set.html" title="http::message::set">set</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Set a field value, removing any other instances of that field.
+                    <br><span class="silver">—</span><br>
+
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/swap.html" title="http::message::swap">swap</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Return a buffer sequence representing the trailers.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
                     <span class="bold"><strong><a class="link" href="../boost__beast__http__message/target.html" title="http::message::target">target</a></strong></span>
                   </p>
                 </td>
@@ -365,6 +628,176 @@
 </tr>
 </tbody>
 </table></div>
+<h6>
+<a name="beast.ref.boost__beast__http__parser.value_type.h3"></a>
+          <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.protected_member_functions"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.protected_member_functions">Protected
+          Member Functions</a>
+        </h6>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                  <p>
+                    Name
+                  </p>
+                </th>
+<th>
+                  <p>
+                    Description
+                  </p>
+                </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/get_chunked_impl.html" title="http::message::get_chunked_impl">get_chunked_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns the chunked Transfer-Encoding setting.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/get_keep_alive_impl.html" title="http::message::get_keep_alive_impl">get_keep_alive_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns the keep-alive setting.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/get_method_impl.html" title="http::message::get_method_impl">get_method_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns the request-method string.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/get_reason_impl.html" title="http::message::get_reason_impl">get_reason_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns the response reason-phrase string.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/get_target_impl.html" title="http::message::get_target_impl">get_target_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns the request-target string.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/has_content_length_impl.html" title="http::message::has_content_length_impl">has_content_length_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Returns <code class="computeroutput"><span class="keyword">true</span></code> if
+                    the Content-Length field is present.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/set_chunked_impl.html" title="http::message::set_chunked_impl">set_chunked_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Adjusts the chunked Transfer-Encoding value.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/set_content_length_impl.html" title="http::message::set_content_length_impl">set_content_length_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Sets or clears the Content-Length field.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/set_keep_alive_impl.html" title="http::message::set_keep_alive_impl">set_keep_alive_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Adjusts the Connection field.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/set_method_impl.html" title="http::message::set_method_impl">set_method_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Set or clear the method string.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/set_reason_impl.html" title="http::message::set_reason_impl">set_reason_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Set or clear the reason string.
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__message/set_target_impl.html" title="http::message::set_target_impl">set_target_impl</a></strong></span>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    Set or clear the target string.
+                  </p>
+                </td>
+</tr>
+</tbody>
+</table></div>
 <p>
           This container is derived from the <code class="computeroutput"><span class="identifier">Fields</span></code>
           template type. To understand all of the members of this class it is necessary
@@ -380,7 +813,7 @@
           to <a class="link" href="../boost__beast__http__status.html" title="http::status"><code class="computeroutput"><span class="identifier">status</span><span class="special">::</span><span class="identifier">ok</span></code></a>.
         </p>
 <h6>
-<a name="beast.ref.boost__beast__http__parser.value_type.h3"></a>
+<a name="beast.ref.boost__beast__http__parser.value_type.h4"></a>
           <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.template_parameters"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.template_parameters">Template
           Parameters</a>
         </h6>
@@ -444,7 +877,7 @@
 </tbody>
 </table></div>
 <h6>
-<a name="beast.ref.boost__beast__http__parser.value_type.h4"></a>
+<a name="beast.ref.boost__beast__http__parser.value_type.h5"></a>
           <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.types0"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.types0">Types</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -541,7 +974,7 @@
 </tbody>
 </table></div>
 <h6>
-<a name="beast.ref.boost__beast__http__parser.value_type.h5"></a>
+<a name="beast.ref.boost__beast__http__parser.value_type.h6"></a>
           <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.member_functions0"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.member_functions0">Member
           Functions</a>
         </h6>
@@ -669,7 +1102,8 @@
 <td>
                   <p>
                     Returns a range of iterators to the fields with the specified
-                    name.
+                    name. <br><span class="silver">—</span><br>Returns a range of iterators
+                    to the fields with the specified name.
                   </p>
                 </td>
 </tr>
@@ -752,7 +1186,7 @@
 <tr>
 <td>
                   <p>
-                    <span class="bold"><strong><a class="link" href="../boost__beast__http__basic_fields/operator_lb__rb_.html" title="http::basic_fields::operator[]">operator[]</a></strong></span>
+                    <span class="bold"><strong><a class="link" href="../boost__beast__http__basic_fields/operator__lb__rb_.html" title="http::basic_fields::operator[]">operator[]</a></strong></span>
                   </p>
                 </td>
 <td>
@@ -804,8 +1238,8 @@
 </tbody>
 </table></div>
 <h6>
-<a name="beast.ref.boost__beast__http__parser.value_type.h6"></a>
-          <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.protected_member_functions"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.protected_member_functions">Protected
+<a name="beast.ref.boost__beast__http__parser.value_type.h7"></a>
+          <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.protected_member_functions0"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.protected_member_functions0">Protected
           Member Functions</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -974,7 +1408,7 @@
 </tbody>
 </table></div>
 <h6>
-<a name="beast.ref.boost__beast__http__parser.value_type.h7"></a>
+<a name="beast.ref.boost__beast__http__parser.value_type.h8"></a>
           <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.friends"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.friends">Friends</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -1019,7 +1453,7 @@
           of <span class="emphasis"><em>Fields</em></span>
         </p>
 <h6>
-<a name="beast.ref.boost__beast__http__parser.value_type.h8"></a>
+<a name="beast.ref.boost__beast__http__parser.value_type.h9"></a>
           <span class="phrase"><a name="beast.ref.boost__beast__http__parser.value_type.template_parameters0"></a></span><a class="link" href="value_type.html#beast.ref.boost__beast__http__parser.value_type.template_parameters0">Template
           Parameters</a>
         </h6>

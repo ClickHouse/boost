@@ -226,47 +226,58 @@
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_space"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_space predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::space</computeroutput> category.</para><para>
+<function name="is_space"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_space predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::space</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_alnum"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_alnum predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::alnum</computeroutput> category.</para><para>
+<function name="is_alnum"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_alnum predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::alnum</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_alpha"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_alpha predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::alpha</computeroutput> category.</para><para>
+<function name="is_alpha"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_alpha predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::alpha</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_cntrl"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_cntrl predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::cntrl</computeroutput> category.</para><para>
+<function name="is_cntrl"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_cntrl predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::cntrl</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_digit"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_digit predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::digit</computeroutput> category.</para><para>
+<function name="is_digit"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_digit predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::digit</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_graph"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_graph predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::graph</computeroutput> category.</para><para>
+<function name="is_graph"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_graph predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::graph</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_lower"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_lower predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::lower</computeroutput> category.</para><para>
+<function name="is_lower"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_lower predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::lower</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_print"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_print predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::print</computeroutput> category.</para><para>
+<function name="is_print"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_print predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::print</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_punct"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_punct predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::punct</computeroutput> category.</para><para>
+<function name="is_punct"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_punct predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::punct</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_upper"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_upper predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::upper</computeroutput> category.</para><para>
+<function name="is_upper"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_upper predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::upper</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
-<function name="is_xdigit"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_xdigit predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::xdigit</computeroutput> category.</para><para>
+<function name="is_xdigit"><type><emphasis>unspecified</emphasis></type><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for classification </para></description></parameter><purpose>is_xdigit predicate </purpose><description><para>Construct the <computeroutput>is_classified</computeroutput> predicate for the <computeroutput>ctype_base::xdigit</computeroutput> category. <sbr/>
+</para><para>
 
 </para></description><returns><para>An instance of the <computeroutput>is_classified</computeroutput> predicate </para>
 </returns></function>
@@ -287,20 +298,23 @@
           <template-type-parameter name="Pred2T"/>
         </template><parameter name="Pred1"><paramtype>const predicate_facade&lt; Pred1T &gt; &amp;</paramtype><description><para>The first predicate </para></description></parameter><parameter name="Pred2"><paramtype>const predicate_facade&lt; Pred2T &gt; &amp;</paramtype><description><para>The second predicate </para></description></parameter><purpose>predicate 'and' composition predicate </purpose><description><para>Construct the <computeroutput>class_and</computeroutput> predicate. This predicate can be used to logically combine two classification predicates. <computeroutput>class_and</computeroutput> holds, if both predicates return true.</para><para>
 
-</para></description><returns><para>An instance of the <computeroutput>class_and</computeroutput> predicate </para>
+</para></description><returns><para>An instance of the <computeroutput>class_and</computeroutput> predicate <sbr/>
+ </para>
 </returns></function>
 <function name="operator||"><type><emphasis>unspecified</emphasis></type><template>
           <template-type-parameter name="Pred1T"/>
           <template-type-parameter name="Pred2T"/>
         </template><parameter name="Pred1"><paramtype>const predicate_facade&lt; Pred1T &gt; &amp;</paramtype><description><para>The first predicate </para></description></parameter><parameter name="Pred2"><paramtype>const predicate_facade&lt; Pred2T &gt; &amp;</paramtype><description><para>The second predicate </para></description></parameter><purpose>predicate 'or' composition predicate </purpose><description><para>Construct the <computeroutput>class_or</computeroutput> predicate. This predicate can be used to logically combine two classification predicates. <computeroutput>class_or</computeroutput> holds, if one of the predicates return true.</para><para>
 
-</para></description><returns><para>An instance of the <computeroutput>class_or</computeroutput> predicate </para>
+</para></description><returns><para>An instance of the <computeroutput>class_or</computeroutput> predicate <sbr/>
+ </para>
 </returns></function>
 <function name="operator!"><type><emphasis>unspecified</emphasis></type><template>
           <template-type-parameter name="PredT"/>
         </template><parameter name="Pred"><paramtype>const predicate_facade&lt; PredT &gt; &amp;</paramtype><description><para>The predicate to be negated </para></description></parameter><purpose>predicate negation operator </purpose><description><para>Construct the <computeroutput>class_not</computeroutput> predicate. This predicate represents a negation. <computeroutput>class_or</computeroutput> holds if of the predicates return false.</para><para>
 
-</para></description><returns><para>An instance of the <computeroutput>class_not</computeroutput> predicate </para>
+</para></description><returns><para>An instance of the <computeroutput>class_not</computeroutput> predicate <sbr/>
+ </para>
 </returns></function>
 
 
@@ -1378,10 +1392,11 @@
 <overloaded-function name="erase_tail_copy"><signature><type>OutputIteratorT</type><template>
           <template-type-parameter name="OutputIteratorT"/>
           <template-type-parameter name="RangeT"/>
-        </template><parameter name="Output"><paramtype>OutputIteratorT</paramtype><description><para>An output iterator to which the result will be copied </para></description></parameter><parameter name="Input"><paramtype>const RangeT &amp;</paramtype><description><para>An input string </para></description></parameter><parameter name="N"><paramtype>int</paramtype><description><para>Length of the tail.</para></description></parameter></signature><signature><type>SequenceT</type><template>
+        </template><parameter name="Output"><paramtype>OutputIteratorT</paramtype><description><para>An output iterator to which the result will be copied </para></description></parameter><parameter name="Input"><paramtype>const RangeT &amp;</paramtype><description><para>An input string </para></description></parameter><parameter name="N"><paramtype>int</paramtype><description><para>Length of the tail. <sbr/>
+ For N&gt;=0, at most N characters are extracted. For N&lt;0, size(Input)-|N| characters are extracted. </para></description></parameter></signature><signature><type>SequenceT</type><template>
           <template-type-parameter name="SequenceT"/>
         </template><parameter name="Input"><paramtype>const SequenceT &amp;</paramtype></parameter><parameter name="N"><paramtype>int</paramtype></parameter></signature><purpose>Erase tail algorithm. </purpose><description><para>Remove the tail from the input. The tail is a suffix of a sequence of given size. If the sequence is shorter then required, the whole string is considered to be the tail. The result is a modified copy of the input. It is returned as a sequence or copied to the output iterator.</para><para>
-For N&gt;=0, at most N characters are extracted. For N&lt;0, size(Input)-|N| characters are extracted. 
+
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
 </para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
@@ -1530,14 +1545,16 @@ For N&gt;=0, at most N characters are extracted. For N&lt;0, size(Input)-|N| cha
           <template-type-parameter name="Range2T"/>
         </template><parameter name="Input"><paramtype>Range1T &amp;</paramtype><description><para>A string which will be searched. </para></description></parameter><parameter name="Search"><paramtype>const Range2T &amp;</paramtype><description><para>A substring to be searched for. </para></description></parameter><parameter name="Loc"><paramtype>const std::locale &amp;</paramtype><default>std::locale()</default><description><para>A locale used for case insensitive comparison </para></description></parameter><purpose>Find last algorithm ( case insensitive ) </purpose><description><para>Search for the last match a string in the input. Searching is case insensitive.</para><para>
 
-<note><para>This function provides the strong exception-safety guarantee </para>
+<note><para>This function provides the strong exception-safety guarantee <sbr/>
+ </para>
 </note>
 </para></description><returns><para>An <computeroutput>iterator_range</computeroutput> delimiting the match. Returned iterator is either <computeroutput>Range1T::iterator</computeroutput> or <computeroutput>Range1T::const_iterator</computeroutput>, depending on the constness of the input parameter.</para>
 </returns></function>
 <function name="find_nth"><type>iterator_range&lt; typename range_iterator&lt; Range1T &gt;::type &gt;</type><template>
           <template-type-parameter name="Range1T"/>
           <template-type-parameter name="Range2T"/>
-        </template><parameter name="Input"><paramtype>Range1T &amp;</paramtype><description><para>A string which will be searched. </para></description></parameter><parameter name="Search"><paramtype>const Range2T &amp;</paramtype><description><para>A substring to be searched for. </para></description></parameter><parameter name="Nth"><paramtype>int</paramtype><description><para>An index (zero-indexed) of the match to be found. For negative N, the matches are counted from the end of string. </para></description></parameter><purpose>Find n-th algorithm. </purpose><description><para>Search for the n-th (zero-indexed) occurrence of the substring in the input.</para><para>
+        </template><parameter name="Input"><paramtype>Range1T &amp;</paramtype><description><para>A string which will be searched. </para></description></parameter><parameter name="Search"><paramtype>const Range2T &amp;</paramtype><description><para>A substring to be searched for. </para></description></parameter><parameter name="Nth"><paramtype>int</paramtype><description><para>An index (zero-indexed) of the match to be found. For negative N, the matches are counted from the end of string. </para></description></parameter><purpose>Find n-th algorithm. </purpose><description><para>Search for the n-th (zero-indexed) occurrence of the substring in the input. <sbr/>
+</para><para>
 
 </para></description><returns><para>An <computeroutput>iterator_range</computeroutput> delimiting the match. Returned iterator is either <computeroutput>Range1T::iterator</computeroutput> or <computeroutput>Range1T::const_iterator</computeroutput>, depending on the constness of the input parameter. </para>
 </returns></function>
@@ -1571,7 +1588,8 @@ For N&gt;=0, at most N characters are extracted. For N&lt;0, size(Input)-|N| cha
           <template-type-parameter name="PredicateT"/>
         </template><parameter name="Input"><paramtype>RangeT &amp;</paramtype><description><para>A input string. </para></description></parameter><parameter name="Pred"><paramtype>PredicateT</paramtype><description><para>A unary predicate to identify a token </para></description></parameter><parameter name="eCompress"><paramtype>token_compress_mode_type</paramtype><default>token_compress_off</default><description><para>Enable/Disable compressing of adjacent tokens </para></description></parameter><purpose>Find token algorithm. </purpose><description><para>Look for a given token in the string. Token is a character that matches the given predicate. If the "token compress mode" is enabled, adjacent tokens are considered to be one match.</para><para>
 
-<note><para>This function provides the strong exception-safety guarantee </para>
+<note><para>This function provides the strong exception-safety guarantee <sbr/>
+ </para>
 </note>
 </para></description><returns><para>An <computeroutput>iterator_range</computeroutput> delimiting the match. Returned iterator is either <computeroutput>RangeT::iterator</computeroutput> or <computeroutput>RangeT::const_iterator</computeroutput>, depending on the constness of the input parameter.</para>
 </returns></function>
@@ -1969,13 +1987,13 @@ For N&gt;=0, at most N characters are extracted. For N&lt;0, size(Input)-|N| cha
     </template><inherit access="public">iterator_facade&lt; find_iterator&lt; IteratorT &gt;, const iterator_range&lt; IteratorT &gt;, forward_traversal_tag &gt;</inherit><purpose><classname alt="boost::algorithm::find_iterator">find_iterator</classname> </purpose><description><para>Find iterator encapsulates a Finder and allows for incremental searching in a string. Each increment moves the iterator to the next match.</para><para>Find iterator is a readable forward traversal iterator.</para><para>Dereferencing the iterator yields an iterator_range delimiting the current match. </para></description><data-member name="End"><type>IteratorT</type></data-member>
 <data-member name="Finder"><type>IteratorT FinderT</type></data-member>
 <method-group name="public member functions">
-<method name="BOOST_DEFAULTED_FUNCTION"><type/><parameter name="operator"><paramtype><classname>find_iterator</classname> &amp;</paramtype><default>(const <classname alt="boost::algorithm::find_iterator">find_iterator</classname> &amp;Other)</default></parameter><parameter name=""><paramtype>{ if(this==&amp;Other) return *this;this-&gt;base_type::operator=(Other);m_Match=Other.m_Match;m_End=Other.m_End;return *this;}</paramtype></parameter><purpose>Copy assignment. </purpose><description><para>Assigns a copy of the find_iteratorConstructor</para><para>Construct new <classname alt="boost::algorithm::find_iterator">find_iterator</classname> for a given finder and a range. </para></description></method>
+<method name="BOOST_DEFAULTED_FUNCTION"><type/><parameter name="operator"><paramtype><classname>find_iterator</classname> &amp;</paramtype><default>(const <classname alt="boost::algorithm::find_iterator">find_iterator</classname> &amp;Other)</default></parameter><parameter name=""><paramtype>{ if(this==&amp;Other) return *this;this-&gt;base_type::operator=(Other);m_Match=Other.m_Match;m_End=Other.m_End;return *this;}</paramtype></parameter><purpose>Copy assignment. </purpose><description><para>Assigns a copy of the <classname alt="boost::algorithm::find_iterator">find_iterator</classname> Constructor</para><para>Construct new <classname alt="boost::algorithm::find_iterator">find_iterator</classname> for a given finder and a range. </para></description></method>
 <method name="m_Match"><type>IteratorT FinderT</type><parameter name=""><paramtype>Begin</paramtype></parameter><parameter name=""><paramtype>Begin</paramtype></parameter></method>
 <method name="m_End"><type>IteratorT FinderT</type><parameter name=""><paramtype>End</paramtype></parameter></method>
 <method name="eof" cv="const"><type>bool</type><purpose>Eof check. </purpose><description><para>Check the eof condition. Eof condition means that there is nothing more to be searched i.e. <classname alt="boost::algorithm::find_iterator">find_iterator</classname> is after the last match. </para></description></method>
 </method-group>
 <constructor><parameter name="Other"><paramtype>const <classname>find_iterator</classname> &amp;</paramtype></parameter><purpose>Default constructor. </purpose><description><para>Construct null iterator. All null iterators are equal.</para><para>
-Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_iterator</classname> </para></description><postconditions><para>eof()==trueCopy constructor</para>
+Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_iterator</classname> </para></description><postconditions><para>eof()==true Copy constructor</para>
 </postconditions></constructor>
 <constructor><template>
           <template-type-parameter name="FinderT"/>
@@ -1991,7 +2009,7 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
     </template><inherit access="public">iterator_facade&lt; split_iterator&lt; IteratorT &gt;, const iterator_range&lt; IteratorT &gt;, forward_traversal_tag &gt;</inherit><purpose><classname alt="boost::algorithm::split_iterator">split_iterator</classname> </purpose><description><para>Split iterator encapsulates a Finder and allows for incremental searching in a string. Unlike the find iterator, split iterator iterates through gaps between matches.</para><para>Find iterator is a readable forward traversal iterator.</para><para>Dereferencing the iterator yields an iterator_range delimiting the current match. </para></description><data-member name="End"><type>IteratorT</type></data-member>
 <data-member name="Finder"><type>IteratorT FinderT</type></data-member>
 <method-group name="public member functions">
-<method name="BOOST_DEFAULTED_FUNCTION"><type/><parameter name="operator"><paramtype><classname>split_iterator</classname> &amp;</paramtype><default>(const <classname alt="boost::algorithm::split_iterator">split_iterator</classname> &amp;Other)</default></parameter><parameter name=""><paramtype>{ if(this==&amp;Other) return *this;this-&gt;base_type::operator=(Other);m_Match=Other.m_Match;m_Next=Other.m_Next;m_End=Other.m_End;m_bEof=Other.m_bEof;return *this;}</paramtype></parameter><purpose>Assignment operator. </purpose><description><para>Assigns a copy of the split_iteratorConstructor</para><para>Construct new <classname alt="boost::algorithm::split_iterator">split_iterator</classname> for a given finder and a range. </para></description></method>
+<method name="BOOST_DEFAULTED_FUNCTION"><type/><parameter name="operator"><paramtype><classname>split_iterator</classname> &amp;</paramtype><default>(const <classname alt="boost::algorithm::split_iterator">split_iterator</classname> &amp;Other)</default></parameter><parameter name=""><paramtype>{ if(this==&amp;Other) return *this;this-&gt;base_type::operator=(Other);m_Match=Other.m_Match;m_Next=Other.m_Next;m_End=Other.m_End;m_bEof=Other.m_bEof;return *this;}</paramtype></parameter><purpose>Assignment operator. </purpose><description><para>Assigns a copy of the <classname alt="boost::algorithm::split_iterator">split_iterator</classname> Constructor</para><para>Construct new <classname alt="boost::algorithm::split_iterator">split_iterator</classname> for a given finder and a range. </para></description></method>
 <method name="m_Match"><type>IteratorT FinderT</type><parameter name=""><paramtype>Begin</paramtype></parameter><parameter name=""><paramtype>Begin</paramtype></parameter></method>
 <method name="m_Next"><type>IteratorT FinderT</type><parameter name=""><paramtype>Begin</paramtype></parameter></method>
 <method name="m_End"><type>IteratorT FinderT</type><parameter name=""><paramtype>End</paramtype></parameter></method>
@@ -3560,11 +3578,13 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
           <template-type-parameter name="RegexTraitsT"/>
           <template-type-parameter name="FormatStringTraitsT"/>
           <template-type-parameter name="FormatStringAllocatorT"/>
-        </template><parameter name="Input"><paramtype>const SequenceT &amp;</paramtype></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype></parameter><parameter name="Format"><paramtype>const std::basic_string&lt; CharT, FormatStringTraitsT, FormatStringAllocatorT &gt; &amp;</paramtype></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default|format_default</default></parameter></signature><purpose>Replace regex algorithm. </purpose><description><para>Search for a substring matching given regex and format it with the specified format.</para><para>The result is a modified copy of the input. It is returned as a sequence or copied to the output iterator.</para><para>
+        </template><parameter name="Input"><paramtype>const SequenceT &amp;</paramtype></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype></parameter><parameter name="Format"><paramtype>const std::basic_string&lt; CharT, FormatStringTraitsT, FormatStringAllocatorT &gt; &amp;</paramtype></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default|format_default</default></parameter></signature><purpose>Replace regex algorithm. </purpose><description><para>Search for a substring matching given regex and format it with the specified format. <sbr/>
+ The result is a modified copy of the input. It is returned as a sequence or copied to the output iterator.</para><para>
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="replace_regex"><type>void</type><template>
@@ -3592,7 +3612,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="replace_all_regex"><type>void</type><template>
@@ -3601,7 +3622,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
           <template-type-parameter name="RegexTraitsT"/>
           <template-type-parameter name="FormatStringTraitsT"/>
           <template-type-parameter name="FormatStringAllocatorT"/>
-        </template><parameter name="Input"><paramtype>SequenceT &amp;</paramtype><description><para>An input string </para></description></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype><description><para>A regular expression </para></description></parameter><parameter name="Format"><paramtype>const std::basic_string&lt; CharT, FormatStringTraitsT, FormatStringAllocatorT &gt; &amp;</paramtype><description><para>Regex format definition </para></description></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default|format_default</default><description><para>Regex options </para></description></parameter><purpose>Replace all regex algorithm. </purpose><description><para>Format all substrings, matching given regex, with the specified format. The input string is modified in-place.</para><para>
+        </template><parameter name="Input"><paramtype>SequenceT &amp;</paramtype><description><para>An input string </para></description></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype><description><para>A regular expression </para></description></parameter><parameter name="Format"><paramtype>const std::basic_string&lt; CharT, FormatStringTraitsT, FormatStringAllocatorT &gt; &amp;</paramtype><description><para>Regex format definition </para></description></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default|format_default</default><description><para>Regex options <sbr/>
+ </para></description></parameter><purpose>Replace all regex algorithm. </purpose><description><para>Format all substrings, matching given regex, with the specified format. The input string is modified in-place.</para><para>
 </para></description></function>
 <overloaded-function name="erase_regex_copy"><signature><type>OutputIteratorT</type><template>
           <template-type-parameter name="OutputIteratorT"/>
@@ -3612,11 +3634,13 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
           <template-type-parameter name="SequenceT"/>
           <template-type-parameter name="CharT"/>
           <template-type-parameter name="RegexTraitsT"/>
-        </template><parameter name="Input"><paramtype>const SequenceT &amp;</paramtype></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default</default></parameter></signature><purpose>Erase regex algorithm. </purpose><description><para>Remove a substring matching given regex from the input. The result is a modified copy of the input. It is returned as a sequence or copied to the output iterator.</para><para>
+        </template><parameter name="Input"><paramtype>const SequenceT &amp;</paramtype></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default</default></parameter></signature><purpose>Erase regex algorithm. </purpose><description><para>Remove a substring matching given regex from the input. The result is a modified copy of the input. It is returned as a sequence or copied to the output iterator. <sbr/>
+</para><para>
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="erase_regex"><type>void</type><template>
@@ -3638,7 +3662,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="erase_all_regex"><type>void</type><template>
@@ -3652,7 +3677,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
           <template-type-parameter name="RangeT"/>
           <template-type-parameter name="CharT"/>
           <template-type-parameter name="RegexTraitsT"/>
-        </template><parameter name="Result"><paramtype>SequenceSequenceT &amp;</paramtype><description><para>A container that can hold copies of references to the substrings. </para></description></parameter><parameter name="Input"><paramtype>const RangeT &amp;</paramtype><description><para>A container which will be searched. </para></description></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype><description><para>A regular expression </para></description></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default</default><description><para>Regex options </para></description></parameter><purpose>Find all regex algorithm. </purpose><description><para>This algorithm finds all substrings matching the give regex in the input.</para><para>Each part is copied and added as a new element to the output container. Thus the result container must be able to hold copies of the matches (in a compatible structure like std::string) or a reference to it (e.g. using the iterator range class). Examples of such a container are <computeroutput>std::vector&lt;std::string&gt;</computeroutput> or <computeroutput>std::list&lt;boost::iterator_range&lt;std::string::iterator&gt;&gt;</computeroutput> </para><para>
+        </template><parameter name="Result"><paramtype>SequenceSequenceT &amp;</paramtype><description><para>A container that can hold copies of references to the substrings. </para></description></parameter><parameter name="Input"><paramtype>const RangeT &amp;</paramtype><description><para>A container which will be searched. </para></description></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype><description><para>A regular expression </para></description></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default</default><description><para>Regex options </para></description></parameter><purpose>Find all regex algorithm. </purpose><description><para>This algorithm finds all substrings matching the give regex in the input. <sbr/>
+</para><para>Each part is copied and added as a new element to the output container. Thus the result container must be able to hold copies of the matches (in a compatible structure like std::string) or a reference to it (e.g. using the iterator range class). Examples of such a container are <computeroutput>std::vector&lt;std::string&gt;</computeroutput> or <computeroutput>std::list&lt;boost::iterator_range&lt;std::string::iterator&gt;&gt;</computeroutput> </para><para>
 
 <note><para>Prior content of the result will be overwritten.</para>
 </note>
@@ -3665,7 +3691,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
           <template-type-parameter name="RangeT"/>
           <template-type-parameter name="CharT"/>
           <template-type-parameter name="RegexTraitsT"/>
-        </template><parameter name="Result"><paramtype>SequenceSequenceT &amp;</paramtype><description><para>A container that can hold copies of references to the substrings.</para></description></parameter><parameter name="Input"><paramtype>const RangeT &amp;</paramtype><description><para>A container which will be searched. </para></description></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype><description><para>A regular expression </para></description></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default</default><description><para>Regex options </para></description></parameter><purpose>Split regex algorithm. </purpose><description><para>Tokenize expression. This function is equivalent to C strtok. Input sequence is split into tokens, separated by separators. Separator is an every match of the given regex. Each part is copied and added as a new element to the output container. Thus the result container must be able to hold copies of the matches (in a compatible structure like std::string) or a reference to it (e.g. using the iterator range class). Examples of such a container are <computeroutput>std::vector&lt;std::string&gt;</computeroutput> or <computeroutput>std::list&lt;boost::iterator_range&lt;std::string::iterator&gt;&gt;</computeroutput> </para><para>
+        </template><parameter name="Result"><paramtype>SequenceSequenceT &amp;</paramtype><description><para>A container that can hold copies of references to the substrings. <sbr/>
+ </para></description></parameter><parameter name="Input"><paramtype>const RangeT &amp;</paramtype><description><para>A container which will be searched. </para></description></parameter><parameter name="Rx"><paramtype>const basic_regex&lt; CharT, RegexTraitsT &gt; &amp;</paramtype><description><para>A regular expression </para></description></parameter><parameter name="Flags"><paramtype>match_flag_type</paramtype><default>match_default</default><description><para>Regex options </para></description></parameter><purpose>Split regex algorithm. </purpose><description><para>Tokenize expression. This function is equivalent to C strtok. Input sequence is split into tokens, separated by separators. Separator is an every match of the given regex. Each part is copied and added as a new element to the output container. Thus the result container must be able to hold copies of the matches (in a compatible structure like std::string) or a reference to it (e.g. using the iterator range class). Examples of such a container are <computeroutput>std::vector&lt;std::string&gt;</computeroutput> or <computeroutput>std::list&lt;boost::iterator_range&lt;std::string::iterator&gt;&gt;</computeroutput> </para><para>
 
 <note><para>Prior content of the result will be overwritten.</para>
 </note>
@@ -4098,7 +4125,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="replace_last"><type>void</type><template>
@@ -4120,7 +4148,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="ireplace_last"><type>void</type><template>
@@ -4164,7 +4193,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="ireplace_nth"><type>void</type><template>
@@ -4228,7 +4258,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="replace_head"><type>void</type><template>
@@ -4247,7 +4278,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>
-</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input</para>
+</para></description><returns><para>An output iterator pointing just after the last inserted character or a modified copy of the input <sbr/>
+</para>
 </returns></overloaded-function>
 
 <function name="replace_tail"><type>void</type><template>
@@ -4610,7 +4642,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
           <template-type-parameter name="SequenceSequenceT"/>
           <template-type-parameter name="RangeT"/>
           <template-type-parameter name="PredicateT"/>
-        </template><parameter name="Result"><paramtype>SequenceSequenceT &amp;</paramtype><description><para>A container that can hold copies of references to the substrings</para></description></parameter><parameter name="Input"><paramtype>RangeT &amp;&amp;</paramtype><description><para>A container which will be searched. </para></description></parameter><parameter name="Pred"><paramtype>PredicateT</paramtype><description><para>A predicate to identify separators. This predicate is supposed to return true if a given element is a separator. </para></description></parameter><parameter name="eCompress"><paramtype>token_compress_mode_type</paramtype><default>token_compress_off</default><description><para>If eCompress argument is set to token_compress_on, adjacent separators are merged together. Otherwise, every two separators delimit a token. </para></description></parameter><purpose>Split algorithm. </purpose><description><para>Tokenize expression. This function is equivalent to C strtok. Input sequence is split into tokens, separated by separators. Separators are given by means of the predicate.</para><para>Each part is copied and added as a new element to the output container. Thus the result container must be able to hold copies of the matches (in a compatible structure like std::string) or a reference to it (e.g. using the iterator range class). Examples of such a container are <computeroutput>std::vector&lt;std::string&gt;</computeroutput> or <computeroutput>std::list&lt;boost::iterator_range&lt;std::string::iterator&gt;&gt;</computeroutput> </para><para>
+        </template><parameter name="Result"><paramtype>SequenceSequenceT &amp;</paramtype><description><para>A container that can hold copies of references to the substrings <sbr/>
+ </para></description></parameter><parameter name="Input"><paramtype>RangeT &amp;&amp;</paramtype><description><para>A container which will be searched. </para></description></parameter><parameter name="Pred"><paramtype>PredicateT</paramtype><description><para>A predicate to identify separators. This predicate is supposed to return true if a given element is a separator. </para></description></parameter><parameter name="eCompress"><paramtype>token_compress_mode_type</paramtype><default>token_compress_off</default><description><para>If eCompress argument is set to token_compress_on, adjacent separators are merged together. Otherwise, every two separators delimit a token. </para></description></parameter><purpose>Split algorithm. </purpose><description><para>Tokenize expression. This function is equivalent to C strtok. Input sequence is split into tokens, separated by separators. Separators are given by means of the predicate.</para><para>Each part is copied and added as a new element to the output container. Thus the result container must be able to hold copies of the matches (in a compatible structure like std::string) or a reference to it (e.g. using the iterator range class). Examples of such a container are <computeroutput>std::vector&lt;std::string&gt;</computeroutput> or <computeroutput>std::list&lt;boost::iterator_range&lt;std::string::iterator&gt;&gt;</computeroutput> </para><para>
 
 <note><para>Prior content of the result will be overwritten.</para>
 </note>
@@ -4816,7 +4849,8 @@ Construct a copy of the <classname alt="boost::algorithm::find_iterator">find_it
         </template><parameter name="Output"><paramtype>OutputIteratorT</paramtype><description><para>An output iterator to which the result will be copied </para></description></parameter><parameter name="Input"><paramtype>const RangeT &amp;</paramtype><description><para>An input range </para></description></parameter><parameter name="IsSpace"><paramtype>PredicateT</paramtype><description><para>A unary predicate identifying spaces </para></description></parameter></signature><signature><type>SequenceT</type><template>
           <template-type-parameter name="SequenceT"/>
           <template-type-parameter name="PredicateT"/>
-        </template><parameter name="Input"><paramtype>const SequenceT &amp;</paramtype></parameter><parameter name="IsSpace"><paramtype>PredicateT</paramtype></parameter></signature><purpose>Right trim - parametric. </purpose><description><para>Remove all trailing spaces from the input.</para><para>The supplied predicate is used to determine which characters are considered spaces. The result is a trimmed copy of the input. It is returned as a sequence or copied to the output iterator</para><para>
+        </template><parameter name="Input"><paramtype>const SequenceT &amp;</paramtype></parameter><parameter name="IsSpace"><paramtype>PredicateT</paramtype></parameter></signature><purpose>Right trim - parametric. </purpose><description><para>Remove all trailing spaces from the input. <sbr/>
+ The supplied predicate is used to determine which characters are considered spaces. The result is a trimmed copy of the input. It is returned as a sequence or copied to the output iterator</para><para>
 
 <note><para>The second variant of this function provides the strong exception-safety guarantee </para>
 </note>

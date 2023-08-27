@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__static_url_base.set_host_name"></a><a class="link" href="set_host_name.html" title="static_url_base::set_host_name">static_url_base::set_host_name</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm84447"></a>
+          <a class="indexterm" name="idm87459"></a>
         </p>
 <p>
           (Inherited from <a class="link" href="../boost__urls__url_base.html" title="url_base"><code class="computeroutput"><span class="identifier">url_base</span></code></a>)
@@ -42,7 +42,7 @@
         </h6>
 <pre class="programlisting"><span class="identifier">url_base</span><span class="special">&amp;</span>
 <span class="identifier">set_host_name</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__static_url_base.set_host_name.h1"></a>
@@ -56,7 +56,7 @@
 <a name="url.ref.boost__urls__static_url_base.set_host_name.h2"></a>
           <span class="phrase"><a name="url.ref.boost__urls__static_url_base.set_host_name.example"></a></span><a class="link" href="set_host_name.html#url.ref.boost__urls__static_url_base.set_host_name.example">Example</a>
         </h6>
-<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">url</span><span class="special">(</span> <span class="string">"http://www.example.com/index.htm"</span><span class="special">).</span><span class="identifier">set_host_name</span><span class="special">(</span> <span class="string">"localhost"</span> <span class="special">).</span><span class="identifier">host_address</span><span class="special">()</span> <span class="special">==</span> <span class="string">"localhost"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">url</span><span class="special">(</span> <span class="string">"http://www.example.com/index.htm"</span> <span class="special">).</span><span class="identifier">set_host_name</span><span class="special">(</span> <span class="string">"localhost"</span> <span class="special">).</span><span class="identifier">host_address</span><span class="special">()</span> <span class="special">==</span> <span class="string">"localhost"</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__static_url_base.set_host_name.h3"></a>
@@ -110,7 +110,7 @@
 <a name="url.ref.boost__urls__static_url_base.set_host_name.h6"></a>
           <span class="phrase"><a name="url.ref.boost__urls__static_url_base.set_host_name.bnf"></a></span><a class="link" href="set_host_name.html#url.ref.boost__urls__static_url_base.set_host_name.bnf">BNF</a>
         </h6>
-<pre class="programlisting"><span class="identifier">reg</span><span class="special">-</span><span class="identifier">name</span>    <span class="special">=</span> <span class="special">*(</span> <span class="identifier">unreserved</span> <span class="special">/</span> <span class="identifier">pct</span><span class="special">-</span><span class="identifier">encoded</span> <span class="special">/</span> <span class="string">"-"</span> <span class="special">/</span> <span class="string">"."</span><span class="special">)</span>
+<pre class="programlisting"><span class="identifier">reg</span><span class="special">-</span><span class="identifier">name</span>    <span class="special">=</span> <span class="special">*(</span> <span class="identifier">unreserved</span> <span class="special">/</span> <span class="identifier">pct</span><span class="special">-</span><span class="identifier">encoded</span> <span class="special">/</span> <span class="string">"-"</span> <span class="special">/</span> <span class="string">"."</span> <span class="special">)</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__static_url_base.set_host_name.h7"></a>

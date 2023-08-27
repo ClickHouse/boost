@@ -35,34 +35,34 @@
 </span>
 <span class="keyword">struct</span> <a class="link" href="unsafe_access.html" title="Struct unsafe_access">unsafe_access</a> <span class="special">{</span>
 
-  <span class="comment">// <a class="link" href="unsafe_access.html#idm12965-bb">public static functions</a></span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12966-bb"><span class="identifier">axes</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12977-bb"><span class="identifier">axes</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="unsafe_access.html#idm12816-bb">public static functions</a></span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12817-bb"><span class="identifier">axes</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12828-bb"><span class="identifier">axes</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">,</span> <span class="keyword">unsigned</span> I <span class="special">=</span> <span class="number">0</span><span class="special">&gt;</span> 
     <span class="keyword">static</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> 
-    <a class="link" href="unsafe_access.html#idm12988-bb"><span class="identifier">axis</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span> <span class="keyword">unsigned</span><span class="special">,</span> <span class="identifier">I</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="special">{</span><span class="special">}</span><span class="special">)</span><span class="special">;</span>
+    <a class="link" href="unsafe_access.html#idm12839-bb"><span class="identifier">axis</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span> <span class="keyword">unsigned</span><span class="special">,</span> <span class="identifier">I</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="special">{</span><span class="special">}</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> 
-    <span class="keyword">static</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <a class="link" href="unsafe_access.html#idm13007-bb"><span class="identifier">axis</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">unsigned</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm13022-bb"><span class="identifier">storage</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm13033-bb"><span class="identifier">storage</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm13044-bb"><span class="identifier">offset</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm13055-bb"><span class="identifier">offset</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+    <span class="keyword">static</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <a class="link" href="unsafe_access.html#idm12858-bb"><span class="identifier">axis</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">,</span> <span class="keyword">unsigned</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12873-bb"><span class="identifier">storage</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12884-bb"><span class="identifier">storage</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12895-bb"><span class="identifier">offset</span></a><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12906-bb"><span class="identifier">offset</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Allocator<span class="special">&gt;</span> 
     <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="special">&amp;</span> 
-    <a class="link" href="unsafe_access.html#idm13066-bb"><span class="identifier">unlimited_storage_buffer</span></a><span class="special">(</span><a class="link" href="unlimited_storage.html" title="Class template unlimited_storage">unlimited_storage</a><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+    <a class="link" href="unsafe_access.html#idm12917-bb"><span class="identifier">unlimited_storage_buffer</span></a><span class="special">(</span><a class="link" href="unlimited_storage.html" title="Class template unlimited_storage">unlimited_storage</a><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> 
-    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm13080-bb"><span class="identifier">storage_adaptor_impl</span></a><span class="special">(</span><a class="link" href="storage_adaptor.html" title="Class template storage_adaptor">storage_adaptor</a><span class="special">&lt;</span> <span class="identifier">T</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a class="link" href="unsafe_access.html#idm12931-bb"><span class="identifier">storage_adaptor_impl</span></a><span class="special">(</span><a class="link" href="storage_adaptor.html" title="Class template storage_adaptor">storage_adaptor</a><span class="special">&lt;</span> <span class="identifier">T</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm19476"></a><h2>Description</h2>
+<a name="idm18866"></a><h2>Description</h2>
 <p>This struct enables access to private data of some classes. It is intended for library developers who need this to implement algorithms efficiently, for example, serialization. Users should not use this. If you are a user who absolutely needs this to get a specific effect, please submit an issue on Github. Perhaps the public interface is insufficient and should be extended for your use case.</p>
 <p>Unlike the normal interface, the <a class="link" href="unsafe_access.html" title="Struct unsafe_access">unsafe_access</a> interface may change between versions. If your code relies on<a class="link" href="unsafe_access.html" title="Struct unsafe_access">unsafe_access</a>, it may or may not break when you update Boost. This is another reason to not use it unless you are ok with these conditions.</p>
 <div class="refsect2">
-<a name="idm19482"></a><h3>
-<a name="idm12965-bb"></a><code class="computeroutput">unsafe_access</code> public static functions</h3>
+<a name="idm18872"></a><h3>
+<a name="idm12816-bb"></a><code class="computeroutput">unsafe_access</code> public static functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12966-bb"></a><span class="identifier">axes</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get axes. <p>
+<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12817-bb"></a><span class="identifier">axes</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get axes. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -85,7 +85,7 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12977-bb"></a><span class="identifier">axes</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get axes. <p>
+<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12828-bb"></a><span class="identifier">axes</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get axes.  <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -101,7 +101,7 @@
 </colgroup>
 <tbody><tr>
 <td><p><span class="term"><code class="computeroutput">hist</code></span></p></td>
-<td><p>histogram. </p></td>
+<td><p>histogram.  </p></td>
 </tr></tbody>
 </table></div></td>
 </tr></tbody>
@@ -110,7 +110,7 @@
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">,</span> <span class="keyword">unsigned</span> I <span class="special">=</span> <span class="number">0</span><span class="special">&gt;</span> 
   <span class="keyword">static</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> 
-  <a name="idm12988-bb"></a><span class="identifier">axis</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span> <span class="keyword">unsigned</span><span class="special">,</span> <span class="identifier">I</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="special">{</span><span class="special">}</span><span class="special">)</span><span class="special">;</span></pre>Get mutable axis reference with compile-time number. <p>
+  <a name="idm12839-bb"></a><span class="identifier">axis</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span> <span class="keyword">unsigned</span><span class="special">,</span> <span class="identifier">I</span> <span class="special">&gt;</span> <span class="special">=</span> <span class="special">{</span><span class="special">}</span><span class="special">)</span><span class="special">;</span></pre>Get mutable axis reference with compile-time number. <p>
 
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
@@ -150,7 +150,7 @@
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> 
-  <span class="keyword">static</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <a name="idm13007-bb"></a><span class="identifier">axis</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">,</span> <span class="keyword">unsigned</span> i<span class="special">)</span><span class="special">;</span></pre>Get mutable axis reference with run-time number. <p>
+  <span class="keyword">static</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <a name="idm12858-bb"></a><span class="identifier">axis</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">,</span> <span class="keyword">unsigned</span> i<span class="special">)</span><span class="special">;</span></pre>Get mutable axis reference with run-time number. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -179,7 +179,7 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm13022-bb"></a><span class="identifier">storage</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get storage. <p>
+<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12873-bb"></a><span class="identifier">storage</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get storage. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -203,7 +203,7 @@
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> 
-  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm13033-bb"></a><span class="identifier">storage</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get storage. <p>
+  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12884-bb"></a><span class="identifier">storage</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get storage.  <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -219,14 +219,14 @@
 </colgroup>
 <tbody><tr>
 <td><p><span class="term"><code class="computeroutput">hist</code></span></p></td>
-<td><p>histogram. </p></td>
+<td><p>histogram.  </p></td>
 </tr></tbody>
 </table></div></td>
 </tr></tbody>
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm13044-bb"></a><span class="identifier">offset</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get index offset. <p>
+<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> <span class="keyword">static</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12895-bb"></a><span class="identifier">offset</span><span class="special">(</span><span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get index offset. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -250,7 +250,7 @@
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Histogram<span class="special">&gt;</span> 
-  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm13055-bb"></a><span class="identifier">offset</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get index offset. <p>
+  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12906-bb"></a><span class="identifier">offset</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Histogram</span> <span class="special">&amp;</span> hist<span class="special">)</span><span class="special">;</span></pre>Get index offset.  <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -266,7 +266,7 @@
 </colgroup>
 <tbody><tr>
 <td><p><span class="term"><code class="computeroutput">hist</code></span></p></td>
-<td><p>histogram </p></td>
+<td><p>histogram  </p></td>
 </tr></tbody>
 </table></div></td>
 </tr></tbody>
@@ -275,7 +275,7 @@
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Allocator<span class="special">&gt;</span> 
   <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="special">&amp;</span> 
-  <a name="idm13066-bb"></a><span class="identifier">unlimited_storage_buffer</span><span class="special">(</span><a class="link" href="unlimited_storage.html" title="Class template unlimited_storage">unlimited_storage</a><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> storage<span class="special">)</span><span class="special">;</span></pre>Get buffer of <code class="computeroutput"><a class="link" href="unlimited_storage.html" title="Class template unlimited_storage">unlimited_storage</a></code>.<p>
+  <a name="idm12917-bb"></a><span class="identifier">unlimited_storage_buffer</span><span class="special">(</span><a class="link" href="unlimited_storage.html" title="Class template unlimited_storage">unlimited_storage</a><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> storage<span class="special">)</span><span class="special">;</span></pre>Get buffer of <code class="computeroutput"><a class="link" href="unlimited_storage.html" title="Class template unlimited_storage">unlimited_storage</a></code>.<p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -299,7 +299,7 @@
 </li>
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> 
-  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm13080-bb"></a><span class="identifier">storage_adaptor_impl</span><span class="special">(</span><a class="link" href="storage_adaptor.html" title="Class template storage_adaptor">storage_adaptor</a><span class="special">&lt;</span> <span class="identifier">T</span> <span class="special">&gt;</span> <span class="special">&amp;</span> storage<span class="special">)</span><span class="special">;</span></pre>Get implementation of <code class="computeroutput"><a class="link" href="storage_adaptor.html" title="Class template storage_adaptor">storage_adaptor</a></code>.<p>
+  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="special">&amp;</span> <a name="idm12931-bb"></a><span class="identifier">storage_adaptor_impl</span><span class="special">(</span><a class="link" href="storage_adaptor.html" title="Class template storage_adaptor">storage_adaptor</a><span class="special">&lt;</span> <span class="identifier">T</span> <span class="special">&gt;</span> <span class="special">&amp;</span> storage<span class="special">)</span><span class="special">;</span></pre>Get implementation of <code class="computeroutput"><a class="link" href="storage_adaptor.html" title="Class template storage_adaptor">storage_adaptor</a></code>.<p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>

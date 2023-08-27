@@ -36,7 +36,7 @@
             <span class="phrase"><a name="url.ref.boost__urls__params_view.params_view.overload5.synopsis"></a></span><a class="link" href="overload5.html#url.ref.boost__urls__params_view.params_view.overload5.synopsis">Synopsis</a>
           </h6>
 <pre class="programlisting"><span class="identifier">params_view</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="identifier">encoding_opts</span> <span class="identifier">opt</span><span class="special">);</span>
 </pre>
 <h6>
@@ -57,8 +57,8 @@
             <span class="phrase"><a name="url.ref.boost__urls__params_view.params_view.overload5.example"></a></span><a class="link" href="overload5.html#url.ref.boost__urls__params_view.params_view.overload5.example">Example</a>
           </h6>
 <pre class="programlisting"><span class="identifier">encoding_opts</span> <span class="identifier">opt</span><span class="special">;</span>
-<span class="identifier">opt</span><span class="special">.</span><span class="identifier">space_as_plus</span> <span class="special">=</span> <span class="keyword">true</span><span class="special">;</span>
-<span class="identifier">params_view</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"name=John+Doe"</span><span class="special">,</span> <span class="identifier">opt</span> <span class="special">);</span>
+<span class="identifier">opt</span><span class="special">.</span><span class="identifier">space_as_plus</span> <span class="special">=</span> <span class="keyword">true</span> <span class="special">;</span>
+<span class="identifier">params_view</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"name=John+Doe"</span> <span class="special">,</span> <span class="identifier">opt</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__params_view.params_view.overload5.h3"></a>

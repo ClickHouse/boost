@@ -90,8 +90,8 @@ A syntax like <code class="computeroutput">system("ls", std_out &gt; std::cerr)<
 </table></div>
 <p>
 Valid expressions with pipes are these:</p>
-<pre class="programlisting"><span class="identifier">std_in</span> <span class="special">&lt;</span> <span class="identifier">pipe</span><span class="special">;</span>
-<span class="identifier">std_in</span> <span class="special">=</span> <span class="identifier">pipe</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">std_in</span> <span class="special">&lt;</span> <a class="link" href="basic_pipe.html" title="Class template basic_pipe">pipe</a><span class="special">;</span>
+<span class="identifier">std_in</span> <span class="special">=</span> <a class="link" href="basic_pipe.html" title="Class template basic_pipe">pipe</a><span class="special">;</span>
 </pre>
 <p>Where the valid types for <code class="computeroutput">pipe</code> are the following:</p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
@@ -103,9 +103,9 @@ Valid expressions with pipes are these:</p>
 <p>
 </p>
 <p>Note that the pipe may also be used between several processes, like this:</p>
-<pre class="programlisting"><span class="identifier">pipe</span> <span class="identifier">p</span><span class="special">;</span>
-<span class="identifier">child</span> <span class="identifier">c1</span><span class="special">(</span><span class="string">"nm"</span><span class="special">,</span> <span class="string">"a.out"</span><span class="special">,</span> <span class="identifier">std_out</span><span class="special">&gt;</span><span class="identifier">p</span><span class="special">)</span><span class="special">;</span>
-<span class="identifier">child</span> <span class="identifier">c2</span><span class="special">(</span><span class="string">"c++filt"</span><span class="special">,</span> <span class="identifier">std_in</span><span class="special">&lt;</span><span class="identifier">p</span><span class="special">)</span><span class="special">;</span>
+<pre class="programlisting"><a class="link" href="basic_pipe.html" title="Class template basic_pipe">pipe</a> <span class="identifier">p</span><span class="special">;</span>
+<a class="link" href="child.html" title="Class child">child</a> <span class="identifier">c1</span><span class="special">(</span><span class="string">"nm"</span><span class="special">,</span> <span class="string">"a.out"</span><span class="special">,</span> <span class="identifier">std_out</span><span class="special">&gt;</span><span class="identifier">p</span><span class="special">)</span><span class="special">;</span>
+<a class="link" href="child.html" title="Class child">child</a> <span class="identifier">c2</span><span class="special">(</span><span class="string">"c++filt"</span><span class="special">,</span> <span class="identifier">std_in</span><span class="special">&lt;</span><span class="identifier">p</span><span class="special">)</span><span class="special">;</span>
 </pre>
 </div>
 <div class="sect2">
@@ -114,8 +114,8 @@ Valid expressions with pipes are these:</p>
 <p>Asynchronous Pipe I/O classifies communication which has automatically handling of the asynchronous operations by the process library. This means, that a pipe will be constructed, the async_read/-write will be automatically started, and that the end of the child process will also close the pipe.</p>
 <p>Valid types for pipe I/O are the following:</p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem"><p><code class="computeroutput">boost::asio::const_buffer</code> <a href="#ftn.id-1.3.29.10.18.18.4.3.4.4.1.1.1.2" class="footnote" name="id-1.3.29.10.18.18.4.3.4.4.1.1.1.2"><sup class="footnote">[29]</sup></a> </p></li>
-<li class="listitem"><p><code class="computeroutput">boost::asio::mutable_buffer</code> <a href="#ftn.id-1.3.29.10.18.18.4.3.4.4.1.2.1.2" class="footnote" name="id-1.3.29.10.18.18.4.3.4.4.1.2.1.2"><sup class="footnote">[30]</sup></a> </p></li>
+<li class="listitem"><p><code class="computeroutput">boost::asio::const_buffer</code>  <a href="#ftn.id-1.3.29.10.18.18.4.3.4.4.1.1.1.2" class="footnote" name="id-1.3.29.10.18.18.4.3.4.4.1.1.1.2"><sup class="footnote">[29]</sup></a> </p></li>
+<li class="listitem"><p><code class="computeroutput">boost::asio::mutable_buffer</code>  <a href="#ftn.id-1.3.29.10.18.18.4.3.4.4.1.2.1.2" class="footnote" name="id-1.3.29.10.18.18.4.3.4.4.1.2.1.2"><sup class="footnote">[30]</sup></a> </p></li>
 <li class="listitem"><p><code class="computeroutput">boost::asio::streambuf</code></p></li>
 </ul></div>
 <p>
@@ -140,7 +140,7 @@ Valid expressions with pipes are these:</p>
 <pre class="programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">future</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="identifier">fut</span><span class="special">;</span>
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_context</span> <span class="identifier">ios</span><span class="special">;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">data</span><span class="special">;</span>
-<span class="identifier">child</span> <span class="identifier">c</span><span class="special">(</span><span class="string">"prog"</span><span class="special">,</span> <span class="identifier">std_in</span> <span class="special">&lt;</span> <span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">)</span> <span class="special">&gt;</span>  <span class="identifier">fut</span><span class="special">,</span> <span class="identifier">ios</span><span class="special">)</span><span class="special">;</span>
+<a class="link" href="child.html" title="Class child">child</a> <span class="identifier">c</span><span class="special">(</span><span class="string">"prog"</span><span class="special">,</span> <span class="identifier">std_in</span> <span class="special">&lt;</span> <span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">)</span> <span class="special">&gt;</span>  <span class="identifier">fut</span><span class="special">,</span> <span class="identifier">ios</span><span class="special">)</span><span class="special">;</span>
 <span class="identifier">fut</span><span class="special">.</span><span class="identifier">get</span><span class="special">(</span><span class="special">)</span><span class="special">;</span>
 </pre>
 </td></tr>

@@ -94,7 +94,7 @@
   <span class="keyword">static</span> <span class="keyword">const</span> <span class="identifier">size_t</span> <span class="identifier">m_k_max</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idm44069"></a><h2>Description</h2>
+<a name="idm44060"></a><h2>Description</h2>
 <p>The extrapolation stepper is a stepper with error estimation and configurable order. The order is given as template parameter and needs to be an <span class="emphasis"><em>odd</em></span> number. The stepper is based on several executions of the modified midpoint method and a Richardson extrapolation. This is essentially the same technique as for <a class="link" href="bulirsch_stoer.html" title="Class template bulirsch_stoer">bulirsch_stoer</a>, but without the variable order.</p>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -106,14 +106,14 @@
 <p>
 </p>
 <div class="refsect2">
-<a name="idm44077"></a><h3>
+<a name="idm44068"></a><h3>
 <a name="boost.numeric.odeint.extrapolation_stepperconstruct-copy-destruct"></a><code class="computeroutput">extrapolation_stepper</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="literallayout"><a name="idm28587-bb"></a><span class="identifier">extrapolation_stepper</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">algebra_type</span> <span class="special">&amp;</span> algebra <span class="special">=</span> <span class="identifier">algebra_type</span><span class="special">(</span><span class="special">)</span><span class="special">)</span><span class="special">;</span></pre></li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idm44097"></a><h3>
+<a name="idm44088"></a><h3>
 <a name="idm28438-bb"></a><code class="computeroutput">extrapolation_stepper</code> private member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><pre class="literallayout"> <a name="idm28439-bb"></a><span class="identifier">BOOST_STATIC_ASSERT_MSG</span><span class="special">(</span><span class="special">(</span><span class="special">(</span><span class="identifier">Order</span> <span class="special">%</span> <span class="number">2</span><span class="special">)</span><span class="special">==</span><span class="number">0</span><span class="special">)</span> <span class="special">&amp;&amp;</span><span class="special">(</span><span class="identifier">Order</span> <span class="special">&gt;</span> <span class="number">2</span><span class="special">)</span><span class="special">,</span> 
@@ -126,7 +126,7 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idm44183"></a><h3>
+<a name="idm44174"></a><h3>
 <a name="idm28469-bb"></a><code class="computeroutput">extrapolation_stepper</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> System<span class="special">,</span> <span class="keyword">typename</span> StateIn<span class="special">,</span> <span class="keyword">typename</span> DerivIn<span class="special">,</span> 

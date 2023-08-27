@@ -42,7 +42,7 @@
     <span class="keyword">class</span> <a href="../../../../../../doc/html/boost_asio/reference/Executor1.html" target="_top"><span class="emphasis"><em>Executor1</em></span></a><span class="special">,</span>
     <span class="keyword">class</span> <a href="https://en.cppreference.com/w/cpp/named_req/Allocator" target="_top"><span class="emphasis"><em>Allocator</em></span></a> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;&gt;</span>
 <span class="keyword">class</span> <span class="identifier">stable_async_base</span> <span class="special">:</span>
-    <span class="keyword">public</span> <span class="identifier">async_base</span><span class="special">&lt;</span> <span class="identifier">Handler</span><span class="special">,</span> <span class="identifier">Executor1</span><span class="special">,</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span>
+    <span class="keyword">public</span> <span class="identifier">async_base</span><span class="special">&lt;</span> <span class="identifier">Handler</span><span class="special">,</span> <span class="identifier">Executor1</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">&lt;</span> <span class="keyword">void</span> <span class="special">&gt;</span> <span class="special">&gt;</span>
 </pre>
 <h5>
 <a name="beast.ref.boost__beast__stable_async_base.h1"></a>
@@ -365,10 +365,10 @@
         message, whose addresses must not change between intermediate operations:
       </p>
 <pre class="programlisting"><span class="comment">// Asynchronously send a message multiple times, once per second</span>
-<span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">AsyncWriteStream</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">WriteHandler</span><span class="special">&gt;</span>
+<span class="keyword">template</span> <span class="special">&lt;</span> <span class="keyword">class</span> <span class="identifier">AsyncWriteStream</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">WriteHandler</span><span class="special">&gt;</span>
 <span class="keyword">auto</span> <span class="identifier">async_write_messages</span><span class="special">(</span>
     <span class="identifier">AsyncWriteStream</span><span class="special">&amp;</span> <span class="identifier">stream</span><span class="special">,</span>
-    <span class="identifier">T</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">message</span><span class="special">,</span>
+    <span class="identifier">T</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">message</span><span class="special">,</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">repeat_count</span><span class="special">,</span>
     <span class="identifier">WriteHandler</span><span class="special">&amp;&amp;</span> <span class="identifier">handler</span><span class="special">)</span> <span class="special">-&gt;</span>
         <span class="keyword">typename</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">async_result</span><span class="special">&lt;</span>
@@ -418,7 +418,7 @@
 
         <span class="keyword">void</span> <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">error_code</span> <span class="identifier">ec</span> <span class="special">=</span> <span class="special">{},</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="special">=</span> <span class="number">0</span><span class="special">)</span>
         <span class="special">{</span>
-            <span class="identifier">reenter</span><span class="special">(*</span><span class="keyword">this</span><span class="special">)</span>
+            <span class="identifier">reenter</span><span class="special">(*</span> <span class="keyword">this</span> <span class="special">)</span>
             <span class="special">{</span>
                 <span class="comment">// If repeats starts at 0 then we must complete immediately. But</span>
                 <span class="comment">// we can't call the final handler from inside the initiating</span>
@@ -426,8 +426,8 @@
                 <span class="comment">// net::async_write with an empty buffer instead of calling</span>
                 <span class="comment">// net::post to avoid an extra function template instantiation, to</span>
                 <span class="comment">// keep compile times lower and make the resulting executable smaller.</span>
-                <span class="identifier">yield</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">stream_</span><span class="special">,</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">{},</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span><span class="keyword">this</span><span class="special">));</span>
-                <span class="keyword">while</span><span class="special">(!</span> <span class="identifier">ec</span> <span class="special">&amp;&amp;</span> <span class="identifier">repeats_</span><span class="special">--</span> <span class="special">&gt;</span> <span class="number">0</span><span class="special">)</span>
+                <span class="identifier">yield</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">stream_</span><span class="special">,</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">{},</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span> <span class="keyword">this</span> <span class="special">));</span>
+                <span class="keyword">while</span> <span class="special">(!</span> <span class="identifier">ec</span> <span class="special">&amp;&amp;</span> <span class="identifier">repeats_</span><span class="special">--</span> <span class="special">&gt;</span> <span class="number">0</span><span class="special">)</span>
                 <span class="special">{</span>
                     <span class="comment">// Send the string. We construct a `const_buffer` here to guarantee</span>
                     <span class="comment">// that we do not create an additional function template instantation</span>
@@ -435,13 +435,13 @@
                     <span class="comment">// net::const_buffer.</span>
 
                     <span class="identifier">yield</span> <span class="identifier">net</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">stream_</span><span class="special">,</span>
-                        <span class="identifier">net</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">(</span><span class="identifier">net</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data_</span><span class="special">.</span><span class="identifier">message</span><span class="special">)),</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span><span class="keyword">this</span><span class="special">));</span>
-                    <span class="keyword">if</span><span class="special">(</span><span class="identifier">ec</span><span class="special">)</span>
-                        <span class="keyword">break</span><span class="special">;</span>
+                        <span class="identifier">net</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">(</span><span class="identifier">net</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data_</span><span class="special">.</span><span class="identifier">message</span><span class="special">)),</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span> <span class="keyword">this</span> <span class="special">));</span>
+                    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">ec</span><span class="special">)</span>
+                        <span class="keyword">break</span> <span class="special">;</span>
 
                     <span class="comment">// Set the timer and wait</span>
                     <span class="identifier">data_</span><span class="special">.</span><span class="identifier">timer</span><span class="special">.</span><span class="identifier">expires_after</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
-                    <span class="identifier">yield</span> <span class="identifier">data_</span><span class="special">.</span><span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span><span class="keyword">this</span><span class="special">));</span>
+                    <span class="identifier">yield</span> <span class="identifier">data_</span><span class="special">.</span><span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span> <span class="keyword">this</span> <span class="special">));</span>
                 <span class="special">}</span>
             <span class="special">}</span>
 

@@ -20,7 +20,7 @@ Manipulator to stream geometries as SVG.
 
 [heading Synopsis]
 ``template<typename Geometry>
-svg_manipulator<Geometry> svg(Geometry const & geometry, std::string const & style, double size = -1.0)``
+svg_manipulator< Geometry > svg(Geometry const & geometry, std::string const & style, double size = -1.0)``
 
 [heading Parameters]
 

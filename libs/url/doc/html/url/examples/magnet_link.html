@@ -55,10 +55,12 @@
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">/</span><span class="identifier">rfc</span><span class="special">/</span><span class="identifier">absolute_uri_rule</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">/</span><span class="identifier">grammar</span><span class="special">/</span><span class="identifier">digit_chars</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">url</span><span class="special">/</span><span class="identifier">grammar</span><span class="special">/</span><span class="identifier">parse</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">core</span><span class="special">/</span><span class="identifier">detail</span><span class="special">/</span><span class="identifier">string_view</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="string">"filter_view.hpp"</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">urls</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">urls</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">core</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">;</span>
 
 <span class="comment">/** Callable to identify a magnet "exact topic"
 
@@ -88,10 +90,10 @@
  */</span>
 <span class="keyword">class</span> <span class="identifier">is_url_with_key</span>
 <span class="special">{</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">k_</span><span class="special">;</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">k_</span><span class="special">;</span>
 <span class="keyword">public</span><span class="special">:</span>
     <span class="identifier">is_url_with_key</span><span class="special">(</span>
-        <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span>
+        <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span>
         <span class="special">:</span> <span class="identifier">k_</span><span class="special">(</span><span class="identifier">key</span><span class="special">)</span> <span class="special">{}</span>
 
     <span class="keyword">bool</span>
@@ -132,7 +134,7 @@
 <span class="comment">/** Callable to convert param values to info_hashes
 
     This callable converts the value of a
-    query parameter into a urls::string_view with
+    query parameter into a core::string_view with
     its infohash.
 
     The infohash hash is a parameter of an
@@ -143,14 +145,14 @@
  */</span>
 <span class="keyword">struct</span> <span class="identifier">param_view_to_infohash</span>
 <span class="special">{</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span>
     <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">param_view</span> <span class="identifier">p</span><span class="special">);</span>
 <span class="special">};</span>
 
 <span class="comment">/** Callable to convert param values to protocols
 
     This callable converts the value of a
-    query parameter into a urls::string_view with
+    query parameter into a core::string_view with
     its protocol.
 
     The protocol is a parameter of an exact
@@ -161,7 +163,7 @@
  */</span>
 <span class="keyword">struct</span> <span class="identifier">to_protocol</span>
 <span class="special">{</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span>
     <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">param_view</span> <span class="identifier">p</span><span class="special">);</span>
 <span class="special">};</span>
 
@@ -370,7 +372,7 @@
         @return Web seed
     */</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
-    <span class="identifier">param</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
+    <span class="identifier">param</span><span class="special">(</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
 
     <span class="keyword">friend</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">ostream</span><span class="special">&amp;</span>
@@ -382,11 +384,11 @@
 <span class="keyword">private</span><span class="special">:</span>
     <span class="comment">// get a query parameter as a urls::pct_string_view</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
-    <span class="identifier">encoded_param</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
+    <span class="identifier">encoded_param</span><span class="special">(</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
 
     <span class="comment">// get a query parameter as a urls::url_view</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span>
-    <span class="identifier">url_param</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
+    <span class="identifier">url_param</span><span class="special">(</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
 
     <span class="keyword">friend</span> <span class="identifier">magnet_link_rule_t</span><span class="special">;</span>
 <span class="special">};</span>
@@ -418,12 +420,12 @@
 <span class="special">{</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">p</span><span class="special">.</span><span class="identifier">key</span> <span class="special">!=</span> <span class="identifier">k_</span><span class="special">)</span>
         <span class="keyword">return</span> <span class="keyword">false</span><span class="special">;</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">buf</span><span class="special">(</span>
         <span class="identifier">p</span><span class="special">.</span><span class="identifier">value</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">p</span><span class="special">.</span><span class="identifier">value</span><span class="special">.</span><span class="identifier">end</span><span class="special">());</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">ec</span><span class="special">.</span><span class="identifier">failed</span><span class="special">())</span>
         <span class="keyword">return</span> <span class="keyword">false</span><span class="special">;</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
         <span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri</span><span class="special">(</span><span class="identifier">buf</span><span class="special">);</span>
     <span class="keyword">return</span> <span class="identifier">r</span><span class="special">.</span><span class="identifier">has_value</span><span class="special">();</span>
 <span class="special">}</span>
@@ -444,26 +446,26 @@
     <span class="keyword">return</span> <span class="identifier">u</span><span class="special">;</span>
 <span class="special">}</span>
 
-<span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span>
+<span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span>
 <span class="identifier">param_view_to_infohash</span><span class="special">::</span>
 <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">param_view</span> <span class="identifier">p</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span> <span class="identifier">topic</span> <span class="special">=</span>
         <span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri</span><span class="special">(</span><span class="identifier">p</span><span class="special">.</span><span class="identifier">value</span><span class="special">).</span><span class="identifier">value</span><span class="special">();</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">t</span> <span class="special">=</span> <span class="identifier">topic</span><span class="special">.</span><span class="identifier">encoded_path</span><span class="special">();</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">t</span> <span class="special">=</span> <span class="identifier">topic</span><span class="special">.</span><span class="identifier">encoded_path</span><span class="special">();</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">pos</span> <span class="special">=</span> <span class="identifier">t</span><span class="special">.</span><span class="identifier">find_last_of</span><span class="special">(</span><span class="char">':'</span><span class="special">);</span>
-    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">pos</span> <span class="special">!=</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">::</span><span class="identifier">npos</span><span class="special">)</span>
+    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">pos</span> <span class="special">!=</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">::</span><span class="identifier">npos</span><span class="special">)</span>
         <span class="keyword">return</span> <span class="identifier">t</span><span class="special">.</span><span class="identifier">substr</span><span class="special">(</span><span class="identifier">pos</span> <span class="special">+</span> <span class="number">1</span><span class="special">);</span>
     <span class="keyword">return</span> <span class="identifier">t</span><span class="special">;</span>
 <span class="special">}</span>
 
-<span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span>
+<span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span>
 <span class="identifier">to_protocol</span><span class="special">::</span>
 <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">param_view</span> <span class="identifier">p</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span> <span class="identifier">topic</span> <span class="special">=</span>
         <span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri</span><span class="special">(</span><span class="identifier">p</span><span class="special">.</span><span class="identifier">value</span><span class="special">).</span><span class="identifier">value</span><span class="special">();</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">t</span> <span class="special">=</span> <span class="identifier">topic</span><span class="special">.</span><span class="identifier">encoded_path</span><span class="special">();</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">t</span> <span class="special">=</span> <span class="identifier">topic</span><span class="special">.</span><span class="identifier">encoded_path</span><span class="special">();</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">pos</span> <span class="special">=</span> <span class="identifier">t</span><span class="special">.</span><span class="identifier">find_last_of</span><span class="special">(</span><span class="char">':'</span><span class="special">);</span>
     <span class="keyword">return</span> <span class="identifier">t</span><span class="special">.</span><span class="identifier">substr</span><span class="special">(</span><span class="number">0</span><span class="special">,</span> <span class="identifier">pos</span><span class="special">);</span>
 <span class="special">}</span>
@@ -519,7 +521,7 @@
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&gt;</span>
 <span class="identifier">magnet_link_view</span><span class="special">::</span><span class="identifier">keyword_topic</span><span class="special">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span> <span class="identifier">o</span> <span class="special">=</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span> <span class="identifier">o</span> <span class="special">=</span>
         <span class="identifier">encoded_param</span><span class="special">(</span><span class="string">"kt"</span><span class="special">);</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">o</span><span class="special">)</span>
         <span class="keyword">return</span> <span class="identifier">o</span><span class="special">-&gt;</span><span class="identifier">decode</span><span class="special">();</span>
@@ -551,7 +553,7 @@
 <span class="special">}</span>
 
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
-<span class="identifier">magnet_link_view</span><span class="special">::</span><span class="identifier">param</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
+<span class="identifier">magnet_link_view</span><span class="special">::</span><span class="identifier">param</span><span class="special">(</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
     <span class="identifier">urls</span><span class="special">::</span><span class="identifier">params_view</span> <span class="identifier">ps</span> <span class="special">=</span> <span class="identifier">u_</span><span class="special">.</span><span class="identifier">params</span><span class="special">();</span>
     <span class="keyword">auto</span> <span class="identifier">it</span> <span class="special">=</span> <span class="identifier">ps</span><span class="special">.</span><span class="identifier">begin</span><span class="special">();</span>
@@ -568,9 +570,9 @@
         <span class="keyword">auto</span> <span class="identifier">mid</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">next</span><span class="special">(</span><span class="identifier">p</span><span class="special">.</span><span class="identifier">key</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="number">2</span><span class="special">);</span>
         <span class="keyword">auto</span> <span class="identifier">last</span> <span class="special">=</span> <span class="identifier">p</span><span class="special">.</span><span class="identifier">key</span><span class="special">.</span><span class="identifier">end</span><span class="special">();</span>
         <span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span> <span class="identifier">prefix</span><span class="special">(</span>
-            <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">(</span><span class="identifier">first</span><span class="special">,</span> <span class="identifier">mid</span><span class="special">));</span>
+            <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">(</span><span class="identifier">first</span><span class="special">,</span> <span class="identifier">mid</span><span class="special">));</span>
         <span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span> <span class="identifier">suffix</span><span class="special">(</span>
-            <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">(</span><span class="identifier">mid</span><span class="special">,</span> <span class="identifier">last</span><span class="special">));</span>
+            <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">(</span><span class="identifier">mid</span><span class="special">,</span> <span class="identifier">last</span><span class="special">));</span>
         <span class="keyword">if</span> <span class="special">(</span><span class="identifier">prefix</span> <span class="special">==</span> <span class="string">"x."</span> <span class="special">&amp;&amp;</span>
             <span class="identifier">suffix</span> <span class="special">==</span> <span class="identifier">key</span> <span class="special">&amp;&amp;</span>
             <span class="identifier">p</span><span class="special">.</span><span class="identifier">has_value</span><span class="special">)</span>
@@ -581,7 +583,7 @@
 <span class="special">}</span>
 
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
-<span class="identifier">magnet_link_view</span><span class="special">::</span><span class="identifier">encoded_param</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
+<span class="identifier">magnet_link_view</span><span class="special">::</span><span class="identifier">encoded_param</span><span class="special">(</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
     <span class="identifier">urls</span><span class="special">::</span><span class="identifier">params_encoded_view</span> <span class="identifier">ps</span> <span class="special">=</span> <span class="identifier">u_</span><span class="special">.</span><span class="identifier">encoded_params</span><span class="special">();</span>
     <span class="keyword">auto</span> <span class="identifier">it</span> <span class="special">=</span> <span class="identifier">ps</span><span class="special">.</span><span class="identifier">find</span><span class="special">(</span><span class="identifier">key</span><span class="special">);</span>
@@ -591,13 +593,13 @@
 <span class="special">}</span>
 
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span>
-<span class="identifier">magnet_link_view</span><span class="special">::</span><span class="identifier">url_param</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
+<span class="identifier">magnet_link_view</span><span class="special">::</span><span class="identifier">url_param</span><span class="special">(</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
     <span class="identifier">urls</span><span class="special">::</span><span class="identifier">params_encoded_view</span> <span class="identifier">ps</span> <span class="special">=</span> <span class="identifier">u_</span><span class="special">.</span><span class="identifier">encoded_params</span><span class="special">();</span>
     <span class="keyword">auto</span> <span class="identifier">it</span> <span class="special">=</span> <span class="identifier">ps</span><span class="special">.</span><span class="identifier">find</span><span class="special">(</span><span class="identifier">key</span><span class="special">);</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">it</span> <span class="special">!=</span> <span class="identifier">ps</span><span class="special">.</span><span class="identifier">end</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="special">(*</span><span class="identifier">it</span><span class="special">).</span><span class="identifier">has_value</span><span class="special">)</span>
     <span class="special">{</span>
-        <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
             <span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri</span><span class="special">((*</span><span class="identifier">it</span><span class="special">).</span><span class="identifier">value</span><span class="special">);</span>
         <span class="keyword">if</span> <span class="special">(</span><span class="identifier">r</span><span class="special">)</span>
             <span class="keyword">return</span> <span class="special">*</span><span class="identifier">r</span><span class="special">;</span>
@@ -613,7 +615,7 @@
     <span class="keyword">using</span> <span class="identifier">value_type</span> <span class="special">=</span> <span class="identifier">magnet_link_view</span><span class="special">;</span>
 
     <span class="comment">/// Parse a sequence of characters into a magnet_link_view</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
     <span class="identifier">parse</span><span class="special">(</span> <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*&amp;</span> <span class="identifier">it</span><span class="special">,</span> <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*</span> <span class="identifier">end</span> <span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
 <span class="special">};</span>
 
@@ -621,10 +623,10 @@
 <span class="identifier">magnet_link_rule_t</span><span class="special">::</span><span class="identifier">parse</span><span class="special">(</span>
     <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*&amp;</span> <span class="identifier">it</span><span class="special">,</span>
     <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*</span> <span class="identifier">end</span> <span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
-    <span class="special">-&gt;</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
+    <span class="special">-&gt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
 <span class="special">{</span>
     <span class="comment">// 1) Parse url with the general uri syntax</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
         <span class="identifier">urls</span><span class="special">::</span><span class="identifier">grammar</span><span class="special">::</span><span class="identifier">parse</span><span class="special">(</span><span class="identifier">it</span><span class="special">,</span> <span class="identifier">end</span><span class="special">,</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">absolute_uri_rule</span><span class="special">);</span>
     <span class="keyword">if</span><span class="special">(!</span><span class="identifier">r</span><span class="special">)</span>
         <span class="keyword">return</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">grammar</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">invalid</span><span class="special">;</span>
@@ -650,7 +652,7 @@
     <span class="special">{</span>
         <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">is_exact_topic</span><span class="special">{}(</span><span class="identifier">p</span><span class="special">))</span>
             <span class="keyword">return</span> <span class="keyword">true</span><span class="special">;</span>
-        <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">u</span> <span class="special">=</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">u</span> <span class="special">=</span>
             <span class="identifier">urls</span><span class="special">::</span><span class="identifier">parse_uri</span><span class="special">(</span><span class="identifier">p</span><span class="special">.</span><span class="identifier">value</span><span class="special">);</span>
         <span class="keyword">return</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">has_value</span><span class="special">();</span>
     <span class="special">}))</span>
@@ -668,8 +670,8 @@
     This is a more convenient user-facing function
     to parse magnet links.
 */</span>
-<span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">magnet_link_view</span> <span class="special">&gt;</span>
-<span class="identifier">parse_magnet_link</span><span class="special">(</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="keyword">noexcept</span>
+<span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">magnet_link_view</span> <span class="special">&gt;</span>
+<span class="identifier">parse_magnet_link</span><span class="special">(</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
     <span class="keyword">return</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">grammar</span><span class="special">::</span><span class="identifier">parse</span><span class="special">(</span><span class="identifier">s</span><span class="special">,</span> <span class="identifier">magnet_link_rule</span><span class="special">);</span>
 <span class="special">}</span>
@@ -692,7 +694,7 @@
         <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
     <span class="special">}</span>
 
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">magnet_link_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">magnet_link_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
         <span class="identifier">parse_magnet_link</span><span class="special">(</span><span class="identifier">argv</span><span class="special">[</span><span class="number">1</span><span class="special">]);</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">r</span><span class="special">)</span>
         <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>

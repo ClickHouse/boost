@@ -37,10 +37,10 @@
 
 <span class="keyword">struct</span> <a class="link" href="async_wait_op_.html" title="Struct async_wait_op_">async_wait_op_</a> <span class="special">{</span>
 
-  <span class="comment">// <a class="link" href="async_wait_op_.html#idm9085-bb">public member functions</a></span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Self<span class="special">&gt;</span> <span class="keyword">void</span> <a class="link" href="../../../container/flat_map.html#idm9086-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="async_wait_op_.html#idm8961-bb">public member functions</a></span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Self<span class="special">&gt;</span> <span class="keyword">void</span> <a class="link" href="async_wait_op_.html#idm8962-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span><span class="special">)</span><span class="special">;</span>
   <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Self<span class="special">&gt;</span> 
-    <span class="keyword">void</span> <a class="link" href="async_wait_op_.html#idm9092-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span><span class="special">,</span> <span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">native_exit_code_type</span><span class="special">)</span><span class="special">;</span>
+    <span class="keyword">void</span> <a class="link" href="../../../container/flat_map.html#idm8968-bb"><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span></a><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span><span class="special">,</span> <span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">native_exit_code_type</span><span class="special">)</span><span class="special">;</span>
 
   <span class="comment">// public data members</span>
   <a class="link" href="../basic_process_handle.html" title="Struct template basic_process_handle">basic_process_handle</a><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">handle</span><span class="special">;</span>
@@ -50,11 +50,11 @@
 <a name="id-1.3.29.12.8.11.3.4.4.4"></a><h2>Description</h2>
 <div class="refsect2">
 <a name="id-1.3.29.12.8.11.3.4.4.4.2"></a><h3>
-<a name="idm9085-bb"></a><code class="computeroutput">async_wait_op_</code> public member functions</h3>
+<a name="idm8961-bb"></a><code class="computeroutput">async_wait_op_</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Self<span class="special">&gt;</span> <span class="keyword">void</span> <a name="idm9086-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span> self<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Self<span class="special">&gt;</span> <span class="keyword">void</span> <a name="idm8962-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span> self<span class="special">)</span><span class="special">;</span></pre></li>
 <li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> Self<span class="special">&gt;</span> 
-  <span class="keyword">void</span> <a name="idm9092-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span> self<span class="special">,</span> <span class="identifier">error_code</span> ec<span class="special">,</span> <span class="identifier">native_exit_code_type</span> code<span class="special">)</span><span class="special">;</span></pre></li>
+  <span class="keyword">void</span> <a name="idm8968-bb"></a><span class="keyword">operator</span><span class="special">(</span><span class="special">)</span><span class="special">(</span><span class="identifier">Self</span> <span class="special">&amp;&amp;</span> self<span class="special">,</span> <span class="identifier">error_code</span> ec<span class="special">,</span> <span class="identifier">native_exit_code_type</span> code<span class="special">)</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 </div>

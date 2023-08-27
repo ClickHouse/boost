@@ -28,7 +28,7 @@
 <a name="mysql.ref.boost__mysql__results.rows"></a><a class="link" href="rows.html" title="results::rows">results::rows</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm32206"></a>
+          <a class="indexterm" name="idm43623"></a>
         </p>
 <p>
           Returns the rows retrieved by the SQL query.
@@ -42,6 +42,14 @@
 </pre>
 <h6>
 <a name="mysql.ref.boost__mysql__results.rows.h1"></a>
+          <span class="phrase"><a name="mysql.ref.boost__mysql__results.rows.description"></a></span><a class="link" href="rows.html#mysql.ref.boost__mysql__results.rows.description">Description</a>
+        </h6>
+<p>
+          For operations returning more than one resultset, returns the rows for
+          the first resultset.
+        </p>
+<h6>
+<a name="mysql.ref.boost__mysql__results.rows.h2"></a>
           <span class="phrase"><a name="mysql.ref.boost__mysql__results.rows.preconditions"></a></span><a class="link" href="rows.html#mysql.ref.boost__mysql__results.rows.preconditions">Preconditions</a>
         </h6>
 <p>
@@ -49,7 +57,7 @@
           <span class="special">==</span> <span class="keyword">true</span></code>
         </p>
 <h6>
-<a name="mysql.ref.boost__mysql__results.rows.h2"></a>
+<a name="mysql.ref.boost__mysql__results.rows.h3"></a>
           <span class="phrase"><a name="mysql.ref.boost__mysql__results.rows.exception_safety"></a></span><a class="link" href="rows.html#mysql.ref.boost__mysql__results.rows.exception_safety">Exception
           safety</a>
         </h6>
@@ -57,7 +65,7 @@
           No-throw guarantee.
         </p>
 <h6>
-<a name="mysql.ref.boost__mysql__results.rows.h3"></a>
+<a name="mysql.ref.boost__mysql__results.rows.h4"></a>
           <span class="phrase"><a name="mysql.ref.boost__mysql__results.rows.object_lifetimes"></a></span><a class="link" href="rows.html#mysql.ref.boost__mysql__results.rows.object_lifetimes">Object
           lifetimes</a>
         </h6>
@@ -65,6 +73,13 @@
           This function returns a view object, with reference semantics. The returned
           view points into memory owned by <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code>, and will be valid as long as <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code> or
           an object move-constructed from <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code> are alive.
+        </p>
+<h6>
+<a name="mysql.ref.boost__mysql__results.rows.h5"></a>
+          <span class="phrase"><a name="mysql.ref.boost__mysql__results.rows.complexity"></a></span><a class="link" href="rows.html#mysql.ref.boost__mysql__results.rows.complexity">Complexity</a>
+        </h6>
+<p>
+          Constant.
         </p>
 </div>
 <div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>

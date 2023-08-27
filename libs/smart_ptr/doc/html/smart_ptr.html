@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="author" content="Greg Colvin, Beman Dawes, Peter Dimov, Glen Fernandes">
 <title>Boost.SmartPtr: The Smart Pointer Library</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -194,7 +194,8 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
 details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
 details{margin-left:1.25rem}
-details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;-webkit-tap-highlight-color:transparent}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
 details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
 details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
 details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
@@ -236,9 +237,8 @@ pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
 table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
 table.linenotable td.code{padding-left:.75em}
-table.linenotable td.linenos{border-right:1px solid;opacity:.35;padding-right:.5em}
-pre.pygments .lineno{border-right:1px solid;opacity:.35;display:inline-block;margin-right:.75em}
-pre.pygments .lineno::before{content:"";margin-right:-.125em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
 .quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
@@ -275,7 +275,7 @@ table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-c
 table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
 table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
 table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
-table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -291,10 +291,11 @@ ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
 ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
 ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
 ul.checklist>li>p:first-child{margin-left:-1em}
 ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
 ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
@@ -337,8 +338,6 @@ sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
-.gist .file-data>table td.line-data{width:99%}
 div.unbreakable{page-break-inside:avoid}
 .big{font-size:larger}
 .small{font-size:smaller}
@@ -1302,8 +1301,8 @@ On C++03 compilers, the return value is of an unspecified type.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;boost/scoped_ptr.hpp&gt;
-#include &lt;iostream&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;boost/scoped_ptr.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span>
 <span class="k">struct</span> <span class="nc">Shoe</span> <span class="p">{</span> <span class="o">~</span><span class="n">Shoe</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Buckle my shoe</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span> <span class="p">};</span>
 
@@ -1314,7 +1313,7 @@ On C++03 compilers, the return value is of an unspecified type.
     <span class="kt">int</span> <span class="n">add_one</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">++*</span><span class="n">ptr</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">scoped_ptr</span><span class="o">&lt;</span><span class="n">Shoe</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">(</span><span class="k">new</span> <span class="n">Shoe</span><span class="p">);</span>
     <span class="n">MyClass</span> <span class="n">my_instance</span><span class="p">;</span>
@@ -1717,7 +1716,7 @@ arguments to the constructor of <code>Y</code> is also OK.</p>
     <span class="n">f</span><span class="p">(</span> <span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">()</span> <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">bad</span><span class="p">()</span>
+<span class="kt">void</span> <span class="n">bad</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">f</span><span class="p">(</span> <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">),</span> <span class="n">g</span><span class="p">()</span> <span class="p">);</span>
 <span class="p">}</span></code></pre>
@@ -4925,9 +4924,9 @@ corresponding <code>weak_ptr</code>.</p>
 <h3 id="enable_shared_from_this_example">Example</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;boost/enable_shared_from_this.hpp&gt;
-#include &lt;boost/shared_ptr.hpp&gt;
-#include &lt;cassert&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;boost/enable_shared_from_this.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;boost/shared_ptr.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp">
 </span>
 <span class="k">class</span> <span class="nc">Y</span><span class="o">:</span> <span class="k">public</span> <span class="n">boost</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span>
 <span class="p">{</span>
@@ -4939,7 +4938,7 @@ corresponding <code>weak_ptr</code>.</p>
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="k">new</span> <span class="n">Y</span><span class="p">);</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">f</span><span class="p">();</span>
@@ -5102,7 +5101,7 @@ For example, in the following code:</p>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">class</span> <span class="nc">Y</span><span class="o">:</span> <span class="k">public</span> <span class="n">boost</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span> <span class="p">{};</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="k">new</span> <span class="n">Y</span><span class="p">);</span>
 <span class="p">}</span></code></pre>
@@ -5176,9 +5175,9 @@ that it&#8217;s not a template, and is its recommended replacement for new code.
 <h3 id="enable_shared_from_example">Example</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;boost/smart_ptr/enable_shared_from.hpp&gt;
-#include &lt;boost/shared_ptr.hpp&gt;
-#include &lt;cassert&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;boost/smart_ptr/enable_shared_from.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;boost/shared_ptr.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp">
 </span>
 <span class="k">class</span> <span class="nc">Y</span><span class="o">:</span> <span class="k">public</span> <span class="n">boost</span><span class="o">::</span><span class="n">enable_shared_from</span>
 <span class="p">{</span>
@@ -5190,7 +5189,7 @@ that it&#8217;s not a template, and is its recommended replacement for new code.
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="k">new</span> <span class="n">Y</span><span class="p">);</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">f</span><span class="p">();</span>
@@ -9231,8 +9230,8 @@ create pointer independent code.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include &lt;boost/pointer_cast.hpp&gt;
-#include &lt;boost/shared_ptr.hpp&gt;
+<pre class="rouge highlight"><code data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;boost/pointer_cast.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;boost/shared_ptr.hpp&gt;</span><span class="cp">
 </span>
 <span class="k">class</span> <span class="nc">base</span> <span class="p">{</span>
 <span class="nl">public:</span>
@@ -9242,12 +9241,12 @@ create pointer independent code.</p>
 <span class="k">class</span> <span class="nc">derived</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span> <span class="p">};</span>
 
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Ptr</span><span class="p">&gt;</span>
-<span class="kt">void</span> <span class="nf">check_if_it_is_derived</span><span class="p">(</span><span class="k">const</span> <span class="n">Ptr</span><span class="o">&amp;</span> <span class="n">ptr</span><span class="p">)</span>
+<span class="kt">void</span> <span class="n">check_if_it_is_derived</span><span class="p">(</span><span class="k">const</span> <span class="n">Ptr</span><span class="o">&amp;</span> <span class="n">ptr</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="n">assert</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">derived</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="n">base</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">derived</span><span class="p">;</span>
   <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">base</span><span class="o">&gt;</span> <span class="n">sptr</span><span class="p">(</span><span class="k">new</span> <span class="n">derived</span><span class="p">);</span>
@@ -9347,7 +9346,7 @@ to an <code>int</code>), we can define another pointer of the same type to anoth
 <pre class="rouge highlight"><code data-lang="c++"><span class="c1">// Let's define a memory allocator that can</span>
 <span class="c1">// work with raw and smart pointers</span>
 
-<span class="cp">#include &lt;boost/pointer_to_other.hpp&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;boost/pointer_to_other.hpp&gt;</span><span class="cp">
 </span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">VoidPtr</span><span class="p">&gt;</span>
 <span class="k">class</span> <span class="nc">memory_allocator</span>
@@ -9952,7 +9951,7 @@ already use ownership-based equality.)</p>
 
 <span class="c1">// file.cpp:</span>
 
-<span class="cp">#include "file.hpp"
+<span class="cp">#include</span> <span class="cpf">"file.hpp"</span><span class="cp">
 </span>
 <span class="k">class</span> <span class="nc">file</span><span class="o">::</span><span class="n">impl</span>
 <span class="p">{</span>
@@ -9970,7 +9969,7 @@ already use ownership-based equality.)</p>
     <span class="kt">void</span> <span class="n">read</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">file</span><span class="o">::</span><span class="n">file</span><span class="p">(</span><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">name</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">mode</span><span class="p">)</span><span class="o">:</span> <span class="n">pimpl_</span><span class="p">(</span><span class="k">new</span> <span class="nf">impl</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="p">))</span>
+<span class="n">file</span><span class="o">::</span><span class="n">file</span><span class="p">(</span><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">name</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">mode</span><span class="p">)</span><span class="o">:</span> <span class="n">pimpl_</span><span class="p">(</span><span class="k">new</span> <span class="n">impl</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="p">))</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
@@ -10666,7 +10665,7 @@ used to non-intrusively associate arbitrary data with objects managed by <code>s
     <span class="kt">void</span> <span class="n">g</span><span class="p">();</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">X</span> <span class="n">x</span><span class="p">;</span>
 
@@ -11558,7 +11557,7 @@ mandates that relational operations on pointers are unspecified (5.9
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-10 13:47:39 UTC
+Last updated 2023-08-08 21:02:55 UTC
 </div>
 </div>
 <style>

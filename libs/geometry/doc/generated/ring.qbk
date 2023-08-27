@@ -25,7 +25,7 @@ A ring (aka linear ring) is a closed line which should not be selfintersecting.
 ``template<typename Point, bool ClockWise, bool Closed, template< typename, typename > class Container,
          template< typename > class Allocator>
 class model::ring
-      : public Container< Point, Allocator< Point > >
+      : public std::vector< Point, std::allocator< Point > >
 {
   // ...
 };

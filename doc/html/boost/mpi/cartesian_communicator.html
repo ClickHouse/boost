@@ -50,7 +50,7 @@
   <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="keyword">int</span> <span class="special">&gt;</span> <a class="link" href="cartesian_communicator.html#id-1_3_25_7_3_2_1_1_4_4-bb"><span class="identifier">coordinates</span></a><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
   <span class="keyword">void</span> <a class="link" href="cartesian_communicator.html#id-1_3_25_7_3_2_1_1_4_5-bb"><span class="identifier">topology</span></a><span class="special">(</span><a class="link" href="cartesian_topology.html" title="Class cartesian_topology">cartesian_topology</a> <span class="special">&amp;</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="keyword">int</span> <span class="special">&gt;</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
   <a class="link" href="cartesian_topology.html" title="Class cartesian_topology">cartesian_topology</a> <a class="link" href="cartesian_communicator.html#id-1_3_25_7_3_2_1_1_4_6-bb"><span class="identifier">topology</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
-  <span class="keyword">int</span> <a class="link" href="cartesian_communicator.html#id-1_3_25_7_3_2_1_1_4_7-bb"><span class="identifier">rank</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">int</span> <a class="link" href="cartesian_communicator.html#id-1_3_25_7_3_2_1_1_4_7-bb"><span class="identifier">rank</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
 <a name="id-1.3.25.7.4.4.4"></a><h2>Description</h2>
@@ -244,7 +244,7 @@
 <p>Retrieve the topology of the grid. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">int</span> <a name="id-1_3_25_7_3_2_1_1_4_7-bb"></a><span class="identifier">rank</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Determine the rank of the executing process in a communicator. <p>This routine is equivalent to <code class="computeroutput">MPI_Comm_rank</code>.</p>
+<pre class="literallayout"><span class="keyword">int</span> <a name="id-1_3_25_7_3_2_1_1_4_7-bb"></a><span class="identifier">rank</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Determine the rank of the executing process in a communicator. <p>This routine is equivalent to <code class="computeroutput">MPI_Comm_rank</code>.</p>
 <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">

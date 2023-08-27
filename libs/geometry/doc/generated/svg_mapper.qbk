@@ -21,7 +21,7 @@ Helper class to create SVG maps.
 [heading Synopsis]
 ``template<typename Point, bool SameScale, typename SvgCoordinateType>
 class svg_mapper
-      : noncopyable
+      : boost::noncopyable
 {
   // ...
 };

@@ -21,7 +21,7 @@ Within detection using winding rule. Side strategy used internally is choosen ba
 [heading Synopsis]
 ``template<typename Point, typename PointOfSegment, typename CalculationType>
 class strategy::within::winding
-      : public within::detail::winding_base_type::type< Point, PointOfSegment, CalculationType >
+      : public within::detail::winding_base_type::type
 {
   // ...
 };

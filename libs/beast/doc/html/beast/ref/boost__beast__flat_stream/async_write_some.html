@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__flat_stream.async_write_some"></a><a class="link" href="async_write_some.html" title="flat_stream::async_write_some">flat_stream::async_write_some</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm30706"></a>
+          <a class="indexterm" name="idm30721"></a>
         </p>
 <p>
           Start an asynchronous write.
@@ -104,19 +104,20 @@
                     must be:
                   </p>
 <pre class="table-programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
-    <span class="identifier">error_code</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>           <span class="comment">// Result of operation.</span>
+    <span class="identifier">error_code</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>           <span class="comment">// Result of operation.</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>   <span class="comment">// Number of bytes written.</span>
 <span class="special">);</span>
 </pre>
+                  <p>
+                    Regardless of whether the asynchronous operation completes immediately
+                    or not, the handler will not be invoked from within this function.
+                    Invocation of the handler will be performed in a manner equivalent
+                    to using <code class="computeroutput"><span class="identifier">net</span><span class="special">::</span><span class="identifier">post</span></code>.
+                  </p>
                 </td>
 </tr>
 </tbody>
 </table></div>
-<p>
-          Regardless of whether the asynchronous operation completes immediately
-          or not, the handler will not be invoked from within this function. Invocation
-          of the handler will be performed in a manner equivalent to using <code class="computeroutput"><span class="identifier">net</span><span class="special">::</span><span class="identifier">post</span></code>.
-        </p>
 <h6>
 <a name="beast.ref.boost__beast__flat_stream.async_write_some.h3"></a>
           <span class="phrase"><a name="beast.ref.boost__beast__flat_stream.async_write_some.remarks"></a></span><a class="link" href="async_write_some.html#beast.ref.boost__beast__flat_stream.async_write_some.remarks">Remarks</a>

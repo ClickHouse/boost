@@ -33,8 +33,7 @@
 <div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../../header/boost/numeric/odeint/stepper/adams_bashforth_hpp.html" title="Header &lt;boost/numeric/odeint/stepper/adams_bashforth.hpp&gt;">boost/numeric/odeint/stepper/adams_bashforth.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">int</span> N<span class="special">&gt;</span> 
-<span class="keyword">struct</span> <a class="link" href="order_helper.html" title="Struct template order_helper">order_helper</a> <span class="special">:</span> <span class="keyword">public</span> boost::mpl::max::type&lt; mpl::eval_if&lt; mpl::equal_to&lt; mpl::modulus&lt; int_&lt; N &gt;, int_&lt; 2 &gt; &gt;, int_&lt; 0 &gt; &gt;, int_&lt; N &gt;, int_&lt; N+1 &gt; &gt;::type, int_&lt; 4 &gt; &gt;
-<span class="special">{</span>
+<span class="keyword">struct</span> <a class="link" href="order_helper.html" title="Struct template order_helper">order_helper</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">mpl</span><span class="special">::</span><span class="identifier">max</span><span class="special">::</span><span class="identifier">type</span> <span class="special">{</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 </div>
 <div class="copyright-footer">Copyright © 2009-2015 Karsten Ahnert and Mario Mulansky<p>

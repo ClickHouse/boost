@@ -10,7 +10,7 @@ The header contains implementation of asynchronous sink frontend. </para><namesp
 <class name="asynchronous_sink"><template>
       <template-type-parameter name="SinkBackendT"/>
       <template-type-parameter name="QueueingStrategyT"><default><classname alt="boost::log::sinks::unbounded_fifo_queue">unbounded_fifo_queue</classname></default></template-type-parameter>
-    </template><inherit access="public">basic_sink_frontend</inherit><inherit access="public">QueueingStrategyT</inherit><purpose>Asynchronous logging sink frontend. </purpose><description><para>The frontend starts a separate thread on construction. All logging records are passed to the backend in this dedicated thread.</para><para>The user can prevent spawning the internal thread by specifying <computeroutput>start_thread</computeroutput> parameter with the value of <computeroutput>false</computeroutput> on construction. In this case log records will be buffered in the internal queue until the user calls <computeroutput>run</computeroutput>, <computeroutput>feed_records</computeroutput> or <computeroutput>flush</computeroutput> in his own thread. Log record queueing strategy is specified in the <computeroutput>QueueingStrategyT</computeroutput> template parameter. </para></description><class name="run_func"><purpose>Function object to run the log record feeding thread. </purpose><typedef name="result_type"><type>void</type></typedef>
+    </template><inherit access="public">basic_sink_frontend</inherit><inherit access="public">unbounded_fifo_queue</inherit><purpose>Asynchronous logging sink frontend. </purpose><description><para>The frontend starts a separate thread on construction. All logging records are passed to the backend in this dedicated thread.</para><para>The user can prevent spawning the internal thread by specifying <computeroutput>start_thread</computeroutput> parameter with the value of <computeroutput>false</computeroutput> on construction. In this case log records will be buffered in the internal queue until the user calls <computeroutput>run</computeroutput>, <computeroutput>feed_records</computeroutput> or <computeroutput>flush</computeroutput> in his own thread. Log record queueing strategy is specified in the <computeroutput>QueueingStrategyT</computeroutput> template parameter. </para></description><class name="run_func"><purpose>Function object to run the log record feeding thread. </purpose><typedef name="result_type"><type>void</type></typedef>
 <method-group name="public member functions">
 <method name="operator()" cv="const"><type>result_type</type></method>
 </method-group>
@@ -142,7 +142,7 @@ The header contains implementation of base classes for sink backends. </para><na
 <struct name="basic_formatted_sink_backend"><template>
       <template-type-parameter name="CharT"/>
       <template-type-parameter name="FrontendRequirementsT"><default><classname alt="boost::log::sinks::synchronized_feeding">synchronized_feeding</classname></default></template-type-parameter>
-    </template><inherit access="public">basic_sink_backend&lt; combine_requirements&lt; FrontendRequirementsT, formatted_records &gt;::type &gt;</inherit><purpose>A base class for a logging sink backend with message formatting support. </purpose><description><para>The <computeroutput><classname alt="boost::log::sinks::basic_formatted_sink_backend">basic_formatted_sink_backend</classname></computeroutput> class template indicates to the frontend that the backend requires logging record formatting.</para><para>The class allows to request encoding conversion in case if the sink backend requires the formatted string in some particular encoding (e.g. if underlying API supports only narrow or wide characters). In order to perform conversion one should specify the desired final character type in the <computeroutput>TargetCharT</computeroutput> template parameter. </para></description><typedef name="char_type"><purpose>Character type. </purpose><type>CharT</type></typedef>
+    </template><inherit access="public">boost::log::sinks::basic_sink_backend&lt; combine_requirements&lt; synchronized_feeding, formatted_records &gt;::type &gt;</inherit><purpose>A base class for a logging sink backend with message formatting support. </purpose><description><para>The <computeroutput><classname alt="boost::log::sinks::basic_formatted_sink_backend">basic_formatted_sink_backend</classname></computeroutput> class template indicates to the frontend that the backend requires logging record formatting.</para><para>The class allows to request encoding conversion in case if the sink backend requires the formatted string in some particular encoding (e.g. if underlying API supports only narrow or wide characters). In order to perform conversion one should specify the desired final character type in the <computeroutput>TargetCharT</computeroutput> template parameter. </para></description><typedef name="char_type"><purpose>Character type. </purpose><type>CharT</type></typedef>
 <typedef name="string_type"><purpose>Formatted string type. </purpose><type>std::basic_string&lt; char_type &gt;</type></typedef>
 <typedef name="frontend_requirements"><purpose>Frontend requirements. </purpose><type>base_type::frontend_requirements</type></typedef>
 </struct><struct name="basic_sink_backend"><template>
@@ -150,6 +150,7 @@ The header contains implementation of base classes for sink backends. </para><na
     </template><purpose>Base class for a logging sink backend. </purpose><description><para>The <computeroutput><classname alt="boost::log::sinks::basic_sink_backend">basic_sink_backend</classname></computeroutput> class template defines a number of types that all sink backends are required to define. All sink backends have to derive from the class. </para></description><typedef name="frontend_requirements"><purpose>Frontend requirements tag. </purpose><type>FrontendRequirementsT</type></typedef>
 <method-group name="public member functions">
 </method-group>
+<constructor cv="= default"/>
 <constructor cv="= delete"><parameter name=""><paramtype><classname>basic_sink_backend</classname> const &amp;</paramtype></parameter></constructor>
 <copy-assignment cv="= delete"><type><classname>basic_sink_backend</classname> &amp;</type><parameter name=""><paramtype><classname>basic_sink_backend</classname> const &amp;</paramtype></parameter></copy-assignment>
 </struct></namespace>
@@ -223,7 +224,7 @@ The header contains implementation of a base class for sink frontends. </para><n
 <method-group name="protected member functions">
 <method name="frontend_mutex" cv="const"><type>mutex_type &amp;</type><purpose>Returns reference to the frontend mutex. </purpose></method>
 <method name="exception_handler"><type>exception_handler_type &amp;</type><purpose>Returns reference to the exception handler. </purpose></method>
-<method name="exception_handler" cv="const"><type>exception_handler_type const  &amp;</type><purpose>Returns reference to the exception handler. </purpose></method>
+<method name="exception_handler" cv="const"><type>exception_handler_type const &amp;</type><purpose>Returns reference to the exception handler. </purpose></method>
 <method name="feed_record"><type>void</type><template>
           <template-type-parameter name="BackendMutexT"/>
           <template-type-parameter name="BackendT"/>
@@ -501,37 +502,37 @@ comp[MY_EVENT_ID2] % formatter1 % ... % formatterN;
 <copy-assignment><type><classname>basic_event_composer</classname> &amp;</type><parameter name="that"><paramtype><classname>basic_event_composer</classname></paramtype></parameter><description><para>Assignment. Provides strong exception guarantee. </para></description></copy-assignment>
 </class><class name="custom_event_category_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_custom_mapping&lt; event_category, AttributeValueT &gt;</inherit><purpose>Customizable event category mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and event categories. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_custom_mapping&lt; event_category, int &gt;</inherit><purpose>Customizable event category mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and event categories. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
 </class><class name="custom_event_id_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_custom_mapping&lt; event_id, AttributeValueT &gt;</inherit><purpose>Customizable event ID mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and event identifiers. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_custom_mapping&lt; event_id, int &gt;</inherit><purpose>Customizable event ID mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and event identifiers. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
 </class><class name="custom_event_type_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_custom_mapping&lt; event_type, AttributeValueT &gt;</inherit><purpose>Customizable event type mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and native event types. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_custom_mapping&lt; event_type, int &gt;</inherit><purpose>Customizable event type mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and native event types. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
 </class><class name="direct_event_category_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_direct_mapping&lt; event_category, AttributeValueT &gt;</inherit><purpose>Straightforward event category mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the event categories. The mapping simply returns the extracted attribute value converted to the event category. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_direct_mapping&lt; event_category, int &gt;</inherit><purpose>Straightforward event category mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the event categories. The mapping simply returns the extracted attribute value converted to the event category. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
 </class><class name="direct_event_id_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_direct_mapping&lt; event_id, AttributeValueT &gt;</inherit><purpose>Straightforward event ID mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the event identifiers. The mapping simply returns the extracted attribute value converted to the event ID. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_direct_mapping&lt; event_id, int &gt;</inherit><purpose>Straightforward event ID mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the event identifiers. The mapping simply returns the extracted attribute value converted to the event ID. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
 </class><class name="direct_event_type_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_direct_mapping&lt; event_type, AttributeValueT &gt;</inherit><purpose>Straightforward event type mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the native event types. The mapping simply returns the extracted attribute value converted to the native event type. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_direct_mapping&lt; event_type, int &gt;</inherit><purpose>Straightforward event type mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the native event types. The mapping simply returns the extracted attribute value converted to the native event type. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
@@ -700,13 +701,13 @@ The header contains implementation of a Syslog sink backend along with its setup
 </class><namespace name="syslog">
 <class name="custom_severity_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_custom_mapping&lt; level, AttributeValueT &gt;</inherit><purpose>Customizable severity level mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and Syslog severity levels. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_custom_mapping&lt; level, int &gt;</inherit><purpose>Customizable severity level mapping. </purpose><description><para>The class allows to setup a custom mapping between an attribute and Syslog severity levels. The mapping should be initialized similarly to the standard <computeroutput>map</computeroutput> container, by using indexing operator and assignment. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
 </class><class name="direct_severity_mapping"><template>
       <template-type-parameter name="AttributeValueT"><default>int</default></template-type-parameter>
-    </template><inherit access="public">basic_direct_mapping&lt; level, AttributeValueT &gt;</inherit><purpose>Straightforward severity level mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the Syslog levels. The mapping simply returns the extracted attribute value converted to the Syslog severity level. </para></description><method-group name="public member functions">
+    </template><inherit access="public">boost::log::sinks::basic_direct_mapping&lt; level, int &gt;</inherit><purpose>Straightforward severity level mapping. </purpose><description><para>This type of mapping assumes that attribute with a particular name always provides values that map directly onto the Syslog levels. The mapping simply returns the extracted attribute value converted to the Syslog severity level. </para></description><method-group name="public member functions">
 </method-group>
 <constructor specifiers="explicit"><parameter name="name"><paramtype>attribute_name const &amp;</paramtype><description><para>Attribute name </para></description></parameter><description><para>Constructor</para><para>
 </para></description></constructor>
@@ -824,7 +825,7 @@ The header contains implementation of a text file sink backend. </para><namespac
 <destructor><description><para>Destructor </para></description></destructor>
 </class><namespace name="file">
 <struct name="collector"><purpose>Base class for file collectors. </purpose><description><para>All file collectors, supported by file sink backends, should inherit this class. </para></description><method-group name="public member functions">
-<method name="store_file" cv="= 0" specifiers="virtual"><type>void</type><parameter name="src_path"><paramtype>filesystem::path const &amp;</paramtype><description><para>The name of the file to be stored </para></description></parameter><description><para>Default constructor</para><para>Virtual destructor</para><para>The function stores the specified file in the storage. May lead to an older file deletion and a long file moving.</para><para>
+<method name="store_file" cv="= 0" specifiers="virtual"><type>void</type><parameter name="src_path"><paramtype>filesystem::path const &amp;</paramtype><description><para>The name of the file to be stored </para></description></parameter><description><para>The function stores the specified file in the storage. May lead to an older file deletion and a long file moving.</para><para>
 </para></description></method>
 <method name="is_in_storage" cv="const = 0" specifiers="virtual"><type>bool</type><parameter name="src_path"><paramtype>filesystem::path const &amp;</paramtype><description><para>The path to be checked </para></description></parameter><description><para>The function checks if the specified path refers to an existing file in the storage.</para><para>
 </para></description></method>
@@ -845,6 +846,8 @@ All other placeholders are not supported.</para><para>
 </para></description><returns><para>The result of filesystem scanning. The last file counter is only populated if <emphasis>method</emphasis> is <computeroutput>scan_matching</computeroutput>, the <emphasis>pattern</emphasis> contains N placeholder, and at least one file matching the pattern is found.</para>
 </returns></method>
 </method-group>
+<constructor cv="= default"><description><para>Default constructor </para></description></constructor>
+<destructor><description><para>Virtual destructor </para></description></destructor>
 <constructor cv="= delete"><parameter name=""><paramtype><classname>collector</classname> const &amp;</paramtype></parameter></constructor>
 <copy-assignment cv="= delete"><type><classname>collector</classname> &amp;</type><parameter name=""><paramtype><classname>collector</classname> const &amp;</paramtype></parameter></copy-assignment>
 </struct><class name="rotation_at_time_interval"><description><para>The class represents the time interval of log file rotation. The log file will be rotated after the specified time interval has passed. </para></description><typedef name="result_type"><type>bool</type></typedef>
@@ -917,7 +920,7 @@ The header contains implementation of a text interprocess message queue sink bac
 <method name="message_queue" cv="noexcept"><type>queue_type &amp;</type><description><para>The method returns a reference to the managed <computeroutput>queue_type</computeroutput> object.</para><para>
 </para></description><returns><para>A reference to the managed <computeroutput>queue_type</computeroutput> object. </para>
 </returns></method>
-<method name="message_queue" cv="const noexcept"><type>queue_type const  &amp;</type><description><para>The method returns a constant reference to the managed <computeroutput>queue_type</computeroutput> object.</para><para>
+<method name="message_queue" cv="const noexcept"><type>queue_type const &amp;</type><description><para>The method returns a constant reference to the managed <computeroutput>queue_type</computeroutput> object.</para><para>
 </para></description><returns><para>A constant reference to the managed <computeroutput>queue_type</computeroutput> object. </para>
 </returns></method>
 <method name="is_open" cv="const noexcept"><type>bool</type><description><para>Tests whether the object is associated with any message queue. Only when the backend has an associated message queue, will any message be sent.</para><para>

@@ -23,7 +23,7 @@ DSV stands for Delimiter Separated Values. Geometries can be streamed as DSV. Th
 
 [heading Synopsis]
 ``template<typename Geometry>
-detail::dsv::dsv_manipulator<Geometry> dsv(Geometry const & geometry, std::string const & coordinate_separator = ", ", std::string const & point_open = "(",
+detail::dsv::dsv_manipulator< Geometry > dsv(Geometry const & geometry, std::string const & coordinate_separator = ", ", std::string const & point_open = "(",
                                              std::string const & point_close = ")", std::string const & point_separator = ", ", std::string const & list_open = "(",
                                              std::string const & list_close = ")", std::string const & list_separator = ", ")``
 

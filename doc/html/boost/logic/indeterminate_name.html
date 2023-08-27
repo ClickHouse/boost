@@ -34,7 +34,9 @@
 <div class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../tribool/reference.html#header.boost.logic.tribool_io_hpp" title="Header &lt;boost/logic/tribool_io.hpp&gt;">boost/logic/tribool_io.hpp</a>&gt;
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CharT<span class="special">&gt;</span> 
-<span class="keyword">class</span> <a class="link" href="indeterminate_name.html" title="Class template indeterminate_name">indeterminate_name</a> <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">facet</span>, <span class="keyword">private</span> <span class="identifier">noncopyable</span> <span class="special">{</span>
+<span class="keyword">class</span> <a class="link" href="indeterminate_name.html" title="Class template indeterminate_name">indeterminate_name</a> <span class="special">:</span>
+  <span class="keyword">public</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">locale</span><span class="special">::</span><span class="identifier">facet</span>, <span class="keyword">private</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span>
+<span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// types</span>
   <span class="keyword">typedef</span> <span class="identifier">CharT</span>                      <a name="boost.logic.indeterminate_name.char_type"></a><span class="identifier">char_type</span><span class="special">;</span>  

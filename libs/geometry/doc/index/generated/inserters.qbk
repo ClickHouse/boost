@@ -4,10 +4,10 @@
 [heading Functions]
 [table
 [[Function][Description]]
-[[[link group__inserters_1gab22c33d31b9805250e54ee6d6d240a47 `inserter(Container &)`]][Insert iterator generator. ]]
+[[[link group__inserters_1ga9ddefc47faf3a27a8f5e698ae753b7b2 `inserter(Container &)`]][Insert iterator generator. ]]
 ]
 
-[#group__inserters_1gab22c33d31b9805250e54ee6d6d240a47]
+[#group__inserters_1ga9ddefc47faf3a27a8f5e698ae753b7b2]
 [section inserter(Container &)]
 '''<indexterm><primary>inserter</primary></indexterm>'''
 Insert iterator generator. 

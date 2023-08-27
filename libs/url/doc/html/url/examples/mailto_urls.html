@@ -165,12 +165,12 @@
     <span class="comment">// Count number of addresses in a string</span>
     <span class="keyword">static</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span>
-    <span class="identifier">addr_in_str</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
+    <span class="identifier">addr_in_str</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">);</span>
 
     <span class="comment">// Get the ith address from a string</span>
     <span class="keyword">static</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
-    <span class="identifier">get_nth_address</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">to</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="special">&amp;</span><span class="identifier">i</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
+    <span class="identifier">get_nth_address</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">to</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="special">&amp;</span><span class="identifier">i</span><span class="special">)</span> <span class="keyword">noexcept</span><span class="special">;</span>
 
     <span class="comment">// Get param value or empty otherwise</span>
     <span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span>
@@ -187,7 +187,7 @@
     <span class="keyword">using</span> <span class="identifier">value_type</span> <span class="special">=</span> <span class="identifier">mailto_view</span><span class="special">;</span>
 
     <span class="comment">/// Parse a sequence of characters into a mailto_view</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
     <span class="identifier">parse</span><span class="special">(</span> <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*&amp;</span> <span class="identifier">it</span><span class="special">,</span> <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*</span> <span class="identifier">end</span> <span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="special">;</span>
 <span class="special">};</span>
 
@@ -198,8 +198,8 @@
     This is a more convenient user-facing function
     to parse mailto URLs.
 */</span>
-<span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">mailto_view</span> <span class="special">&gt;</span>
-<span class="identifier">parse_mailto</span><span class="special">(</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="keyword">noexcept</span>
+<span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">mailto_view</span> <span class="special">&gt;</span>
+<span class="identifier">parse_mailto</span><span class="special">(</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
     <span class="keyword">return</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">grammar</span><span class="special">::</span><span class="identifier">parse</span><span class="special">(</span><span class="identifier">s</span><span class="special">,</span> <span class="identifier">mailto_rule</span><span class="special">);</span>
 <span class="special">}</span>
@@ -226,7 +226,7 @@
         <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
     <span class="special">}</span>
 
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">mailto_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">mailto_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
         <span class="identifier">parse_mailto</span><span class="special">(</span><span class="identifier">argv</span><span class="special">[</span><span class="number">1</span><span class="special">]);</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">r</span><span class="special">)</span>
         <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
@@ -356,7 +356,7 @@
 <span class="special">}</span>
 
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span>
-<span class="identifier">mailto_view</span><span class="special">::</span><span class="identifier">addr_in_str</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">)</span>
+<span class="identifier">mailto_view</span><span class="special">::</span><span class="identifier">addr_in_str</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span>
     <span class="keyword">bool</span> <span class="identifier">empty</span> <span class="special">=</span> <span class="keyword">true</span><span class="special">;</span>
@@ -376,11 +376,11 @@
     <span class="keyword">return</span> <span class="identifier">n</span><span class="special">;</span>
 <span class="special">}</span>
 
-<span class="identifier">urls</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
-<span class="identifier">mailto_view</span><span class="special">::</span><span class="identifier">get_nth_address</span><span class="special">(</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">to</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="special">&amp;</span><span class="identifier">i</span><span class="special">)</span> <span class="keyword">noexcept</span>
+<span class="identifier">boost</span><span class="special">::</span><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">&gt;</span>
+<span class="identifier">mailto_view</span><span class="special">::</span><span class="identifier">get_nth_address</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">to</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="special">&amp;</span><span class="identifier">i</span><span class="special">)</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
     <span class="keyword">auto</span> <span class="identifier">p</span> <span class="special">=</span> <span class="identifier">to</span><span class="special">.</span><span class="identifier">find</span><span class="special">(</span><span class="char">','</span><span class="special">);</span>
-    <span class="keyword">while</span> <span class="special">(</span><span class="identifier">p</span> <span class="special">!=</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">::</span><span class="identifier">npos</span><span class="special">)</span>
+    <span class="keyword">while</span> <span class="special">(</span><span class="identifier">p</span> <span class="special">!=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">::</span><span class="identifier">npos</span><span class="special">)</span>
     <span class="special">{</span>
         <span class="keyword">if</span> <span class="special">(</span><span class="identifier">i</span> <span class="special">==</span> <span class="number">0</span><span class="special">)</span>
             <span class="keyword">return</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">pct_string_view</span><span class="special">(</span>
@@ -411,10 +411,10 @@
 
 <span class="keyword">auto</span>
 <span class="identifier">mailto_rule_t</span><span class="special">::</span><span class="identifier">parse</span><span class="special">(</span> <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*&amp;</span> <span class="identifier">it</span><span class="special">,</span> <span class="keyword">char</span> <span class="keyword">const</span><span class="special">*</span> <span class="identifier">end</span> <span class="special">)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span>
-    <span class="special">-&gt;</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
+    <span class="special">-&gt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span> <span class="identifier">value_type</span> <span class="special">&gt;</span>
 <span class="special">{</span>
     <span class="comment">// Syntax-based rules</span>
-    <span class="identifier">urls</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">result</span><span class="special">&lt;</span><span class="identifier">urls</span><span class="special">::</span><span class="identifier">url_view</span><span class="special">&gt;</span> <span class="identifier">r</span> <span class="special">=</span>
         <span class="identifier">urls</span><span class="special">::</span><span class="identifier">grammar</span><span class="special">::</span><span class="identifier">parse</span><span class="special">(</span><span class="identifier">it</span><span class="special">,</span> <span class="identifier">end</span><span class="special">,</span> <span class="identifier">urls</span><span class="special">::</span><span class="identifier">absolute_uri_rule</span><span class="special">);</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">r</span><span class="special">)</span>
         <span class="keyword">return</span> <span class="identifier">r</span><span class="special">.</span><span class="identifier">error</span><span class="special">();</span>

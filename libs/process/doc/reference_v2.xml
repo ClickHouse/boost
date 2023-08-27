@@ -149,16 +149,17 @@ This can be used when multiple processes shared some settings, e.g. </para></des
 <constructor><parameter name="s"><paramtype>const value_type *</paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Source"/>
-          <template-type-parameter name=""><default>typename std::enable_if&lt;                    std::is_same&lt;const value_type,                            typename std::remove_pointer&lt;decltype(std::declval&lt;Source&gt;().c_str())&gt;::type                    &gt;::value&gt;::type</default></template-type-parameter>
+          <template-type-parameter name=""><default>typename std::enable_if&lt;                    std::is_same&lt;const value_type,                            typename std::remove_pointer&lt;decltype(std::declval&lt;Source&gt;().c_str())&gt;::type                    &gt;::value</default></template-type-parameter>
+          <template-nontype-parameter name=""><type>::type</type></template-nontype-parameter>
         </template><parameter name="src"><paramtype>Source &amp;&amp;</paramtype></parameter></constructor>
 <method-group name="private static functions">
 <method name="null_char_" specifiers="static"><type>constexpr const_pointer</type></method>
 </method-group>
-</struct><typedef name="cstring_ref"><type><classname>basic_cstring_ref</classname>&lt; char &gt;</type></typedef>
+</struct>
+<typedef name="cstring_ref"><type><classname>basic_cstring_ref</classname>&lt; char &gt;</type></typedef>
 <typedef name="wcstring_ref"><type><classname>basic_cstring_ref</classname>&lt; wchar_t &gt;</type></typedef>
 <typedef name="u16cstring_ref"><type><classname>basic_cstring_ref</classname>&lt; char16_t &gt;</type></typedef>
 <typedef name="u32cstring_ref"><type><classname>basic_cstring_ref</classname>&lt; char32_t &gt;</type></typedef>
-
 
 
 
@@ -190,11 +191,11 @@ This can be used when multiple processes shared some settings, e.g. </para></des
 <namespace name="boost">
 <namespace name="process">
 <namespace name="v2">
-<typedef name="default_process_launcher"><purpose>The default launcher for processes. </purpose><description><para>This launcher will be used by process if a process is launched through the constructor:</para><para><programlisting language="c++">process proc("test", {});
+
+<typedef name="default_process_launcher"><purpose>The default launcher for processes. </purpose><description><para>This launcher will be used by process if a process is launched through the constructor:</para><para><programlisting language="c++"><classname alt="boost::process::v2::basic_process">process</classname> proc("test", {});
 // equivalent to
 process prod = default_launcher()("test", {});
 </programlisting> </para></description><type>implementation_defined</type></typedef>
-
 
 
 
@@ -231,12 +232,12 @@ process proc2(executor, exe, {"BAR"}, env);
 <method-group name="public static functions">
 <method name="build_env" specifiers="static"><type>std::vector&lt; const char * &gt;</type><template>
           <template-type-parameter name="Args"/>
-        </template><parameter name="args"><paramtype>Args &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>typename std::enable_if&lt; std::is_convertible&lt; decltype(*std::begin(std::declval&lt; Args &gt;())), <classname>cstring_ref</classname> &gt;::value &gt;::type *</paramtype><default>nullptr</default></parameter></method>
+        </template><parameter name="args"><paramtype>Args &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>typename std::enable_if&lt; std::is_convertible&lt; decltype(*std::begin(std::declval&lt; Args &gt;())), <classname>cstring_ref</classname> &gt;::value</paramtype></parameter><parameter name=""><paramtype>::type *</paramtype><default>nullptr</default></parameter></method>
 </method-group>
 <method-group name="public member functions">
 <method name="build_env"><type>std::vector&lt; const char * &gt;</type><template>
           <template-type-parameter name="Args"/>
-        </template><parameter name="args"><paramtype>Args &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>typename std::enable_if&lt; !std::is_convertible&lt; decltype(*std::begin(std::declval&lt; Args &gt;())), <classname>cstring_ref</classname> &gt;::value &gt;::type *</paramtype><default>nullptr</default></parameter></method>
+        </template><parameter name="args"><paramtype>Args &amp;&amp;</paramtype></parameter><parameter name=""><paramtype>typename std::enable_if&lt; !std::is_convertible&lt; decltype(*std::begin(std::declval&lt; Args &gt;())), <classname>cstring_ref</classname> &gt;::value</paramtype></parameter><parameter name=""><paramtype>::type *</paramtype><default>nullptr</default></parameter></method>
 <method name="on_setup"><type>error_code</type><parameter name="launcher"><paramtype>posix::default_launcher &amp;</paramtype></parameter><parameter name=""><paramtype>const filesystem::path &amp;</paramtype></parameter><parameter name=""><paramtype>const char *const *</paramtype></parameter></method>
 </method-group>
 <constructor><parameter name="sv"><paramtype>std::initializer_list&lt; string_view &gt;</paramtype></parameter></constructor>
@@ -257,7 +258,7 @@ process proc2(executor, exe, {"BAR"}, env);
 <method-group name="public member functions">
 <method name="operator++"><type><classname>iterator</classname> &amp;</type></method>
 <method name="operator++"><type><classname>iterator</classname></type><parameter name=""><paramtype>int</paramtype></parameter></method>
-<method name="operator *" cv="const"><type><classname>key_value_pair_view</classname></type></method>
+<method name="operator*" cv="const"><type><classname>key_value_pair_view</classname></type></method>
 </method-group>
 <constructor cv="= default"/>
 <constructor cv="= default"><parameter name=""><paramtype>const <classname>iterator</classname> &amp;</paramtype></parameter></constructor>
@@ -316,8 +317,8 @@ process proc2(executor, exe, {"BAR"}, env);
 <constructor specifiers="explicit"><parameter name="kv"><paramtype><classname>key_view</classname></paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Source"/>
-        </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter><parameter name=""><paramtype>decltype(source.data())</paramtype><default>nullptr</default></parameter><parameter name=""><paramtype>decltype(source.size())</paramtype><default>0u</default></parameter></constructor>
-<constructor><parameter name="raw"><paramtype>const typename conditional&lt; is_same&lt; value_type, char &gt;::<classname>value</classname>, wchar_t, char &gt;::type *</paramtype></parameter></constructor>
+        </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter><parameter name=""><paramtype>decltype(std::declval&lt; Source &gt;().data())</paramtype><default>nullptr</default></parameter><parameter name=""><paramtype>decltype(std::declval&lt; Source &gt;().size())</paramtype><default>0u</default></parameter></constructor>
+<constructor><parameter name="raw"><paramtype>const typename conditional&lt; is_same&lt; value_type, char &gt;::value, wchar_t, char &gt;::type *</paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="InputIt"/>
         </template><parameter name="first"><paramtype>InputIt</paramtype></parameter><parameter name="last"><paramtype>InputIt</paramtype></parameter></constructor>
@@ -369,16 +370,16 @@ process proc2(executor, exe, {"BAR"}, env);
 <method name="get" cv="const = 0" specifiers="virtual"><type>auto</type><template>
           <template-nontype-parameter name="Idx"><type>std::size_t</type></template-nontype-parameter>
         </template></method>
-<method name="get" cv="const"><type><classname>key_view</classname></type><template>
+<method name="get" cv="const = 0" specifiers="virtual"><type><classname>key_view</classname></type><template>
         </template></method>
-<method name="get" cv="const"><type><classname>value_view</classname></type><template>
+<method name="get" cv="const = 0" specifiers="virtual"><type><classname>value_view</classname></type><template>
         </template></method>
 </method-group>
 <constructor/>
 <constructor cv="= default"><parameter name="p"><paramtype>const <classname>key_value_pair</classname> &amp;</paramtype></parameter></constructor>
 <constructor><parameter name="p"><paramtype><classname>key_value_pair</classname> &amp;&amp;</paramtype></parameter></constructor>
 <constructor><parameter name="key"><paramtype><classname>key_view</classname></paramtype></parameter><parameter name="value"><paramtype><classname>value_view</classname></paramtype></parameter></constructor>
-<constructor><parameter name="key"><paramtype><classname>key_view</classname></paramtype></parameter><parameter name="values"><paramtype>std::initializer_list&lt; basic_string_view&lt; char_type &gt;&gt;</paramtype></parameter></constructor>
+<constructor><parameter name="key"><paramtype><classname>key_view</classname></paramtype></parameter><parameter name="values"><paramtype>std::initializer_list&lt; basic_string_view&lt; char_type &gt; &gt;</paramtype></parameter></constructor>
 <constructor><parameter name="source"><paramtype>const string_type &amp;</paramtype></parameter></constructor>
 <constructor><parameter name="source"><paramtype>string_type &amp;&amp;</paramtype></parameter></constructor>
 <constructor><parameter name="raw"><paramtype>const value_type *</paramtype></parameter></constructor>
@@ -386,12 +387,12 @@ process proc2(executor, exe, {"BAR"}, env);
 <constructor specifiers="explicit"><parameter name="kv"><paramtype><classname>key_value_pair_view</classname></paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Source"/>
-        </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter><parameter name=""><paramtype>decltype(source.data())</paramtype><default>nullptr</default></parameter><parameter name=""><paramtype>decltype(source.size())</paramtype><default>0u</default></parameter></constructor>
+        </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter><parameter name=""><paramtype>decltype(std::declval&lt; Source &gt;().data())</paramtype><default>nullptr</default></parameter><parameter name=""><paramtype>decltype(std::declval&lt; Source &gt;().size())</paramtype><default>0u</default></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Key"/>
           <template-type-parameter name="Value"/>
         </template><parameter name="kv"><paramtype>const std::pair&lt; Key, Value &gt; &amp;</paramtype></parameter></constructor>
-<constructor><parameter name="raw"><paramtype>const typename conditional&lt; is_same&lt; value_type, char &gt;::<classname>value</classname>, wchar_t, char &gt;::type *</paramtype></parameter></constructor>
+<constructor><parameter name="raw"><paramtype>const typename conditional&lt; is_same&lt; value_type, char &gt;::value, wchar_t, char &gt;::type *</paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="InputIt"/>
           <template-type-parameter name="std::iterator_traits&lt; InputIt &gt;::iterator_category"/>
@@ -433,9 +434,9 @@ process proc2(executor, exe, {"BAR"}, env);
 <method name="c_str" cv="const noexcept"><type>const value_type *</type></method>
 <method name="data" cv="const"><type>const value_type *</type></method>
 <method name="size" cv="const"><type>std::size_t</type></method>
-<method name="get" cv="const"><type><classname>key_view</classname></type><template>
+<method name="get" cv="const = 0" specifiers="virtual"><type><classname>key_view</classname></type><template>
         </template></method>
-<method name="get" cv="const"><type><classname>value_view</classname></type><template>
+<method name="get" cv="const = 0" specifiers="virtual"><type><classname>value_view</classname></type><template>
         </template></method>
 </method-group>
 <constructor/>
@@ -443,7 +444,7 @@ process proc2(executor, exe, {"BAR"}, env);
 <constructor><parameter name="p"><paramtype><classname>key_value_pair_view</classname> &amp;&amp;</paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Source"/>
-          <template-type-parameter name=""><default>typename std::enable_if&lt;is_constructible&lt;<classname alt="boost::process::v2::basic_cstring_ref">string_view_type</classname>, Source&gt;::<classname alt="boost::process::v2::environment::value">value</classname>&gt;::type</default></template-type-parameter>
+          <template-type-parameter name=""><default>typename std::enable_if&lt;is_constructible&lt;<classname alt="boost::process::v2::basic_cstring_ref">string_view_type</classname>, Source&gt;::value&gt;::type</default></template-type-parameter>
         </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter></constructor>
 <constructor><parameter name="p"><paramtype>const char_type *</paramtype></parameter></constructor>
 <constructor><parameter name="p"><paramtype>char_type *</paramtype></parameter></constructor>
@@ -478,7 +479,7 @@ process proc2(executor, exe, {"BAR"}, env);
 <constructor><parameter name="p"><paramtype><classname>key_view</classname> &amp;&amp;</paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Source"/>
-          <template-type-parameter name=""><default>typename std::enable_if&lt;is_constructible&lt;string_view_type, Source&gt;::<classname alt="boost::process::v2::environment::value">value</classname>&gt;::type</default></template-type-parameter>
+          <template-type-parameter name=""><default>typename std::enable_if&lt;is_constructible&lt;string_view_type, Source&gt;::value&gt;::type</default></template-type-parameter>
         </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter></constructor>
 <constructor><parameter name="p"><paramtype>const char_type *</paramtype></parameter></constructor>
 <constructor><parameter name="p"><paramtype>char_type *</paramtype></parameter></constructor>
@@ -534,8 +535,8 @@ process proc2(executor, exe, {"BAR"}, env);
 <constructor specifiers="explicit"><parameter name="kv"><paramtype><classname>value_view</classname></paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Source"/>
-        </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter><parameter name=""><paramtype>decltype(source.data())</paramtype><default>nullptr</default></parameter><parameter name=""><paramtype>decltype(source.size())</paramtype><default>0u</default></parameter></constructor>
-<constructor><parameter name="raw"><paramtype>const typename conditional&lt; is_same&lt; value_type, char &gt;::<classname>value</classname>, wchar_t, char &gt;::type *</paramtype></parameter></constructor>
+        </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter><parameter name=""><paramtype>decltype(std::declval&lt; Source &gt;().data())</paramtype><default>nullptr</default></parameter><parameter name=""><paramtype>decltype(std::declval&lt; Source &gt;().size())</paramtype><default>0u</default></parameter></constructor>
+<constructor><parameter name="raw"><paramtype>const typename conditional&lt; is_same&lt; value_type, char &gt;::value, wchar_t, char &gt;::type *</paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="InputIt"/>
         </template><parameter name="first"><paramtype>InputIt</paramtype></parameter><parameter name="last"><paramtype>InputIt</paramtype></parameter></constructor>
@@ -553,7 +554,7 @@ process proc2(executor, exe, {"BAR"}, env);
 <method-group name="public member functions">
 <method name="operator++"><type><classname>value_iterator</classname> &amp;</type></method>
 <method name="operator++"><type><classname>value_iterator</classname></type><parameter name=""><paramtype>int</paramtype></parameter></method>
-<method name="operator *" cv="const"><type>string_view_type</type></method>
+<method name="operator*" cv="const"><type>string_view_type</type></method>
 </method-group>
 <constructor cv="= default"/>
 <constructor cv="= default"><parameter name=""><paramtype>const <classname>value_iterator</classname> &amp;</paramtype></parameter></constructor>
@@ -590,7 +591,7 @@ process proc2(executor, exe, {"BAR"}, env);
 <constructor><parameter name="p"><paramtype><classname>value_view</classname> &amp;&amp;</paramtype></parameter></constructor>
 <constructor><template>
           <template-type-parameter name="Source"/>
-          <template-type-parameter name=""><default>typename std::enable_if&lt;is_constructible&lt;<classname alt="boost::process::v2::basic_cstring_ref">string_view_type</classname>, Source&gt;::<classname alt="boost::process::v2::environment::value">value</classname>&gt;::type</default></template-type-parameter>
+          <template-type-parameter name=""><default>typename std::enable_if&lt;is_constructible&lt;<classname alt="boost::process::v2::basic_cstring_ref">string_view_type</classname>, Source&gt;::value&gt;::type</default></template-type-parameter>
         </template><parameter name="source"><paramtype>const Source &amp;</paramtype></parameter></constructor>
 <constructor><parameter name="p"><paramtype>const char_type *</paramtype></parameter></constructor>
 <constructor><parameter name="p"><paramtype>char_type *</paramtype></parameter></constructor>
@@ -640,48 +641,48 @@ The environment type passed in must be a range with value T that fulfills the fo
 </para><para>
 </para></description><returns><para>A filesystem::path to the executable or an empty path if it cannot be found. </para>
 </returns></function>
-<overloaded-function name="get"><signature><type><classname>value</classname></type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type><classname>value</classname></type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter></signature><signature><type><classname>value</classname></type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type><classname>value</classname></type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter></signature><signature><type><classname>value</classname></type><parameter name="c"><paramtype>const char_type *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type><classname>value</classname></type><parameter name="c"><paramtype>const char_type *</paramtype></parameter></signature><purpose>Get an environment variable from the current process. </purpose></overloaded-function>
-
-
-
-
-
-<overloaded-function name="set"><signature><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter></signature><signature><type>void</type><template>
+<function name="get"><type><classname>value</classname></type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Get an environment variable from the current process. </purpose></function>
+<function name="get"><type><classname>value</classname></type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter></function>
+<function name="get"><type><classname>value</classname></type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="get"><type><classname>value</classname></type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter></function>
+<function name="get"><type><classname>value</classname></type><parameter name="c"><paramtype>const char_type *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="get"><type><classname>value</classname></type><parameter name="c"><paramtype>const char_type *</paramtype></parameter></function>
+<function name="set"><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Set an environment variable for the current process. </purpose><description><para>Disambiguating.</para><para>Throwing. </para></description></function>
+<function name="set"><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter></function>
+<function name="set"><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="set"><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter></function>
+<function name="set"><type>void</type><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="set"><type>void</type><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype><classname>value_view</classname></paramtype></parameter></function>
+<function name="set"><type>void</type><template>
           <template-type-parameter name="Char"/>
           <template-type-parameter name=""><default>typename std::enable_if&lt;!std::is_same&lt;Char, char_type&gt;::value&gt;::type</default></template-type-parameter>
-        </template><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><template>
+        </template><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="set"><type>void</type><template>
           <template-type-parameter name="Char"/>
           <template-type-parameter name=""><default>typename std::enable_if&lt;!std::is_same&lt;Char, char_type&gt;::value&gt;::type</default></template-type-parameter>
-        </template><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter></signature><signature><type>void</type><template>
+        </template><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter></function>
+<function name="set"><type>void</type><template>
           <template-type-parameter name="Char"/>
           <template-type-parameter name=""><default>typename std::enable_if&lt;!std::is_same&lt;Char, char_type&gt;::value&gt;::type</default></template-type-parameter>
-        </template><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><template>
+        </template><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="set"><type>void</type><template>
           <template-type-parameter name="Char"/>
           <template-type-parameter name=""><default>typename std::enable_if&lt;!std::is_same&lt;Char, char_type&gt;::value&gt;::type</default></template-type-parameter>
-        </template><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter></signature><signature><type>void</type><template>
+        </template><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter></function>
+<function name="set"><type>void</type><template>
           <template-type-parameter name="Char"/>
           <template-type-parameter name=""><default>typename std::enable_if&lt;!std::is_same&lt;Char, char_type&gt;::value&gt;::type</default></template-type-parameter>
-        </template><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><template>
+        </template><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="set"><type>void</type><template>
           <template-type-parameter name="Char"/>
           <template-type-parameter name=""><default>typename std::enable_if&lt;!std::is_same&lt;Char, char_type&gt;::value&gt;::type</default></template-type-parameter>
-        </template><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter></signature><purpose>Set an environment variable for the current process. </purpose></overloaded-function>
-
-
-
-
-
-
-
-
-
-
-
-<overloaded-function name="unset"><signature><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt;&gt;</paramtype></parameter></signature><signature><type>void</type><parameter name="c"><paramtype>const char_type *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><signature><type>void</type><parameter name="c"><paramtype>const char_type *</paramtype></parameter></signature><purpose>Remove an environment variable from the current process. </purpose></overloaded-function>
-
-
-
-
-
+        </template><parameter name="k"><paramtype>const char_type *</paramtype></parameter><parameter name="vw"><paramtype>const Char *</paramtype></parameter></function>
+<function name="unset"><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Remove an environment variable from the current process. </purpose><description><para>Disambiguating.</para><para>Throwing. </para></description></function>
+<function name="unset"><type>void</type><parameter name="k"><paramtype>const <classname>key</classname> &amp;</paramtype></parameter></function>
+<function name="unset"><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="unset"><type>void</type><parameter name="k"><paramtype><classname>basic_cstring_ref</classname>&lt; char_type, key_char_traits&lt; char_type &gt; &gt;</paramtype></parameter></function>
+<function name="unset"><type>void</type><parameter name="c"><paramtype>const char_type *</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="unset"><type>void</type><parameter name="c"><paramtype>const char_type *</paramtype></parameter></function>
 </namespace>
 <namespace name="posix">
 </namespace>
@@ -797,18 +798,18 @@ The environment type passed in must be a range with value T that fulfills the fo
 
 
 
-<overloaded-function name="execute"><signature><type>int</type><template>
+<function name="execute"><type>int</type><template>
           <template-type-parameter name="Executor"><purpose><para>The asio executor of the process handle </para></purpose></template-type-parameter>
-        </template><parameter name="proc"><paramtype><classname>basic_process</classname>&lt; Executor &gt;</paramtype><description><para>The process to be run. </para></description></parameter></signature><signature><type>int</type><template>
-          <template-type-parameter name="Executor"/>
-        </template><parameter name="proc"><paramtype><classname>basic_process</classname>&lt; Executor &gt;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></signature><purpose>Run a process and wait for it to complete. </purpose><description><para>
+        </template><parameter name="proc"><paramtype><classname>basic_process</classname>&lt; Executor &gt;</paramtype><description><para>The process to be run. </para></description></parameter><purpose>Run a process and wait for it to complete. </purpose><description><para>
 
 
 
 </para></description><returns><para>int The exit code of the process </para>
-</returns><throws><simpara><classname>system_error</classname> An error that might have occurred during the wait. </simpara></throws></overloaded-function>
-
-<function name="async_execute"><type/><template>
+</returns><throws><simpara><classname>system_error</classname> An error that might have occurred during the wait.</simpara></throws></function>
+<function name="execute"><type>int</type><template>
+          <template-type-parameter name="Executor"/>
+        </template><parameter name="proc"><paramtype><classname>basic_process</classname>&lt; Executor &gt;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></function>
+<function name="async_execute"><type>deduced</type><template>
           <template-type-parameter name="Executor"><default>boost::asio::any_io_executor</default></template-type-parameter>
           <template-nontype-parameter name="DEFAULT_TYPE"><type>Token WaitHandler</type></template-nontype-parameter>
         </template><parameter name="proc"><paramtype><classname>basic_process</classname>&lt; Executor &gt;</paramtype></parameter><parameter name="DEFAULT"><paramtype>WaitHandler &amp;&amp;handler </paramtype></parameter><purpose>Execute a process asynchronously. </purpose><description><para>This function asynchronously for a process to complete.</para><para>Cancelling the execution will signal the child process to exit with the following interpretations:</para><para><itemizedlist>
@@ -827,58 +828,25 @@ The environment type passed in must be a range with value T that fulfills the fo
 </header>
 <header name="boost/process/v2/exit_code.hpp">
 <namespace name="boost">
-<namespace name="asio">
-<struct-specialization name="associator"><template>
-      <template-nontype-parameter name="Associator"><type>template&lt; typename, typename &gt; class</type></template-nontype-parameter>
-      <template-type-parameter name="Handler"/>
-      <template-type-parameter name="DefaultCandidate"/>
-    </template><specialization><template-arg>Associator</template-arg><template-arg>boost::process::v2::detail::code_as_error_handler&lt; Handler &gt;</template-arg><template-arg>DefaultCandidate</template-arg></specialization><inherit access="public">Associator&lt; Handler, DefaultCandidate &gt;</inherit><method-group name="public static functions">
-<method name="get" cv="noexcept" specifiers="static"><type>Associator&lt; Handler, DefaultCandidate &gt;::type</type><parameter name="h"><paramtype><emphasis>unspecified</emphasis></paramtype></parameter><parameter name="c"><paramtype>const DefaultCandidate &amp;</paramtype><default>DefaultCandidate()</default></parameter></method>
-</method-group>
-</struct-specialization><struct-specialization name="async_result"><template>
-      <template-type-parameter name="CompletionToken"/>
-    </template><specialization><template-arg>boost::process::v2::code_as_error_t&lt; CompletionToken &gt;</template-arg><template-arg>void(boost::process::v2::error_code</template-arg><template-arg>boost::process::v2::native_exit_code_type)</template-arg></specialization><struct name="init_wrapper"><template>
-      <template-type-parameter name="Initiation"/>
-    </template><data-member name="initiation_"><type>Initiation</type></data-member>
-<method-group name="public member functions">
-<method name="operator()"><type>void</type><template>
-          <template-type-parameter name="Handler"/>
-          <template-nontype-parameter name="Args"><type>typename...</type></template-nontype-parameter>
-        </template><parameter name="handler"><paramtype>Handler &amp;&amp;</paramtype></parameter><parameter name="cat"><paramtype>const boost::process::v2::error_category &amp;</paramtype></parameter><parameter name="args"><paramtype>Args &amp;&amp;...</paramtype></parameter></method>
-</method-group>
-<constructor><parameter name="init"><paramtype>Initiation</paramtype></parameter></constructor>
-</struct><typedef name="signature"><type>void(boost::process::v2::error_code)</type></typedef>
-<typedef name="return_type"><type>typename async_result&lt; CompletionToken, void(boost::process::v2::error_code)&gt;::return_type</type></typedef>
-<data-member name="token"><type>RawCompletionToken &amp;&amp;</type></data-member>
-<data-member name="args"><type>RawCompletionToken Args &amp;&amp;</type></data-member>
-<method-group name="public static functions">
-<method name="BOOST_PROCESS_V2_INITFN_DEDUCED_RESULT_TYPE" specifiers="static"><type>static</type><template>
-          <template-type-parameter name="Initiation"/>
-          <template-type-parameter name="RawCompletionToken"/>
-          <template-nontype-parameter name="Args"><type>typename...</type></template-nontype-parameter>
-        </template><parameter name=""><paramtype>CompletionToken</paramtype></parameter><parameter name=""><paramtype>signature</paramtype></parameter><parameter name=""><paramtype>(async_initiate&lt; CompletionToken, signature &gt;(declval&lt; init_wrapper&lt; typename decay&lt; Initiation &gt;::type &gt; &gt;(), declval&lt; CompletionToken &amp; &gt;(), declval&lt; BOOST_ASIO_MOVE_ARG(Args)&gt;()...))</paramtype></parameter></method>
-</method-group>
-</struct-specialization></namespace>
 <namespace name="process">
 <namespace name="v2">
-<struct name="code_as_error_t"><template>
-      <template-type-parameter name="CompletionToken"/>
-    </template><description><para>Convert the exit-code in a completion into an error if the actual error isn't set. <programlisting language="c++">process proc{ctx, "exit", {"1"}};
+<function name="check_exit_code"><type>error_code</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><parameter name="native_code"><paramtype>native_exit_code_type</paramtype></parameter><parameter name="category"><paramtype>const error_category &amp;</paramtype><default>error::get_exit_code_category()</default></parameter><description><para>Helper to subsume an exit-code into an error_code if there's no actual error isn't set. <programlisting language="c++"><classname alt="boost::process::v2::basic_process">process</classname> proc{ctx, "exit", {"1"}};
 
-proc.async_wait(code_as_error(
+proc.async_wait(
+    asio::deferred(
+     [&amp;proc](error_code ec, int)
+     {
+       return asio::deferred.values(
+                 check_exit_code(ec, proc.native_exit_code())
+             );
+
    [](error_code ec)
    {
      assert(ec.value() == 10);
      assert(ec.category() == error::get_exit_code_category());
    }));
-</programlisting> </para></description><data-member name="token_"><type>CompletionToken</type></data-member>
-<data-member name="category"><type>const error_category &amp;</type></data-member>
-<method-group name="public member functions">
-</method-group>
-<constructor><template>
-          <template-type-parameter name="Token_"/>
-        </template><parameter name="token"><paramtype>Token_ &amp;&amp;</paramtype></parameter><parameter name="category"><paramtype>const error_category &amp;</paramtype></parameter></constructor>
-</struct><typedef name="native_exit_code_type"><purpose>The native exit-code type, usually an integral value. </purpose><description><para>The OS may have a value different from <computeroutput>int</computeroutput> to represent the exit codes of subprocesses. It might also contain additional information. </para></description><type>implementation_defined</type></typedef>
+</programlisting> </para></description></function>
+<typedef name="native_exit_code_type"><purpose>The native exit-code type, usually an integral value. </purpose><description><para>The OS may have a value different from <computeroutput>int</computeroutput> to represent the exit codes of subprocesses. It might also contain additional information. </para></description><type>implementation_defined</type></typedef>
 
 
 
@@ -889,9 +857,6 @@ proc.async_wait(code_as_error(
 
 <function name="process_is_running"><type>bool</type><parameter name="code"><paramtype>native_exit_code_type</paramtype></parameter><purpose>Check if the native exit code indicates the process is still running. </purpose></function>
 <function name="evaluate_exit_code"><type>int</type><parameter name="code"><paramtype>native_exit_code_type</paramtype></parameter><purpose>Obtain the portable part of the exit code, i.e. what the subprocess has returned from main. </purpose></function>
-<function name="code_as_error"><type><classname>code_as_error_t</classname>&lt; CompletionToken &gt;</type><template>
-          <template-type-parameter name="CompletionToken"/>
-        </template><parameter name="token"><paramtype>CompletionToken &amp;&amp;</paramtype></parameter><parameter name="category"><paramtype>const error_category &amp;</paramtype><default>error::get_exit_code_category()</default></parameter><purpose>Deduction function for <classname alt="boost::process::v2::code_as_error_t">code_as_error_t</classname>. </purpose></function>
 
 
 
@@ -909,6 +874,7 @@ proc.async_wait(code_as_error(
 <namespace name="boost">
 <namespace name="process">
 <namespace name="v2">
+
 <typedef name="pid_type"><type>implementation_defined</type></typedef>
 
 <function name="current_pid"><type>pid_type</type><purpose>Get the process id of the current process. </purpose></function>
@@ -918,7 +884,6 @@ proc.async_wait(code_as_error(
 <function name="parent_pid"><type>pid_type</type><parameter name="pid"><paramtype>pid_type</paramtype></parameter></function>
 <function name="child_pids"><type>std::vector&lt; pid_type &gt;</type><parameter name="pid"><paramtype>pid_type</paramtype></parameter><parameter name="ec"><paramtype>boost::system::error_code &amp;</paramtype></parameter></function>
 <function name="child_pids"><type>std::vector&lt; pid_type &gt;</type><parameter name="pid"><paramtype>pid_type</paramtype></parameter></function>
-
 
 
 
@@ -938,7 +903,7 @@ proc.async_wait(code_as_error(
 <namespace name="v2">
 <struct name="basic_popen"><template>
       <template-type-parameter name="Executor"><default>boost::asio::any_io_executor</default></template-type-parameter>
-    </template><inherit access="public">boost::process::v2::basic_process&lt; Executor &gt;</inherit><purpose>A subprocess with automatically assigned pipes. </purpose><description><para>The purpose os the popen is to provide a convenient way to use the stdin &amp; stdout of a process.</para><para><programlisting language="c++">popen proc(executor, find_executable("addr2line"), {argv[0]});
+    </template><inherit access="public">boost::process::v2::basic_process&lt; boost::asio::any_io_executor &gt;</inherit><purpose>A subprocess with automatically assigned pipes. </purpose><description><para>The purpose os the popen is to provide a convenient way to use the stdin &amp; stdout of a process.</para><para><programlisting language="c++">popen proc(executor, find_executable("addr2line"), {argv[0]});
 asio::write(proc, asio::buffer("main\n"));
 std::string line;
 asio::read_until(proc, asio::dynamic_buffer(line), '\n');
@@ -973,10 +938,10 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 </note>
 </para></description><returns><para>The number of bytes written. Returns 0 if an error occurred.</para>
 </returns></method>
-<method name="BOOST_PROCESS_V2_INITFN_AUTO_RESULT_TYPE" cv="const"><type/><template>
+<method name="async_write_some"><type>deduced</type><template>
           <template-type-parameter name="ConstBufferSequence"/>
           <template-nontype-parameter name=""><type>BOOST_ASIO_COMPLETION_TOKEN_FOR(void(boost::system::error_code, std::size_t)) WriteToken BOOST_ASIO_DEFAULT_COMPLETION_TOKEN_TYPE(executor_type)</type></template-nontype-parameter>
-        </template><parameter name=""><paramtype>WriteToken</paramtype></parameter><parameter name=""><paramtype>void(boost::system::error_code, std::size_t)</paramtype></parameter><purpose>Start an asynchronous write. </purpose><description><para>This function is used to asynchronously write data to the pipe. It is an initiating function for an asynchronous_operation, and always returns immediately.</para><para>
+        </template><parameter name="buffers"><paramtype>const ConstBufferSequence &amp;</paramtype><description><para>One or more data buffers to be written to the pipe. Although the buffers object may be copied as necessary, ownership of the underlying memory blocks is retained by the caller, which must guarantee that they remain valid until the completion handler is called.</para></description></parameter><parameter name=""><paramtype>BOOST_ASIO_MOVE_ARG(WriteToken) token DEFAULT(executor_type)</paramtype></parameter><purpose>Start an asynchronous write. </purpose><description><para>This function is used to asynchronously write data to the pipe. It is an initiating function for an asynchronous_operation, and always returns immediately.</para><para>
 <formalpara><title>Completion Signature</title><para><programlisting language="c++">void(boost::system::error_code, std::size_t) 
 </programlisting></para>
 </formalpara>
@@ -986,7 +951,6 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 </programlisting> See the buffer documentation for information on writing multiple buffers in one go, and how to use it with arrays, boost::array or std::vector. </para>
 </formalpara>
 </para></description></method>
-<method name="BOOST_ASIO_MOVE_ARG"><type/><parameter name=""><paramtype>WriteToken</paramtype></parameter></method>
 <method name="read_some"><type>std::size_t</type><template>
           <template-type-parameter name="MutableBufferSequence"/>
         </template><parameter name="buffers"><paramtype>const MutableBufferSequence &amp;</paramtype><description><para>One or more buffers into which the data will be read.</para></description></parameter><purpose>Read some data from the pipe. </purpose><description><para>This function is used to read data from the pipe. The function call will block until one or more bytes of data has been read successfully, or until an error occurs.</para><para>
@@ -1007,10 +971,10 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 </note>
 </para></description><returns><para>The number of bytes read. Returns 0 if an error occurred.</para>
 </returns></method>
-<method name="BOOST_PROCESS_V2_INITFN_AUTO_RESULT_TYPE" cv="const"><type/><template>
+<method name="async_read_some"><type>deduced</type><template>
           <template-type-parameter name="MutableBufferSequence"/>
           <template-nontype-parameter name=""><type>BOOST_ASIO_COMPLETION_TOKEN_FOR(void(boost::system::error_code, std::size_t)) ReadToken BOOST_ASIO_DEFAULT_COMPLETION_TOKEN_TYPE(executor_type)</type></template-nontype-parameter>
-        </template><parameter name=""><paramtype>ReadToken</paramtype></parameter><parameter name=""><paramtype>void(boost::system::error_code, std::size_t)</paramtype></parameter><purpose>Start an asynchronous read. </purpose><description><para>This function is used to asynchronously read data from the pipe. It is an initiating function for an asynchronous_operation, and always returns immediately.</para><para>
+        </template><parameter name="buffers"><paramtype>const MutableBufferSequence &amp;</paramtype><description><para>One or more buffers into which the data will be read. Although the buffers object may be copied as necessary, ownership of the underlying memory blocks is retained by the caller, which must guarantee that they remain valid until the completion handler is called.</para></description></parameter><parameter name=""><paramtype>BOOST_ASIO_MOVE_ARG(ReadToken) token DEFAULT(executor_type)</paramtype></parameter><purpose>Start an asynchronous read. </purpose><description><para>This function is used to asynchronously read data from the pipe. It is an initiating function for an asynchronous_operation, and always returns immediately.</para><para>
 <formalpara><title>Completion Signature</title><para><programlisting language="c++">void(boost::system::error_code, std::size_t) 
 </programlisting></para>
 </formalpara>
@@ -1021,7 +985,6 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 </programlisting> See the buffer documentation for information on reading into multiple buffers in one go, and how to use it with arrays, boost::array or std::vector. </para>
 </formalpara>
 </para></description></method>
-<method name="BOOST_ASIO_MOVE_ARG"><type/><parameter name=""><paramtype>ReadToken</paramtype></parameter></method>
 </method-group>
 <constructor cv="= default"><parameter name=""><paramtype><classname>basic_popen</classname> &amp;&amp;</paramtype></parameter><purpose>Move construct a popen. </purpose></constructor>
 <copy-assignment cv="= default"><type><classname>basic_popen</classname> &amp;</type><parameter name=""><paramtype><classname>basic_popen</classname> &amp;&amp;</paramtype></parameter><purpose>Move assign a popen. </purpose></copy-assignment>
@@ -1039,13 +1002,6 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
           <template-type-parameter name="Launcher"/>
           <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
         </template><parameter name="launcher"><paramtype>Launcher &amp;&amp;</paramtype></parameter><parameter name="executor"><paramtype>executor_type</paramtype></parameter><parameter name="exe"><paramtype>const filesystem::path &amp;</paramtype></parameter><parameter name="args"><paramtype>std::initializer_list&lt; string_view &gt;</paramtype></parameter><parameter name="inits"><paramtype>Inits &amp;&amp;...</paramtype></parameter><purpose>Construct a child from a property list and launch it using the default process launcher. </purpose></constructor>
-<constructor specifiers="explicit"><template>
-          <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
-        </template><parameter name="executor"><paramtype>executor_type</paramtype></parameter><parameter name="exe"><paramtype>const filesystem::path &amp;</paramtype></parameter><parameter name="args"><paramtype>std::initializer_list&lt; wstring_view &gt;</paramtype></parameter><parameter name="inits"><paramtype>Inits &amp;&amp;...</paramtype></parameter><purpose>Construct a child from a property list and launch it using the default process launcher. </purpose></constructor>
-<constructor specifiers="explicit"><template>
-          <template-type-parameter name="Launcher"/>
-          <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
-        </template><parameter name="launcher"><paramtype>Launcher &amp;&amp;</paramtype></parameter><parameter name="executor"><paramtype>executor_type</paramtype></parameter><parameter name="exe"><paramtype>const filesystem::path &amp;</paramtype></parameter><parameter name="args"><paramtype>std::initializer_list&lt; wstring_view &gt;</paramtype></parameter><parameter name="inits"><paramtype>Inits &amp;&amp;...</paramtype></parameter><purpose>Construct a child from a property list and launch it using the default process launcher. </purpose></constructor>
 <constructor specifiers="explicit"><template>
           <template-type-parameter name="Args"/>
           <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
@@ -1075,8 +1031,8 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
           <template-type-parameter name="Args"/>
           <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
         </template><parameter name="launcher"><paramtype>Launcher &amp;&amp;</paramtype></parameter><parameter name="context"><paramtype>ExecutionContext &amp;</paramtype></parameter><parameter name="exe"><paramtype>typename std::enable_if&lt; std::is_convertible&lt; ExecutionContext &amp;, boost::asio::execution_context &amp; &gt;::value, const filesystem::path &amp; &gt;::type</paramtype></parameter><parameter name="args"><paramtype>Args &amp;&amp;</paramtype></parameter><parameter name="inits"><paramtype>Inits &amp;&amp;...</paramtype></parameter><purpose>Construct a child from a property list and launch it using the default process launcher. </purpose></constructor>
-</struct><typedef name="popen"><purpose>A popen object with the default executor. </purpose><type><classname>basic_popen</classname>&lt;&gt;</type></typedef>
-
+</struct>
+<typedef name="popen"><purpose>A popen object with the default executor. </purpose><type><classname>basic_popen</classname>&lt;&gt;</type></typedef>
 
 
 
@@ -1124,29 +1080,29 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 <method name="get_executor"><type>executor_type</type><purpose>Get the executor of the process. </purpose></method>
 <method name="handle"><type>handle_type &amp;</type><purpose>Get the underlying non-closing handle. </purpose></method>
 <method name="handle" cv="const"><type>const handle_type &amp;</type><purpose>Get the underlying non-closing handle. </purpose></method>
-<method name="interrupt"><type>void</type><purpose>Sends the process a signal to ask for an interrupt, which the process may interpret as a shutdown. </purpose><description><para>Maybe be ignored by the subprocess. </para></description></method>
-<method name="interrupt"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="request_exit"><type>void</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="request_exit"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Sends the process a signal to ask for a graceful shutdown. Maybe be ignored by the subprocess. </purpose></method>
+<method name="interrupt"><type>void</type><purpose>Sends the process a signal to ask for an interrupt, which the process may interpret as a shutdown. </purpose><description><para>Maybe be ignored by the subprocess.</para><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="interrupt"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter></method>
+<method name="request_exit"><type>void</type></method>
+<method name="request_exit"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Sends the process a signal to ask for a graceful shutdown. Maybe be ignored by the subprocess. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
 <method name="suspend"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Send the process a signal requesting it to stop. This may rely on undocumented functions. </purpose></method>
 <method name="suspend"><type>void</type><purpose>Send the process a signal requesting it to stop. This may rely on undocumented functions. </purpose></method>
 <method name="resume"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Send the process a signal requesting it to resume. This may rely on undocumented functions. </purpose></method>
 <method name="resume"><type>void</type><purpose>Send the process a signal requesting it to resume. This may rely on undocumented functions. </purpose></method>
-<method name="terminate"><type>void</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="terminate"><type>void</type></method>
 <method name="terminate"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Unconditionally terminates the process and stores the exit code in exit_status. </purpose></method>
-<method name="wait"><type>int</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="wait"><type>int</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Waits for the process to exit, store the exit code internally and return it. </purpose></method>
+<method name="wait"><type>int</type></method>
+<method name="wait"><type>int</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Waits for the process to exit, store the exit code internally and return it. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
 <method name="detach"><type>handle_type</type><purpose>Detach the process. </purpose></method>
-<method name="native_handle"><type>native_handle_type</type></method>
-<method name="exit_code" cv="const"><type>int</type></method>
+<method name="native_handle"><type>native_handle_type</type><purpose>Get the native. </purpose></method>
+<method name="exit_code" cv="const"><type>int</type><purpose>Return the evaluated exit_code. </purpose></method>
 <method name="id" cv="const"><type>pid_type</type><purpose>Get the id of the process;. </purpose></method>
 <method name="native_exit_code" cv="const"><type>native_exit_code_type</type><purpose>The native handle of the process. </purpose><description><para>This might be undefined on posix systems that only support signals </para></description></method>
 <method name="running"><type>bool</type><purpose>Checks if the current process is running. </purpose><description><para>If it has already completed the exit code will be stored internally and can be obtained by calling `exit_code. </para></description></method>
-<method name="running" cv="noexcept"><type>bool</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="running" cv="noexcept"><type>bool</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
 <method name="is_open" cv="const"><type>bool</type><purpose>Check if the process is referring to an existing process. </purpose><description><para>Note that this might be a process that already exited. </para></description></method>
-<method name="async_wait"><type/><template>
+<method name="async_wait"><type>deduced</type><template>
           <template-nontype-parameter name="DEFAULT_TYPE"><type>Token WaitHandler</type></template-nontype-parameter>
-        </template><parameter name="DEFAULT"><paramtype>WaitHandler &amp;&amp;handler </paramtype></parameter><purpose>Asynchronously wait for the process to exit and deliver the portable exit-code in the completion handler. </purpose></method>
+        </template><parameter name="DEFAULT"><paramtype>WaitHandler &amp;&amp;handler </paramtype></parameter><purpose>Asynchronously wait for the process to exit and deliver the native exit-code in the completion handler. </purpose></method>
 </method-group>
 <constructor cv="= default"><description><para>An empty process is similar to a default constructed thread. It holds an empty handle and is a place holder for a process that is to be launched later. </para></description></constructor>
 <constructor cv="= delete"><parameter name=""><paramtype>const <classname>basic_process</classname> &amp;</paramtype></parameter></constructor>
@@ -1159,9 +1115,6 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 <constructor specifiers="explicit"><template>
           <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
         </template><parameter name="executor"><paramtype>executor_type</paramtype></parameter><parameter name="exe"><paramtype>const filesystem::path &amp;</paramtype></parameter><parameter name="args"><paramtype>std::initializer_list&lt; string_view &gt;</paramtype></parameter><parameter name="inits"><paramtype>Inits &amp;&amp;...</paramtype></parameter><purpose>Construct a child from a property list and launch it using the default launcher.. </purpose></constructor>
-<constructor specifiers="explicit"><template>
-          <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
-        </template><parameter name="executor"><paramtype>executor_type</paramtype></parameter><parameter name="exe"><paramtype>const filesystem::path &amp;</paramtype></parameter><parameter name="args"><paramtype>std::initializer_list&lt; wstring_view &gt;</paramtype></parameter><parameter name="inits"><paramtype>Inits &amp;&amp;...</paramtype></parameter><purpose>Construct a child from a property list and launch it using the default launcher.. </purpose></constructor>
 <constructor specifiers="explicit"><template>
           <template-type-parameter name="Args"/>
           <template-nontype-parameter name="Inits"><type>typename ...</type></template-nontype-parameter>
@@ -1188,8 +1141,8 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
           <template-type-parameter name="ExecutionContext"/>
         </template><parameter name="context"><paramtype>ExecutionContext &amp;</paramtype></parameter><parameter name=""><paramtype>typename std::enable_if&lt; is_convertible&lt; ExecutionContext &amp;, boost::asio::execution_context &amp; &gt;::value, void * &gt;::type</paramtype><default>nullptr</default></parameter><purpose>Create an invalid handle. </purpose></constructor>
 <destructor><purpose>Destruct the handle and terminate the process if it wasn't detached. </purpose></destructor>
-</struct><typedef name="process"><purpose>Process with the default executor. </purpose><type><classname>basic_process</classname></type></typedef>
-
+</struct>
+<typedef name="process"><purpose>Process with the default executor. </purpose><type><classname>basic_process</classname></type></typedef>
 
 
 
@@ -1227,18 +1180,18 @@ asio::read_until(proc, asio::dynamic_buffer(line), '\n');
 <method name="get_executor"><type>executor_type</type><purpose>Getter for the executor. </purpose></method>
 <method name="id" cv="const"><type>pid_type</type><purpose>Get the id of the process. </purpose></method>
 <method name="terminate_if_running"><type>void</type><parameter name=""><paramtype>error_code &amp;</paramtype></parameter><purpose>Terminate the process if it's still running and ignore the result. </purpose></method>
-<method name="terminate_if_running"><type>void</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="wait"><type>void</type><parameter name="exit_status"><paramtype>native_exit_code_type &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>wait for the process to exit and store the exit code in exit_status. </purpose></method>
-<method name="wait"><type>void</type><parameter name="exit_status"><paramtype>native_exit_code_type &amp;</paramtype></parameter><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="terminate_if_running"><type>void</type><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="wait"><type>void</type><parameter name="exit_status"><paramtype>native_exit_code_type &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>wait for the process to exit and store the exit code in exit_status. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="wait"><type>void</type><parameter name="exit_status"><paramtype>native_exit_code_type &amp;</paramtype></parameter></method>
 <method name="interrupt"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Sends the process a signal to ask for an interrupt, which the process may interpret as a shutdown. </purpose><description><para>Maybe be ignored by the subprocess. </para></description></method>
-<method name="interrupt"><type>void</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="request_exit"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Sends the process a signal to ask for a graceful shutdown. Maybe be ignored by the subprocess. </purpose></method>
-<method name="request_exit"><type>void</type><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.Unconditionally terminates the process and stores the exit code in exit_status. </para></description></method>
-<method name="terminate"><type>void</type><parameter name="exit_status"><paramtype>native_exit_code_type &amp;</paramtype></parameter><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
-<method name="running"><type>bool</type><parameter name="exit_code"><paramtype>native_exit_code_type &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Checks if the current process is running. </purpose><description><para>If it has already completed, it assigns the exit code to <computeroutput>exit_code</computeroutput>. </para></description></method>
-<method name="running"><type>bool</type><parameter name="exit_code"><paramtype>native_exit_code_type &amp;</paramtype></parameter><purpose>Throwing. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="interrupt"><type>void</type><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="request_exit"><type>void</type><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Sends the process a signal to ask for a graceful shutdown. Maybe be ignored by the subprocess. </purpose><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="request_exit"><type>void</type><purpose>Unconditionally terminates the process and stores the exit code in exit_status. </purpose></method>
+<method name="terminate"><type>void</type><parameter name="exit_status"><paramtype>native_exit_code_type &amp;</paramtype></parameter><description><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="running"><type>bool</type><parameter name="exit_code"><paramtype>native_exit_code_type &amp;</paramtype></parameter><parameter name="ec"><paramtype>error_code &amp;</paramtype></parameter><purpose>Checks if the current process is running. </purpose><description><para>If it has already completed, it assigns the exit code to <computeroutput>exit_code</computeroutput>.</para><para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para></description></method>
+<method name="running"><type>bool</type><parameter name="exit_code"><paramtype>native_exit_code_type &amp;</paramtype></parameter></method>
 <method name="is_open" cv="const"><type>bool</type><purpose>Check if the process handle is referring to an existing process. </purpose></method>
-<method name="async_wait"><type/><template>
+<method name="async_wait"><type>deduced</type><template>
           <template-nontype-parameter name="DEFAULT_TYPE"><type>Token WaitHandler</type></template-nontype-parameter>
         </template><parameter name="DEFAULT"><paramtype>WaitHandler &amp;&amp;handler </paramtype></parameter><purpose>Asynchronously wait for the process to exit and deliver the native exit-code in the completion handler. </purpose></method>
 </method-group>
@@ -1316,9 +1269,9 @@ process proc{ctx, exe, cmd.args()};
 <method-group name="private member functions">
 <method name="parse_"><type>void</type></method>
 </method-group>
-</struct><data-member name="shell_category" specifiers="static"><type>const error_category &amp;</type></data-member>
+</struct>
+<data-member name="shell_category" specifiers="static"><type>const error_category &amp;</type></data-member>
 <function name="get_shell_category"><type>const error_category &amp;</type><purpose>Error category used by the shell parser. </purpose></function>
-
 
 
 

@@ -35,7 +35,7 @@
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T <span class="special">=</span> <a class="link" href="_self.html" title="Struct _self">_self</a><span class="special">,</span> <span class="keyword">typename</span> Reference <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">use_default</span><span class="special">,</span> 
          <span class="keyword">typename</span> DifferenceType <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">ptrdiff_t</span><span class="special">&gt;</span> 
-<span class="keyword">struct</span> <a class="link" href="random_access_iterator.html" title="Struct template random_access_iterator">random_access_iterator</a> <span class="special">:</span> <span class="keyword">public</span> boost::type_erasure::iterator&lt; boost::random_access_traversal_tag, T, Reference, DifferenceType &gt;
+<span class="keyword">struct</span> <a class="link" href="random_access_iterator.html" title="Struct template random_access_iterator">random_access_iterator</a> <span class="special">:</span> <span class="keyword">public</span> boost::type_erasure::iterator&lt; boost::random_access_traversal_tag, _self, boost::use_default, std::ptrdiff_t &gt;
 <span class="special">{</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 </div>

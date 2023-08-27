@@ -28,7 +28,7 @@
 <a name="mysql.ref.boost__mysql__row_view.value_type"></a><a class="link" href="value_type.html" title="row_view::value_type">row_view::value_type</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm35980"></a>
+          <a class="indexterm" name="idm49365"></a>
         </p>
 <p>
           A type that can hold elements in this collection with value semantics.
@@ -71,6 +71,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">blob</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">blob</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -84,6 +86,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">date</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">date</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -97,6 +101,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">datetime</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">datetime</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -110,6 +116,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="keyword">double</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="keyword">double</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -123,6 +131,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="keyword">float</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="keyword">float</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -136,6 +146,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">int64_t</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">int64_t</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -149,6 +161,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -162,6 +176,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">time</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">time</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -175,6 +191,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">uint64_t</span></code>
+                    value or throws an exception. <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">uint64_t</span></code>
                     value or throws an exception.
                   </p>
                 </td>
@@ -192,17 +210,22 @@
                     <br><span class="silver">—</span><br>Move constructor. <br><span class="silver">—</span><br>Constructs
                     a <code class="computeroutput"><span class="identifier">field</span></code> holding
                     an <code class="computeroutput"><span class="identifier">int64</span></code>. <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code>
-                    holding an <code class="computeroutput"><span class="identifier">uint64</span></code>.
-                    <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code> holding a string. <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code>
-                    holding a <code class="computeroutput"><span class="identifier">blob</span></code>.
-                    <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code> holding a <code class="computeroutput"><span class="keyword">float</span></code>. <br><span class="silver">—</span><br>Constructs
+                    holding an <code class="computeroutput"><span class="identifier">int64</span></code>.
+                    <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code> holding an <code class="computeroutput"><span class="identifier">uint64</span></code>. <br><span class="silver">—</span><br>Constructs
                     a <code class="computeroutput"><span class="identifier">field</span></code> holding
-                    a <code class="computeroutput"><span class="keyword">double</span></code>. <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code>
-                    holding a <code class="computeroutput"><span class="identifier">date</span></code>.
-                    <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code> holding a <code class="computeroutput"><span class="identifier">datetime</span></code>. <br><span class="silver">—</span><br>Constructs
+                    an <code class="computeroutput"><span class="identifier">uint64</span></code>. <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code>
+                    holding a string. <br><span class="silver">—</span><br>Constructs
                     a <code class="computeroutput"><span class="identifier">field</span></code> holding
-                    a <code class="computeroutput"><span class="identifier">time</span></code>. <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code>
-                    from a <a class="link" href="../boost__mysql__field_view.html" title="field_view"><code class="computeroutput"><span class="identifier">field_view</span></code></a>.
+                    a string. <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code> holding a <code class="computeroutput"><span class="identifier">blob</span></code>. <br><span class="silver">—</span><br>Constructs
+                    a <code class="computeroutput"><span class="identifier">field</span></code> holding
+                    a <code class="computeroutput"><span class="keyword">float</span></code>. <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code>
+                    holding a <code class="computeroutput"><span class="keyword">double</span></code>.
+                    <br><span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code> holding a <code class="computeroutput"><span class="identifier">date</span></code>. <br><span class="silver">—</span><br>Constructs
+                    a <code class="computeroutput"><span class="identifier">field</span></code> holding
+                    a <code class="computeroutput"><span class="identifier">datetime</span></code>. <br>
+                    <span class="silver">—</span><br>Constructs a <code class="computeroutput"><span class="identifier">field</span></code> holding a <code class="computeroutput"><span class="identifier">time</span></code>. <br><span class="silver">—</span><br>Constructs
+                    a <code class="computeroutput"><span class="identifier">field</span></code> from
+                    a <a class="link" href="../boost__mysql__field_view.html" title="field_view"><code class="computeroutput"><span class="identifier">field_view</span></code></a>.
                   </p>
                 </td>
 </tr>
@@ -215,6 +238,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">blob</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">blob</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -228,6 +253,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">date</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">date</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -241,6 +268,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">datetime</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">datetime</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -254,6 +283,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="keyword">double</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="keyword">double</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -267,6 +298,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="keyword">float</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="keyword">float</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -280,6 +313,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">int64_t</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">int64_t</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -293,6 +328,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -306,6 +343,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">time</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">time</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -319,6 +358,8 @@
 <td>
                   <p>
                     Retrieves a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">uint64_t</span></code>
+                    value (unchecked access). <br><span class="silver">—</span><br>Retrieves
+                    a reference to the underlying <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">uint64_t</span></code>
                     value (unchecked access).
                   </p>
                 </td>
@@ -492,7 +533,19 @@
                     and destroying any previous contents. <br><span class="silver">—</span><br>Replaces
                     <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code>
                     with <code class="computeroutput"><span class="identifier">v</span></code>, changing
+                    the kind to <code class="computeroutput"><span class="identifier">int64</span></code>
+                    and destroying any previous contents. <br><span class="silver">—</span><br>Replaces
+                    <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code>
+                    with <code class="computeroutput"><span class="identifier">v</span></code>, changing
                     the kind to <code class="computeroutput"><span class="identifier">uint64</span></code>
+                    and destroying any previous contents. <br><span class="silver">—</span><br>Replaces
+                    <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code>
+                    with <code class="computeroutput"><span class="identifier">v</span></code>, changing
+                    the kind to <code class="computeroutput"><span class="identifier">uint64</span></code>
+                    and destroying any previous contents. <br><span class="silver">—</span><br>Replaces
+                    <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code>
+                    with <code class="computeroutput"><span class="identifier">v</span></code>, changing
+                    the kind to <code class="computeroutput"><span class="identifier">string</span></code>
                     and destroying any previous contents. <br><span class="silver">—</span><br>Replaces
                     <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code>
                     with <code class="computeroutput"><span class="identifier">v</span></code>, changing
@@ -595,7 +648,7 @@
 <tr>
 <td>
                   <p>
-                    <span class="bold"><strong><a class="link" href="../boost__mysql__field/operator_not__eq_.html" title="field::operator!=">operator!=</a></strong></span>
+                    <span class="bold"><strong><a class="link" href="../boost__mysql__field/operator__not__eq_.html" title="field::operator!=">operator!=</a></strong></span>
                   </p>
                 </td>
 <td>

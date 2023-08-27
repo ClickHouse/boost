@@ -38,7 +38,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">class</span> <span class="identifier">OptionalString</span><span class="special">&gt;</span>
 <span class="identifier">param</span><span class="special">(</span>
-    <span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">,</span>
+    <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">key</span><span class="special">,</span>
     <span class="identifier">OptionalString</span> <span class="keyword">const</span><span class="special">&amp;</span> <span class="identifier">value</span><span class="special">);</span>
 </pre>
 <h6>
@@ -54,15 +54,15 @@
 <a name="url.ref.boost__urls__param.param.overload4.h2"></a>
             <span class="phrase"><a name="url.ref.boost__urls__param.param.overload4.example"></a></span><a class="link" href="overload4.html#url.ref.boost__urls__param.param.overload4.example">Example</a>
           </h6>
-<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span><span class="special">,</span> <span class="string">"value"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span> <span class="special">,</span> <span class="string">"value"</span> <span class="special">);</span>
 </pre>
-<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span><span class="special">,</span> <span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">string_view</span><span class="special">&gt;(</span><span class="string">"value"</span><span class="special">)</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span> <span class="special">,</span> <span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">&gt;(</span> <span class="string">"value"</span> <span class="special">)</span> <span class="special">);</span>
 </pre>
-<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">none</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span> <span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">none</span> <span class="special">);</span>
 </pre>
-<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span><span class="special">,</span> <span class="keyword">nullptr</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span> <span class="special">,</span> <span class="keyword">nullptr</span> <span class="special">);</span>
 </pre>
-<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span><span class="special">,</span> <span class="identifier">no_value</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">param</span> <span class="identifier">qp</span><span class="special">(</span> <span class="string">"key"</span> <span class="special">,</span> <span class="identifier">no_value</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__param.param.overload4.h3"></a>
@@ -115,7 +115,8 @@
                   </td>
 <td>
                     <p>
-                      An optional string type, such as <a class="link" href="../../boost__urls__string_view.html" title="string_view"><code class="computeroutput"><span class="identifier">string_view</span></code></a>, <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="keyword">nullptr</span></code>, <a class="link" href="../../boost__urls__no_value_t.html" title="no_value_t"><code class="computeroutput"><span class="identifier">no_value_t</span></code></a>, or <code class="computeroutput"><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">string_view</span><span class="special">&gt;</span></code>.
+                      An optional string type, such as <code class="computeroutput"><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span></code>,
+                      <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="keyword">nullptr</span></code>, <a class="link" href="../../boost__urls__no_value_t.html" title="no_value_t"><code class="computeroutput"><span class="identifier">no_value_t</span></code></a>, or <code class="computeroutput"><span class="identifier">optional</span><span class="special">&lt;</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">&gt;</span></code>.
                     </p>
                   </td>
 </tr></tbody>

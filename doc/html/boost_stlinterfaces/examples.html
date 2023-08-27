@@ -59,7 +59,9 @@
 <span class="comment">// parameters for most stl_interfaces template parameters.</span>
 <span class="keyword">struct</span> <span class="identifier">simple_random_access_iterator</span>
     <span class="special">:</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
           <span class="identifier">simple_random_access_iterator</span><span class="special">,</span>
+<span class="preprocessor">#endif</span>
           <span class="identifier">std</span><span class="special">::</span><span class="identifier">random_access_iterator_tag</span><span class="special">,</span>
           <span class="keyword">int</span><span class="special">&gt;</span>
 <span class="special">{</span>
@@ -120,7 +122,9 @@
 <span class="comment">// from the same template.</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">ValueType</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">random_access_iterator</span> <span class="special">:</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
                                     <span class="identifier">random_access_iterator</span><span class="special">&lt;</span><span class="identifier">ValueType</span><span class="special">&gt;,</span>
+<span class="preprocessor">#endif</span>
                                     <span class="identifier">std</span><span class="special">::</span><span class="identifier">random_access_iterator_tag</span><span class="special">,</span>
                                     <span class="identifier">ValueType</span><span class="special">&gt;</span>
 <span class="special">{</span>
@@ -212,7 +216,9 @@
 <span class="comment">// reference -- the reference type is a pair of references, std::tuple&lt;int &amp;,</span>
 <span class="comment">// int &amp;&gt;.</span>
 <span class="keyword">struct</span> <span class="identifier">zip_iterator</span> <span class="special">:</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">proxy_iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
                       <span class="identifier">zip_iterator</span><span class="special">,</span>
+<span class="preprocessor">#endif</span>
                       <span class="identifier">std</span><span class="special">::</span><span class="identifier">random_access_iterator_tag</span><span class="special">,</span>
                       <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;,</span>
                       <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="special">&amp;,</span> <span class="keyword">int</span> <span class="special">&amp;&gt;&gt;</span>
@@ -335,7 +341,9 @@
 <span class="comment">// iterator_interface is flexible enough to handle this odd kind of iterator.</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Container</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">back_insert_iterator</span> <span class="special">:</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
                                   <span class="identifier">back_insert_iterator</span><span class="special">&lt;</span><span class="identifier">Container</span><span class="special">&gt;,</span>
+<span class="preprocessor">#endif</span>
                                   <span class="identifier">std</span><span class="special">::</span><span class="identifier">output_iterator_tag</span><span class="special">,</span>
                                   <span class="keyword">typename</span> <span class="identifier">Container</span><span class="special">::</span><span class="identifier">value_type</span><span class="special">,</span>
                                   <span class="identifier">back_insert_iterator</span><span class="special">&lt;</span><span class="identifier">Container</span><span class="special">&gt;</span> <span class="special">&amp;&gt;</span>
@@ -367,7 +375,9 @@
     <span class="identifier">back_insert_iterator</span> <span class="special">&amp;</span> <span class="keyword">operator</span><span class="special">++()</span> <span class="special">{</span> <span class="keyword">return</span> <span class="special">*</span><span class="keyword">this</span><span class="special">;</span> <span class="special">}</span>
 
     <span class="keyword">using</span> <span class="identifier">base_type</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
         <span class="identifier">back_insert_iterator</span><span class="special">&lt;</span><span class="identifier">Container</span><span class="special">&gt;,</span>
+<span class="preprocessor">#endif</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">output_iterator_tag</span><span class="special">,</span>
         <span class="keyword">typename</span> <span class="identifier">Container</span><span class="special">::</span><span class="identifier">value_type</span><span class="special">,</span>
         <span class="identifier">back_insert_iterator</span><span class="special">&lt;</span><span class="identifier">Container</span><span class="special">&gt;</span> <span class="special">&amp;&gt;;</span>
@@ -420,7 +430,9 @@
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">BidiIter</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">reverse_iterator</span>
     <span class="special">:</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">iterator_interface</span><span class="special">&lt;</span>
+<span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">BOOST_STL_INTERFACES_USE_DEDUCED_THIS</span>
           <span class="identifier">reverse_iterator</span><span class="special">&lt;</span><span class="identifier">BidiIter</span><span class="special">&gt;,</span>
+<span class="preprocessor">#endif</span>
 <span class="preprocessor">#if</span> <span class="number">201703L</span> <span class="special">&lt;</span> <span class="identifier">__cplusplus</span> <span class="special">&amp;&amp;</span> <span class="identifier">defined</span><span class="special">(</span><span class="identifier">__cpp_lib_ranges</span><span class="special">)</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">v2</span><span class="special">::</span><span class="identifier">v2_dtl</span><span class="special">::</span><span class="identifier">iter_concept_t</span><span class="special">&lt;</span><span class="identifier">BidiIter</span><span class="special">&gt;,</span>
 <span class="preprocessor">#else</span>

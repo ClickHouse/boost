@@ -17,9 +17,12 @@
           FILE_SUFFIX: '.html'
       };
     </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="Boost.GIL  documentation" href="../index.html" />
@@ -71,8 +74,8 @@
 written in this folder:</p>
 <div class="section" id="convolution">
 <h2>Convolution</h2>
-<p>The simplest way to look at this is &#8220;tweaking the input so that it would
-look like the shape provided&#8221;. What exact tweaking is applied depends on
+<p>The simplest way to look at this is “tweaking the input so that it would
+look like the shape provided”. What exact tweaking is applied depends on
 the kernel.</p>
 </div>
 <hr class="docutils" />
@@ -82,7 +85,7 @@ the kernel.</p>
 about a different usage. Simply put, they are matrices, that are used to
 achieve certain effects on the image. Lets consider a simple one, 3 by 3
 Scharr filter</p>
-<p><code class="docutils literal"><span class="pre">ScharrX</span> <span class="pre">=</span> <span class="pre">[1,0,-1][1,0,-1][1,0,-1]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">ScharrX</span> <span class="pre">=</span> <span class="pre">[1,0,-1][1,0,-1][1,0,-1]</span></code></p>
 <p>The filter above, when convolved with a single channel image
 (intensity/luminance strength), will produce a gradient in X
 (horizontal) direction. There is filtering that cannot be done with a
@@ -107,7 +110,7 @@ of an image, and Y axis will correspond to value at that pixel. By
 little stretch of an imagination, filters (another names are kernels,
 weights) could be considered an image (or any 2D matrix). A mean filter
 would draw a flat plane, whereas Gaussian filter would draw a hill that
-gets sharper depending on it&#8217;s sigma value.</p>
+gets sharper depending on it’s sigma value.</p>
 </div>
 </div>
 
@@ -122,8 +125,8 @@ gets sharper depending on it&#8217;s sigma value.</p>
     </div>
     </div>
     <div class="footer" role="contentinfo">
-      Last updated on 2023-04-10 13:04:15.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+      Last updated on 2023-08-08 21:08:21.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.2.1.
     </div>
   </body>
 </html>

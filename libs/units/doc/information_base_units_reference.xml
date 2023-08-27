@@ -3,7 +3,7 @@
 <namespace name="boost">
 <namespace name="units">
 <namespace name="information">
-<struct name="bit_base_unit"><inherit access="public">boost::units::base_unit&lt; bit_base_unit, information_dimension, -700 &gt;</inherit><method-group name="public static functions">
+<struct name="bit_base_unit"><inherit access="public">base_unit&lt; bit_base_unit, information_dimension, -700 &gt;</inherit><method-group name="public static functions">
 <method name="name" specifiers="static"><type>std::string</type></method>
 <method name="symbol" specifiers="static"><type>std::string</type></method>
 </method-group>

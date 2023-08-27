@@ -22,7 +22,7 @@
         </template><parameter name="what"><paramtype>const std::string &amp;</paramtype><description><para>The message to associate with this error. </para></description></parameter><parameter name="path"><paramtype>const T &amp;</paramtype><description><para>The path that could not be found in the property_tree. </para></description></parameter><purpose>Instantiate a <classname alt="boost::property_tree::ptree_bad_path">ptree_bad_path</classname> with the given message and path data. </purpose><description><para>
 </para></description></constructor>
 <destructor/>
-</class><class name="ptree_error"><inherit access="public">runtime_error</inherit><purpose>Base class for all property tree errors. Derives from <computeroutput>std::runtime_error</computeroutput>. Call member function <computeroutput>what</computeroutput> to get human readable message associated with the error. </purpose><method-group name="public member functions">
+</class><class name="ptree_error"><inherit access="public">std::runtime_error</inherit><purpose>Base class for all property tree errors. Derives from <computeroutput>std::runtime_error</computeroutput>. Call member function <computeroutput>what</computeroutput> to get human readable message associated with the error. </purpose><method-group name="public member functions">
 </method-group>
 <constructor><parameter name="what"><paramtype>const std::string &amp;</paramtype><description><para>The message to associate with this error. </para></description></parameter><purpose>Instantiate a <classname alt="boost::property_tree::ptree_error">ptree_error</classname> instance with the given message. </purpose><description><para>
 </para></description></constructor>
@@ -40,7 +40,15 @@
 <header name="boost/property_tree/id_translator.hpp">
 <namespace name="boost">
 <namespace name="property_tree">
-<struct-specialization name="translator_between"><template>
+<struct name="id_translator"><template>
+      <template-type-parameter name="T"/>
+    </template><purpose>Simple implementation of the Translator concept. It does no translation. </purpose><typedef name="internal_type"><type>T</type></typedef>
+<typedef name="external_type"><type>T</type></typedef>
+<method-group name="public member functions">
+<method name="get_value"><type>boost::optional&lt; T &gt;</type><parameter name="v"><paramtype>const T &amp;</paramtype></parameter></method>
+<method name="put_value"><type>boost::optional&lt; T &gt;</type><parameter name="v"><paramtype>const T &amp;</paramtype></parameter></method>
+</method-group>
+</struct><struct-specialization name="translator_between"><template>
       <template-type-parameter name="Ch"/>
       <template-type-parameter name="Traits"/>
       <template-type-parameter name="Alloc"/>
@@ -235,24 +243,18 @@
 <header name="boost/property_tree/ptree.hpp">
 <namespace name="boost">
 <namespace name="property_tree">
-
-
-
-
-
-
-
-</namespace>
-</namespace>
-</header>
-<header name="boost/property_tree/ptree_fwd.hpp">
-<namespace name="boost">
-<namespace name="property_tree">
 <class name="basic_ptree"><template>
       <template-type-parameter name="Key"/>
       <template-type-parameter name="Data"/>
       <template-type-parameter name="KeyCompare"/>
-    </template><description><para>Property tree main structure. A property tree is a hierarchical data structure which has one element of type <computeroutput>Data</computeroutput> in each node, as well as an ordered sequence of sub-nodes, which are additionally identified by a non-unique key of type <computeroutput>Key</computeroutput>.</para><para>Key equivalency is defined by <computeroutput>KeyCompare</computeroutput>, a predicate defining a strict weak ordering.</para><para>Property tree defines a Container-like interface to the (key-node) pairs of its direct sub-nodes. The iterators are bidirectional. The sequence of nodes is held in insertion order, not key order. </para></description><method-group name="public member functions">
+    </template><description><para>Property tree main structure. A property tree is a hierarchical data structure which has one element of type <computeroutput>Data</computeroutput> in each node, as well as an ordered sequence of sub-nodes, which are additionally identified by a non-unique key of type <computeroutput>Key</computeroutput>.</para><para>Key equivalency is defined by <computeroutput>KeyCompare</computeroutput>, a predicate defining a strict weak ordering.</para><para>Property tree defines a Container-like interface to the (key-node) pairs of its direct sub-nodes. The iterators are bidirectional. The sequence of nodes is held in insertion order, not key order. </para></description><typedef name="self_type"><description><para>Simpler way to refer to this <classname alt="boost::property_tree::basic_ptree">basic_ptree</classname>&lt;C,K,P,A&gt; type. Note that this is private, and made public only for doxygen. </para></description><type><classname>basic_ptree</classname>&lt; Key, Data, KeyCompare &gt;</type></typedef>
+<typedef name="key_type"><type>Key</type></typedef>
+<typedef name="data_type"><type>Data</type></typedef>
+<typedef name="key_compare"><type>KeyCompare</type></typedef>
+<typedef name="value_type"><type>std::pair&lt; const Key, self_type &gt;</type></typedef>
+<typedef name="size_type"><type>std::size_t</type></typedef>
+<typedef name="path_type"><type><classname>path_of</classname>&lt; Key &gt;::type</type></typedef>
+<method-group name="public member functions">
 <method name="swap"><type>void</type><parameter name="rhs"><paramtype>self_type &amp;</paramtype></parameter><description><para>Swap with other tree. Only constant-time and nothrow if the data type's swap is. </para></description></method>
 <method name="size" cv="const"><type>size_type</type><description><para>The number of direct children of this node. </para></description></method>
 <method name="max_size" cv="const"><type>size_type</type></method>
@@ -291,7 +293,7 @@
         </template><parameter name="comp"><paramtype>Compare</paramtype></parameter><description><para>Sorts the direct children of this node according to the predicate. The predicate is passed the whole pair of key and child. </para></description></method>
 <method name="sort"><type>void</type><description><para>Sorts the direct children of this node according to key order. </para></description></method>
 <method name="operator==" cv="const"><type>bool</type><parameter name="rhs"><paramtype>const self_type &amp;</paramtype></parameter><description><para>Two property trees are the same if they have the same data, the keys and order of their children are the same, and the children compare equal, recursively. </para></description></method>
-<method name="operator !=" cv="const"><type>bool</type><parameter name="rhs"><paramtype>const self_type &amp;</paramtype></parameter></method>
+<method name="operator!=" cv="const"><type>bool</type><parameter name="rhs"><paramtype>const self_type &amp;</paramtype></parameter></method>
 <method name="ordered_begin"><type>assoc_iterator</type><description><para>Returns an iterator to the first child, in key order. </para></description></method>
 <method name="ordered_begin" cv="const"><type>const_assoc_iterator</type><description><para>Returns an iterator to the first child, in key order. </para></description></method>
 <method name="not_found"><type>assoc_iterator</type><description><para>Returns the not-found iterator. Equivalent to end() in a real associative container. </para></description></method>
@@ -445,13 +447,20 @@ return boost::null;
 <method name="walk_path" cv="const"><type>self_type *</type><parameter name="p"><paramtype>path_type &amp;</paramtype></parameter></method>
 <method name="force_path"><type>self_type &amp;</type><parameter name="p"><paramtype>path_type &amp;</paramtype></parameter></method>
 </method-group>
-</class><struct name="id_translator"><template>
-      <template-type-parameter name="T"/>
-    </template><purpose>Simple implementation of the Translator concept. It does no translation. </purpose><method-group name="public member functions">
-<method name="get_value"><type>boost::optional&lt; T &gt;</type><parameter name="v"><paramtype>const T &amp;</paramtype></parameter></method>
-<method name="put_value"><type>boost::optional&lt; T &gt;</type><parameter name="v"><paramtype>const T &amp;</paramtype></parameter></method>
-</method-group>
-</struct><struct name="path_of"><template>
+</class>
+
+
+
+
+
+
+</namespace>
+</namespace>
+</header>
+<header name="boost/property_tree/ptree_fwd.hpp">
+<namespace name="boost">
+<namespace name="property_tree">
+<struct name="path_of"><template>
       <template-type-parameter name="Key"/>
     </template><purpose>If you want to use a custom key type, specialize this struct for it and give it a 'type' typedef that specifies your path type. The path type must conform to the Path concept described in the documentation. This is already specialized for std::basic_string. </purpose></struct><struct name="translator_between"><template>
       <template-type-parameter name="Internal"/>

@@ -7,9 +7,15 @@
 
 //[example_unix_socket
 
-#include <boost/mysql.hpp>
+#include <boost/mysql/error_with_diagnostics.hpp>
+#include <boost/mysql/handshake_params.hpp>
+#include <boost/mysql/results.hpp>
+#include <boost/mysql/row_view.hpp>
+#include <boost/mysql/statement.hpp>
+#include <boost/mysql/unix.hpp>
 
 #include <boost/asio/io_context.hpp>
+#include <boost/asio/local/stream_protocol.hpp>
 
 #include <iostream>
 #include <tuple>
@@ -78,7 +84,7 @@ void main_impl(int argc, char** argv)
 
     // Execute the statement
     boost::mysql::results result;
-    conn.execute_statement(stmt, std::make_tuple(company_id), result);
+    conn.execute(stmt.bind(company_id), result);
 
     // Print employees
     for (boost::mysql::row_view employee : result.rows())

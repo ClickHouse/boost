@@ -30,16 +30,20 @@ struct parse_test
         {
             {
                 auto r = parse_uri_reference("A:\\");
-                BOOST_TEST_THROWS(r.value(), system_error);
+                BOOST_TEST_THROWS(r.value(), system::system_error);
             }
             {
                 auto r = parse_uri_reference("A:\"");
-                BOOST_TEST_THROWS(r.value(), system_error);
+                BOOST_TEST_THROWS(r.value(), system::system_error);
             }
+        }
+        // reg-name might have ipv4 prefix
+        {
+            BOOST_TEST_NOT(parse_relative_ref("//0.1.0.1%"));
         }
         // parse docs
         {
-            result< url_view > r = parse_relative_ref( "//www.boost.org/index.html?field=value#downloads" );
+            system::result< url_view > r = parse_relative_ref( "//www.boost.org/index.html?field=value#downloads" );
             if ( r.has_value() )
             {
                 url_view u = *r;
@@ -47,7 +51,7 @@ struct parse_test
             }
         }
         {
-            result< url_view > r = parse_uri_reference( "https://www.example.com/path/to/file.txt" );
+            system::result< url_view > r = parse_uri_reference( "https://www.example.com/path/to/file.txt" );
             if ( r.has_value() )
             {
                 url_view u = *r;

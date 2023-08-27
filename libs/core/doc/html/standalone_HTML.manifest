@@ -35,10 +35,10 @@ core/ref.html
 boost/is_reference_wrapper.html
 boost/reference_wrapper.html
 boost/unwrap_reference.html
-boost/ref_idm12232.html
-boost/cref_idm12246.html
-boost/ref_idm12260.html
-boost/cref_idm12269.html
+boost/ref_idm12364.html
+boost/cref_idm12378.html
+boost/ref_idm12392.html
+boost/cref_idm12401.html
 boost/unwrap_ref.html
 core/scoped_enum.html
 core/serialization.html
@@ -51,3 +51,4 @@ core/snprintf.html
 core/uncaught_exceptions.html
 core/use_default.html
 core/verbose_terminate_handler.html
+core/yield_primitives.html

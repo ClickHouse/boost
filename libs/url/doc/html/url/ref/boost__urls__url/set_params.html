@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__url.set_params"></a><a class="link" href="set_params.html" title="url::set_params">url::set_params</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm105194"></a>
+          <a class="indexterm" name="idm108610"></a>
         </p>
 <p>
           Set the query params.
@@ -39,7 +39,7 @@
         </h6>
 <pre class="programlisting"><span class="identifier">url</span><span class="special">&amp;</span>
 <span class="identifier">set_params</span><span class="special">(</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">initializer_list</span><span class="special">&lt;</span> <span class="identifier">param_view</span> <span class="special">&gt;</span> <span class="identifier">s</span><span class="special">);</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">initializer_list</span><span class="special">&lt;</span> <span class="identifier">param_view</span> <span class="special">&gt;</span> <span class="identifier">ps</span><span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__url.set_params.h1"></a>
@@ -54,7 +54,7 @@
 <a name="url.ref.boost__urls__url.set_params.h2"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_params.example"></a></span><a class="link" href="set_params.html#url.ref.boost__urls__url.set_params.example">Example</a>
         </h6>
-<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">url</span><span class="special">(</span> <span class="string">"http://example.com"</span> <span class="special">).</span><span class="identifier">set_params</span><span class="special">(</span> <span class="special">{</span><span class="string">"id"</span><span class="special">,</span> <span class="string">"42"</span><span class="special">}</span> <span class="special">).</span><span class="identifier">query</span><span class="special">()</span> <span class="special">==</span> <span class="string">"id=42"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">url</span><span class="special">(</span> <span class="string">"http://example.com"</span> <span class="special">).</span><span class="identifier">set_params</span><span class="special">(</span> <span class="special">{</span> <span class="string">"id"</span> <span class="special">,</span> <span class="string">"42"</span> <span class="special">}</span> <span class="special">).</span><span class="identifier">query</span><span class="special">()</span> <span class="special">==</span> <span class="string">"id=42"</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__url.set_params.h3"></a>
@@ -124,25 +124,14 @@
 <a name="url.ref.boost__urls__url.set_params.h8"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_params.specification"></a></span><a class="link" href="set_params.html#url.ref.boost__urls__url.set_params.specification">Specification</a>
         </h6>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-              &lt;a href="<a href="https://datatracker.ietf.org/doc/html/rfc3986#section-3.4" target="_top">https://datatracker.ietf.org/doc/html/rfc3986#section-3.4</a>
-              &gt;3.4. Query (rfc3986)
-            </li>
-<li class="listitem">
-              <a href="https://en.wikipedia.org/wiki/Query_string" target="_top">Query string
-              (Wikipedia)</a>
-            </li>
-</ul></div>
-<h6>
-<a name="url.ref.boost__urls__url.set_params.h9"></a>
-          <span class="phrase"><a name="url.ref.boost__urls__url.set_params.see_also"></a></span><a class="link" href="set_params.html#url.ref.boost__urls__url.set_params.see_also">See
-          Also</a>
-        </h6>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+              &lt;a href="https://datatracker.ietf.org/doc/html/rfc3986#section-3.4
+              &gt;3.4. Query (rfc3986)&lt;/a&gt; @li &lt;a href="<a href="https://en.wikipedia.org/wiki/Query_string" target="_top">https://en.wikipedia.org/wiki/Query_string</a>"
+              &gt;Query string (Wikipedia)&lt;/a&gt;
+            </li></ul></div>
 <p>
-          <a class="link" href="encoded_params.html" title="url::encoded_params"><code class="computeroutput"><span class="identifier">encoded_params</span></code></a>,
-          <a class="link" href="remove_query.html" title="url::remove_query"><code class="computeroutput"><span class="identifier">remove_query</span></code></a>,
-          <a class="link" href="set_encoded_query.html" title="url::set_encoded_query"><code class="computeroutput"><span class="identifier">set_encoded_query</span></code></a>, <a class="link" href="set_query.html" title="url::set_query"><code class="computeroutput"><span class="identifier">set_query</span></code></a>.
+          @see @ref encoded_params, @ref remove_query, @ref set_encoded_query, @ref
+          set_query.\ifile "/root/project/libs/url/include/boost/url/url.hpp"
         </p>
 </div>
 <div class="copyright-footer">Copyright © 2021, 2022 Vinnie Falco, Alan de Freitas<p>

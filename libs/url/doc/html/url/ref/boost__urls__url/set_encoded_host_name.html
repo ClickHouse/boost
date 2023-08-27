@@ -28,7 +28,7 @@
 <a name="url.ref.boost__urls__url.set_encoded_host_name"></a><a class="link" href="set_encoded_host_name.html" title="url::set_encoded_host_name">url::set_encoded_host_name</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm103664"></a>
+          <a class="indexterm" name="idm107090"></a>
         </p>
 <p>
           Set the host to a name.
@@ -54,7 +54,7 @@
 <a name="url.ref.boost__urls__url.set_encoded_host_name.h2"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_encoded_host_name.example"></a></span><a class="link" href="set_encoded_host_name.html#url.ref.boost__urls__url.set_encoded_host_name.example">Example</a>
         </h6>
-<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">url</span><span class="special">(</span> <span class="string">"http://www.example.com/index.htm"</span><span class="special">).</span><span class="identifier">set_encoded_host_name</span><span class="special">(</span> <span class="string">"localhost"</span> <span class="special">).</span><span class="identifier">host_address</span><span class="special">()</span> <span class="special">==</span> <span class="string">"localhost"</span> <span class="special">);</span>
+<pre class="programlisting"><span class="identifier">assert</span><span class="special">(</span> <span class="identifier">url</span><span class="special">(</span> <span class="string">"http://www.example.com/index.htm"</span> <span class="special">).</span><span class="identifier">set_encoded_host_name</span><span class="special">(</span> <span class="string">"localhost"</span> <span class="special">).</span><span class="identifier">host_address</span><span class="special">()</span> <span class="special">==</span> <span class="string">"localhost"</span> <span class="special">);</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__url.set_encoded_host_name.h3"></a>
@@ -144,7 +144,7 @@
 <a name="url.ref.boost__urls__url.set_encoded_host_name.h7"></a>
           <span class="phrase"><a name="url.ref.boost__urls__url.set_encoded_host_name.bnf"></a></span><a class="link" href="set_encoded_host_name.html#url.ref.boost__urls__url.set_encoded_host_name.bnf">BNF</a>
         </h6>
-<pre class="programlisting"><span class="identifier">reg</span><span class="special">-</span><span class="identifier">name</span>    <span class="special">=</span> <span class="special">*(</span> <span class="identifier">unreserved</span> <span class="special">/</span> <span class="identifier">pct</span><span class="special">-</span><span class="identifier">encoded</span> <span class="special">/</span> <span class="string">"-"</span> <span class="special">/</span> <span class="string">"."</span><span class="special">)</span>
+<pre class="programlisting"><span class="identifier">reg</span><span class="special">-</span><span class="identifier">name</span>    <span class="special">=</span> <span class="special">*(</span> <span class="identifier">unreserved</span> <span class="special">/</span> <span class="identifier">pct</span><span class="special">-</span><span class="identifier">encoded</span> <span class="special">/</span> <span class="string">"-"</span> <span class="special">/</span> <span class="string">"."</span> <span class="special">)</span>
 </pre>
 <h6>
 <a name="url.ref.boost__urls__url.set_encoded_host_name.h8"></a>
@@ -160,7 +160,7 @@
         </h6>
 <p>
           <a class="link" href="set_encoded_host.html" title="url::set_encoded_host"><code class="computeroutput"><span class="identifier">set_encoded_host</span></code></a>, <a class="link" href="set_encoded_host_address.html" title="url::set_encoded_host_address"><code class="computeroutput"><span class="identifier">set_encoded_host_address</span></code></a>, <a class="link" href="set_host.html" title="url::set_host"><code class="computeroutput"><span class="identifier">set_host</span></code></a>,
-          <a class="link" href="set_host_address.html" title="url::set_host_address"><code class="computeroutput"><span class="identifier">set_host_address</span></code></a>, <a class="link" href="set_host_ipv4.html" title="url::set_host_ipv4"><code class="computeroutput"><span class="identifier">set_host_ipv4</span></code></a>, <a class="link" href="set_host_ipv6.html" title="url::set_host_ipv6"><code class="computeroutput"><span class="identifier">set_host_ipv6</span></code></a>, <a class="link" href="set_host_ipvfuture.html" title="url::set_host_ipvfuture"><code class="computeroutput"><span class="identifier">set_host_ipvfuture</span></code></a>, <a class="link" href="set_host_name.html" title="url::set_host_name"><code class="computeroutput"><span class="identifier">set_host_name</span></code></a>.
+          <a class="link" href="set_host_address.html" title="url::set_host_address"><code class="computeroutput"><span class="identifier">set_host_address</span></code></a>, <a class="link" href="set_host_ipv4.html" title="url::set_host_ipv4"><code class="computeroutput"><span class="identifier">set_host_ipv4</span></code></a>, <a class="link" href="set_host_ipv6.html" title="url::set_host_ipv6"><code class="computeroutput"><span class="identifier">set_host_ipv6</span></code></a>, <a class="link" href="set_host_ipvfuture.html" title="url::set_host_ipvfuture"><code class="computeroutput"><span class="identifier">set_host_ipvfuture</span></code></a>, /root/project/libs/url/include/boost/url/url.hpp
         </p>
 </div>
 <div class="copyright-footer">Copyright © 2021, 2022 Vinnie Falco, Alan de Freitas<p>

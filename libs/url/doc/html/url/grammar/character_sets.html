@@ -71,7 +71,7 @@
         set. The example below skips any leading whitespace and then returns everything
         from the first non-whitespace character to the last non-whitespace character:
       </p>
-<pre class="programlisting"><span class="identifier">string_view</span> <span class="identifier">get_token</span><span class="special">(</span> <span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="keyword">noexcept</span>
+<pre class="programlisting"><span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">get_token</span><span class="special">(</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">s</span> <span class="special">)</span> <span class="keyword">noexcept</span>
 <span class="special">{</span>
     <span class="keyword">auto</span> <span class="identifier">it0</span> <span class="special">=</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">data</span><span class="special">();</span>
     <span class="keyword">auto</span> <span class="keyword">const</span> <span class="identifier">end</span> <span class="special">=</span> <span class="identifier">it0</span> <span class="special">+</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">size</span><span class="special">();</span>
@@ -89,7 +89,7 @@
     <span class="keyword">auto</span> <span class="identifier">it1</span> <span class="special">=</span> <span class="identifier">find_if</span><span class="special">(</span> <span class="identifier">it0</span><span class="special">,</span> <span class="identifier">end</span><span class="special">,</span> <span class="identifier">ws_chars</span> <span class="special">);</span>
 
     <span class="comment">// [it0, it1) is the part we want</span>
-    <span class="keyword">return</span> <span class="identifier">string_view</span><span class="special">(</span> <span class="identifier">it0</span><span class="special">,</span> <span class="identifier">it1</span> <span class="special">-</span> <span class="identifier">it0</span> <span class="special">);</span>
+    <span class="keyword">return</span> <span class="identifier">core</span><span class="special">::</span><span class="identifier">string_view</span><span class="special">(</span> <span class="identifier">it0</span><span class="special">,</span> <span class="identifier">it1</span> <span class="special">-</span> <span class="identifier">it0</span> <span class="special">);</span>
 <span class="special">}</span>
 </pre>
 <p>

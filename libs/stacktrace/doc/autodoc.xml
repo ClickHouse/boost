@@ -138,7 +138,7 @@
 <emphasis role="bold">Complexity:</emphasis> unknown (lots of platform specific work).</para><para><emphasis role="bold">Async-Handler-Safety</emphasis>: Unsafe. </para></description><returns><para>Code line in the source file, were the function of the frame is defined. </para>
 </returns><throws><simpara><classname>std::bad_alloc</classname> if not enough memory to construct string for internal needs.</simpara></throws></method>
 <method name="empty" cv="const noexcept"><type>constexpr bool</type><purpose>Checks that frame is not references NULL address. </purpose><description><para>
-<emphasis role="bold">Complexity:</emphasis> O(1)</para><para><emphasis role="bold">Async-Handler-Safety</emphasis>: Safe. Checks that frame references NULL address. 
+<emphasis role="bold">Complexity:</emphasis> O(1)</para><para><emphasis role="bold">Async-Handler-Safety</emphasis>: Safe.</para><para>Checks that frame references NULL address. 
 <emphasis role="bold">Complexity:</emphasis> O(1)</para><para><emphasis role="bold">Async-Handler-Safety</emphasis>: Safe. </para></description><returns><para><computeroutput>true</computeroutput> if <computeroutput>this-&gt;address() != 0</computeroutput></para>
 </returns><returns><para><computeroutput>true</computeroutput> if <computeroutput>this-&gt;address() == 0</computeroutput></para>
 </returns></method>
@@ -216,7 +216,7 @@
 </namespace>
 </header>
 <header name="boost/stacktrace/safe_dump_to.hpp">
-<para>This header contains low-level async-signal-safe functions for dumping call stacks. Dumps are binary serialized arrays of <computeroutput>void*</computeroutput>, so you could read them by using 'od -tx8 -An stacktrace_dump_failename' Linux command or using boost::stacktrace::stacktrace::from_dump functions. </para><namespace name="boost">
+<para>This header contains low-level async-signal-safe functions for dumping call stacks. Dumps are binary serialized arrays of `void*`, so you could read them by using 'od -tx8 -An stacktrace_dump_failename' Linux command or using boost::stacktrace::stacktrace::from_dump functions. </para><namespace name="boost">
 <namespace name="stacktrace">
 
 

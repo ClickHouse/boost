@@ -35,7 +35,7 @@
 
 </span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> utc_time_ <span class="special">=</span> <span class="identifier">posix_time</span><span class="special">::</span><span class="identifier">ptime</span><span class="special">,</span> 
          <span class="keyword">typename</span> tz_type <span class="special">=</span> <span class="identifier">date_time</span><span class="special">::</span><span class="identifier">time_zone_base</span><span class="special">&lt;</span><span class="identifier">utc_time_</span><span class="special">,</span><span class="keyword">char</span><span class="special">&gt;</span> <span class="special">&gt;</span> 
-<span class="keyword">class</span> <a class="link" href="local_date_time_base.html" title="Class template local_date_time_base">local_date_time_base</a> <span class="special">:</span> <span class="keyword">public</span> date_time::base_time&lt; utc_time_, boost::posix_time::posix_time_system &gt;
+<span class="keyword">class</span> <a class="link" href="local_date_time_base.html" title="Class template local_date_time_base">local_date_time_base</a> <span class="special">:</span> <span class="keyword">public</span> date_time::base_time&lt; posix_time::ptime, boost::posix_time::posix_time_system &gt;
 <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// types</span>
@@ -146,7 +146,7 @@
 </colgroup>
 <tbody><tr>
 <td><p><span class="term">Throws:</span></p></td>
-<td>&amp;ndash; <a class="link" href="time_label_invalid.html" title="Struct time_label_invalid">time_label_invalid</a> if the time passed does not exist in the given locale. The non-existent case occurs typically during the shift-back from daylight savings time. When the clock is shifted forward a range of times (2 am to 3 am in the US) is skipped and hence is invalid. <a class="link" href="dst_not_valid.html" title="Struct dst_not_valid">dst_not_valid</a> if the DST flag is passed for a period where DST is not active. </td>
+<td>-- <a class="link" href="time_label_invalid.html" title="Struct time_label_invalid">time_label_invalid</a> if the time passed does not exist in the given locale. The non-existent case occurs typically during the shift-back from daylight savings time. When the clock is shifted forward a range of times (2 am to 3 am in the US) is skipped and hence is invalid. <a class="link" href="dst_not_valid.html" title="Struct dst_not_valid">dst_not_valid</a> if the DST flag is passed for a period where DST is not active. </td>
 </tr></tbody>
 </table></div>
 </li>

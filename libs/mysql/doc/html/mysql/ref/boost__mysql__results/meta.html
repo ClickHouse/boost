@@ -28,7 +28,7 @@
 <a name="mysql.ref.boost__mysql__results.meta"></a><a class="link" href="meta.html" title="results::meta">results::meta</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm32251"></a>
+          <a class="indexterm" name="idm43676"></a>
         </p>
 <p>
           Returns metadata about the columns in the query.
@@ -47,6 +47,10 @@
 <p>
           The returned collection will have as many <a class="link" href="../boost__mysql__metadata.html" title="metadata"><code class="computeroutput"><span class="identifier">metadata</span></code></a> objects as columns retrieved
           by the SQL query, and in the same order.
+        </p>
+<p>
+          For operations returning more than one resultset, returns metadata for
+          the first resultset.
         </p>
 <h6>
 <a name="mysql.ref.boost__mysql__results.meta.h2"></a>
@@ -73,6 +77,13 @@
           This function returns a view object, with reference semantics. The returned
           view points into memory owned by <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code>, and will be valid as long as <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code> or
           an object move-constructed from <code class="computeroutput"><span class="special">*</span><span class="keyword">this</span></code> are alive.
+        </p>
+<h6>
+<a name="mysql.ref.boost__mysql__results.meta.h5"></a>
+          <span class="phrase"><a name="mysql.ref.boost__mysql__results.meta.complexity"></a></span><a class="link" href="meta.html#mysql.ref.boost__mysql__results.meta.complexity">Complexity</a>
+        </h6>
+<p>
+          Constant.
         </p>
 </div>
 <div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>
