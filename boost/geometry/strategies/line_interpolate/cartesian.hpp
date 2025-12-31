@@ -56,10 +56,10 @@ struct default_strategy<Geometry, cartesian_tag>
 };
 
 
-template <typename CT, typename DS>
-struct strategy_converter<strategy::line_interpolate::cartesian<CT, DS> >
+template <typename CT, typename DST>
+struct strategy_converter<strategy::line_interpolate::cartesian<CT, DST> >
 {
-    static auto get(strategy::line_interpolate::cartesian<CT, DS> const&)
+    static auto get(strategy::line_interpolate::cartesian<CT, DST> const&)
     {
         return strategies::line_interpolate::cartesian<CT>();
     }
