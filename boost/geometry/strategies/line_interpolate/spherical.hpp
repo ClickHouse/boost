@@ -72,12 +72,12 @@ struct default_strategy<Geometry, spherical_equatorial_tag>
 };
 
 
-template <typename CT, typename DS>
-struct strategy_converter<strategy::line_interpolate::spherical<CT, DS> >
+template <typename CT, typename DST>
+struct strategy_converter<strategy::line_interpolate::spherical<CT, DST> >
 {
-    static auto get(strategy::line_interpolate::spherical<CT, DS> const& s)
+    static auto get(strategy::line_interpolate::spherical<CT, DST> const& s)
     {
-        typedef typename strategy::line_interpolate::spherical<CT, DS>::radius_type radius_type;
+        typedef typename strategy::line_interpolate::spherical<CT, DST>::radius_type radius_type;
         return strategies::line_interpolate::spherical<radius_type, CT>(s.radius());
     }
 };
