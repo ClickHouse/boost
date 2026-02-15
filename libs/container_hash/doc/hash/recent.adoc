@@ -8,6 +8,14 @@ https://www.boost.org/LICENSE_1_0.txt
 = Recent Changes
 :idprefix: recent_
 
+== Boost 1.89.0
+
+* Added the `hash_is_avalanching` trait class.
+
+== Boost 1.84.0
+
+* {cpp}03 is no longer supported.
+
 == Boost 1.82.0
 
 * Added an overload of `hash_value` for `std::nullptr_t`.

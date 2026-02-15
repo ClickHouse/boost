@@ -10,23 +10,7 @@ add_subdirectory(../.. boostorg/ratio)
 
 set(deps
 # Primary dependencies
-
-config
-core
-integer
-mpl
-rational
-static_assert
-type_traits
-
 # Secondary dependencies
-
-assert
-throw_exception
-predef
-preprocessor
-utility
-io
 )
 
 foreach(dep IN LISTS deps)
@@ -36,9 +20,9 @@ foreach(dep IN LISTS deps)
 endforeach()
 
 add_executable(quick ../quick.cpp)
-target_link_libraries(quick Boost::ratio Boost::core)
+target_link_libraries(quick Boost::ratio)
 
 enable_testing()
 add_test(quick quick)
 
-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure -C $<CONFIG>)
+add_custom_target(check VERBATIM COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure -C $<CONFIG>)

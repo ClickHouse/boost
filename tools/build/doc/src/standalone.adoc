@@ -1,5 +1,5 @@
 = B2 User Manual
-:copyright: Copyright 2018-2021 René Ferdinand Rivera Morell; Copyright 2006, 2014 Vladimir Prus
+:copyright: Copyright 2018-2025 René Ferdinand Rivera Morell; Copyright 2006, 2014 Vladimir Prus
 :author: René Ferdinand Rivera Morell, Vladimir Prus, Steven Watanabe
 :toc: left
 :toclevels: 2
@@ -7,19 +7,12 @@
 :sectnums:
 :nofooter:
 :stylesheet: amber.css
-// :source-highlighter: rouge
-// :source-highlighter: pygments
 :source-language: jam
-:highlightjsdir: hljs
-// :pygments-style: native
-// :rouge-style: native
-// :pygments-style: friendly
 :caution-caption: ⚑
 :important-caption: ‼
 :note-caption: ℹ
 :tip-caption: ☀
 :warning-caption: ⚠
-:CPP: C++
 
 == Introduction
 
@@ -33,8 +26,7 @@ endif::[]
 include::howto.adoc[]
 
 ****
-Copyright 2018-2021 René Ferdinand Rivera Morell;
-Copyright 2006, 2014 Vladimir Prus.
+{copyright}
 Distributed under the Boost Software License, Version 1.0. (See accompanying
 file `LICENSE.txt` or copy at https://www.bfgroup.xyz/b2/LICENSE.txt)
 ****
@@ -65,6 +57,10 @@ include::examples.adoc[]
 
 include::bjam.adoc[]
 
+include::code_ref.adoc[]
+
 include::history.adoc[]
+
+include::appendix.adoc[]
 
 :leveloffset: -1

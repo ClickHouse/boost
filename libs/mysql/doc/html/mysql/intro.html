@@ -28,10 +28,9 @@
 <a name="mysql.intro"></a><a class="link" href="intro.html" title="Introduction">Introduction</a>
 </h2></div></div></div>
 <p>
-      <a href="https://anarthal.github.io/boost/index.html" target="_top">Boost.MySQL</a>
-      is a C++11 client for the <a href="https://www.mysql.com/" target="_top">MySQL</a>
-      and <a href="https://mariadb.com/" target="_top">MariaDB</a> database servers, based
-      on <a href="../../../../../libs/asio/index.html" target="_top">Boost.Asio</a>.
+      <a href="../../../../../libs/mysql/index.html" target="_top">Boost.MySQL</a> is a C++11 client
+      for the <a href="https://www.mysql.com/" target="_top">MySQL</a> and <a href="https://mariadb.com/" target="_top">MariaDB</a>
+      database servers, based on <a href="../../../../../libs/asio/index.html" target="_top">Boost.Asio</a>.
     </p>
 <h4>
 <a name="mysql.intro.h0"></a>
@@ -40,14 +39,14 @@
 <p>
       MySQL and MariaDB are widespread SQL database servers. MySQL clients connect
       to the server in order to issue SQL queries. For this purpose, MySQL employs
-      a dedicated protocol. <a href="https://anarthal.github.io/boost/index.html" target="_top">Boost.MySQL</a>
+      a dedicated protocol. <a href="../../../../../libs/mysql/index.html" target="_top">Boost.MySQL</a>
       is an implementation of the client side of this protocol.
     </p>
 <p>
       This library is a full implementation of the <a href="https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html" target="_top">MySQL
       client/server protocol</a>. It aims to expose the protocol primitives in
       an efficient but easy-to-use way. It is similar in scope to the official <a href="https://dev.mysql.com/doc/c-api/8.0/en/" target="_top">libmysqlclient</a>, but interoperable
-      with Asio, safer and more expressive. Note that <a href="https://anarthal.github.io/boost/index.html" target="_top">Boost.MySQL</a>
+      with Asio, safer and more expressive. Note that <a href="../../../../../libs/mysql/index.html" target="_top">Boost.MySQL</a>
       <span class="bold"><strong>does not use libmysqlclient</strong></span>: it's a full implementation
       of the MySQL protocol, which makes it natively compatible with Asio.
     </p>
@@ -108,7 +107,7 @@
       to use</a>
     </h4>
 <p>
-      If any of the following statements is true, you may consider using <a href="https://anarthal.github.io/boost/index.html" target="_top">Boost.MySQL</a>:
+      If any of the following statements is true, you may consider using <a href="../../../../../libs/mysql/index.html" target="_top">Boost.MySQL</a>:
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
@@ -156,37 +155,13 @@
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          gcc 5.4 (Linux)
+          gcc 5.4 to gcc 15.0 (Linux)
         </li>
 <li class="listitem">
-          gcc 6.5 (Linux)
+          clang 4 to clang 20.0 (Linux)
         </li>
 <li class="listitem">
-          gcc 10.3 (Linux)
-        </li>
-<li class="listitem">
-          gcc 11.2 (Linux)
-        </li>
-<li class="listitem">
-          gcc 13.0 (Linux)
-        </li>
-<li class="listitem">
-          clang 3.6 (Linux)
-        </li>
-<li class="listitem">
-          clang 7.0 (Linux)
-        </li>
-<li class="listitem">
-          clang 11.0 (Linux)
-        </li>
-<li class="listitem">
-          clang 14.0 (Linux)
-        </li>
-<li class="listitem">
-          clang 16.0 (Linux)
-        </li>
-<li class="listitem">
-          clang 14.0 (OSX)
+          Apple clang 14.0 (OSX)
         </li>
 <li class="listitem">
           MSVC 14.1 - Visual Studio 2017 (Windows)
@@ -206,10 +181,10 @@
           MySQL v5.7.41.
         </li>
 <li class="listitem">
-          MySQL v8.0.33.
+          MySQL v8.4.1.
         </li>
 <li class="listitem">
-          MariaDB v11.0.
+          MariaDB v11.4.2.
         </li>
 </ul></div>
 <h4>
@@ -222,7 +197,7 @@
       development. Thanks also to Christian Mazakas for his ideas in early stages,
       and to <a href="https://github.com/klemens-morgenstern" target="_top">Klemens Morgenstern</a>
       and and <a href="https://github.com/vinniefalco" target="_top">Vinnie Falco</a> for
-      his techincal advice. Without you, this library would not exist.
+      his technical advice. Without you, this library would not exist.
     </p>
 <p>
       Finally, thanks to <a href="https://github.com/chriskohlhoff" target="_top">Christopher
@@ -231,7 +206,7 @@
       for his date algorithms, shamelessly copied in this lib.
     </p>
 </div>
-<div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>
+<div class="copyright-footer">Copyright © 2019-2024 Ruben Perez<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

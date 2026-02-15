@@ -34,10 +34,10 @@ Start
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../MutableBufferSequence.html" title="Mutable buffer sequence requirements">MutableBufferSequence</a><span class="special">,</span>
-    <span class="keyword">typename</span> <a class="link" href="../ReadToken.html" title="Read token requirements">ReadToken</a> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../ReadToken.html" title="Read token requirements">ReadToken</a> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span><span class="identifier">executor_type</span><span class="special">&gt;&gt;</span>
 <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type"><span class="emphasis"><em>DEDUCED</em></span></a> <span class="identifier">async_read_some</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">MutableBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
-    <span class="identifier">ReadToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">);</span>
+    <span class="identifier">ReadToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <span class="identifier">executor_type</span> <span class="special">&gt;());</span>
 </pre>
 <p>
           This function is used to asynchronously read data from the stream socket.
@@ -77,7 +77,7 @@ Start
                 Regardless of whether the asynchronous operation completes immediately
                 or not, the completion handler will not be invoked from within this
                 function. On immediate completion, invocation of the handler will
-                be performed in a manner equivalent to using <a class="link" href="../post.html" title="post"><code class="computeroutput"><span class="identifier">post</span></code></a>.
+                be performed in a manner equivalent to using <a class="link" href="../async_immediate.html" title="async_immediate"><code class="computeroutput"><span class="identifier">async_immediate</span></code></a>.
               </p>
 </dd>
 </dl>
@@ -134,7 +134,8 @@ Start
             </li>
 </ul></div>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

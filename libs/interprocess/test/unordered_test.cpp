@@ -8,6 +8,11 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//boost::unordered is supported only in C++11 and newer
+#include <boost/config.hpp>
+
+#if BOOST_CXX_VERSION >=201103L
+
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include "get_process_id_name.hpp"
@@ -37,7 +42,7 @@ int main()
 {
    //Remove any other old shared memory from the system
    bip::shared_memory_object::remove(bip::test::get_process_id_name());
-   BOOST_TRY {
+   BOOST_INTERPROCESS_TRY {
       bip::managed_shared_memory shm(bip::create_only, bip::test::get_process_id_name(), 65536);
 
       //Elements to be inserted in unordered containers
@@ -86,12 +91,19 @@ int main()
          return 1;
 
    }
-   BOOST_CATCH(...){
+   BOOST_INTERPROCESS_CATCH(...){
       //Remove shared memory from the system
       bip::shared_memory_object::remove(bip::test::get_process_id_name());
-      BOOST_RETHROW
-   } BOOST_CATCH_END
+      BOOST_INTERPROCESS_RETHROW
+   } BOOST_INTERPROCESS_CATCH_END
    //Remove shared memory from the system
    bip::shared_memory_object::remove(bip::test::get_process_id_name());
    return 0;
 }
+
+#else
+int main()
+{
+   return 0;
+}
+#endif //#if BOOST_CXX_VERSION >=201103L

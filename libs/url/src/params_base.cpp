@@ -8,8 +8,6 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_IMPL_PARAMS_BASE_IPP
-#define BOOST_URL_IMPL_PARAMS_BASE_IPP
 
 #include <boost/url/detail/config.hpp>
 #include <boost/url/decode_view.hpp>
@@ -182,7 +180,7 @@ params_base::
 end() const noexcept ->
     iterator
 {
-    return iterator(ref_, opt_, 0);
+    return {ref_, opt_, 0};
 }
 
 //------------------------------------------------
@@ -285,4 +283,3 @@ operator<<(
 } // urls
 } // boost
 
-#endif

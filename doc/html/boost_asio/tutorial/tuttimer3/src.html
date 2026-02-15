@@ -32,15 +32,15 @@
 <span class="comment">// timer.cpp</span>
 <span class="comment">// ~~~~~~~~~</span>
 <span class="comment">//</span>
-<span class="comment">// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)</span>
+<span class="comment">// Copyright (c) 2003-2025 Christopher M. Kohlhoff (chris at kohlhoff dot com)</span>
 <span class="comment">//</span>
 <span class="comment">// Distributed under the Boost Software License, Version 1.0. (See accompanying</span>
 <span class="comment">// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)</span>
 <span class="comment">//</span>
 
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">asio</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">bind</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">void</span> <span class="identifier">print</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="comment">/*e*/</span><span class="special">,</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">steady_timer</span><span class="special">*</span> <span class="identifier">t</span><span class="special">,</span> <span class="keyword">int</span><span class="special">*</span> <span class="identifier">count</span><span class="special">)</span>
@@ -51,7 +51,7 @@
     <span class="special">++(*</span><span class="identifier">count</span><span class="special">);</span>
 
     <span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">expires_at</span><span class="special">(</span><span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">expiry</span><span class="special">()</span> <span class="special">+</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
-    <span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
+    <span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span> <span class="identifier">t</span><span class="special">,</span> <span class="identifier">count</span><span class="special">));</span>
   <span class="special">}</span>
 <span class="special">}</span>
@@ -62,7 +62,7 @@
 
   <span class="keyword">int</span> <span class="identifier">count</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span>
   <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">steady_timer</span> <span class="identifier">t</span><span class="special">(</span><span class="identifier">io</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
-  <span class="identifier">t</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
+  <span class="identifier">t</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
         <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">t</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">count</span><span class="special">));</span>
 
   <span class="identifier">io</span><span class="special">.</span><span class="identifier">run</span><span class="special">();</span>
@@ -77,7 +77,8 @@
           arguments to a completion handler</a>
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+// Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -30,7 +30,7 @@ public:
         : fail_after_(fail_after), err_(err)
     {
     }
-    error_code maybe_fail() noexcept { return ++num_calls_ >= fail_after_ ? err_ : error_code(); }
+    error_code maybe_fail() noexcept { return num_calls_++ >= fail_after_ ? err_ : error_code(); }
 };
 
 }  // namespace test

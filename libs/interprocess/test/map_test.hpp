@@ -15,8 +15,6 @@
 #include "check_equal_containers.hpp"
 #include <map>
 
-// interprocess
-#include <boost/interprocess/containers/pair.hpp>
 // interprocess/detail
 #include <boost/interprocess/detail/utilities.hpp>
 // intrusive/detail
@@ -46,18 +44,18 @@ template<class ManagedSharedMemory
 int map_test ()
 {
    typedef typename MyShmMap::key_type    IntType;
-   typedef boost::interprocess::pair<IntType, IntType>         IntPairType;
    typedef typename MyStdMap::value_type  StdPairType;
-   const int memsize = 65536;
+   typedef typename MyShmMap::value_type  IntPairType;
+   const int Memsize = 128u * 1024u;
    const char *const shMemName = test::get_process_id_name();
    const int max = 100;
 
-   BOOST_TRY{
+   BOOST_INTERPROCESS_TRY{
       //Create shared memory
       shared_memory_object::remove(shMemName);
-      ManagedSharedMemory segment(create_only, shMemName, memsize);
+      ManagedSharedMemory segment(create_only, shMemName, Memsize);
 
-      segment.reserve_named_objects(100);
+      segment.reserve_named_objects(10);
 
       //Shared memory allocator must be always be initialized
       //since it has no default constructor
@@ -136,7 +134,7 @@ int map_test ()
 
          MyShmMap *shmmap3 =
             segment.template construct<MyShmMap>("MyShmMap3")
-               ( ordered_unique_range
+               ( boost::container::ordered_unique_range
                , ::boost::make_move_iterator(&aux_vect[0])
                , ::boost::make_move_iterator(aux_vect + 50)
                , std::less<IntType>(), segment.get_segment_manager());
@@ -145,7 +143,7 @@ int map_test ()
 
          MyShmMultiMap *shmmultimap3 =
             segment.template construct<MyShmMultiMap>("MyShmMultiMap3")
-               ( ordered_range
+               (boost::container::ordered_range
                , ::boost::make_move_iterator(&aux_vect3[0])
                , ::boost::make_move_iterator(aux_vect3 + 50)
                , std::less<IntType>(), segment.get_segment_manager());
@@ -484,10 +482,10 @@ int map_test ()
       if(!segment.all_memory_deallocated())
          return 1;
    }
-   BOOST_CATCH(...){
+   BOOST_INTERPROCESS_CATCH(...){
       shared_memory_object::remove(shMemName);
-      BOOST_RETHROW
-   } BOOST_CATCH_END
+      BOOST_INTERPROCESS_RETHROW
+   } BOOST_INTERPROCESS_CATCH_END
    shared_memory_object::remove(shMemName);
    return 0;
 }
@@ -500,19 +498,19 @@ template<class ManagedSharedMemory
 int map_test_copyable ()
 {
    typedef typename MyShmMap::key_type    IntType;
-   typedef boost::interprocess::pair<IntType, IntType>         IntPairType;
+   typedef typename MyShmMap::value_type  IntPairType;
    typedef typename MyStdMap::value_type  StdPairType;
 
-   const int memsize = 65536;
+   const int Memsize = 128u * 1024u;
    const char *const shMemName = test::get_process_id_name();
    const int max = 100;
 
-   BOOST_TRY{
+   BOOST_INTERPROCESS_TRY{
    //Create shared memory
    shared_memory_object::remove(shMemName);
-   ManagedSharedMemory segment(create_only, shMemName, memsize);
+   ManagedSharedMemory segment(create_only, shMemName, Memsize);
 
-   segment.reserve_named_objects(100);
+   segment.reserve_named_objects(10);
 
    //Shared memory allocator must be always be initialized
    //since it has no default constructor
@@ -578,10 +576,10 @@ int map_test_copyable ()
       if(!segment.all_memory_deallocated())
          return 1;
    }
-   BOOST_CATCH(...){
+   BOOST_INTERPROCESS_CATCH(...){
       shared_memory_object::remove(shMemName);
-      BOOST_RETHROW
-   } BOOST_CATCH_END
+      BOOST_INTERPROCESS_RETHROW
+   } BOOST_INTERPROCESS_CATCH_END
    shared_memory_object::remove(shMemName);
    return 0;
 }

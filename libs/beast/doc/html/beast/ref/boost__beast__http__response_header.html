@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__http__response_header"></a><a class="link" href="boost__beast__http__response_header.html" title="http::response_header">http::response_header</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm76746"></a>
+        <a class="indexterm" name="id77609"></a>
       </p>
 <p>
         A typical HTTP response header.
@@ -233,6 +233,19 @@
 <td>
                 <p>
                   Remove all fields from the container.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/contains.html" title="http::header::contains">contains</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns <code class="computeroutput"><span class="keyword">true</span></code> if there
+                  is a field with the specified name.
                 </p>
               </td>
 </tr>
@@ -664,15 +677,69 @@
 </tr>
 </tbody>
 </table></div>
+<h5>
+<a name="beast.ref.boost__beast__http__response_header.h4"></a>
+        <span class="phrase"><a name="beast.ref.boost__beast__http__response_header.static_members"></a></span><a class="link" href="boost__beast__http__response_header.html#beast.ref.boost__beast__http__response_header.static_members">Static
+        Members</a>
+      </h5>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>
+                  Name
+                </p>
+              </th>
+<th>
+                <p>
+                  Description
+                </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/max_name_size.html" title="http::header::max_name_size">max_name_size</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Maximum field name size.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__header/max_value_size.html" title="http::header::max_value_size">max_value_size</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Maximum field value size.
+                </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
 <p>
         This container is derived from the <code class="computeroutput"><span class="identifier">Fields</span></code>
         template type. To understand all of the members of this class it is necessary
         to view the declaration for the <code class="computeroutput"><span class="identifier">Fields</span></code>
         type. When using the default fields container, those declarations are in
         <a class="link" href="boost__beast__http__fields.html" title="http::fields"><code class="computeroutput"><span class="identifier">fields</span></code></a>.
+      </p>
+<p>
         Newly constructed header objects have version set to HTTP/1.1. Newly constructed
-        response objects also have result code set to <a class="link" href="boost__beast__http__status.html" title="http::status"><code class="computeroutput"><span class="identifier">status</span><span class="special">::</span><span class="identifier">ok</span></code></a>. A <code class="computeroutput"><span class="identifier">header</span></code>
-        includes the start-line and header-fields.
+        response objects also have result code set to <a class="link" href="boost__beast__http__status.html" title="http::status"><code class="computeroutput"><span class="identifier">status</span><span class="special">::</span><span class="identifier">ok</span></code></a>.
+      </p>
+<p>
+        A <code class="computeroutput"><span class="identifier">header</span></code> includes the start-line
+        and header-fields.
       </p>
 </div>
 <div class="copyright-footer">Copyright © 2016-2019 Vinnie

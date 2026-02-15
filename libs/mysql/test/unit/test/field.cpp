@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+// Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -11,17 +11,17 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <cstddef>
 #include <cstdint>
-#include <sstream>
 
 #include "test_common/assert_buffer_equals.hpp"
 #include "test_common/create_basic.hpp"
-#include "test_common/printing.hpp"
 #include "test_common/stringize.hpp"
 
 using namespace boost::mysql;
 using namespace boost::mysql::test;
+
+// Don't attempt to print std::chrono values
+BOOST_TEST_DONT_PRINT_LOG_VALUE(boost::mysql::time)
 
 BOOST_AUTO_TEST_SUITE(test_field)
 
@@ -144,7 +144,7 @@ BOOST_AUTO_TEST_CASE(from_boost_string_view)
     BOOST_TEST(v.as_string() == "test");
 }
 
-#ifdef __cpp_lib_string_view
+#ifndef BOOST_NO_CXX17_HDR_STRING_VIEW
 BOOST_AUTO_TEST_CASE(from_std_string_view)
 {
     std::string_view sv("test123", 4);
@@ -433,7 +433,7 @@ BOOST_AUTO_TEST_CASE(from_boost_string_view)
     BOOST_TEST(v.as_string() == "test");
 }
 
-#ifdef __cpp_lib_string_view
+#ifndef BOOST_NO_CXX17_HDR_STRING_VIEW
 BOOST_AUTO_TEST_CASE(from_std_string_view)
 {
     std::string_view sv("test123", 4);

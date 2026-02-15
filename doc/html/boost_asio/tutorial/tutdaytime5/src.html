@@ -32,16 +32,16 @@
 <span class="comment">// server.cpp</span>
 <span class="comment">// ~~~~~~~~~~</span>
 <span class="comment">//</span>
-<span class="comment">// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)</span>
+<span class="comment">// Copyright (c) 2003-2025 Christopher M. Kohlhoff (chris at kohlhoff dot com)</span>
 <span class="comment">//</span>
 <span class="comment">// Distributed under the Boost Software License, Version 1.0. (See accompanying</span>
 <span class="comment">// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)</span>
 <span class="comment">//</span>
 
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">array</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">ctime</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">string</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">array</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">asio</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">using</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">;</span>
@@ -63,7 +63,7 @@
 
     <span class="keyword">for</span> <span class="special">(;;)</span>
     <span class="special">{</span>
-      <span class="identifier">boost</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="number">1</span><span class="special">&gt;</span> <span class="identifier">recv_buf</span><span class="special">;</span>
+      <span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="number">1</span><span class="special">&gt;</span> <span class="identifier">recv_buf</span><span class="special">;</span>
       <span class="identifier">udp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">remote_endpoint</span><span class="special">;</span>
       <span class="identifier">socket</span><span class="special">.</span><span class="identifier">receive_from</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">recv_buf</span><span class="special">),</span> <span class="identifier">remote_endpoint</span><span class="special">);</span>
 
@@ -87,7 +87,8 @@
           synchronous UDP daytime server</a>
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

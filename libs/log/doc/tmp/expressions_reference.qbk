@@ -135,4 +135,6 @@
 
 [template class_expressions_attribute_matches[][classref boost::log::expressions::attribute_matches attribute_matches]]
 
+[template boost_log_expressions_predicates_wrap_filter_hpp[][headerref boost/log/expressions/predicates/wrap_filter.hpp]]
+
 [template boost_log_expressions_record_hpp[][headerref boost/log/expressions/record.hpp]]

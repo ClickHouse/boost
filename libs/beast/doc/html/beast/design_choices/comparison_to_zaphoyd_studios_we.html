@@ -199,8 +199,7 @@
                     implementation. Instead, it follows the Asio pattern. Calls to
                     asynchronous initiation functions use the same method to invoke
                     intermediate handlers as the method used to invoke the final
-                    handler, through the <a href="../../../../../../doc/html/boost_asio/reference/asio_handler_invoke.html" target="_top"><code class="computeroutput"><span class="identifier">asio_handler_invoke</span></code></a>
-                    mechanism.
+                    handler, through the associated executor mechanism.
                   </p>
 <p>
                     The only requirement in Beast is that calls to asynchronous initiation
@@ -211,10 +210,7 @@
                     performance costs associated with mutexes are incurred.
                   </p>
 <div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
+<colgroup><col></colgroup>
 <thead><tr>
 <th>
                             <p>
@@ -227,21 +223,10 @@
                             </p>
                           </th>
 </tr></thead>
-<tbody><tr>
-<td>
-<pre class="table-programlisting"><span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Function</span><span class="special">&gt;</span>
-<span class="keyword">friend</span>
-<span class="keyword">void</span> <span class="identifier">asio_handler_invoke</span><span class="special">(</span><span class="identifier">Function</span><span class="special">&amp;&amp;</span> <span class="identifier">f</span><span class="special">,</span> <span class="identifier">read_frame_op</span><span class="special">*</span> <span class="identifier">op</span><span class="special">)</span>
-<span class="special">{</span>
-    <span class="keyword">return</span> <span class="identifier">boost_asio_handler_invoke_helpers</span><span class="special">::</span><span class="identifier">invoke</span><span class="special">(</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">op</span><span class="special">-&gt;</span><span class="identifier">d_</span><span class="special">-&gt;</span><span class="identifier">h</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
-                          </td>
-<td>
+<tbody><tr><td>
 <pre class="table-programlisting"><span class="identifier">mutex_type</span> <span class="identifier">m_read_mutex</span><span class="special">;</span>
 </pre>
-                          </td>
-</tr></tbody>
+                          </td></tr></tbody>
 </table></div>
 </dd>
 <dt><span class="term">5. Callback Model</span></dt>
@@ -259,9 +244,9 @@
                     or moved but most importantly they are not type erased. The compiler
                     can see through the type directly to the implementation, permitting
                     optimization. Furthermore, Beast follows the Asio rules for treatment
-                    of handlers. It respects any allocation, continuation, or invocation
-                    customizations associated with the handler through the use of
-                    argument dependent lookup overloads of functions such as <code class="computeroutput"><span class="identifier">asio_handler_allocate</span></code>.
+                    of handlers. It respects any allocation, executors, cancellations
+                    associated with the handler through the use of argument dependent
+                    lookup overloads of functions such as <code class="computeroutput"><span class="identifier">bind_allocaotr</span></code>.
                   </p>
 <p>
                     The Beast completion handler is provided at the call site. For

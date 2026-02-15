@@ -32,53 +32,10 @@
 The
           completion signature for the group of operations.
         </p>
-<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">parallel_group_signature</span><span class="special">&lt;</span> <span class="keyword">sizeof</span><span class="special">...(</span><span class="identifier">Ops</span><span class="special">),</span> <span class="keyword">typename</span> <span class="identifier">completion_signature_of</span><span class="special">&lt;</span> <span class="identifier">Ops</span> <span class="special">&gt;::</span><span class="identifier">type</span><span class="special">...&gt;::</span><span class="identifier">type</span> <span class="identifier">signature</span><span class="special">;</span>
+<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">parallel_group_signature</span><span class="special">&lt;</span> <span class="keyword">sizeof</span><span class="special">...(</span><span class="identifier">Ops</span><span class="special">),</span> <span class="identifier">completion_signature_of_t</span><span class="special">&lt;</span> <span class="identifier">Ops</span> <span class="special">&gt;...</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="identifier">signature</span><span class="special">;</span>
 </pre>
 <h6>
 <a name="boost_asio.reference.experimental__parallel_group.signature.h0"></a>
-          <span class="phrase"><a name="boost_asio.reference.experimental__parallel_group.signature.types"></a></span><a class="link" href="signature.html#boost_asio.reference.experimental__parallel_group.signature.types">Types</a>
-        </h6>
-<div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                  <p>
-                    Name
-                  </p>
-                </th>
-<th>
-                  <p>
-                    Description
-                  </p>
-                </th>
-</tr></thead>
-<tbody><tr>
-<td>
-                  <p>
-                    <a class="link" href="../completion_signature_of/type.html" title="completion_signature_of::type"><span class="bold"><strong>type</strong></span></a>
-                  </p>
-                </td>
-<td>
-                </td>
-</tr></tbody>
-</table></div>
-<p>
-          Class template <code class="computeroutput"><span class="identifier">completion_signature_of</span></code>
-          is a trait with a member type alias <code class="computeroutput"><span class="identifier">type</span></code>
-          that denotes the completion signature of the asynchronous operation initiated
-          by the expression <code class="computeroutput"><span class="identifier">T</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="identifier">token</span><span class="special">)</span></code>
-          operation, where <code class="computeroutput"><span class="identifier">token</span></code>
-          is an unspecified completion token type. If the asynchronous operation
-          does not have exactly one completion signature, the instantion of the trait
-          is well-formed but the member type alias <code class="computeroutput"><span class="identifier">type</span></code>
-          is omitted. If the expression <code class="computeroutput"><span class="identifier">T</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="identifier">token</span><span class="special">)</span></code> is not an asynchronous operation then
-          use of the trait is ill-formed.
-        </p>
-<h6>
-<a name="boost_asio.reference.experimental__parallel_group.signature.h1"></a>
           <span class="phrase"><a name="boost_asio.reference.experimental__parallel_group.signature.requirements"></a></span><a class="link" href="signature.html#boost_asio.reference.experimental__parallel_group.signature.requirements">Requirements</a>
         </h6>
 <p>
@@ -88,7 +45,8 @@ The
           <span class="emphasis"><em>Convenience header: </em></span>None
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

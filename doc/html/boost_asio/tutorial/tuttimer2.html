@@ -64,29 +64,27 @@
 <pre class="programlisting">  <span class="identifier">t</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(&amp;</span><span class="identifier">print</span><span class="special">);</span>
 </pre>
 <p>
-        Finally, we must call the <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>
-        member function on the io_context object.
+        Finally, we must call the boost::asio::io_context::run() member function
+        on the io_context object.
       </p>
 <p>
         The asio library provides a guarantee that completion handlers will only
-        be called from threads that are currently calling <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>.
-        Therefore unless the <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>
-        function is called the completion handler for the asynchronous wait completion
-        will never be invoked.
+        be called from threads that are currently calling boost::asio::io_context::run().
+        Therefore unless the boost::asio::io_context::run() function is called the
+        completion handler for the asynchronous wait completion will never be invoked.
       </p>
 <p>
-        The <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>
-        function will also continue to run while there is still "work"
-        to do. In this example, the work is the asynchronous wait on the timer, so
-        the call will not return until the timer has expired and the completion handler
-        has returned.
+        The boost::asio::io_context::run() function will also continue to run while
+        there is still "work" to do. In this example, the work is the asynchronous
+        wait on the timer, so the call will not return until the timer has expired
+        and the completion handler has returned.
       </p>
 <p>
         It is important to remember to give the io_context some work to do before
-        calling <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>.
-        For example, if we had omitted the above call to <a class="link" href="../reference/basic_waitable_timer/async_wait.html" title="basic_waitable_timer::async_wait">steady_timer::async_wait()</a>,
-        the io_context would not have had any work to do, and consequently <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a> would
-        have returned immediately.
+        calling boost::asio::io_context::run(). For example, if we had omitted the
+        above call to <a class="link" href="../reference/basic_waitable_timer/async_wait.html" title="basic_waitable_timer::async_wait">steady_timer::async_wait()</a>,
+        the io_context would not have had any work to do, and consequently boost::asio::io_context::run()
+        would have returned immediately.
       </p>
 <pre class="programlisting">  <span class="identifier">io</span><span class="special">.</span><span class="identifier">run</span><span class="special">();</span>
 
@@ -108,7 +106,8 @@
         to a completion handler</a>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

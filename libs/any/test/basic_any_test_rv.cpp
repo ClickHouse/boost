@@ -2,7 +2,7 @@
 //
 //  See http://www.boost.org for most recent version, including documentation.
 //
-//  Copyright Antony Polukhin, 2013-2023.
+//  Copyright Antony Polukhin, 2013-2025.
 //  Copyright Ruslan Arutyunyan, 2019-2021.
 //
 //  Distributed under the Boost
@@ -12,15 +12,6 @@
 #include <boost/any/basic_any.hpp>
 
 #include "move_test.hpp"
-
-#ifdef BOOST_NO_CXX11_RVALUE_REFERENCES
-
-int main()
-{
-    return EXIT_SUCCESS;
-}
-
-#else
 
 int main() {
     const int res1 = any_tests::move_tests<boost::anys::basic_any<> >::run_tests();
@@ -36,4 +27,3 @@ int main() {
     if (res4) return 4;
 }
 
-#endif

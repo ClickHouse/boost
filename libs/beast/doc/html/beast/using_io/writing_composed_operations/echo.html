@@ -137,8 +137,8 @@
           of a completion handler by being movable, and by making it invocable so
           it can be used as a continuation for the asynchronous operations it launches.
           Rather than using <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code> or <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span></code>,
-          which destroys the type information and therefore breaks the allocation
-          and invocation hooks, we will simply pass <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span><span class="keyword">this</span><span class="special">)</span></code>
+          which destroys the type information and therefore breaks the associators,
+          we will simply pass <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(*</span><span class="keyword">this</span><span class="special">)</span></code>
           as the completion handler parameter for any operations that we initiate.
           For the move to work correctly, care must be taken to ensure that no access
           to data members are made after the move takes place. Here is the complete

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Chapter 33. Boost.Ratio 2.1.0</title>
+<title>Chapter 32. Boost.Ratio 2.1.0</title>
 <link rel="stylesheet" href="../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="The Boost C++ Libraries BoostBook Documentation Subset">
@@ -27,7 +27,7 @@
 <div class="chapter">
 <div class="titlepage"><div>
 <div><h2 class="title">
-<a name="ratio"></a>Chapter 33. Boost.Ratio 2.1.0</h2></div>
+<a name="ratio"></a>Chapter 32. Boost.Ratio 2.1.0</h2></div>
 <div><div class="author"><h3 class="author">
 <span class="firstname">Howard</span> <span class="surname">Hinnant</span>
 </h3></div></div>
@@ -65,10 +65,8 @@
 </dl></dd>
 <dt><span class="section"><a href="ratio/reference.html">Reference </a></span></dt>
 <dd><dl>
-<dt><span class="section"><a href="ratio/reference.html#ratio.reference.config_hpp">Header <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">ratio</span><span class="special">/</span><span class="identifier">config</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code></a></span></dt>
-<dt><span class="section"><a href="ratio/reference.html#ratio.reference.std">C++0x Recommendation</a></span></dt>
+<dt><span class="section"><a href="ratio/reference.html#ratio.reference.std">Standard C++11 Functionality</a></span></dt>
 <dt><span class="section"><a href="ratio/reference.html#ratio.reference.io">Ratio I/O</a></span></dt>
-<dt><span class="section"><a href="ratio/reference.html#ratio.reference.mpl">Rational Constant</a></span></dt>
 </dl></dd>
 <dt><span class="section"><a href="ratio/appendices.html">Appendices</a></span></dt>
 <dd><dl>
@@ -149,10 +147,15 @@
 <a name="ratio.overview.motivation"></a><a class="link" href="ratio.html#ratio.overview.motivation" title="Motivation">Motivation</a>
 </h3></div></div></div>
 <p>
-        <span class="bold"><strong>Boost.Ratio</strong></span> aims to implement the compile
-        time ratio facility in C++0x, as proposed in <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2661.htm" target="_top"><span class="bold"><strong>N2661 - A Foundation to Sleep On</strong></span></a>. That document
+        <span class="bold"><strong>Boost.Ratio</strong></span> aimed to implement the compile
+        time ratio facility in C++11, as proposed in <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2661.htm" target="_top"><span class="bold"><strong>N2661 - A Foundation to Sleep On</strong></span></a>. That document
         provides background and motivation for key design decisions and is the source
         of a good deal of information in this documentation.
+      </p>
+<p>
+        Since C++11 is now universally available, this library is only retained for
+        backward compatibility, and starting with Boost 1.84, it's implemented in
+        terms of the standard <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">ratio</span><span class="special">&gt;</span></code> header.
       </p>
 </div>
 <div class="section">
@@ -173,11 +176,6 @@
 <li class="listitem">
             It provides a textual representation of <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">ratio</span><span class="special">&lt;</span><span class="identifier">N</span><span class="special">,</span> <span class="identifier">D</span><span class="special">&gt;</span></code> in the form of a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_string</span></code>
             which can be useful for I/O.
-          </li>
-<li class="listitem">
-            Some extension related to the <a class="link" href="ratio/reference.html#ratio.reference.mpl.rational_constant" title="Rational Constant Concept">Rational
-            Constant</a> concept enabling the use of <a class="link" href="ratio/reference.html#ratio.reference.std.ratio_hpp.ratio" title="Class Template ratio&lt;&gt;"><code class="computeroutput"><span class="identifier">ratio</span></code></a>&lt;&gt; in the context
-            of <span class="bold"><strong>Boost.MPL</strong></span> numeric metafunctions.
           </li>
 </ul></div>
 </div>

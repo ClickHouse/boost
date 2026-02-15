@@ -13,7 +13,7 @@ set -eu
 # it is the name of the branch targeted by the pull request (in many cases this
 # will be master).
 MAIN_BRANCH="0"
-if [[ $TRAVIS_BRANCH == "master" || $TRAVIS_BRANCH == "develop" ]]; then
+if [[ $DRONE_BRANCH == "master" || $DRONE_BRANCH == "develop" ]]; then
     MAIN_BRANCH="1"
 fi
 
@@ -23,7 +23,7 @@ elif [[ "${TRAVIS}" == "true" ]]; then
   JOBS="2"
 elif [[ $(uname -s) == "Linux" ]]; then
   # Physical cores
-  JOBS=$(lscpu -p | grep -v '^#' | sort -u -t, -k 2,4 | wc -l)
+  JOBS=4
 elif [[ $(uname) == "Darwin" ]]; then
   # Physical cores
   JOBS=$(sysctl -n hw.physicalcpu)

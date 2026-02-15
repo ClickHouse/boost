@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="The Boost C++ Libraries BoostBook Documentation Subset">
-<link rel="up" href="../boost_lexical_cast.html" title="Chapter 19. Boost.Lexical_Cast 1.0">
-<link rel="prev" href="../boost_lexical_cast.html" title="Chapter 19. Boost.Lexical_Cast 1.0">
+<link rel="up" href="../boost_lexical_cast.html" title="Chapter 18. Boost.Lexical_Cast 1.0">
+<link rel="prev" href="../boost_lexical_cast.html" title="Chapter 18. Boost.Lexical_Cast 1.0">
 <link rel="next" href="synopsis.html" title="Synopsis">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -113,9 +113,9 @@
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">number_to_file</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">number</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">FILE</span><span class="special">*</span> <span class="identifier">file</span><span class="special">)</span>
 <span class="special">{</span>
-    <span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="number">50</span><span class="special">&gt;</span> <span class="identifier">buf_t</span><span class="special">;</span> <span class="comment">// You can use std::array if your compiler supports it</span>
+    <span class="keyword">using</span> <span class="identifier">buf_t</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="number">50</span><span class="special">&gt;;</span>
     <span class="identifier">buf_t</span> <span class="identifier">buffer</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">lexical_cast</span><span class="special">&lt;</span><span class="identifier">buf_t</span><span class="special">&gt;(</span><span class="identifier">number</span><span class="special">);</span> <span class="comment">// No dynamic memory allocation</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">fputs</span><span class="special">(</span><span class="identifier">buffer</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">file</span><span class="special">);</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">fputs</span><span class="special">(</span><span class="identifier">buffer</span><span class="special">.</span><span class="identifier">data</span><span class="special">(),</span> <span class="identifier">file</span><span class="special">);</span>
 <span class="special">}</span>
 </pre>
 <p>
@@ -150,9 +150,8 @@
         string and appends that string to the result.
       </p>
 <p>
-        Example is based on the example from the <a href="http://www.packtpub.com/boost-cplusplus-application-development-cookbook/book" target="_top">Boost
-        C++ Application Development Cookbook</a> by Antony Polukhin, ISBN 9781849514880.
-        Russian translation: <a href="https://dmkpress.com/catalog/computer/programming/c/978-5-97060-868-5/" target="_top">ISBN:
+        Example is based on the example from the Boost C++ Application Development
+        Cookbook by Antony Polukhin, ISBN 9781849514880. Russian translation: <a href="https://dmkpress.com/catalog/computer/programming/c/978-5-97060-868-5/" target="_top">ISBN:
         9785970608685</a>.
       </p>
 <p>
@@ -202,11 +201,11 @@
       </p>
 <p>
 </p>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">fusion</span><span class="special">/</span><span class="identifier">adapted</span><span class="special">/</span><span class="identifier">boost_tuple</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">fusion</span><span class="special">/</span><span class="identifier">adapted</span><span class="special">/</span><span class="identifier">std_tuple</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">fusion</span><span class="special">/</span><span class="identifier">adapted</span><span class="special">/</span><span class="identifier">std_pair</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;</span> <span class="identifier">decim</span><span class="special">(</span><span class="char">'-'</span><span class="special">,</span> <span class="number">10</span><span class="special">,</span> <span class="char">'e'</span><span class="special">,</span> <span class="number">5</span><span class="special">);</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;</span> <span class="identifier">decim</span><span class="special">(</span><span class="char">'-'</span><span class="special">,</span> <span class="number">10</span><span class="special">,</span> <span class="char">'e'</span><span class="special">,</span> <span class="number">5</span><span class="special">);</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">stringize</span><span class="special">(</span><span class="identifier">decim</span><span class="special">)</span> <span class="special">!=</span> <span class="string">"-10e5"</span><span class="special">)</span> <span class="special">{</span>
         <span class="keyword">return</span> <span class="number">1</span><span class="special">;</span>
     <span class="special">}</span>
@@ -267,7 +266,7 @@
       </p>
 </div>
 </div>
-<div class="copyright-footer">Copyright © 2000-2005 Kevlin Henney<br>Copyright © 2006-2010 Alexander Nasonov<br>Copyright © 2011-2023 Antony Polukhin<p>
+<div class="copyright-footer">Copyright © 2000-2005 Kevlin Henney<br>Copyright © 2006-2010 Alexander Nasonov<br>Copyright © 2011-2025 Antony Polukhin<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

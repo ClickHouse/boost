@@ -47,8 +47,8 @@
     <span class="keyword">char</span> <span class="identifier">data</span><span class="special">[</span><span class="number">1024</span><span class="special">];</span>
     <span class="keyword">for</span> <span class="special">(;;)</span>
     <span class="special">{</span>
-      <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">);</span>
-      <span class="identifier">co_await</span> <span class="identifier">async_write</span><span class="special">(</span><span class="identifier">socket</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">n</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">);</span>
+      <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">));</span>
+      <span class="identifier">co_await</span> <span class="identifier">async_write</span><span class="special">(</span><span class="identifier">socket</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">n</span><span class="special">));</span>
     <span class="special">}</span>
   <span class="special">}</span>
   <span class="keyword">catch</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">exception</span><span class="special">&amp;</span> <span class="identifier">e</span><span class="special">)</span>
@@ -81,16 +81,24 @@
           which is used to explicitly ignore the result of an asynchronous operation.
         </p>
 <p>
-          In this example the body of the coroutine is implemented in the <code class="computeroutput"><span class="identifier">echo</span></code> function. When the <code class="computeroutput"><span class="identifier">use_awaitable</span></code> completion token is passed
-          to an asynchronous operation, the operation's initiating function returns
-          an <code class="computeroutput"><span class="identifier">awaitable</span></code> that may be
-          used with the <code class="computeroutput"><span class="identifier">co_await</span></code>
+          In this example the body of the coroutine is implemented in the <code class="computeroutput"><span class="identifier">echo</span></code> function. When an asynchronous operation
+          is called without explicitly specifying a completion token, the default
+          completion token <a class="link" href="../../reference/deferred.html" title="deferred"><code class="computeroutput"><span class="identifier">deferred</span></code></a> is used. This causes
+          the operation's initiating function to return a deferred asynchronous operation
+          object that may be used with the <code class="computeroutput"><span class="identifier">co_await</span></code>
           keyword:
+        </p>
+<pre class="programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">));</span>
+</pre>
+<p>
+          Alternatively, we can specify the <code class="computeroutput"><span class="identifier">use_awaitable</span></code>
+          completion token:
         </p>
 <pre class="programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">);</span>
 </pre>
 <p>
-          Where an asynchronous operation's handler signature has the form:
+          With either of those completion tokens, when an asynchronous operation's
+          handler signature has the form:
         </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">,</span> <span class="identifier">result_type</span> <span class="identifier">result</span><span class="special">);</span>
 </pre>
@@ -121,13 +129,34 @@
         </h6>
 <p>
           To perform explicit error handling, rather than the default exception-throwing
-          behaviour, use the <a class="link" href="../../reference/as_tuple.html" title="as_tuple"><code class="computeroutput"><span class="identifier">as_tuple</span></code></a> or <a class="link" href="../../reference/redirect_error.html" title="redirect_error"><code class="computeroutput"><span class="identifier">redirect_error</span></code></a> completion token
-          adapters.
+          behaviour, use the <a class="link" href="../../reference/as_tuple.html" title="as_tuple"><code class="computeroutput"><span class="identifier">as_tuple</span></code></a>, <a class="link" href="../../reference/redirect_disposition.html" title="redirect_disposition"><code class="computeroutput"><span class="identifier">redirect_disposition</span></code></a> or <a class="link" href="../../reference/redirect_error.html" title="redirect_error"><code class="computeroutput"><span class="identifier">redirect_error</span></code></a>
+          completion token adapters.
         </p>
 <p>
           The <code class="computeroutput"><span class="identifier">as_tuple</span></code> completion
           token adapter packages the completion handler arguments into a single tuple,
           which is then returned as the result of the awaited operation. For example:
+        </p>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">awaitable</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="identifier">echo</span><span class="special">(</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">)</span>
+<span class="special">{</span>
+  <span class="keyword">char</span> <span class="identifier">data</span><span class="special">[</span><span class="number">1024</span><span class="special">];</span>
+  <span class="keyword">for</span> <span class="special">(;;)</span>
+  <span class="special">{</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span><span class="special">&gt;</span> <span class="identifier">result</span> <span class="special">=</span>
+      <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">as_tuple</span><span class="special">);</span>
+    <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">get</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;(</span><span class="identifier">result</span><span class="special">))</span>
+    <span class="special">{</span>
+      <span class="comment">// success</span>
+    <span class="special">}</span>
+
+    <span class="comment">// ...</span>
+  <span class="special">}</span>
+<span class="special">}</span>
+</pre>
+<p>
+          or if explicitly specifying the <code class="computeroutput"><span class="identifier">use_awaitable</span></code>
+          completion token:
         </p>
 <pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">awaitable</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="identifier">echo</span><span class="special">(</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">)</span>
 <span class="special">{</span>
@@ -155,7 +184,7 @@
   <span class="keyword">for</span> <span class="special">(;;)</span>
   <span class="special">{</span>
     <span class="keyword">auto</span> <span class="special">[</span><span class="identifier">ec</span><span class="special">,</span> <span class="identifier">n</span><span class="special">]</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">as_tuple</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">));</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">as_tuple</span><span class="special">);</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">ec</span><span class="special">)</span>
     <span class="special">{</span>
       <span class="comment">// success</span>
@@ -176,8 +205,8 @@
   <span class="keyword">for</span> <span class="special">(;;)</span>
   <span class="special">{</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">redirect_error</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">));</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span>
+        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">redirect_error</span><span class="special">(</span><span class="identifier">ec</span><span class="special">));</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">ec</span><span class="special">)</span>
     <span class="special">{</span>
       <span class="comment">// success</span>
@@ -292,16 +321,19 @@
         </p>
 <pre class="programlisting"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">awaitable_operators</span><span class="special">;</span>
 </pre>
+<p>
+          Note: To use these operators we must explicitly specify the <code class="computeroutput"><span class="identifier">use_awaitable</span></code> completion token.
+        </p>
 <h6>
 <a name="boost_asio.overview.composition.cpp20_coroutines.h3"></a>
-          <span class="phrase"><a name="boost_asio.overview.composition.cpp20_coroutines.lightweight_coroutines_implementing_asynchonous_operations"></a></span><a class="link" href="cpp20_coroutines.html#boost_asio.overview.composition.cpp20_coroutines.lightweight_coroutines_implementing_asynchonous_operations">Lightweight
-          Coroutines Implementing Asynchonous Operations</a>
+          <span class="phrase"><a name="boost_asio.overview.composition.cpp20_coroutines.lightweight_coroutines_implementing_asynchronous_operations"></a></span><a class="link" href="cpp20_coroutines.html#boost_asio.overview.composition.cpp20_coroutines.lightweight_coroutines_implementing_asynchronous_operations">Lightweight
+          Coroutines Implementing Asynchronous Operations</a>
         </h6>
 <p>
-          The <code class="computeroutput"><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">co_composed</span></code> template facilitates a lightweight
-          implementation of user-defined asynchronous operations using C++20 coroutines.
-          The following example illustrates a simple asynchronous operation that
-          implements an echo protocol in terms of a coroutine:
+          The <code class="computeroutput"><span class="identifier">co_composed</span></code> template
+          facilitates a lightweight implementation of user-defined asynchronous operations
+          using C++20 coroutines. The following example illustrates a simple asynchronous
+          operation that implements an echo protocol in terms of a coroutine:
         </p>
 <pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">CompletionToken</span><span class="special">&gt;</span>
 <span class="keyword">auto</span> <span class="identifier">async_echo</span><span class="special">(</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">&amp;</span> <span class="identifier">socket</span><span class="special">,</span>
@@ -309,7 +341,7 @@
 <span class="special">{</span>
   <span class="keyword">return</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_initiate</span><span class="special">&lt;</span>
     <span class="identifier">CompletionToken</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">)&gt;(</span>
-      <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">co_composed</span><span class="special">&lt;</span>
+      <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">co_composed</span><span class="special">&lt;</span>
         <span class="keyword">void</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">)&gt;(</span>
           <span class="special">[](</span><span class="keyword">auto</span> <span class="identifier">state</span><span class="special">,</span> <span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">&amp;</span> <span class="identifier">socket</span><span class="special">)</span> <span class="special">-&gt;</span> <span class="keyword">void</span>
           <span class="special">{</span>
@@ -322,11 +354,12 @@
               <span class="keyword">for</span> <span class="special">(;;)</span>
               <span class="special">{</span>
                 <span class="keyword">char</span> <span class="identifier">data</span><span class="special">[</span><span class="number">1024</span><span class="special">];</span>
-                <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span> <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span>
-                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
+                <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">n</span> <span class="special">=</span>
+                  <span class="identifier">co_await</span> <span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span>
+                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">));</span>
 
                 <span class="identifier">co_await</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">socket</span><span class="special">,</span>
-                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">n</span><span class="special">),</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
+                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">n</span><span class="special">));</span>
               <span class="special">}</span>
             <span class="special">}</span>
             <span class="keyword">catch</span> <span class="special">(</span><span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">system_error</span><span class="special">&amp;</span> <span class="identifier">e</span><span class="special">)</span>
@@ -344,19 +377,20 @@
         </h6>
 <p>
           <a class="link" href="../../reference/co_spawn.html" title="co_spawn">co_spawn</a>, <a class="link" href="../../reference/detached.html" title="detached">detached</a>,
-          <a class="link" href="../../reference/as_tuple.html" title="as_tuple">as_tuple</a>, <a class="link" href="../../reference/redirect_error.html" title="redirect_error">redirect_error</a>,
+          <a class="link" href="../../reference/as_tuple.html" title="as_tuple">as_tuple</a>, <a class="link" href="../../reference/redirect_disposition.html" title="redirect_disposition">redirect_disposition</a>,
+          <a class="link" href="../../reference/redirect_error.html" title="redirect_error">redirect_error</a>,
           <a class="link" href="../../reference/awaitable.html" title="awaitable">awaitable</a>, <a class="link" href="../../reference/use_awaitable_t.html" title="use_awaitable_t">use_awaitable_t</a>,
           <a class="link" href="../../reference/use_awaitable.html" title="use_awaitable">use_awaitable</a>,
           <a class="link" href="../../reference/this_coro__executor.html" title="this_coro::executor">this_coro::executor</a>,
-          <a class="link" href="../../reference/experimental__co_composed.html" title="experimental::co_composed">experimental::co_composed</a>,
-          <a class="link" href="../../examples/cpp17_examples.html#boost_asio.examples.cpp17_examples.coroutines_ts_support">Coroutines
+          <a class="link" href="../../reference/co_composed.html" title="co_composed">co_composed</a>, <a class="link" href="../../examples/cpp17_examples.html#boost_asio.examples.cpp17_examples.coroutines_ts_support">Coroutines
           examples</a>, <a class="link" href="coro.html" title="Resumable C++ 20 Coroutines">Resumable
           C++20 Coroutines</a>, <a class="link" href="spawn.html" title="Stackful Coroutines">Stackful
           Coroutines</a>, <a class="link" href="coroutine.html" title="Stackless Coroutines">Stackless
           Coroutines</a>.
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

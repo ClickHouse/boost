@@ -76,6 +76,19 @@
 <tr>
 <td>
                 <p>
+                  <a class="link" href="experimental__use_coro_t/as_default_on_t.html" title="experimental::use_coro_t::as_default_on_t"><span class="bold"><strong>as_default_on_t</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Type alias to adapt an I/O object to use use_coro_t as its default
+                  completion token type.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
                   <a class="link" href="experimental__use_coro_t__executor_with_default.html" title="experimental::use_coro_t::executor_with_default"><span class="bold"><strong>executor_with_default</strong></span></a>
                 </p>
               </td>
@@ -183,8 +196,9 @@
         is returned.
       </p>
 <p>
-        Note that this token is not the most efficient (use <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span></code>
-        for that) but does provide type erasure, as it will always return a <code class="computeroutput"><span class="identifier">coro</span></code>.
+        Note that this token is not the most efficient (use the default completion
+        token <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span></code> for that) but does provide type
+        erasure, as it will always return a <code class="computeroutput"><span class="identifier">coro</span></code>.
       </p>
 <h5>
 <a name="boost_asio.reference.experimental__use_coro_t.h2"></a>
@@ -197,7 +211,8 @@
         <span class="emphasis"><em>Convenience header: </em></span>None
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

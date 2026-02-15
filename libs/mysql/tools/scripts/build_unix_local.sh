@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+# Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 #
 # Distributed under the Boost Software License, Version 1.0. (See accompanying
 # file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -8,46 +8,64 @@
 
 set -e
 
-BK=b2
+repo_base=$(realpath $(dirname $(realpath $0))/../..)
+
+BK=cmake
 IMAGE=build-gcc13
-SHA=c94b77a716a0cc2cf5f489d9a97e9a0aefa7c0de
-CONTAINER=builder-$IMAGE-$BK
-FULL_IMAGE=ghcr.io/anarthal-containers/$IMAGE:$SHA
-DB=mysql8
+IMAGE_VERSION=1
+CONTAINER=builder-$IMAGE
+FULL_IMAGE=ghcr.io/anarthal/cpp-ci-containers/$IMAGE:$IMAGE_VERSION
+DB=mysql-9_4_0
+DB_VERSION=1
 
 docker start $DB || docker run -d \
     --name $DB \
     -v /var/run/mysqld:/var/run/mysqld \
     -p 3306:3306 \
-    ghcr.io/anarthal-containers/$DB:$SHA
+    ghcr.io/anarthal/cpp-ci-containers/$DB:$DB_VERSION
 docker start $CONTAINER || docker run -dit \
     --name $CONTAINER \
-    -v ~/workspace/mysql:/opt/boost-mysql \
+    -v "$repo_base:/opt/boost-mysql" \
     -v /var/run/mysqld:/var/run/mysqld \
     $FULL_IMAGE
 docker network connect my-net $DB || echo "DB already connected"
 docker network connect my-net $CONTAINER || echo "Network already connected"
-docker exec $CONTAINER python /opt/boost-mysql/tools/ci.py --source-dir=/opt/boost-mysql \
-    --build-kind=$BK \
-    --build-shared-libs=1 \
-    --valgrind=0 \
-    --coverage=0 \
-    --clean=0 \
-    --toolset=gcc \
-    --address-model=64 \
-    --address-sanitizer=0 \
-    --undefined-sanitizer=0 \
-    --cxxstd=20 \
-    --variant=debug \
-    --separate-compilation=1 \
-    --cmake-standalone-tests=1 \
-    --cmake-add-subdir-tests=1 \
-    --cmake-install-tests=1 \
-    --cmake-build-type=Debug \
-    --stdlib=native \
-    --server-host=$DB \
-    --db=$DB
 
-if [ "$BK" == "docs" ]; then
-    cp -r ~/workspace/mysql/doc/html ~/workspace/boost-root/libs/mysql/doc/
-fi
+# Command line
+db_args="--server-host=$DB"
+case $BK in
+    b2) cmd="$db_args
+            --toolset=clang
+            --cxxstd=11
+            --variant=release
+            --stdlib=native
+            --address-model=64
+            --separate-compilation=1
+            --use-ts-executor=0
+            --address-sanitizer=0
+            --undefined-sanitizer=0
+            --coverage=0
+            --valgrind=0"
+        ;;
+    
+    cmake) cmd="$db_args
+            --cmake-build-type=Debug
+            --build-shared-libs=1
+            --cxxstd=11
+            --install-test=0
+            "
+        ;;
+    
+    fuzz) cmd="$db_args" ;;
+
+    bench) cmd="$db_args
+                --protocol-iters=10
+                --connection-pool-iters=0
+                "
+        ;;
+
+    *) cmd="" ;;
+esac
+
+# Run
+docker exec $CONTAINER python /opt/boost-mysql/tools/ci/main.py --source-dir=/opt/boost-mysql $BK $cmd

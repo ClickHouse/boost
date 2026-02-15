@@ -2,14 +2,13 @@
 // wait_for_one_error.cpp
 // ~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2025 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
 #include <boost/asio.hpp>
-#include <boost/asio/experimental/deferred.hpp>
 #include <boost/asio/experimental/parallel_group.hpp>
 #include <iostream>
 
@@ -25,11 +24,8 @@ int main()
   char data[1024];
 
   boost::asio::experimental::make_parallel_group(
-      in.async_read_some(
-        boost::asio::buffer(data),
-        boost::asio::deferred),
-      timer.async_wait(
-        boost::asio::deferred)
+      in.async_read_some(boost::asio::buffer(data)),
+      timer.async_wait()
     ).async_wait(
       boost::asio::experimental::wait_for_one_success(),
       [](

@@ -53,9 +53,9 @@ inline void turns_to_svg(Turns const& turns, Mapper& mapper)
             // Create a rounded off point
             std::pair<int, int> p
                     = std::make_pair(
-                          boost::numeric_cast<int>(half
+                          util::numeric_cast<int>(half
                                                    + ten * bg::get<0>(turn.point)),
-                          boost::numeric_cast<int>(half
+                          util::numeric_cast<int>(half
                                                    + ten * bg::get<1>(turn.point))
                           );
             std::string style =  "fill:rgb(0,0,0);font-family:Arial;font-size:12px";
@@ -128,9 +128,6 @@ inline void to_svg(G1 const& g1, G2 const& g2, G3 const& g3,
     filename << "case_"
         << caseid << "_"
         << string_from_type<coordinate_type>::name()
-#if defined(BOOST_GEOMETRY_USE_RESCALING)
-        << "_rescaled"
-#endif
         << ".svg";
 
     std::ofstream svg(filename.str());

@@ -13,12 +13,13 @@
 
 #include <boost/interprocess/detail/config_begin.hpp>
 
-#include <boost/interprocess/containers/vector.hpp>
+#include <boost/container/vector.hpp>
 
 #include <vector>
 #include <iostream>
 #include <new> //std::nothrow
 #include <cstring>   //std::memset
+#include <typeinfo>
 
 namespace boost { namespace interprocess { namespace test {
 
@@ -91,15 +92,17 @@ template<class Allocator>
 bool test_allocation_shrink(Allocator &a)
 {
    std::vector<void*> buffers;
+   std::vector<std::size_t> sizes;
 
    //Allocate buffers with extra memory
    for(std::size_t i = 0; true; ++i){
       void *ptr = a.allocate(i*2, std::nothrow);
       if(!ptr)
          break;
-     std::size_t size = a.size(ptr);
+      std::size_t size = a.size(ptr);
       std::memset(ptr, 0, size);
       buffers.push_back(ptr);
+      sizes.push_back(size);
    }
 
    //Now shrink to half
@@ -109,15 +112,20 @@ bool test_allocation_shrink(Allocator &a)
       typename Allocator::size_type received_size;
       char *reuse = static_cast<char*>(buffers[i]);
       if(a.template allocation_command<char>
-         ( boost::interprocess::shrink_in_place | boost::interprocess::nothrow_allocation, i*2
+         ( boost::interprocess::shrink_in_place | boost::interprocess::nothrow_allocation, sizes[i]
          , received_size = i, reuse)){
-         if(received_size > std::size_t(i*2)){
+         if(received_size > sizes[i]){
             return false;
          }
          if(received_size < std::size_t(i)){
             return false;
          }
-       std::memset(buffers[i], 0, a.size(buffers[i]));
+         const std::size_t sz = a.size(buffers[i]);
+         if (received_size != sz) {
+            return false;
+         }
+
+         std::memset(buffers[i], 0, sz);
       }
    }
 
@@ -416,6 +424,7 @@ bool test_aligned_allocation(Allocator &a)
 
          if(((std::size_t)ptr & (j - 1)) != 0)
             return false;
+         std::memset(ptr, 0xFF, i - 1);
          a.deallocate(ptr);
          if(!a.all_memory_deallocated() || !a.check_sanity()){
             return false;
@@ -523,7 +532,9 @@ bool test_clear_free_memory(Allocator &a)
       for(std::size_t j = 0; j < memsize; ++j){
          if(static_cast<char*>((char*)ptr)[j]){
             std::cout << "Zero memory test failed. in buffer " << i
-                      << " byte " << j << " first address " << (void*) first_addr << " offset " << ((char*)ptr+j) - (char*)first_addr << " memsize: " << memsize << std::endl;
+                      << " byte " << j << " first address " << (const void*) first_addr
+                      << " offset " << ((const char*)ptr+j) - (const char*)first_addr
+                      << " memsize: " << memsize << std::endl;
             return false;
          }
       }
@@ -790,7 +801,7 @@ bool test_many_different_allocation(Allocator &a)
       }
 
       std::vector<void*> buffers;
-      for(std::size_t i = 0; true; ++i){
+      while(true){
          multiallocation_chain chain;
          a.allocate_many(std::nothrow, requested_sizes, ArraySize, 1, chain);
          if(chain.empty())
@@ -864,7 +875,7 @@ bool test_many_deallocation(Allocator &a)
 
    typedef typename Allocator::multiallocation_chain multiallocation_chain;
    const std::size_t ArraySize = 11;
-   vector<multiallocation_chain> buffers;
+   boost::container::vector<multiallocation_chain> buffers;
    typename Allocator::size_type requested_sizes[ArraySize];
    for(std::size_t i = 0; i < ArraySize; ++i){
       requested_sizes[i] = 4*i;
@@ -872,7 +883,7 @@ bool test_many_deallocation(Allocator &a)
    typename Allocator::size_type free_memory = a.get_free_memory();
 
    {
-      for(std::size_t i = 0; true; ++i){
+      while(true){
          multiallocation_chain chain;
          a.allocate_many(std::nothrow, requested_sizes, ArraySize, 1, chain);
          if(chain.empty())

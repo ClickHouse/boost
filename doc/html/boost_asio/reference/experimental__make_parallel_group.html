@@ -35,25 +35,25 @@
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Ops</span><span class="special">&gt;</span>
-<span class="identifier">parallel_group</span><span class="special">&lt;</span> <span class="identifier">Ops</span><span class="special">...&gt;</span> <a class="link" href="experimental__make_parallel_group/overload1.html" title="experimental::make_parallel_group (1 of 3 overloads)">make_parallel_group</a><span class="special">(</span>
+<span class="identifier">parallel_group</span><span class="special">&lt;</span> <span class="identifier">Ops</span><span class="special">...</span> <span class="special">&gt;</span> <a class="link" href="experimental__make_parallel_group/overload1.html" title="experimental::make_parallel_group (1 of 3 overloads)">make_parallel_group</a><span class="special">(</span>
     <span class="identifier">Ops</span><span class="special">...</span> <span class="identifier">ops</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="experimental__make_parallel_group/overload1.html" title="experimental::make_parallel_group (1 of 3 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">Range</span><span class="special">&gt;</span>
-<span class="identifier">ranged_parallel_group</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="special">&gt;</span> <a class="link" href="experimental__make_parallel_group/overload2.html" title="experimental::make_parallel_group (2 of 3 overloads)">make_parallel_group</a><span class="special">(</span>
+<span class="identifier">ranged_parallel_group</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;</span> <span class="special">&gt;</span> <a class="link" href="experimental__make_parallel_group/overload2.html" title="experimental::make_parallel_group (2 of 3 overloads)">make_parallel_group</a><span class="special">(</span>
     <span class="identifier">Range</span> <span class="special">&amp;&amp;</span> <span class="identifier">range</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_async_operation_range</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_async_operation_range</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="experimental__make_parallel_group/overload2.html" title="experimental::make_parallel_group (2 of 3 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">Allocator</span><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">Range</span><span class="special">&gt;</span>
-<span class="identifier">ranged_parallel_group</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;::</span><span class="identifier">type</span><span class="special">,</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <a class="link" href="experimental__make_parallel_group/overload3.html" title="experimental::make_parallel_group (3 of 3 overloads)">make_parallel_group</a><span class="special">(</span>
+<span class="identifier">ranged_parallel_group</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;,</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <a class="link" href="experimental__make_parallel_group/overload3.html" title="experimental::make_parallel_group (3 of 3 overloads)">make_parallel_group</a><span class="special">(</span>
     <span class="identifier">allocator_arg_t</span> <span class="special">,</span>
     <span class="keyword">const</span> <span class="identifier">Allocator</span> <span class="special">&amp;</span> <span class="identifier">allocator</span><span class="special">,</span>
     <span class="identifier">Range</span> <span class="special">&amp;&amp;</span> <span class="identifier">range</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_async_operation_range</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_async_operation_range</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">Range</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="experimental__make_parallel_group/overload3.html" title="experimental::make_parallel_group (3 of 3 overloads)">more...</a></em></span>
 </pre>
 <h5>
@@ -67,7 +67,8 @@
         <span class="emphasis"><em>Convenience header: </em></span>None
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

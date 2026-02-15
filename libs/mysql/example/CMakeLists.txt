@@ -1,122 +1,132 @@
 #
-# Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+# Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 #
 # Distributed under the Boost Software License, Version 1.0. (See accompanying
 # file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #
 
 # Note: examples count as integration tests. This is only processed
-# when we're the main project and BOOST_MYSQL_INTEGRATION_TESTS is on
-find_package(Boost ${BOOST_MYSQL_VERSION} REQUIRED COMPONENTS context)
+# when BOOST_MYSQL_INTEGRATION_TESTS is on
 
 # Get the MySQL hostname to use for examples
 if(DEFINED ENV{BOOST_MYSQL_SERVER_HOST})
     set(SERVER_HOST $ENV{BOOST_MYSQL_SERVER_HOST})
 else()
-    set(SERVER_HOST "localhost")
+    set(SERVER_HOST "127.0.0.1")
 endif()
 
 add_library(boost_mysql_examples_common INTERFACE)
 target_link_libraries(
     boost_mysql_examples_common
     INTERFACE
-    Boost::disable_autolinking
     boost_mysql_compiled
 )
 
-# Declare an example target
-function (add_example_target EXAMPLE_NAME EXAMPLE_PATH)
-    add_executable(${EXAMPLE_NAME} ${EXAMPLE_PATH})
-    target_link_libraries(${EXAMPLE_NAME} PRIVATE boost_mysql_examples_common ${ARGN})
-    boost_mysql_common_target_settings(${EXAMPLE_NAME})
-endfunction()
 
-# Build and run an example
-function (add_example EXAMPLE_NAME EXAMPLE_PATH)
-    add_example_target(${EXAMPLE_NAME} ${EXAMPLE_PATH})
+function(add_example EXAMPLE_NAME)
+    # Parse the arguments
+    set(ONE_VALUE_ARGS PYTHON_RUNNER)
+    set(MULTI_VALUE_ARGS SOURCES LIBS ARGS)
+    cmake_parse_arguments(ADD_EXAMPLE "" "${ONE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}" ${ARGN})
 
-    if (BOOST_MYSQL_VALGRIND_TESTS)
-        add_memcheck_test(
-            NAME "${EXAMPLE_NAME}_memcheck"
-            TARGET ${EXAMPLE_NAME}
-            ARGUMENTS ${ARGN}
+    # Create the target
+    set(TARGET_NAME "boost_mysql_example_${EXAMPLE_NAME}")
+    add_executable(${TARGET_NAME} ${ADD_EXAMPLE_SOURCES})
+    target_link_libraries(${TARGET_NAME} PRIVATE boost_mysql_examples_common)
+    boost_mysql_test_target_settings(${TARGET_NAME})
+    target_link_libraries(${TARGET_NAME} PRIVATE ${ADD_EXAMPLE_LIBS})
+
+    # Add it as a test
+    if (ADD_EXAMPLE_PYTHON_RUNNER)
+        add_test(
+            NAME ${TARGET_NAME}
+            COMMAND
+            python
+            ${CMAKE_CURRENT_SOURCE_DIR}/private/${ADD_EXAMPLE_PYTHON_RUNNER}
+            $<TARGET_FILE:${TARGET_NAME}>
+            ${ADD_EXAMPLE_ARGS}
         )
     else()
         add_test(
-            NAME ${EXAMPLE_NAME}
-            COMMAND ${EXAMPLE_NAME} ${ARGN}
+            NAME ${TARGET_NAME}
+            COMMAND ${TARGET_NAME} ${ADD_EXAMPLE_ARGS}
         )
     endif()
 endfunction()
 
-# Coroutines needs Boost.Context and shouldn't be memchecked
-function (add_example_coroutines)
-    set(EXECUTABLE_NAME boost_mysql_example_async_coroutines)
-    add_example_target(${EXECUTABLE_NAME} async_coroutines.cpp Boost::context)
-    add_test(
-        NAME ${EXECUTABLE_NAME}
-        COMMAND ${EXECUTABLE_NAME} example_user example_password ${SERVER_HOST}
-    )
+function(add_tutorial EXAMPLE_NAME EXAMPLE_PATH)
+    add_example(${EXAMPLE_NAME} SOURCES "1_tutorial/${EXAMPLE_PATH}" ${ARGN})
 endfunction()
 
-# The order management examples must be run several times through a Python script
-function (add_example_order_management EXAMPLE_NAME EXAMPLE_PATH)
-    add_example_target(${EXAMPLE_NAME} ${EXAMPLE_PATH})
-    add_test(
-        NAME ${EXAMPLE_NAME}
-        COMMAND
-            python
-            ${CMAKE_CURRENT_SOURCE_DIR}/private/run_stored_procedures.py
-            $<TARGET_FILE:${EXAMPLE_NAME}>
-            ${SERVER_HOST}
-    )
+function(add_simple_example EXAMPLE_NAME)
+    add_example(${EXAMPLE_NAME} SOURCES "2_simple/${EXAMPLE_NAME}.cpp" ${ARGN})
 endfunction()
 
-# Regular examples are the ones that require no extra linking libs and can be run
-# with example_user example_password
-set (REGULAR_EXAMPLES
-    snippets
-    tutorial
-    async_callbacks
-    async_coroutinescpp20
-    async_futures
-    metadata
-    ssl
-    timeouts
-)
-foreach (FILE_NAME ${REGULAR_EXAMPLES})
-    add_example(
-        "boost_mysql_example_${FILE_NAME}"
-        "${FILE_NAME}.cpp"
-        example_user example_password ${SERVER_HOST}
-    )
-endforeach()
+set(REGULAR_ARGS example_user example_password ${SERVER_HOST})
 
-# Order management examples must be run several times through a Python script
-set(ORDER_EXAMPLES
-    prepared_statements_cpp11
-    prepared_statements_cpp14
-    stored_procedures_cpp11
-    stored_procedures_cpp14
-)
-foreach (FILE_NAME ${ORDER_EXAMPLES})
-    add_example_order_management(
-        "boost_mysql_example_${FILE_NAME}"
-        "order_management/${FILE_NAME}.cpp"
-    )
-endforeach()
+# Tutorials
+add_tutorial(tutorial_sync                 1_sync.cpp                  ARGS ${REGULAR_ARGS})
+add_tutorial(tutorial_async                2_async.cpp                 ARGS ${REGULAR_ARGS})
+add_tutorial(tutorial_with_params          3_with_params.cpp           ARGS ${REGULAR_ARGS} 1)
+add_tutorial(tutorial_static_interface     4_static_interface.cpp      ARGS ${REGULAR_ARGS} 1        LIBS Boost::pfr)
+add_tutorial(tutorial_updates_transactions 5_updates_transactions.cpp  ARGS ${REGULAR_ARGS} 1 "John" LIBS Boost::pfr)
+add_tutorial(tutorial_connection_pool      6_connection_pool.cpp       ARGS ${SERVER_HOST}           LIBS Boost::pfr
+    PYTHON_RUNNER run_tutorial_connection_pool.py)
+add_tutorial(tutorial_error_handling       7_error_handling.cpp        ARGS ${SERVER_HOST} --test-errors  LIBS Boost::pfr
+    PYTHON_RUNNER run_tutorial_connection_pool.py)
 
-# Rest of the examples
-add_example_coroutines()
-if ("$ENV{BOOST_MYSQL_NO_UNIX_SOCKET_TESTS}" STREQUAL "")
-    add_example(
-        boost_mysql_example_unix_socket
-        unix_socket.cpp
-        example_user example_password
-    )
+# Simple
+add_simple_example(inserts                      ARGS ${REGULAR_ARGS} "John" "Doe" "HGS")
+add_simple_example(deletes                      ARGS ${REGULAR_ARGS} 20)
+add_simple_example(callbacks                    ARGS ${REGULAR_ARGS})
+add_simple_example(coroutines_cpp11             ARGS ${REGULAR_ARGS} LIBS Boost::context)
+add_simple_example(batch_inserts                ARGS ${SERVER_HOST}  PYTHON_RUNNER run_batch_inserts.py LIBS Boost::json)
+add_simple_example(batch_inserts_generic        ARGS ${SERVER_HOST}  PYTHON_RUNNER run_batch_inserts.py LIBS Boost::json)
+add_simple_example(patch_updates                ARGS ${SERVER_HOST}  PYTHON_RUNNER run_patch_updates.py)
+add_simple_example(dynamic_filters              ARGS ${SERVER_HOST}  PYTHON_RUNNER run_dynamic_filters.py)
+add_simple_example(disable_tls                  ARGS ${REGULAR_ARGS})
+add_simple_example(tls_certificate_verification ARGS ${REGULAR_ARGS})
+add_simple_example(metadata                     ARGS ${REGULAR_ARGS})
+add_simple_example(prepared_statements          ARGS ${REGULAR_ARGS} "HGS")
+add_simple_example(pipeline                     ARGS ${REGULAR_ARGS} "HGS")
+add_simple_example(multi_function               ARGS ${REGULAR_ARGS})
+add_simple_example(source_script                ARGS ${REGULAR_ARGS} ${CMAKE_CURRENT_SOURCE_DIR}/private/test_script.sql)
+
+# UNIX sockets. Don't run the example on Windows machines
+if (NOT WIN32)
+    add_simple_example(unix_socket ARGS example_user example_password)
 endif()
+
+# Advanced
 add_example(
-    boost_mysql_example_source_script
-    source_script.cpp
-    example_user example_password ${SERVER_HOST} ${CMAKE_CURRENT_SOURCE_DIR}/private/test_script.sql
+    http_server_cpp14_coroutines
+    SOURCES
+        3_advanced/http_server_cpp14_coroutines/repository.cpp
+        3_advanced/http_server_cpp14_coroutines/handle_request.cpp
+        3_advanced/http_server_cpp14_coroutines/server.cpp
+        3_advanced/http_server_cpp14_coroutines/main.cpp
+    LIBS
+        Boost::context
+        Boost::json
+        Boost::url
+        Boost::beast
+    PYTHON_RUNNER run_notes.py
+    ARGS ${SERVER_HOST}
+)
+
+add_example(
+    http_server_cpp20
+    SOURCES
+        3_advanced/http_server_cpp20/error.cpp
+        3_advanced/http_server_cpp20/repository.cpp
+        3_advanced/http_server_cpp20/handle_request.cpp
+        3_advanced/http_server_cpp20/server.cpp
+        3_advanced/http_server_cpp20/main.cpp
+    LIBS
+        Boost::json
+        Boost::url
+        Boost::beast
+        Boost::pfr
+    PYTHON_RUNNER run_orders.py
+    ARGS ${SERVER_HOST}
 )

@@ -7,10 +7,11 @@
     ],
     "description": "A fixed capacity dynamically sized string.",
     "category": [
-        "Container",
+        "Containers",
         "String"
     ],
     "maintainers": [
+        "Krystian Stasiowski <sdkrystian@gmail.com>",
         "Alan de Freitas <alandefreitas@gmail.com>",
         "Vinnie Falco <vinnie.falco@gmail.com>"
     ],

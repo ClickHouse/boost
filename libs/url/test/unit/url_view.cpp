@@ -83,6 +83,35 @@ public:
             BOOST_TEST_EQ(u1.data(), u2.data());
         }
 
+        // issue #872
+        {
+            url base{"https://127.0.0.1"};
+            url_view ref = "/foo";
+
+            // url_view(url)
+            {
+                url_view base_view{base};
+                BOOST_TEST(base_view.has_scheme());
+                url dest;
+                auto res = resolve(base_view, ref, dest);
+                BOOST_TEST(res);
+                BOOST_TEST(dest.has_scheme());
+                BOOST_TEST_EQ(dest.buffer(), "https://127.0.0.1/foo");
+            }
+
+            // url_view::operator=(url)
+            {
+                url_view base_view;
+                base_view = base;
+                BOOST_TEST(base_view.has_scheme());
+                url dest;
+                auto res = resolve(base_view, ref, dest);
+                BOOST_TEST(res);
+                BOOST_TEST(dest.has_scheme());
+                BOOST_TEST_EQ(dest.buffer(), "https://127.0.0.1/foo");
+            }
+        }
+
         // url_view(core::string_view)
         {
             BOOST_TEST_NO_THROW(url_view(
@@ -683,6 +712,12 @@ public:
             BOOST_TEST_EQ(u.query(), "k=");
         }
         {
+            url_view u("http://?k[]=");
+            BOOST_TEST(u.has_query());
+            BOOST_TEST_EQ(u.encoded_query(), "k[]=");
+            BOOST_TEST_EQ(u.query(), "k[]=");
+        }
+        {
             url_view u("http://?#");
             BOOST_TEST(u.has_query());
             BOOST_TEST_EQ(u.encoded_query(), "");
@@ -1052,6 +1087,11 @@ public:
         testParseOriginForm();
 
         testJavadocs();
+
+        {
+            auto r = parse_uri("https://us%65rnam%65:password@%65xampl%65.com:8080/path/to/r%65sourc%65?qu%65ry_param=valu%65#s%65ction");
+            ignore_unused(r);
+        }
     }
 };
 

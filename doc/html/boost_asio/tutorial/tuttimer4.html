@@ -33,9 +33,9 @@
         handler. The program should execute identically to the tutorial program from
         tutorial Timer.3.
       </p>
-<pre class="programlisting"><span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">asio</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">bind</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 </pre>
 <p>
         Instead of defining a free function <code class="computeroutput"><span class="identifier">print</span></code>
@@ -58,20 +58,20 @@
   <span class="special">{</span>
 </pre>
 <p>
-        The boost::bind() function works just as well with class member functions
-        as with free functions. Since all non-static class member functions have
-        an implicit <code class="computeroutput"><span class="keyword">this</span></code> parameter,
-        we need to bind <code class="computeroutput"><span class="keyword">this</span></code> to the
-        function. As in tutorial Timer.3, boost::bind() converts our completion handler
-        (now a member function) into a function object that can be invoked as though
-        it has the signature <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;)</span></code>.
+        The <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code> function works just as well with class
+        member functions as with free functions. Since all non-static class member
+        functions have an implicit <code class="computeroutput"><span class="keyword">this</span></code>
+        parameter, we need to bind <code class="computeroutput"><span class="keyword">this</span></code>
+        to the function. As in tutorial Timer.3, <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
+        converts our completion handler (now a member function) into a function object
+        that can be invoked as though it has the signature <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;)</span></code>.
       </p>
 <p>
         You will note that the boost::asio::placeholders::error placeholder is not
         specified here, as the <code class="computeroutput"><span class="identifier">print</span></code>
         member function does not accept an error object as a parameter.
       </p>
-<pre class="programlisting">    <span class="identifier">timer_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print</span><span class="special">,</span> <span class="keyword">this</span><span class="special">));</span>
+<pre class="programlisting">    <span class="identifier">timer_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print</span><span class="special">,</span> <span class="keyword">this</span><span class="special">));</span>
   <span class="special">}</span>
 </pre>
 <p>
@@ -96,7 +96,7 @@
       <span class="special">++</span><span class="identifier">count_</span><span class="special">;</span>
 
       <span class="identifier">timer_</span><span class="special">.</span><span class="identifier">expires_at</span><span class="special">(</span><span class="identifier">timer_</span><span class="special">.</span><span class="identifier">expiry</span><span class="special">()</span> <span class="special">+</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
-      <span class="identifier">timer_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print</span><span class="special">,</span> <span class="keyword">this</span><span class="special">));</span>
+      <span class="identifier">timer_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print</span><span class="special">,</span> <span class="keyword">this</span><span class="special">));</span>
     <span class="special">}</span>
   <span class="special">}</span>
 
@@ -134,7 +134,8 @@
         completion handlers in multithreaded programs</a>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+# Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 #
 # Distributed under the Boost Software License, Version 1.0. (See accompanying
 # file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -19,59 +19,58 @@ else()
         # Primary dependencies
         asio
         assert
+        charconv
+        compat
         config
         core
         describe
         endian
-        lexical_cast
+        intrusive
         mp11
+        optional
+        pfr
         system
         throw_exception
         variant2
 
         # Secondary dependencies
         align
-        array
-        bind
-        chrono
         context
-        coroutine
         date_time
-        exception
-        "function"
-        regex
-        smart_ptr
+        static_assert
+        container_hash
+        move
+        detail
+        predef
         type_traits
         utility
-        static_assert
-        container
-        integer
-        numeric/conversion
-        range
         winapi
-        move
-        mpl
-        predef
-        ratio
-        typeof
-        intrusive
         pool
+        smart_ptr
+        exception
         algorithm
         io
+        lexical_cast
+        numeric/conversion
+        range
         tokenizer
-        tuple
         preprocessor
-        conversion
+        array
+        bind
         concept_check
-        container_hash
-        detail
+        "function"
         iterator
-        optional
+        mpl
+        regex
+        tuple
         unordered
+        container
+        integer
+        conversion
         function_types
         fusion
-        rational
         functional
+        typeof
     )
 
     # Build our dependencies, so the targets Boost::xxx are defined

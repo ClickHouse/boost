@@ -9,7 +9,7 @@ if(HAVE_BOOST_TEST)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-set(BOOST_TEST_LINK_LIBRARIES Boost::unordered Boost::core Boost::concept_check)
+set(BOOST_TEST_LINK_LIBRARIES Boost::unordered Boost::core Boost::concept_check Boost::tuple)
 
 function(fca_tests)
   boost_test(PREFIX boost_unordered ${ARGN})
@@ -20,7 +20,7 @@ function(foa_tests)
 endfunction()
 
 function(cfoa_tests)
-  boost_test(PREFIX boost_unordered_cfoa LINK_LIBRARIES Boost::compat Threads::Threads ${ARGN})
+  boost_test(PREFIX boost_unordered_cfoa LINK_LIBRARIES Boost::compat Boost::iterator Threads::Threads ${ARGN})
 endfunction()
 
 # FCA tests
@@ -77,11 +77,6 @@ fca_tests(SOURCES exception/swap_exception_tests.cpp COMPILE_DEFINITIONS BOOST_U
 fca_tests(SOURCES exception/merge_exception_tests.cpp)
 fca_tests(SOURCES exception/less_tests.cpp)
 fca_tests(SOURCES unordered/narrow_cast_tests.cpp)
-fca_tests(SOURCES unordered/compile_set.cpp COMPILE_DEFINITIONS BOOST_UNORDERED_USE_MOVE NAME bmove_compile_set)
-fca_tests(SOURCES unordered/compile_map.cpp COMPILE_DEFINITIONS BOOST_UNORDERED_USE_MOVE NAME bmove_compile_map)
-fca_tests(SOURCES unordered/copy_tests.cpp COMPILE_DEFINITIONS BOOST_UNORDERED_USE_MOVE NAME bmove_copy)
-fca_tests(SOURCES unordered/move_tests.cpp COMPILE_DEFINITIONS BOOST_UNORDERED_USE_MOVE NAME bmove_move)
-fca_tests(SOURCES unordered/assign_tests.cpp COMPILE_DEFINITIONS BOOST_UNORDERED_USE_MOVE NAME bmove_assign)
 fca_tests(SOURCES quick.cpp)
 
 fca_tests(TYPE compile-fail NAME insert_node_type_fail_map COMPILE_DEFINITIONS UNORDERED_TEST_MAP SOURCES unordered/insert_node_type_fail.cpp)
@@ -128,6 +123,7 @@ foa_tests(SOURCES unordered/uses_allocator.cpp)
 foa_tests(SOURCES unordered/link_test_1.cpp unordered/link_test_2.cpp )
 foa_tests(SOURCES unordered/scoped_allocator.cpp)
 foa_tests(SOURCES unordered/hash_is_avalanching_test.cpp)
+foa_tests(SOURCES unordered/pull_tests.cpp)
 foa_tests(SOURCES exception/constructor_exception_tests.cpp)
 foa_tests(SOURCES exception/copy_exception_tests.cpp)
 foa_tests(SOURCES exception/assign_exception_tests.cpp)
@@ -140,7 +136,7 @@ foa_tests(SOURCES exception/merge_exception_tests.cpp)
 
 # CFOA tests
 
-cfoa_tests(SOURCES cfoa/insert_tests.cpp)
+cfoa_tests(SOURCES cfoa/insert_tests.cpp COMPILE_OPTIONS $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)
 cfoa_tests(SOURCES cfoa/erase_tests.cpp)
 cfoa_tests(SOURCES cfoa/try_emplace_tests.cpp)
 cfoa_tests(SOURCES cfoa/emplace_tests.cpp)

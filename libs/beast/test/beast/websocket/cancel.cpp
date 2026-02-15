@@ -32,7 +32,7 @@ struct async_all_server_op : boost::asio::coroutine
     async_all_server_op(stream<asio::ip::tcp::socket> & ws) : ws(ws) {}
 
     template<typename Self>
-    void operator()(Self && self, error_code ec = {}, std::size_t sz = 0)
+    void operator()(Self && self, error_code ec = {}, std::size_t = 0)
     {
         if (ec)
             return self.complete(ec);
@@ -81,7 +81,7 @@ struct async_all_client_op : boost::asio::coroutine
     std::shared_ptr<impl_t> impl{std::make_shared<impl_t>()};
 
     template<typename Self>
-    void operator()(Self && self, error_code ec = {}, std::size_t sz = 0)
+    void operator()(Self && self, error_code ec = {}, std::size_t = 0)
     {
         if (ec)
             return self.complete(ec);
@@ -166,6 +166,8 @@ public:
                             cancel_counter++;
 
                         BEAST_EXPECTS(ec == net::error::operation_aborted
+                                    // freebsd does this in tests.
+                                    || ec == net::error::connection_reset
                                     || ec == net::error::broken_pipe
                                      // winapi WSAECONNRESET, as system_category
                                     || ec == error_code(10054, boost::system::system_category())

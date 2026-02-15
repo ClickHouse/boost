@@ -39,7 +39,7 @@
     <span class="identifier">SyncReadStream</span> <span class="special">&amp;</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">basic_streambuf</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">b</span><span class="special">,</span>
     <span class="identifier">MatchCondition</span> <span class="identifier">match_condition</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_match_condition</span><span class="special">&lt;</span> <span class="identifier">MatchCondition</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_match_condition</span><span class="special">&lt;</span> <span class="identifier">MatchCondition</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
           This function is used to read data into the specified streambuf until a
@@ -138,6 +138,10 @@
           typically leave that data in the streambuf for a subsequent read_until
           operation to examine.
         </p>
+<h6>
+<a name="boost_asio.reference.read_until.overload15.h4"></a>
+          <span class="phrase"><a name="boost_asio.reference.read_until.overload15.remarks0"></a></span><a class="link" href="overload15.html#boost_asio.reference.read_until.overload15.remarks0">Remarks</a>
+        </h6>
 <p>
           The default implementation of the <code class="computeroutput"><span class="identifier">is_match_condition</span></code>
           type trait evaluates to true for function pointers and function objects
@@ -145,7 +149,7 @@
           It must be specialised for other user-defined function objects.
         </p>
 <h6>
-<a name="boost_asio.reference.read_until.overload15.h4"></a>
+<a name="boost_asio.reference.read_until.overload15.h5"></a>
           <span class="phrase"><a name="boost_asio.reference.read_until.overload15.examples"></a></span><a class="link" href="overload15.html#boost_asio.reference.read_until.overload15.examples">Examples</a>
         </h6>
 <p>
@@ -199,7 +203,8 @@
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">read_until</span><span class="special">(</span><span class="identifier">s</span><span class="special">,</span> <span class="identifier">b</span><span class="special">,</span> <span class="identifier">match_char</span><span class="special">(</span><span class="char">'a'</span><span class="special">));</span>
 </pre>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

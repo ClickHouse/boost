@@ -1,4 +1,6 @@
 // Copyright (C) 2023 Christian Mazakas
+// Copyright (C) 2023-2024 Joaquin M Lopez Munoz
+// Copyright (C) 2024 Braden Ganetsky
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
@@ -6,12 +8,18 @@
 #define BOOST_UNORDERED_TEST_CFOA_HELPERS_HPP
 
 #include "../helpers/generators.hpp"
+#include "../helpers/helpers.hpp"
+#include "../helpers/pmr.hpp"
 #include "../helpers/test.hpp"
+#include "common_helpers.hpp"
 
 #include <boost/compat/latch.hpp>
 #include <boost/container_hash/hash.hpp>
 #include <boost/core/span.hpp>
+#include <boost/unordered/concurrent_flat_map_fwd.hpp>
+#include <boost/unordered/concurrent_flat_set_fwd.hpp>
 #include <boost/unordered/unordered_flat_map.hpp>
+#include <boost/unordered/unordered_flat_set.hpp>
 
 #include <algorithm>
 #include <atomic>
@@ -123,6 +131,33 @@ struct stateful_key_equal
   }
 };
 
+template <class T> struct cfoa_ptr
+{
+private:
+  template <class> friend struct stateful_allocator2;
+
+  T* p_ = nullptr;
+
+  cfoa_ptr(T* p) : p_(p) {}
+
+public:
+  using element_type = T;
+
+  cfoa_ptr() = default;
+  cfoa_ptr(std::nullptr_t) : p_(nullptr){};
+  template <class U> using rebind = cfoa_ptr<U>;
+
+  operator bool() const { return !!p_; }
+
+  template <typename Q = T>
+  Q& operator*() const noexcept { return *p_; }
+
+  T* operator->() const noexcept { return p_; }
+
+  template<typename Q = T>
+  static cfoa_ptr<Q> pointer_to(Q& r) { return {std::addressof(r)}; }
+};
+
 template <class T> struct stateful_allocator
 {
   int x_ = -1;
@@ -151,7 +186,38 @@ template <class T> struct stateful_allocator
   bool operator!=(stateful_allocator const& rhs) const { return x_ != rhs.x_; }
 };
 
-struct raii
+template <class T> struct stateful_allocator2
+{
+
+  int x_ = -1;
+
+  using value_type = T;
+  using pointer = cfoa_ptr<T>;
+
+  stateful_allocator2() = default;
+  stateful_allocator2(stateful_allocator2 const&) = default;
+  stateful_allocator2(stateful_allocator2&&) = default;
+
+  stateful_allocator2(int const x) : x_{x} {}
+
+  template <class U>
+  stateful_allocator2(stateful_allocator2<U> const& rhs) : x_{rhs.x_}
+  {
+  }
+
+  pointer allocate(std::size_t n)
+  {
+    return {static_cast<T*>(::operator new(n * sizeof(T)))};
+  }
+
+  void deallocate(pointer p, std::size_t) { ::operator delete(p.p_); }
+
+  bool operator==(stateful_allocator2 const& rhs) const { return x_ == rhs.x_; }
+  bool operator!=(stateful_allocator2 const& rhs) const { return x_ != rhs.x_; }
+};
+
+template <class Tag>
+struct basic_raii
 {
   static std::atomic<std::uint32_t> default_constructor;
   static std::atomic<std::uint32_t> copy_constructor;
@@ -163,17 +229,17 @@ struct raii
 
   int x_ = -1;
 
-  raii() { ++default_constructor; }
-  raii(int const x) : x_{x} { ++default_constructor; }
-  raii(raii const& rhs) : x_{rhs.x_} { ++copy_constructor; }
-  raii(raii&& rhs) noexcept : x_{rhs.x_}
+  basic_raii() { ++default_constructor; }
+  basic_raii(int const x) : x_{x} { ++default_constructor; }
+  basic_raii(basic_raii const& rhs) : x_{rhs.x_} { ++copy_constructor; }
+  basic_raii(basic_raii&& rhs) noexcept : x_{rhs.x_}
   {
     rhs.x_ = -1;
     ++move_constructor;
   }
-  ~raii() { ++destructor; }
+  ~basic_raii() { ++destructor; }
 
-  raii& operator=(raii const& rhs)
+  basic_raii& operator=(basic_raii const& rhs)
   {
     ++copy_assignment;
     if (this != &rhs) {
@@ -182,7 +248,7 @@ struct raii
     return *this;
   }
 
-  raii& operator=(raii&& rhs) noexcept
+  basic_raii& operator=(basic_raii&& rhs) noexcept
   {
     ++move_assignment;
     if (this != &rhs) {
@@ -192,37 +258,37 @@ struct raii
     return *this;
   }
 
-  friend bool operator==(raii const& lhs, raii const& rhs)
+  friend bool operator==(basic_raii const& lhs, basic_raii const& rhs)
   {
     return lhs.x_ == rhs.x_;
   }
 
-  friend bool operator!=(raii const& lhs, raii const& rhs)
+  friend bool operator!=(basic_raii const& lhs, basic_raii const& rhs)
   {
     return !(lhs == rhs);
   }
 
-  friend bool operator==(raii const& lhs, int const x) { return lhs.x_ == x; }
-  friend bool operator!=(raii const& lhs, int const x)
+  friend bool operator==(basic_raii const& lhs, int const x) { return lhs.x_ == x; }
+  friend bool operator!=(basic_raii const& lhs, int const x)
   {
     return !(lhs.x_ == x);
   }
 
-  friend bool operator==(int const x, raii const& rhs) { return rhs.x_ == x; }
+  friend bool operator==(int const x, basic_raii const& rhs) { return rhs.x_ == x; }
 
-  friend bool operator!=(int const x, raii const& rhs)
+  friend bool operator!=(int const x, basic_raii const& rhs)
   {
     return !(rhs.x_ == x);
   }
 
-  friend std::ostream& operator<<(std::ostream& os, raii const& rhs)
+  friend std::ostream& operator<<(std::ostream& os, basic_raii const& rhs)
   {
     os << "{ x_: " << rhs.x_ << " }";
     return os;
   }
 
   friend std::ostream& operator<<(
-    std::ostream& os, std::pair<raii const, raii> const& rhs)
+    std::ostream& os, std::pair<basic_raii const, basic_raii> const& rhs)
   {
     os << "pair<" << rhs.first << ", " << rhs.second << ">";
     return os;
@@ -238,16 +304,30 @@ struct raii
     move_assignment = 0;
   }
 
-  friend void swap(raii& lhs, raii& rhs) { std::swap(lhs.x_, rhs.x_); }
+  friend void swap(basic_raii& lhs, basic_raii& rhs) { std::swap(lhs.x_, rhs.x_); }
 };
 
-std::atomic<std::uint32_t> raii::default_constructor{0};
-std::atomic<std::uint32_t> raii::copy_constructor{0};
-std::atomic<std::uint32_t> raii::move_constructor{0};
-std::atomic<std::uint32_t> raii::destructor{0};
-std::atomic<std::uint32_t> raii::copy_assignment{0};
-std::atomic<std::uint32_t> raii::move_assignment{0};
+template <class Tag> std::atomic<std::uint32_t> basic_raii<Tag>::default_constructor(0);
+template <class Tag> std::atomic<std::uint32_t> basic_raii<Tag>::copy_constructor(0);
+template <class Tag> std::atomic<std::uint32_t> basic_raii<Tag>::move_constructor(0);
+template <class Tag> std::atomic<std::uint32_t> basic_raii<Tag>::destructor(0);
+template <class Tag> std::atomic<std::uint32_t> basic_raii<Tag>::copy_assignment(0);
+template <class Tag> std::atomic<std::uint32_t> basic_raii<Tag>::move_assignment(0);
 
+struct raii_tag_
+{
+};
+class raii : public basic_raii<raii_tag_>
+{
+  using basic_raii::basic_raii;
+};
+
+template <class Tag>
+std::size_t hash_value(basic_raii<Tag> const& r) noexcept
+{
+  boost::hash<int> hasher;
+  return hasher(r.x_);
+}
 std::size_t hash_value(raii const& r) noexcept
 {
   boost::hash<int> hasher;
@@ -255,6 +335,13 @@ std::size_t hash_value(raii const& r) noexcept
 }
 
 namespace std {
+  template <class Tag> struct hash<basic_raii<Tag>>
+  {
+    std::size_t operator()(basic_raii<Tag> const& r) const noexcept
+    {
+      return hash_value(r);
+    }
+  };
   template <> struct hash<raii>
   {
     std::size_t operator()(raii const& r) const noexcept
@@ -277,27 +364,48 @@ auto make_random_values(std::size_t count, F f) -> std::vector<decltype(f())>
   return v;
 }
 
-struct value_type_generator_type
+template <typename K>
+struct value_generator
 {
-  std::pair<raii const, raii> operator()(test::random_generator rg)
-  {
-    int* p = nullptr;
-    int a = generate(p, rg);
-    int b = generate(p, rg);
-    return std::make_pair(raii{a}, raii{b});
-  }
-} value_type_generator;
+  using value_type = raii;
 
-struct init_type_generator_type
+  value_type operator()(test::random_generator rg)
+  {
+    int* p = nullptr;
+    int a = generate(p, rg);
+    return value_type(a);
+  }
+};
+
+template <typename K, typename V>
+struct value_generator<std::pair<K, V> >
 {
-  std::pair<raii, raii> operator()(test::random_generator rg)
+  static constexpr bool const_key = std::is_const<K>::value;
+  static constexpr bool const_mapped = std::is_const<V>::value;
+  using value_type = std::pair<
+    typename std::conditional<const_key, raii const, raii>::type,
+    typename std::conditional<const_mapped, raii const, raii>::type>;
+
+  value_type operator()(test::random_generator rg)
   {
     int* p = nullptr;
     int a = generate(p, rg);
     int b = generate(p, rg);
     return std::make_pair(raii{a}, raii{b});
   }
-} init_type_generator;
+};
+
+struct value_type_generator_factory_type
+{
+  template <typename Container>
+  value_generator<typename Container::value_type> get() { return {}; }
+} value_type_generator_factory;
+
+struct init_type_generator_factory_type
+{
+  template <typename Container>
+  value_generator<typename Container::init_type> get() { return {}; }
+} init_type_generator_factory;
 
 template <class T>
 std::vector<boost::span<T> > split(
@@ -355,29 +463,6 @@ template <class T, class F> void thread_runner(std::vector<T>& values, F f)
   for (auto& t : threads) {
     t.join();
   }
-}
-
-template <class X, class Y>
-void test_matches_reference(X const& x, Y const& reference_map)
-{
-  using value_type = typename X::value_type;
-  BOOST_TEST_EQ(x.size(), x.visit_all([&](value_type const& kv) {
-    BOOST_TEST(reference_map.contains(kv.first));
-    BOOST_TEST_EQ(kv.second, reference_map.find(kv.first)->second);
-  }));
-}
-
-template <class X, class Y>
-void test_fuzzy_matches_reference(
-  X const& x, Y const& reference_map, test::random_generator rg)
-{
-  using value_type = typename X::value_type;
-  BOOST_TEST_EQ(x.size(), x.visit_all([&](value_type const& kv) {
-    BOOST_TEST(reference_map.contains(kv.first));
-    if (rg == test::sequential) {
-      BOOST_TEST_EQ(kv.second, reference_map.find(kv.first)->second);
-    }
-  }));
 }
 
 template <class T> using span_value_type = typename T::value_type;
@@ -458,6 +543,7 @@ template <class T> class ptr
 
 public:
   ptr() : ptr_(0) {}
+  ptr(std::nullptr_t) : ptr_(nullptr) {}
   explicit ptr(void_ptr const& x) : ptr_((T*)x.ptr_) {}
 
   T& operator*() const { return *ptr_; }
@@ -481,7 +567,7 @@ public:
   T& operator[](std::ptrdiff_t s) const { return ptr_[s]; }
   bool operator!() const { return !ptr_; }
 
-  static ptr pointer_to(T& p) { return ptr(boost::addressof(p)); }
+  static ptr pointer_to(T& p) { return ptr(std::addressof(p)); }
 
   // I'm not using the safe bool idiom because the containers should be
   // able to cope with bool conversions.
@@ -589,5 +675,18 @@ public:
 public:
   fancy_allocator& operator=(fancy_allocator const&) { return *this; }
 };
+
+namespace boost {
+  template <> struct pointer_traits<void_ptr>
+  {
+    template <class U> struct rebind_to
+    {
+      typedef ptr<U> type;
+    };
+
+    template<class U>
+    using rebind=typename rebind_to<U>::type;
+  };
+} // namespace boost
 
 #endif // BOOST_UNORDERED_TEST_CFOA_HELPERS_HPP

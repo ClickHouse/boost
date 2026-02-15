@@ -33,9 +33,9 @@
           </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">ExecutionContext</span><span class="special">&gt;</span>
-<span class="identifier">Protocol</span><span class="special">::</span><span class="identifier">socket</span><span class="special">::</span><span class="keyword">template</span> <span class="identifier">rebind_executor</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">ExecutionContext</span><span class="special">::</span><span class="identifier">executor_type</span> <span class="special">&gt;::</span><span class="identifier">other</span> <span class="identifier">accept</span><span class="special">(</span>
+<span class="identifier">Protocol</span><span class="special">::</span><span class="identifier">socket</span><span class="special">::</span><span class="keyword">template</span> <span class="identifier">rebind_executor</span><span class="special">&lt;</span> <span class="identifier">typenameExecutionContext</span><span class="special">::</span><span class="identifier">executor_type</span> <span class="special">&gt;::</span><span class="identifier">other</span> <span class="identifier">accept</span><span class="special">(</span>
     <span class="identifier">ExecutionContext</span> <span class="special">&amp;</span> <span class="identifier">context</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">ExecutionContext</span> <span class="special">&amp;,</span> <span class="identifier">execution_context</span> <span class="special">&amp;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">ExecutionContext</span> <span class="special">&amp;,</span> <span class="identifier">execution_context</span> <span class="special">&amp;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
             This function is used to accept a new connection from a peer. The function
@@ -90,7 +90,8 @@
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">accept</span><span class="special">());</span>
 </pre>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

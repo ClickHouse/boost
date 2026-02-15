@@ -7,7 +7,7 @@
 <link rel="home" href="../index.html" title="Chapter 1. Boost.MySQL">
 <link rel="up" href="../index.html" title="Chapter 1. Boost.MySQL">
 <link rel="prev" href="multi_resultset.html" title="Multi-resultset: stored procedures and multi-queries">
-<link rel="next" href="meta.html" title="Metadata">
+<link rel="next" href="connection_pool.html" title="Connection pools">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -21,7 +21,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="multi_resultset.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="meta.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="multi_resultset.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="connection_pool.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -71,7 +71,7 @@
                 that we're in <span class="emphasis"><em>case 1</em></span>.
               </li>
 <li class="listitem">
-                Some matadata packets describing the columns that the query retrieved.
+                Some metadata packets describing the columns that the query retrieved.
                 These become available to the user and are necessary to parse the
                 rows.
               </li>
@@ -193,8 +193,8 @@
 </ul></div>
 <p>
       <code class="computeroutput"><span class="identifier">read_some_rows</span></code> returns a <a class="link" href="ref/boost__mysql__rows_view.html" title="rows_view"><code class="literal">rows_view</code></a>
-      object pointing into the connection's internal buffers. This view is valid
-      until the connection performs any other operation involving a network transfer.
+      object pointing into the connection's internal buffer. This view is valid until
+      the connection performs any other operation involving a network transfer.
     </p>
 <p>
       Note that there is no need to distinguish between <span class="emphasis"><em>case 1</em></span>
@@ -221,7 +221,7 @@
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">body</span><span class="special">;</span>
 <span class="special">};</span>
 
-<span class="comment">// We must use Boost.Describe to add reflection capabilities to post.</span>
+<span class="comment">// We use BOOST_DESCRIBE_STRUCT to add reflection capabilities to post.</span>
 <span class="comment">// We must list all the fields that should be populated by Boost.MySQL</span>
 <span class="identifier">BOOST_DESCRIBE_STRUCT</span><span class="special">(</span><span class="identifier">post</span><span class="special">,</span> <span class="special">(),</span> <span class="special">(</span><span class="identifier">id</span><span class="special">,</span> <span class="identifier">title</span><span class="special">,</span> <span class="identifier">body</span><span class="special">))</span>
 </pre>
@@ -303,7 +303,7 @@
       You can access metadata at any point, using <a class="link" href="ref/boost__mysql__execution_state/meta.html" title="execution_state::meta"><code class="literal">execution_state::meta</code></a>
       or <a class="link" href="ref/boost__mysql__static_execution_state/meta.html" title="static_execution_state::meta"><code class="literal">static_execution_state::meta</code></a>.
       This function returns a collection of <a class="link" href="ref/boost__mysql__metadata.html" title="metadata"><code class="literal">metadata</code></a>
-      objects. For more information, plase refer to <a class="link" href="meta.html" title="Metadata">this
+      objects. For more information, please refer to <a class="link" href="meta.html" title="Metadata">this
       section</a>.
     </p>
 <p>
@@ -522,7 +522,7 @@ END
       returns <code class="computeroutput"><span class="keyword">true</span></code>.
     </p>
 <p>
-      <a class="link" href="examples/source_script.html" title="Using multi-queries to source a .sql file">This example</a> shows this
+      <a class="link" href="examples/source_script.html" title="Sourcing a .sql file using multi-queries">This example</a> shows this
       general case. It uses multi-queries to run an arbitrary SQL script file.
     </p>
 <h4>
@@ -533,39 +533,39 @@ END
 <p>
       To properly understand <code class="computeroutput"><span class="identifier">read_some_rows</span></code>,
       we need to know that every <a class="link" href="ref/boost__mysql__connection.html" title="connection"><code class="literal">connection</code></a>
-      owns an internal <span class="bold"><strong>read buffer</strong></span>, where packets
-      sent by the server are stored. It is a single, flat buffer, and you can configure
+      owns an <span class="bold"><strong>internal buffer</strong></span>, where packets sent
+      by the server are stored. It is a single, flat buffer, and you can configure
       its initial size when creating a <code class="computeroutput"><span class="identifier">connection</span></code>,
       passing a <a class="link" href="ref/boost__mysql__buffer_params.html" title="buffer_params"><code class="literal">buffer_params</code></a>
       object as the first argument to <code class="computeroutput"><span class="identifier">connection</span></code>'s
-      constructor. The read buffer may be grown under certain circumstances to accomodate
+      constructor. The read buffer may be grown under certain circumstances to accommodate
       large messages.
     </p>
 <p>
       <code class="computeroutput"><span class="identifier">read_some_rows</span></code> gets the maximum
-      number of rows that fit in the read buffer (without growing it) performing
+      number of rows that fit in the internal buffer (without growing it) performing
       a single <code class="computeroutput"><span class="identifier">read_some</span></code> operation
       on the stream (or using cached data). If there are rows to read, <code class="computeroutput"><span class="identifier">read_some_rows</span></code> guarantees to read at least
       one. This means that, if doing what we described yields no rows (e.g. because
-      of a large row that doesn't fit into the read buffer), <code class="computeroutput"><span class="identifier">read_some_rows</span></code>
+      of a large row that doesn't fit into the buffer), <code class="computeroutput"><span class="identifier">read_some_rows</span></code>
       will grow the buffer or perform more reads until at least one row has been
       read. If you're using the static interface, the number of read rows is limited
       by the size of span you passed, too.
     </p>
 <p>
       If you want to get the most of <code class="computeroutput"><span class="identifier">read_some_rows</span></code>,
-      customize the initial read buffer size to maximize the number of rows that
-      each batch retrieves.
+      customize the initial buffer size to maximize the number of rows that each
+      batch retrieves.
     </p>
 </div>
-<div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>
+<div class="copyright-footer">Copyright © 2019-2024 Ruben Perez<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="multi_resultset.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="meta.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="multi_resultset.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="connection_pool.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

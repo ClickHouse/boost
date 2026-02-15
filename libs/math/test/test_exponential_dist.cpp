@@ -8,7 +8,11 @@
 
 // test_exponential_dist.cpp
 
-#include <boost/math/tools/test.hpp>
+#ifdef BOOST_MATH_ENABLE_SYCL
+#include "sycl/sycl.hpp"
+#endif
+
+#include "../include_private/boost/math/tools/test.hpp"
 #include <boost/math/concepts/real_concept.hpp> // for real_concept
 #include <boost/math/distributions/exponential.hpp>
     using boost::math::exponential_distribution;

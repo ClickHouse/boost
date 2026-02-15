@@ -3,8 +3,9 @@
 
 // Copyright (c) 2021 Barend Gehrels, Amsterdam, the Netherlands.
 
-// This file was modified by Oracle on 2021.
-// Modifications copyright (c) 2021, Oracle and/or its affiliates.
+// This file was modified by Oracle on 2021-2024.
+// Modifications copyright (c) 2021-2024, Oracle and/or its affiliates.
+// Contributed and/or modified by Vissarion Fysikopoulos, on behalf of Oracle
 // Contributed and/or modified by Adam Wulkiewicz, on behalf of Oracle
 
 // Use, modification and distribution is subject to the Boost Software License,
@@ -20,6 +21,8 @@
 
 #include <boost/geometry/strategies/strategies.hpp>
 #include <boost/geometry/geometries/geometries.hpp>
+#include <boost/geometry/util/condition.hpp>
+
 #include <boost/geometry/io/wkt/wkt.hpp>
 
 #include <vector>
@@ -39,11 +42,10 @@ void do_test(std::string const& case_id,
              std::size_t expected_cluster_count)
 {
     using coor_type = typename bg::coordinate_type<Point>::type;
-    using policy_type = bg::detail::no_rescale_policy;
     using turn_info = bg::detail::overlay::turn_info
         <
             Point,
-            typename bg::detail::segment_ratio_type<Point, policy_type>::type
+            typename bg::segment_ratio_type<Point>::type
         >;
 
     using cluster_type = std::map
@@ -59,7 +61,7 @@ void do_test(std::string const& case_id,
     }
 
     cluster_type clusters;
-    bg::detail::overlay::get_clusters(turns, clusters, policy_type());
+    bg::detail::overlay::get_clusters(turns, clusters);
     BOOST_CHECK_MESSAGE(expected_cluster_count == clusters.size(),
                         "Case: " << case_id
                         << " ctype: " << string_from_type<coor_type>::name()
@@ -93,6 +95,7 @@ void test_get_clusters_border_cases(typename bg::coordinate_type<Point>::type ep
 
 int test_main(int, char* [])
 {
+    constexpr bool has_long_double =  sizeof(long double) > sizeof(double);
     using fp = bg::model::point<float, 2, bg::cs::cartesian>;
     using dp = bg::model::point<double, 2, bg::cs::cartesian>;
     using ep = bg::model::point<long double, 2, bg::cs::cartesian>;
@@ -101,11 +104,15 @@ int test_main(int, char* [])
     test_get_clusters<dp>();
     test_get_clusters<ep>();
 
-    // These constant relate to the threshold in get_clusters.hpp,
+    // These constant relate to the (earlier) thresholds in get_clusters.hpp,
     // and the used floating point type.
+    // (thresholds are now replaced by common_approximately_equals_epsilon_multiplier)
     test_get_clusters_border_cases<fp>(1.0e-5);
     test_get_clusters_border_cases<dp>(1.0e-14);
-    test_get_clusters_border_cases<ep>(1.0e-17);
+    if (BOOST_GEOMETRY_CONDITION(has_long_double))
+    {
+        test_get_clusters_border_cases<ep>(1.0e-17);
+    }
 
     return 0;
 }

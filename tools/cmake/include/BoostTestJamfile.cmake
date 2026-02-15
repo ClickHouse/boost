@@ -9,10 +9,6 @@ if(NOT CMAKE_VERSION VERSION_LESS 3.10)
   include_guard()
 endif()
 
-if(BUILD_TESTING AND CMAKE_VERSION VERSION_LESS 3.9)
-  message(AUTHOR_WARNING "BoostTestJamfile requires CMake 3.9") # CMAKE_MATCH_x
-endif()
-
 include(BoostMessage)
 
 # boost_test_jamfile( FILE jamfile [PREFIX prefix]
@@ -20,11 +16,16 @@ include(BoostMessage)
 #   COMPILE_DEFINITIONS defs...
 #   COMPILE_OPTIONS opts...
 #   COMPILE_FEATURES features...
+#   INCLUDE_DIRECTORIES dirs...
 # )
 
 function(boost_test_jamfile)
 
-  cmake_parse_arguments(_ "" "FILE;PREFIX" "LIBRARIES;LINK_LIBRARIES;COMPILE_DEFINITIONS;COMPILE_OPTIONS;COMPILE_FEATURES" ${ARGN})
+  cmake_parse_arguments(_
+    ""
+    "FILE;PREFIX"
+    "LIBRARIES;LINK_LIBRARIES;COMPILE_DEFINITIONS;COMPILE_OPTIONS;COMPILE_FEATURES;INCLUDE_DIRECTORIES"
+    ${ARGN})
 
   if(__UNPARSED_ARGUMENTS)
     message(AUTHOR_WARNING "boost_test_jamfile: extra arguments ignored: ${__UNPARSED_ARGUMENTS}")
@@ -74,6 +75,7 @@ function(boost_test_jamfile)
         COMPILE_DEFINITIONS ${__COMPILE_DEFINITIONS}
         COMPILE_OPTIONS ${__COMPILE_OPTIONS}
         COMPILE_FEATURES ${__COMPILE_FEATURES}
+        INCLUDE_DIRECTORIES ${__INCLUDE_DIRECTORIES}
       )
     endif()
 

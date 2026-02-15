@@ -230,7 +230,7 @@ public:
 
         template<class F, class Alloc>
         void
-        post(F&& f, Alloc const& a)
+        post(F&&, Alloc const&)
         {
             // shouldn't be called since the enclosing
             // networking wrapper only uses dispatch
@@ -239,7 +239,7 @@ public:
 
         template<class F, class Alloc>
         void
-        defer(F&& f, Alloc const& a)
+        defer(F&&, Alloc const&)
         {
             // shouldn't be called since the enclosing
             // networking wrapper only uses dispatch
@@ -249,9 +249,9 @@ public:
     };
 
 #if defined(BOOST_ASIO_NO_TS_EXECUTORS)
-    BOOST_STATIC_ASSERT(net::execution::is_executor<test_executor>::value);
+    BOOST_CORE_STATIC_ASSERT(net::execution::is_executor<test_executor>::value);
 #else
-    BOOST_STATIC_ASSERT(net::is_executor<test_executor>::value);
+    BOOST_CORE_STATIC_ASSERT(net::is_executor<test_executor>::value);
 #endif
 
     class test_cb

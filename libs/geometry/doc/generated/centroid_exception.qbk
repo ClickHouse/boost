@@ -34,7 +34,7 @@ The centroid\u005fexception is thrown if the free centroid function is called wi
 [[Function] [Description] [Parameters] ]
 [[``centroid_exception()``
 
-] [The default constructor. ] [
+] [] [
 
 ]]
 ]
@@ -44,10 +44,9 @@ The centroid\u005fexception is thrown if the free centroid function is called wi
 [[Function] [Description] [Parameters]  [Returns]]
 [[``char const * what()``
 
-] [Returns the explanatory string. ] [
+] [] [
 
 ][
-Pointer to a null-terminated string with explanatory information. 
 
 ]
 ]

@@ -7,7 +7,7 @@
 <link rel="home" href="../../boost_asio.html" title="Boost.Asio">
 <link rel="up" href="../reference.html" title="Reference">
 <link rel="prev" href="invalid_service_owner/invalid_service_owner.html" title="invalid_service_owner::invalid_service_owner">
-<link rel="next" href="io_context/add_service.html" title="io_context::add_service">
+<link rel="next" href="io_context/count_type.html" title="io_context::count_type">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -21,7 +21,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="invalid_service_owner/invalid_service_owner.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../boost_asio.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="io_context/add_service.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="invalid_service_owner/invalid_service_owner.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../boost_asio.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="io_context/count_type.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
@@ -97,19 +97,6 @@
 <tr>
 <td>
                 <p>
-                  <a class="link" href="io_context__work.html" title="io_context::work"><span class="bold"><strong>work</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated: Use executor_work_guard.) Class to inform the io_context
-                  when it has work to do.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
                   <a class="link" href="io_context/count_type.html" title="io_context::count_type"><span class="bold"><strong>count_type</strong></span></a>
                 </p>
               </td>
@@ -171,19 +158,6 @@
 <tr>
 <td>
                 <p>
-                  <a class="link" href="io_context/dispatch.html" title="io_context::dispatch"><span class="bold"><strong>dispatch</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated: Use boost::asio::dispatch().) Request the io_context
-                  to invoke the given handler.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
                   <a class="link" href="io_context/get_executor.html" title="io_context::get_executor"><span class="bold"><strong>get_executor</strong></span></a>
                 </p>
               </td>
@@ -226,8 +200,6 @@
 <td>
                 <p>
                   Run the io_context object's event processing loop to execute ready
-                  handlers. <br> <span class="silver"> —</span><br> (Deprecated: Use non-error_code overload.)
-                  Run the io_context object's event processing loop to execute ready
                   handlers.
                 </p>
               </td>
@@ -241,35 +213,7 @@
 <td>
                 <p>
                   Run the io_context object's event processing loop to execute one
-                  ready handler. <br> <span class="silver"> —</span><br> (Deprecated: Use non-error_code overload.)
-                  Run the io_context object's event processing loop to execute one
                   ready handler.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="io_context/post.html" title="io_context::post"><span class="bold"><strong>post</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated: Use boost::asio::post().) Request the io_context to
-                  invoke the given handler and return immediately.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="io_context/reset.html" title="io_context::reset"><span class="bold"><strong>reset</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated: Use restart().) Reset the io_context in preparation
-                  for a subsequent run() invocation.
                 </p>
               </td>
 </tr>
@@ -293,9 +237,7 @@
               </td>
 <td>
                 <p>
-                  Run the io_context object's event processing loop. <br> <span class="silver"> —</span><br>
-                  (Deprecated: Use non-error_code overload.) Run the io_context object's
-                  event processing loop.
+                  Run the io_context object's event processing loop.
                 </p>
               </td>
 </tr>
@@ -321,9 +263,7 @@
 <td>
                 <p>
                   Run the io_context object's event processing loop to execute at
-                  most one handler. <br> <span class="silver"> —</span><br> (Deprecated: Use non-error_code
-                  overload.) Run the io_context object's event processing loop to
-                  execute at most one handler.
+                  most one handler.
                 </p>
               </td>
 </tr>
@@ -487,58 +427,15 @@
                 </p>
               </th>
 </tr></thead>
-<tbody>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="io_context/add_service.html" title="io_context::add_service"><span class="bold"><strong>add_service</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated: Use make_service().) Add a service object to the execution_context.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="io_context/has_service.html" title="io_context::has_service"><span class="bold"><strong>has_service</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  Determine if an execution_context contains a specified service
-                  type.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="io_context/make_service.html" title="io_context::make_service"><span class="bold"><strong>make_service</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  Creates a service object and adds it to the execution_context.
-                </p>
-              </td>
-</tr>
-<tr>
+<tbody><tr>
 <td>
                 <p>
                   <a class="link" href="io_context/use_service.html" title="io_context::use_service"><span class="bold"><strong>use_service</strong></span></a>
                 </p>
               </td>
 <td>
-                <p>
-                  <br> <span class="silver"> —</span><br> Obtain the service object corresponding to the given
-                  type.
-                </p>
               </td>
-</tr>
-</tbody>
+</tr></tbody>
 </table></div>
 <p>
         The <a class="link" href="io_context.html" title="io_context"><code class="computeroutput"><span class="identifier">io_context</span></code></a>
@@ -722,14 +619,15 @@
         <span class="emphasis"><em>Convenience header: </em></span><code class="literal">boost/asio.hpp</code>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="invalid_service_owner/invalid_service_owner.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../boost_asio.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="io_context/add_service.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="invalid_service_owner/invalid_service_owner.html"><img src="../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../boost_asio.html"><img src="../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="io_context/count_type.html"><img src="../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

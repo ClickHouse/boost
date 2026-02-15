@@ -15,7 +15,7 @@
 #include <boost/random/uniform_int.hpp>
 #include <boost/chrono.hpp>
 #include "test.hpp"
-#include <boost/array.hpp>
+#include <array>
 #include <iostream>
 #include <iomanip>
 
@@ -44,6 +44,7 @@ struct stopwatch
    typename Clock::time_point m_start;
 };
 
+// LCOV_EXCL_START
 void print_flags(std::ios_base::fmtflags f)
 {
    std::cout << "Formatting flags were: ";
@@ -57,18 +58,19 @@ void print_flags(std::ios_base::fmtflags f)
       std::cout << "showpos ";
    std::cout << std::endl;
 }
+// LCOV_EXCL_STOP
 
 template <class T>
 void test()
 {
    typedef T                                mp_t;
-   boost::array<std::ios_base::fmtflags, 9> f =
+   std::array<std::ios_base::fmtflags, 9> f =
        {{std::ios_base::fmtflags(0), std::ios_base::showpoint, std::ios_base::showpos, std::ios_base::scientific, std::ios_base::scientific | std::ios_base::showpos,
          std::ios_base::scientific | std::ios_base::showpoint, std::ios_base::fixed, std::ios_base::fixed | std::ios_base::showpoint,
          std::ios_base::fixed | std::ios_base::showpos}};
 
-   boost::array<boost::array<const char*, 13 * 9>, 40> string_data = {{
-#include "libs/multiprecision/test/string_data.ipp"
+   std::array<std::array<const char*, 13 * 9>, 40> string_data = {{
+#include "string_data.ipp"
    }};
 
    double num   = 123456789.0;
@@ -88,6 +90,7 @@ void test()
             const char* expect = string_data[j][col];
             if (ss.str() != expect)
             {
+               // LCOV_EXCL_START
                std::cout << std::setprecision(20) << "Testing value " << val << std::endl;
                print_flags(f[i]);
                std::cout << "Precision is: " << prec << std::endl;
@@ -95,6 +98,7 @@ void test()
                std::cout << "Expected: " << expect << std::endl;
                ++boost::detail::test_errors();
                mp_t(val).str(prec, f[i]); // for debugging
+               // LCOV_EXCL_STOP
             }
          }
       }
@@ -104,7 +108,7 @@ void test()
       val = num / denom;
    }
 
-   boost::array<const char*, 13 * 9> zeros =
+   std::array<const char*, 13 * 9> zeros =
        {{"0", "0.", "+0", "0.0e+00", "+0.0e+00", "0.0e+00", "0.0", "0.0", "+0.0", "0", "0.0", "+0", "0.00e+00", "+0.00e+00", "0.00e+00", "0.00", "0.00", "+0.00", "0", "0.00", "+0", "0.000e+00", "+0.000e+00", "0.000e+00", "0.000", "0.000", "+0.000", "0", "0.000", "+0", "0.0000e+00", "+0.0000e+00", "0.0000e+00", "0.0000", "0.0000", "+0.0000", "0", "0.0000", "+0", "0.00000e+00", "+0.00000e+00", "0.00000e+00", "0.00000", "0.00000", "+0.00000", "0", "0.00000", "+0", "0.000000e+00", "+0.000000e+00", "0.000000e+00", "0.000000", "0.000000", "+0.000000", "0", "0.000000", "+0", "0.0000000e+00", "+0.0000000e+00", "0.0000000e+00", "0.0000000", "0.0000000", "+0.0000000", "0", "0.0000000", "+0", "0.00000000e+00", "+0.00000000e+00", "0.00000000e+00", "0.00000000", "0.00000000", "+0.00000000", "0", "0.00000000", "+0", "0.000000000e+00", "+0.000000000e+00", "0.000000000e+00", "0.000000000", "0.000000000", "+0.000000000", "0", "0.000000000", "+0", "0.0000000000e+00", "+0.0000000000e+00", "0.0000000000e+00", "0.0000000000", "0.0000000000", "+0.0000000000", "0", "0.0000000000", "+0", "0.00000000000e+00", "+0.00000000000e+00", "0.00000000000e+00", "0.00000000000", "0.00000000000", "+0.00000000000", "0", "0.00000000000", "+0", "0.000000000000e+00", "+0.000000000000e+00", "0.000000000000e+00", "0.000000000000", "0.000000000000", "+0.000000000000", "0", "0.000000000000", "+0", "0.0000000000000e+00", "+0.0000000000000e+00", "0.0000000000000e+00", "0.0000000000000", "0.0000000000000", "+0.0000000000000"}};
 
    unsigned col = 0;
@@ -120,6 +124,7 @@ void test()
          const char* expect = zeros[col];
          if (ss.str() != expect)
          {
+            // LCOV_EXCL_START
             std::cout << std::setprecision(20) << "Testing value " << val << std::endl;
             print_flags(f[i]);
             std::cout << "Precision is: " << prec << std::endl;
@@ -127,6 +132,7 @@ void test()
             std::cout << "Expected: " << expect << std::endl;
             ++boost::detail::test_errors();
             mp_t(val).str(prec, f[i]); // for debugging
+            // LCOV_EXCL_STOP
          }
       }
    }

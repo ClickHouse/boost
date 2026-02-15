@@ -3,15 +3,19 @@
 # Distributed under the Boost Software License, Version 1.0.
 # https://www.boost.org/LICENSE_1_0.txt
 
-cmake_minimum_required(VERSION 3.5...3.16)
+cmake_minimum_required(VERSION 3.8...3.16)
 
-project(boost_math VERSION "${BOOST_SUPERPROJECT_VERSION}" LANGUAGES CXX)
+project(boost_math VERSION 1.90.0 LANGUAGES CXX)
 
 add_library(boost_math INTERFACE)
 
 add_library(Boost::math ALIAS boost_math)
 
 target_include_directories(boost_math INTERFACE include)
+if(NOT CMAKE_VERSION VERSION_LESS "3.19")
+  file(GLOB_RECURSE headers include/*.hpp)
+  target_sources(boost_math PRIVATE ${headers})
+endif()
 
 include(CMakeDependentOption)
 
@@ -41,12 +45,19 @@ else()
 
 endif()
 
+target_compile_features(boost_math INTERFACE cxx_std_14)
+
+if(BUILD_TESTING AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt")
+
+  add_subdirectory(test)
+
 # Only enable tests when we're the root project
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+elseif(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
   include(CTest)
   add_subdirectory(test)
   
   include(GNUInstallDirs)
   install(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+
 endif()

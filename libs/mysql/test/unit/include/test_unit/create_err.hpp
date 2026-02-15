@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+// Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -11,14 +11,15 @@
 #include <boost/mysql/common_server_errc.hpp>
 #include <boost/mysql/string_view.hpp>
 
-#include <boost/mysql/impl/internal/protocol/protocol.hpp>
+#include <boost/mysql/impl/internal/protocol/deserialization.hpp>
 
 #include "test_unit/create_frame.hpp"
-#include "test_unit/serialization.hpp"
 
 namespace boost {
 namespace mysql {
 namespace test {
+
+std::vector<std::uint8_t> serialize_err_impl(detail::err_view pack, bool with_header);
 
 class err_builder
 {
@@ -43,8 +44,8 @@ public:
         seqnum_ = v;
         return *this;
     }
-    std::vector<std::uint8_t> build_body_without_header() const { return serialize_err_without_header(err_); }
-    std::vector<std::uint8_t> build_body() const { return serialize_err(err_); }
+    std::vector<std::uint8_t> build_body_without_header() const { return serialize_err_impl(err_, false); }
+    std::vector<std::uint8_t> build_body() const { return serialize_err_impl(err_, true); }
     std::vector<std::uint8_t> build_frame() const { return create_frame(seqnum_, build_body()); }
 };
 

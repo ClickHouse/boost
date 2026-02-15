@@ -17,9 +17,7 @@ big, or little endian byte ordering. User defined types are also supported.
 
 ## Reference
 
-Functions are implemented `inline` if appropriate. For {cpp}03 compilers,
-`noexcept` is elided. Boost scoped enum emulation is used so that the library
-still works for compilers that do not support scoped enums.
+Functions are implemented `inline` if appropriate.
 
 ### Definitions
 
@@ -52,10 +50,9 @@ its value is never read, there would be no undefined behavior.
 
 ### Header `<boost/endian/conversion.hpp>` Synopsis
 
-[subs=+quotes]
 ```
 #define BOOST_ENDIAN_INTRINSIC_MSG \
-   "`message describing presence or absence of intrinsics`"
+   "message describing presence or absence of intrinsics"
 
 namespace boost
 {
@@ -63,9 +60,9 @@ namespace endian
 {
   enum class order
   {
-    native = `see below`,
-    big    = `see below`,
-    little = `see below`,
+    native = /* see below */,
+    big    = /* see below */,
+    little = /* see below */,
   };
 
   // Byte reversal functions

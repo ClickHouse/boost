@@ -40,9 +40,9 @@
     <span class="identifier">SyncReadStream</span> <span class="special">&amp;</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="identifier">DynamicBuffer_v1</span> <span class="special">&amp;&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
     <span class="identifier">MatchCondition</span> <span class="identifier">match_condition</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_match_condition</span><span class="special">&lt;</span> <span class="identifier">MatchCondition</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_dynamic_buffer_v1</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_dynamic_buffer_v2</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_match_condition</span><span class="special">&lt;</span> <span class="identifier">MatchCondition</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_dynamic_buffer_v1</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_dynamic_buffer_v2</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
           This function is used to read data into the specified dynamic buffer sequence
@@ -141,6 +141,10 @@
           An application will typically leave that data in the dynamic buffer sequence
           for a subsequent read_until operation to examine.
         </p>
+<h6>
+<a name="boost_asio.reference.read_until.overload7.h4"></a>
+          <span class="phrase"><a name="boost_asio.reference.read_until.overload7.remarks0"></a></span><a class="link" href="overload7.html#boost_asio.reference.read_until.overload7.remarks0">Remarks</a>
+        </h6>
 <p>
           The default implementation of the <code class="computeroutput"><span class="identifier">is_match_condition</span></code>
           type trait evaluates to true for function pointers and function objects
@@ -148,14 +152,14 @@
           It must be specialised for other user-defined function objects.
         </p>
 <h6>
-<a name="boost_asio.reference.read_until.overload7.h4"></a>
+<a name="boost_asio.reference.read_until.overload7.h5"></a>
           <span class="phrase"><a name="boost_asio.reference.read_until.overload7.examples"></a></span><a class="link" href="overload7.html#boost_asio.reference.read_until.overload7.examples">Examples</a>
         </h6>
 <p>
           To read data into a dynamic buffer sequence until whitespace is encountered:
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffers_iterator</span><span class="special">&lt;</span>
-    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">const_buffers_1</span><span class="special">&gt;</span> <span class="identifier">iterator</span><span class="special">;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">&gt;</span> <span class="identifier">iterator</span><span class="special">;</span>
 
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">iterator</span><span class="special">,</span> <span class="keyword">bool</span><span class="special">&gt;</span>
 <span class="identifier">match_whitespace</span><span class="special">(</span><span class="identifier">iterator</span> <span class="identifier">begin</span><span class="special">,</span> <span class="identifier">iterator</span> <span class="identifier">end</span><span class="special">)</span>
@@ -203,7 +207,8 @@
 <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">read_until</span><span class="special">(</span><span class="identifier">s</span><span class="special">,</span> <span class="identifier">data</span><span class="special">,</span> <span class="identifier">match_char</span><span class="special">(</span><span class="char">'a'</span><span class="special">));</span>
 </pre>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

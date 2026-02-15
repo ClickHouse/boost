@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>post (1 of 3 overloads)</title>
+<title>post (1 of 7 overloads)</title>
 <link rel="stylesheet" href="../../../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../../boost_asio.html" title="Boost.Asio">
 <link rel="up" href="../post.html" title="post">
 <link rel="prev" href="../post.html" title="post">
-<link rel="next" href="overload2.html" title="post (2 of 3 overloads)">
+<link rel="next" href="overload2.html" title="post (2 of 7 overloads)">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -25,15 +25,15 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="boost_asio.reference.post.overload1"></a><a class="link" href="overload1.html" title="post (1 of 3 overloads)">post (1 of 3 overloads)</a>
+<a name="boost_asio.reference.post.overload1"></a><a class="link" href="overload1.html" title="post (1 of 7 overloads)">post (1 of 7 overloads)</a>
 </h4></div></div></div>
 <p>
           Submits a completion token or function object for execution.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <a class="link" href="../NullaryToken.html" title="Nullary token requirements">NullaryToken</a><span class="special">&gt;</span>
-<a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type"><span class="emphasis"><em>DEDUCED</em></span></a> <span class="identifier">post</span><span class="special">(</span>
-    <span class="identifier">NullaryToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span><span class="special">);</span>
+    <span class="keyword">typename</span> <a class="link" href="../NullaryToken.html" title="Nullary token requirements">NullaryToken</a> <span class="special">=</span> <span class="identifier">deferred_t</span><span class="special">&gt;</span>
+<span class="keyword">auto</span> <span class="identifier">post</span><span class="special">(</span>
+    <span class="identifier">NullaryToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">deferred_t</span><span class="special">());</span>
 </pre>
 <p>
           This function submits an object for execution using the object's associated
@@ -91,36 +91,36 @@
               Obtains the handler's associated executor object <code class="computeroutput"><span class="identifier">ex</span></code>
               of type <code class="computeroutput"><span class="identifier">Ex</span></code> by performing
             </p>
-<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">ex</span> <span class="special">=</span> <span class="identifier">get_associated_executor</span><span class="special">(</span><span class="identifier">handler</span><span class="special">);</span>
-</pre>
+<p class="simpara">
+              auto ex = get_associated_executor(completion_handler);
+            </p>
 </li>
 <li class="listitem">
 <p class="simpara">
               Obtains the handler's associated allocator object <code class="computeroutput"><span class="identifier">alloc</span></code>
               by performing
             </p>
-<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">alloc</span> <span class="special">=</span> <span class="identifier">get_associated_allocator</span><span class="special">(</span><span class="identifier">handler</span><span class="special">);</span>
-</pre>
+<p class="simpara">
+              auto alloc = get_associated_allocator(completion_handler);
+            </p>
 </li>
 <li class="listitem">
 <p class="simpara">
               If <code class="computeroutput"><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span><span class="identifier">Ex</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is true, performs
             </p>
-<pre class="programlisting"><span class="identifier">prefer</span><span class="special">(</span>
-    <span class="identifier">require</span><span class="special">(</span><span class="identifier">ex</span><span class="special">,</span> <span class="identifier">execution</span><span class="special">::</span><span class="identifier">blocking</span><span class="special">.</span><span class="identifier">never</span><span class="special">),</span>
-    <span class="identifier">execution</span><span class="special">::</span><span class="identifier">relationship</span><span class="special">.</span><span class="identifier">fork</span><span class="special">,</span>
-    <span class="identifier">execution</span><span class="special">::</span><span class="identifier">allocator</span><span class="special">(</span><span class="identifier">alloc</span><span class="special">)</span>
-  <span class="special">).</span><span class="identifier">execute</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">CompletionHandler</span><span class="special">&gt;(</span><span class="identifier">completion_handler</span><span class="special">));</span>
-</pre>
+<p class="simpara">
+              prefer( require(ex, execution::blocking.never), execution::relationship.fork,
+              execution::allocator(alloc) ).execute(std::forward&lt;CompletionHandler&gt;(completion_handler));
+            </p>
 </li>
 <li class="listitem">
 <p class="simpara">
               If <code class="computeroutput"><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span><span class="identifier">Ex</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is false, performs
             </p>
-<pre class="programlisting"><span class="identifier">ex</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span>
-    <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">CompletionHandler</span><span class="special">&gt;(</span><span class="identifier">completion_handler</span><span class="special">),</span>
-    <span class="identifier">alloc</span><span class="special">);</span>
-</pre>
+<p class="simpara">
+              ex.post( std::forward&lt;CompletionHandler&gt;(completion_handler),
+              alloc);
+            </p>
 </li>
 </ul></div>
 <h6>
@@ -131,7 +131,8 @@
 <pre class="programlisting"><span class="keyword">void</span><span class="special">()</span>
 </pre>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

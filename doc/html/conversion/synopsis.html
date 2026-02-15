@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="The Boost C++ Libraries BoostBook Documentation Subset">
-<link rel="up" href="../conversion.html" title="Chapter 9. The Conversion Library 1.7">
+<link rel="up" href="../conversion.html" title="Chapter 8. The Conversion Library 1.7">
 <link rel="prev" href="polymorphic_casts.html" title="Polymorphic casts">
 <link rel="next" href="history.html" title="History">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,17 +33,17 @@
 <span class="comment">// Throws: std::bad_cast if ( dynamic_cast&lt;Derived&gt;(x) == 0 )</span>
 <span class="comment">// Returns: dynamic_cast&lt;Derived&gt;(x)</span>
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Derived</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">Base</span><span class="special">&gt;</span>
-<span class="keyword">inline</span> <span class="identifier">Derived</span> <span class="identifier">polymorphic_cast</span><span class="special">(</span><span class="identifier">Base</span><span class="special">*</span> <span class="identifier">x</span><span class="special">);</span>
+<span class="keyword">constexpr</span> <span class="identifier">Derived</span> <span class="identifier">polymorphic_cast</span><span class="special">(</span><span class="identifier">Base</span><span class="special">*</span> <span class="identifier">x</span><span class="special">);</span>
 
 <span class="comment">// Effects: assert( dynamic_cast&lt;Derived&gt;(x) == x );</span>
 <span class="comment">// Returns: static_cast&lt;Derived&gt;(x)</span>
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Derived</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">Base</span><span class="special">&gt;</span>
-<span class="keyword">inline</span> <span class="identifier">Derived</span> <span class="identifier">polymorphic_downcast</span><span class="special">(</span><span class="identifier">Base</span><span class="special">*</span> <span class="identifier">x</span><span class="special">);</span>
+<span class="keyword">constexpr</span> <span class="identifier">Derived</span> <span class="identifier">polymorphic_downcast</span><span class="special">(</span><span class="identifier">Base</span><span class="special">*</span> <span class="identifier">x</span><span class="special">);</span>
 
 <span class="comment">// Effects: assert( dynamic_cast&lt;Derived&gt;(&amp;x) == &amp;x );</span>
 <span class="comment">// Returns: static_cast&lt;Derived&gt;(x)</span>
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Derived</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">Base</span><span class="special">&gt;</span>
-<span class="keyword">inline</span> <span class="identifier">Derived</span> <span class="identifier">polymorphic_downcast</span><span class="special">(</span><span class="identifier">Base</span><span class="special">&amp;</span> <span class="identifier">x</span><span class="special">);</span>
+<span class="keyword">constexpr</span> <span class="identifier">Derived</span> <span class="identifier">polymorphic_downcast</span><span class="special">(</span><span class="identifier">Base</span><span class="special">&amp;</span> <span class="identifier">x</span><span class="special">);</span>
 
 <span class="comment">// Throws: std::bad_cast if ( dynamic_pointer_cast&lt;Derived&gt;(x) == 0 )</span>
 <span class="comment">// Returns: dynamic_pointer_cast&lt;Derived&gt;(x)</span>
@@ -58,7 +58,7 @@
 <span class="special">}</span>
 </pre>
 </div>
-<div class="copyright-footer">Copyright © 2001 Beman Dawes<br>Copyright © 2014-2023 Antony Polukhin<p>
+<div class="copyright-footer">Copyright © 2001 Beman Dawes<br>Copyright © 2014-2025 Antony Polukhin<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

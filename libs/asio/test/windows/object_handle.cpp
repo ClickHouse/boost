@@ -2,7 +2,7 @@
 // object_handle.cpp
 // ~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2025 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -61,22 +61,18 @@ void test()
     HANDLE native_handle2 = INVALID_HANDLE_VALUE;
     win::object_handle handle4(ioc_ex, native_handle2);
 
-#if defined(BOOST_ASIO_HAS_MOVE)
     win::object_handle handle5(std::move(handle4));
 
     win::basic_object_handle<io_context::executor_type> handle6(ioc);
     win::object_handle handle7(std::move(handle6));
-#endif // defined(BOOST_ASIO_HAS_MOVE)
 
     // basic_object_handle operators.
 
-#if defined(BOOST_ASIO_HAS_MOVE)
     handle1 = win::object_handle(ioc);
     handle1 = std::move(handle3);
     handle1 = std::move(handle6);
-#endif // defined(BOOST_ASIO_HAS_MOVE)
 
-    // basic_io_object functions.
+    // I/O object functions.
 
     win::object_handle::executor_type ex = handle1.get_executor();
     (void)ex;

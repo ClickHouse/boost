@@ -7,15 +7,13 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_IMPL_PORT_RULE_IPP
-#define BOOST_URL_IMPL_PORT_RULE_IPP
 
 #include <boost/url/detail/config.hpp>
-#include <boost/url/rfc/detail/port_rule.hpp>
+#include "port_rule.hpp"
 #include <boost/url/grammar/parse.hpp>
 #include <boost/url/grammar/token_rule.hpp>
 #include <boost/url/grammar/unsigned_rule.hpp>
-#include <boost/static_assert.hpp>
+#include <boost/core/detail/static_assert.hpp>
 #include <type_traits>
 
 namespace boost {
@@ -104,4 +102,3 @@ parse(
 } // urls
 } // boost
 
-#endif

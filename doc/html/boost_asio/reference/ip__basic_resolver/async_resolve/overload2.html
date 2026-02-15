@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ip::basic_resolver::async_resolve (2 of 6 overloads)</title>
+<title>ip::basic_resolver::async_resolve (2 of 5 overloads)</title>
 <link rel="stylesheet" href="../../../../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../../../boost_asio.html" title="Boost.Asio">
 <link rel="up" href="../async_resolve.html" title="ip::basic_resolver::async_resolve">
-<link rel="prev" href="overload1.html" title="ip::basic_resolver::async_resolve (1 of 6 overloads)">
-<link rel="next" href="overload3.html" title="ip::basic_resolver::async_resolve (3 of 6 overloads)">
+<link rel="prev" href="overload1.html" title="ip::basic_resolver::async_resolve (1 of 5 overloads)">
+<link rel="next" href="overload3.html" title="ip::basic_resolver::async_resolve (3 of 5 overloads)">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -25,22 +25,24 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="boost_asio.reference.ip__basic_resolver.async_resolve.overload2"></a><a class="link" href="overload2.html" title="ip::basic_resolver::async_resolve (2 of 6 overloads)">ip::basic_resolver::async_resolve
-          (2 of 6 overloads)</a>
+<a name="boost_asio.reference.ip__basic_resolver.async_resolve.overload2"></a><a class="link" href="overload2.html" title="ip::basic_resolver::async_resolve (2 of 5 overloads)">ip::basic_resolver::async_resolve
+          (2 of 5 overloads)</a>
 </h5></div></div></div>
 <p>
             Asynchronously perform forward resolution of a query to a list of entries.
           </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <a class="link" href="../../ResolveToken.html" title="Resolve token requirements">ResolveToken</a> <span class="special">=</span> <a class="link" href="../../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../../ResolveToken.html" title="Resolve token requirements">ResolveToken</a> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span><span class="identifier">executor_type</span><span class="special">&gt;&gt;</span>
 <a class="link" href="../../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type"><span class="emphasis"><em>DEDUCED</em></span></a> <span class="identifier">async_resolve</span><span class="special">(</span>
     <span class="identifier">string_view</span> <span class="identifier">host</span><span class="special">,</span>
     <span class="identifier">string_view</span> <span class="identifier">service</span><span class="special">,</span>
-    <span class="identifier">ResolveToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <a class="link" href="../../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">);</span>
+    <span class="identifier">resolver_base</span><span class="special">::</span><span class="identifier">flags</span> <span class="identifier">resolve_flags</span><span class="special">,</span>
+    <span class="identifier">ResolveToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <span class="identifier">executor_type</span> <span class="special">&gt;());</span>
 </pre>
 <p>
             This function is used to resolve host and service names into a list of
-            endpoint entries.
+            endpoint entries. It is an initiating function for an <a class="link" href="../../../overview/model/async_ops.html" title="Asynchronous Operations">asynchronous
+            operation</a>, and always returns immediately.
           </p>
 <h6>
 <a name="boost_asio.reference.ip__basic_resolver.async_resolve.overload2.h0"></a>
@@ -64,6 +66,13 @@
                   an empty string, in which case all resolved endpoints will have
                   a port number of 0.
                 </p></dd>
+<dt><span class="term">resolve_flags</span></dt>
+<dd><p>
+                  A set of flags that determine how name resolution should be performed.
+                  The default flags are suitable for communication with remote hosts.
+                  See the <a class="link" href="../../ip__resolver_base.html" title="ip::resolver_base"><code class="computeroutput"><span class="identifier">ip</span><span class="special">::</span><span class="identifier">resolver_base</span></code></a> documentation
+                  for the set of available flags.
+                </p></dd>
 <dt><span class="term">token</span></dt>
 <dd>
 <p>
@@ -83,7 +92,7 @@
                   Regardless of whether the asynchronous operation completes immediately
                   or not, the completion handler will not be invoked from within
                   this function. On immediate completion, invocation of the handler
-                  will be performed in a manner equivalent to using <a class="link" href="../../post.html" title="post"><code class="computeroutput"><span class="identifier">post</span></code></a>.
+                  will be performed in a manner equivalent to using <a class="link" href="../../async_immediate.html" title="async_immediate"><code class="computeroutput"><span class="identifier">async_immediate</span></code></a>.
                 </p>
 </dd>
 </dl>
@@ -117,7 +126,8 @@
             names.
           </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

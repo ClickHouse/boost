@@ -31,7 +31,8 @@
         <a class="indexterm" name="boost_asio.indexterm.make_strand"></a>
       </p>
 <p>
-        The <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">make_strand</span></code> function creates a <a class="link" href="strand.html" title="strand"><code class="computeroutput"><span class="identifier">strand</span></code></a> object for an executor or
+        The <a class="link" href="make_strand.html" title="make_strand"><code class="computeroutput"><span class="identifier">make_strand</span></code></a>
+        function creates a <a class="link" href="strand.html" title="strand"><code class="computeroutput"><span class="identifier">strand</span></code></a> object for an executor or
         execution context.
       </p>
 <p>
@@ -42,7 +43,7 @@
     <span class="keyword">typename</span> <a class="link" href="Executor1.html" title="Executor requirements">Executor</a><span class="special">&gt;</span>
 <span class="identifier">strand</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;</span> <a class="link" href="make_strand/overload1.html" title="make_strand (1 of 2 overloads)">make_strand</a><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">Executor</span> <span class="special">&amp;</span> <span class="identifier">ex</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">||</span><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">||</span><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="make_strand/overload1.html" title="make_strand (1 of 2 overloads)">more...</a></em></span>
 </pre>
 <p>
@@ -53,7 +54,7 @@
     <span class="keyword">typename</span> <span class="identifier">ExecutionContext</span><span class="special">&gt;</span>
 <span class="identifier">strand</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">ExecutionContext</span><span class="special">::</span><span class="identifier">executor_type</span> <span class="special">&gt;</span> <a class="link" href="make_strand/overload2.html" title="make_strand (2 of 2 overloads)">make_strand</a><span class="special">(</span>
     <span class="identifier">ExecutionContext</span> <span class="special">&amp;</span> <span class="identifier">ctx</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">ExecutionContext</span> <span class="special">&amp;,</span> <span class="identifier">execution_context</span> <span class="special">&amp;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">ExecutionContext</span> <span class="special">&amp;,</span> <span class="identifier">execution_context</span> <span class="special">&amp;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="make_strand/overload2.html" title="make_strand (2 of 2 overloads)">more...</a></em></span>
 </pre>
 <h5>
@@ -67,7 +68,8 @@
         <span class="emphasis"><em>Convenience header: </em></span><code class="literal">boost/asio.hpp</code>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -75,7 +75,7 @@ The object of EqualTo type compares Values and returns [^`true`] if they are equ
 [[[#classboost_1_1geometry_1_1index_1_1rtree_1ad8fe544de514014a1bd87ea1b881ff9b] `value_equal`][The function object comparing objects of type Value. ]]
 [[[#classboost_1_1geometry_1_1index_1_1rtree_1ab6618b5c7e88ed70533233fbac0f5b2e] `allocator_type`][The type of allocator used by the container. ]]
 [[[#classboost_1_1geometry_1_1index_1_1rtree_1a9354ae77fb1cf24bac978e568f40aa80] `indexable_type`][The Indexable type to which Value is translated. ]]
-[[[#classboost_1_1geometry_1_1index_1_1rtree_1a12e80f9da4c68e0e687f1c2012321147] `bounds_type`][The Box type used by the R-tree. ]]
+[[[#classboost_1_1geometry_1_1index_1_1rtree_1a43b41434a34123f08c3b1d02bc5e2227] `bounds_type`][The Box type used by the R-tree. ]]
 [[[#classboost_1_1geometry_1_1index_1_1rtree_1a5301c3d7ee3589751579e0573a9e8165] `reference`][Type of reference to Value. ]]
 [[[#classboost_1_1geometry_1_1index_1_1rtree_1a615e622930be97ab1f3b8ceee641feaf] `const_reference`][Type of reference to const Value. ]]
 [[[#classboost_1_1geometry_1_1index_1_1rtree_1a762ced6b98d2cc6503e2b00549c6a89a] `pointer`][Type of pointer to Value. ]]
@@ -695,7 +695,7 @@ Insert a value to the index.
 
 
 
-[warning This operation only guarantees that there will be no memory leaks. After an exception is thrown the R-tree may be left in an inconsistent state, elements must not be inserted or removed. Other operations are allowed however some of them may return invalid data. ]
+[warning This operation only guarantees that there will be no memory leaks. After an exception is thrown the R-tree may be left in an inconsistent state, elements must not be inserted or removed. Other operations are allowed, however, some of them may return invalid data. ]
 
 [endsect]
 
@@ -724,7 +724,7 @@ Insert a range of values to the index.
 
 
 
-[warning This operation only guarantees that there will be no memory leaks. After an exception is thrown the R-tree may be left in an inconsistent state, elements must not be inserted or removed. Other operations are allowed however some of them may return invalid data. ]
+[warning This operation only guarantees that there will be no memory leaks. After an exception is thrown the R-tree may be left in an inconsistent state, elements must not be inserted or removed. Other operations are allowed, however, some of them may return invalid data. ]
 
 [endsect]
 
@@ -742,7 +742,7 @@ Insert a value created using convertible object or a range of values to the inde
 [heading Parameter(s)]
 [table 
 [[Type][Name][Description]]
-[[`ConvertibleOrRange const &`][ `conv_or_rng` ][An object of type convertible to value_type or a range of values.]]
+[[`ConvertibleOrRange const &`][ `conv_or_rng` ][An object of type convertible to [link classboost_1_1geometry_1_1index_1_1rtree_1a5761a41d87b93d4fd548ecb6600ae757 value_type] or a range of values.]]
 ]
 [heading Throws]
 
@@ -834,7 +834,7 @@ In contrast to the [^`std::set`] or [^`std::map erase()`] method it removes valu
 [heading Parameter(s)]
 [table 
 [[Type][Name][Description]]
-[[`ConvertibleOrRange const &`][ `conv_or_rng` ][The object of type convertible to value_type or a range of values.]]
+[[`ConvertibleOrRange const &`][ `conv_or_rng` ][The object of type convertible to [link classboost_1_1geometry_1_1index_1_1rtree_1a5761a41d87b93d4fd548ecb6600ae757 value_type] or a range of values.]]
 ]
 [heading Returns]
 The number of removed values.
@@ -1207,7 +1207,7 @@ Returns the box able to contain all values stored in the container.
 Returns the box able to contain all values stored in the container. If the container is empty the result of [^`geometry::assign_inverse()`] is returned.[heading Synopsis]
 [pre
 
-[^[link classboost_1_1geometry_1_1index_1_1rtree_1a12e80f9da4c68e0e687f1c2012321147 bounds_type]] `bounds``()`
+[^[link classboost_1_1geometry_1_1index_1_1rtree_1a43b41434a34123f08c3b1d02bc5e2227 bounds_type]] `bounds``()`
 ]
 
 [heading Modifier(s)]
@@ -1224,7 +1224,7 @@ Nothing.
 Count Values or Indexables stored in the container. 
 
 [heading Description]
-For indexable_type it returns the number of values which indexables equals the parameter. For value_type it returns the number of values which equals the parameter.[heading Synopsis]
+For [link classboost_1_1geometry_1_1index_1_1rtree_1a9354ae77fb1cf24bac978e568f40aa80 indexable_type] it returns the number of values which indexables equals the parameter. For [link classboost_1_1geometry_1_1index_1_1rtree_1a5761a41d87b93d4fd548ecb6600ae757 value_type] it returns the number of values which equals the parameter.[heading Synopsis]
 [pre
 `template<``typename ValueOrIndexable``>`
 [^[link classboost_1_1geometry_1_1index_1_1rtree_1acc1f90d7b70afebc58107c523ece5cd5 size_type]] `count``(``ValueOrIndexable const &` `vori``)`
@@ -1275,7 +1275,7 @@ Returns function retrieving Indexable from Value.
 
 [heading Modifier(s)]
 ``const ``[heading Returns]
-The indexable_getter object.
+The [link classboost_1_1geometry_1_1index_1_1rtree_1a43a7adb311cafc08e23010ccb4e97fb5 indexable_getter] object.
 [heading Throws]
 Nothing. 
 
@@ -1294,7 +1294,7 @@ Returns function comparing Values.
 
 [heading Modifier(s)]
 ``const ``[heading Returns]
-The value_equal function.
+The [link classboost_1_1geometry_1_1index_1_1rtree_1ad8fe544de514014a1bd87ea1b881ff9b value_equal] function.
 [heading Throws]
 Nothing. 
 

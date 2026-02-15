@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Color Space and Layout - Boost.GIL  documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -23,6 +24,9 @@
     <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="Boost.GIL  documentation" href="../index.html" />
@@ -37,7 +41,7 @@
       <tr>
         <td valign="top" width="300">
           <h3><a href="../index.html"><img
-          alt="C++ Boost" src="../_static/gil.png" border="0"></a></h3>
+          alt="C++ Boost" src="../../_static/gil.png" border="0"></a></h3>
         </td>
 
         <td >
@@ -68,16 +72,16 @@
       
     </div>
       
-  <div class="section" id="color-space-and-layout">
+  <section id="color-space-and-layout">
 <h1>Color Space and Layout</h1>
-<div class="contents local topic" id="contents">
+<nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
 <li><p><a class="reference internal" href="#models" id="id2">Models</a></p></li>
 </ul>
-</div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#id1">Overview</a></h2>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a></h2>
 <p>A color space captures the set and interpretation of channels comprising a
 pixel. In Boost.GIL, color space is defined as an MPL random access sequence
 containing the types of all elements in the color space.</p>
@@ -91,9 +95,9 @@ same set of colors in the same order).</p>
 <li><p><a class="reference external" href="../reference/structboost_1_1gil_1_1_channel_mapping_concept.html">ChannelMappingConcept&lt;Mapping&gt;</a></p></li>
 </ul>
 </div>
-</div>
-<div class="section" id="models">
-<h2><a class="toc-backref" href="#id2">Models</a></h2>
+</section>
+<section id="models">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Models</a></h2>
 <p>GIL currently provides the following color spaces:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">gray_t</span></code></p></li>
@@ -116,11 +120,11 @@ same set of colors in the same order).</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">argb_layout_t</span></code></p></li>
 </ul>
 <p>As an example, here is how GIL defines the RGBA color space:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">red_t</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">green_t</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">blue_t</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">alpha_t</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
-<span class="n">rgba_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list</span><span class="o">&lt;</span><span class="n">red_t</span><span class="p">,</span><span class="w"> </span><span class="n">green_t</span><span class="p">,</span><span class="w"> </span><span class="n">blue_t</span><span class="p">,</span><span class="w"> </span><span class="n">alpha_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">red_t</span><span class="w"> </span><span class="p">{};</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">green_t</span><span class="w"> </span><span class="p">{};</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">blue_t</span><span class="w"> </span><span class="p">{};</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">alpha_t</span><span class="w"> </span><span class="p">{};</span>
+<span class="n">rgba_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list</span><span class="o">&lt;</span><span class="n">red_t</span><span class="p">,</span><span class="w"> </span><span class="n">green_t</span><span class="p">,</span><span class="w"> </span><span class="n">blue_t</span><span class="p">,</span><span class="w"> </span><span class="n">alpha_t</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>The ordering of the channels in the color space definition specifies their
@@ -131,27 +135,27 @@ color space, channels may vary in their physical ordering in memory.</p>
 an MPL random access sequence of integral types.
 A color space and its associated mapping are often used together.</p>
 <p>Thus they are grouped in GIL’s layout:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"></span>
-<span class="o">&lt;</span><span class="w"></span>
-<span class="w">    </span><span class="k">typename</span><span class="w"> </span><span class="nc">ColorSpace</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">typename</span><span class="w"> </span><span class="nc">ChannelMapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">make_integer_sequence</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_size</span><span class="o">&lt;</span><span class="n">ColorSpace</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">layout</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">color_space_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColorSpace</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">channel_mapping_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChannelMapping</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span>
+<span class="o">&lt;</span>
+<span class="w">    </span><span class="k">typename</span><span class="w"> </span><span class="nc">ColorSpace</span><span class="p">,</span>
+<span class="w">    </span><span class="k">typename</span><span class="w"> </span><span class="nc">ChannelMapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">make_integer_sequence</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_size</span><span class="o">&lt;</span><span class="n">ColorSpace</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;</span>
+<span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">layout</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">color_space_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColorSpace</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">channel_mapping_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChannelMapping</span><span class="p">;</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>Here is how to create layouts for the RGBA color space:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">rgba_layout_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layout</span><span class="o">&lt;</span><span class="n">rgba_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// default ordering is 0,1,2,3...</span>
-<span class="k">using</span><span class="w"> </span><span class="n">bgra_layout_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layout</span><span class="o">&lt;</span><span class="n">rgba_t</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list_c</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">argb_layout_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layout</span><span class="o">&lt;</span><span class="n">rgba_t</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list_c</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">abgr_layout_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layout</span><span class="o">&lt;</span><span class="n">rgba_t</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list_c</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">bgra_layout_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layout</span><span class="o">&lt;</span><span class="n">rgba_t</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list_c</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">argb_layout_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layout</span><span class="o">&lt;</span><span class="n">rgba_t</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list_c</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">abgr_layout_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layout</span><span class="o">&lt;</span><span class="n">rgba_t</span><span class="p">,</span><span class="w"> </span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list_c</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     <div class="navbar" style="text-align:right;">
@@ -164,7 +168,7 @@ A color space and its associated mapping are often used together.</p>
     </div>
     </div>
     <div class="footer" role="contentinfo">
-      Last updated on 2023-08-08 21:08:21.
+      Last updated on 2025-12-03 13:12:03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.2.1.
     </div>
   </body>

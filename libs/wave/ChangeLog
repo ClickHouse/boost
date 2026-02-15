@@ -18,6 +18,22 @@ TODO (known issues):
 
 CHANGELOG
 
+Boost V1.87:
+  - Fixed #220: Seg fault under C++20 and empty stringify parameter (thanks jwnhy)
+  - Fixed #222: No line directive if first line of included file is blank (thanks Nick Nobles)
+  - Misc build fixes: CI server update, deprecated headers, modular build
+
+Boost V1.86:
+  - Fixed #197: Improper signed overflow handling (UB and a missing division check)
+  - Replaced usage of vsprintf() with the more secure vsnprintf()
+
+Boost V1.85:
+  - Fixed #200: Emitted pragmas lack terminating newline
+  - Fixed #202: YYMARKER not updated when fill called on BOOST_WAVE_BSIZE boundary
+
+Boost V1.84:
+  - Fixed #188: Segmentation fault when "#pragma\n" is encountered
+
 Boost V1.82:
   - Fixed #182: cpp_re.hpp has a memmove that passes 0/null as arguments
 

@@ -38,6 +38,7 @@
 #include <boost/geometry/io/wkt/wkt.hpp>
 
 #include <boost/geometry/util/condition.hpp>
+#include <boost/geometry/util/is_inverse_spheroidal_coordinates.hpp>
 
 #include <boost/geometry/views/detail/indexed_point_view.hpp>
 
@@ -137,11 +138,7 @@ private:
                                      double height_max2,
                                      double tolerance)
         {
-            typedef typename bg::coordinate_system
-                <
-                    Box
-                >::type::units box_units_type;
-
+            using box_units_type = bg::detail::coordinate_system_units_t<Box>;
             std::string const units_str = units2string<box_units_type>();
 
             Box detected;

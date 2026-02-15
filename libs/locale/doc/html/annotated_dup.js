@@ -46,7 +46,7 @@ var annotated_dup =
         [ "date_time_period_set", "classboost_1_1locale_1_1date__time__period__set.html", "classboost_1_1locale_1_1date__time__period__set" ],
         [ "generator", "classboost_1_1locale_1_1generator.html", "classboost_1_1locale_1_1generator" ],
         [ "generic_codecvt", "classboost_1_1locale_1_1generic__codecvt.html", null ],
-        [ "generic_codecvt< CharType, CodecvtImpl, 1 >", "classboost_1_1locale_1_1generic__codecvt_3_01CharType_00_01CodecvtImpl_00_011_01_4.html", null ],
+        [ "generic_codecvt< char, CodecvtImpl, 1 >", "classboost_1_1locale_1_1generic__codecvt_3_01char_00_01CodecvtImpl_00_011_01_4.html", null ],
         [ "generic_codecvt< CharType, CodecvtImpl, 2 >", "classboost_1_1locale_1_1generic__codecvt_3_01CharType_00_01CodecvtImpl_00_012_01_4.html", null ],
         [ "generic_codecvt< CharType, CodecvtImpl, 4 >", "classboost_1_1locale_1_1generic__codecvt_3_01CharType_00_01CodecvtImpl_00_014_01_4.html", null ],
         [ "generic_codecvt_base", "classboost_1_1locale_1_1generic__codecvt__base.html", "classboost_1_1locale_1_1generic__codecvt__base" ],

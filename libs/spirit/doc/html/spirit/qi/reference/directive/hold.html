@@ -179,9 +179,9 @@
               The <code class="computeroutput"><span class="identifier">hold</span><span class="special">[]</span></code>
               directive uses <code class="computeroutput"><span class="identifier">swap</span><span class="special">()</span></code> to implement the rollback/commit
               semantics for the attribute. For this reason the attribute type needs
-              to to be usable with <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code>
-              (needs to either define a proper overload for <code class="computeroutput"><span class="identifier">swap</span><span class="special">(</span><span class="identifier">attribute_type</span><span class="special">&amp;,</span> <span class="identifier">attribute_type</span><span class="special">&amp;)</span></code> or expose a member function
-              <code class="computeroutput"><span class="identifier">attribute_type</span><span class="special">::</span><span class="identifier">swap</span><span class="special">(</span><span class="identifier">attribute_type</span><span class="special">&amp;)</span></code>.
+              to to be usable with <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code>
+              (needs to define a proper overload for <code class="computeroutput"><span class="identifier">swap</span><span class="special">(</span><span class="identifier">attribute_type</span><span class="special">&amp;,</span> <span class="identifier">attribute_type</span><span class="special">&amp;)</span></code> or be both move-constructible
+              and move-assignable.
             </p></td></tr>
 </table></div>
 <h6>

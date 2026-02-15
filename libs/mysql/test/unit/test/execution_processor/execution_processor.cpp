@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+// Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -15,8 +15,6 @@
 
 #include <boost/mysql/detail/coldef_view.hpp>
 #include <boost/mysql/detail/execution_processor/execution_processor.hpp>
-
-#include <boost/mysql/impl/internal/protocol/protocol.hpp>
 
 #include <boost/test/unit_test.hpp>
 

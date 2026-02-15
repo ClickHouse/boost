@@ -41,15 +41,14 @@
             if the signal is already in the set.
           </p>
 <p>
-            Flags other than flags::dont_care require OS support for the <code class="computeroutput"><span class="identifier">sigaction</span></code> call, and this function will
-            fail with <code class="computeroutput"><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_not_supported</span></code> if this is
-            unavailable.
+            Flags other than <code class="computeroutput"><span class="identifier">flags</span><span class="special">::</span><span class="identifier">dont_care</span></code>
+            require OS support for the <code class="computeroutput"><span class="identifier">sigaction</span></code>
+            call, and this function will fail with <code class="computeroutput"><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_not_supported</span></code>
+            if this is unavailable.
           </p>
 <p>
             The specified flags will conflict with a prior, active registration of
-            the same signal, if either specified a flags value other than flags::dont_care.
-            In this case, the <code class="computeroutput"><span class="identifier">add</span></code>
-            will fail with <code class="computeroutput"><span class="identifier">error</span><span class="special">::</span><span class="identifier">invalid_argument</span></code>.
+            the same signal, if either specified a flags value other than <code class="computeroutput"><span class="identifier">flags</span><span class="special">::</span><span class="identifier">dont_care</span></code>. In this case, the <code class="computeroutput"><span class="identifier">add</span></code> will fail with <code class="computeroutput"><span class="identifier">error</span><span class="special">::</span><span class="identifier">invalid_argument</span></code>.
           </p>
 <h6>
 <a name="boost_asio.reference.basic_signal_set.add.overload4.h0"></a>
@@ -73,7 +72,8 @@
 </dl>
 </div>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

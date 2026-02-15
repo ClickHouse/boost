@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="The Boost C++ Libraries BoostBook Documentation Subset">
-<link rel="up" href="../interprocess.html" title="Chapter 16. Boost.Interprocess">
+<link rel="up" href="../interprocess.html" title="Chapter 15. Boost.Interprocess">
 <link rel="prev" href="architecture.html" title="Architecture and internals">
 <link rel="next" href="acknowledgements_notes.html" title="Acknowledgements, notes and links">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -146,7 +146,7 @@
                   can't use at all. This extra bytes will be used to store additional
                   data that should not be overwritten. So, <span class="bold"><strong>my_algorithm</strong></span>
                   will be placed at address XXX of the memory segment, and will manage
-                  the <span class="bold"><strong>[XXX + sizeof(my_algorithm) + extra_hdr_bytes,
+                  the <span class="bold"><strong>(XXX + sizeof(my_algorithm) + extra_hdr_bytes,
                   XXX + size)</strong></span> range of the segment.
                 </li>
 </ul></div>
@@ -185,7 +185,7 @@
             managed memory by <span class="bold"><strong>my_algorithm</strong></span> in <span class="bold"><strong>extra_size</strong></span> bytes. So <span class="bold"><strong>size()</strong></span>
             function should return the updated size, and the new managed memory range
             will be (if the address where the algorithm is constructed is XXX):
-            <span class="bold"><strong>[XXX + sizeof(my_algorithm) + extra_hdr_bytes,
+            <span class="bold"><strong>(XXX + sizeof(my_algorithm) + extra_hdr_bytes,
             XXX + old_size + extra_size)</strong></span>. This function should offer the
             same synchronization as <code class="computeroutput"><span class="identifier">allocate</span><span class="special">()</span></code>.
           </li>
@@ -364,8 +364,6 @@
         For example, the index type <code class="computeroutput"><span class="identifier">flat_map_index</span></code>
         based in <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">interprocess</span><span class="special">::</span><span class="identifier">flat_map</span></code> is just defined as:
       </p>
-<p>
-</p>
 <pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">boost</span> <span class="special">{</span> <span class="keyword">namespace</span> <span class="identifier">interprocess</span> <span class="special">{</span>
 
 <span class="preprocessor">#ifndef</span> <span class="identifier">BOOST_INTERPROCESS_DOXYGEN_INVOKED</span>
@@ -382,8 +380,8 @@
    <span class="keyword">typedef</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">key_type</span><span class="special">,</span> <span class="identifier">mapped_type</span><span class="special">&gt;</span>        <span class="identifier">value_type</span><span class="special">;</span>
    <span class="keyword">typedef</span> <span class="identifier">allocator</span><span class="special">&lt;</span><span class="identifier">value_type</span>
                     <span class="special">,</span><span class="identifier">segment_manager_base</span><span class="special">&gt;</span>   <span class="identifier">allocator_type</span><span class="special">;</span>
-   <span class="keyword">typedef</span> <span class="identifier">flat_map</span><span class="special">&lt;</span><span class="identifier">key_type</span><span class="special">,</span>  <span class="identifier">mapped_type</span><span class="special">,</span>
-                    <span class="identifier">key_less</span><span class="special">,</span> <span class="identifier">allocator_type</span><span class="special">&gt;</span>      <span class="identifier">index_t</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">container</span><span class="special">::</span><span class="identifier">flat_map</span><span class="special">&lt;</span><span class="identifier">key_type</span><span class="special">,</span>  <span class="identifier">mapped_type</span><span class="special">,</span>
+                                      <span class="identifier">key_less</span><span class="special">,</span> <span class="identifier">allocator_type</span><span class="special">&gt;</span>      <span class="identifier">index_t</span><span class="special">;</span>
 <span class="special">};</span>
 
 <span class="preprocessor">#endif</span>   <span class="comment">//#ifndef BOOST_INTERPROCESS_DOXYGEN_INVOKED</span>
@@ -393,35 +391,59 @@
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">MapConfig</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">flat_map_index</span>
    <span class="comment">//Derive class from flat_map specialization</span>
-   <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">flat_map_index_aux</span><span class="special">&lt;</span><span class="identifier">MapConfig</span><span class="special">&gt;::</span><span class="identifier">index_t</span>
+   <span class="special">:</span> <span class="keyword">private</span> <span class="identifier">flat_map_index_aux</span><span class="special">&lt;</span><span class="identifier">MapConfig</span><span class="special">&gt;::</span><span class="identifier">index_t</span>
 <span class="special">{</span>
    <span class="preprocessor">#if</span> <span class="special">!</span><span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_INTERPROCESS_DOXYGEN_INVOKED</span><span class="special">)</span>
    <span class="keyword">typedef</span> <span class="identifier">flat_map_index_aux</span><span class="special">&lt;</span><span class="identifier">MapConfig</span><span class="special">&gt;</span>  <span class="identifier">index_aux</span><span class="special">;</span>
    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">index_aux</span><span class="special">::</span><span class="identifier">index_t</span>    <span class="identifier">base_type</span><span class="special">;</span>
    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">index_aux</span><span class="special">::</span>
-      <span class="identifier">segment_manager_base</span>          <span class="identifier">segment_manager_base</span><span class="special">;</span>
+      <span class="identifier">segment_manager_base</span>                   <span class="identifier">segment_manager_base</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">key_type</span>      <span class="identifier">key_type</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">mapped_type</span>   <span class="identifier">mapped_type</span><span class="special">;</span>
    <span class="preprocessor">#endif</span>   <span class="comment">//#ifndef BOOST_INTERPROCESS_DOXYGEN_INVOKED</span>
 
    <span class="keyword">public</span><span class="special">:</span>
+   <span class="keyword">using</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">begin</span><span class="special">;</span>
+   <span class="keyword">using</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">end</span><span class="special">;</span>
+   <span class="keyword">using</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">size</span><span class="special">;</span>
+   <span class="keyword">using</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">erase</span><span class="special">;</span>
+   <span class="keyword">using</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">shrink_to_fit</span><span class="special">;</span>
+   <span class="keyword">using</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">reserve</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">iterator</span>         <span class="identifier">iterator</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">const_iterator</span>   <span class="identifier">const_iterator</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">value_type</span>       <span class="identifier">value_type</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="identifier">MapConfig</span><span class="special">::</span><span class="identifier">compare_key_type</span> <span class="identifier">compare_key_type</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="identifier">iterator</span>                             <span class="identifier">insert_commit_data</span><span class="special">;</span>
+   <span class="keyword">typedef</span> <span class="identifier">iterator</span>                             <span class="identifier">index_data_t</span><span class="special">;</span>
+
    <span class="comment">//!Constructor. Takes a pointer to the segment manager. Can throw</span>
    <span class="identifier">flat_map_index</span><span class="special">(</span><span class="identifier">segment_manager_base</span> <span class="special">*</span><span class="identifier">segment_mngr</span><span class="special">)</span>
       <span class="special">:</span> <span class="identifier">base_type</span><span class="special">(</span><span class="keyword">typename</span> <span class="identifier">index_aux</span><span class="special">::</span><span class="identifier">key_less</span><span class="special">(),</span>
                   <span class="keyword">typename</span> <span class="identifier">index_aux</span><span class="special">::</span><span class="identifier">allocator_type</span><span class="special">(</span><span class="identifier">segment_mngr</span><span class="special">))</span>
    <span class="special">{}</span>
 
-   <span class="comment">//!This reserves memory to optimize the insertion of n elements in the index</span>
-   <span class="keyword">void</span> <span class="identifier">reserve</span><span class="special">(</span><span class="keyword">typename</span> <span class="identifier">segment_manager_base</span><span class="special">::</span><span class="identifier">size_type</span> <span class="identifier">n</span><span class="special">)</span>
-   <span class="special">{</span>  <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">reserve</span><span class="special">(</span><span class="identifier">n</span><span class="special">);</span>  <span class="special">}</span>
+   <span class="identifier">std</span><span class="special">::</span><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">iterator</span><span class="special">,</span> <span class="keyword">bool</span><span class="special">&gt;</span> <span class="identifier">insert_check</span>
+      <span class="special">(</span><span class="keyword">const</span> <span class="identifier">compare_key_type</span><span class="special">&amp;</span> <span class="identifier">key</span><span class="special">,</span> <span class="identifier">insert_commit_data</span><span class="special">&amp;)</span>
+   <span class="special">{</span>
+      <span class="identifier">std</span><span class="special">::</span><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">iterator</span><span class="special">,</span> <span class="keyword">bool</span><span class="special">&gt;</span> <span class="identifier">r</span><span class="special">;</span>
+      <span class="identifier">r</span><span class="special">.</span><span class="identifier">first</span> <span class="special">=</span> <span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">base_type</span><span class="special">::</span><span class="identifier">find</span><span class="special">(</span><span class="identifier">key_type</span><span class="special">(</span><span class="identifier">key</span><span class="special">.</span><span class="identifier">str</span><span class="special">(),</span> <span class="identifier">key</span><span class="special">.</span><span class="identifier">len</span><span class="special">()));</span>
+      <span class="identifier">r</span><span class="special">.</span><span class="identifier">second</span> <span class="special">=</span> <span class="identifier">r</span><span class="special">.</span><span class="identifier">first</span> <span class="special">==</span> <span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">base_type</span><span class="special">::</span><span class="identifier">end</span><span class="special">();</span>
+      <span class="keyword">return</span> <span class="identifier">r</span><span class="special">;</span>
+   <span class="special">}</span>
 
-   <span class="comment">//!This frees all unnecessary memory</span>
-   <span class="keyword">void</span> <span class="identifier">shrink_to_fit</span><span class="special">()</span>
-   <span class="special">{</span>  <span class="identifier">base_type</span><span class="special">::</span><span class="identifier">shrink_to_fit</span><span class="special">();</span>   <span class="special">}</span>
+   <span class="identifier">iterator</span> <span class="identifier">insert_commit</span>
+      <span class="special">(</span><span class="keyword">const</span> <span class="identifier">compare_key_type</span> <span class="special">&amp;</span><span class="identifier">k</span><span class="special">,</span> <span class="keyword">void</span> <span class="special">*</span><span class="identifier">context</span><span class="special">,</span> <span class="identifier">index_data_t</span><span class="special">&amp;,</span> <span class="identifier">insert_commit_data</span><span class="special">&amp;</span> <span class="special">)</span>
+   <span class="special">{</span>
+      <span class="comment">//Now commit the insertion using previous context data</span>
+      <span class="keyword">return</span> <span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">base_type</span><span class="special">::</span><span class="identifier">insert</span><span class="special">(</span><span class="identifier">value_type</span><span class="special">(</span><span class="identifier">key_type</span><span class="special">(</span><span class="identifier">k</span><span class="special">.</span><span class="identifier">str</span><span class="special">(),</span> <span class="identifier">k</span><span class="special">.</span><span class="identifier">len</span><span class="special">()),</span> <span class="identifier">mapped_type</span><span class="special">(</span><span class="identifier">context</span><span class="special">))).</span><span class="identifier">first</span><span class="special">;</span>
+   <span class="special">}</span>
+
+   <span class="identifier">iterator</span> <span class="identifier">find</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">compare_key_type</span><span class="special">&amp;</span> <span class="identifier">k</span><span class="special">)</span>
+   <span class="special">{</span>  <span class="keyword">return</span> <span class="keyword">this</span><span class="special">-&gt;</span><span class="identifier">base_type</span><span class="special">::</span><span class="identifier">find</span><span class="special">(</span><span class="identifier">key_type</span><span class="special">(</span><span class="identifier">k</span><span class="special">.</span><span class="identifier">str</span><span class="special">(),</span> <span class="identifier">k</span><span class="special">.</span><span class="identifier">len</span><span class="special">()));</span>   <span class="special">}</span>
 <span class="special">};</span>
 
 <span class="special">}}</span>   <span class="comment">//namespace boost { namespace interprocess</span>
 </pre>
-<p>
-      </p>
 <p>
         If the user is defining a node container based index (a container whose iterators
         are not invalidated when inserting or erasing other elements), <span class="bold"><strong>Boost.Interprocess</strong></span> can optimize named object destruction
@@ -473,7 +495,7 @@
 </pre>
 </div>
 </div>
-<div class="copyright-footer">Copyright © 2005-2015 Ion Gaztanaga<p>
+<div class="copyright-footer">Copyright © 2005-2024 Ion Gaztanaga<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

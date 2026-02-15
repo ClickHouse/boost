@@ -2,7 +2,7 @@
 // thread_pool.cpp
 // ~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2025 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -16,23 +16,13 @@
 // Test that header file is self-contained.
 #include <boost/asio/thread_pool.hpp>
 
+#include <functional>
 #include <boost/asio/dispatch.hpp>
 #include <boost/asio/post.hpp>
 #include "unit_test.hpp"
 
-#if defined(BOOST_ASIO_HAS_BOOST_BIND)
-# include <boost/bind/bind.hpp>
-#else // defined(BOOST_ASIO_HAS_BOOST_BIND)
-# include <functional>
-#endif // defined(BOOST_ASIO_HAS_BOOST_BIND)
-
 using namespace boost::asio;
-
-#if defined(BOOST_ASIO_HAS_BOOST_BIND)
-namespace bindns = boost;
-#else // defined(BOOST_ASIO_HAS_BOOST_BIND)
 namespace bindns = std;
-#endif
 
 void increment(int* count)
 {
@@ -109,6 +99,40 @@ private:
 boost::asio::execution_context::id test_service::id;
 #endif // defined(BOOST_ASIO_NO_TYPEID)
 
+class test_context_service : public boost::asio::execution_context::service
+{
+public:
+  static boost::asio::execution_context::id id;
+
+  test_context_service(boost::asio::execution_context& c, int value = 0)
+    : boost::asio::execution_context::service(c),
+      value_(value)
+  {
+  }
+
+  int get_value() const
+  {
+    return value_;
+  }
+
+private:
+  virtual void shutdown() {}
+
+  int value_;
+};
+
+boost::asio::execution_context::id test_context_service::id;
+
+class test_context_service_maker :
+  public boost::asio::execution_context::service_maker
+{
+public:
+  void make(boost::asio::execution_context& ctx) const override
+  {
+    (void)boost::asio::make_service<test_context_service>(ctx, 42);
+  }
+};
+
 void thread_pool_service_test()
 {
   boost::asio::thread_pool pool1(1);
@@ -164,6 +188,14 @@ void thread_pool_service_test()
   delete svc4;
 
   BOOST_ASIO_CHECK(!boost::asio::has_service<test_service>(pool3));
+
+  // Initial service registration.
+
+  boost::asio::thread_pool pool4{1, test_context_service_maker{}};
+
+  BOOST_ASIO_CHECK(boost::asio::has_service<test_context_service>(pool4));
+  BOOST_ASIO_CHECK(boost::asio::use_service<test_context_service>(pool4).get_value()
+      == 42);
 }
 
 void thread_pool_executor_query_test()
@@ -205,17 +237,15 @@ void thread_pool_executor_query_test()
         boost::asio::execution::relationship.fork)
       == boost::asio::execution::relationship.fork);
 
-#if !defined(BOOST_ASIO_NO_DEPRECATED)
-  BOOST_ASIO_CHECK(
-      boost::asio::query(pool.executor(),
-        boost::asio::execution::bulk_guarantee)
-      == boost::asio::execution::bulk_guarantee.parallel);
-#endif // !defined(BOOST_ASIO_NO_DEPRECATED)
-
   BOOST_ASIO_CHECK(
       boost::asio::query(pool.executor(),
         boost::asio::execution::mapping)
       == boost::asio::execution::mapping.thread);
+
+  BOOST_ASIO_CHECK(
+      boost::asio::query(pool.executor(),
+        boost::asio::execution::inline_exception_handling)
+      == boost::asio::execution::inline_exception_handling.terminate);
 
   BOOST_ASIO_CHECK(
       boost::asio::query(pool.executor(),
@@ -290,232 +320,107 @@ void thread_pool_executor_execute_test()
   BOOST_ASIO_CHECK(count == 10);
 }
 
-#if !defined(BOOST_ASIO_NO_DEPRECATED)
-
-struct receiver
+template <typename T>
+class custom_allocator
 {
-  int* count_;
+public:
+  using value_type = T;
 
-  receiver(int* count)
-    : count_(count)
+  custom_allocator(int* live_count, int* total_count)
+    : live_count_(live_count),
+      total_count_(total_count)
   {
   }
 
-  receiver(const receiver& other) BOOST_ASIO_NOEXCEPT
-    : count_(other.count_)
+  template <typename U>
+  custom_allocator(const custom_allocator<U>& other) noexcept
+    : live_count_(other.live_count_),
+      total_count_(other.total_count_)
   {
   }
 
-#if defined(BOOST_ASIO_HAS_MOVE)
-  receiver(receiver&& other) BOOST_ASIO_NOEXCEPT
-    : count_(other.count_)
+  bool operator==(const custom_allocator& other) const noexcept
   {
-    other.count_ = 0;
-  }
-#endif // defined(BOOST_ASIO_HAS_MOVE)
-
-  void set_value() BOOST_ASIO_NOEXCEPT
-  {
-    ++(*count_);
+    return &live_count_ == &other.live_count_ &&
+      &total_count_ == &other.total_count_;;
   }
 
-  template <typename E>
-  void set_error(BOOST_ASIO_MOVE_ARG(E) e) BOOST_ASIO_NOEXCEPT
+  bool operator!=(const custom_allocator& other) const noexcept
   {
-    (void)e;
+    return &live_count_ != &other.live_count_ ||
+      &total_count_ != &other.total_count_;
   }
 
-  void set_done() BOOST_ASIO_NOEXCEPT
+  T* allocate(std::size_t n) const
   {
+    ++(*live_count_);
+    ++(*total_count_);
+    return static_cast<T*>(::operator new(sizeof(T) * n));
   }
+
+  void deallocate(T* p, std::size_t /*n*/) const
+  {
+    --(*live_count_);
+    ::operator delete(p);
+  }
+
+private:
+  template <typename> friend class custom_allocator;
+
+  int* live_count_;
+  int* total_count_;
 };
 
-namespace boost {
-namespace asio {
-namespace traits {
-
-#if !defined(BOOST_ASIO_HAS_DEDUCED_SET_VALUE_MEMBER_TRAIT)
-
-template <>
-struct set_value_member<receiver, void()>
+void thread_pool_allocator_test()
 {
-  BOOST_ASIO_STATIC_CONSTEXPR(bool, is_valid = true);
-  BOOST_ASIO_STATIC_CONSTEXPR(bool, is_noexcept = true);
-  typedef void result_type;
-};
+  int live_count;
+  int total_count;
 
-#endif // !defined(BOOST_ASIO_HAS_DEDUCED_SET_VALUE_MEMBER_TRAIT)
+#if !defined(BOOST_ASIO_NO_TS_EXECUTORS)
+  {
+    live_count = 0;
+    total_count = 0;
+    thread_pool pool1(std::allocator_arg,
+        custom_allocator<int>(&live_count, &total_count));
+    (void)pool1;
 
-#if !defined(BOOST_ASIO_HAS_DEDUCED_SET_ERROR_MEMBER_TRAIT)
+    BOOST_ASIO_CHECK(live_count > 0);
+    BOOST_ASIO_CHECK(total_count > 0);
+  }
 
-template <typename E>
-struct set_error_member<receiver, E>
-{
-  BOOST_ASIO_STATIC_CONSTEXPR(bool, is_valid = true);
-  BOOST_ASIO_STATIC_CONSTEXPR(bool, is_noexcept = true);
-  typedef void result_type;
-};
+  BOOST_ASIO_CHECK(live_count == 0);
+  BOOST_ASIO_CHECK(total_count > 0);
+#endif // !defined(BOOST_ASIO_NO_TS_EXECUTORS)
 
-#endif // !defined(BOOST_ASIO_HAS_DEDUCED_SET_ERROR_MEMBER_TRAIT)
+  {
+    live_count = 0;
+    total_count = 0;
+    thread_pool pool2(std::allocator_arg,
+        custom_allocator<int>(&live_count, &total_count), 1);
+    (void)pool2;
 
-#if !defined(BOOST_ASIO_HAS_DEDUCED_SET_DONE_MEMBER_TRAIT)
+    BOOST_ASIO_CHECK(live_count > 0);
+    BOOST_ASIO_CHECK(total_count > 0);
+  }
 
-template <>
-struct set_done_member<receiver>
-{
-  BOOST_ASIO_STATIC_CONSTEXPR(bool, is_valid = true);
-  BOOST_ASIO_STATIC_CONSTEXPR(bool, is_noexcept = true);
-  typedef void result_type;
-};
+  BOOST_ASIO_CHECK(live_count == 0);
+  BOOST_ASIO_CHECK(total_count > 0);
 
-#endif // !defined(BOOST_ASIO_HAS_DEDUCED_SET_DONE_MEMBER_TRAIT)
+  {
+    live_count = 0;
+    total_count = 0;
+    thread_pool pool3(std::allocator_arg,
+        custom_allocator<int>(&live_count, &total_count), 1,
+        boost::asio::config_from_string(""));
+    (void)pool3;
 
-} // namespace traits
-} // namespace asio
-} // namespace boost
+    BOOST_ASIO_CHECK(live_count > 0);
+    BOOST_ASIO_CHECK(total_count > 0);
+  }
 
-void thread_pool_scheduler_test()
-{
-  int count = 0;
-  receiver r(&count);
-  thread_pool pool(1);
-
-  boost::asio::execution::submit(
-    boost::asio::execution::schedule(pool.scheduler()), r);
-
-  boost::asio::execution::submit(
-      boost::asio::require(
-        boost::asio::execution::schedule(pool.executor()),
-        boost::asio::execution::blocking.possibly), r);
-
-  boost::asio::execution::submit(
-      boost::asio::require(
-        boost::asio::execution::schedule(pool.executor()),
-        boost::asio::execution::blocking.always), r);
-
-  boost::asio::execution::submit(
-      boost::asio::require(
-        boost::asio::execution::schedule(pool.executor()),
-        boost::asio::execution::blocking.never), r);
-
-  boost::asio::execution::submit(
-      boost::asio::require(
-        boost::asio::execution::schedule(pool.executor()),
-        boost::asio::execution::blocking.never,
-        boost::asio::execution::outstanding_work.tracked), r);
-
-  boost::asio::execution::submit(
-      boost::asio::require(
-        boost::asio::execution::schedule(pool.executor()),
-        boost::asio::execution::blocking.never,
-        boost::asio::execution::outstanding_work.untracked), r);
-
-  boost::asio::execution::submit(
-      boost::asio::require(
-        boost::asio::execution::schedule(pool.executor()),
-        boost::asio::execution::blocking.never,
-        boost::asio::execution::outstanding_work.untracked,
-        boost::asio::execution::relationship.fork), r);
-
-  boost::asio::execution::submit(
-      boost::asio::require(
-        boost::asio::execution::schedule(pool.executor()),
-        boost::asio::execution::blocking.never,
-        boost::asio::execution::outstanding_work.untracked,
-        boost::asio::execution::relationship.continuation), r);
-
-  boost::asio::execution::submit(
-      boost::asio::prefer(
-        boost::asio::require(
-          boost::asio::execution::schedule(pool.executor()),
-          boost::asio::execution::blocking.never,
-          boost::asio::execution::outstanding_work.untracked,
-          boost::asio::execution::relationship.continuation),
-        boost::asio::execution::allocator(std::allocator<void>())), r);
-
-  boost::asio::execution::submit(
-      boost::asio::prefer(
-        boost::asio::require(
-          boost::asio::execution::schedule(pool.executor()),
-          boost::asio::execution::blocking.never,
-          boost::asio::execution::outstanding_work.untracked,
-          boost::asio::execution::relationship.continuation),
-        boost::asio::execution::allocator), r);
-
-  pool.wait();
-
-  BOOST_ASIO_CHECK(count == 10);
+  BOOST_ASIO_CHECK(live_count == 0);
+  BOOST_ASIO_CHECK(total_count > 0);
 }
-
-void thread_pool_executor_bulk_execute_test()
-{
-  int count = 0;
-  thread_pool pool(1);
-
-  pool.executor().bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::require(pool.executor(),
-    boost::asio::execution::blocking.possibly).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::require(pool.executor(),
-    boost::asio::execution::blocking.always).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::require(pool.executor(),
-    boost::asio::execution::blocking.never).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::require(pool.executor(),
-    boost::asio::execution::blocking.never,
-    boost::asio::execution::outstanding_work.tracked).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::require(pool.executor(),
-    boost::asio::execution::blocking.never,
-    boost::asio::execution::outstanding_work.untracked).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::require(pool.executor(),
-    boost::asio::execution::blocking.never,
-    boost::asio::execution::outstanding_work.untracked,
-    boost::asio::execution::relationship.fork).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::require(pool.executor(),
-    boost::asio::execution::blocking.never,
-    boost::asio::execution::outstanding_work.untracked,
-    boost::asio::execution::relationship.continuation).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::prefer(
-    boost::asio::require(pool.executor(),
-      boost::asio::execution::blocking.never,
-      boost::asio::execution::outstanding_work.untracked,
-      boost::asio::execution::relationship.continuation),
-    boost::asio::execution::allocator(std::allocator<void>())).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  boost::asio::prefer(
-    boost::asio::require(pool.executor(),
-      boost::asio::execution::blocking.never,
-      boost::asio::execution::outstanding_work.untracked,
-      boost::asio::execution::relationship.continuation),
-    boost::asio::execution::allocator).bulk_execute(
-      bindns::bind(increment, &count), 2);
-
-  pool.wait();
-
-  BOOST_ASIO_CHECK(count == 20);
-}
-
-#else // !defined(BOOST_ASIO_NO_DEPRECATED)
-
-void thread_pool_scheduler_test() {}
-void thread_pool_executor_bulk_execute_test() {}
-
-#endif // !defined(BOOST_ASIO_NO_DEPRECATED)
 
 BOOST_ASIO_TEST_SUITE
 (
@@ -524,6 +429,5 @@ BOOST_ASIO_TEST_SUITE
   BOOST_ASIO_TEST_CASE(thread_pool_service_test)
   BOOST_ASIO_TEST_CASE(thread_pool_executor_query_test)
   BOOST_ASIO_TEST_CASE(thread_pool_executor_execute_test)
-  BOOST_ASIO_TEST_CASE(thread_pool_scheduler_test)
-  BOOST_ASIO_TEST_CASE(thread_pool_executor_bulk_execute_test)
+  BOOST_ASIO_TEST_CASE(thread_pool_allocator_test)
 )

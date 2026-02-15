@@ -1,5 +1,4 @@
-// Copyright 2008-2022 Emil Dotchevski and Reverge Studios, Inc.
-
+// Copyright 2008-2024 Emil Dotchevski and Reverge Studios, Inc.
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
@@ -38,6 +37,8 @@ tester<is_scalar<long double>::value> t13;
 tester<!is_scalar<vec<float,4> >::value> t14;
 tester<!is_scalar<mat<float,4,4> >::value> t15;
 tester<!is_scalar<quat<float> >::value> t16;
+tester<is_scalar<signed long long>::value> t17;
+tester<is_scalar<unsigned long long>::value> t18;
 
 int
 main()

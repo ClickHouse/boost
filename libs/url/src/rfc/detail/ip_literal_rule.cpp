@@ -8,17 +8,15 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_IMPL_IP_LITERAL_RULE_IPP
-#define BOOST_URL_IMPL_IP_LITERAL_RULE_IPP
 
 #include <boost/url/detail/config.hpp>
 #include <boost/url/rfc/ipv6_address_rule.hpp>
-#include <boost/url/rfc/detail/ip_literal_rule.hpp>
-#include <boost/url/rfc/detail/ipv6_addrz_rule.hpp>
+#include "ip_literal_rule.hpp"
+#include "ipv6_addrz_rule.hpp"
 #include <boost/url/grammar/delim_rule.hpp>
 #include <boost/url/grammar/parse.hpp>
 #include <boost/url/grammar/tuple_rule.hpp>
-#include <boost/url/rfc/detail/ipvfuture_rule.hpp>
+#include "ipvfuture_rule.hpp"
 
 namespace boost {
 namespace urls {
@@ -59,7 +57,7 @@ parse(
                     grammar::delim_rule(']'))));
         if(! rv)
         {
-            // IPv6addrz
+            // IPv6addrz: https://datatracker.ietf.org/doc/html/rfc6874
             it = it0;
             auto rv2 = grammar::parse(
                 it, end,
@@ -97,4 +95,3 @@ parse(
 } // urls
 } // boost
 
-#endif

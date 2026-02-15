@@ -4,7 +4,7 @@
 <title>Obtaining the Size of a Unit In the Last Place - ULP</title>
 <link rel="stylesheet" href="../../math.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="../../index.html" title="Math Toolkit 4.1.0">
+<link rel="home" href="../../index.html" title="Math Toolkit 4.2.1">
 <link rel="up" href="../next_float.html" title="Floating-Point Representation Distance (ULP), and Finding Adjacent Floating-Point Values">
 <link rel="prev" href="float_advance.html" title="Advancing a floating-point Value by a Specific Representation Distance (ULP) float_advance">
 <link rel="next" href="../float_comparison.html" title="Floating-point Comparison">
@@ -110,11 +110,10 @@
             When the argument becomes very small, it may be that there is no floating-point
             value that represents one ULP. Whether this is the case or not depends
             not only on whether the hardware may <span class="emphasis"><em>sometimes</em></span> support
-            denormals (as signalled by <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">numeric_limits</span><span class="special">&lt;</span><span class="identifier">FPT</span><span class="special">&gt;::</span><span class="identifier">has_denorm</span></code>),
-            but also whether these are currently enabled at runtime (for example
-            on SSE hardware, the DAZ or FTZ flags will disable denormal support).
-            In this situation, the <code class="computeroutput"><span class="identifier">ulp</span></code>
-            function may return a value that is many orders of magnitude too large.
+            denormals (as signalled by <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">math</span><span class="special">::</span><span class="identifier">detail</span><span class="special">::</span><span class="identifier">has_denorm_now</span><span class="special">&lt;</span><span class="identifier">FPT</span><span class="special">&gt;()</span></code>), but also whether these are currently
+            enabled at runtime (for example on SSE hardware, the DAZ or FTZ flags
+            will disable denormal support). In this situation, the <code class="computeroutput"><span class="identifier">ulp</span></code> function may return a value that
+            is many orders of magnitude too large.
           </li>
 </ul></div>
 <p>

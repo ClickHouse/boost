@@ -41,6 +41,40 @@
 </pre>
 <h5>
 <a name="boost_asio.reference.experimental__promise.h0"></a>
+        <span class="phrase"><a name="boost_asio.reference.experimental__promise.types"></a></span><a class="link" href="experimental__promise.html#boost_asio.reference.experimental__promise.types">Types</a>
+      </h5>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>
+                  Name
+                </p>
+              </th>
+<th>
+                <p>
+                  Description
+                </p>
+              </th>
+</tr></thead>
+<tbody><tr>
+<td>
+                <p>
+                  <a class="link" href="experimental__promise/value_type.html" title="experimental::promise::value_type"><span class="bold"><strong>value_type</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  The value that's returned by the promise.
+                </p>
+              </td>
+</tr></tbody>
+</table></div>
+<h5>
+<a name="boost_asio.reference.experimental__promise.h1"></a>
         <span class="phrase"><a name="boost_asio.reference.experimental__promise.member_functions"></a></span><a class="link" href="experimental__promise.html#boost_asio.reference.experimental__promise.member_functions">Member
         Functions</a>
       </h5>
@@ -121,15 +155,23 @@
 </tr>
 </tbody>
 </table></div>
-<p>
-        Signature The signature of the operation.
-      </p>
-<p>
-        Executor The executor to be used by the promise (taken from the operation).
-      </p>
-<p>
-        Allocator The allocator used for the promise. Can be set through use_allocator.
-      </p>
+<div class="variablelist">
+<p class="title"><b></b></p>
+<dl class="variablelist">
+<dt><span class="term">Signature</span></dt>
+<dd><p>
+              The signature of the operation.
+            </p></dd>
+<dt><span class="term">Executor</span></dt>
+<dd><p>
+              The executor to be used by the promise (taken from the operation).
+            </p></dd>
+<dt><span class="term">Allocator</span></dt>
+<dd><p>
+              The allocator used for the promise. Can be set through use_allocator.
+            </p></dd>
+</dl>
+</div>
 <p>
         A promise can be used to initiate an asynchronous option that can be completed
         later. If the promise gets destroyed before completion, the operation gets
@@ -139,7 +181,7 @@
         A promise fulfills the requirements of async_operation.
       </p>
 <h5>
-<a name="boost_asio.reference.experimental__promise.h1"></a>
+<a name="boost_asio.reference.experimental__promise.h2"></a>
         <span class="phrase"><a name="boost_asio.reference.experimental__promise.examples"></a></span><a class="link" href="experimental__promise.html#boost_asio.reference.experimental__promise.examples">Examples</a>
       </h5>
 <p>
@@ -148,13 +190,14 @@
 <pre class="programlisting"><span class="identifier">awaitable</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">&gt;</span> <span class="identifier">read_write_some</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="special">&amp;</span> <span class="identifier">sock</span><span class="special">,</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">mutable_buffer</span> <span class="identifier">read_buf</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">const_buffer</span> <span class="identifier">to_write</span><span class="special">)</span>
 <span class="special">{</span>
-  <span class="keyword">auto</span> <span class="identifier">p</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_read</span><span class="special">(</span><span class="identifier">read_buf</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">use_awaitable</span><span class="special">);</span>
-  <span class="identifier">co_await</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_write_some</span><span class="special">(</span><span class="identifier">to_write</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deferred</span><span class="special">);</span>
+  <span class="keyword">auto</span> <span class="identifier">p</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_read</span><span class="special">(</span><span class="identifier">read_buf</span><span class="special">,</span>
+      <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">experimental</span><span class="special">::</span><span class="identifier">use_promise</span><span class="special">);</span>
+  <span class="identifier">co_await</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_write_some</span><span class="special">(</span><span class="identifier">to_write</span><span class="special">);</span>
   <span class="identifier">co_await</span> <span class="identifier">p</span><span class="special">;</span>
 <span class="special">}</span>
 </pre>
 <h5>
-<a name="boost_asio.reference.experimental__promise.h2"></a>
+<a name="boost_asio.reference.experimental__promise.h3"></a>
         <span class="phrase"><a name="boost_asio.reference.experimental__promise.requirements"></a></span><a class="link" href="experimental__promise.html#boost_asio.reference.experimental__promise.requirements">Requirements</a>
       </h5>
 <p>
@@ -164,7 +207,8 @@
         <span class="emphasis"><em>Convenience header: </em></span>None
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

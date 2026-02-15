@@ -29,32 +29,32 @@
         of 42 overloads)</a>
 </h4></div></div></div>
 <p>
-          Create a new non-modifiable buffer that represents the given string.
+          Create a new modifiable buffer from a contiguous container.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <span class="identifier">Elem</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">Traits</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">Allocator</span><span class="special">&gt;</span>
-<span class="identifier">const_buffer</span> <span class="identifier">buffer</span><span class="special">(</span>
-    <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">basic_string</span><span class="special">&lt;</span> <span class="identifier">Elem</span><span class="special">,</span> <span class="identifier">Traits</span><span class="special">,</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">data</span><span class="special">);</span>
+    <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="identifier">mutable_buffer</span> <span class="identifier">buffer</span><span class="special">(</span>
+    <span class="identifier">T</span> <span class="special">&amp;</span> <span class="identifier">data</span><span class="special">,</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_contiguous_iterator</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">::</span><span class="identifier">iterator</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="identifier">defaulted_constraint</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="identifier">defaulted_constraint</span><span class="special">(),</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">const_buffer</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="identifier">defaulted_constraint</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="identifier">defaulted_constraint</span><span class="special">(),</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">mutable_buffer</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="identifier">defaulted_constraint</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="identifier">defaulted_constraint</span><span class="special">(),</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_const</span><span class="special">&lt;</span> <span class="identifier">remove_reference_t</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">iterator_traits</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">::</span><span class="identifier">iterator</span> <span class="special">&gt;::</span><span class="identifier">reference</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="identifier">defaulted_constraint</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="identifier">defaulted_constraint</span><span class="special">());</span>
 </pre>
 <h6>
 <a name="boost_asio.reference.buffer.overload29.h0"></a>
           <span class="phrase"><a name="boost_asio.reference.buffer.overload29.return_value"></a></span><a class="link" href="overload29.html#boost_asio.reference.buffer.overload29.return_value">Return Value</a>
         </h6>
 <p>
-          <code class="computeroutput"><span class="identifier">const_buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">.</span><span class="identifier">data</span><span class="special">(),</span> <span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">*</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">Elem</span><span class="special">))</span></code>.
+          A <a class="link" href="../mutable_buffer.html" title="mutable_buffer"><code class="computeroutput"><span class="identifier">mutable_buffer</span></code></a>
+          value equivalent to:
         </p>
-<h6>
-<a name="boost_asio.reference.buffer.overload29.h1"></a>
-          <span class="phrase"><a name="boost_asio.reference.buffer.overload29.remarks"></a></span><a class="link" href="overload29.html#boost_asio.reference.buffer.overload29.remarks">Remarks</a>
-        </h6>
-<p>
-          The buffer is invalidated by any non-const operation called on the given
-          string object.
-        </p>
+<pre class="programlisting"><span class="identifier">mutable_buffer</span><span class="special">(</span>
+   <span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">?</span> <span class="special">&amp;</span><span class="identifier">data</span><span class="special">[</span><span class="number">0</span><span class="special">]</span> <span class="special">:</span> <span class="number">0</span><span class="special">,</span>
+   <span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">*</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">::</span><span class="identifier">value_type</span><span class="special">));</span>
+</pre>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

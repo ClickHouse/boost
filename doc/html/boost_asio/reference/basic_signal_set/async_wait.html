@@ -33,9 +33,9 @@ Start
           an asynchronous operation to wait for a signal to be delivered.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <a class="link" href="../SignalToken.html" title="Signal token requirements">SignalToken</a> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../SignalToken.html" title="Signal token requirements">SignalToken</a> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span><span class="identifier">executor_type</span><span class="special">&gt;&gt;</span>
 <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type"><span class="emphasis"><em>DEDUCED</em></span></a> <span class="identifier">async_wait</span><span class="special">(</span>
-    <span class="identifier">SignalToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">);</span>
+    <span class="identifier">SignalToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <span class="identifier">executor_type</span> <span class="special">&gt;());</span>
 </pre>
 <p>
           This function may be used to initiate an asynchronous wait against the
@@ -81,7 +81,7 @@ Start
                 Regardless of whether the asynchronous operation completes immediately
                 or not, the completion handler will not be invoked from within this
                 function. On immediate completion, invocation of the handler will
-                be performed in a manner equivalent to using <a class="link" href="../post.html" title="post"><code class="computeroutput"><span class="identifier">post</span></code></a>.
+                be performed in a manner equivalent to using <a class="link" href="../async_immediate.html" title="async_immediate"><code class="computeroutput"><span class="identifier">async_immediate</span></code></a>.
               </p>
 </dd>
 </dl>
@@ -113,8 +113,20 @@ Start
               <code class="computeroutput"><span class="identifier">cancellation_type</span><span class="special">::</span><span class="identifier">total</span></code>
             </li>
 </ul></div>
+<h6>
+<a name="boost_asio.reference.basic_signal_set.async_wait.h3"></a>
+          <span class="phrase"><a name="boost_asio.reference.basic_signal_set.async_wait.remarks"></a></span><a class="link" href="async_wait.html#boost_asio.reference.basic_signal_set.async_wait.remarks">Remarks</a>
+        </h6>
+<p>
+          Unlike the POSIX function <code class="computeroutput"><span class="identifier">signal</span></code>,
+          <code class="computeroutput"><span class="identifier">async_wait</span></code> executes its
+          completion handler as specified in the <a class="link" href="../asynchronous_operations.html" title="Requirements on asynchronous operations">asynchronous
+          operation requirements</a>. This means it places no async-signal safety
+          restrictions on what work can be performed in a completion handler.
+        </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

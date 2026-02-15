@@ -43,8 +43,6 @@
 
 [/ Networking Identifiers ]
 
-[def __asio_handler_allocate__  [@boost:/doc/html/boost_asio/reference/asio_handler_allocate.html `asio_handler_allocate`]]
-[def __asio_handler_invoke__    [@boost:/doc/html/boost_asio/reference/asio_handler_invoke.html `asio_handler_invoke`]]
 [def __basic_stream_socket__    [@boost:/doc/html/boost_asio/reference/basic_stream_socket.html `basic_stream_socket`]]
 [def __const_buffer__           [@boost:/doc/html/boost_asio/reference/const_buffer.html `const_buffer`]]
 [def __deduced__                [@boost:/doc/html/boost_asio/reference/asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type ['DEDUCED]]]
@@ -198,12 +196,5 @@ __new__ indicates an item that was recently added.
 [include 06_websocket/_websocket.qbk]
 [include 07_concepts/_concepts.qbk]
 [include 08_design/_design.qbk]
-
-[section:moved1 Release Notes (Moved)]
-The Release Notes have been moved to the top of the table of contents.
-[endsect]
-[section:moved2 Reference (Moved)]
-The Reference has been moved to the top of the table of contents.
-[endsect]
 
 [xinclude index.xml]

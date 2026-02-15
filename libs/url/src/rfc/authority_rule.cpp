@@ -7,8 +7,6 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_RFC_IMPL_AUTHORITY_RULE_IPP
-#define BOOST_URL_RFC_IMPL_AUTHORITY_RULE_IPP
 
 #include <boost/url/detail/config.hpp>
 #include <boost/url/rfc/authority_rule.hpp>
@@ -16,15 +14,15 @@
 #include <boost/url/grammar/optional_rule.hpp>
 #include <boost/url/grammar/parse.hpp>
 #include <boost/url/grammar/tuple_rule.hpp>
-#include <boost/url/rfc/detail/host_rule.hpp>
-#include <boost/url/rfc/detail/port_rule.hpp>
-#include <boost/url/rfc/detail/userinfo_rule.hpp>
+#include "detail/host_rule.hpp"
+#include "detail/port_rule.hpp"
+#include "detail/userinfo_rule.hpp"
 
 namespace boost {
 namespace urls {
 
 auto
-authority_rule_t::
+implementation_defined::authority_rule_t::
 parse(
     char const*& it,
     char const* const end
@@ -83,4 +81,3 @@ parse(
 } // urls
 } // boost
 
-#endif

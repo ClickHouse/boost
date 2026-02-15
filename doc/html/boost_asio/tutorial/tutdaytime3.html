@@ -91,7 +91,7 @@
       <span class="identifier">tcp_connection</span><span class="special">::</span><span class="identifier">create</span><span class="special">(</span><span class="identifier">io_context_</span><span class="special">);</span>
 
     <span class="identifier">acceptor_</span><span class="special">.</span><span class="identifier">async_accept</span><span class="special">(</span><span class="identifier">new_connection</span><span class="special">-&gt;</span><span class="identifier">socket</span><span class="special">(),</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">tcp_server</span><span class="special">::</span><span class="identifier">handle_accept</span><span class="special">,</span> <span class="keyword">this</span><span class="special">,</span> <span class="identifier">new_connection</span><span class="special">,</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">tcp_server</span><span class="special">::</span><span class="identifier">handle_accept</span><span class="special">,</span> <span class="keyword">this</span><span class="special">,</span> <span class="identifier">new_connection</span><span class="special">,</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">));</span>
   <span class="special">}</span>
 </pre>
@@ -123,10 +123,10 @@
         object alive as long as there is an operation that refers to it.
       </p>
 <pre class="programlisting"><span class="keyword">class</span> <span class="identifier">tcp_connection</span>
-  <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">enable_shared_from_this</span><span class="special">&lt;</span><span class="identifier">tcp_connection</span><span class="special">&gt;</span>
+  <span class="special">:</span> <span class="keyword">public</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_shared_from_this</span><span class="special">&lt;</span><span class="identifier">tcp_connection</span><span class="special">&gt;</span>
 <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
-  <span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">shared_ptr</span><span class="special">&lt;</span><span class="identifier">tcp_connection</span><span class="special">&gt;</span> <span class="identifier">pointer</span><span class="special">;</span>
+  <span class="keyword">typedef</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">shared_ptr</span><span class="special">&lt;</span><span class="identifier">tcp_connection</span><span class="special">&gt;</span> <span class="identifier">pointer</span><span class="special">;</span>
 
   <span class="keyword">static</span> <span class="identifier">pointer</span> <span class="identifier">create</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_context</span><span class="special">&amp;</span> <span class="identifier">io_context</span><span class="special">)</span>
   <span class="special">{</span>
@@ -154,14 +154,14 @@
 <pre class="programlisting">    <span class="identifier">message_</span> <span class="special">=</span> <span class="identifier">make_daytime_string</span><span class="special">();</span>
 </pre>
 <p>
-        When initiating the asynchronous operation, and if using boost::bind(), you
-        must specify only the arguments that match the handler's parameter list.
+        When initiating the asynchronous operation, and if using <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>,
+        you must specify only the arguments that match the handler's parameter list.
         In this program, both of the argument placeholders (boost::asio::placeholders::error
         and boost::asio::placeholders::bytes_transferred) could potentially have
         been removed, since they are not being used in <code class="computeroutput"><span class="identifier">handle_write</span><span class="special">()</span></code>.
       </p>
 <pre class="programlisting">    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">socket_</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">message_</span><span class="special">),</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">tcp_connection</span><span class="special">::</span><span class="identifier">handle_write</span><span class="special">,</span> <span class="identifier">shared_from_this</span><span class="special">(),</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">tcp_connection</span><span class="special">::</span><span class="identifier">handle_write</span><span class="special">,</span> <span class="identifier">shared_from_this</span><span class="special">(),</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">bytes_transferred</span><span class="special">));</span>
 </pre>
@@ -197,16 +197,16 @@
         are not used in the body of the <code class="computeroutput"><span class="identifier">handle_write</span><span class="special">()</span></code> function. If parameters are not needed,
         it is possible to remove them from the function so that it looks like:
       </p>
-<pre class="programlisting">  <span class="keyword">void</span> <span class="identifier">handle_write</span><span class="special">()</span>
-  <span class="special">{</span>
-  <span class="special">}</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handle_write</span><span class="special">()</span>
+<span class="special">{</span>
+<span class="special">}</span>
 </pre>
 <p>
         The boost::asio::async_write() call used to initiate the call can then be
         changed to just:
       </p>
-<pre class="programlisting">  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">socket_</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">message_</span><span class="special">),</span>
-      <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">tcp_connection</span><span class="special">::</span><span class="identifier">handle_write</span><span class="special">,</span> <span class="identifier">shared_from_this</span><span class="special">()));</span>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_write</span><span class="special">(</span><span class="identifier">socket_</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">message_</span><span class="special">),</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">tcp_connection</span><span class="special">::</span><span class="identifier">handle_write</span><span class="special">,</span> <span class="identifier">shared_from_this</span><span class="special">()));</span>
 </pre>
 <p>
         See the <a class="link" href="tutdaytime3/src.html" title="Source listing for Daytime.3">full source listing</a>
@@ -223,7 +223,8 @@
         UDP daytime client</a>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -7,11 +7,9 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_DETAIL_IMPL_URL_IMPL_IPP
-#define BOOST_URL_DETAIL_IMPL_URL_IMPL_IPP
 
 #include <boost/url/detail/config.hpp>
-#include <boost/url/detail/path.hpp>
+#include "path.hpp"
 #include <boost/url/detail/url_impl.hpp>
 #include <boost/url/authority_view.hpp>
 #include <boost/assert.hpp>
@@ -279,7 +277,7 @@ split(
 // add n to [first, last]
 void
 url_impl::
-adjust(
+adjust_right(
     int first,
     int last,
     std::size_t n) noexcept
@@ -287,6 +285,19 @@ adjust(
     for(int i = first;
             i <= last; ++i)
         offset_[i] += n;
+}
+
+// remove n from [first, last]
+void
+url_impl::
+adjust_left(
+    int first,
+    int last,
+    std::size_t n) noexcept
+{
+    for(int i = first;
+            i <= last; ++i)
+        offset_[i] -= n;
 }
 
 // set [first, last) offset
@@ -389,6 +400,15 @@ nseg() const noexcept
     if(impl_)
         return impl_->nseg_;
     return nseg_;
+}
+
+std::size_t
+path_ref::
+decoded_size() const noexcept
+{
+    if(impl_)
+        return impl_->decoded_[id_path];
+    return dn_;
 }
 
 //------------------------------------------------
@@ -516,5 +536,3 @@ nparam() const noexcept
 } // detail
 } // urls
 } // boost
-
-#endif

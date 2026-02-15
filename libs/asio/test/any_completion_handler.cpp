@@ -2,7 +2,7 @@
 // any_completion_handler.cpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2025 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,28 +18,16 @@
 
 #include "unit_test.hpp"
 
-#if defined(BOOST_ASIO_HAS_STD_TUPLE) \
-  && defined(BOOST_ASIO_HAS_MOVE) \
-  && defined(BOOST_ASIO_HAS_VARIADIC_TEMPLATES)
-
+#include <functional>
 #include <boost/asio/bind_allocator.hpp>
 #include <boost/asio/bind_cancellation_slot.hpp>
 #include <boost/asio/bind_executor.hpp>
 #include <boost/asio/bind_immediate_executor.hpp>
 #include <boost/asio/error.hpp>
+#include <boost/asio/inline_executor.hpp>
 #include <boost/asio/thread_pool.hpp>
 
-#if defined(BOOST_ASIO_HAS_BOOST_BIND)
-# include <boost/bind/bind.hpp>
-#else // defined(BOOST_ASIO_HAS_BOOST_BIND)
-# include <functional>
-#endif // defined(BOOST_ASIO_HAS_BOOST_BIND)
-
-#if defined(BOOST_ASIO_HAS_BOOST_BIND)
-namespace bindns = boost;
-#else // defined(BOOST_ASIO_HAS_BOOST_BIND)
 namespace bindns = std;
-#endif
 
 void increment(int* count)
 {
@@ -193,7 +181,7 @@ void any_completion_handler_associator_test()
       boost::asio::bind_allocator(handler_allocator<char>(&alloc_count),
         boost::asio::bind_cancellation_slot(sig.slot(),
           boost::asio::bind_executor(pool.get_executor(),
-            boost::asio::bind_immediate_executor(boost::asio::system_executor(),
+            boost::asio::bind_immediate_executor(boost::asio::inline_executor(),
               bindns::bind(&increment, &count))))));
 
   BOOST_ASIO_CHECK(alloc_count == 1);
@@ -226,7 +214,7 @@ void any_completion_handler_associator_test()
     handler_type, boost::asio::thread_pool::executor_type>::type ex2
       = boost::asio::get_associated_immediate_executor(h1, pool.get_executor());
 
-  BOOST_ASIO_CHECK(ex2 == boost::asio::system_executor());
+  BOOST_ASIO_CHECK(ex2 == boost::asio::inline_executor());
 }
 
 void increment_with_error(boost::system::error_code ec,
@@ -271,17 +259,3 @@ BOOST_ASIO_TEST_SUITE
   BOOST_ASIO_TEST_CASE(any_completion_handler_associator_test)
   BOOST_ASIO_TEST_CASE(any_completion_handler_invocation_test)
 )
-
-#else // defined(BOOST_ASIO_HAS_STD_TUPLE)
-      //   && defined(BOOST_ASIO_HAS_MOVE)
-      //   && defined(BOOST_ASIO_HAS_VARIADIC_TEMPLATES)
-
-BOOST_ASIO_TEST_SUITE
-(
-  "any_completion_handler",
-  BOOST_ASIO_TEST_CASE(null_test)
-)
-
-#endif // defined(BOOST_ASIO_HAS_STD_TUPLE)
-       //   && defined(BOOST_ASIO_HAS_MOVE)
-       //   && defined(BOOST_ASIO_HAS_VARIADIC_TEMPLATES)

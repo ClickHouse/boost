@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="The Boost C++ Libraries BoostBook Documentation Subset">
-<link rel="up" href="../boost_pfr.html" title="Chapter 26. Boost.PFR 2.1">
+<link rel="up" href="../boost_pfr.html" title="Chapter 26. Boost.PFR 2.3">
 <link rel="prev" href="short_examples_for_the_impatient.html" title="Short Examples for the Impatient">
 <link rel="next" href="limitations_and_configuration.html" title="Limitations and Configuration">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,6 +39,8 @@
       ways of getting operators </a></span></dt>
 <dt><span class="section"><a href="tutorial.html#boost_pfr.tutorial.reflection_of_unions">Reflection of
       unions </a></span></dt>
+<dt><span class="section"><a href="tutorial.html#boost_pfr.tutorial.reflection_of_field_name">Reflection
+      of field name </a></span></dt>
 </dl></div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
@@ -115,7 +117,7 @@
 </h3></div></div></div>
 <p>
         The following example shows how to access structure fields by index using
-        <code class="computeroutput"><a class="link" href="../boost/pfr/get_idm2329.html" title="Function template get">boost::pfr::get</a></code>.
+        <code class="computeroutput"><a class="link" href="../doxygen/reference_section_of_pfr/core_8hpp_1a07b17ed2eaa9115346f5b14899ec53e4.html" title="Function template get">boost::pfr::get</a></code>.
       </p>
 <p>
         Let's define some structure:
@@ -255,11 +257,11 @@
 <tr>
 <td>
                 <p>
-                  <code class="computeroutput"><a class="link" href="../reference_section.html#header.boost.pfr.ops_hpp" title="Header &lt;boost/pfr/ops.hpp&gt;">boost/pfr/ops.hpp: eq, ne,
+                  <code class="computeroutput"><a class="link" href="../reference_section_of_pfr.html#doxygen.reference_section_of_pfr.ops_8hpp" title="Header &lt;boost/pfr/ops.hpp&gt;">boost/pfr/ops.hpp: eq, ne,
                   gt, lt, le, ge</a></code>
                 </p>
                 <p>
-                  <code class="computeroutput"><a class="link" href="../reference_section.html#header.boost.pfr.io_hpp" title="Header &lt;boost/pfr/io.hpp&gt;">boost/pfr/io.hpp: io</a></code>
+                  <code class="computeroutput"><a class="link" href="../reference_section_of_pfr.html#doxygen.reference_section_of_pfr.io_8hpp" title="Header &lt;boost/pfr/io.hpp&gt;">boost/pfr/io.hpp: io</a></code>
                 </p>
               </td>
 <td>
@@ -297,7 +299,7 @@
 <tr>
 <td>
                 <p>
-                  <code class="computeroutput"><a class="link" href="../BOOST_PFR_FUNCTIONS_FOR.html" title="Macro BOOST_PFR_FUNCTIONS_FOR">BOOST_PFR_FUNCTIONS_FOR(T)</a></code>
+                  <code class="computeroutput"><a class="link" href="../doxygen/reference_section_of_pfr/functions__for_8hpp_1a4092167ce3b09df7a69fe9123cf48c6a.html" title="Macro BOOST_PFR_FUNCTIONS_FOR">BOOST_PFR_FUNCTIONS_FOR(T)</a></code>
                 </p>
               </td>
 <td>
@@ -335,11 +337,11 @@
 <tr>
 <td>
                 <p>
-                  <code class="computeroutput"><a class="link" href="../reference_section.html#header.boost.pfr.ops_fields_hpp" title="Header &lt;boost/pfr/ops_fields.hpp&gt;">boost/pfr/ops_fields.hpp:
+                  <code class="computeroutput"><a class="link" href="../reference_section_of_pfr.html#doxygen.reference_section_of_pfr.ops__fields_8hpp" title="Header &lt;boost/pfr/ops_fields.hpp&gt;">boost/pfr/ops_fields.hpp:
                   eq_fields, ne_fields, gt_fields, lt_fields, le_fields, ge_fields</a></code>
                 </p>
                 <p>
-                  <code class="computeroutput"><a class="link" href="../reference_section.html#header.boost.pfr.io_hpp" title="Header &lt;boost/pfr/io.hpp&gt;">boost/pfr/io_fields.hpp: io_fields</a></code>
+                  <code class="computeroutput"><a class="link" href="../reference_section_of_pfr.html#doxygen.reference_section_of_pfr.io_8hpp" title="Header &lt;boost/pfr/io.hpp&gt;">boost/pfr/io_fields.hpp: io_fields</a></code>
                 </p>
               </td>
 <td>
@@ -425,7 +427,7 @@
 <p>
         Argument Dependant Lookup works well. <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">less</span></code>
         will find the operators for <code class="computeroutput"><span class="keyword">struct</span>
-        <span class="identifier">pair_like</span></code>. <code class="computeroutput"><a class="link" href="../BOOST_PFR_FUNCTIONS_FOR.html" title="Macro BOOST_PFR_FUNCTIONS_FOR">BOOST_PFR_FUNCTIONS_FOR(T)</a></code>
+        <span class="identifier">pair_like</span></code>. <code class="computeroutput"><a class="link" href="../doxygen/reference_section_of_pfr/functions__for_8hpp_1a4092167ce3b09df7a69fe9123cf48c6a.html" title="Macro BOOST_PFR_FUNCTIONS_FOR">BOOST_PFR_FUNCTIONS_FOR(T)</a></code>
         can not be used for local types. It does not respect conversion operators
         of <code class="computeroutput"><span class="identifier">T</span></code>, so for example the
         following code will output different values:
@@ -508,8 +510,38 @@
         to reflect unions. See `Reflection of unions` section in the docs for more info."</span>
 </pre>
 </div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_pfr.tutorial.reflection_of_field_name"></a><a class="link" href="tutorial.html#boost_pfr.tutorial.reflection_of_field_name" title="Reflection of field name">Reflection
+      of field name </a>
+</h3></div></div></div>
+<p>
+        Since C++20 it's possible to read name of a structure field by index using
+        Boost.PFR library. The following example shows how to do it using <code class="computeroutput"><a class="link" href="../doxygen/reference_section_of_pfr/core__name_8hpp_1ad820b865b5817b15c21faca3f470e511.html" title="Function template get_name">boost::pfr::get_name</a></code>.
+      </p>
+<p>
+        Let's define some structure:
+      </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">pfr</span><span class="special">/</span><span class="identifier">core_name</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>            <span class="comment">// defining structure</span>
+    <span class="keyword">int</span> <span class="identifier">some_integer</span><span class="special">;</span>
+    <span class="keyword">char</span> <span class="identifier">c</span><span class="special">;</span>
+<span class="special">};</span>
+</pre>
+<p>
+        We can access field's names of that structure by index:
+      </p>
+<pre class="programlisting"><span class="keyword">constexpr</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">n1</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">pfr</span><span class="special">::</span><span class="identifier">get_name</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;();</span> <span class="comment">// returns "some_integer"</span>
+<span class="keyword">constexpr</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string_view</span> <span class="identifier">n2</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">pfr</span><span class="special">::</span><span class="identifier">get_name</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;();</span> <span class="comment">// returns "c"</span>
+</pre>
+<p>
+        See <a class="link" href="limitations_and_configuration.html" title="Limitations and Configuration"><span class="bold"><strong>Limitations
+        and Configuration</strong></span></a>.
+      </p>
 </div>
-<div class="copyright-footer">Copyright © 2016-2023 Antony Polukhin<p>
+</div>
+<div class="copyright-footer">Copyright © 2016-2025 Antony Polukhin<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

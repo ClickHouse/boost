@@ -171,7 +171,8 @@
               </td>
 <td>
                 <p>
-                  Send a websocket close control frame asynchronously.
+                  Perform the WebSocket closing handshake asynchronously and close
+                  the underlying stream.
                 </p>
               </td>
 </tr>
@@ -295,7 +296,8 @@
               </td>
 <td>
                 <p>
-                  Send a websocket close control frame.
+                  Perform the WebSocket closing handshake and close the underlying
+                  stream.
                 </p>
               </td>
 </tr>
@@ -348,6 +350,18 @@
                   Get the option value. <br><span class="silver">—</span><br>Get the
                   timeout option. <br><span class="silver">—</span><br>Get the permessage-deflate
                   extension options.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__websocket__stream/get_status.html" title="websocket::stream::get_status">get_status</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Get the status of the permessage-deflate extension.
                 </p>
               </td>
 </tr>
@@ -634,9 +648,11 @@
 <p>
         The <a class="link" href="boost__beast__websocket__stream.html" title="websocket::stream"><code class="computeroutput"><span class="identifier">stream</span></code></a> class template provides asynchronous
         and blocking message-oriented functionality necessary for clients and servers
-        to utilize the WebSocket protocol. For asynchronous operations, the application
-        must ensure that they are are all performed within the same implicit or explicit
-        strand.
+        to utilize the WebSocket protocol.
+      </p>
+<p>
+        For asynchronous operations, the application must ensure that they are are
+        all performed within the same implicit or explicit strand.
       </p>
 <h5>
 <a name="beast.ref.boost__beast__websocket__stream.h4"></a>

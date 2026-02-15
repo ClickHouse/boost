@@ -13,7 +13,7 @@
 #if defined(BOOST_INTERPROCESS_XSI_SHARED_MEMORY_OBJECTS)
 
 #include <boost/interprocess/allocators/allocator.hpp>
-#include <boost/interprocess/containers/vector.hpp>
+#include <boost/container/vector.hpp>
 #include <boost/interprocess/managed_xsi_shared_memory.hpp>
 #include <boost/interprocess/detail/file_wrapper.hpp>
 #include <boost/interprocess/file_mapping.hpp>
@@ -25,14 +25,14 @@ using namespace boost::interprocess;
 
 void remove_shared_memory(const xsi_key &key)
 {
-   BOOST_TRY{
+   BOOST_INTERPROCESS_TRY{
       xsi_shared_memory xsi(open_only, key);
       xsi_shared_memory::remove(xsi.get_shmid());
    }
-   BOOST_CATCH(interprocess_exception &e){
+   BOOST_INTERPROCESS_CATCH(interprocess_exception &e){
       if(e.get_error_code() != not_found_error)
-         BOOST_RETHROW
-   } BOOST_CATCH_END
+         BOOST_INTERPROCESS_RETHROW
+   } BOOST_INTERPROCESS_CATCH_END
 }
 
 class xsi_shared_memory_remover
@@ -56,7 +56,8 @@ int main ()
 
    file_mapping::remove(ShmemName);
    {  ipcdetail::file_wrapper(create_only, ShmemName, read_write); }
-   xsi_key key(ShmemName, 1);
+
+   xsi_key key(ShmemName, static_cast<boost::uint8_t>(boost::interprocess::ipcdetail::get_current_system_highres_rand()));
    file_mapping::remove(ShmemName);
    int shmid;
 
@@ -64,7 +65,7 @@ int main ()
    typedef allocator<int, managed_xsi_shared_memory::segment_manager>
       allocator_int_t;
    //A vector that uses that allocator
-   typedef boost::interprocess::vector<int, allocator_int_t> MyVect;
+   typedef boost::container::vector<int, allocator_int_t> MyVect;
 
    {
       //Remove the shmem it is already created

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+// Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -8,50 +8,62 @@
 #ifndef BOOST_MYSQL_TEST_UNIT_INCLUDE_TEST_UNIT_PRINTING_HPP
 #define BOOST_MYSQL_TEST_UNIT_INCLUDE_TEST_UNIT_PRINTING_HPP
 
-#include <boost/mysql/detail/results_iterator.hpp>
-#include <boost/mysql/detail/resultset_encoding.hpp>
-#include <boost/mysql/detail/rows_iterator.hpp>
-
-#include <boost/mysql/impl/internal/protocol/capabilities.hpp>
-#include <boost/mysql/impl/internal/protocol/db_flavor.hpp>
-
-#include <boost/test/unit_test.hpp>
-
-#include <ostream>
+#include <cstdint>
+#include <iosfwd>
 
 namespace boost {
 namespace mysql {
+
+// address_type
+enum class address_type;
+std::ostream& operator<<(std::ostream& os, address_type value);
+
 namespace detail {
 
-inline std::ostream& operator<<(std::ostream& os, capabilities caps)
-{
-    return os << "capabilities(" << caps.get() << ")";
-}
+// capabilities
+enum class capabilities : std::uint32_t;
+std::ostream& operator<<(std::ostream& os, capabilities caps);
 
-inline std::ostream& operator<<(std::ostream& os, db_flavor value)
-{
-    switch (value)
-    {
-    case db_flavor::mysql: return os << "mysql";
-    case db_flavor::mariadb: return os << "mariadb";
-    default: return os << "<unknown db_flavor>";
-    }
-}
+// db_flavor
+enum class db_flavor;
+std::ostream& operator<<(std::ostream& os, db_flavor value);
 
-inline std::ostream& operator<<(std::ostream& os, resultset_encoding t)
-{
-    switch (t)
-    {
-    case resultset_encoding::binary: return os << "binary";
-    case resultset_encoding::text: return os << "text";
-    default: return os << "unknown";
-    }
-}
+// resultset_encoding
+enum class resultset_encoding;
+std::ostream& operator<<(std::ostream& os, resultset_encoding t);
 
-inline std::ostream& operator<<(std::ostream& os, results_iterator it)
-{
-    return os << "results_iterator(" << static_cast<const void*>(it.obj()) << ", index=" << it.index() << ")";
-}
+// connection_status
+enum class connection_status;
+std::ostream& operator<<(std::ostream& os, connection_status t);
+
+// results_iterator
+class results_iterator;
+std::ostream& operator<<(std::ostream& os, const results_iterator& it);
+
+// next_action_type
+enum class next_action_type;
+std::ostream& operator<<(std::ostream& os, next_action_type t);
+
+// pipeline_stage_kind
+enum class pipeline_stage_kind;
+std::ostream& operator<<(std::ostream& os, pipeline_stage_kind v);
+
+// pipeline_request_stage
+struct pipeline_request_stage;
+bool operator==(const pipeline_request_stage& lhs, const pipeline_request_stage& rhs);
+std::ostream& operator<<(std::ostream& os, pipeline_request_stage v);
+
+// node_status (pool)
+enum class node_status;
+std::ostream& operator<<(std::ostream& os, node_status v);
+
+// collection_state (pool)
+enum class collection_state;
+std::ostream& operator<<(std::ostream& os, collection_state v);
+
+// next_connection_action (pool)
+enum class next_connection_action;
+std::ostream& operator<<(std::ostream& os, next_connection_action v);
 
 }  // namespace detail
 }  // namespace mysql

@@ -7,16 +7,14 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_RFC_IMPL_URI_RULE_IPP
-#define BOOST_URL_RFC_IMPL_URI_RULE_IPP
 
 #include <boost/url/detail/config.hpp>
 #include <boost/url/rfc/uri_rule.hpp>
 #include <boost/url/rfc/query_rule.hpp>
-#include <boost/url/rfc/detail/fragment_part_rule.hpp>
-#include <boost/url/rfc/detail/hier_part_rule.hpp>
-#include <boost/url/rfc/detail/query_part_rule.hpp>
-#include <boost/url/rfc/detail/scheme_rule.hpp>
+#include "detail/fragment_part_rule.hpp"
+#include "detail/hier_part_rule.hpp"
+#include "detail/query_part_rule.hpp"
+#include "detail/scheme_rule.hpp"
 #include <boost/url/grammar/delim_rule.hpp>
 #include <boost/url/grammar/tuple_rule.hpp>
 #include <boost/url/grammar/optional_rule.hpp>
@@ -26,7 +24,7 @@ namespace boost {
 namespace urls {
 
 auto
-uri_rule_t::
+implementation_defined::uri_rule_t::
 parse(
     char const*& it,
     char const* const end
@@ -74,8 +72,7 @@ parse(
             // map "?" to { {} }
             u.apply_query(
                 rv->query,
-                rv->count +
-                    rv->query.empty());
+                rv->count);
         }
     }
 
@@ -95,4 +92,3 @@ parse(
 } // urls
 } // boost
 
-#endif

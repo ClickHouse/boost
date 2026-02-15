@@ -28,7 +28,7 @@
 <a name="geometry.reference.io.dsv.dsv"></a><a class="link" href="dsv.html" title="dsv">dsv</a>
 </h5></div></div></div>
 <p>
-            <a class="indexterm" name="idm73046"></a>
+            <a class="indexterm" name="id74442"></a>
 Main DSV-streaming function.
           </p>
 <h6>
@@ -48,7 +48,7 @@ Main DSV-streaming function.
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Geometry</span><span class="special">&gt;</span>
 <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dsv</span><span class="special">::</span><span class="identifier">dsv_manipulator</span><span class="special">&lt;</span> <span class="identifier">Geometry</span> <span class="special">&gt;</span> <span class="identifier">dsv</span><span class="special">(</span><span class="identifier">Geometry</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">geometry</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">coordinate_separator</span> <span class="special">=</span> <span class="string">", "</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">point_open</span> <span class="special">=</span> <span class="string">"("</span><span class="special">,</span>
                                              <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">point_close</span> <span class="special">=</span> <span class="string">")"</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">point_separator</span> <span class="special">=</span> <span class="string">", "</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">list_open</span> <span class="special">=</span> <span class="string">"("</span><span class="special">,</span>
-                                             <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">list_close</span> <span class="special">=</span> <span class="string">")"</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">list_separator</span> <span class="special">=</span> <span class="string">", "</span><span class="special">)</span></pre>
+                                             <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">list_close</span> <span class="special">=</span> <span class="string">")"</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">list_separator</span> <span class="special">=</span> <span class="string">", "</span><span class="special">,</span> <span class="keyword">bool</span> <span class="identifier">close_rings</span> <span class="special">=</span> <span class="keyword">false</span><span class="special">)</span></pre>
 <p>
           </p>
 <h6>
@@ -213,6 +213,22 @@ Main DSV-streaming function.
 <td>
                   </td>
 </tr>
+<tr>
+<td>
+                    <p>
+                      bool
+                    </p>
+                  </td>
+<td>
+                  </td>
+<td>
+                    <p>
+                      close_rings
+                    </p>
+                  </td>
+<td>
+                  </td>
+</tr>
 </tbody>
 </table></div>
 <h6>
@@ -232,8 +248,8 @@ Main DSV-streaming function.
             <code class="computeroutput"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">geometry</span><span class="special">/</span><span class="identifier">io</span><span class="special">/</span><span class="identifier">dsv</span><span class="special">/</span><span class="identifier">write</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
           </p>
 </div>
-<div class="copyright-footer">Copyright © 2009-2021 Barend Gehrels,
-      Bruno Lalande, Mateusz Loskot, Adam Wulkiewicz, Oracle and/or its affiliates<p>
+<div class="copyright-footer">Copyright © 2009-2024 Barend Gehrels, Bruno Lalande, Mateusz Loskot, Adam
+      Wulkiewicz, Oracle and/or its affiliates<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

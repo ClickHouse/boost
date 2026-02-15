@@ -50,8 +50,11 @@
             endpoints by trying each endpoint until a connection is successfully
             established. The underlying socket is automatically opened if needed.
             An automatically opened socket is not returned to the closed state upon
-            failure. The algorithm, known as a <span class="emphasis"><em>composed operation</em></span>,
-            is implemented in terms of calls to the underlying socket's <code class="computeroutput"><span class="identifier">connect</span></code> function.
+            failure.
+          </p>
+<p>
+            The algorithm, known as a <span class="emphasis"><em>composed operation</em></span>, is
+            implemented in terms of calls to the underlying socket's <code class="computeroutput"><span class="identifier">connect</span></code> function.
           </p>
 <h6>
 <a name="beast.ref.boost__beast__basic_stream.connect.overload3.h2"></a>
@@ -119,7 +122,8 @@
 <tbody><tr>
 <td>
                     <p>
-                      <code class="computeroutput"><span class="identifier">system_error</span></code>
+                      <code class="computeroutput"><span class="special">[</span><span class="identifier">link</span>
+                      <span class="identifier">beast</span><span class="special">.</span><span class="identifier">ref</span><span class="special">.</span><span class="identifier">boost__beast__system_error</span> <span class="identifier">system_error</span><span class="special">]</span></code>
                     </p>
                   </td>
 <td>

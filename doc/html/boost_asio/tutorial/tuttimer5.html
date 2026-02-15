@@ -34,12 +34,11 @@
       </p>
 <p>
         The previous four tutorials avoided the issue of handler synchronisation
-        by calling the <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>
-        function from one thread only. As you already know, the asio library provides
-        a guarantee that completion handlers will only be called from threads that
-        are currently calling <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>.
-        Consequently, calling <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>
-        from only one thread ensures that completion handlers cannot run concurrently.
+        by calling the boost::asio::io_context::run() function from one thread only.
+        As you already know, the asio library provides a guarantee that completion
+        handlers will only be called from threads that are currently calling boost::asio::io_context::run().
+        Consequently, calling boost::asio::io_context::run() from only one thread
+        ensures that completion handlers cannot run concurrently.
       </p>
 <p>
         The single threaded approach is usually the best place to start when developing
@@ -56,15 +55,14 @@
 </ul></div>
 <p>
         If you find yourself running into these limitations, an alternative approach
-        is to have a pool of threads calling <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>.
-        However, as this allows handlers to execute concurrently, we need a method
-        of synchronisation when handlers might be accessing a shared, thread-unsafe
-        resource.
+        is to have a pool of threads calling boost::asio::io_context::run(). However,
+        as this allows handlers to execute concurrently, we need a method of synchronisation
+        when handlers might be accessing a shared, thread-unsafe resource.
       </p>
-<pre class="programlisting"><span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">thread</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">asio</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">thread</span><span class="special">/</span><span class="identifier">thread</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">bind</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 </pre>
 <p>
         We start by defining a class called <code class="computeroutput"><span class="identifier">printer</span></code>,
@@ -85,10 +83,10 @@
         is an executor adapter that guarantees that, for those handlers that are
         dispatched through it, an executing handler will be allowed to complete before
         the next one is started. This is guaranteed irrespective of the number of
-        threads that are calling <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>.
-        Of course, the handlers may still execute concurrently with other handlers
-        that were not dispatched through an <a class="link" href="../reference/strand.html" title="strand">strand</a>,
-        or were dispatched through a different <a class="link" href="../reference/strand.html" title="strand">strand</a>
+        threads that are calling boost::asio::io_context::run(). Of course, the handlers
+        may still execute concurrently with other handlers that were not dispatched
+        through an <a class="link" href="../reference/strand.html" title="strand">strand</a>, or
+        were dispatched through a different <a class="link" href="../reference/strand.html" title="strand">strand</a>
         object.
       </p>
 <pre class="programlisting">  <span class="identifier">printer</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_context</span><span class="special">&amp;</span> <span class="identifier">io</span><span class="special">)</span>
@@ -107,10 +105,10 @@
         we are ensuring that they cannot execute concurrently.
       </p>
 <pre class="programlisting">    <span class="identifier">timer1_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">bind_executor</span><span class="special">(</span><span class="identifier">strand_</span><span class="special">,</span>
-          <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print1</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
+          <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print1</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
 
     <span class="identifier">timer2_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">bind_executor</span><span class="special">(</span><span class="identifier">strand_</span><span class="special">,</span>
-          <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print2</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
+          <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print2</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
   <span class="special">}</span>
 
   <span class="special">~</span><span class="identifier">printer</span><span class="special">()</span>
@@ -135,7 +133,7 @@
       <span class="identifier">timer1_</span><span class="special">.</span><span class="identifier">expires_at</span><span class="special">(</span><span class="identifier">timer1_</span><span class="special">.</span><span class="identifier">expiry</span><span class="special">()</span> <span class="special">+</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
 
       <span class="identifier">timer1_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">bind_executor</span><span class="special">(</span><span class="identifier">strand_</span><span class="special">,</span>
-            <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print1</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
+            <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print1</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
     <span class="special">}</span>
   <span class="special">}</span>
 
@@ -149,7 +147,7 @@
       <span class="identifier">timer2_</span><span class="special">.</span><span class="identifier">expires_at</span><span class="special">(</span><span class="identifier">timer2_</span><span class="special">.</span><span class="identifier">expiry</span><span class="special">()</span> <span class="special">+</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
 
       <span class="identifier">timer2_</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">bind_executor</span><span class="special">(</span><span class="identifier">strand_</span><span class="special">,</span>
-            <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print2</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
+            <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">printer</span><span class="special">::</span><span class="identifier">print2</span><span class="special">,</span> <span class="keyword">this</span><span class="special">)));</span>
     <span class="special">}</span>
   <span class="special">}</span>
 
@@ -162,20 +160,19 @@
 </pre>
 <p>
         The <code class="computeroutput"><span class="identifier">main</span></code> function now causes
-        <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>
-        to be called from two threads: the main thread and one additional thread.
-        This is accomplished using an boost::thread object.
+        boost::asio::io_context::run() to be called from two threads: the main thread
+        and one additional thread. This is accomplished using an boost::thread object.
       </p>
 <p>
-        Just as it would with a call from a single thread, concurrent calls to <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a> will
-        continue to execute while there is "work" left to do. The background
-        thread will not exit until all asynchronous operations have completed.
+        Just as it would with a call from a single thread, concurrent calls to boost::asio::io_context::run()
+        will continue to execute while there is "work" left to do. The
+        background thread will not exit until all asynchronous operations have completed.
       </p>
 <pre class="programlisting"><span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span>
 <span class="special">{</span>
   <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_context</span> <span class="identifier">io</span><span class="special">;</span>
   <span class="identifier">printer</span> <span class="identifier">p</span><span class="special">(</span><span class="identifier">io</span><span class="special">);</span>
-  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">thread</span> <span class="identifier">t</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_context</span><span class="special">::</span><span class="identifier">run</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">io</span><span class="special">));</span>
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">thread</span> <span class="identifier">t</span><span class="special">([&amp;]{</span> <span class="identifier">io</span><span class="special">.</span><span class="identifier">run</span><span class="special">();</span> <span class="special">});</span>
   <span class="identifier">io</span><span class="special">.</span><span class="identifier">run</span><span class="special">();</span>
   <span class="identifier">t</span><span class="special">.</span><span class="identifier">join</span><span class="special">();</span>
 
@@ -193,7 +190,8 @@
         member function as a completion handler</a>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

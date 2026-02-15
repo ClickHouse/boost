@@ -22,6 +22,10 @@
 #include <string>
 #include <type_traits>
 
+#if defined(BOOST_GCC) && BOOST_GCC >= 130000
+#pragma GCC diagnostic ignored "-Wself-move"
+#endif
+
 namespace boost {
 namespace beast {
 
@@ -133,7 +137,7 @@ void
 test_buffer_sequence(
     ConstBufferSequence const& buffers)
 {
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
         net::is_const_buffer_sequence<
             ConstBufferSequence>::value);
 
@@ -285,11 +289,11 @@ test_mutable_dynamic_buffer(
     MutableDynamicBuffer_v0 const& b0,
     std::true_type)
 {
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
         net::is_mutable_buffer_sequence<typename
             MutableDynamicBuffer_v0::mutable_buffers_type>::value);
 
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
         std::is_convertible<
             typename MutableDynamicBuffer_v0::mutable_buffers_type,
             typename MutableDynamicBuffer_v0::const_buffers_type>::value);
@@ -365,14 +369,14 @@ void
 test_dynamic_buffer(
     DynamicBuffer_v0 const& b0)
 {
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
         net::is_dynamic_buffer_v1<DynamicBuffer_v0>::value);
 
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
         net::is_const_buffer_sequence<typename
             DynamicBuffer_v0::const_buffers_type>::value);
 
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
         net::is_mutable_buffer_sequence<typename
             DynamicBuffer_v0::mutable_buffers_type>::value);
 
@@ -600,14 +604,14 @@ template<class DynamicBuffer_v0>
 void
 test_dynamic_buffer_ref(DynamicBuffer_v0 b0)
 {
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
             net::is_dynamic_buffer_v1<DynamicBuffer_v0>::value);
 
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
             net::is_const_buffer_sequence<typename
             DynamicBuffer_v0::const_buffers_type>::value);
 
-    BOOST_STATIC_ASSERT(
+    BOOST_CORE_STATIC_ASSERT(
             net::is_mutable_buffer_sequence<typename
             DynamicBuffer_v0::mutable_buffers_type>::value);
 

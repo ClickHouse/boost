@@ -993,6 +993,266 @@ public:
         }
     }
 
+    /*
+     * Tests when a deflate frame doesn't prepare the supplied buffer
+     * more than rd_msg_max.
+     */
+    void
+    testIssue2879()
+    {
+        // contains a deflate block with a size of 288230380446614262 (truncated at the end)
+        auto frame = sbuf(
+            "\xc2\xff\x04\x00\x00\x00\xff\xff\x02\xf6"
+            "\x4c\x31\x0d\x0a\x66\x3a\x27\x00\x00\x69"
+            "\x20\x20\x20\xff\x46\x00\x00\x10\x00\x6f"
+            "\x29\x00\xd6\x2e\x31\x0d\x0a\x48\x6f\x73"
+            "\x74\x3a\x42\x42\x42\x52\x41\x41\x45\x42"
+            "\x42\x42\x42\x42\x42\x01\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\xff"
+            "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
+            "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
+            "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
+            "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
+            "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
+            "\xff\xff\xff\xff\xff\xff\xff\xff\xff\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x01\x01\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f"
+            "\x0f\x0f\x0f\x0f\x0f\x0f\x01\x01\x01\x01"
+            "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+            "\x01\x43\x43\x43\x43\x43\x3f\x3f\x28\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x45\x54\x50\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x3f"
+            "\x3f\x3f\x3f\x3f\x3f\x3f\x3f\x43\x43\x43"
+            "\x43\x43\x43\x43\x43\x43\x43\x70\x67\x72"
+            "\x61\x64\x65\x00\x54\x00");
+
+        permessage_deflate pmd;
+        pmd.client_enable = true;
+        pmd.server_enable = true;
+
+        // read
+        {
+            net::io_context ioc;
+            stream<test::stream> wsc{ioc};
+            stream<test::stream> wss{ioc};
+            wsc.set_option(pmd);
+            wss.set_option(pmd);
+            wss.read_message_max(2048);
+            wsc.next_layer().connect(wss.next_layer());
+            wsc.async_handshake(
+                "localhost", "/", [](error_code){});
+            wss.async_accept([](error_code){});
+            ioc.run();
+            ioc.restart();
+            BEAST_EXPECT(wsc.is_open());
+            BEAST_EXPECT(wss.is_open());
+            net::write(wsc.next_layer(), frame);
+            error_code ec;
+            flat_buffer b;
+            wss.read(b, ec);
+            BEAST_EXPECTS(ec == error::message_too_big, ec.message());
+        }
+
+        // async read
+        {
+            net::io_context ioc;
+            stream<test::stream> wsc{ioc};
+            stream<test::stream> wss{ioc};
+            wsc.set_option(pmd);
+            wss.set_option(pmd);
+            wss.read_message_max(2048);
+            wsc.next_layer().connect(wss.next_layer());
+            wsc.async_handshake(
+                "localhost", "/", [](error_code){});
+            wss.async_accept([](error_code){});
+            ioc.run();
+            ioc.restart();
+            BEAST_EXPECT(wsc.is_open());
+            BEAST_EXPECT(wss.is_open());
+            net::write(wsc.next_layer(), frame);
+            error_code ec;
+            flat_buffer b;
+            wss.async_read(b,
+                [&ec](error_code ec_, std::size_t){ ec = ec_; });
+            ioc.run();
+            BEAST_EXPECTS(ec == error::message_too_big, ec.message());
+        }
+    }
+
+    void
+    testIssue3028()
+    {
+        auto msg = sbuf(
+            "wkaqsefsjynzktlawklztjjpzrasqgkxlhdkmgbqtvxvqn"
+            "ciekvocenenoawnfdpesvxbqgohblexlnzdvizyjbmekyi"
+            "gnrjfurknkcflbhkcmwmqzhizqdnltfimsfgyhcgeieiuk"
+            "rjrmdkfgizfakmfkonuuuwyemjjzsxnhxjvqpxlaimoqef"
+            "xbpqtjeuqpixjikxnfwyspkwywrhpynielsprzfpqpkgxn"
+            "eamswbpfywwdaicyjuebutrnljqhatbkfowfxkbyafhkgx"
+            "pgetcdzctbbesoyanockavckncdyuewiaxssmdewdwyiid"
+            "jemizrtjicmxhqxpbtsdquzwfkphbbldkqdgjbcczbiaxf"
+            "preamtbbqtrqvqaukhltdadwfoqtojpieqyipirscqdzfr"
+            "hbdyhdqpjtrmnprvphfyplmmwzvvwujrlxlljdfwgjnobu"
+            "lxozuysikvfzcacseoztlqhtxeuecqvygsfzmeywwtgfss"
+            "ptwbnvplsirilcwapomabqjrpxshakgldnrpexpbqtzroo"
+            "awyfueagvxptrqyrpzozdnwqflbgviqmsnewzdovaqfgdq"
+            "ophacrbpskdymbuvneuirbgekveyrpuuqhgzqhnogyylsw"
+            "ffsbdiuxarrliimzrzhcqsbqibmursximesnmkimkydvuz"
+            "tgvmaotnycavsixnvwlsrhjvkcrodohiwtrdovjmkiswbq"
+            "umxsacowiygdztvkhdxjgwzplpdlimocxyftqgcfsqdlsn"
+            "wcvgnujvpgptfubffcgajwzvktaztwfvlbbalawkmnhsag"
+            "oevmctztwatgqlsxgxzgpiwainrmvzswvsotfkctgioqdw"
+            "uzvkvhxhhylpmxcvptkdywscdhullqiferhzwmjdbzlqzz"
+            "pfnlppegbvrjdzstmlgnnoodknjcrvnizfigcijepyrjue"
+            "clxortfyzyorurmldqqckaamcnkhxdmsqwwwsdkpuctvdo"
+            "nlolqynufpvfqtidmptewhlzvzzzwlcnnmdenqaedprkxl"
+            "xwsikfysilibsdfwiocdeimxhimnkqgaixxsmqxagxgjej"
+            "droqbilhadmgfovvoxfynmakxprnevltwvhdwwmrbglojj"
+            "yirxjplkucrxwoyjokhpfbdfuwtszqeqdqdbotlcqjjmrx"
+            "cezxwmjadwoduketuoidxpcaayzemzcebartsonxsunity"
+            "tugxijrdmxfaxjjmvedlvlspaghkzdaqwsdudeawrkfysw"
+            "nzdxwmolazwiuutmtizwymexcpcbtjfxoerogcocediyfx"
+            "qqcokcjdwdlubaawjxmcptrzvehukyqbxyjiclyzfikbez"
+            "pqnigelrqbvdgoqrbirgtxszdemclahlivxdruipjoczgf"
+            "ccvocukfihbtqlyuvoiptdqijoaiscmibciozqtopuipms"
+            "qcawhwelcsukaxnvrzzgdsckawwpugrpdqspmlvffzidvi"
+            "agndsjkwakvuaijrdneqzaerjjmosvkxhdlpajgcrqeglf"
+            "bknernbwucgqmxkqaojdjemrslunovugiixmsmrfawthzr"
+            "mlwuksvlllpjbpbkepabppiaftdmvtwuvyedwjuspkxebu"
+            "glauomevvfiwdmnxtbbbvcyvklsyvzevhioyygwnuptdzz"
+            "mqwlqesqfoujokzqobyzqdpkpbbsixfvfubazvglxrfgto"
+            "zgzujnxjtihwvvxyavpymdxjyyepgrxnqeldfkjesvhnmz"
+            "ygnafpumcwzossrejurszinstrjygyxlsjpeekflkgoagl"
+            "nbmhdssxrjvjjcnssiccrcyzhglikjddjsvnymlmgcdzyb"
+            "erpfhbaynowpyzqaqrjkmbnbcjuwlmjxjmhwfomykbkvhc"
+            "blvnjpykuqfbbvuwrkjgtiqsxpltacnpmdyetmvhrvjzyh"
+            "dfetlytsvmutibygrpzhzvjmaqxqlgyvfxhrsapfrlknse"
+            "zzrdbzpemviyccheninsecqinxvavvkfvcsuepzhrxzuhk"
+            "bzjajoqjtgzzflvcnqkeednobfcdymtlhfhdrnbascfbql"
+            "vgewukfejmdfiogcxyrdospneadldytparvbzuohoyanve"
+            "rfbappanncqojtbkytqpugrmgiqxbadwqulkbpwrjgclfh"
+            "cnqhdyvioqpbqfambbiwmocvfiafvrrigkhrtwpnogunme"
+            "kwawsqbqzgzojavfijugpbhsuqivpqseylxmbyotrzddfd"
+            "rmzuxnfabqoxxotmwqctyzqwjlxyikxggyyokiwhhdqwrv"
+            "kjgzqfgprlsseuqfwdglczrmxoamysnqzwsbifwcdusqmn"
+            "btvtenlvhoxccvngeegcknjqkuqnjgdjuqqgdfotxjatvm"
+            "qjklvykrwwvhlqvemvmtaptnovmfblpyzzzjqneojpbvfr"
+            "ckgfmuhyygagntghkhkodoqrisshegseijoqnuwlwdzgya"
+            "jrcnewxkjabcbdlwkhfjgutmxbvxcopewmqhkolntvwcvf"
+            "vmbwhebwoektwlhqgsxdynhmvvvuxlnthswgwiwhhsvfwl"
+            "iewtcflrjilbclcboyqwjjtdqbsfjthjnlagrajwaoccjv"
+            "gvlfolhou");
+
+        permessage_deflate pmd;
+        pmd.client_enable = true;
+        pmd.server_enable = true;
+
+        // read
+        {
+            net::io_context ioc;
+            stream<test::stream> wsc{ioc};
+            stream<test::stream> wss{ioc};
+            wsc.set_option(pmd);
+            wss.set_option(pmd);
+            wsc.next_layer().connect(wss.next_layer());
+            wsc.async_handshake(
+                "localhost", "/", [](error_code){});
+            wss.async_accept([](error_code){});
+            ioc.run();
+            ioc.restart();
+            BEAST_EXPECT(wsc.is_open());
+            BEAST_EXPECT(wss.is_open());
+            for(int i = 0; i < 3; ++i)
+            {
+                wsc.write(net::buffer(msg));
+                do
+                {
+                    char buf[1];
+                    error_code ec;
+                    wss.read_some(net::buffer(buf), ec);
+                    if(! BEAST_EXPECTS(!ec, ec.message()))
+                        break;
+                } while(!wss.is_message_done());
+            }
+        }
+
+        // async read
+        {
+            net::io_context ioc;
+            stream<test::stream> wsc{ioc};
+            stream<test::stream> wss{ioc};
+            wsc.set_option(pmd);
+            wss.set_option(pmd);
+            wsc.next_layer().connect(wss.next_layer());
+            wsc.async_handshake(
+                "localhost", "/", [](error_code){});
+            wss.async_accept([](error_code){});
+            ioc.run();
+            ioc.restart();
+            BEAST_EXPECT(wsc.is_open());
+            BEAST_EXPECT(wss.is_open());
+            struct read_some_handler
+            {
+                stream<test::stream>* wss;
+                net::mutable_buffer buf;
+                void
+                operator()(error_code ec, std::size_t)
+                {
+                    if(! BEAST_EXPECTS(!ec, ec.message()))
+                        return;
+
+                    if(!wss->is_message_done())
+                        wss->async_read_some(buf, *this);
+                }
+            };
+            for(int i = 0; i < 3; ++i)
+            {
+                wsc.write(net::buffer(msg));
+                char buf[1];
+                wss.async_read_some(
+                    net::buffer(buf),
+                    read_some_handler{ &wss, net::buffer(buf) });
+                ioc.run();
+                ioc.restart();
+            }
+        }
+    }
+
     void
     testMoveOnly()
     {
@@ -1038,6 +1298,8 @@ public:
         testIssue807();
         testIssue954();
         testIssue1630();
+        testIssue2879();
+        testIssue3028();
         testIssueBF1();
         testIssueBF2();
         testMoveOnly();

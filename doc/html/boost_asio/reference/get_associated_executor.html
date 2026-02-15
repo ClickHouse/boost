@@ -45,16 +45,16 @@
 <span class="keyword">auto</span> <a class="link" href="get_associated_executor/overload2.html" title="get_associated_executor (2 of 3 overloads)">get_associated_executor</a><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;</span> <span class="identifier">t</span><span class="special">,</span>
     <span class="keyword">const</span> <span class="identifier">Executor</span> <span class="special">&amp;</span> <span class="identifier">ex</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">||</span><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span><span class="special">||</span><span class="identifier">execution</span><span class="special">::</span><span class="identifier">is_executor</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="get_associated_executor/overload2.html" title="get_associated_executor (2 of 3 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">ExecutionContext</span><span class="special">&gt;</span>
-<span class="identifier">associated_executor</span><span class="special">&lt;</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">ExecutionContext</span><span class="special">::</span><span class="identifier">executor_type</span> <span class="special">&gt;::</span><span class="identifier">type</span> <a class="link" href="get_associated_executor/overload3.html" title="get_associated_executor (3 of 3 overloads)">get_associated_executor</a><span class="special">(</span>
+<span class="identifier">associated_executor</span><span class="special">&lt;</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">typenameExecutionContext</span><span class="special">::</span><span class="identifier">executor_type</span> <span class="special">&gt;::</span><span class="identifier">type</span> <a class="link" href="get_associated_executor/overload3.html" title="get_associated_executor (3 of 3 overloads)">get_associated_executor</a><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;</span> <span class="identifier">t</span><span class="special">,</span>
     <span class="identifier">ExecutionContext</span> <span class="special">&amp;</span> <span class="identifier">ctx</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">ExecutionContext</span> <span class="special">&amp;,</span> <span class="identifier">execution_context</span> <span class="special">&amp;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_convertible</span><span class="special">&lt;</span> <span class="identifier">ExecutionContext</span> <span class="special">&amp;,</span> <span class="identifier">execution_context</span> <span class="special">&amp;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
   <span class="emphasis"><em>» <a class="link" href="get_associated_executor/overload3.html" title="get_associated_executor (3 of 3 overloads)">more...</a></em></span>
 </pre>
 <h5>
@@ -68,7 +68,8 @@
         <span class="emphasis"><em>Convenience header: </em></span><code class="literal">boost/asio.hpp</code>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

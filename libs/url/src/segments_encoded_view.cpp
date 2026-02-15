@@ -8,10 +8,9 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_IMPL_SEGMENTS_ENCODED_VIEW_IPP
-#define BOOST_URL_IMPL_SEGMENTS_ENCODED_VIEW_IPP
 
 #include <boost/url/detail/config.hpp>
+#include <boost/url/detail/segments_range.hpp>
 #include <boost/url/segments_encoded_view.hpp>
 #include <boost/url/parse_path.hpp>
 
@@ -35,6 +34,12 @@ segments_encoded_view(
 }
 
 segments_encoded_view::
+segments_encoded_view(iterator first, iterator last) noexcept
+    : segments_encoded_base(detail::make_subref(first, last))
+{
+}
+
+segments_encoded_view::
 operator
 segments_view() const noexcept
 {
@@ -44,4 +49,3 @@ segments_view() const noexcept
 } // urls
 } // boost
 
-#endif

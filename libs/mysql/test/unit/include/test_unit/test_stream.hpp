@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+// Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -10,9 +10,9 @@
 
 #include <boost/mysql/error_code.hpp>
 
-#include <boost/mysql/detail/any_stream_impl.hpp>
-
+#include <boost/asio/any_completion_handler.hpp>
 #include <boost/asio/any_io_executor.hpp>
+#include <boost/asio/buffer.hpp>
 #include <boost/core/span.hpp>
 
 #include <cstddef>
@@ -20,7 +20,6 @@
 #include <set>
 #include <vector>
 
-#include "test_common/tracker_executor.hpp"
 #include "test_unit/fail_count.hpp"
 
 namespace boost {
@@ -30,7 +29,7 @@ namespace test {
 class test_stream
 {
 public:
-    test_stream() = default;
+    test_stream(asio::any_io_executor ex) : ex_(std::move(ex)) {}
 
     // Support the layered stream model
     using lowest_layer_type = test_stream;
@@ -63,15 +62,15 @@ public:
 
     // Executor
     using executor_type = asio::any_io_executor;
-    executor_type get_executor();
+    executor_type get_executor() { return ex_; }
 
     // Reading
     std::size_t read_some(asio::mutable_buffer, error_code& ec);
     void async_read_some(asio::mutable_buffer, asio::any_completion_handler<void(error_code, std::size_t)>);
 
     // Writing
-    std::size_t write_some(boost::asio::const_buffer, error_code& ec);
-    void async_write_some(boost::asio::const_buffer, asio::any_completion_handler<void(error_code, std::size_t)>);
+    std::size_t write_some(asio::const_buffer, error_code& ec);
+    void async_write_some(asio::const_buffer, asio::any_completion_handler<void(error_code, std::size_t)>);
 
 private:
     std::vector<std::uint8_t> bytes_to_read_;
@@ -80,7 +79,7 @@ private:
     std::vector<std::uint8_t> bytes_written_;
     fail_count fail_count_;
     std::size_t write_break_size_{1024};  // max number of bytes to be written in each write_some
-    executor_info executor_info_{};
+    asio::any_io_executor ex_;
 
     std::size_t get_size_to_read(std::size_t buffer_size) const;
     std::size_t do_read(asio::mutable_buffer buff, error_code& ec);
@@ -90,12 +89,8 @@ private:
     struct write_op;
 };
 
-using test_any_stream = detail::any_stream_impl<test_stream>;
-
 }  // namespace test
 }  // namespace mysql
 }  // namespace boost
-
-extern template class boost::mysql::detail::any_stream_impl<boost::mysql::test::test_stream>;
 
 #endif

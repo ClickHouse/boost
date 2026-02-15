@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="The Boost C++ Libraries BoostBook Documentation Subset">
-<link rel="up" href="../stl_interfaces.html" title="Chapter 37. Boost.STLInterfaces">
+<link rel="up" href="../stl_interfaces.html" title="Chapter 36. Boost.STLInterfaces">
 <link rel="prev" href="tutorial__view_adaptors.html" title="Tutorial: View Adaptors">
 <link rel="next" href="tutorial___bind_back____and_more_complicated_view_adaptors.html" title="Tutorial: bind_back() and More Complicated View Adaptors">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">F</span><span class="special">&gt;</span>
     <span class="keyword">struct</span> <span class="identifier">closure</span> <span class="special">:</span> <span class="identifier">range_adaptor_closure</span><span class="special">&lt;</span><span class="identifier">closure</span><span class="special">&lt;</span><span class="identifier">F</span><span class="special">&gt;&gt;</span>
     <span class="special">{</span>
-        <span class="keyword">constexpr</span> <span class="identifier">closure</span><span class="special">(</span><span class="identifier">F</span> <span class="identifier">f</span><span class="special">)</span> <span class="special">:</span> <span class="identifier">f_</span><span class="special">(</span><span class="identifier">f</span><span class="special">)</span> <span class="special">{}</span>
+        <span class="keyword">constexpr</span> <span class="identifier">closure</span><span class="special">(</span><span class="identifier">F</span> <span class="identifier">f</span><span class="special">)</span> <span class="special">:</span> <span class="identifier">f_</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">f</span><span class="special">))</span> <span class="special">{}</span>
 
 <span class="preprocessor">#if</span> <span class="identifier">BOOST_STL_INTERFACES_USE_CONCEPTS</span>
         <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
@@ -52,13 +52,26 @@
             <span class="keyword">typename</span> <span class="identifier">Enable</span> <span class="special">=</span>
                 <span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_if_t</span><span class="special">&lt;</span><span class="identifier">detail</span><span class="special">::</span><span class="identifier">is_invocable_v</span><span class="special">&lt;</span><span class="identifier">F</span> <span class="keyword">const</span> <span class="special">&amp;,</span> <span class="identifier">T</span><span class="special">&gt;&gt;&gt;</span>
 <span class="preprocessor">#endif</span>
-        <span class="keyword">constexpr</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">T</span> <span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">)</span> <span class="keyword">const</span>
+        <span class="keyword">constexpr</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">T</span> <span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">&amp;</span>
         <span class="special">{</span>
             <span class="keyword">return</span> <span class="identifier">f_</span><span class="special">((</span><span class="identifier">T</span> <span class="special">&amp;&amp;)</span> <span class="identifier">t</span><span class="special">);</span>
         <span class="special">}</span>
 
+<span class="preprocessor">#if</span> <span class="identifier">BOOST_STL_INTERFACES_USE_CONCEPTS</span>
+        <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+        <span class="identifier">requires</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">invocable</span><span class="special">&lt;</span><span class="identifier">F</span> <span class="special">&amp;&amp;,</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="preprocessor">#else</span>
+        <span class="keyword">template</span><span class="special">&lt;</span>
+            <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span>
+            <span class="keyword">typename</span> <span class="identifier">Enable</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_if_t</span><span class="special">&lt;</span><span class="identifier">detail</span><span class="special">::</span><span class="identifier">is_invocable_v</span><span class="special">&lt;</span><span class="identifier">F</span> <span class="special">&amp;&amp;,</span> <span class="identifier">T</span><span class="special">&gt;&gt;&gt;</span>
+<span class="preprocessor">#endif</span>
+        <span class="keyword">constexpr</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">T</span> <span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">)</span> <span class="special">&amp;&amp;</span>
+        <span class="special">{</span>
+            <span class="keyword">return</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">f_</span><span class="special">)((</span><span class="identifier">T</span> <span class="special">&amp;&amp;)</span> <span class="identifier">t</span><span class="special">);</span>
+        <span class="special">}</span>
+
     <span class="keyword">private</span><span class="special">:</span>
-        <span class="identifier">F</span> <span class="identifier">f_</span><span class="special">;</span>
+        <span class="special">[[</span><span class="identifier">no_unique_address</span><span class="special">]]</span> <span class="identifier">F</span> <span class="identifier">f_</span><span class="special">;</span>
     <span class="special">};</span>
 </pre>
 <p>
@@ -88,7 +101,7 @@
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">F</span><span class="special">&gt;</span>
     <span class="keyword">struct</span> <span class="identifier">adaptor</span>
     <span class="special">{</span>
-        <span class="keyword">constexpr</span> <span class="identifier">adaptor</span><span class="special">(</span><span class="identifier">F</span> <span class="identifier">f</span><span class="special">)</span> <span class="special">:</span> <span class="identifier">f_</span><span class="special">(</span><span class="identifier">f</span><span class="special">)</span> <span class="special">{}</span>
+        <span class="keyword">constexpr</span> <span class="identifier">adaptor</span><span class="special">(</span><span class="identifier">F</span> <span class="identifier">f</span><span class="special">)</span> <span class="special">:</span> <span class="identifier">f_</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">f</span><span class="special">))</span> <span class="special">{}</span>
 
         <span class="comment">// clang-format off</span>
         <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
@@ -97,7 +110,7 @@
         <span class="special">{</span>
 <span class="preprocessor">#if</span> <span class="identifier">BOOST_STL_INTERFACES_USE_CONCEPTS</span>
             <span class="keyword">if</span> <span class="keyword">constexpr</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_invocable_v</span><span class="special">&lt;</span><span class="identifier">F</span> <span class="keyword">const</span> <span class="special">&amp;,</span> <span class="identifier">Args</span><span class="special">...&gt;)</span> <span class="special">{</span>
-                <span class="keyword">return</span> <span class="identifier">f</span><span class="special">((</span><span class="identifier">Args</span> <span class="special">&amp;&amp;)</span> <span class="identifier">args</span><span class="special">...);</span>
+                <span class="keyword">return</span> <span class="identifier">f_</span><span class="special">((</span><span class="identifier">Args</span> <span class="special">&amp;&amp;)</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span> <span class="keyword">else</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">closure</span><span class="special">(</span>
                     <span class="identifier">stl_interfaces</span><span class="special">::</span><span class="identifier">bind_back</span><span class="special">(</span><span class="identifier">f_</span><span class="special">,</span> <span class="special">(</span><span class="identifier">Args</span> <span class="special">&amp;&amp;)</span> <span class="identifier">args</span><span class="special">...));</span>
@@ -111,7 +124,7 @@
         <span class="special">}</span>
 
     <span class="keyword">private</span><span class="special">:</span>
-        <span class="identifier">F</span> <span class="identifier">f_</span><span class="special">;</span>
+        <span class="special">[[</span><span class="identifier">no_unique_address</span><span class="special">]]</span> <span class="identifier">F</span> <span class="identifier">f_</span><span class="special">;</span>
     <span class="special">};</span>
 </pre>
 <p>

@@ -32,7 +32,8 @@
 Default
           constructor.
         </p>
-<pre class="programlisting"><span class="keyword">constexpr</span> <a class="link" href="use_coro_t/overload1.html" title="experimental::use_coro_t::use_coro_t (1 of 2 overloads)">use_coro_t</a><span class="special">();</span>
+<pre class="programlisting"><span class="keyword">constexpr</span> <a class="link" href="use_coro_t/overload1.html" title="experimental::use_coro_t::use_coro_t (1 of 2 overloads)">use_coro_t</a><span class="special">(</span>
+    <span class="identifier">allocator_type</span> <span class="identifier">allocator</span> <span class="special">=</span> <span class="identifier">allocator_type</span><span class="special">{});</span>
   <span class="emphasis"><em>» <a class="link" href="use_coro_t/overload1.html" title="experimental::use_coro_t::use_coro_t (1 of 2 overloads)">more...</a></em></span>
 </pre>
 <p>
@@ -41,11 +42,13 @@ Default
 <pre class="programlisting"><span class="keyword">constexpr</span> <a class="link" href="use_coro_t/overload2.html" title="experimental::use_coro_t::use_coro_t (2 of 2 overloads)">use_coro_t</a><span class="special">(</span>
     <span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span> <span class="identifier">file_name</span><span class="special">,</span>
     <span class="keyword">int</span> <span class="identifier">line</span><span class="special">,</span>
-    <span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span> <span class="identifier">function_name</span><span class="special">);</span>
+    <span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span> <span class="identifier">function_name</span><span class="special">,</span>
+    <span class="identifier">allocator_type</span> <span class="identifier">allocator</span> <span class="special">=</span> <span class="identifier">allocator_type</span><span class="special">{});</span>
   <span class="emphasis"><em>» <a class="link" href="use_coro_t/overload2.html" title="experimental::use_coro_t::use_coro_t (2 of 2 overloads)">more...</a></em></span>
 </pre>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

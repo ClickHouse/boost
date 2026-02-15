@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__basic_stream.async_write_some"></a><a class="link" href="async_write_some.html" title="basic_stream::async_write_some">basic_stream::async_write_some</a>
 </h5></div></div></div>
 <p>
-          <a class="indexterm" name="idm15224"></a>
+          <a class="indexterm" name="id19084"></a>
         </p>
 <p>
           Write some data asynchronously.
@@ -51,6 +51,8 @@
         </h6>
 <p>
           This function is used to asynchronously write data to the underlying socket.
+        </p>
+<p>
           This call always returns immediately. The asynchronous operation will continue
           until one of the following conditions is true:
         </p>
@@ -66,9 +68,12 @@
           The algorithm, known as a <span class="emphasis"><em>composed asynchronous operation</em></span>,
           is implemented in terms of calls to the next layer's <code class="computeroutput"><span class="identifier">async_write_some</span></code>
           function. The program must ensure that no other calls to <a class="link" href="async_write_some.html" title="basic_stream::async_write_some"><code class="computeroutput"><span class="identifier">async_write_some</span></code></a> are performed
-          until this operation completes. If the timeout timer expires while the
-          operation is outstanding, the operation will be canceled and the completion
-          handler will be invoked with the error <a class="link" href="../boost__beast__error.html" title="error"><code class="computeroutput"><span class="identifier">error</span><span class="special">::</span><span class="identifier">timeout</span></code></a>.
+          until this operation completes.
+        </p>
+<p>
+          If the timeout timer expires while the operation is outstanding, the operation
+          will be canceled and the completion handler will be invoked with the error
+          <a class="link" href="../boost__beast__error.html" title="error"><code class="computeroutput"><span class="identifier">error</span><span class="special">::</span><span class="identifier">timeout</span></code></a>.
         </p>
 <h6>
 <a name="beast.ref.boost__beast__basic_stream.async_write_some.h2"></a>
@@ -128,10 +133,12 @@
 <span class="special">);</span>
 </pre>
                   <p>
-                    Regardless of whether the asynchronous operation completes immediately
-                    or not, the handler will not be invoked from within this function.
-                    Invocation of the handler will be performed in a manner equivalent
-                    to using <code class="computeroutput"><span class="identifier">net</span><span class="special">::</span><span class="identifier">post</span></code>.
+                    If the handler has an associated immediate executor, an immediate
+                    completion will be dispatched to it. Otherwise, the handler will
+                    not be invoked from within this function. Invocation of the handler
+                    will be performed by dispatching to the immediate executor. If
+                    no immediate executor is specified, this is equivalent to using
+                    <code class="computeroutput"><span class="identifier">net</span><span class="special">::</span><span class="identifier">post</span></code>.
                   </p>
                 </td>
 </tr>

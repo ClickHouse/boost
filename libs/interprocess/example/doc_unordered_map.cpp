@@ -9,6 +9,8 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <boost/interprocess/detail/workaround.hpp>
+#if BOOST_CXX_VERSION >=201103L
+
 //[doc_unordered_map
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
@@ -38,32 +40,15 @@ int main ()
    //Remove shared memory on construction and destruction
    struct shm_remove
    {
-   //<-
-   #if 1
       shm_remove() { shared_memory_object::remove(test::get_process_id_name()); }
       ~shm_remove(){ shared_memory_object::remove(test::get_process_id_name()); }
-   #else
-   //->
-      shm_remove() { shared_memory_object::remove("MySharedMemory"); }
-      ~shm_remove(){ shared_memory_object::remove("MySharedMemory"); }
-   //<-
-   #endif
-   //->
    } remover;
    //<-
    (void)remover;
    //->
 
    //Create shared memory
-   //<-
-   #if 1
    managed_shared_memory segment(create_only, test::get_process_id_name(), 65536);
-   #else
-   //->
-   managed_shared_memory segment(create_only, "MySharedMemory", 65536);
-   //<-
-   #endif
-   //->
 
    //Note that unordered_map<Key, MappedType>'s value_type is std::pair<const Key, MappedType>,
    //so the allocator must allocate that pair.
@@ -95,4 +80,9 @@ int main ()
    return 0;
 }
 //]
-
+#else
+int main()
+{
+   return 0;
+}
+#endif //#if BOOST_CXX_VERSION >=201103L

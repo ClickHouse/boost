@@ -34,7 +34,7 @@ Request the strand to invoke
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">Function</span><span class="special">&gt;</span>
-<span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">traits</span><span class="special">::</span><span class="identifier">execute_member</span><span class="special">&lt;</span> <span class="keyword">const</span> <span class="identifier">Executor</span> <span class="special">&amp;,</span> <span class="identifier">Function</span> <span class="special">&gt;::</span><span class="identifier">is_valid</span><span class="special">,</span> <span class="keyword">void</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="identifier">execute</span><span class="special">(</span>
+<span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">traits</span><span class="special">::</span><span class="identifier">execute_member</span><span class="special">&lt;</span> <span class="keyword">const</span> <span class="identifier">Executor</span> <span class="special">&amp;,</span> <span class="identifier">Function</span> <span class="special">&gt;::</span><span class="identifier">is_valid</span><span class="special">,</span> <span class="keyword">void</span> <span class="special">&gt;</span> <span class="identifier">execute</span><span class="special">(</span>
     <span class="identifier">Function</span> <span class="special">&amp;&amp;</span> <span class="identifier">f</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 </pre>
 <p>
@@ -62,7 +62,8 @@ Request the strand to invoke
 </dl>
 </div>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>async_connect (1 of 6 overloads)</title>
+<title>async_connect (1 of 4 overloads)</title>
 <link rel="stylesheet" href="../../../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../../boost_asio.html" title="Boost.Asio">
 <link rel="up" href="../async_connect.html" title="async_connect">
 <link rel="prev" href="../async_connect.html" title="async_connect">
-<link rel="next" href="overload2.html" title="async_connect (2 of 6 overloads)">
+<link rel="next" href="overload2.html" title="async_connect (2 of 4 overloads)">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -25,8 +25,8 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="boost_asio.reference.async_connect.overload1"></a><a class="link" href="overload1.html" title="async_connect (1 of 6 overloads)">async_connect
-        (1 of 6 overloads)</a>
+<a name="boost_asio.reference.async_connect.overload1"></a><a class="link" href="overload1.html" title="async_connect (1 of 4 overloads)">async_connect
+        (1 of 4 overloads)</a>
 </h4></div></div></div>
 <p>
           Asynchronously establishes a socket connection by trying each endpoint
@@ -36,12 +36,13 @@
     <span class="keyword">typename</span> <a class="link" href="../Protocol.html" title="Protocol requirements">Protocol</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../Executor1.html" title="Executor requirements">Executor</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../EndpointSequence.html" title="Endpoint sequence requirements">EndpointSequence</a><span class="special">,</span>
-    <span class="keyword">typename</span> <a class="link" href="../RangeConnectToken.html" title="Range connect token requirements">RangeConnectToken</a> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../RangeConnectToken.html" title="Range connect token requirements">RangeConnectToken</a> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span><span class="identifier">Executor</span><span class="special">&gt;&gt;</span>
 <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type"><span class="emphasis"><em>DEDUCED</em></span></a> <span class="identifier">async_connect</span><span class="special">(</span>
     <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">Protocol</span><span class="special">,</span> <span class="identifier">Executor</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="keyword">const</span> <span class="identifier">EndpointSequence</span> <span class="special">&amp;</span> <span class="identifier">endpoints</span><span class="special">,</span>
-    <span class="identifier">RangeConnectToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_endpoint_sequence</span><span class="special">&lt;</span> <span class="identifier">EndpointSequence</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">RangeConnectToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <span class="identifier">Executor</span> <span class="special">&gt;(),</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_endpoint_sequence</span><span class="special">&lt;</span> <span class="identifier">EndpointSequence</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_connect_condition</span><span class="special">&lt;</span> <span class="identifier">RangeConnectToken</span><span class="special">,</span> <span class="keyword">decltype</span><span class="special">(</span><span class="identifier">declval</span><span class="special">&lt;</span> <span class="keyword">const</span> <span class="identifier">EndpointSequence</span> <span class="special">&amp;</span> <span class="special">&gt;().</span><span class="identifier">begin</span><span class="special">())&gt;::</span><span class="identifier">value</span> <span class="special">&gt;=</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
           This function attempts to connect a socket to one of a sequence of endpoints.
@@ -91,7 +92,7 @@
                 Regardless of whether the asynchronous operation completes immediately
                 or not, the completion handler will not be invoked from within this
                 function. On immediate completion, invocation of the handler will
-                be performed in a manner equivalent to using <a class="link" href="../post.html" title="post"><code class="computeroutput"><span class="identifier">post</span></code></a>.
+                be performed in a manner equivalent to using <a class="link" href="../async_immediate.html" title="async_immediate"><code class="computeroutput"><span class="identifier">async_immediate</span></code></a>.
               </p>
 </dd>
 </dl>
@@ -158,7 +159,8 @@
           operation.
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

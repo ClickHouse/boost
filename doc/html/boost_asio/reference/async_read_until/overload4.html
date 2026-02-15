@@ -36,15 +36,15 @@
     <span class="keyword">typename</span> <a class="link" href="../AsyncReadStream.html" title="Buffer-oriented asynchronous read stream requirements">AsyncReadStream</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../DynamicBuffer_v1.html" title="Dynamic buffer requirements (version 1)">DynamicBuffer_v1</a><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">MatchCondition</span><span class="special">,</span>
-    <span class="keyword">typename</span> <a class="link" href="../ReadToken.html" title="Read token requirements">ReadToken</a> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../ReadToken.html" title="Read token requirements">ReadToken</a> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span>        <span class="keyword">typename</span> <span class="identifier">AsyncReadStream</span><span class="special">::</span><span class="identifier">executor_type</span><span class="special">&gt;&gt;</span>
 <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.automatic_deduction_of_initiating_function_return_type"><span class="emphasis"><em>DEDUCED</em></span></a> <span class="identifier">async_read_until</span><span class="special">(</span>
     <span class="identifier">AsyncReadStream</span> <span class="special">&amp;</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="identifier">DynamicBuffer_v1</span> <span class="special">&amp;&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
     <span class="identifier">MatchCondition</span> <span class="identifier">match_condition</span><span class="special">,</span>
-    <span class="identifier">ReadToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <a class="link" href="../asynchronous_operations.html#boost_asio.reference.asynchronous_operations.default_completion_tokens"><span class="emphasis"><em>DEFAULT</em></span></a><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_match_condition</span><span class="special">&lt;</span> <span class="identifier">MatchCondition</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="identifier">is_dynamic_buffer_v1</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
-    <span class="keyword">typename</span> <span class="identifier">constraint</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_dynamic_buffer_v2</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;::</span><span class="identifier">type</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;::</span><span class="identifier">type</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
+    <span class="identifier">ReadToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">token</span> <span class="special">=</span> <span class="identifier">default_completion_token_t</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">AsyncReadStream</span><span class="special">::</span><span class="identifier">executor_type</span> <span class="special">&gt;(),</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_match_condition</span><span class="special">&lt;</span> <span class="identifier">MatchCondition</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="identifier">is_dynamic_buffer_v1</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">,</span>
+    <span class="identifier">constraint_t</span><span class="special">&lt;</span> <span class="special">!</span><span class="identifier">is_dynamic_buffer_v2</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">DynamicBuffer_v1</span> <span class="special">&gt;</span> <span class="special">&gt;::</span><span class="identifier">value</span> <span class="special">&gt;</span>  <span class="special">=</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
           This function is used to asynchronously read data into the specified dynamic
@@ -142,7 +142,7 @@
                 Regardless of whether the asynchronous operation completes immediately
                 or not, the completion handler will not be invoked from within this
                 function. On immediate completion, invocation of the handler will
-                be performed in a manner equivalent to using <a class="link" href="../post.html" title="post"><code class="computeroutput"><span class="identifier">post</span></code></a>.
+                be performed in a manner equivalent to using <a class="link" href="../async_immediate.html" title="async_immediate"><code class="computeroutput"><span class="identifier">async_immediate</span></code></a>.
               </p>
 </dd>
 </dl>
@@ -183,7 +183,7 @@
           until whitespace is encountered:
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffers_iterator</span><span class="special">&lt;</span>
-    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">const_buffers_1</span><span class="special">&gt;</span> <span class="identifier">iterator</span><span class="special">;</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">const_buffer</span><span class="special">&gt;</span> <span class="identifier">iterator</span><span class="special">;</span>
 
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">iterator</span><span class="special">,</span> <span class="keyword">bool</span><span class="special">&gt;</span>
 <span class="identifier">match_whitespace</span><span class="special">(</span><span class="identifier">iterator</span> <span class="identifier">begin</span><span class="special">,</span> <span class="identifier">iterator</span> <span class="identifier">end</span><span class="special">)</span>
@@ -257,7 +257,8 @@
           operation.
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

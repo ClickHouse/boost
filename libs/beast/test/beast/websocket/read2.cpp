@@ -18,18 +18,11 @@
 #include <boost/asio/use_awaitable.hpp>
 #endif
 
-#include <boost/config/workaround.hpp>
-#if BOOST_WORKAROUND(BOOST_GCC, < 80200)
-#define BOOST_BEAST_SYMBOL_HIDDEN __attribute__ ((visibility("hidden")))
-#else
-#define BOOST_BEAST_SYMBOL_HIDDEN
-#endif
-
 namespace boost {
 namespace beast {
 namespace websocket {
 
-class BOOST_BEAST_SYMBOL_HIDDEN read2_test
+class read2_test
     : public websocket_test_suite
 {
 public:
@@ -473,9 +466,8 @@ public:
             {
                 if(se.code() == test::error::test_failure)
                     throw;
-                BEAST_EXPECTS(se.code().category() ==
-                    make_error_code(static_cast<
-                        zlib::error>(0)).category(),
+                auto const ec = make_error_code(static_cast<zlib::error>(0));
+                BEAST_EXPECTS(se.code().category() == ec.category(),
                     se.code().message());
             }
             catch(...)

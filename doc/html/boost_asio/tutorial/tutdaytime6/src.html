@@ -32,18 +32,18 @@
 <span class="comment">// server.cpp</span>
 <span class="comment">// ~~~~~~~~~~</span>
 <span class="comment">//</span>
-<span class="comment">// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)</span>
+<span class="comment">// Copyright (c) 2003-2025 Christopher M. Kohlhoff (chris at kohlhoff dot com)</span>
 <span class="comment">//</span>
 <span class="comment">// Distributed under the Boost Software License, Version 1.0. (See accompanying</span>
 <span class="comment">// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)</span>
 <span class="comment">//</span>
 
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">array</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">ctime</span><span class="special">&gt;</span>
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">memory</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">string</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">array</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">bind</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">shared_ptr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">asio</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">using</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">;</span>
@@ -69,7 +69,7 @@
   <span class="special">{</span>
     <span class="identifier">socket_</span><span class="special">.</span><span class="identifier">async_receive_from</span><span class="special">(</span>
         <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">recv_buffer_</span><span class="special">),</span> <span class="identifier">remote_endpoint_</span><span class="special">,</span>
-        <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">udp_server</span><span class="special">::</span><span class="identifier">handle_receive</span><span class="special">,</span> <span class="keyword">this</span><span class="special">,</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">udp_server</span><span class="special">::</span><span class="identifier">handle_receive</span><span class="special">,</span> <span class="keyword">this</span><span class="special">,</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">bytes_transferred</span><span class="special">));</span>
   <span class="special">}</span>
@@ -79,11 +79,11 @@
   <span class="special">{</span>
     <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">error</span><span class="special">)</span>
     <span class="special">{</span>
-      <span class="identifier">boost</span><span class="special">::</span><span class="identifier">shared_ptr</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&gt;</span> <span class="identifier">message</span><span class="special">(</span>
+      <span class="identifier">std</span><span class="special">::</span><span class="identifier">shared_ptr</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&gt;</span> <span class="identifier">message</span><span class="special">(</span>
           <span class="keyword">new</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">(</span><span class="identifier">make_daytime_string</span><span class="special">()));</span>
 
       <span class="identifier">socket_</span><span class="special">.</span><span class="identifier">async_send_to</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(*</span><span class="identifier">message</span><span class="special">),</span> <span class="identifier">remote_endpoint_</span><span class="special">,</span>
-          <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">udp_server</span><span class="special">::</span><span class="identifier">handle_send</span><span class="special">,</span> <span class="keyword">this</span><span class="special">,</span> <span class="identifier">message</span><span class="special">,</span>
+          <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">udp_server</span><span class="special">::</span><span class="identifier">handle_send</span><span class="special">,</span> <span class="keyword">this</span><span class="special">,</span> <span class="identifier">message</span><span class="special">,</span>
             <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span>
             <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">bytes_transferred</span><span class="special">));</span>
 
@@ -91,7 +91,7 @@
     <span class="special">}</span>
   <span class="special">}</span>
 
-  <span class="keyword">void</span> <span class="identifier">handle_send</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">shared_ptr</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&gt;</span> <span class="comment">/*message*/</span><span class="special">,</span>
+  <span class="keyword">void</span> <span class="identifier">handle_send</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">shared_ptr</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&gt;</span> <span class="comment">/*message*/</span><span class="special">,</span>
       <span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="comment">/*error*/</span><span class="special">,</span>
       <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="comment">/*bytes_transferred*/</span><span class="special">)</span>
   <span class="special">{</span>
@@ -99,7 +99,7 @@
 
   <span class="identifier">udp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket_</span><span class="special">;</span>
   <span class="identifier">udp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">remote_endpoint_</span><span class="special">;</span>
-  <span class="identifier">boost</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="number">1</span><span class="special">&gt;</span> <span class="identifier">recv_buffer_</span><span class="special">;</span>
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">char</span><span class="special">,</span> <span class="number">1</span><span class="special">&gt;</span> <span class="identifier">recv_buffer_</span><span class="special">;</span>
 <span class="special">};</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span>
@@ -123,7 +123,8 @@
           asynchronous UDP daytime server</a>
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

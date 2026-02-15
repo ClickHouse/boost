@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="Chapter 1. Boost.MySQL">
 <link rel="up" href="../index.html" title="Chapter 1. Boost.MySQL">
-<link rel="prev" href="overview.html" title="Overview">
+<link rel="prev" href="prepared_statements.html" title="Prepared statements">
 <link rel="next" href="static_interface.html" title="The static interface">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -21,7 +21,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="overview.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="static_interface.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="prepared_statements.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="static_interface.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -93,17 +93,17 @@
       object. Indexing the returned view also returns view objects:
     </p>
 <pre class="programlisting"><span class="comment">// Populate a results object</span>
-<span class="identifier">results</span> <span class="identifier">result</span><span class="special">;</span>
-<span class="identifier">conn</span><span class="special">.</span><span class="identifier">execute</span><span class="special">(</span><span class="string">"SELECT 'Hello world'"</span><span class="special">,</span> <span class="identifier">result</span><span class="special">);</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">results</span> <span class="identifier">result</span><span class="special">;</span>
+<span class="identifier">co_await</span> <span class="identifier">conn</span><span class="special">.</span><span class="identifier">async_execute</span><span class="special">(</span><span class="string">"SELECT 'Hello world'"</span><span class="special">,</span> <span class="identifier">result</span><span class="special">);</span>
 
 <span class="comment">// results::rows() returns a rows_view. The underlying memory is owned by the results object</span>
-<span class="identifier">rows_view</span> <span class="identifier">all_rows</span> <span class="special">=</span> <span class="identifier">result</span><span class="special">.</span><span class="identifier">rows</span><span class="special">();</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">rows_view</span> <span class="identifier">all_rows</span> <span class="special">=</span> <span class="identifier">result</span><span class="special">.</span><span class="identifier">rows</span><span class="special">();</span>
 
 <span class="comment">// Indexing a rows_view yields a row_view. The underlying memory is owned by the results object</span>
-<span class="identifier">row_view</span> <span class="identifier">first_row</span> <span class="special">=</span> <span class="identifier">all_rows</span><span class="special">.</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">);</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">row_view</span> <span class="identifier">first_row</span> <span class="special">=</span> <span class="identifier">all_rows</span><span class="special">.</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">);</span>
 
 <span class="comment">// Indexing a row_view yields a field_view. The underlying memory is owned by the results object</span>
-<span class="identifier">field_view</span> <span class="identifier">first_field</span> <span class="special">=</span> <span class="identifier">first_row</span><span class="special">.</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">);</span>  <span class="comment">// Contains the string "Hello world"</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">field_view</span> <span class="identifier">first_field</span> <span class="special">=</span> <span class="identifier">first_row</span><span class="special">.</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">);</span>  <span class="comment">// Contains the string "Hello world"</span>
 </pre>
 <p>
       Views behave similarly to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string_view</span></code>.
@@ -117,13 +117,13 @@
       view using its owning counterpart:
     </p>
 <pre class="programlisting"><span class="comment">// You may use all_rows_owning after result has gone out of scope</span>
-<span class="identifier">rows</span> <span class="identifier">all_rows_owning</span><span class="special">{</span><span class="identifier">all_rows</span><span class="special">};</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">rows</span> <span class="identifier">all_rows_owning</span><span class="special">{</span><span class="identifier">all_rows</span><span class="special">};</span>
 
 <span class="comment">// You may use first_row_owning after result has gone out of scope</span>
-<span class="identifier">row</span> <span class="identifier">first_row_owning</span><span class="special">{</span><span class="identifier">first_row</span><span class="special">};</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">row</span> <span class="identifier">first_row_owning</span><span class="special">{</span><span class="identifier">first_row</span><span class="special">};</span>
 
 <span class="comment">// You may use first_field_owning after result has gone out of scope</span>
-<span class="identifier">field</span> <span class="identifier">first_field_owning</span><span class="special">{</span><span class="identifier">first_field</span><span class="special">};</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">field</span> <span class="identifier">first_field_owning</span><span class="special">{</span><span class="identifier">first_field</span><span class="special">};</span>
 </pre>
 <h4>
 <a name="mysql.dynamic_interface.h1"></a>
@@ -160,11 +160,11 @@
 <p>
       For example:
     </p>
-<pre class="programlisting"><span class="identifier">results</span> <span class="identifier">result</span><span class="special">;</span>
-<span class="identifier">conn</span><span class="special">.</span><span class="identifier">execute</span><span class="special">(</span><span class="string">"SELECT 'abc', 42"</span><span class="special">,</span> <span class="identifier">result</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">mysql</span><span class="special">::</span><span class="identifier">results</span> <span class="identifier">result</span><span class="special">;</span>
+<span class="identifier">co_await</span> <span class="identifier">conn</span><span class="special">.</span><span class="identifier">async_execute</span><span class="special">(</span><span class="string">"SELECT 'abc', 42"</span><span class="special">,</span> <span class="identifier">result</span><span class="special">);</span>
 
 <span class="comment">// Obtain a field's underlying value using the is_xxx and get_xxx accessors</span>
-<span class="identifier">field_view</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">result</span><span class="special">.</span><span class="identifier">rows</span><span class="special">().</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">).</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">);</span>  <span class="comment">// f points to the string "abc"</span>
+<span class="identifier">mysql</span><span class="special">::</span><span class="identifier">field_view</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">result</span><span class="special">.</span><span class="identifier">rows</span><span class="special">().</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">).</span><span class="identifier">at</span><span class="special">(</span><span class="number">0</span><span class="special">);</span>  <span class="comment">// f points to the string "abc"</span>
 <span class="keyword">if</span> <span class="special">(</span><span class="identifier">f</span><span class="special">.</span><span class="identifier">is_string</span><span class="special">())</span>
 <span class="special">{</span>
     <span class="comment">// we know it's a string, unchecked access</span>
@@ -173,7 +173,7 @@
 <span class="special">}</span>
 <span class="keyword">else</span>
 <span class="special">{</span>
-    <span class="comment">// Oops, something went wrong - schema msimatch?</span>
+    <span class="comment">// Oops, something went wrong - schema mismatch?</span>
 <span class="special">}</span>
 
 <span class="comment">// Alternative: use the as_xxx accessor</span>
@@ -189,26 +189,26 @@
       This is how <code class="computeroutput"><span class="identifier">NULL</span></code>s are typically
       handled:
     </p>
-<pre class="programlisting"><span class="identifier">results</span> <span class="identifier">result</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">mysql</span><span class="special">::</span><span class="identifier">results</span> <span class="identifier">result</span><span class="special">;</span>
 
 <span class="comment">// Create some test data</span>
-<span class="identifier">conn</span><span class="special">.</span><span class="identifier">execute</span><span class="special">(</span>
+<span class="identifier">co_await</span> <span class="identifier">conn</span><span class="special">.</span><span class="identifier">async_execute</span><span class="special">(</span>
     <span class="identifier">R</span><span class="string">"%(
         CREATE TEMPORARY TABLE products (
             id VARCHAR(50) PRIMARY KEY,
             description VARCHAR(256)
-        )
+        );
+        INSERT INTO products VALUES ('PTT', 'Potatoes'), ('CAR', NULL)
     )%"</span><span class="special">,</span>
     <span class="identifier">result</span>
 <span class="special">);</span>
-<span class="identifier">conn</span><span class="special">.</span><span class="identifier">execute</span><span class="special">(</span><span class="string">"INSERT INTO products VALUES ('PTT', 'Potatoes'), ('CAR', NULL)"</span><span class="special">,</span> <span class="identifier">result</span><span class="special">);</span>
 
 <span class="comment">// Retrieve the data. Note that some fields are NULL</span>
-<span class="identifier">conn</span><span class="special">.</span><span class="identifier">execute</span><span class="special">(</span><span class="string">"SELECT id, description FROM products"</span><span class="special">,</span> <span class="identifier">result</span><span class="special">);</span>
+<span class="identifier">co_await</span> <span class="identifier">conn</span><span class="special">.</span><span class="identifier">async_execute</span><span class="special">(</span><span class="string">"SELECT id, description FROM products"</span><span class="special">,</span> <span class="identifier">result</span><span class="special">);</span>
 
-<span class="keyword">for</span> <span class="special">(</span><span class="identifier">row_view</span> <span class="identifier">r</span> <span class="special">:</span> <span class="identifier">result</span><span class="special">.</span><span class="identifier">rows</span><span class="special">())</span>
+<span class="keyword">for</span> <span class="special">(</span><span class="identifier">mysql</span><span class="special">::</span><span class="identifier">row_view</span> <span class="identifier">r</span> <span class="special">:</span> <span class="identifier">result</span><span class="special">.</span><span class="identifier">rows</span><span class="special">())</span>
 <span class="special">{</span>
-    <span class="identifier">field_view</span> <span class="identifier">description_fv</span> <span class="special">=</span> <span class="identifier">r</span><span class="special">.</span><span class="identifier">at</span><span class="special">(</span><span class="number">1</span><span class="special">);</span>
+    <span class="identifier">mysql</span><span class="special">::</span><span class="identifier">field_view</span> <span class="identifier">description_fv</span> <span class="special">=</span> <span class="identifier">r</span><span class="special">.</span><span class="identifier">at</span><span class="special">(</span><span class="number">1</span><span class="special">);</span>
     <span class="keyword">if</span> <span class="special">(</span><span class="identifier">description_fv</span><span class="special">.</span><span class="identifier">is_null</span><span class="special">())</span>
     <span class="special">{</span>
         <span class="comment">// Handle the NULL value</span>
@@ -605,10 +605,9 @@
 </div>
 <p>
       No character set conversion is applied on strings. They are provided as the
-      server sends them. If you've issued a <code class="computeroutput"><span class="string">"SET
-      NAMES &lt;charset-name&gt;"</span></code> statement, strings will be
-      encoded according to <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">charset</span><span class="special">-</span><span class="identifier">name</span><span class="special">&gt;</span></code>.
-      For details, see <a class="link" href="charsets.html" title="Character sets">this section</a>.
+      server sends them. If you've run <a class="link" href="ref/boost__mysql__any_connection/async_set_character_set.html" title="any_connection::async_set_character_set"><code class="literal">async_set_character_set</code></a>,
+      strings will be encoded according to the passed character set. For details,
+      see <a class="link" href="charsets.html" title="Character sets and collations">this section</a>.
     </p>
 <h4>
 <a name="mysql.dynamic_interface.h3"></a>
@@ -639,7 +638,7 @@
       <code class="computeroutput"><span class="identifier">field</span></code> accessors return references,
       which allow you to mutate the underlying object:
     </p>
-<pre class="programlisting"><span class="identifier">field</span> <span class="identifier">f</span><span class="special">(</span><span class="string">"my_string"</span><span class="special">);</span>            <span class="comment">// constructs a field that owns the string "my_string"</span>
+<pre class="programlisting"><span class="identifier">mysql</span><span class="special">::</span><span class="identifier">field</span> <span class="identifier">f</span><span class="special">(</span><span class="string">"my_string"</span><span class="special">);</span>     <span class="comment">// constructs a field that owns the string "my_string"</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&amp;</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">f</span><span class="special">.</span><span class="identifier">as_string</span><span class="special">();</span>  <span class="comment">// s points into f's storage</span>
 <span class="identifier">s</span><span class="special">.</span><span class="identifier">push_back</span><span class="special">(</span><span class="char">'2'</span><span class="special">);</span>                <span class="comment">// f now holds "my_string2"</span>
 </pre>
@@ -648,8 +647,8 @@
       using the assignment operator. This allows you to also change the underlying
       type of a <code class="computeroutput"><span class="identifier">field</span></code>:
     </p>
-<pre class="programlisting"><span class="identifier">field</span> <span class="identifier">f</span><span class="special">(</span><span class="string">"my_string"</span><span class="special">);</span>  <span class="comment">// constructs a field that owns the string "my_string"</span>
-<span class="identifier">f</span> <span class="special">=</span> <span class="number">42</span><span class="special">;</span>                <span class="comment">// destroys "my_string" and stores the value 42 as an int64</span>
+<pre class="programlisting"><span class="identifier">mysql</span><span class="special">::</span><span class="identifier">field</span> <span class="identifier">f</span><span class="special">(</span><span class="string">"my_string"</span><span class="special">);</span>  <span class="comment">// constructs a field that owns the string "my_string"</span>
+<span class="identifier">f</span> <span class="special">=</span> <span class="number">42</span><span class="special">;</span>                       <span class="comment">// destroys "my_string" and stores the value 42 as an int64</span>
 </pre>
 <h4>
 <a name="mysql.dynamic_interface.h4"></a>
@@ -1663,14 +1662,14 @@
 </table>
 </div>
 </div>
-<div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>
+<div class="copyright-footer">Copyright © 2019-2024 Ruben Perez<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="overview.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="static_interface.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="prepared_statements.html"><img src="../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="static_interface.html"><img src="../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

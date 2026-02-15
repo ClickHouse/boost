@@ -20,6 +20,9 @@
 #include <assert.h>
 #include <string.h>
 
+#include <string>
+#include <vector>
+
 static struct hash * module_hash = 0;
 static module_t root;
 
@@ -199,7 +202,7 @@ static void stat_module( void * xmodule, void * data )
 {
     module_t *m = (module_t *)xmodule;
 
-    if ( DEBUG_MEM || DEBUG_PROFILE )
+    if ( is_debug_mem() || is_debug_profile() )
     {
         struct hash * class_info = (struct hash *)data;
         if ( m->class_module )
@@ -256,7 +259,7 @@ void modules_done()
 {
     if ( module_hash )
     {
-        if ( DEBUG_MEM || DEBUG_PROFILE )
+        if ( is_debug_mem() || is_debug_profile() )
         {
             struct hash * class_hash = hashinit( sizeof( struct module_stats ), "object info" );
             hashenumerate( module_hash, stat_module, (void *)class_hash );
@@ -431,4 +434,19 @@ int module_get_fixed_var( struct module_t * m_, OBJECT * name )
 
     v = (struct fixed_variable *)hash_find( m->variable_indices, name );
     return v && v->n < m_->num_fixed_variables ? v->n : -1;
+}
+
+static void module_rules_add( RULE * r, b2::list_ref * result )
+{
+    if ( r->exported )
+        result->push_back( object_copy( r->name ) );
+}
+
+LIST * module_rules( module_t * m )
+{
+    b2::list_ref result;
+    if (!m) m = root_module();
+    if (m->rules)
+        hash_enumerate(m->rules, &module_rules_add, &result);
+    return result.release();
 }

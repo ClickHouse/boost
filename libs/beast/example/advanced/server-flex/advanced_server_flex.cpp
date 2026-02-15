@@ -17,20 +17,21 @@
 
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
-#include <boost/beast/ssl.hpp>
 #include <boost/beast/websocket.hpp>
+#include <boost/beast/websocket/ssl.hpp>
 #include <boost/beast/version.hpp>
 #include <boost/asio/bind_executor.hpp>
 #include <boost/asio/dispatch.hpp>
 #include <boost/asio/signal_set.hpp>
+#include <boost/asio/ssl.hpp>
 #include <boost/asio/strand.hpp>
 #include <boost/make_unique.hpp>
 #include <boost/optional.hpp>
 #include <algorithm>
 #include <cstdlib>
-#include <functional>
 #include <iostream>
 #include <memory>
+#include <queue>
 #include <string>
 #include <thread>
 #include <vector>
@@ -390,21 +391,18 @@ class ssl_websocket_session
     : public websocket_session<ssl_websocket_session>
     , public std::enable_shared_from_this<ssl_websocket_session>
 {
-    websocket::stream<
-        beast::ssl_stream<beast::tcp_stream>> ws_;
+    websocket::stream<ssl::stream<beast::tcp_stream>> ws_;
 
 public:
     // Create the ssl_websocket_session
     explicit
-    ssl_websocket_session(
-        beast::ssl_stream<beast::tcp_stream>&& stream)
+    ssl_websocket_session(ssl::stream<beast::tcp_stream>&& stream)
         : ws_(std::move(stream))
     {
     }
 
     // Called by the base class
-    websocket::stream<
-        beast::ssl_stream<beast::tcp_stream>>&
+    websocket::stream<ssl::stream<beast::tcp_stream>>&
     ws()
     {
         return ws_;
@@ -426,7 +424,7 @@ make_websocket_session(
 template<class Body, class Allocator>
 void
 make_websocket_session(
-    beast::ssl_stream<beast::tcp_stream> stream,
+    ssl::stream<beast::tcp_stream> stream,
     http::request<Body, http::basic_fields<Allocator>> req)
 {
     std::make_shared<ssl_websocket_session>(
@@ -452,7 +450,7 @@ class http_session
     }
 
     static constexpr std::size_t queue_limit = 8; // max responses
-    std::vector<http::message_generator> response_queue_;
+    std::queue<http::message_generator> response_queue_;
 
     // The parser is stored in an optional container so we can
     // construct it from scratch it at the beginning of each new message.
@@ -533,42 +531,30 @@ public:
     queue_write(http::message_generator response)
     {
         // Allocate and store the work
-        response_queue_.push_back(std::move(response));
+        response_queue_.push(std::move(response));
 
-        // If there was no previous work, start the write
-        // loop
+        // If there was no previous work, start the write loop
         if (response_queue_.size() == 1)
             do_write();
     }
 
     // Called to start/continue the write-loop. Should not be called when
     // write_loop is already active.
-    //
-    // Returns `true` if the caller may initiate a new read
-    bool
+    void
     do_write()
     {
-        bool const was_full =
-            response_queue_.size() == queue_limit;
-
         if(! response_queue_.empty())
         {
-            http::message_generator msg =
-                std::move(response_queue_.front());
-            response_queue_.erase(response_queue_.begin());
-
-            bool keep_alive = msg.keep_alive();
+            bool keep_alive = response_queue_.front().keep_alive();
 
             beast::async_write(
                 derived().stream(),
-                std::move(msg),
+                std::move(response_queue_.front()),
                 beast::bind_front_handler(
                     &http_session::on_write,
                     derived().shared_from_this(),
                     keep_alive));
         }
-
-        return was_full;
     }
 
     void
@@ -589,12 +575,13 @@ public:
             return derived().do_eof();
         }
 
-        // Inform the queue that a write completed
-        if(do_write())
-        {
-            // Read another request
+        // Resume the read if it has been paused
+        if(response_queue_.size() == queue_limit)
             do_read();
-        }
+
+        response_queue_.pop();
+
+        do_write();
     }
 };
 
@@ -660,7 +647,7 @@ class ssl_http_session
     : public http_session<ssl_http_session>
     , public std::enable_shared_from_this<ssl_http_session>
 {
-    beast::ssl_stream<beast::tcp_stream> stream_;
+    ssl::stream<beast::tcp_stream> stream_;
 
 public:
     // Create the http_session
@@ -694,14 +681,14 @@ public:
     }
 
     // Called by the base class
-    beast::ssl_stream<beast::tcp_stream>&
+    ssl::stream<beast::tcp_stream>&
     stream()
     {
         return stream_;
     }
 
     // Called by the base class
-    beast::ssl_stream<beast::tcp_stream>
+    ssl::stream<beast::tcp_stream>
     release_stream()
     {
         return std::move(stream_);

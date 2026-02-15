@@ -37,7 +37,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">CompletionToken</span><span class="special">,</span>
     <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Values</span><span class="special">&gt;</span>
-<span class="keyword">constexpr</span> <span class="identifier">append_t</span><span class="special">&lt;</span> <span class="keyword">typename</span> <span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">CompletionToken</span> <span class="special">&gt;::</span><span class="identifier">type</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">decay</span><span class="special">&lt;</span> <span class="identifier">Values</span> <span class="special">&gt;::</span><span class="identifier">type</span><span class="special">...&gt;</span> <span class="identifier">append</span><span class="special">(</span>
+<span class="keyword">constexpr</span> <span class="identifier">append_t</span><span class="special">&lt;</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">CompletionToken</span> <span class="special">&gt;,</span> <span class="identifier">decay_t</span><span class="special">&lt;</span> <span class="identifier">Values</span> <span class="special">&gt;...</span> <span class="special">&gt;</span> <span class="identifier">append</span><span class="special">(</span>
     <span class="identifier">CompletionToken</span> <span class="special">&amp;&amp;</span> <span class="identifier">completion_token</span><span class="special">,</span>
     <span class="identifier">Values</span> <span class="special">&amp;&amp;...</span> <span class="identifier">values</span><span class="special">);</span>
 </pre>
@@ -52,7 +52,8 @@
         <span class="emphasis"><em>Convenience header: </em></span><code class="literal">boost/asio.hpp</code>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

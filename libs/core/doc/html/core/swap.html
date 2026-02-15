@@ -28,7 +28,7 @@
 <a name="core.swap"></a><a class="link" href="swap.html" title="swap">swap</a>
 </h2></div></div></div>
 <div class="toc"><dl class="toc">
-<dt><span class="section"><a href="swap.html#core.swap.header_boost_core_swap_hpp">Header &lt;boost/core/swap.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="swap.html#core.swap.header_boost_core_invoke_swap_hp">Header &lt;boost/core/invoke_swap.hpp&gt;</a></span></dt>
 <dt><span class="section"><a href="swap.html#core.swap.introduction">Introduction</a></span></dt>
 <dt><span class="section"><a href="swap.html#core.swap.rationale">Rationale</a></span></dt>
 <dt><span class="section"><a href="swap.html#core.swap.exception_safety">Exception Safety</a></span></dt>
@@ -38,7 +38,7 @@
 </dl></div>
 <div class="simplesect">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idm16438"></a>Authors</h3></div></div></div>
+<a name="id18519"></a>Authors</h3></div></div></div>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
           Niels Dekker
@@ -56,11 +56,11 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="core.swap.header_boost_core_swap_hpp"></a><a class="link" href="swap.html#core.swap.header_boost_core_swap_hpp" title="Header &lt;boost/core/swap.hpp&gt;">Header &lt;boost/core/swap.hpp&gt;</a>
+<a name="core.swap.header_boost_core_invoke_swap_hp"></a><a class="link" href="swap.html#core.swap.header_boost_core_invoke_swap_hp" title="Header &lt;boost/core/invoke_swap.hpp&gt;">Header &lt;boost/core/invoke_swap.hpp&gt;</a>
 </h3></div></div></div>
 <p>
-        <code class="literal">template&lt;class T&gt; void swap(T&amp; left, T&amp; right) noexcept(<span class="emphasis"><em>see
-        below</em></span>);</code>
+        <code class="literal">template&lt;class T&gt; void invoke_swap(T&amp; left, T&amp; right)
+        noexcept(<span class="emphasis"><em>see below</em></span>);</code>
       </p>
 </div>
 <div class="section">
@@ -68,7 +68,7 @@
 <a name="core.swap.introduction"></a><a class="link" href="swap.html#core.swap.introduction" title="Introduction">Introduction</a>
 </h3></div></div></div>
 <p>
-        The template function <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code>
+        The template function <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code>
         allows the values of two variables to be swapped, using argument dependent
         lookup to select a specialized swap function if available. If no specialized
         swap function is available, <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">swap</span></code>
@@ -97,8 +97,8 @@
         specialized swap functions in their own namespaces.
       </p>
 <p>
-        <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code> also supports swapping built-in arrays.
-        Note that <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">swap</span></code> originally did not do so, but a request
+        <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code> also supports swapping built-in
+        arrays. Note that <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">swap</span></code> originally did not do so, but a request
         to add an overload of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">swap</span></code>
         for built-in arrays has been accepted by the C++ Standards Committee<a href="#ftn.core.swap.rationale.f1" class="footnote" name="core.swap.rationale.f1"><sup class="footnote">[2]</sup></a>.
       </p>
@@ -108,17 +108,17 @@
 <a name="core.swap.exception_safety"></a><a class="link" href="swap.html#core.swap.exception_safety" title="Exception Safety">Exception Safety</a>
 </h3></div></div></div>
 <p>
-        <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code> provides the same exception guarantee
-        as the underlying swap function used, with one exception; for an array of
-        type <code class="computeroutput"><span class="identifier">T</span><span class="special">[</span><span class="identifier">n</span><span class="special">]</span></code>, where
+        <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code> provides the same exception
+        guarantee as the underlying swap function used, with one exception; for an
+        array of type <code class="computeroutput"><span class="identifier">T</span><span class="special">[</span><span class="identifier">n</span><span class="special">]</span></code>, where
         <code class="computeroutput"><span class="identifier">n</span> <span class="special">&gt;</span>
         <span class="number">1</span></code> and the underlying swap function
         for <code class="computeroutput"><span class="identifier">T</span></code> provides the strong
-        exception guarantee, <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code>
+        exception guarantee, <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code>
         provides only the basic exception guarantee.
       </p>
 <p>
-        In C++11 and later, <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code>
+        In C++11 and later, <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code>
         propagates the same <code class="computeroutput"><span class="keyword">noexcept</span></code>
         specification as the one specified in the underlying swap function.
       </p>
@@ -168,7 +168,7 @@
 </h3></div></div></div>
 <p>
         Several older compilers do not support argument dependent lookup. On these
-        compilers <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code> will call <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">swap</span></code>,
+        compilers <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code> will call <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">swap</span></code>,
         ignoring any specialized swap functions that could be found as a result of
         argument dependent lookup.
       </p>
@@ -189,7 +189,9 @@
 <li class="listitem">
             <span class="bold"><strong>Steven Watanabe</strong></span> - for the idea to make
             <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">swap</span></code> less specialized than <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">swap</span></code>, thereby allowing the function
-            to have the name 'swap' without introducing ambiguity
+            to have the name 'swap' without introducing ambiguity. However, later
+            the function was renamed to <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">core</span><span class="special">::</span><span class="identifier">invoke_swap</span></code>
+            to avoid potential infinite recursion.
           </li>
 </ul></div>
 </div>

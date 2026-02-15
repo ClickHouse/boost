@@ -8,8 +8,6 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_IMPL_URL_BASE_IPP
-#define BOOST_URL_IMPL_URL_BASE_IPP
 
 #include <boost/url/detail/config.hpp>
 #include <boost/url/url_base.hpp>
@@ -20,24 +18,25 @@
 #include <boost/url/url_view.hpp>
 #include <boost/url/detail/any_params_iter.hpp>
 #include <boost/url/detail/any_segments_iter.hpp>
-#include <boost/url/detail/decode.hpp>
+#include "detail/decode.hpp"
 #include <boost/url/detail/encode.hpp>
 #include <boost/url/detail/except.hpp>
-#include <boost/url/detail/move_chars.hpp>
-#include <boost/url/detail/normalize.hpp>
-#include <boost/url/detail/path.hpp>
-#include <boost/url/detail/print.hpp>
+#include "detail/normalize.hpp"
+#include "detail/path.hpp"
+#include "detail/print.hpp"
 #include <boost/url/grammar/ci_string.hpp>
 #include <boost/url/rfc/authority_rule.hpp>
 #include <boost/url/rfc/query_rule.hpp>
-#include <boost/url/rfc/detail/charsets.hpp>
-#include <boost/url/rfc/detail/host_rule.hpp>
-#include <boost/url/rfc/detail/ipvfuture_rule.hpp>
-#include <boost/url/rfc/detail/path_rules.hpp>
-#include <boost/url/rfc/detail/port_rule.hpp>
-#include <boost/url/rfc/detail/scheme_rule.hpp>
-#include <boost/url/rfc/detail/userinfo_rule.hpp>
+#include <boost/url/rfc/ipv6_address_rule.hpp>
+#include "rfc/detail/charsets.hpp"
+#include "rfc/detail/host_rule.hpp"
+#include "rfc/detail/ipvfuture_rule.hpp"
+#include "boost/url/rfc/detail/path_rules.hpp"
+#include "rfc/detail/port_rule.hpp"
+#include "rfc/detail/scheme_rule.hpp"
+#include "rfc/detail/userinfo_rule.hpp"
 #include <boost/url/grammar/parse.hpp>
+#include "detail/move_chars.hpp"
 #include <cstring>
 #include <iostream>
 #include <stdexcept>
@@ -131,7 +130,7 @@ copy(url_view_base const& u)
     }
     reserve_impl(
         u.size(), op);
-    impl_ = u.impl_;
+    impl_ = *u.pi_;
     impl_.cs_ = s_;
     impl_.from_ = {from::url};
     std::memcpy(s_,
@@ -224,12 +223,12 @@ remove_scheme()
     // (po and qo are invalidated)
     if (need_resize)
     {
-        impl_.adjust(id_user, id_end, 0 - sn);
+        impl_.adjust_left(id_user, id_end, sn);
     }
     else
     {
-        impl_.adjust(id_user, id_path, 0 - sn);
-        impl_.adjust(id_query, id_end, 0 - sn + 2 * cn);
+        impl_.adjust_left(id_user, id_path, sn);
+        impl_.adjust_left(id_query, id_end, sn - 2 * cn);
     }
     if (encode_colon)
     {
@@ -304,8 +303,8 @@ set_encoded_authority(
         dest[n - 1] = '/';
     impl_.apply_authority(a);
     if(need_slash)
-        impl_.adjust(
-            id_query, id_end, 1);
+        impl_.adjust_right(
+                id_query, id_end, 1);
     return *this;
 }
 
@@ -391,7 +390,6 @@ set_encoded_userinfo(
     pct_string_view s)
 {
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
     auto const pos = s.find_first_of(':');
     if(pos != core::string_view::npos)
     {
@@ -401,12 +399,10 @@ set_encoded_userinfo(
         auto const n0 =
             detail::re_encoded_size_unsafe(
                 s0,
-                detail::user_chars,
-                opt);
+                detail::user_chars);
         auto const n1 =
             detail::re_encoded_size_unsafe(s1,
-                detail::password_chars,
-                opt);
+                detail::password_chars);
         auto dest =
             set_userinfo_impl(n0 + n1 + 1, op);
         impl_.decoded_[id_user] =
@@ -414,16 +410,14 @@ set_encoded_userinfo(
                 dest,
                 dest + n0,
                 s0,
-                detail::user_chars,
-                opt);
+                detail::user_chars);
         *dest++ = ':';
         impl_.decoded_[id_pass] =
             detail::re_encode_unsafe(
                 dest,
                 dest + n1,
                 s1,
-                detail::password_chars,
-                opt);
+                detail::password_chars);
         impl_.split(id_user, 2 + n0);
     }
     else
@@ -431,15 +425,14 @@ set_encoded_userinfo(
         // user
         auto const n =
             detail::re_encoded_size_unsafe(
-                s, detail::user_chars, opt);
+                s, detail::user_chars);
         auto dest = set_userinfo_impl(n, op);
         impl_.decoded_[id_user] =
             detail::re_encode_unsafe(
                 dest,
                 dest + n,
                 s,
-                detail::user_chars,
-                opt);
+                detail::user_chars);
         impl_.split(id_user, 2 + n);
         impl_.decoded_[id_pass] = 0;
     }
@@ -489,18 +482,16 @@ set_encoded_user(
     pct_string_view s)
 {
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
     auto const n =
         detail::re_encoded_size_unsafe(
-            s, detail::user_chars, opt);
+            s, detail::user_chars);
     auto dest = set_user_impl(n, op);
     impl_.decoded_[id_user] =
         detail::re_encode_unsafe(
             dest,
             dest + n,
             s,
-            detail::user_chars,
-            opt);
+            detail::user_chars);
     BOOST_ASSERT(
         impl_.decoded_[id_user] ==
             s.decoded_size());
@@ -534,20 +525,17 @@ set_encoded_password(
     pct_string_view s)
 {
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
     auto const n =
         detail::re_encoded_size_unsafe(
             s,
-            detail::password_chars,
-            opt);
+            detail::password_chars);
     auto dest = set_password_impl(n, op);
     impl_.decoded_[id_pass] =
         detail::re_encode_unsafe(
             dest,
             dest + n,
             s,
-            detail::password_chars,
-            opt);
+            detail::password_chars);
     BOOST_ASSERT(
         impl_.decoded_[id_pass] ==
             s.decoded_size());
@@ -615,18 +603,40 @@ set_host(
         s.back() == ']')
     {
         // IP-literal
+        if (s[1] != 'v')
         {
             // IPv6-address
-            auto rv = parse_ipv6_address(
-                s.substr(1, s.size() - 2));
+            auto innersv = s.substr(1, s.size() - 2);
+            auto innerit = innersv.begin();
+            auto endit = innersv.end();
+            auto rv = grammar::parse(
+                innerit,
+                endit,
+                ipv6_address_rule);
             if(rv)
-                return set_host_ipv6(*rv);
+            {
+                if (innerit == endit)
+                {
+                    set_host_ipv6_and_encoded_zone_id(*rv, {});
+                    return *this;
+                }
+                // IPv6addrz: https://datatracker.ietf.org/doc/html/rfc6874
+                auto chars_left = endit - innerit;
+                if (chars_left >= 2 &&
+                    *innerit++ == '%')
+                {
+                    core::string_view zone_id_str = {&*innerit, std::size_t(chars_left - 1)};
+                    set_host_ipv6_and_zone_id(*rv, zone_id_str);
+                    return *this;
+                }
+            }
         }
+        else
         {
             // IPvFuture
             auto rv = grammar::parse(
                 s.substr(1, s.size() - 2),
-                    detail::ipvfuture_rule);
+                detail::ipvfuture_rule);
             if(rv)
                 return set_host_ipvfuture(rv->str);
         }
@@ -668,13 +678,40 @@ set_encoded_host(
         s.back() == ']')
     {
         // IP-literal
+        if (s[1] != 'v')
         {
             // IPv6-address
-            auto rv = parse_ipv6_address(
-                s.substr(1, s.size() - 2));
+            auto innersv = s.substr(1, s.size() - 2);
+            auto innerit = innersv.begin();
+            auto endit = innersv.end();
+            auto rv = grammar::parse(
+                innerit,
+                endit,
+                ipv6_address_rule);
             if(rv)
-                return set_host_ipv6(*rv);
+            {
+                if (innerit == endit)
+                {
+                    set_host_ipv6_and_encoded_zone_id(*rv, {});
+                    return *this;
+                }
+                // IPv6addrz: https://datatracker.ietf.org/doc/html/rfc6874
+                auto chars_left = endit - innerit;
+                if (chars_left >= 3 &&
+                    *innerit++ == '%' &&
+                    *innerit++ == '2' &&
+                    *innerit++ == '5')
+                {
+                    auto const nz = std::size_t(chars_left - 3);
+                    core::string_view zone_id_str = {&*innerit, std::size_t(chars_left - 3)};
+                    std::size_t dnz = detail::decode_bytes_unsafe(zone_id_str);
+                    pct_string_view zone_id_pct = make_pct_string_view_unsafe(innerit, nz, dnz);
+                    set_host_ipv6_and_encoded_zone_id(*rv, zone_id_pct);
+                    return *this;
+                }
+            }
         }
+        else
         {
             // IPvFuture
             auto rv = grammar::parse(
@@ -694,17 +731,15 @@ set_encoded_host(
 
     // reg-name
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
     auto const n = detail::re_encoded_size_unsafe(
-        s, detail::host_chars, opt);
+        s, detail::host_chars);
     auto dest = set_host_impl(n, op);
     impl_.decoded_[id_host] =
         detail::re_encode_unsafe(
             dest,
             impl_.get(id_path).data(),
             s,
-            detail::host_chars,
-            opt);
+            detail::host_chars);
     BOOST_ASSERT(impl_.decoded_[id_host] ==
         s.decoded_size());
     impl_.host_type_ =
@@ -717,25 +752,49 @@ url_base::
 set_host_address(
     core::string_view s)
 {
+    if (!s.empty())
     {
-        // IPv6-address
-        auto rv = parse_ipv6_address(s);
-        if(rv)
-            return set_host_ipv6(*rv);
-    }
-    {
+        // IP-literal
+        if (s[0] != 'v')
+        {
+            // IPv6-address
+            auto innerit = s.begin();
+            auto endit = s.end();
+            auto rv = grammar::parse(
+                innerit,
+                endit,
+                ipv6_address_rule);
+            if(rv)
+            {
+                if (innerit == endit)
+                {
+                    set_host_ipv6_and_encoded_zone_id(*rv, {});
+                    return *this;
+                }
+                // IPv6addrz: https://datatracker.ietf.org/doc/html/rfc6874
+                auto chars_left = endit - innerit;
+                if (chars_left >= 2 &&
+                    *innerit++ == '%')
+                {
+                    core::string_view zone_id_str = {&*innerit, std::size_t(chars_left - 1)};
+                    set_host_ipv6_and_zone_id(*rv, zone_id_str);
+                    return *this;
+                }
+            }
+        }
+
         // IPvFuture
-        auto rv = grammar::parse(
-            s, detail::ipvfuture_rule);
+        auto rv = grammar::parse(s, detail::ipvfuture_rule);
         if(rv)
             return set_host_ipvfuture(rv->str);
-    }
-    if(s.size() >= 7) // "0.0.0.0"
-    {
-        // IPv4-address
-        auto rv = parse_ipv4_address(s);
-        if(rv)
-            return set_host_ipv4(*rv);
+
+        if(s.size() >= 7) // "0.0.0.0"
+        {
+            // IPv4-address
+            auto rv2 = parse_ipv4_address(s);
+            if(rv2)
+                return set_host_ipv4(*rv2);
+        }
     }
 
     // reg-name
@@ -761,40 +820,70 @@ url_base::
 set_encoded_host_address(
     pct_string_view s)
 {
+    if( !s.empty() )
     {
-        // IPv6-address
-        auto rv = parse_ipv6_address(s);
-        if(rv)
-            return set_host_ipv6(*rv);
-    }
-    {
-        // IPvFuture
-        auto rv = grammar::parse(
-            s, detail::ipvfuture_rule);
-        if(rv)
-            return set_host_ipvfuture(rv->str);
-    }
-    if(s.size() >= 7) // "0.0.0.0"
-    {
-        // IPv4-address
-        auto rv = parse_ipv4_address(s);
-        if(rv)
-            return set_host_ipv4(*rv);
+        // IP-literal
+        if (s[0] != 'v')
+        {
+            // IPv6-address
+            auto innerit = s.begin();
+            auto endit = s.end();
+            auto rv = grammar::parse(
+                innerit,
+                endit,
+                ipv6_address_rule);
+            if(rv)
+            {
+                if (innerit == endit)
+                {
+                    set_host_ipv6_and_encoded_zone_id(*rv, {});
+                    return *this;
+                }
+                // IPv6addrz: https://datatracker.ietf.org/doc/html/rfc6874
+                auto chars_left = endit - innerit;
+                if (chars_left >= 3 &&
+                    *innerit++ == '%' &&
+                    *innerit++ == '2' &&
+                    *innerit++ == '5')
+                {
+                    auto const nz = std::size_t(chars_left - 3);
+                    core::string_view zone_id_str = {&*innerit, std::size_t(chars_left - 3)};
+                    std::size_t dnz = detail::decode_bytes_unsafe(zone_id_str);
+                    pct_string_view zone_id_pct = make_pct_string_view_unsafe(innerit, nz, dnz);
+                    set_host_ipv6_and_encoded_zone_id(*rv, zone_id_pct);
+                    return *this;
+                }
+            }
+
+            if(s.size() >= 7) // "0.0.0.0"
+            {
+                // IPv4-address
+                auto rv2 = parse_ipv4_address(s);
+                if(rv2)
+                   return set_host_ipv4(*rv2);
+            }
+        }
+        else
+        {
+            // IPvFuture
+            auto rv = grammar::parse(
+                s, detail::ipvfuture_rule);
+            if(rv)
+                return set_host_ipvfuture(rv->str);
+        }
     }
 
     // reg-name
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
     auto const n = detail::re_encoded_size_unsafe(
-        s, detail::host_chars, opt);
+        s, detail::host_chars);
     auto dest = set_host_impl(n, op);
     impl_.decoded_[id_host] =
         detail::re_encode_unsafe(
             dest,
             impl_.get(id_path).data(),
             s,
-            detail::host_chars,
-            opt);
+            detail::host_chars);
     BOOST_ASSERT(impl_.decoded_[id_host] ==
         s.decoded_size());
     impl_.host_type_ =
@@ -827,24 +916,97 @@ url_base::
 set_host_ipv6(
     ipv6_address const& addr)
 {
-    op_t op(*this);
-    char buf[2 +
-        urls::ipv6_address::max_str_len];
-    auto s = addr.to_buffer(
-        buf + 1, sizeof(buf) - 2);
-    buf[0] = '[';
-    buf[s.size() + 1] = ']';
-    auto const n = s.size() + 2;
+    set_host_ipv6_and_encoded_zone_id(addr, encoded_zone_id());
+    return *this;
+}
+
+url_base&
+url_base::
+set_zone_id(core::string_view s)
+{
+    set_host_ipv6_and_zone_id(host_ipv6_address(), s);
+    return *this;
+}
+
+url_base&
+url_base::
+set_encoded_zone_id(pct_string_view s)
+{
+    set_host_ipv6_and_encoded_zone_id(host_ipv6_address(), s);
+    return *this;
+}
+
+void
+url_base::
+set_host_ipv6_and_zone_id(
+    ipv6_address const& addr,
+    core::string_view zone_id)
+{
+    op_t op(*this, &zone_id);
+    char ipv6_str_buf[urls::ipv6_address::max_str_len];
+    auto ipv6_str = addr.to_buffer(ipv6_str_buf, sizeof(ipv6_str_buf));
+    bool const has_zone_id = !zone_id.empty();
+    encoding_opts opt;
+    auto const ipn = ipv6_str.size();
+    auto const zn = encoded_size(zone_id, unreserved_chars, opt);
+    auto const n = ipn + 2 + has_zone_id * (3 + zn);
     auto dest = set_host_impl(n, op);
-    std::memcpy(dest, buf, n);
-    impl_.decoded_[id_host] = n;
+    *dest++ = '[';
+    std::memcpy(dest, ipv6_str.data(), ipn);
+    dest += ipn;
+    if (has_zone_id)
+    {
+        *dest++ = '%';
+        *dest++ = '2';
+        *dest++ = '5';
+        encode(dest, zn, zone_id, unreserved_chars, opt);
+        dest += zn;
+    }
+    *dest++ = ']';
+    // ipn + |"["| + |"]"| + (has_zone_id ? |"%"| + zn : 0)
+    impl_.decoded_[id_host] = ipn + 2 + has_zone_id * (1 + zone_id.size());
     impl_.host_type_ = urls::host_type::ipv6;
     auto bytes = addr.to_bytes();
     std::memcpy(
         impl_.ip_addr_,
         bytes.data(),
         bytes.size());
-    return *this;
+}
+
+void
+url_base::
+set_host_ipv6_and_encoded_zone_id(
+    ipv6_address const& addr,
+    pct_string_view zone_id)
+{
+    op_t op(*this, &detail::ref(zone_id));
+    char ipv6_str_buf[urls::ipv6_address::max_str_len];
+    auto ipv6_str = addr.to_buffer(ipv6_str_buf, sizeof(ipv6_str_buf));
+    bool const has_zone_id = !zone_id.empty();
+    auto const ipn = ipv6_str.size();
+    auto const zn = detail::re_encoded_size_unsafe(zone_id, unreserved_chars);
+    auto const n = ipn + 2 + has_zone_id * (3 + zn);
+    auto dest = set_host_impl(n, op);
+    *dest++ = '[';
+    std::memcpy(dest, ipv6_str.data(), ipn);
+    dest += ipn;
+    std::size_t dzn = 0;
+    if (has_zone_id)
+    {
+        *dest++ = '%';
+        *dest++ = '2';
+        *dest++ = '5';
+        dzn = detail::re_encode_unsafe(dest, dest + zn, zone_id, unreserved_chars);
+    }
+    *dest++ = ']';
+    // ipn + |"["| + |"]"| + (has_zone_id ? |"%"| + zn : 0)
+    impl_.decoded_[id_host] = ipn + 2 + has_zone_id * (1 + dzn);
+    impl_.host_type_ = urls::host_type::ipv6;
+    auto bytes = addr.to_bytes();
+    std::memcpy(
+        impl_.ip_addr_,
+        bytes.data(),
+        bytes.size());
 }
 
 url_base&
@@ -918,17 +1080,15 @@ set_encoded_host_name(
         allowed = allowed - '.';
 
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
     auto const n = detail::re_encoded_size_unsafe(
-        s, allowed, opt);
+        s, allowed);
     auto dest = set_host_impl(n, op);
     impl_.decoded_[id_host] =
         detail::re_encode_unsafe(
             dest,
             dest + n,
             s,
-            allowed,
-            opt);
+            allowed);
     BOOST_ASSERT(
         impl_.decoded_[id_host] ==
             s.decoded_size());
@@ -1212,7 +1372,6 @@ set_encoded_path(
     pct_string_view s)
 {
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
 
 //------------------------------------------------
 //
@@ -1222,7 +1381,7 @@ set_encoded_path(
 // - colons in first segment might need to be re-encoded
 // - the path might need to receive a prefix
     auto const n = detail::re_encoded_size_unsafe(
-        s, detail::path_chars, opt);
+        s, detail::path_chars);
     std::size_t n_reencode_colons = 0;
     core::string_view first_seg;
     if (!has_scheme() &&
@@ -1280,15 +1439,13 @@ set_encoded_path(
             dest,
             impl_.get(id_query).data(),
             first_seg,
-            detail::segment_chars - ':',
-            opt);
+            detail::segment_chars - ':');
     impl_.decoded_[id_path] +=
         detail::re_encode_unsafe(
             dest,
             impl_.get(id_query).data(),
             s.substr(first_seg.size()),
-            detail::path_chars,
-            opt);
+            detail::path_chars);
     BOOST_ASSERT(dest == impl_.get(id_query).data());
     BOOST_ASSERT(
         impl_.decoded_[id_path] ==
@@ -1350,7 +1507,7 @@ set_query(
     edit_params(
         detail::params_iter_impl(impl_),
         detail::params_iter_impl(impl_, 0),
-        detail::query_iter(s, true));
+        detail::query_string_iter(s, true));
     return *this;
 }
 
@@ -1360,7 +1517,6 @@ set_encoded_query(
     pct_string_view s)
 {
     op_t op(*this);
-    encoding_opts opt;
     std::size_t n = 0;      // encoded size
     std::size_t nparam = 1; // param count
     auto const end = s.end();
@@ -1402,8 +1558,7 @@ set_encoded_query(
             dest,
             dest + n,
             s,
-            detail::query_chars,
-            opt);
+            detail::query_chars);
     BOOST_ASSERT(
         impl_.decoded_[id_query] ==
             s.decoded_size());
@@ -1425,7 +1580,7 @@ params_ref
 url_base::
 params(encoding_opts opt) noexcept
 {
-    return params_ref(*this, opt);
+    return {*this, opt};
 }
 
 params_encoded_ref
@@ -1437,9 +1592,11 @@ encoded_params() noexcept
 
 url_base&
 url_base::
-set_params( std::initializer_list<param_view> ps ) noexcept
+set_params(
+    std::initializer_list<param_view> ps,
+    encoding_opts opts) noexcept
 {
-    params().assign(ps);
+    params(opts).assign(ps);
     return *this;
 }
 
@@ -1507,12 +1664,10 @@ set_encoded_fragment(
     pct_string_view s)
 {
     op_t op(*this, &detail::ref(s));
-    encoding_opts opt;
     auto const n =
         detail::re_encoded_size_unsafe(
             s,
-            detail::fragment_chars,
-            opt);
+            detail::fragment_chars);
     auto dest = resize_impl(
         id_frag, n + 1, op);
     *dest++ = '#';
@@ -1521,8 +1676,7 @@ set_encoded_fragment(
             dest,
             dest + n,
             s,
-            detail::fragment_chars,
-            opt);
+            detail::fragment_chars);
     BOOST_ASSERT(
         impl_.decoded_[id_frag] ==
             s.decoded_size());
@@ -1605,6 +1759,8 @@ resolve(
         if(ref.has_fragment())
             set_encoded_fragment(
                 ref.encoded_fragment());
+        else
+            remove_fragment();
         return {};
     }
     if(ref.is_path_absolute())
@@ -1660,12 +1816,15 @@ resolve(
 //
 //------------------------------------------------
 
-template <class Charset>
+template <
+    class AllowedCharset,
+    class IgnoredCharset>
 void
 url_base::
 normalize_octets_impl(
     int id,
-    Charset const& allowed,
+    AllowedCharset const& allowed,
+    IgnoredCharset const& ignored,
     op_t& op) noexcept
 {
     char* it = s_ + impl_.offset(id);
@@ -1685,7 +1844,8 @@ normalize_octets_impl(
 
         // decode unreserved octets
         d = detail::decode_one(it + 1);
-        if (allowed(d))
+        if (allowed(d) &&
+            !ignored(d))
         {
             *dest = d;
             it += 3;
@@ -1706,6 +1866,18 @@ normalize_octets_impl(
         shrink_impl(id, n, op);
         s_[size()] = '\0';
     }
+}
+
+template<class CharSet>
+void
+url_base::
+normalize_octets_impl(
+    int idx,
+    CharSet const& allowed,
+    op_t& op) noexcept
+{
+    return normalize_octets_impl(
+        idx, allowed, detail::empty_chars, op);
 }
 
 url_base&
@@ -1909,7 +2081,10 @@ normalize_query()
 {
     op_t op(*this);
     normalize_octets_impl(
-        id_query, detail::query_chars, op);
+        id_query,
+        detail::query_chars,
+        detail::query_ignore_chars,
+        op);
     return *this;
 }
 
@@ -2023,7 +2198,7 @@ resize_impl(
     impl_.collapse(first, last,
         impl_.offset(last) + n);
     // shift (last, end) right
-    impl_.adjust(last, id_end, n);
+    impl_.adjust_right(last, id_end, n);
     s_[size()] = '\0';
     return s_ + impl_.offset(first);
 }
@@ -2063,8 +2238,7 @@ shrink_impl(
     impl_.collapse(first,  last,
         impl_.offset(last) - n);
     // shift (last, end) left
-    impl_.adjust(
-        last, id_end, 0 - n);
+    impl_.adjust_left(last, id_end, n);
     s_[size()] = '\0';
     return s_ + impl_.offset(first);
 }
@@ -2673,20 +2847,16 @@ edit_params(
     auto pos1 = pos0 + it1.pos;
     pos0 = pos0 + it0.pos;
 
-    // Iterator doesn't belong to this url
+    // Iterators belong to this url
     BOOST_ASSERT(it0.ref.alias_of(impl_));
-
-    // Iterator doesn't belong to this url
     BOOST_ASSERT(it1.ref.alias_of(impl_));
 
-    // Iterator is in the wrong order
+    // Iterators is in the right order
     BOOST_ASSERT(it0.index <= it1.index);
 
-    // Iterator is out of range
+    // Iterators are within range
     BOOST_ASSERT(it0.index <= impl_.nparam_);
     BOOST_ASSERT(pos0 <= impl_.offset(id_frag));
-
-    // Iterator is out of range
     BOOST_ASSERT(it1.index <= impl_.nparam_);
     BOOST_ASSERT(pos1 <= impl_.offset(id_frag));
 
@@ -2844,4 +3014,3 @@ to_lower_impl(int id) noexcept
 } // urls
 } // boost
 
-#endif

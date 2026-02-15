@@ -33,9 +33,9 @@
         the timer fires once a second. This will show how to pass additional parameters
         to your handler function.
       </p>
-<pre class="programlisting"><span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
+<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
 <span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">asio</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="special">#</span><span class="identifier">include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">bind</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 </pre>
 <p>
         To implement a repeating timer using asio you need to change the timer's
@@ -64,9 +64,9 @@
         As mentioned above, this tutorial program uses a counter to stop running
         when the timer fires for the sixth time. However you will observe that there
         is no explicit call to ask the io_context to stop. Recall that in tutorial
-        Timer.2 we learnt that the <a class="link" href="../reference/io_context/run.html" title="io_context::run">io_context::run()</a>
-        function completes when there is no more "work" to do. By not starting
-        a new asynchronous wait on the timer when <code class="computeroutput"><span class="identifier">count</span></code>
+        Timer.2 we learnt that the boost::asio::io_context::run() function completes
+        when there is no more "work" to do. By not starting a new asynchronous
+        wait on the timer when <code class="computeroutput"><span class="identifier">count</span></code>
         reaches 5, the io_context will run out of work and stop running.
       </p>
 <pre class="programlisting">  <span class="keyword">if</span> <span class="special">(*</span><span class="identifier">count</span> <span class="special">&lt;</span> <span class="number">5</span><span class="special">)</span>
@@ -83,27 +83,23 @@
 <pre class="programlisting">    <span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">expires_at</span><span class="special">(</span><span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">expiry</span><span class="special">()</span> <span class="special">+</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">chrono</span><span class="special">::</span><span class="identifier">seconds</span><span class="special">(</span><span class="number">1</span><span class="special">));</span>
 </pre>
 <p>
-        Then we start a new asynchronous wait on the timer. As you can see, the boost::bind()
-        function is used to associate the extra parameters with your completion handler.
-        The <a class="link" href="../reference/basic_waitable_timer/async_wait.html" title="basic_waitable_timer::async_wait">steady_timer::async_wait()</a>
+        Then we start a new asynchronous wait on the timer. As you can see, the
+        <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code> function is used to associate the
+        extra parameters with your completion handler. The <a class="link" href="../reference/basic_waitable_timer/async_wait.html" title="basic_waitable_timer::async_wait">steady_timer::async_wait()</a>
         function expects a handler function (or function object) with the signature
         <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">system</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;)</span></code>. Binding the additional parameters
         converts your <code class="computeroutput"><span class="identifier">print</span></code> function
         into a function object that matches the signature correctly.
       </p>
 <p>
-        See the <a href="http://www.boost.org/libs/bind/bind.html" target="_top">Boost.Bind
-        documentation</a> for more information on how to use boost::bind().
-      </p>
-<p>
-        In this example, the boost::asio::placeholders::error argument to boost::bind()
+        In this example, the boost::asio::placeholders::error argument to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
         is a named placeholder for the error object passed to the handler. When initiating
-        the asynchronous operation, and if using boost::bind(), you must specify
-        only the arguments that match the handler's parameter list. In tutorial Timer.4
-        you will see that this placeholder may be elided if the parameter is not
-        needed by the completion handler.
+        the asynchronous operation, and if using <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>,
+        you must specify only the arguments that match the handler's parameter list.
+        In tutorial Timer.4 you will see that this placeholder may be elided if the
+        parameter is not needed by the completion handler.
       </p>
-<pre class="programlisting">    <span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
+<pre class="programlisting">    <span class="identifier">t</span><span class="special">-&gt;</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span> <span class="identifier">t</span><span class="special">,</span> <span class="identifier">count</span><span class="special">));</span>
   <span class="special">}</span>
 <span class="special">}</span>
@@ -125,7 +121,7 @@
         parameters needed for the <code class="computeroutput"><span class="identifier">print</span></code>
         function.
       </p>
-<pre class="programlisting">  <span class="identifier">t</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
+<pre class="programlisting">  <span class="identifier">t</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">print</span><span class="special">,</span>
         <span class="identifier">boost</span><span class="special">::</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">t</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">count</span><span class="special">));</span>
 
   <span class="identifier">io</span><span class="special">.</span><span class="identifier">run</span><span class="special">();</span>
@@ -155,7 +151,8 @@
         function as a completion handler</a>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -11,6 +11,7 @@
 #include <boost/interprocess/detail/portable_intermodule_singleton.hpp>
 #include <iostream>
 #include <cstdlib> //for std::abort
+#include <typeinfo>
 
 using namespace boost::interprocess;
 
@@ -53,19 +54,19 @@ int intermodule_singleton_test()
    bool exception_thrown = false;
    bool exception_2_thrown = false;
 
-   BOOST_TRY{
+   BOOST_INTERPROCESS_TRY{
       IntermoduleType<MyThrowingClass, true, false>::get();
    }
-   BOOST_CATCH(int &){
+   BOOST_INTERPROCESS_CATCH(int &){
       exception_thrown = true;
       //Second try
-      BOOST_TRY{
+      BOOST_INTERPROCESS_TRY{
          IntermoduleType<MyThrowingClass, true, false>::get();
       }
-      BOOST_CATCH(interprocess_exception &){
+      BOOST_INTERPROCESS_CATCH(interprocess_exception &){
          exception_2_thrown = true;
-      } BOOST_CATCH_END
-   } BOOST_CATCH_END
+      } BOOST_INTERPROCESS_CATCH_END
+   } BOOST_INTERPROCESS_CATCH_END
 
    if(!exception_thrown || !exception_2_thrown){
       return 1;
@@ -78,12 +79,12 @@ int intermodule_singleton_test()
 
    //Second try
    exception_2_thrown = false;
-   BOOST_TRY{
+   BOOST_INTERPROCESS_TRY{
       IntermoduleType<MyThrowingClass, true, false>::get();
    }
-   BOOST_CATCH(interprocess_exception &){
+   BOOST_INTERPROCESS_CATCH(interprocess_exception &){
       exception_2_thrown = true;
-   } BOOST_CATCH_END
+   } BOOST_INTERPROCESS_CATCH_END
    if(!exception_2_thrown){
       return 1;
    }
@@ -211,16 +212,16 @@ class LogDeadReferenceUser
       std::cout << "~LogDeadReferenceUser(), LogSingleton: " << typeid(LogSingleton).name() << "\n" << std::endl;
       //Make sure the exception is thrown as we are
       //trying to use a dead non-phoenix singleton
-      BOOST_TRY{
+      BOOST_INTERPROCESS_TRY{
          LogSingleton::get().log_it();
          std::string s("LogDeadReferenceUser failed for LogSingleton ");
          s += typeid(LogSingleton).name();
          std::cout << "~LogDeadReferenceUser(), error: " << s << std::endl;
          std::abort();
       }
-      BOOST_CATCH(interprocess_exception &){
+      BOOST_INTERPROCESS_CATCH(interprocess_exception &){
          //Correct behaviour
-      } BOOST_CATCH_END
+      } BOOST_INTERPROCESS_CATCH_END
    }
 };
 

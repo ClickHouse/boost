@@ -45,7 +45,7 @@
 <pre class="programlisting"><span class="identifier">io_context</span> <span class="identifier">ioc</span><span class="special">;</span>
 
 <span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">endpoint</span><span class="special">(</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">v4</span><span class="special">(),</span> <span class="number">80</span><span class="special">);</span>
-<span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">ios</span><span class="special">,</span> <span class="identifier">endpoint</span><span class="special">);</span>
+<span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">ioc</span><span class="special">,</span> <span class="identifier">endpoint</span><span class="special">);</span>
 
 <span class="keyword">for</span> <span class="special">(;;)</span>
 <span class="special">{</span>
@@ -92,7 +92,7 @@
 <p>
           <a class="link" href="../../reference/ip__tcp/iostream.html" title="ip::tcp::iostream">ip::tcp::iostream</a>,
           <a class="link" href="../../reference/basic_socket_iostream.html" title="basic_socket_iostream">basic_socket_iostream</a>,
-          <a class="link" href="../../examples/cpp03_examples.html#boost_asio.examples.cpp03_examples.iostreams">iostreams
+          <a class="link" href="../../examples/cpp11_examples.html#boost_asio.examples.cpp11_examples.iostreams">iostreams
           examples</a>.
         </p>
 <h6>
@@ -105,7 +105,8 @@
           any code conversion.
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

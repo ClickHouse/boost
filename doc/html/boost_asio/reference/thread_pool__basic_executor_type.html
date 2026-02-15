@@ -40,66 +40,6 @@
 </pre>
 <h5>
 <a name="boost_asio.reference.thread_pool__basic_executor_type.h0"></a>
-        <span class="phrase"><a name="boost_asio.reference.thread_pool__basic_executor_type.types"></a></span><a class="link" href="thread_pool__basic_executor_type.html#boost_asio.reference.thread_pool__basic_executor_type.types">Types</a>
-      </h5>
-<div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                <p>
-                  Name
-                </p>
-              </th>
-<th>
-                <p>
-                  Description
-                </p>
-              </th>
-</tr></thead>
-<tbody>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="thread_pool__basic_executor_type/index_type.html" title="thread_pool::basic_executor_type::index_type"><span class="bold"><strong>index_type</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  The bulk execution index type.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="thread_pool__basic_executor_type/sender_type.html" title="thread_pool::basic_executor_type::sender_type"><span class="bold"><strong>sender_type</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated.) The sender type, when this type is used as a scheduler.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="thread_pool__basic_executor_type/shape_type.html" title="thread_pool::basic_executor_type::shape_type"><span class="bold"><strong>shape_type</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  The bulk execution shape type.
-                </p>
-              </td>
-</tr>
-</tbody>
-</table></div>
-<h5>
-<a name="boost_asio.reference.thread_pool__basic_executor_type.h1"></a>
         <span class="phrase"><a name="boost_asio.reference.thread_pool__basic_executor_type.member_functions"></a></span><a class="link" href="thread_pool__basic_executor_type.html#boost_asio.reference.thread_pool__basic_executor_type.member_functions">Member
         Functions</a>
       </h5>
@@ -130,30 +70,6 @@
 <td>
                 <p>
                   Copy constructor. <br> <span class="silver"> —</span><br> Move constructor.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="thread_pool__basic_executor_type/bulk_execute.html" title="thread_pool::basic_executor_type::bulk_execute"><span class="bold"><strong>bulk_execute</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated.) Bulk execution function.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <a class="link" href="thread_pool__basic_executor_type/connect.html" title="thread_pool::basic_executor_type::connect"><span class="bold"><strong>connect</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated.) Connect function.
                 </p>
               </td>
 </tr>
@@ -278,8 +194,8 @@
               </td>
 <td>
                 <p>
-                  (Deprecated.) Query the current value of the bulk_guarantee property.
-                  <br> <span class="silver"> —</span><br> Query the current value of the mapping property.
+                  Query the current value of the mapping property. <br> <span class="silver"> —</span><br>
+                  Query the current value of the inline_exception_handling property.
                   <br> <span class="silver"> —</span><br> Query the current value of the outstanding_work property.
                 </p>
               </td>
@@ -320,18 +236,6 @@
 <tr>
 <td>
                 <p>
-                  <a class="link" href="thread_pool__basic_executor_type/schedule.html" title="thread_pool::basic_executor_type::schedule"><span class="bold"><strong>schedule</strong></span></a>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated.) Schedule function.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
                   <a class="link" href="thread_pool__basic_executor_type/_basic_executor_type.html" title="thread_pool::basic_executor_type::~basic_executor_type"><span class="bold"><strong>~basic_executor_type</strong></span></a> <span class="silver">[destructor]</span>
                 </p>
               </td>
@@ -344,7 +248,7 @@
 </tbody>
 </table></div>
 <h5>
-<a name="boost_asio.reference.thread_pool__basic_executor_type.h2"></a>
+<a name="boost_asio.reference.thread_pool__basic_executor_type.h1"></a>
         <span class="phrase"><a name="boost_asio.reference.thread_pool__basic_executor_type.friends"></a></span><a class="link" href="thread_pool__basic_executor_type.html#boost_asio.reference.thread_pool__basic_executor_type.friends">Friends</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -392,7 +296,7 @@
 </tbody>
 </table></div>
 <h5>
-<a name="boost_asio.reference.thread_pool__basic_executor_type.h3"></a>
+<a name="boost_asio.reference.thread_pool__basic_executor_type.h2"></a>
         <span class="phrase"><a name="boost_asio.reference.thread_pool__basic_executor_type.requirements"></a></span><a class="link" href="thread_pool__basic_executor_type.html#boost_asio.reference.thread_pool__basic_executor_type.requirements">Requirements</a>
       </h5>
 <p>
@@ -402,7 +306,8 @@
         <span class="emphasis"><em>Convenience header: </em></span><code class="literal">boost/asio.hpp</code>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__http__fields"></a><a class="link" href="boost__beast__http__fields.html" title="http::fields">http::fields</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm78536"></a>
+        <a class="indexterm" name="id79466"></a>
       </p>
 <p>
         A typical HTTP header fields container.
@@ -231,6 +231,19 @@
 <td>
                 <p>
                   Remove all fields from the container.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__basic_fields/contains.html" title="http::basic_fields::contains">contains</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns <code class="computeroutput"><span class="keyword">true</span></code> if there
+                  is a field with the specified name.
                 </p>
               </td>
 </tr>
@@ -573,6 +586,55 @@
 </table></div>
 <h5>
 <a name="beast.ref.boost__beast__http__fields.h4"></a>
+        <span class="phrase"><a name="beast.ref.boost__beast__http__fields.static_members"></a></span><a class="link" href="boost__beast__http__fields.html#beast.ref.boost__beast__http__fields.static_members">Static
+        Members</a>
+      </h5>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>
+                  Name
+                </p>
+              </th>
+<th>
+                <p>
+                  Description
+                </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__basic_fields/max_name_size.html" title="http::basic_fields::max_name_size">max_name_size</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Maximum field name size.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__basic_fields/max_value_size.html" title="http::basic_fields::max_value_size">max_value_size</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Maximum field value size.
+                </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
+<h5>
+<a name="beast.ref.boost__beast__http__fields.h5"></a>
         <span class="phrase"><a name="beast.ref.boost__beast__http__fields.friends"></a></span><a class="link" href="boost__beast__http__fields.html#beast.ref.boost__beast__http__fields.friends">Friends</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -608,16 +670,20 @@
 <p>
         This container is designed to store the field value pairs that make up the
         fields and trailers in an HTTP message. Objects of this type are iterable,
-        with each element holding the field name and field value. Field names are
-        stored as-is, but comparisons are case-insensitive. The container behaves
-        as a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">multiset</span></code>; there will be a separate value
+        with each element holding the field name and field value.
+      </p>
+<p>
+        Field names are stored as-is, but comparisons are case-insensitive. The container
+        behaves as a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">multiset</span></code>; there will be a separate value
         for each occurrence of the same field name. When the container is iterated
         the fields are presented in the order of insertion, with fields having the
-        same name following each other consecutively. Meets the requirements of
-        <span class="emphasis"><em>Fields</em></span>
+        same name following each other consecutively.
+      </p>
+<p>
+        Meets the requirements of <span class="emphasis"><em>Fields</em></span>
       </p>
 <h5>
-<a name="beast.ref.boost__beast__http__fields.h5"></a>
+<a name="beast.ref.boost__beast__http__fields.h6"></a>
         <span class="phrase"><a name="beast.ref.boost__beast__http__fields.template_parameters"></a></span><a class="link" href="boost__beast__http__fields.html#beast.ref.boost__beast__http__fields.template_parameters">Template
         Parameters</a>
       </h5>

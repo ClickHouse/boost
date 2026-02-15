@@ -61,9 +61,9 @@ var NAVTREE =
     ] ],
     [ "Appendix", "appendix.html", "appendix" ],
     [ "Changelog", "changelog.html", null ],
-    [ "Modules", "modules.html", "modules" ],
+    [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", null ],
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", "namespacemembers_dup" ],
         [ "Functions", "namespacemembers_func.html", "namespacemembers_func" ],
@@ -94,11 +94,14 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"classboost_1_1locale_1_1generator.html#a7b4458ef36df82bc9e359735c55203e8",
-"group__boundary.html#ga315e4baac1059256cd9009a765670554",
-"messages_formatting.html#extracting_messages_from_code"
+"allocator__traits_8hpp_source.html",
+"classboost_1_1locale_1_1date__time.html#a8d00584d1f1b2dc0f9b44ef53e2a15e9",
+"classboost_1_1locale_1_1util_1_1base__converter.html#a77f96b74594000cacbbfa8e05817e2af",
+"group__boundary.html#gae4ac52a6957bbe887f909a3a4827799e",
+"namespaceboost_1_1locale_1_1flags.html#ab0255a81e609e12040ca07dda4434a99ad1d78f10bf2abf74da44c0b29b00d422",
+"structboost_1_1locale_1_1gnu__gettext_1_1messages__info_1_1domain.html#a3f652fb5ab683b83ca1977e83a0a7e1d"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

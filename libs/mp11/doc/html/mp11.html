@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="author" content="Peter Dimov">
 <title>Boost.Mp11: A C++11 metaprogramming library</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -85,10 +85,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -141,7 +141,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -163,6 +163,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -209,13 +210,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -331,7 +329,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -394,7 +392,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -439,216 +437,119 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <style>
 pre.rouge table td { padding: 5px; }
 pre.rouge table pre { margin: 0; }
-pre.rouge .cm {
-  color: #999988;
-  font-style: italic;
+pre.rouge, pre.rouge .w {
+  color: #24292f;
+  background-color: #f6f8fa;
 }
-pre.rouge .cp {
-  color: #999999;
-  font-weight: bold;
-}
-pre.rouge .c1 {
-  color: #999988;
-  font-style: italic;
-}
-pre.rouge .cs {
-  color: #999999;
-  font-weight: bold;
-  font-style: italic;
-}
-pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
-  color: #999988;
-  font-style: italic;
-}
-pre.rouge .err {
-  color: #a61717;
-  background-color: #e3d2d2;
-}
-pre.rouge .gd {
-  color: #000000;
-  background-color: #ffdddd;
-}
-pre.rouge .ge {
-  color: #000000;
-  font-style: italic;
+pre.rouge .k, pre.rouge .kd, pre.rouge .kn, pre.rouge .kp, pre.rouge .kr, pre.rouge .kt, pre.rouge .kv {
+  color: #cf222e;
 }
 pre.rouge .gr {
-  color: #aa0000;
+  color: #f6f8fa;
 }
-pre.rouge .gh {
-  color: #999999;
+pre.rouge .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+pre.rouge .nb {
+  color: #953800;
+}
+pre.rouge .nc {
+  color: #953800;
+}
+pre.rouge .no {
+  color: #953800;
+}
+pre.rouge .nn {
+  color: #953800;
+}
+pre.rouge .sr {
+  color: #116329;
+}
+pre.rouge .na {
+  color: #116329;
+}
+pre.rouge .nt {
+  color: #116329;
 }
 pre.rouge .gi {
-  color: #000000;
-  background-color: #ddffdd;
+  color: #116329;
+  background-color: #dafbe1;
 }
-pre.rouge .go {
-  color: #888888;
+pre.rouge .ges {
+  font-weight: bold;
+  font-style: italic;
 }
-pre.rouge .gp {
-  color: #555555;
+pre.rouge .kc {
+  color: #0550ae;
 }
-pre.rouge .gs {
+pre.rouge .l, pre.rouge .ld, pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #0550ae;
+}
+pre.rouge .sb {
+  color: #0550ae;
+}
+pre.rouge .bp {
+  color: #0550ae;
+}
+pre.rouge .ne {
+  color: #0550ae;
+}
+pre.rouge .nl {
+  color: #0550ae;
+}
+pre.rouge .py {
+  color: #0550ae;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #0550ae;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #0550ae;
+}
+pre.rouge .gh {
+  color: #0550ae;
   font-weight: bold;
 }
 pre.rouge .gu {
-  color: #aaaaaa;
-}
-pre.rouge .gt {
-  color: #aa0000;
-}
-pre.rouge .kc {
-  color: #000000;
+  color: #0550ae;
   font-weight: bold;
 }
-pre.rouge .kd {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kn {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kp {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kr {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kt {
-  color: #445588;
-  font-weight: bold;
-}
-pre.rouge .k, pre.rouge .kv {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .mf {
-  color: #009999;
-}
-pre.rouge .mh {
-  color: #009999;
-}
-pre.rouge .il {
-  color: #009999;
-}
-pre.rouge .mi {
-  color: #009999;
-}
-pre.rouge .mo {
-  color: #009999;
-}
-pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
-  color: #009999;
-}
-pre.rouge .sa {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .sb {
-  color: #d14;
-}
-pre.rouge .sc {
-  color: #d14;
-}
-pre.rouge .sd {
-  color: #d14;
-}
-pre.rouge .s2 {
-  color: #d14;
-}
-pre.rouge .se {
-  color: #d14;
-}
-pre.rouge .sh {
-  color: #d14;
-}
-pre.rouge .si {
-  color: #d14;
-}
-pre.rouge .sx {
-  color: #d14;
-}
-pre.rouge .sr {
-  color: #009926;
-}
-pre.rouge .s1 {
-  color: #d14;
-}
-pre.rouge .ss {
-  color: #990073;
-}
-pre.rouge .s, pre.rouge .dl {
-  color: #d14;
-}
-pre.rouge .na {
-  color: #008080;
-}
-pre.rouge .bp {
-  color: #999999;
-}
-pre.rouge .nb {
-  color: #0086B3;
-}
-pre.rouge .nc {
-  color: #445588;
-  font-weight: bold;
-}
-pre.rouge .no {
-  color: #008080;
+pre.rouge .s, pre.rouge .sa, pre.rouge .sc, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .se, pre.rouge .sh, pre.rouge .sx, pre.rouge .s1, pre.rouge .ss {
+  color: #0a3069;
 }
 pre.rouge .nd {
-  color: #3c5d5d;
-  font-weight: bold;
-}
-pre.rouge .ni {
-  color: #800080;
-}
-pre.rouge .ne {
-  color: #990000;
-  font-weight: bold;
+  color: #8250df;
 }
 pre.rouge .nf, pre.rouge .fm {
-  color: #990000;
+  color: #8250df;
+}
+pre.rouge .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cp, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6e7781;
+}
+pre.rouge .gl {
+  color: #6e7781;
+}
+pre.rouge .gt {
+  color: #6e7781;
+}
+pre.rouge .ni {
+  color: #24292f;
+}
+pre.rouge .si {
+  color: #24292f;
+}
+pre.rouge .ge {
+  color: #24292f;
+  font-style: italic;
+}
+pre.rouge .gs {
+  color: #24292f;
   font-weight: bold;
-}
-pre.rouge .nl {
-  color: #990000;
-  font-weight: bold;
-}
-pre.rouge .nn {
-  color: #555555;
-}
-pre.rouge .nt {
-  color: #000080;
-}
-pre.rouge .vc {
-  color: #008080;
-}
-pre.rouge .vg {
-  color: #008080;
-}
-pre.rouge .vi {
-  color: #008080;
-}
-pre.rouge .nv, pre.rouge .vm {
-  color: #008080;
-}
-pre.rouge .ow {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .o {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .w {
-  color: #bbbbbb;
-}
-pre.rouge {
-  background-color: #f8f8f8;
 }
 </style>
 </head>
@@ -673,6 +574,10 @@ pre.rouge {
 </li>
 <li><a href="#changelog">Revision History</a>
 <ul class="sectlevel2">
+<li><a href="#changes_in_1_90_0">Changes in 1.90.0</a></li>
+<li><a href="#changes_in_1_88_0">Changes in 1.88.0</a></li>
+<li><a href="#changes_in_1_87_0">Changes in 1.87.0</a></li>
+<li><a href="#changes_in_1_85_0">Changes in 1.85.0</a></li>
 <li><a href="#changes_in_1_83_0">Changes in 1.83.0</a></li>
 <li><a href="#changes_in_1_79_0">Changes in 1.79.0</a></li>
 <li><a href="#changes_in_1_78_0">Changes in 1.78.0</a></li>
@@ -793,6 +698,8 @@ pre.rouge {
 <li><a href="#mp_atl_i">mp_at&lt;L, I&gt;</a></li>
 <li><a href="#mp_take_cl_n">mp_take_c&lt;L, N&gt;</a></li>
 <li><a href="#mp_takel_n">mp_take&lt;L, N&gt;</a></li>
+<li><a href="#mp_slice_cl_i_j">mp_slice_c&lt;L, I, J&gt;</a></li>
+<li><a href="#mp_slicel_i_j">mp_slice&lt;L, I, J&gt;</a></li>
 <li><a href="#mp_backl">mp_back&lt;L&gt;</a></li>
 <li><a href="#mp_pop_backl">mp_pop_back&lt;L&gt;</a></li>
 <li><a href="#mp_insert_cl_i_t">mp_insert_c&lt;L, I, T&#8230;&#8203;&gt;</a></li>
@@ -840,6 +747,8 @@ pre.rouge {
 <li><a href="#mp_partial_sum_ql_v_q">mp_partial_sum_q&lt;L, V, Q&gt;</a></li>
 <li><a href="#mp_pairwise_foldl_f">mp_pairwise_fold&lt;L, F&gt;</a></li>
 <li><a href="#mp_pairwise_fold_ql_q">mp_pairwise_fold_q&lt;L, Q&gt;</a></li>
+<li><a href="#mp_sliding_foldl_n_f">mp_sliding_fold&lt;L, N, F&gt;</a></li>
+<li><a href="#mp_sliding_fold_ql_n_q">mp_sliding_fold_q&lt;L, N, Q&gt;</a></li>
 <li><a href="#mp_iteratev_f_r">mp_iterate&lt;V, F, R&gt;</a></li>
 <li><a href="#mp_iterate_qv_qf_qr">mp_iterate_q&lt;V, Qf, Qr&gt;</a></li>
 <li><a href="#mp_uniquel">mp_unique&lt;L&gt;</a></li>
@@ -904,6 +813,11 @@ pre.rouge {
 <li><a href="#mp_bind_front_qq_t">mp_bind_front_q&lt;Q, T&#8230;&#8203;&gt;</a></li>
 <li><a href="#mp_bind_backf_t">mp_bind_back&lt;F, T&#8230;&#8203;&gt;</a></li>
 <li><a href="#mp_bind_back_qq_t">mp_bind_back_q&lt;Q, T&#8230;&#8203;&gt;</a></li>
+</ul>
+</li>
+<li><a href="#lambda">Lambda Expressions, &lt;boost/mp11/lambda.hpp&gt;</a>
+<ul class="sectlevel3">
+<li><a href="#mp_lambdat">mp_lambda&lt;T&gt;</a></li>
 </ul>
 </li>
 <li><a href="#integer_sequence">Integer Sequences, &lt;boost/mp11/integer_sequence.hpp&gt;</a>
@@ -972,7 +886,7 @@ gives us <code>std::tuple&lt;int*, float*&gt;</code>, but we can also apply <cod
 <h2 id="definitions">Definitions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <em>list</em> is a&#8201;&#8212;&#8201;usually but not necessarily variadic&#8201;&#8212;&#8201;template class whose parameters are all types,
+<p>A <em>list</em> is an instantiation of a&#8201;&#8212;&#8201;usually but not necessarily variadic&#8201;&#8212;&#8201;class template whose parameters are all types,
 for example <code>mp_list&lt;char[], void&gt;</code>, <code>mp_list&lt;&gt;</code>, <code>std::tuple&lt;int, float, char&gt;</code>, <code>std::pair&lt;int, float&gt;</code>, <code>std::shared_ptr&lt;X&gt;</code>.</p>
 </div>
 <div class="paragraph">
@@ -1107,7 +1021,7 @@ how we can leverage Mp11 to automate the task:</p>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">result</span> <span class="o">=</span>
     <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">common_type</span><span class="o">&lt;</span><span class="n">promote</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">promote</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;&gt;::</span><span class="n">type</span><span class="p">;</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T2</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="n">test_result</span><span class="p">(</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="p">)</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T2</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">test_result</span><span class="p">(</span> <span class="n">mp_list</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="n">T3</span> <span class="o">=</span> <span class="k">decltype</span><span class="p">(</span> <span class="n">T1</span><span class="p">()</span> <span class="o">+</span> <span class="n">T2</span><span class="p">()</span> <span class="p">);</span>
     <span class="k">using</span> <span class="n">T4</span> <span class="o">=</span> <span class="n">result</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;</span><span class="p">;</span>
@@ -1117,7 +1031,7 @@ how we can leverage Mp11 to automate the task:</p>
         <span class="o">&lt;&lt;</span> <span class="s">", result: "</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="o">&lt;</span><span class="n">T4</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="n">L</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">short</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">unsigned</span><span class="p">,</span> <span class="kt">long</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="n">tuple_for_each</span><span class="p">(</span> <span class="n">mp_product</span><span class="o">&lt;</span><span class="n">mp_list</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">){</span> <span class="n">test_result</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="p">}</span> <span class="p">);</span>
@@ -1159,7 +1073,7 @@ a templated <code>operator()</code> and pass that to <code>tuple_for_each</code>
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="n">L</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">short</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">unsigned</span><span class="p">,</span> <span class="kt">long</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="n">tuple_for_each</span><span class="p">(</span> <span class="n">mp_product</span><span class="o">&lt;</span><span class="n">mp_list</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">test_result</span><span class="p">()</span> <span class="p">);</span>
@@ -1268,7 +1182,7 @@ implementation of the standard function <code>tuple_cat</code>, with the end res
 
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">Tp</span><span class="p">,</span>
     <span class="k">class</span> <span class="nc">R</span> <span class="o">=</span> <span class="n">mp_append</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="p">&gt;,</span> <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">Tp</span><span class="o">&gt;::</span><span class="n">type</span><span class="p">...</span><span class="o">&gt;&gt;</span>
-    <span class="n">R</span> <span class="n">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
+    <span class="n">R</span> <span class="nf">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="k">const</span> <span class="n">N</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">Tp</span><span class="p">);</span>
 
@@ -1446,7 +1360,7 @@ as <code>L1</code> (an <code>mp_list</code>) with contents <code>tuple_element&l
 
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">Tp</span><span class="p">,</span>
     <span class="k">class</span> <span class="nc">R</span> <span class="o">=</span> <span class="n">mp_append</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="p">&gt;,</span> <span class="n">from_tuple_like</span><span class="o">&lt;</span><span class="n">remove_cv_ref</span><span class="o">&lt;</span><span class="n">Tp</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="o">&gt;&gt;</span>
-    <span class="n">R</span> <span class="n">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
+    <span class="n">R</span> <span class="nf">tuple_cat</span><span class="p">(</span> <span class="n">Tp</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">tp</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="k">const</span> <span class="n">N</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">Tp</span><span class="p">);</span>
 
@@ -1599,12 +1513,12 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
         <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">v</span> <span class="p">)...</span> <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">()</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="nf">name</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">boost</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">demangle</span><span class="p">(</span> <span class="k">typeid</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">V</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="n">print_variant</span><span class="p">(</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="n">V</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">)</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">V</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print_variant</span><span class="p">(</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="n">V</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"("</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">")"</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">": "</span><span class="p">;</span>
 
@@ -1612,7 +1526,7 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
         <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"("</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">")"</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">},</span> <span class="n">v</span> <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">variant</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span>
 
@@ -1634,6 +1548,55 @@ elements will be the same, either <code>int</code> or <code>float</code>, and we
 <div class="sect1">
 <h2 id="changelog">Revision History</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="changes_in_1_90_0">Changes in 1.90.0</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated <code>mp_reverse_fold</code> to work on fixed size lists</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changes_in_1_88_0">Changes in 1.88.0</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Fixed <code>mp_from_sequence</code> for non-integral values (accidentally broken in 1.83.0 due to offset support)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changes_in_1_87_0">Changes in 1.87.0</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added <code>mp_lambda</code> (contributed by Joaquin M Lopez Munoz)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changes_in_1_85_0">Changes in 1.85.0</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added <code>mp_sliding_fold</code>, a generalization of <code>mp_pairwise_fold</code> (contributed by Braden Ganetsky)</p>
+</li>
+<li>
+<p>Added <code>mp_slice</code> (thanks to Braden Ganetsky)</p>
+</li>
+<li>
+<p>Added value list support to <code>mp_min_element</code>, <code>mp_max_element</code>.</p>
+</li>
+<li>
+<p>Added limited value list support to <code>mp_transform</code>.</p>
+</li>
+</ul>
+</div>
+</div>
 <div class="sect2">
 <h3 id="changes_in_1_83_0">Changes in 1.83.0</h3>
 <div class="ulist">
@@ -2332,7 +2295,7 @@ is an alias for <code>L&lt;U&#8230;&#8203;, T&#8230;&#8203;&gt;</code>.</p>
 <div class="title">Code Example 31. Using mp_push_back with mp_list_v</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L3</span> <span class="o">=</span> <span class="n">mp_list_v</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_push_front</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;0, 1, true, false&gt;</span></code></pre>
+<span class="k">using</span> <span class="n">R3</span> <span class="o">=</span> <span class="n">mp_push_back</span><span class="o">&lt;</span><span class="n">L3</span><span class="p">,</span> <span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// mp_list_v&lt;0, 1, true, false&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -2742,12 +2705,12 @@ for passing types as values to functions.</p>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="n">print2</span><span class="p">()</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print2</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="n">mp_identity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">print1</span><span class="o">&lt;</span><span class="kt">int</span> <span class="k">const</span><span class="o">&amp;&gt;</span><span class="p">();</span> <span class="c1">// 'int'</span>
     <span class="n">print2</span><span class="o">&lt;</span><span class="kt">int</span> <span class="k">const</span><span class="o">&amp;&gt;</span><span class="p">();</span> <span class="c1">// 'mp_identity&lt;int const &amp;&gt;'</span>
@@ -3171,6 +3134,14 @@ failure.)</p>
 </div>
 <div class="paragraph">
 <p><code>mp_transform&lt;F, L1&lt;T1&#8230;&#8203;&gt;, L2&lt;T2&#8230;&#8203;&gt;, &#8230;&#8203;, Ln&lt;Tn&#8230;&#8203;&gt;&gt;</code> applies <code>F</code> to each successive tuple of elements and returns <code>L1&lt;F&lt;T1, T2, &#8230;&#8203;, Tn&gt;&#8230;&#8203;&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>All lists in <code>L&#8230;&#8203;</code> must be of the same size. Otherwise, the result is a substitution failure.</p>
+</div>
+<div class="paragraph">
+<p>Has limited support of value lists as <code>L&#8230;&#8203;</code> under C&#43;&#43;17 (for one to three lists.)
+In that case, elements are wrapped with <code>mp_value</code> before being passed to <code>F</code>, and
+are unwrapped afterwards. The result is <code>L1&lt;F&lt;mp_value&lt;T1&gt;, mp_value&lt;T2&gt;, &#8230;&#8203;&gt;::value&#8230;&#8203;&gt;</code>.</p>
 </div>
 <div class="listingblock">
 <div class="title">Code Example 67. Using mp_transform to produce a list of pointers from a list of pointees</div>
@@ -4026,6 +3997,69 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 </div>
 </div>
 <div class="sect3">
+<h4 id="mp_slice_cl_i_j">mp_slice_c&lt;L, I, J&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class L, std::size_t I, std::size_t J&gt; using mp_slice_c = mp_drop_c&lt;mp_take_c&lt;L, J&gt;, I&gt;;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>mp_slice_c&lt;L, I, J&gt;</code> returns a list of the same form as <code>L</code> containing the elements from index <code>I</code> (inclusive) to index <code>J</code> (exclusive).</p>
+</div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 85%;">
+<caption class="title">Illustration 12. mp_slice_c</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3336%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code><strong>L1</strong></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>A<sub>0</sub></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>&#8230;&#8203;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>A<sub>i</sub></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>&#8230;&#8203;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>A<sub>j-1</sub></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>A<sub>j</sub></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>&#8230;&#8203;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>A<sub>n-1</sub></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle" colspan="9"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code><strong>mp_slice_c&lt;L1, I, J&gt;</strong></code></p></td>
+<td class="tableblock halign-right valign-middle" colspan="2"></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>A<sub>i</sub></code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>&#8230;&#8203;</code></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><code>A<sub>j-1</sub></code></p></td>
+<td class="tableblock halign-center valign-middle" colspan="3"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="mp_slicel_i_j">mp_slice&lt;L, I, J&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class L, class I, class J&gt; using mp_slice = mp_drop&lt;mp_take&lt;L, J&gt;, I&gt;;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Same as <code>mp_slice_c</code>, but with type arguments <code>I</code> and <code>J</code>. <code>I::value</code> and <code>J::value</code> must be nonnegative numbers.</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="mp_backl">mp_back&lt;L&gt;</h4>
 <div class="literalblock">
 <div class="content">
@@ -4068,7 +4102,7 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <p>Supports a value list as <code>L</code> under C&#43;&#43;17. In that case, the elements <code>T::value&#8230;&#8203;</code> are inserted.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 12. mp_insert_c with two elements</caption>
+<caption class="title">Illustration 13. mp_insert_c with two elements</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 8.3333%;">
@@ -4135,7 +4169,7 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <p>Supports a value list as <code>L</code> under C&#43;&#43;17.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 13. mp_erase_c</caption>
+<caption class="title">Illustration 14. mp_erase_c</caption>
 <colgroup>
 <col style="width: 30.7692%;">
 <col style="width: 7.6923%;">
@@ -4200,7 +4234,7 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <p>Replaces all <code>V</code> elements of <code>L</code> with <code>W</code> and returns the result.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 14. mp_replace</caption>
+<caption class="title">Illustration 15. mp_replace</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 12.5%;">
@@ -4240,7 +4274,7 @@ where <code>T</code> is the type of <code>N::value</code>.</p>
 <p>Replaces all <code>T</code> elements of <code>L</code> for which <code>mp_to_bool&lt;P&lt;T&gt;&gt;</code> is <code>mp_true</code> with <code>W</code> and returns the result.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 15. mp_replace_if</caption>
+<caption class="title">Illustration 16. mp_replace_if</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 12.5%;">
@@ -4598,6 +4632,9 @@ for the elements of <code>L&lt;U1&#8230;&#8203;&gt;</code> and <code>mp_false</c
 <div class="paragraph">
 <p>It&#8217;s equivalent to <code>mp_fold&lt;mp_rest&lt;L&gt;, mp_first&lt;L&gt;, F&gt;</code>, where <code>F&lt;T, U&gt;</code> returns <code>mp_if&lt;P&lt;T, U&gt;, T, U&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17. In that case, the element is returned wrapped with <code>mp_value</code>.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="mp_min_element_ql_q">mp_min_element_q&lt;L, Q&gt;</h4>
@@ -4622,6 +4659,9 @@ for the elements of <code>L&lt;U1&#8230;&#8203;&gt;</code> and <code>mp_false</c
 </div>
 <div class="paragraph">
 <p>It&#8217;s equivalent to <code>mp_fold&lt;mp_rest&lt;L&gt;, mp_first&lt;L&gt;, F&gt;</code>, where <code>F&lt;T, U&gt;</code> returns <code>mp_if&lt;P&lt;U, T&gt;, T, U&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Supports a value list as <code>L</code> under C&#43;&#43;17. In that case, the element is returned wrapped with <code>mp_value</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -4682,7 +4722,7 @@ is <code>mp_size&lt;L&gt;</code>.</p>
 <p><code>mp_reverse&lt;L&lt;T1, T2, &#8230;&#8203;, Tn&gt;&gt;</code> is <code>L&lt;Tn, &#8230;&#8203;, T2, T1&gt;</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 85%;">
-<caption class="title">Illustration 16. mp_reverse</caption>
+<caption class="title">Illustration 17. mp_reverse</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 12.5%;">
@@ -4851,6 +4891,52 @@ result is an empty list. If <code>L</code> is an empty list, the result is also 
 </div>
 </div>
 <div class="sect3">
+<h4 id="mp_sliding_foldl_n_f">mp_sliding_fold&lt;L, N, F&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class L, class N, template&lt;class...&gt; class F&gt; using mp_sliding_fold = /*...*/;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>mp_sliding_fold&lt;L, N, F&gt;</code> returns a list of the same form as <code>L</code> whose elements are
+the result of the application of the n-ary metafunction <code>F</code> to each n-tuple of adjacent
+elements of <code>L</code>. That is, <code>mp_sliding_fold&lt;L&lt;T1, T2, T3, T4&gt;, mp_size_t&lt;3&gt;, F&gt;</code> is
+<code>L&lt;F&lt;T1, T2, T3&gt;, F&lt;T2, T3, T4&gt;&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>The result has <code>N-1</code> fewer elements than the original.
+If <code>L</code> has fewer than <code>N::value</code> elements, the result is an empty list.</p>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 84. Using mp_sliding_fold</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">L</span><span class="p">,</span> <span class="k">class</span> <span class="nc">N</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">local_maximum</span> <span class="o">=</span>
+    <span class="n">mp_sliding_fold</span><span class="o">&lt;</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">mp_max</span><span class="o">&gt;</span><span class="p">;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mp_sliding_fold_ql_n_q">mp_sliding_fold_q&lt;L, N, Q&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class L, class N, class Q&gt; using mp_sliding_fold_q =
+    mp_sliding_fold&lt;L, N, Q::template fn&gt;;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As <code>mp_sliding_fold</code>, but takes a quoted metafunction.</p>
+</div>
+<div class="listingblock">
+<div class="title">Code Example 85. Using mp_sliding_fold_q</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">struct</span> <span class="nc">average</span> <span class="p">{</span> <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">C</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">mp_int</span><span class="o">&lt;</span><span class="n">mp_plus</span><span class="o">&lt;</span><span class="n">C</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">value</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">C</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span> <span class="p">};</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">L</span><span class="p">,</span> <span class="k">class</span> <span class="nc">N</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">moving_average</span> <span class="o">=</span>
+    <span class="n">mp_sliding_fold_q</span><span class="o">&lt;</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">average</span><span class="o">&gt;</span><span class="p">;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="mp_iteratev_f_r">mp_iterate&lt;V, F, R&gt;</h4>
 <div class="literalblock">
 <div class="content">
@@ -4881,7 +4967,7 @@ which when passed as <code>V</code> to <code>mp_iterate&lt;V, mp_first, mp_secon
 <code>mp_list&lt;X1, X2, X3&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 84. Using mp_iterate</div>
+<div class="title">Code Example 86. Using mp_iterate</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">struct</span> <span class="nc">X1</span> <span class="p">{};</span>
 <span class="k">struct</span> <span class="nc">X2</span> <span class="p">{};</span>
@@ -5038,7 +5124,7 @@ which when passed as <code>V</code> to <code>mp_iterate&lt;V, mp_first, mp_secon
 <p>Returns <code>std::forward&lt;F&gt;(f)</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 85. Using mp_for_each and a C++14 lambda to print a tuple</div>
+<div class="title">Code Example 87. Using mp_for_each and a C++14 lambda to print a tuple</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">tp</span> <span class="p">)</span>
 <span class="p">{</span>
@@ -5084,7 +5170,7 @@ Only <code>constexpr</code> on C++14 and higher.</p>
 <p>Returns <code>mp_with_index&lt;N::value&gt;(i, f)</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 86. Using mp_with_index and a C++14 lambda to print the active element of a variant</div>
+<div class="title">Code Example 88. Using mp_with_index and a C++14 lambda to print the active element of a variant</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">...</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">variant</span><span class="o">&lt;</span><span class="n">T</span><span class="p">...</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span> <span class="p">)</span>
 <span class="p">{</span>
@@ -5261,7 +5347,7 @@ replaces the existing element with <code>T</code>.</p>
 replaces the existing element <code>L&lt;X, Y&#8230;&#8203;&gt;</code> with <code>L&lt;X, F&lt;X, Y&#8230;&#8203;&gt;&gt;</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 87. Using mp_map_update to count the number of occurrences of types in a list</div>
+<div class="title">Code Example 89. Using mp_map_update to count the number of occurrences of types in a list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="p">&gt;</span> <span class="k">using</span> <span class="n">inc2nd</span> <span class="o">=</span> <span class="n">mp_int</span><span class="o">&lt;</span><span class="n">U</span><span class="o">::</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -5336,7 +5422,7 @@ returns <code>mp_false</code>. If the application causes a substitution failure,
 returns <code>mp_true</code>. <code>mp_and&lt;&gt;</code> is <code>mp_true</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 88. mp_and behavior</div>
+<div class="title">Code Example 90. mp_and behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_and</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_true</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// mp_true</span>
 
@@ -5362,7 +5448,7 @@ is an error because <code>void</code> does not have a nested <code>value</code>.
 mask substitution failures as <code>mp_and</code> does.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 89. mp_all behavior</div>
+<div class="title">Code Example 91. mp_all behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_all</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_true</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// mp_true</span>
 
@@ -5386,7 +5472,7 @@ mask substitution failures as <code>mp_and</code> does.</p>
 returns <code>mp_true</code>. If all results are <code>mp_false</code>, returns <code>mp_false</code>. <code>mp_or&lt;&gt;</code> is <code>mp_false</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 90. mp_or behavior</div>
+<div class="title">Code Example 92. mp_or behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_or</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// mp_true</span>
 
@@ -5410,7 +5496,7 @@ returns <code>mp_true</code>. If all results are <code>mp_false</code>, returns 
 <code>mp_or</code>, but does not perform short-circuit evaluation.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 91. mp_any behavior</div>
+<div class="title">Code Example 93. mp_any behavior</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_any</span><span class="o">&lt;</span><span class="n">mp_true</span><span class="p">,</span> <span class="n">mp_false</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// mp_true</span>
 
@@ -5445,7 +5531,7 @@ returns <code>mp_true</code>. If all results are <code>mp_false</code>, returns 
 whose parameters are all types, <code>mp_false</code> otherwise. <code>mp_similar&lt;&gt;</code> is <code>mp_true</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 92. mp_similar</div>
+<div class="title">Code Example 94. mp_similar</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">mp_similar</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>                        <span class="c1">// mp_true</span>
 <span class="k">using</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">mp_similar</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span> <span class="kt">void</span><span class="o">&gt;</span><span class="p">;</span>                  <span class="c1">// mp_true</span>
@@ -5621,6 +5707,56 @@ expressions replaced with their corresponding evaluations against <code>U&#8230;
 </div>
 </div>
 <div class="sect2">
+<h3 id="lambda">Lambda Expressions, &lt;boost/mp11/lambda.hpp&gt;</h3>
+<div class="sect3">
+<h4 id="mp_lambdat">mp_lambda&lt;T&gt;</h4>
+<div class="literalblock">
+<div class="content">
+<pre>template&lt;class T&gt; using mp_lambda = /*...*/;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>mp_lambda&lt;T&gt;</code> is a quoted metafunction whose nested template <code>fn&lt;U&#8230;&#8203;&gt;</code>
+returns a type <code>V</code> with the same syntactic definition as <code>T</code>, except
+that occurrences of placeholders in <code>T</code> are replaced by the corresponding
+element of <code>U&#8230;&#8203;</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, <code>mp_lambda&lt;std::pair&lt;_1, _2*&gt;&gt;::fn&lt;int, char&gt;</code> is <code>std::pair&lt;int, char*&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Replacement does not happen inside those constituent parts of <code>T</code> resulting
+from the instantiation of a class template with non-type template parameters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+In GCC 4.8, a compiler bug results in <code>const</code> and <code>volatile</code> qualifiers
+being stripped from the returned type <code>V</code> (except when they are applied to
+function or member function types).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>mp_lambda</code> is not supported in VS2013 and prior due to compiler limitations.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="integer_sequence">Integer Sequences, &lt;boost/mp11/integer_sequence.hpp&gt;</h3>
 <div class="sect3">
 <h4 id="integer_sequencet_i">integer_sequence&lt;T, I&#8230;&#8203;&gt;</h4>
@@ -5784,7 +5920,7 @@ because some libraries, such as Boost.Fusion, contain their own MPL
 support for <code>std::tuple</code>, which conflicts with Mp11&#8217;s one.</p>
 </div>
 <div class="listingblock">
-<div class="title">Code Example 93. Converting an existing MPL Sequence into an mp_list</div>
+<div class="title">Code Example 95. Converting an existing MPL Sequence into an mp_list</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c++"><span class="k">using</span> <span class="n">L</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">::</span><span class="n">copy</span><span class="o">&lt;</span><span class="n">Sequence</span><span class="p">,</span> <span class="n">mpl</span><span class="o">::</span><span class="n">back_inserter</span><span class="o">&lt;</span><span class="n">mp11</span><span class="o">::</span><span class="n">mp_list</span><span class="o">&lt;&gt;&gt;&gt;::</span><span class="n">type</span><span class="p">;</span></code></pre>
 </div>
@@ -5820,7 +5956,7 @@ into this documentation by Glen Fernandes.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-08 21:02:53 UTC
+Last updated 2025-12-03 13:46:43 UTC
 </div>
 </div>
 <style>

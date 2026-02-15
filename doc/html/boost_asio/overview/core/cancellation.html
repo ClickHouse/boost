@@ -292,9 +292,10 @@
           guarantee still satisfies the <code class="computeroutput"><span class="identifier">terminal</span></code>
           guarantee. The <code class="computeroutput"><span class="identifier">total</span></code> guarantee
           satisfies both <code class="computeroutput"><span class="identifier">partial</span></code>
-          and <code class="computeroutput"><span class="identifier">total</span></code>. This means that
-          when an operation supports a given cancellation type as its strongest guarantee,
-          it should honour cancellation requests for any of the weaker guarantees.
+          and <code class="computeroutput"><span class="identifier">terminal</span></code>. This means
+          that when an operation supports a given cancellation type as its strongest
+          guarantee, it should honour cancellation requests for any of the weaker
+          guarantees.
         </p>
 <p>
           Cancellation requests should not be emitted during an asynchronous operation's
@@ -381,7 +382,8 @@
           <a class="link" href="../../reference/experimental__make_parallel_group.html" title="experimental::make_parallel_group">experimental::make_parallel_group</a>
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

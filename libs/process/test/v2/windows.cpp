@@ -9,10 +9,6 @@
 #define BOOST_ALL_NO_LIB 1
 #endif // !defined(BOOST_ALL_NO_LIB)
 
-#if defined(BOOST_FILESYSTEM_DYN_LINK)
-#undef BOOST_FILESYSTEM_DYN_LINK
-#endif
-
 // Test that header file is self-contained.
 #include <boost/process/v2/process.hpp>
 
@@ -50,19 +46,6 @@ BOOST_AUTO_TEST_CASE(show_window)
 
 }
 
-BOOST_AUTO_TEST_CASE(creation_flags)
-{
-    using boost::unit_test::framework::master_test_suite;
-    const auto pth = master_test_suite().argv[1];
-    asio::io_context ctx;
-    bpv::process proc{ctx, pth, {"creation-flags"}};
-
-    BOOST_CHECK_EQUAL(proc.wait() & ~EXTENDED_STARTUPINFO_PRESENT, 0);
-
-    proc = bpv::process{ctx, master_test_suite().argv[1], {"creation-flags"}, bpv::windows::process_creation_flags<STARTF_TITLEISAPPID>()};
-    BOOST_CHECK(proc.running());
-    BOOST_CHECK_EQUAL(proc.wait() & ~EXTENDED_STARTUPINFO_PRESENT, STARTF_TITLEISAPPID);
-}
 
 BOOST_AUTO_TEST_CASE(as_user_launcher)
 {

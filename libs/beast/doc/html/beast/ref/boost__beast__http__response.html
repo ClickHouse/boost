@@ -28,7 +28,7 @@
 <a name="beast.ref.boost__beast__http__response"></a><a class="link" href="boost__beast__http__response.html" title="http::response">http::response</a>
 </h4></div></div></div>
 <p>
-        <a class="indexterm" name="idm77755"></a>
+        <a class="indexterm" name="id78670"></a>
       </p>
 <p>
         A typical HTTP response.
@@ -302,6 +302,19 @@
 <tr>
 <td>
                 <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__message/contains.html" title="http::message::contains">contains</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Returns <code class="computeroutput"><span class="keyword">true</span></code> if there
+                  is a field with the specified name.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
                   <span class="bold"><strong><a class="link" href="boost__beast__http__message/content_length.html" title="http::message::content_length">content_length</a></strong></span>
                 </p>
               </td>
@@ -459,8 +472,7 @@
               </td>
 <td>
                 <p>
-                  Return the request-method verb. <br><span class="silver">—</span><br>Set
-                  the request-method.
+                  Return the request-method verb.
                 </p>
               </td>
 </tr>
@@ -472,8 +484,7 @@
               </td>
 <td>
                 <p>
-                  Return the request-method as a string. <br><span class="silver">—</span><br>Set
-                  the request-method.
+                  Return the request-method as a string.
                 </p>
               </td>
 </tr>
@@ -548,8 +559,7 @@
               </td>
 <td>
                 <p>
-                  Return the response reason-phrase. <br><span class="silver">—</span><br>Set
-                  the response reason-phrase (deprecated)
+                  Return the response reason-phrase.
                 </p>
               </td>
 </tr>
@@ -561,9 +571,7 @@
               </td>
 <td>
                 <p>
-                  The response status-code result. <br><span class="silver">—</span><br>Set
-                  the response status-code. <br><span class="silver">—</span><br>Set
-                  the response status-code as an integer.
+                  The response status-code result.
                 </p>
               </td>
 </tr>
@@ -613,8 +621,7 @@
               </td>
 <td>
                 <p>
-                  Returns the request-target string. <br><span class="silver">—</span><br>Set
-                  the request-target string.
+                  Returns the request-target string.
                 </p>
               </td>
 </tr>
@@ -626,8 +633,7 @@
               </td>
 <td>
                 <p>
-                  Return the HTTP-version. <br><span class="silver">—</span><br>Set
-                  the HTTP-version.
+                  Return the HTTP-version.
                 </p>
               </td>
 </tr>
@@ -803,22 +809,76 @@
 </tr>
 </tbody>
 </table></div>
+<h5>
+<a name="beast.ref.boost__beast__http__response.h4"></a>
+        <span class="phrase"><a name="beast.ref.boost__beast__http__response.static_members"></a></span><a class="link" href="boost__beast__http__response.html#beast.ref.boost__beast__http__response.static_members">Static Members</a>
+      </h5>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>
+                  Name
+                </p>
+              </th>
+<th>
+                <p>
+                  Description
+                </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__message/max_name_size.html" title="http::message::max_name_size">max_name_size</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Maximum field name size.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__beast__http__message/max_value_size.html" title="http::message::max_value_size">max_value_size</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Maximum field value size.
+                </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
 <p>
         This container is derived from the <code class="computeroutput"><span class="identifier">Fields</span></code>
         template type. To understand all of the members of this class it is necessary
         to view the declaration for the <code class="computeroutput"><span class="identifier">Fields</span></code>
         type. When using the default fields container, those declarations are in
         <a class="link" href="boost__beast__http__fields.html" title="http::fields"><code class="computeroutput"><span class="identifier">fields</span></code></a>.
+      </p>
+<p>
         A message can be a request or response, depending on the <code class="computeroutput"><span class="identifier">isRequest</span></code>
         template argument value. Requests and responses have different types; functions
-        may be overloaded based on the type if desired. The <code class="computeroutput"><span class="identifier">Body</span></code>
-        template argument type determines the model used to read or write the content
-        body of the message. Newly constructed messages objects have version set
-        to HTTP/1.1. Newly constructed response objects also have result code set
-        to <a class="link" href="boost__beast__http__status.html" title="http::status"><code class="computeroutput"><span class="identifier">status</span><span class="special">::</span><span class="identifier">ok</span></code></a>.
+        may be overloaded based on the type if desired.
+      </p>
+<p>
+        The <code class="computeroutput"><span class="identifier">Body</span></code> template argument
+        type determines the model used to read or write the content body of the message.
+      </p>
+<p>
+        Newly constructed messages objects have version set to HTTP/1.1. Newly constructed
+        response objects also have result code set to <a class="link" href="boost__beast__http__status.html" title="http::status"><code class="computeroutput"><span class="identifier">status</span><span class="special">::</span><span class="identifier">ok</span></code></a>.
       </p>
 <h5>
-<a name="beast.ref.boost__beast__http__response.h4"></a>
+<a name="beast.ref.boost__beast__http__response.h5"></a>
         <span class="phrase"><a name="beast.ref.boost__beast__http__response.template_parameters"></a></span><a class="link" href="boost__beast__http__response.html#beast.ref.boost__beast__http__response.template_parameters">Template
         Parameters</a>
       </h5>

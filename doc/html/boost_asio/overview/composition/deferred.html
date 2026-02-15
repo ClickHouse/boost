@@ -71,17 +71,31 @@
 </pre>
 <h6>
 <a name="boost_asio.overview.composition.deferred.h0"></a>
+          <span class="phrase"><a name="boost_asio.overview.composition.deferred.deferred_as_the_default_completion_token"></a></span><a class="link" href="deferred.html#boost_asio.overview.composition.deferred.deferred_as_the_default_completion_token">Deferred
+          as the Default Completion Token</a>
+        </h6>
+<p>
+          Most asynchronous operations provided by Boost.Asio have a default completion
+          token. Although this default token can be changed by specifying a custom
+          executor, it is normally boost::asio::deferred. This means that we can
+          omit the token and simply write:
+        </p>
+<pre class="programlisting"><span class="keyword">auto</span> <span class="identifier">deferred_op</span> <span class="special">=</span> <span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">();</span>
+</pre>
+<h6>
+<a name="boost_asio.overview.composition.deferred.h1"></a>
           <span class="phrase"><a name="boost_asio.overview.composition.deferred.see_also"></a></span><a class="link" href="deferred.html#boost_asio.overview.composition.deferred.see_also">See
           Also</a>
         </h6>
 <p>
           <a class="link" href="../../reference/deferred.html" title="deferred">deferred</a>, <a class="link" href="../../reference/deferred_t.html" title="deferred_t">deferred_t</a>,
-          <a class="link" href="../../examples/cpp14_examples.html#boost_asio.examples.cpp14_examples.deferred">Deferred examples
+          <a class="link" href="../../examples/cpp11_examples.html#boost_asio.examples.cpp11_examples.deferred">Deferred examples
           (C++11)</a>, <a class="link" href="../../examples/cpp14_examples.html#boost_asio.examples.cpp14_examples.deferred">Deferred
           examples (C++14)</a>.
         </p>
 </div>
-<div class="copyright-footer">Copyright © 2003-2023 Christopher M. Kohlhoff<p>
+<div class="copyright-footer">Copyright © 2003-2025 Christopher M.
+      Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

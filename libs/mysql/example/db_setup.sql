@@ -1,5 +1,5 @@
 --
--- Copyright (c) 2019-2023 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
+-- Copyright (c) 2019-2025 Ruben Perez Hidalgo (rubenperez038 at gmail dot com)
 --
 -- Distributed under the Boost Software License, Version 1.0. (See accompanying
 -- file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -23,7 +23,7 @@ CREATE TABLE employee(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    salary DOUBLE,
+    salary INT UNSIGNED,
     company_id CHAR(10) NOT NULL,
     FOREIGN KEY (company_id) REFERENCES company(id)
 );
@@ -31,6 +31,11 @@ CREATE TABLE audit_log(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     t TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     msg TEXT
+);
+CREATE TABLE notes(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL
 );
     
 INSERT INTO company (name, id, tax_id) VALUES
@@ -77,7 +82,6 @@ DELIMITER ;
 
 -- User
 DROP USER IF EXISTS 'example_user'@'%';
-CREATE USER 'example_user'@'%' IDENTIFIED WITH 'mysql_native_password';
-ALTER USER 'example_user'@'%' IDENTIFIED BY 'example_password';
+CREATE USER 'example_user'@'%' IDENTIFIED BY 'example_password';
 GRANT ALL PRIVILEGES ON boost_mysql_examples.* TO 'example_user'@'%';
 FLUSH PRIVILEGES;

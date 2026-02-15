@@ -3,8 +3,9 @@
 
 // Copyright (c) 2007-2015 Barend Gehrels, Amsterdam, the Netherlands.
 
-// This file was modified by Oracle on 2015-2021.
-// Modifications copyright (c) 2015-2021 Oracle and/or its affiliates.
+// This file was modified by Oracle on 2015-2024.
+// Modifications copyright (c) 2015-2024 Oracle and/or its affiliates.
+// Contributed and/or modified by Vissarion Fysikopoulos, on behalf of Oracle
 // Contributed and/or modified by Menelaos Karavelas, on behalf of Oracle
 // Contributed and/or modified by Adam Wulkiewicz, on behalf of Oracle
 
@@ -28,6 +29,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 #include <boost/range/iterator.hpp>
+#include <boost/range/size.hpp>
 
 #include <boost/geometry/algorithms/union.hpp>
 
@@ -68,7 +70,7 @@ inline std::size_t num_points(Range const& rng, bool add_for_open = false)
 
 template <typename OutputType, typename G1, typename G2>
 void test_union(std::string const& caseid, G1 const& g1, G2 const& g2,
-        const count_set& expected_count, const count_set& expected_hole_count,
+        count_set const& expected_count, count_set const& expected_hole_count,
         int expected_point_count, expectation_limits const& expected_area,
         ut_settings const& settings)
 {
@@ -144,17 +146,6 @@ void test_union(std::string const& caseid, G1 const& g1, G2 const& g2,
     }
 #endif
 
-
-
-#if defined(BOOST_GEOMETRY_DEBUG_ROBUSTNESS)
-    std::cout << "*** case: " << caseid
-        << " area: " << area
-        << " points: " << n
-        << " polygons: " << boost::size(clip)
-        << " holes: " << holes
-        << std::endl;
-#endif
-
     if (! expected_count.empty())
     {
         BOOST_CHECK_MESSAGE(expected_count.has(clip.size()),
@@ -174,16 +165,6 @@ void test_union(std::string const& caseid, G1 const& g1, G2 const& g2,
                             << " type: " << (type_for_assert_message<G1, G2>())
                             );
     }
-
-#if defined(BOOST_GEOMETRY_USE_RESCALING)
-    // Without rescaling, point count might easily differ (which is no problem)
-    BOOST_CHECK_MESSAGE(expected_point_count < 0 || std::abs(int(n) - expected_point_count) < 3,
-            "union: " << caseid
-            << " #points expected: " << expected_point_count
-            << " detected: " << n
-            << " type: " << (type_for_assert_message<G1, G2>())
-            );
-#endif
 
     BOOST_CHECK_MESSAGE(expected_area.contains(area, settings.percentage),
             "union: " << caseid << std::setprecision(20)
@@ -206,9 +187,6 @@ void test_union(std::string const& caseid, G1 const& g1, G2 const& g2,
             << string_from_type<coordinate_type>::name()
             << (ccw ? "_ccw" : "")
             << (open ? "_open" : "")
-#if defined(BOOST_GEOMETRY_USE_RESCALING)
-            << "_rescaled"
-#endif
             << ".svg";
 
         std::ofstream svg(filename.str().c_str());
@@ -240,7 +218,7 @@ void test_union(std::string const& caseid, G1 const& g1, G2 const& g2,
 template <typename OutputType, typename G1, typename G2>
 void test_one(std::string const& caseid,
         std::string const& wkt1, std::string const& wkt2,
-        const count_set& expected_count, const count_set& expected_hole_count,
+        count_set const& expected_count, count_set const& expected_hole_count,
         int expected_point_count, expectation_limits const& expected_area,
         ut_settings const& settings = ut_settings())
 {

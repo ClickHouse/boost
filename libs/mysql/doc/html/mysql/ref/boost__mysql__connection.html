@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../../index.html" title="Chapter 1. Boost.MySQL">
 <link rel="up" href="../../pt01.html" title="Part Two: Reference. ">
-<link rel="prev" href="boost__mysql__buffer_params/set_initial_read_size.html" title="buffer_params::set_initial_read_size">
+<link rel="prev" href="boost__mysql__connect_params/multi_queries.html" title="connect_params::multi_queries">
 <link rel="next" href="boost__mysql__connection/executor_type.html" title="connection::executor_type">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -21,14 +21,14 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="boost__mysql__buffer_params/set_initial_read_size.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__connection/executor_type.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="boost__mysql__connect_params/multi_queries.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__connection/executor_type.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="mysql.ref.boost__mysql__connection"></a><a class="link" href="boost__mysql__connection.html" title="connection">connection</a>
 </h4></div></div></div>
 <p>
-        A connection to a MySQL server.
+        (Legacy) A connection to a MySQL server.
       </p>
 <h5>
 <a name="mysql.ref.boost__mysql__connection.h0"></a>
@@ -39,7 +39,7 @@
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">class</span> <a class="link" href="boost__mysql__Stream.html" title="Stream concept"><code class="literal"><span class="emphasis"><em>Stream</em></span></code></a><span class="special">&gt;</span>
-<span class="keyword">class</span> <span class="identifier">connection</span>
+<span class="keyword">class</span> <span class="identifier">connection</span><span class="special">;</span>
 </pre>
 <h5>
 <a name="mysql.ref.boost__mysql__connection.h1"></a>
@@ -78,7 +78,7 @@
 <tr>
 <td>
                 <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection__rebind_executor.html" title="connection::rebind_executor">rebind_executor</a></strong></span>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/rebind_executor.html" title="connection::rebind_executor">rebind_executor</a></strong></span>
                 </p>
               </td>
 <td>
@@ -133,8 +133,7 @@
               </td>
 <td>
                 <p>
-                  Closes the connection to the server. <br><span class="silver">—</span><br>Closes
-                  the connection to the server.
+                  Closes the connection to the server.
                 </p>
               </td>
 </tr>
@@ -146,8 +145,7 @@
               </td>
 <td>
                 <p>
-                  Closes a statement, deallocating it from the server. <br><span class="silver">—</span><br>Closes
-                  a statement, deallocating it from the server.
+                  Closes a statement, deallocating it from the server.
                 </p>
               </td>
 </tr>
@@ -159,8 +157,7 @@
               </td>
 <td>
                 <p>
-                  Establishes a connection to a MySQL server. <br><span class="silver">—</span><br>Establishes
-                  a connection to a MySQL server.
+                  Establishes a connection to a MySQL server.
                 </p>
               </td>
 </tr>
@@ -172,21 +169,7 @@
               </td>
 <td>
                 <p>
-                  Executes a text query or prepared statement. <br><span class="silver">—</span><br>Executes
-                  a text query or prepared statement.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_execute_statement.html" title="connection::async_execute_statement">async_execute_statement</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Executes a prepared statement. <br><span class="silver">—</span><br>(Deprecated)
-                  Executes a prepared statement.
+                  Executes a text query or prepared statement.
                 </p>
               </td>
 </tr>
@@ -198,8 +181,7 @@
               </td>
 <td>
                 <p>
-                  Performs the MySQL-level handshake. <br><span class="silver">—</span><br>Performs
-                  the MySQL-level handshake.
+                  Performs the MySQL-level handshake.
                 </p>
               </td>
 </tr>
@@ -211,8 +193,7 @@
               </td>
 <td>
                 <p>
-                  Checks whether the server is alive. <br><span class="silver">—</span><br>Checks
-                  whether the server is alive.
+                  Checks whether the server is alive.
                 </p>
               </td>
 </tr>
@@ -224,21 +205,7 @@
               </td>
 <td>
                 <p>
-                  Prepares a statement server-side. <br><span class="silver">—</span><br>Prepares
-                  a statement server-side.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_query.html" title="connection::async_query">async_query</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Executes a SQL text query. <br><span class="silver">—</span><br>(Deprecated)
-                  Executes a SQL text query.
+                  Prepares a statement server-side.
                 </p>
               </td>
 </tr>
@@ -251,9 +218,7 @@
 <td>
                 <p>
                   Notifies the MySQL server that the client wants to end the session
-                  and shutdowns SSL. <br><span class="silver">—</span><br>Notifies the
-                  MySQL server that the client wants to end the session and shutdowns
-                  SSL.
+                  and shutdowns SSL.
                 </p>
               </td>
 </tr>
@@ -266,8 +231,6 @@
 <td>
                 <p>
                   Reads metadata for subsequent resultsets in a multi-resultset operation.
-                  <br><span class="silver">—</span><br>Reads metadata for subsequent
-                  resultsets in a multi-resultset operation.
                 </p>
               </td>
 </tr>
@@ -279,9 +242,19 @@
               </td>
 <td>
                 <p>
-                  Reads a batch of rows. <br><span class="silver">—</span><br>Reads
-                  a batch of rows. <br><span class="silver">—</span><br>Reads a batch
-                  of rows.
+                  Reads a batch of rows.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_reset_connection.html" title="connection::async_reset_connection">async_reset_connection</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Resets server-side session state, like variables and prepared statements.
                 </p>
               </td>
 </tr>
@@ -293,36 +266,7 @@
               </td>
 <td>
                 <p>
-                  Starts a SQL execution as a multi-function operation. <br><span class="silver">—</span><br>Starts
-                  a SQL execution as a multi-function operation.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_start_query.html" title="connection::async_start_query">async_start_query</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Starts a text query as a multi-function operation.
-                  <br><span class="silver">—</span><br>(Deprecated) Starts a text query
-                  as a multi-function operation.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/async_start_statement_execution.html" title="connection::async_start_statement_execution">async_start_statement_execution</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Starts a statement execution as a multi-function operation.
-                  <br><span class="silver">—</span><br>(Deprecated) Starts a statement
-                  execution as a multi-function operation.
+                  Starts a SQL execution as a multi-function operation.
                 </p>
               </td>
 </tr>
@@ -334,8 +278,7 @@
               </td>
 <td>
                 <p>
-                  Closes the connection to the server. <br><span class="silver">—</span><br>Closes
-                  the connection to the server.
+                  Closes the connection to the server.
                 </p>
               </td>
 </tr>
@@ -347,8 +290,7 @@
               </td>
 <td>
                 <p>
-                  Closes a statement, deallocating it from the server. <br><span class="silver">—</span><br>Closes
-                  a statement, deallocating it from the server.
+                  Closes a statement, deallocating it from the server.
                 </p>
               </td>
 </tr>
@@ -360,8 +302,7 @@
               </td>
 <td>
                 <p>
-                  Establishes a connection to a MySQL server. <br><span class="silver">—</span><br>Establishes
-                  a connection to a MySQL server.
+                  Establishes a connection to a MySQL server.
                 </p>
               </td>
 </tr>
@@ -387,21 +328,7 @@
               </td>
 <td>
                 <p>
-                  Executes a text query or prepared statement. <br><span class="silver">—</span><br>Executes
-                  a text query or prepared statement.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/execute_statement.html" title="connection::execute_statement">execute_statement</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Executes a prepared statement. <br><span class="silver">—</span><br>(Deprecated)
-                  Executes a prepared statement.
+                  Executes a text query or prepared statement.
                 </p>
               </td>
 </tr>
@@ -425,8 +352,7 @@
               </td>
 <td>
                 <p>
-                  Performs the MySQL-level handshake. <br><span class="silver">—</span><br>Performs
-                  the MySQL-level handshake.
+                  Performs the MySQL-level handshake.
                 </p>
               </td>
 </tr>
@@ -462,8 +388,7 @@
               </td>
 <td>
                 <p>
-                  Checks whether the server is alive. <br><span class="silver">—</span><br>Checks
-                  whether the server is alive.
+                  Checks whether the server is alive.
                 </p>
               </td>
 </tr>
@@ -475,21 +400,7 @@
               </td>
 <td>
                 <p>
-                  Prepares a statement server-side. <br><span class="silver">—</span><br>Prepares
-                  a statement server-side.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/query.html" title="connection::query">query</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Executes a SQL text query. <br><span class="silver">—</span><br>(Deprecated)
-                  Executes a SQL text query.
+                  Prepares a statement server-side.
                 </p>
               </td>
 </tr>
@@ -502,9 +413,7 @@
 <td>
                 <p>
                   Notifies the MySQL server that the client wants to end the session
-                  and shutdowns SSL. <br><span class="silver">—</span><br>Notifies the
-                  MySQL server that the client wants to end the session and shutdowns
-                  SSL.
+                  and shutdowns SSL.
                 </p>
               </td>
 </tr>
@@ -517,8 +426,6 @@
 <td>
                 <p>
                   Reads metadata for subsequent resultsets in a multi-resultset operation.
-                  <br><span class="silver">—</span><br>Reads metadata for subsequent
-                  resultsets in a multi-resultset operation.
                 </p>
               </td>
 </tr>
@@ -530,8 +437,19 @@
               </td>
 <td>
                 <p>
-                  Reads a batch of rows. <br><span class="silver">—</span><br>Reads
-                  a batch of rows.
+                  Reads a batch of rows.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/reset_connection.html" title="connection::reset_connection">reset_connection</a></strong></span>
+                </p>
+              </td>
+<td>
+                <p>
+                  Resets server-side session state, like variables and prepared statements.
                 </p>
               </td>
 </tr>
@@ -555,36 +473,7 @@
               </td>
 <td>
                 <p>
-                  Starts a SQL execution as a multi-function operation. <br><span class="silver">—</span><br>Starts
-                  a SQL execution as a multi-function operation.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/start_query.html" title="connection::start_query">start_query</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Starts a text query as a multi-function operation.
-                  <br><span class="silver">—</span><br>(Deprecated) Starts a text query
-                  as a multi-function operation.
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <span class="bold"><strong><a class="link" href="boost__mysql__connection/start_statement_execution.html" title="connection::start_statement_execution">start_statement_execution</a></strong></span>
-                </p>
-              </td>
-<td>
-                <p>
-                  (Deprecated) Starts a statement execution as a multi-function operation.
-                  <br><span class="silver">—</span><br>(Deprecated) Starts a statement
-                  execution as a multi-function operation.
+                  Starts a SQL execution as a multi-function operation.
                 </p>
               </td>
 </tr>
@@ -619,17 +508,26 @@
         <span class="phrase"><a name="mysql.ref.boost__mysql__connection.description"></a></span><a class="link" href="boost__mysql__connection.html#mysql.ref.boost__mysql__connection.description">Description</a>
       </h5>
 <p>
-        Represents a connection to a MySQL server.
+        Represents a templated connection to a MySQL server.
       </p>
 <p>
-        <code class="computeroutput"><span class="identifier">connection</span></code>is the main I/O
-        object that this library implements. It owns a <code class="computeroutput"><span class="identifier">Stream</span></code>
-        object that is accessed by functions involving network operations, as well
-        as session state. You can access the stream using <a class="link" href="boost__mysql__connection/stream.html" title="connection::stream"><code class="computeroutput"><span class="identifier">connection</span><span class="special">::</span><span class="identifier">stream</span></code></a>, and its executor via <a class="link" href="boost__mysql__connection/get_executor.html" title="connection::get_executor"><code class="computeroutput"><span class="identifier">connection</span><span class="special">::</span><span class="identifier">get_executor</span></code></a>.
+        <code class="computeroutput"><span class="identifier">connection</span></code> owns a <code class="computeroutput"><span class="identifier">Stream</span></code> object that is accessed by functions
+        involving network operations, as well as session state. You can access the
+        stream using <a class="link" href="boost__mysql__connection/stream.html" title="connection::stream"><code class="computeroutput"><span class="identifier">connection</span><span class="special">::</span><span class="identifier">stream</span></code></a>, and its executor via <a class="link" href="boost__mysql__connection/get_executor.html" title="connection::get_executor"><code class="computeroutput"><span class="identifier">connection</span><span class="special">::</span><span class="identifier">get_executor</span></code></a>.
         The executor used by this object is always the same as the underlying stream.
       </p>
 <h5>
 <a name="mysql.ref.boost__mysql__connection.h4"></a>
+        <span class="phrase"><a name="mysql.ref.boost__mysql__connection.single_outstanding_async_operati"></a></span><a class="link" href="boost__mysql__connection.html#mysql.ref.boost__mysql__connection.single_outstanding_async_operati">Single
+        outstanding async operation per connection</a>
+      </h5>
+<p>
+        At any given point in time, only one async operation can be outstanding per
+        connection. If an async operation is initiated while another one is in progress,
+        it will fail with <a class="link" href="boost__mysql__client_errc.html" title="client_errc"><code class="computeroutput"><span class="identifier">client_errc</span><span class="special">::</span><span class="identifier">operation_in_progress</span></code></a>.
+      </p>
+<h5>
+<a name="mysql.ref.boost__mysql__connection.h5"></a>
         <span class="phrase"><a name="mysql.ref.boost__mysql__connection.thread_safety"></a></span><a class="link" href="boost__mysql__connection.html#mysql.ref.boost__mysql__connection.thread_safety">Thread
         safety</a>
       </h5>
@@ -644,18 +542,26 @@
         object, if you call its member functions concurrently from separate threads,
         you will get a race condition.
       </p>
+<h5>
+<a name="mysql.ref.boost__mysql__connection.h6"></a>
+        <span class="phrase"><a name="mysql.ref.boost__mysql__connection.legacy"></a></span><a class="link" href="boost__mysql__connection.html#mysql.ref.boost__mysql__connection.legacy">Legacy</a>
+      </h5>
+<p>
+        New code should use <a class="link" href="boost__mysql__any_connection.html" title="any_connection"><code class="computeroutput"><span class="identifier">any_connection</span></code></a> instead of this class,
+        as it's simpler to use and provides the same level of performance.
+      </p>
 <p>
         Convenience header <code class="literal">&lt;<a href="https://github.com/boostorg/mysql/blob/master/include/boost/mysql.hpp" target="_top">boost/mysql.hpp</a>&gt;</code>
       </p>
 </div>
-<div class="copyright-footer">Copyright © 2019-2023 Ruben Perez<p>
+<div class="copyright-footer">Copyright © 2019-2024 Ruben Perez<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
 </div>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="boost__mysql__buffer_params/set_initial_read_size.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__connection/executor_type.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="boost__mysql__connect_params/multi_queries.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../../pt01.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="boost__mysql__connection/executor_type.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

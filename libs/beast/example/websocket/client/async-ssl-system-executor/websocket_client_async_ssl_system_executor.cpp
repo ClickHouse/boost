@@ -16,13 +16,12 @@
 #include "example/common/root_certificates.hpp"
 
 #include <boost/beast/core.hpp>
-#include <boost/beast/ssl.hpp>
 #include <boost/beast/websocket.hpp>
 #include <boost/beast/websocket/ssl.hpp>
+#include <boost/asio/ssl.hpp>
 #include <boost/asio/strand.hpp>
 #include <boost/asio/system_executor.hpp>
 #include <cstdlib>
-#include <functional>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -47,8 +46,7 @@ fail(beast::error_code ec, char const* what)
 class session : public std::enable_shared_from_this<session>
 {
     tcp::resolver resolver_;
-    websocket::stream<
-        beast::ssl_stream<beast::tcp_stream>> ws_;
+    websocket::stream<ssl::stream<beast::tcp_stream>> ws_;
     beast::flat_buffer buffer_;
     std::string host_;
     std::string text_;
@@ -76,6 +74,19 @@ public:
         char const* port,
         char const* text)
     {
+        // Set SNI Hostname (many hosts need this to handshake successfully)
+        if(! SSL_set_tlsext_host_name(ws_.next_layer().native_handle(), host))
+        {
+            beast::error_code ec{
+                static_cast<int>(::ERR_get_error()),
+                net::error::get_ssl_category()};
+            std::cerr << ec.message() << "\n";
+            return;
+        }
+
+        // Set the expected hostname in the peer certificate for verification
+        ws_.next_layer().set_verify_callback(ssl::host_name_verification(host));
+
         // Save these for later
         host_ = host;
         text_ = text;
@@ -114,23 +125,13 @@ public:
         if(ec)
             return fail(ec, "connect");
 
+        // Set a timeout on the operation
+        beast::get_lowest_layer(ws_).expires_after(std::chrono::seconds(30));
+
         // Update the host_ string. This will provide the value of the
         // Host HTTP header during the WebSocket handshake.
         // See https://tools.ietf.org/html/rfc7230#section-5.4
         host_ += ':' + std::to_string(ep.port());
-
-        // Set a timeout on the operation
-        beast::get_lowest_layer(ws_).expires_after(std::chrono::seconds(30));
-
-        // Set SNI Hostname (many hosts need this to handshake successfully)
-        if(! SSL_set_tlsext_host_name(
-            ws_.next_layer().native_handle(),
-            host_.c_str()))
-        {
-          ec = beast::error_code(static_cast<int>(::ERR_get_error()),
-                                 net::error::get_ssl_category());
-          return fail(ec, "connect");
-        }
 
         // Perform the SSL handshake
         ws_.next_layer().async_handshake(
@@ -253,6 +254,9 @@ int main(int argc, char** argv)
 
     // The SSL context is required, and holds certificates
     ssl::context ctx{ssl::context::tlsv12_client};
+
+    // Verify the remote server's certificate
+    ctx.set_verify_mode(ssl::verify_peer);
 
     // This holds the root certificate used for verification
     load_root_certificates(ctx);

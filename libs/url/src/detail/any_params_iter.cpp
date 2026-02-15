@@ -7,14 +7,12 @@
 // Official repository: https://github.com/boostorg/url
 //
 
-#ifndef BOOST_URL_DETAIL_IMPL_ANY_PARAMS_ITER_IPP
-#define BOOST_URL_DETAIL_IMPL_ANY_PARAMS_ITER_IPP
 
 #include <boost/url/detail/config.hpp>
 #include <boost/url/detail/any_params_iter.hpp>
 #include <boost/url/encode.hpp>
 #include <boost/core/detail/string_view.hpp>
-#include <boost/url/rfc/detail/charsets.hpp>
+#include "../rfc/detail/charsets.hpp"
 
 namespace boost {
 namespace urls {
@@ -46,8 +44,8 @@ any_params_iter::
 //
 //------------------------------------------------
 
-query_iter::
-query_iter(
+query_string_iter::
+query_string_iter(
     core::string_view s,
     bool ne) noexcept
     : any_params_iter(
@@ -57,7 +55,7 @@ query_iter(
 }
 
 void
-query_iter::
+query_string_iter::
 rewind() noexcept
 {
     if(empty)
@@ -83,7 +81,7 @@ rewind() noexcept
 }
 
 bool
-query_iter::
+query_string_iter::
 measure(
     std::size_t& n) noexcept
 {
@@ -103,7 +101,7 @@ measure(
 }
 
 void
-query_iter::
+query_string_iter::
 copy(
     char*& dest,
     char const* end) noexcept
@@ -124,7 +122,7 @@ copy(
 }
 
 void
-query_iter::
+query_string_iter::
 increment() noexcept
 {
     p_ += n_;
@@ -148,32 +146,34 @@ increment() noexcept
 //
 //------------------------------------------------
 
-param_iter::
-param_iter(
-    param_view const& p) noexcept
+single_param_iter::
+single_param_iter(
+    param_view const& p,
+    bool space_as_plus) noexcept
     : any_params_iter(
         false,
         p.key,
         p.value)
     , has_value_(p.has_value)
+    , space_as_plus_(space_as_plus)
 {
 }
 
 void
-param_iter::
+single_param_iter::
 rewind() noexcept
 {
     at_end_ = false;
 }
 
 bool
-param_iter::
+single_param_iter::
 measure(std::size_t& n) noexcept
 {
     if(at_end_)
         return false;
     encoding_opts opt;
-    opt.space_as_plus = false;
+    opt.space_as_plus = space_as_plus_;
     n += encoded_size(
         s0,
         detail::param_key_chars,
@@ -191,21 +191,21 @@ measure(std::size_t& n) noexcept
 }
 
 void
-param_iter::
+single_param_iter::
 copy(
     char*& dest,
     char const* end) noexcept
 {
     BOOST_ASSERT(! at_end_);
     encoding_opts opt;
-    opt.space_as_plus = false;
+    opt.space_as_plus = space_as_plus_;
     dest += encode(
         dest,
         end - dest,
         s0,
         detail::param_key_chars,
         opt);
-    if(has_value_)
+    if (has_value_)
     {
         *dest++ = '=';
         dest += encode(
@@ -230,7 +230,7 @@ measure_impl(
     param_view const& p) noexcept
 {
     encoding_opts opt;
-    opt.space_as_plus = false;
+    opt.space_as_plus = space_as_plus_;
     n += encoded_size(
         p.key,
         detail::param_key_chars,
@@ -253,7 +253,7 @@ copy_impl(
     param_view const& p) noexcept
 {
     encoding_opts opt;
-    opt.space_as_plus = false;
+    opt.space_as_plus = space_as_plus_;
     dest += encode(
         dest,
         end - dest,
@@ -302,17 +302,13 @@ measure(std::size_t& n) noexcept
 {
     if(at_end_)
         return false;
-    encoding_opts opt;
-    opt.space_as_plus = false;
     n += detail::re_encoded_size_unsafe(
         s0,
-        detail::param_key_chars,
-        opt);
+        detail::param_key_chars);
     if(has_value_)
         n += detail::re_encoded_size_unsafe(
             s1,
-            detail::param_value_chars,
-            opt) + 1; // for '='
+            detail::param_value_chars) + 1; // for '='
     at_end_ = true;
     return true;
 }
@@ -323,14 +319,11 @@ copy(
     char*& dest,
     char const* end) noexcept
 {
-    encoding_opts opt;
-    opt.space_as_plus = false;
     detail::re_encode_unsafe(
         dest,
         end,
         s0,
-        detail::param_key_chars,
-        opt);
+        detail::param_key_chars);
     if(has_value_)
     {
         *dest++ = '=';
@@ -338,8 +331,7 @@ copy(
             dest,
             end,
             s1,
-            detail::param_value_chars,
-            opt);
+            detail::param_value_chars);
     }
 }
 
@@ -356,17 +348,13 @@ measure_impl(
     std::size_t& n,
     param_view const& p) noexcept
 {
-    encoding_opts opt;
-    opt.space_as_plus = false;
     n += detail::re_encoded_size_unsafe(
         p.key,
-        detail::param_key_chars,
-        opt);
+        detail::param_key_chars);
     if(p.has_value)
         n += detail::re_encoded_size_unsafe(
             p.value,
-            detail::param_value_chars,
-            opt) + 1; // for '='
+            detail::param_value_chars) + 1; // for '='
 }
 
 void
@@ -376,14 +364,11 @@ copy_impl(
     char const* end,
     param_view const& p) noexcept
 {
-    encoding_opts opt;
-    opt.space_as_plus = false;
     detail::re_encode_unsafe(
         dest,
         end,
         p.key,
-        detail::param_key_chars,
-        opt);
+        detail::param_key_chars);
     if(p.has_value)
     {
         *dest++ = '=';
@@ -391,8 +376,7 @@ copy_impl(
             dest,
             end,
             p.value,
-            detail::param_value_chars,
-            opt);
+            detail::param_value_chars);
     }
 }
 
@@ -471,12 +455,9 @@ measure(
     n += nk_; // skip key
     if(has_value_)
     {
-        encoding_opts opt;
-        opt.space_as_plus = false;
         n += detail::re_encoded_size_unsafe(
             s0,
-            detail::param_value_chars,
-            opt) + 1; // for '='
+            detail::param_value_chars) + 1; // for '='
     }
     at_end_ = true;
     return true;
@@ -492,18 +473,14 @@ copy(
     if(! has_value_)
         return;
     *dest++ = '=';
-    encoding_opts opt;
-    opt.space_as_plus = false;
     detail::re_encode_unsafe(
         dest,
         end,
         s0,
-        detail::param_value_chars,
-        opt);
+        detail::param_value_chars);
 }
 
 } // detail
 } // urls
 } // boost
 
-#endif
