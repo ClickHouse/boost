@@ -92,6 +92,8 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
     bool                                                        is_started{ false };
 #if defined(BOOST_USE_ASAN)
     void                                                    *   fake_stack{ nullptr };
+#endif
+#if defined(BOOST_USE_ASAN) || defined(BOOST_USE_MSAN)
     void                                                    *   stack_bottom{ nullptr };
     std::size_t                                                 stack_size{ 0 };
 #endif
@@ -154,6 +156,9 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
             __sanitizer_start_switch_fiber( & from->fake_stack, stack_bottom, stack_size);
         }
 #endif
+#if defined(BOOST_USE_MSAN)
+        __msan_start_switch_fiber( stack_bottom, stack_size);
+#endif
 #if defined (BOOST_USE_TSAN)
         __tsan_switch_to_fiber(tsan_fiber, 0);
 #endif
@@ -163,6 +168,10 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
         __sanitizer_finish_switch_fiber( current()->fake_stack,
                                          (const void **) & current()->from->stack_bottom,
                                          & current()->from->stack_size);
+#endif
+#if defined(BOOST_USE_MSAN)
+        __msan_finish_switch_fiber( (const void **) & current()->from->stack_bottom,
+                                    & current()->from->stack_size);
 #endif
 #if defined(BOOST_NO_CXX14_STD_EXCHANGE)
         return exchange( current()->from, nullptr);
@@ -216,6 +225,9 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
 #if defined(BOOST_USE_ASAN)
         __sanitizer_start_switch_fiber( & from->fake_stack, stack_bottom, stack_size);
 #endif
+#if defined(BOOST_USE_MSAN)
+        __msan_start_switch_fiber( stack_bottom, stack_size);
+#endif
 #if defined (BOOST_USE_TSAN)
         __tsan_switch_to_fiber(tsan_fiber, 0);
 #endif
@@ -225,6 +237,10 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
         __sanitizer_finish_switch_fiber( current()->fake_stack,
                                          (const void **) & current()->from->stack_bottom,
                                          & current()->from->stack_size);
+#endif
+#if defined(BOOST_USE_MSAN)
+        __msan_finish_switch_fiber( (const void **) & current()->from->stack_bottom,
+                                    & current()->from->stack_size);
 #endif
 #if defined(BOOST_NO_CXX14_STD_EXCHANGE)
         return exchange( current()->from, nullptr);
@@ -282,6 +298,10 @@ public:
         __sanitizer_finish_switch_fiber( fake_stack,
                                          (const void **) & from->stack_bottom,
                                          & from->stack_size);
+#endif
+#if defined(BOOST_USE_MSAN)
+        __msan_finish_switch_fiber( (const void **) & from->stack_bottom,
+                                    & from->stack_size);
 #endif
         Ctx c{ from };
         try {
@@ -347,7 +367,7 @@ static fiber_activation_record * create_fiber1( StackAlloc && salloc, Fn && fn) 
     ::makecontext(&record->uctx, (void (*)()) & fiber_entry_func<capture_t>, 1,
                   record);
 #endif
-#if defined(BOOST_USE_ASAN)
+#if defined(BOOST_USE_ASAN) || defined(BOOST_USE_MSAN)
     record->stack_bottom = record->uctx.uc_stack.ss_sp;
     record->stack_size = record->uctx.uc_stack.ss_size;
 #endif
@@ -398,7 +418,7 @@ static fiber_activation_record * create_fiber2( preallocated palloc, StackAlloc 
     ::makecontext(&record->uctx, (void (*)()) & fiber_entry_func<capture_t>, 1,
                   record);
 #endif
-#if defined(BOOST_USE_ASAN)
+#if defined(BOOST_USE_ASAN) || defined(BOOST_USE_MSAN)
     record->stack_bottom = record->uctx.uc_stack.ss_sp;
     record->stack_size = record->uctx.uc_stack.ss_size;
 #endif
