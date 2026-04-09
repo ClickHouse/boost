@@ -172,6 +172,15 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
 #if defined(BOOST_USE_MSAN)
         __msan_finish_switch_fiber( (const void **) & current()->from->stack_bottom,
                                     & current()->from->stack_size);
+        // On AArch64, LLVM loses MSan shadow for struct-padding bytes in return values
+        // (llvm/llvm-project#54476). On heap-allocated fiber stacks the dirty shadow
+        // accumulates across context switches and propagates via stack-slot reuse.
+        // Unpoison the whole fiber stack to prevent these false positives.
+#if defined(__aarch64__)
+        if ( ! current()->main_ctx) {
+            __msan_unpoison( current()->stack_bottom, current()->stack_size);
+        }
+#endif
 #endif
 #if defined(BOOST_NO_CXX14_STD_EXCHANGE)
         return exchange( current()->from, nullptr);
@@ -241,6 +250,11 @@ struct BOOST_CONTEXT_DECL fiber_activation_record {
 #if defined(BOOST_USE_MSAN)
         __msan_finish_switch_fiber( (const void **) & current()->from->stack_bottom,
                                     & current()->from->stack_size);
+#if defined(__aarch64__)
+        if ( ! current()->main_ctx) {
+            __msan_unpoison( current()->stack_bottom, current()->stack_size);
+        }
+#endif
 #endif
 #if defined(BOOST_NO_CXX14_STD_EXCHANGE)
         return exchange( current()->from, nullptr);
@@ -302,6 +316,9 @@ public:
 #if defined(BOOST_USE_MSAN)
         __msan_finish_switch_fiber( (const void **) & from->stack_bottom,
                                     & from->stack_size);
+#if defined(__aarch64__)
+        __msan_unpoison( stack_bottom, stack_size);
+#endif
 #endif
         Ctx c{ from };
         try {
