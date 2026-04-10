@@ -15,6 +15,13 @@ void __sanitizer_finish_switch_fiber( void *, const void **, size_t *);
 }
 #endif
 
+#if defined(BOOST_USE_MSAN)
+extern "C" {
+void __msan_start_switch_fiber( const void *, size_t);
+void __msan_finish_switch_fiber( const void **, size_t *);
+}
+#endif
+
 #if defined(BOOST_USE_SEGMENTED_STACKS)
 extern "C" {
 void __splitstack_getcontext( void * [BOOST_CONTEXT_SEGMENTS]);
