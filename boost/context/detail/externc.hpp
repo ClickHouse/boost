@@ -19,6 +19,7 @@ void __sanitizer_finish_switch_fiber( void *, const void **, size_t *);
 extern "C" {
 void __msan_start_switch_fiber( const void *, size_t);
 void __msan_finish_switch_fiber( const void **, size_t *);
+void __msan_unpoison( const volatile void *, size_t);
 }
 #endif
 
