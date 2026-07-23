@@ -63,6 +63,13 @@ _make_fcontext:
     ; reserve space for context-data on context-stack
     sub  x0, x0, #0xb0
 
+    ; ClickHouse patch (issue #111579): zero the saved frame-pointer slot (x29, at offset 0x90 of
+    ; the context block) so a fiber starts with a null frame-pointer terminator. make_fcontext
+    ; otherwise leaves this slot uninitialized; a frame-pointer stack walker (macOS backtrace()/
+    ; __thread_stack_pcs, sample, lldb, the crash reporter) then follows the junk off the fiber
+    ; stack and crashes. A null terminator makes such walkers stop cleanly at the fiber entry.
+    str  xzr, [x0, #0x90]
+
     ; third arg of make_fcontext() == address of context-function
     ; store address as a PC to jump in
     str  x2, [x0, #0xa0]
