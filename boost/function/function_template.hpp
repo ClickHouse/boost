@@ -724,8 +724,12 @@ namespace boost {
       vtable_type;
 
     vtable_type* get_vtable() const {
+#if defined(__FILC__)
+      return static_cast<vtable_type*>(zandptr(vtable, ~static_cast<std::size_t>(0x01)));
+#else
       return reinterpret_cast<vtable_type*>(
                reinterpret_cast<std::size_t>(vtable) & ~static_cast<std::size_t>(0x01));
+#endif
     }
 
     struct clear_type {};
@@ -943,7 +947,13 @@ namespace boost {
         if (boost::detail::function::is_trivially_copyable<Functor>::value &&
             boost::detail::function::function_allows_small_object_optimization<Functor>::value)
           value |= static_cast<std::size_t>(0x01);
+#if defined(__FILC__)
+        // Keep the capability of `stored_vtable` while adding the low-bit tag.
+        vtable = static_cast<boost::detail::function::vtable_base *>(zmkptr(
+            const_cast<boost::detail::function::vtable_base *>(&stored_vtable.base), value));
+#else
         vtable = reinterpret_cast<boost::detail::function::vtable_base *>(value);
+#endif
       } else
         vtable = 0;
     }
@@ -976,7 +986,13 @@ namespace boost {
         if (boost::detail::function::is_trivially_copyable<Functor>::value &&
             boost::detail::function::function_allows_small_object_optimization<Functor>::value)
           value |= static_cast<std::size_t>(0x01);
+#if defined(__FILC__)
+        // Keep the capability of `stored_vtable` while adding the low-bit tag.
+        vtable = static_cast<boost::detail::function::vtable_base *>(zmkptr(
+            const_cast<boost::detail::function::vtable_base *>(&stored_vtable.base), value));
+#else
         vtable = reinterpret_cast<boost::detail::function::vtable_base *>(value);
+#endif
       } else
         vtable = 0;
     }

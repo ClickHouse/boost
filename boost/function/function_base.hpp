@@ -11,6 +11,10 @@
 #ifndef BOOST_FUNCTION_BASE_HEADER
 #define BOOST_FUNCTION_BASE_HEADER
 
+#if defined(__FILC__)
+#include <stdfil.h>
+#endif
+
 #include <boost/function/function_fwd.hpp>
 #include <boost/function_equal.hpp>
 #include <boost/core/typeinfo.hpp>
@@ -567,8 +571,12 @@ public:
 
 public: // should be protected, but GCC 2.95.3 will fail to allow access
   detail::function::vtable_base* get_vtable() const {
+#if defined(__FILC__)
+    return static_cast<detail::function::vtable_base*>(zandptr(vtable, ~static_cast<std::size_t>(0x01)));
+#else
     return reinterpret_cast<detail::function::vtable_base*>(
              reinterpret_cast<std::size_t>(vtable) & ~static_cast<std::size_t>(0x01));
+#endif
   }
 
   bool has_trivial_copy_and_destroy() const {
