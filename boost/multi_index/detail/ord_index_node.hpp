@@ -35,6 +35,11 @@
 
 #ifndef BOOST_MULTI_INDEX_DETAIL_ORD_INDEX_NODE_HPP
 #define BOOST_MULTI_INDEX_DETAIL_ORD_INDEX_NODE_HPP
+#if defined(__FILC__) && !defined(BOOST_MULTI_INDEX_DISABLE_COMPRESSED_ORDERED_INDEX_NODES)
+// Compressed nodes store parent pointers as integers and lose FilC capabilities.
+#define BOOST_MULTI_INDEX_DISABLE_COMPRESSED_ORDERED_INDEX_NODES
+#endif
+
 
 #if defined(_MSC_VER)
 #pragma once

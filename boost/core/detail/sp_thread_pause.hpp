@@ -25,7 +25,12 @@
 # endif
 #endif
 
-#if defined(BOOST_CORE_HAS_BUILTIN_IA32_PAUSE)
+#if defined(__FILC__)
+
+// FilC does not support inline assembly pause hints. Keep the compiler barrier.
+# define BOOST_CORE_SP_PAUSE() __atomic_signal_fence(__ATOMIC_SEQ_CST)
+
+#elif defined(BOOST_CORE_HAS_BUILTIN_IA32_PAUSE)
 
 # define BOOST_CORE_SP_PAUSE() __builtin_ia32_pause()
 
