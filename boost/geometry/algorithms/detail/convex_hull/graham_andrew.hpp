@@ -49,7 +49,7 @@ namespace detail { namespace convex_hull
 // TODO: All of the copies could be avoided if this function stored pointers to points.
 //       But would it be possible considering that a range can return proxy reference?
 template <typename InputProxy, typename Point, typename Less>
-inline void get_extremes(InputProxy const& in_proxy,
+inline bool get_extremes(InputProxy const& in_proxy,
                          Point& left, Point& right,
                          Less const& less)
 {
@@ -107,6 +107,8 @@ inline void get_extremes(InputProxy const& in_proxy,
             }
         }
     });
+
+    return ! first;
 }
 
 
@@ -166,7 +168,10 @@ public:
     {
         partitions state;
 
-        apply(in_proxy, state, strategy);
+        if (! apply(in_proxy, state, strategy))
+        {
+            return;
+        }
 
         result(state,
                range::back_inserter(out_ring),
@@ -176,7 +181,7 @@ public:
 
 private:
     template <typename InputProxy, typename Strategy>
-    static void apply(InputProxy const& in_proxy, partitions& state, Strategy& strategy)
+    static bool apply(InputProxy const& in_proxy, partitions& state, Strategy& strategy)
     {
         // First pass.
         // Get min/max (in most cases left / right) points
@@ -194,7 +199,12 @@ private:
 
         geometry::less_exact<point_type, -1, Strategy> less;
 
-        detail::convex_hull::get_extremes(in_proxy, most_left, most_right, less);
+        // Only exterior rings are visited, so a polygon with points only in
+        // its interior rings provides no extremes: its hull is empty.
+        if (! detail::convex_hull::get_extremes(in_proxy, most_left, most_right, less))
+        {
+            return false;
+        }
 
         container_type lower_points, upper_points;
 
@@ -218,6 +228,8 @@ private:
         build_half_hull<1>(upper_points, state.m_upper_hull,
                            most_left, most_right,
                            side_strategy);
+
+        return true;
     }
 
     template <int Factor, typename SideStrategy>
