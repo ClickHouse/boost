@@ -934,8 +934,14 @@ public:
         }
         else
         {
+            // The derivative of lam12 is proportional to the reduced length, which
+            // meridian_length computes only when EnableReducedLength is set, so request it
+            // explicitly. Otherwise the derivative is zero, Newton's method is never used,
+            // and the bisection can reach an azimuth for which cos_alpha2 is NaN, e.g. from
+            // latitude -45 to latitude 45 with a longitude difference of 1e-10.
             CT dummy;
-            meridian_length(eps, ep2, sigma12, sin_sigma1, cos_sigma1, dn1,
+            karney_inverse<CT, false, false, false, true, false, SeriesOrder>::meridian_length(
+                                                eps, ep2, sigma12, sin_sigma1, cos_sigma1, dn1,
                                                 sin_sigma2, cos_sigma2, dn2,
                                                 cos_beta1, cos_beta2, dummy,
                                                 diff_lam12, dummy, dummy,
